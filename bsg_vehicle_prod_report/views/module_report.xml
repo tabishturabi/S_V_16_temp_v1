@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="drivers_reward_id">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style>
+                            .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 12px;
+                            }
+
+                            .report_head {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                    float : left;
+
+                            }
+
+                            .report_table {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                    float : left;
+                            }
+
+                            .report_footer {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                            }
+
+                            .middle_rep {
+                                    width: 100%;
+                                    height: 200px;
+                            }
+
+                            .bank_det {
+                                    width : 45%;
+                                    float: left;
+                            }
+
+                            .bank_det_1 {
+                                    width : 50%;
+                                    float: right;
+                            }
+
+                            .bank{
+                                    width : 100%;
+                                    float: left;
+                            }
+
+                            h1 {
+                                    margin: 0px auto;
+                                    width: 60%;
+
+                            }
+
+                            table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid #CCC;
+                            }
+                            table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 1px 1px 1px 1px;
+                                    font-size: 12px;
+                                    border-right: 2px solid #CCC;
+                                    border-bottom: 1px solid #eee;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                    border-right: none
+                            }
+
+
+                            table tr th {
+                                    text-align: center;
+                            }
+
+                            .space {
+                                    width : 50px;
+                                    min-width : 50px;
+                                    max-width : 50px;
+                            }
+
+                            .space1 {
+                                    width : 75px;
+                                    min-width : 75px;
+                                    max-width : 75px;
+                            }
+
+                            .space2 {
+                                    width : 130px;
+                                    min-width : 130px;
+                                    max-width : 130px;
+                            }
+
+                            .space3 {
+                                    width : 100px;
+                                    min-width : 100px;
+                                    max-width : 100px;
+                            }
+
+                            .space4 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+
+                            .space5 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+
+
+                        </style>
+
+                        <div class="report-container">
+
+
+                            <div class="report_head">
+                                 
+                                <div style="width:30%;float:left">
+                                    <img src="/bsg_drivers_reward_report/static/img/albassami_transport_logoWP.png" width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Drivers Reward Report</h2>
+                                </div>
+
+                                <div style="width:30%;float:right;margin-bottom : 35px;">
+                                    <img src="/bsg_drivers_reward_report/static/img/rightHeader.png" width="230" height="110" style="float:right;margin_right:25px"/>
+                                </div>
+
+                            </div>
+
+                            <div class="report_table">
+
+                                <table style="width:40%;margin-bottom:20px">
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">From Date</td>
+                                        <td>
+                                            <span t-esc="form"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">To Date</td>
+                                        <td>
+                                            <span t-esc="to"></span>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+
+                                <t t-if="report_num == 2">
+
+                                    <table>
+
+                                        <tr>
+                                            <th>Reward Amount</th>
+                                            <th>SO Status</th>
+                                            <th>SO Amount</th>
+                                            <th>Agreement Distance</th>
+                                            <th>Agreement Revenue</th>
+                                            <th>Trip Distance</th>
+                                            <th>Vehicle Type</th>
+                                            <th>Vehicle</th>
+                                            <th>Location TO</th>
+                                            <th>Location From</th>
+                                            <th>SO Reference</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>قيمة الحافز</th>
+                                            <th>حاله الاتفاقية</th>
+                                            <th>قيمـة الاتفاقية</th>
+                                            <th>مسافة الإتفاقية</th>
+                                            <th>إيرادات الإتفاقية</th>
+                                            <th>مسافة الرحلة</th>
+                                            <th> نوع الشاحـنة</th>
+                                            <th>الشاحـنة</th>
+                                            <th>فرع الوصول</th>
+                                            <th> فرع الشحن</th>
+                                            <th>رقم الاتفاقية</th>
+                                        </tr>
+
+                                        <t t-foreach="main_data" t-as="o">
+
+                                            <tr>
+                                                <th colspan="7" style='font-size:18px;text-align:right;padding-right:3px'>
+                                                    <span t-esc="o['name']"></span>
+                                                    <span t-esc="o['code']"></span>
+                                                </th>
+                                                
+                                            </tr>
+
+                                            <t t-foreach="o['trips_data']" t-as="t">
+                                                <tr>
+                                                    <th colspan="5" style='font-size:15px;text-align:right;padding-right:30px'>
+                                                        <span t-esc="t['trip']"></span>
+                                                    </th>
+                                                    <th colspan="5" style='font-size:15px;text-align:right;padding-right:30px'>
+                                                        <span t-esc="t['route_name']"></span>
+                                                    </th>
+
+                                                </tr>
+
+                                                <t t-foreach="t['so_line']" t-as="b">
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <!-- <span t-esc="'{0:,.2f}'.format(float(b['driver_reward']))"></span> -->
+                                                            <span></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="b['state']"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(b['so_amt']))"></span>
+                                                        </td>
+
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(b['agree_dis']))"></span>
+                                                        </td>
+
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(b['agree_rev']))"></span>
+                                                        </td>
+
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(b['trip_dis']))"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="b['vehicle_type']"></span>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <span t-esc="b['vehicle']"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="b['loc_to']"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="b['loc_from']"></span>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <span t-esc="b['so_ref']"></span>
+                                                        </td>
+                                                        
+                                                    </tr>
+
+                                                </t>
+
+                                            </t>
+                                
+                                        </t>
+
+                                    </table>
+
+                                </t>
+
+                                <t t-if="report_num == 1">
+
+                                    <table>
+
+                                        <tr>
+                                            <th>Total Rewards Amount</th>
+                                            <th>Total Empty Trips count</th>
+                                            <th>Total loaded Trips count</th>
+                                            <th>Total Agreements Count</th>
+                                            <th>Total Agreements Revenue</th>
+                                            <th>Total Trip Distance</th>
+                                            <th>Driver Name</th>
+                                            <th>Driver Code</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>قيمة الحافز</th>
+                                            <th>إجمالي عدد الرحلات الفارغة</th>
+                                            <th>إجمالي عدد الرحلات المحملة</th>
+                                            <th>إجمالي عدد الإتفاقيات</th>
+                                            <th>إجمالي إيرادات الإتفاقيات</th>
+                                            <th>اجمالي مسافة الرحلات</th>
+                                            <th>اسم السائق</th>
+                                            <th>كود السائق</th>
+                                        </tr>
+
+                                        <t t-foreach="main_data" t-as="b">
+
+                                            <tr>
+
+
+                                                <td>
+                                                    <!-- <span t-esc="'{0:,.2f}'.format(float(b['driver_reward']))"></span> -->
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="b['empty_trips_count']"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="b['loaded_trips_count']"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="b['so_count']"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(b['agree_rev']))"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(b['trip_dis']))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="b['name']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="b['code']"></span>
+                                                </td>
+                                                
+                                            </tr>
+                                
+                                        </t>
+
+                                    </table>
+
+                                </t>
+
+                            </div>
+
+                        </div>
+
+                                         
+                    </div><!--end of page-->  
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

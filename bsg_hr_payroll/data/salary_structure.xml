@@ -1,0 +1,8 @@
+<odoo>
+    <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'hr_payroll'), ('name', '=', 'structure_base')]"/>
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
+</odoo>

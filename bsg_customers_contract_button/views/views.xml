@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="customers_config_form_view">
+        <field name="name">res.partner.contract.button.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_cargo_sale_res_partner_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[1]/button[@name='action_contract_view']" position="replace">
+               <button name="action_contracts" type="object" groups="bsg_customer_contract.group_view_my_contract"
+                      class="oe_stat_button" icon="fa-file-text" >
+                  <field name="customer_contracts_number" string="Contracts" widget="statinfo"></field>
+              </button>
+            </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

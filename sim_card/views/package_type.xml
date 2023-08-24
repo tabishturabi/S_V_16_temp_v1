@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="sim_card_package_form_view" model="ir.ui.view">
+            <field name="name">sim_card_package_form_view</field>
+            <field name="model">package.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card package">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <group style="color:#0e620a;">
+                            <group colspan="4" col="4">
+                                <field name="name"/>
+                                <field name="contract_no" force_save="1"/>
+                                <field name="service_id"/>
+                                <field name="generation"/>
+                            </group>
+                            <group string="Package Specification">
+                                <field name="minutes"/>
+                                <field name="local_minutes"/>
+                                <field name="international_minutes"/>
+                                <field name="local_sms"/>
+                                <field name="device_discount"/>
+                                <field name="no_slice"/>
+                                <label for="pkg_cost"/>
+                                <div class="o_row">
+                                    <field name="pkg_cost"/>
+                                    <field name="pkg_unit"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="local_internet"/>
+                                <field name="local_roaming"/>
+                                <field name="minutes_roaming"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_package_tree_view" model="ir.ui.view">
+            <field name="name">sim_card_package_tree_view</field>
+            <field name="model">package.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="service_id"/>
+                    <field name="contract_no"/>
+                    <field name="pkg_cost"/>
+                    <field name="pkg_unit"/>
+                    <field name="minutes"/>
+                    <field name="local_minutes"/>
+                    <field name="international_minutes"/>
+                    <field name="local_sms"/>
+                    <field name="device_discount"/>
+                    <field name="no_slice"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_package_view_search" model="ir.ui.view">
+            <field name="name">sim_card_package</field>
+            <field name="model">package.type</field>
+            <field name="arch" type="xml">
+                <search string="package type">
+                    <field name="name"/>
+                    <field name="service_id"/>
+                    <field name="contract_no"/>
+                    <field name="pkg_cost"/>
+                    <field name="pkg_unit"/>
+                    <field name="minutes"/>
+                    <field name="local_minutes"/>
+                    <field name="international_minutes"/>
+                    <field name="local_sms"/>
+                    <field name="device_discount"/>
+                    <field name="no_slice"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="sim_card_package_action" model="ir.actions.act_window">
+            <field name="name">Package Type</field>
+            <field name="res_model">package.type</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sim_card_package_main_menu" name="Package Type Define" action="sim_card_package_action"
+                  parent="sim_card_request_main_menu_config" groups="sim_card.package_type_user" sequence="4"/>
+
+    </data>
+</openerp>

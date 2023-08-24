@@ -1,0 +1,147 @@
+/* search tab */
+.dash-row0 {
+	margin-top: 15px;
+}
+.h-100 {
+    min-height: 100px
+}
+.h-150 {
+    min-height: 150px
+}
+.h-200 {
+    min-height: 200px
+}
+
+/* 12. Spec Panel */
+.specpanel>.panel-heading {
+    color: inherit;
+    font-weight: 600;
+    padding: 10px 4px;
+    transition: all .3s;
+    border: 1px solid transparent
+}
+.specpanel .hbuilt.panel-heading {
+    border-bottom: 0
+}
+.specpanel>.panel-footer,
+.specpanel>.panel-section {
+    color: inherit;
+    border: 1px solid #eaeaea;
+    border-top: 0;
+    font-size: 90%;
+    background: #f7f9fa;
+    padding: 10px 15px
+}
+.specpanel.panel-collapse>.panel-heading,
+.specpanel .hbuilt {
+    background: #fff;
+    border-color: #eaeaea;
+    border: 1px solid #eaeaea;
+    padding: 10px 10px;
+    border-radius: 2px
+}
+.specpanel .panel-body {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative
+}
+.specpanel .count {
+    font-size: 17px;
+}
+.specpanel.panel-group .panel-body:first-child {
+    border-top: 1px solid #eaeaea
+}
+.specpanel.panel-group .panel-body {
+    border-top: 0
+}
+.panel-collapse .panel-body {
+    border: 0
+}
+.stat-data {
+    border-bottom: 1px solid #dadada;
+}
+.specpanel {
+    border: 0;
+    box-shadow: none;
+    margin-bottom: 25px
+}
+.colorplate1 {
+    background-color: #34495e !important;
+    color: #fff !important;
+}
+.colorplate2 {
+    background-color: #288ae1 !important;
+    color: #fff !important;
+}
+.colorplate3 {
+    background-color: #e05471 !important;
+    color: #fff !important;
+}
+.colorplate4 {
+    background-color: #d6a42f !important;
+    color: #fff !important;
+}
+.text-success-dashboard {
+    color: #1ab394
+}
+
+.small {
+    font-size: 12px;
+    font-weight: bold;
+}
+.small_hidden {
+    font-size: 12px;
+    font-weight: bold;
+    color: transparent;
+}
+.panel-tools {
+    display: inline-block;
+    float: right;
+    margin-top: 0;
+    padding: 0;
+    position: relative
+}
+.panel-tools a {
+    margin-left: 5px;
+    color: #9d9fa2;
+    cursor: pointer
+}
+.graph1under {
+    background: #f7f9fa;
+    padding: 20px;
+    margin-top: 20px;
+}
+.graph2under {
+    background: #f1f3f6;
+    padding: 20px;
+    margin-top: 20px;
+}
+.graph1under h4{
+    font-size: 1.1rem;
+}
+.graph2under h4{
+    font-size: 1.1rem;
+}
+.m-xs {
+    margin: 5px;
+    font-size: 17px;
+}
+.stat-data {
+    border-bottom: 1px solid #dadada;
+}
+.project-list table tr td {
+    border-top: 0;
+    border-bottom: 1px solid #e7eaec;
+    /* padding: 10px 10px; */
+    vertical-align: middle
+}
+.project-list table tr td a {
+    color: #1ab394;
+    text-decoration: none;
+}
+.list{
+    border: none !important;
+    font-size: 11px;
+}

@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_support_support_team_fleet_daily_trip_count">
+        <field name="name">fleet.daily.trip.count.form</field>
+        <field name="model">fleet.daily.trip.count</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form delete="false" >
+                <header>
+                  <button name="change_trip_count" string="Confirm" type="object" class="btn-primary" states="draft"/>
+                  <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="name" required="1"  options="{'no_open': True}"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>
+                    <group>
+                       <field name="daily_trip_count" options="{'no_open': True}"  attrs="{'readonly': [('state', 'in', ['draft','confirmed'])]}"/>
+                       <field name="new_daily_trip_count" required="1" options="{'no_open': True}"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>                    
+                  </group>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>                
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_support_support_team_fleet_change_driver_tree">
+        <field name="name">fleet.daily.trip.count.tree</field>
+        <field name="model">fleet.daily.trip.count</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+              <field name="daily_trip_count"/>
+              <field name="new_daily_trip_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_support_team_fleet_daily_trip_count">
+        <field name="name">Fleet Daily Trip Count</field>
+        <field name="res_model">fleet.daily.trip.count</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+   
+    <menuitem name="Fleet Daily Trip Count" 
+      id="root_menu_support_team_daily_trip_count" 
+      parent="bsg_support_team.root_menu_support_team" 
+      action="action_support_team_fleet_daily_trip_count"
+      sequence="4"
+      />
+
+  </data>
+</odoo>

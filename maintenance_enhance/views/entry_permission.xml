@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="entry_permission_form_view" model="ir.ui.view">
+            <field name="name">entry_permission_form_view</field>
+            <field name="model">entry_permission</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="entry permission">
+                    <header>
+                        <button name="action_confirm" type="object" groups="maintenance_enhance.group_ep_confirm"
+                                string="Confirm" class="oe_highlight" states="draft"/>
+                        <button name="action_cancel" type="object" groups="maintenance_enhance.group_ep_cancel"
+                                string="Cancel" class="oe_highlight" attrs="{'invisible':[('state','not in',['done','draft'])]}"/>
+                        <button name="action_reset" type="object" groups="maintenance_enhance.group_ep_reset"
+                                string="Reset To Draft" class="oe_highlight" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_wo_view" class="oe_stat_button" icon="fa-book"
+                                    type="object">
+                                <field name="wo_count" widget="statinfo" string="Work Order"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="date" readonly="1" attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name="maintenance_for" required="1" attrs="{'readonly':[('state','=','done')]}"/>
+                                <field name="vehicle_code" required="1" attrs="{'readonly':[('state','=','done')]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="vehicle_status" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="driver_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="driver_mobile" attrs="{'readonly':[('state','!=','draft')]}" force_save="1"/>
+                                <field name="truck_load" force_save="1"/>
+                                <field name="department_service" force_save="1"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="vehicle_name" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="taq_number" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="plate_no" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="odometer_not_work"/>
+                                <field name="current_branch_user_id" force_save="1" readonly="1"/>
+                                <field name="kilometer" readonly="1" force_save="1" attrs="{'required':[('odometer_not_work','=',False)],'invisible':[('odometer_not_work','=',True)],'readonly':[('state','=','done')]}"/>
+                                <field name="upload_inspection" force_save="1"
+                                       attrs="{'readonly':[('state','=','done')]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="description" widget="html" attrs="{'readonly':[('state','=','done')]}"/>
+
+                            </group>
+
+                        </group>
+                        <group>
+                            <group name="group_left">
+                                <field name="inspection_config_trailer" widget="many2many_checkboxes"
+                                       attrs="{'readonly':[('state','=','done')]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="inspection_config_truck" widget="many2many_checkboxes"
+                                       attrs="{'readonly':[('state','=','done')]}"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="entry_permission_tree_view" model="ir.ui.view">
+            <field name="name">entry_permission_tree_view</field>
+            <field name="model">entry_permission</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="vehicle_name"/>
+                    <field name="driver_mobile"/>
+                    <field name="vehicle_code"/>
+                    <field name="driver_id"/>
+                    <field name="driver_code"/>
+                    <field name="plate_no"/>
+                    <field name="current_branch_user_id"/>
+                    <field name="kilometer"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="entry_permission_view_search" model="ir.ui.view">
+            <field name="name">entry.permission.view.search</field>
+            <field name="model">entry_permission</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="vehicle_name"/>
+                    <field name="driver_mobile"/>
+                    <field name="vehicle_code"/>
+                    <field name="driver_id"/>
+                    <field name="driver_code"/>
+                    <field name="plate_no"/>
+                    <field name="current_branch_user_id"/>
+                    <field name="kilometer"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="entry_permission_action" model="ir.actions.act_window">
+            <field name="name">Entry Permission</field>
+            <field name="res_model">entry_permission</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="entry_permission_main_menu" name="Entry Permit To Workshop" action="entry_permission_action"
+                  parent="maintenance_enhance.menu_fleet_maintenance_child1"
+                  groups="maintenance_enhance.group_wo_maintenance_with_access_only_read,maintenance_enhance.group_ep_create,maintenance_enhance.group_ep_read_write,maintenance_enhance.group_ep_confirm,maintenance_enhance.group_ep_cancel,maintenance_enhance.group_ep_reset"/>
+
+    </data>
+</odoo>

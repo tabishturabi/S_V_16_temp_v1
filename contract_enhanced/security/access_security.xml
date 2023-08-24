@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_contract_management">
+            <field name="name">Contract Management</field>
+            <field name="description">Contract Management</field>
+            <field name="sequence">21</field>
+        </record>
+       	<record model="res.groups" id="group_supplier_contract">
+            <field name="name">Supplier Contract</field>
+            <field name="category_id" ref="module_contract_management"/>
+        </record>
+    </data>
+</odoo>

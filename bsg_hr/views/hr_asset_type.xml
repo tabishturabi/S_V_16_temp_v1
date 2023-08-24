@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+<!-- assettype form view-->
+      <record model="ir.ui.view" id="view_asset_type_form">
+        <field name="name">hr.asset.type.form</field>
+        <field name="model">hr.asset.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Document Type" >
+                <sheet>
+                    <group>
+                        <field name="bsg_name"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_asset_type_tree">
+        <field name="name">hr.asset.type.tree</field>
+        <field name="model">hr.asset.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsg_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsg_emp_asset_type_action">
+        <field name="name">Asset Type</field>
+        <field name="res_model">hr.asset.type</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Asset Type"
+      id="hr_emp_asset_menu"
+      parent="hr.menu_human_resources_configuration"
+      action="bsg_emp_asset_type_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

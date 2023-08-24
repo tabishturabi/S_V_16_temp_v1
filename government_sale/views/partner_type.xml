@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_partner_type_form_government_sale" model="ir.ui.view">
+            <field name="name">view_partner.type.form.government.sale</field>
+            <field name="model">partner.type</field>
+            <field name="inherit_id" ref="base_customer.view_partner_type_form"/>
+            <field name="arch" type="xml">
+                <field name="pricing_type" position="after">
+                    <field name="is_government"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_trailer_management_cat">
+            <field name="name">Trailer Management</field>
+            <field name="description">Trailer Management</field>
+            <field name="sequence">26</field>
+        </record>
+
+       	<record model="res.groups" id="group_create_trailer">
+            <field name="name">Create Trailer</field>
+            <field name="category_id" ref="module_trailer_management_cat"/>
+        </record>
+
+       	<record model="res.groups" id="group_view_trailer">
+            <field name="name">View Trailer</field>
+            <field name="category_id" ref="module_trailer_management_cat"/>
+        </record>
+
+       	<record model="res.groups" id="group_update_trailer">
+            <field name="name">Update Trailer</field>
+            <field name="category_id" ref="module_trailer_management_cat"/>
+        </record>
+
+        <record model="res.groups" id="group_can_create_vehicles_and_triler">
+            <field name="name">Can Create vehicles and trailer</field>
+            <field name="category_id" ref="module_trailer_management_cat"/>
+        </record>
+        <record model="res.groups" id="group_driver_assign">
+            <field name="name">Driver Assign</field>
+<!--            Migration Note once bsg_trip_mgmt will be moved in this repo this category will be uncommented-->
+<!--            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>-->
+        </record>
+        <record model="res.groups" id="group_driver_unassign">
+            <field name="name">Driver UnAssign</field>
+<!--            Migration Note once bsg_trip_mgmt will be moved in this repo this category will be uncommented-->
+<!--            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>-->
+        </record>
+
+    </data>
+</odoo>

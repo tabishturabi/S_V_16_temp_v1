@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_attendance_report_wizard_form">
+            <field name="name">attendance.report.wizard.form</field>
+            <field name="model">attendance.report.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="grouping_by" />
+                            </group>
+
+                            <group>
+                                <field name="report_list" />
+                                <field name="is_parent_dep"
+                                       attrs="{'invisible': [('grouping_by', 'not in', ['by_departments','by_sumany'])]}" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="employee_ids" widget="many2many_tags"/>
+                                <field name="branch_ids" widget="many2many_tags"/>
+                                <field name="resource_calendar_ids" widget="many2many_tags" />
+                                <field name="country_ids" widget="many2many_tags"/>
+                                <!--                                <field name="religion_ids" widget="many2many_tags"/>-->
+                                <!--                                <field name="guarantor_ids" widget="many2many_tags"/>-->
+                                <field name="partner_type_ids" widget="many2many_tags"/>
+                                <field name="employee_tags_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="department_ids" widget="many2many_tags"/>
+
+                                <field name="job_position_ids" widget="many2many_tags" />
+                                <field name="employee_status"/>
+                                <field name="company_ids" widget="many2many_tags"/>
+                                <!--                                <field name="region_ids" widget="many2many_tags" />-->
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="date_from" attrs="{'required': [('report_list', 'in', ['summary', 'daily', 'permission'])]}"
+                                       string="Begin Date/ Leave empty if no begin date" />
+                            </group>
+                            <group>
+                                <field name="date_to" attrs="{'required': [('report_list', 'in', ['summary', 'daily', 'permission'])]}"
+                                       string="End Date/ Leave empty if no end date" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="do_print" string="Print Report" type="object" class="btn-primary"/>
+                        <button name="do_print_excel" string="Print Excel" type="object" class="btn-primary"
+                        attrs="{'invisible': [('report_list', 'not in', ['summary'])]}"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_report_action">
+            <field name="name">Employee Salary Info Reports</field>
+            <field name="res_model">attendance.report.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_attendance_report_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem name="PDF Reports"
+                  id="menu_hr_attendance_reports"
+                  parent="hr_attendance.menu_hr_attendance_report"
+                  sequence="11"
+                  action="hr_attendance_report_action"/>
+
+<!--        <menuitem id="menu_hr_attendance_report"-->
+<!--                  name="Reporting"-->
+<!--                  parent="hr_attendance.menu_hr_attendance_report"-->
+<!--                  sequence="100" groups="hr_attendance.group_hr_attendance_user"-->
+<!--                  action="hr_attendance.hr_attendance_action_graph"/>-->
+
+        <menuitem id="menu_hr_attendance_report"
+                  name="Reporting"
+                  parent="hr_attendance.menu_hr_attendance_report"
+                  sequence="100" groups="hr_attendance.group_hr_attendance_user"
+                  action="hr_attendance.hr_attendance_report_action"/>
+
+    </data>
+</odoo>

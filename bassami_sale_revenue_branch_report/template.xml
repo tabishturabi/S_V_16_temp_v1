@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="revenue_branch_id"
+                model="sale.revenue.by.branch"
+                string="Sale Revenue Branch"
+                report_type="xlsx"
+                name="bassami_sale_revenue_branch_report.revenue_branch_xlsx"
+                file="bassami_sale_revenue_branch_report.revenue_branch_xlsx"/>
+
+        <record id="sale_revenue_by_branch_wizard" model="ir.ui.view">
+            <field name="name">sale.revenue.by.branch</field>
+            <field name="model">sale.revenue.by.branch</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="form"/>
+                             <field name="cargo_sale_type" invisible="1"/>
+                            <field name="branch_type"/>
+                            <field name="ship_loc" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('branch_type','!=','specific')],'required':[('branch_type','=','specific')]}" widget="many2many_tags"/>
+                            <field name="payment_method_filter"/>
+                            <field name="payment_method_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('payment_method_filter','!=','specific')],'required':[('payment_method_filter','=','specific')]}"/>
+                            <field name="customer_filter"/>
+                            <field name="customer_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('customer_filter','!=','specific')],'required':[('customer_filter','=','specific')]}"/>
+                            <field name="user_type"/>
+                            <field name="users" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('user_type','!=','specific')],'required':[('user_type','=','specific')]}" widget="many2many_tags"/>
+                            <field name="invoicep_line_filter" attrs="{'invisible':[('with_summary','=',True)]}"></field>
+                            <field name="so_line_state" attrs="{'invisible':[('with_summary','!=',True)]}"></field>
+                            <field name="partner_type_filter" />
+                            <field name="Partner_type_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('partner_type_filter','!=','specific')],'required':[('partner_type_filter','=','specific')]}"></field>
+                            <field name="with_cc"></field>
+                            <field name="create_from" ></field>
+                            <field name="with_summary" invisible="1"></field>
+                            <field name="satha_only" invisible="1"/>
+                            <field name="link" invisible="1"/>
+                            <field name="affected_records" invisible="1"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="report_type" invisible="1"/>
+                            <field name="branch_type_to"/>
+                            <field name="drop_loc" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('branch_type_to','!=','specific')],'required':[('branch_type_to','=','specific')]}" widget="many2many_tags"/>
+<!--                            <field name="pay_case"/>-->
+                            <field name="state"/>
+                            <field name="trip_type"/>
+                            <field name="sale_order_state" invisible="1"></field>
+                            <field name="shipment_type_filter" />
+                            <field name="shipment_type_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('shipment_type_filter','!=','specific')],'required':[('shipment_type_filter','=','specific')]}"></field>
+                            <field name="car_size_filter" />
+                            <field name="car_size_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('car_size_filter','!=','specific')],'required':[('car_size_filter','=','specific')]}"></field>
+                        </group>
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class="oe_highlight"/>
+                        <button name="print_xls_report" type="object" string="Print XLS" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_revenue_by_branch_action" model="ir.actions.act_window">
+            <field name="name">Sale Revenue By Branch</field>
+            <field name="res_model">sale.revenue.by.branch</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sale_revenue_by_branch_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="sale_revenue_by_branch_menu_item" name="Revenue by Branch"
+                  action="sale_revenue_by_branch_action" parent="bsg_cargo_sale.cargo_sale_root_meun"
+                  sequence="7"/>
+    </data>
+</odoo>

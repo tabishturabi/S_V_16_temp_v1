@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_decisions_button_form">
+        <field name="name">employee.decisions.button.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+               <button name="action_decisions" type="object"
+                      class="oe_stat_button" icon="fa-file-text" >
+                  <field name="employee_decisions_number" string="Decisions" widget="statinfo"></field>
+              </button>
+            </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

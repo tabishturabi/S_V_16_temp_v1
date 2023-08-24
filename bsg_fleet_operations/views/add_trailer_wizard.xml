@@ -1,0 +1,35 @@
+<odoo>
+  <data>
+    <record id="add_trailer_wizard_form" model="ir.ui.view">
+        <field name="name">add_trailer_wizard_form</field>
+        <field name="model">add.trailer.wizard</field>
+        <field name="arch" type="xml">
+          <form>
+            <sheet>
+              <group>
+                <group>
+                  <field name="vehicle_id" invisible="1" />
+                  <field name="safety_certificate_received" widget="radio" options="{'horizontal':true}" />
+                  <field name="safety_certificate_received_reason" attrs="{'required':[('safety_certificate_received','=','no')],'invisible':[('safety_certificate_received','!=','no')]}"/>
+                </group>
+                <group>
+                </group>
+              </group>
+            </sheet>
+            <footer>
+               <button name="add_trailer" string="Add Trailer" type="object" class="btn-primary"/>
+               <button string="Cancel" special="cancel" class="btn-seconday"/>
+           </footer>
+          </form>
+        </field>
+    </record>
+    <record id="add_trailer_wizard_action" model="ir.actions.act_window">
+        <field name="name">Add Trailer</field>
+        <field name="res_model">add.trailer.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="add_trailer_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+  </data>
+</odoo>

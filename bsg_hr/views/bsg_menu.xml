@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+    <data>
+
+      <menuitem
+              id="menu_hr_employees"
+              name="Employees"
+              parent="hr.menu_hr_root"
+              sequence="1"
+
+      />
+      <record id="hr.menu_hr_employee_user" model="ir.ui.menu">
+        <field name="parent_id" ref="bsg_hr.menu_hr_employees"/>
+        <field name="sequence" eval="1"/>
+      </record>
+
+      <menuitem
+              id="hr_contract.hr_menu_contract"
+              name="Contracts"
+              action="hr_contract.action_hr_contract"
+              parent="bsg_hr.menu_hr_employees"
+              sequence="2"
+              groups="hr_contract.group_hr_contract_manager"/>
+
+
+    </data>
+
+  </data>
+</odoo>

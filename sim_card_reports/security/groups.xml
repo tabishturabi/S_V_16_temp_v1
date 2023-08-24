@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data noupdate="0">
+          <record id="groups_sim_card_report" model="res.groups">
+              <field name="name">Sim Card Report</field>
+              <field name="comment">The user will have access to sim card report menu.</field>
+              <field name="category_id" ref="sim_card.module_sim_card"/>
+          </record>
+    </data>
+</odoo>

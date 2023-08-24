@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="clearance_refusal_reason_form">
+      <field name="name">clearance.refusal.reason.form</field>
+      <field name="model">clearance.refusal.reason</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="clearance_id" invisible="1"></field>
+          <label for="refusal_reason" string="Reason To Refuse"></label>
+          <field name="refusal_reason"></field>
+           <footer>
+               <button name="click_refuse" string="Submit" type="object"
+                            confirm="Are You sure you want to refuse?" class="btn-primary"/>
+               <button string="Cancel" special="cancel" class="btn-seconday"/>
+           </footer>
+        </form>
+       </field>
+       </record>
+
+       <record id="clearance_refusal_reason_action" model="ir.actions.act_window">
+            <field name="name">Reason To Refuse</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">clearance.refusal.reason</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="clearance_refusal_reason_form"></field>
+            <field name="context">{'default_clearance_id':active_id}</field>
+            <field name="target">new</field>
+        </record>
+
+       <record model="ir.ui.view" id="clearance_cancel_reason_form">
+      <field name="name">clearance.cancel.reason.form</field>
+      <field name="model">clearance.cancel.reason</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="clearance_id" invisible="1"></field>
+          <label for="cancel_reason" string="Reason To Cancel"></label>
+          <field name="cancel_reason"></field>
+           <footer>
+               <button name="click_cancel" string="Submit" type="object"
+                            confirm="Are You sure you want to cancel?" class="btn-primary"/>
+               <button string="Cancel" special="cancel" class="btn-seconday"/>
+           </footer>
+        </form>
+       </field>
+       </record>
+
+       <record id="clearance_cancel_reason_action" model="ir.actions.act_window">
+            <field name="name">Reason To Cancel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">clearance.cancel.reason</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="clearance_cancel_reason_form"></field>
+            <field name="context">{'default_clearance_id':active_id}</field>
+            <field name="target">new</field>
+        </record>
+  </data>
+</odoo>

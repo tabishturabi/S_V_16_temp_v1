@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+
+  <!-- bsg sponser form view definition -->
+    <record model="ir.ui.view" id="bsg_sponsor_form_view">
+      <field name="name">bsg_sponsor_form_view</field>
+      <field name="model">bsg.sponsor.info</field>
+      <field name="arch" type="xml">
+        <form>
+          <separator/>
+          <h4>Sponsor Details</h4>
+          <separator/>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="sponsor_id"/>
+              <field name="partner_id"/>
+              <label for="street" string="Address"/>
+              <div class="o_address_format">
+                <field name="street" placeholder="Street..." class="o_address_street"/>
+                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                <field name="city" placeholder="City" class="o_address_city"/>
+                <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                <field name="zip_code" placeholder="Postal /Zip Code" class="o_address_zip"/>
+                <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+              </div>
+              <field name="website" widget="url" placeholder="e.g. www.bafco.com"/>
+            </group>
+            <group>
+              <field name="phone"/>
+              <field name="fax"/>
+              <field name="pob"/>
+              <field name="email"/>
+              <field name="mobile"/>
+              <field name="cr_no"/>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+  </data>
+</odoo>

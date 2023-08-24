@@ -1,0 +1,42 @@
+.con-color{
+	background-color:white;
+	border-radius: 6px !important;
+}
+
+.bg_color{
+	background-color:lightgrey;
+	padding:15px !important;
+	border-radius: 6px !important;
+}
+.mt-20{
+	margin-top: 20px !important;
+}
+@media (min-width: 576px){
+.ml-left{
+	margin-left: 185px !important;
+}
+.ml-treack{
+	margin-left:210px !important;
+}
+.img-mar{
+	margin-left: 80px !important;
+}
+.ar_rep{
+	margin-left: 242px;
+}
+
+}
+.input_none{
+	border:none;
+	background: lightgrey !important;
+	color : green !important;
+}
+.input_white{
+	border:none;
+	background: white !important;
+	color : black !important;
+}
+
+.ar_in{
+	text-align: right !important;
+}

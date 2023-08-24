@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+        <record id="view_purchase_order_form_smart_button" model="ir.ui.view">
+            <field name="name">purchase.order.form.smart.button</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_order_formform"/>
+            <field name="arch" type="xml">
+                  <xpath expr="//field[@name='order_line']/form/sheet/group/group/field[@name='move_dest_ids']" position="after">
+
+                          <label for="onhand"/>
+                          <div>
+                              <span class="oe_inline">&#160;</span>
+                              <button name="action_view_onhand" class="btn-link" type="object" style="text-decoration:underline;">
+                                  <field name="onhand" class="btn-link" readonly="1" style="text-decoration:underline;"/> 
+                              </button>    
+                          </div>
+
+                          <label for="poptd" string="P.O/PTD"/>
+                          <div>   
+                                  <span class="oe_inline">&#160;</span>
+                                  <button name="action_view_poytdo_period" class="btn-link" type="object" style="text-decoration:underline;">
+                                      <field name="poptd" class="btn-link" widget="integer" style="text-decoration:underline;"/>
+                                  </button>
+                          </div>
+
+                          <label for="poytd_close" string="P.O/YTD"/>
+                          <div>  
+                                  <button name="action_view_poytdo_close" string="CLOSE " type="object"  style="color:white;background-color:gray;" class="oe_inline">
+                                          <span class="oe_inline">&#160;</span>
+                                          <field name="poytd_close" string="PO YTD OPEN" widget="integer" class="oe_inline"/>
+                                  </button>
+
+                                  <span class="oe_inline">&#160;</span>
+
+                                  <button name="action_view_poytdo_open" string="OPEN " type="object" style="color:white;background-color:#00A09D;" class="oe_inline">
+                                          <span class="oe_inline">&#160;</span>
+                                          <field name="poytd_open"  widget="integer" class="oe_inline"/>
+                                  </button>
+                                  
+                                  
+                          </div>
+
+                          <label for="prptd" string="P.R/PTD"/>
+                          <div> 
+                              <span class="oe_inline">&#160;</span>
+                              <button name="action_view_prytdo_period" class="btn-link" type="object" style="text-decoration:underline;">
+                                  <field name="prptd" class="btn-link" widget="integer" style="text-decoration:underline;"/>
+                              </button>
+                          </div>  
+
+
+                          <label for="prytd_close" string="P.R/YTD"/>
+                          <div> 
+
+                              <button name="action_view_prytdo_close" string="CLOSE  " type="object"  style="color:white;background-color:gray;" class="oe_inline">
+                                          <span class="oe_inline">&#160;</span>
+                                          <field name="prytd_close" string="PO YTD OPEN" widget="integer" class="oe_inline"/>
+                              </button>
+
+                              <span class="oe_inline">&#160;</span>
+
+                              <button name="action_view_prytdo_open" string="OPEN  " type="object" style="color:white;background-color:#00A09D;" class="oe_inline">
+                                          <span class="oe_inline">&#160;</span>
+                                          <field name="prytd_open"  widget="integer" class="oe_inline"/>
+                              </button>
+                          </div>
+                  </xpath>
+            </field>
+        </record>    
+  </data>
+</odoo>

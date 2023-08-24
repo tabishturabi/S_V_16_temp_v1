@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="employee_leave_service_date_form">
+        <field name="name">employee.leave.service.date.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//page[@name='hr_settings']//group[@groups='base.group_no_one']" position="replace">-->
+            <xpath expr="//page[@name='hr_settings']" position="inside">
+                 <group name="leaves" string="Leaves">
+                    <label for="remaining_leaves"/>
+                    <div>
+                        <field name="remaining_leaves" class="oe_inline"/> days
+                    </div>
+                     <field name="leave_start_date"></field>
+                     <field name="last_return_date"></field>
+                </group>
+                <group string="Service">
+                    <field name="end_service_date"></field>
+                </group>
+            </xpath>
+        </field>
+      </record>
+<!--      <record model="ir.ui.view" id="employee_last_return_date_form">-->
+<!--        <field name="name">employee.last.return.date.form</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="bsg_hr_payroll.inherits_view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='last_return_date']" position="replace">-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--      </record>-->
+  </data>
+</odoo>

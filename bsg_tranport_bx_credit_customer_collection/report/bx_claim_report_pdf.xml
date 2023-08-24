@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="external_layout_standard_2">
+      <div class="header">
+          <div class="row">
+              <div class="col-3 mb4">
+                      <img src="bsg_tranport_bx_credit_customer_collection/static/src/img/logo.png" width="1200px" height="220px" alt="Logo"/>
+              </div>
+          </div>
+      </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+<!--        <div class="footer o_standard_footer">-->
+<!--              <div class="text-center" style="border-top: 1px solid black;">-->
+<!--                  <ul class="list-inline mb4">-->
+<!--                      <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>-->
+<!--&lt;!&ndash;                      <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>&ndash;&gt;-->
+<!--                  </ul>-->
+<!--                  <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                      Page: <span class="page"/> - <span class="topage"/>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+      </template>
+      <template id="bx_claim_pdf">
+        <t t-call="web.html_container">
+             <t t-call="bsg_tranport_bx_credit_customer_collection.external_layout_standard_2">
+                 <div class="page">
+                     <style type="text/css">
+                            <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/bsg_tranport_bx_credit_customer_collection//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             div {
+                                font-family: 'Arial';
+                                    }
+
+					            ]]>
+                        </style>
+                     <t t-set="contract_id" t-value="docs.get_contract(docs)" />
+                      <div width="100%" style="margin-top:10px;direction: rtl;font-size:30px;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "docs.doc_reference_no">
+                                 <span><t t-esc="docs.doc_reference_no" /> </span>
+                             </t>
+                          </div >
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                              <span> الرقم  :</span>
+                          </div>
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <t t-if = "docs.date">
+                                     <span><t t-esc="docs.date" /> </span>
+                                 </t>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span>التاريخ :</span>
+                         </div>
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <span><t t-esc="contract_id.contract_no" /> </span>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span>رقم العقد:</span>
+                         </div>
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <t t-set="contract_date" t-value="docs.get_contract_date(contract_id)" />
+                                 <t t-if="contract_date">
+                                     <span><t t-esc="contract_date" /> </span>
+                                     <span>هـ</span>
+                                 </t>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span> تاريخ العقد:</span>
+                         </div>
+                     </div>
+                     <br />
+                     <br />
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                          <div style="font-size:30px;padding-top:2px;padding-bottom:2px;direction: rtl;width:1%;border:0px solid black;float:left;text-align:right;">
+                             <span></span>
+                         </div>
+                         <div style="font-size:30px;padding-top:2px;padding-bottom:2px;direction: rtl;width:99%;border:0px solid black;float:left;text-align:right;">
+                             <span><t t-esc="docs.invoice_to.title.display_name" /></span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:30px;padding-top:2px;padding-bottom:2px;direction: rtl;width:1%;border:0px solid black;float:left;text-align:right;">
+                             <span></span>
+                         </div>
+                          <div style="font-size:30px;padding-top:2px;padding-bottom:2px;direction: rtl;width:99%;border:0px solid black;float:left;text-align:right;">
+                             <span><t t-esc="docs.invoice_to.name" /> </span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:30px;padding-top:20px;padding-bottom:20px;direction: rtl;width:100%;border:0px solid black;text-align:right;">
+                             <span>الموقــر</span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:30px;direction: rtl;width:100%;border:0px solid black;float:left;text-align:right;">
+                             <span>السلام عليكم ورحمة الله وبركاته,,</span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;font-size:30px;border:0px solid black; background-color:white; color:black;};">
+                         <div style="width:100%;direction: rtl;border:0px solid black;text-align:right;">
+                             <span>نرفع لسعادتكم معاملة رقم</span>
+                             <span style="font-weight:bold;">(<t t-esc="docs.doc_reference_no"></t>)</span>
+                             <span>مـع كامـل مرفقاتـها .</span>
+                         </div>
+                         <div style="width:100%;direction: rtl;border:0px solid black;text-align:right;">
+                             <span>بمبلغ</span>
+                             <span style="font-weight:bold;">(<t t-esc="docs.amount_total"></t>)</span>
+                              <span style="font-weight:bold;">
+                                  <t t-set="arabic_amount_total" t-value="docs.get_arabic_total_word(docs.amount_total)" />
+                                  <t t-esc="arabic_amount_total"></t>
+                              </span>
+                             <span>
+                                 فقط . وذلك مقابل
+                             </span>
+                             <span><t t-esc="docs.internal_note"></t></span>
+                             <br />
+                             <span>
+                                 آملين التكرم بالإطلاع والمراجعة وإحالتها إلى جهة الاختصاص لصرف مستحقاتنا.
+                                 <br />
+                                 شاكرين ومقدرين حسن تعاونكم الطيب معنا,
+                                 <br />
+                                 وتقبلوا خالص تحياتنا,,,
+                             </span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="padding-top:20px;font-size:30px;direction: rtl;width:100%;border:0px solid black;float:left;text-align:left;">
+                             <span>شركة مجموعة أعمال البسامي الدولية</span>
+                         </div>
+                     </div>
+                 </div>
+             </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="bassami_inspection_sign_page" model="ir.actions.client">
+        <field name="name">Mark Car Damages</field>
+        <field name="tag">bassami_inspection_sign_page</field>
+    </record>
+
+	<record id="view_bassami_inspection_tree" model="ir.ui.view">
+		<field name="name">bassami.inspection</field>
+		<field name="model">bassami.inspection</field>
+		<field name="arch" type="xml">
+			<tree string="Car Inspection" create="false" delete="false">
+				<field name="name"/>
+				<field name="customer"/>
+				<field name="user_id"/>
+				<field name="cargo_sale_id"/>
+				<field name="cargo_sale_line_id"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record id="view_bassami_inspection" model="ir.ui.view">
+		<field name="name">bassami.inspection.form</field>
+		<field name="model">bassami.inspection</field>
+		<field name="arch" type="xml">
+			<form string="Car Inspection" class="inspection_view" create="false" delete="false">
+				<header>
+					<button name="action_send_to_progress" class="btn-primary" type="object" states="draft" string="Send To Progress"/>
+					<button name="assign_to_me" class="btn-primary" type="object" attrs="{'invisible':[('user_id', '!=', False)]}" string="Assign To Me"/>
+					<button name="action_approved" class="btn-primary" confirm="Are you sure you?" type="object" states="underprocess" string="Approve"/>
+					<button name="action_cancelled" type="object" states="underprocess,approved" string="Cancelled"/>
+					<button name="action_to_draft" type="object" class="btn-primary" states="cancelled" string="Move to Re-Process"/>
+					<field name="state" widget="statusbar" class="btn-primary" statusbar_visible="draft,underprocess,approved,cancelled"/>
+				</header>
+				<sheet>
+
+					<group  col="4" colspan="4" string="Sale Order Information">
+						<field name="name" readonly="1"/>
+						<field name="cargo_sale_line_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+						 <field name="customer" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+						 <field name="branch_from" readonly="1"/>
+						 <field name="branch_to" readonly="1"/>
+						 <field name="plate_no" readonly="1"/>
+						 <field name="plate_number" readonly="1"/>
+						 <field name="chassis_no"/>
+						 <field name="odoo_id"/>
+						 <!-- <field name="plate_no_2"/>
+						 <field name="chassis_no_2"/> -->
+					</group>
+
+					<group  col="4" colspan="4" string="Assigned Employee Information">
+						<field name="user_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+						<field name="assigned_employee_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+					</group>
+					<field name="attachment_top_id" invisible="1"/>
+					<field name="attachment_left_id" invisible="1"/>
+					<field name="attachment_right_id" invisible="1"/>
+					<field name="attachment_bottom_id" invisible="1"/>
+					<separator/>
+					<hr/>
+					<div class="car-design-pic text-center mt16">
+						<div class="car-top-btn">
+							<button class="btn-primary takeimage" name="%(bassami_inspection.action_get_image_wizard)d" 
+							type="action" context="{'CallTop': True, 'is_other': False}">Add Pic. <i attrs="{'invisible':[('attachment_top_id', '=', False)]}" class="fa fa-check"/></button>
+						</div>
+						<div class="car-center-btn mt8 mb8">
+							<button class="btn-primary takeimage" name="%(bassami_inspection.action_get_image_wizard)d" 
+							type="action" context="{'CallLeft': True, 'is_other': False}" style="margin-right: 10px;">Add Pic. <i attrs="{'invisible':[('attachment_left_id', '=', False)]}" class="fa fa-check"/></button>
+							<!-- <field name="digital_signature" widget="signature" style="width: 35%;"/> -->
+							<field name="attachment_car_image_id" invisible="1"/>
+							<field name="attachment_car_image_binary"   widget="image" style="width: 35%;" attrs="{'invisible':[('attachment_car_image_id', '=', False)]}"/>
+							<img class="car_image" src="/bassami_inspection/static/src/img/car.png" alt="Car Inspection" style="width: 35%;" attrs="{'invisible':[('attachment_car_image_id', '!=', False)]}"/>
+							<button class="btn-primary takeimage" name="%(bassami_inspection.action_get_image_wizard)d" 
+							type="action" context="{'CallRight': True, 'is_other': False}" style="margin-left: 10px;">Add Pic.  <i attrs="{'invisible':[('attachment_right_id', '=', False)]}" class="fa fa-check"/></button>
+						</div>
+						<button name="sign_directly" class="btn btn-danger" type="object" string=" Mark Damages" style="width: 25%; margin-top:-10px; margin-bottom:15px;"> <i class="fa fa-edit"/></button>
+						<div class="car-bottom-btn">
+							<button class="btn-primary takeimage" name="%(bassami_inspection.action_get_image_wizard)d" 
+							type="action" context="{'CallBottom': True, 'is_other': False}">Add Pic.<i attrs="{'invisible':[('attachment_bottom_id', '=', False)]}" class="fa fa-check"/></button>
+						</div>
+					</div>
+					<div class="car_information mt8">
+						<button class="btn-primary additional-takeimage" name="%(bassami_inspection.action_get_image_wizard)d" 
+							type="action" context="{'is_other': True}">Additional Images</button>
+					</div>
+					<group string="Top-Bottom-Left-Right">
+						<group>
+							<field name="attachment_top_binary" nolabel="1" readonly="1" widget="image" style="width: 160px !important;height:175px !important;"/>
+							<field name="attachment_bottom_id_binary" nolabel="1" readonly="1" widget="image" style="width: 160px !important;height:175px !important;"/>
+						</group>
+						<group>
+							<field name="attachment_left_binary" nolabel="1" readonly="1" widget="image" style="width: 160px !important;height:175px !important;"/>
+							<field name="attachment_right_binary" nolabel="1" readonly="1" widget="image" style="width: 160px !important;height:175px !important;"/>
+							<field name="count" invisible="1"/>
+						</group>
+					</group>
+						<separator/>
+					<group>
+						<field nolabel="1" name="attachment_ids" readonly="1" widget="many2many_binary"/>
+					</group>
+					<separator/>
+					<hr/>
+					<group string="Inspection Findings"  col="4" colspan="4">
+					    <label for="attachment_car_image_binary" string="Car Damages"/>
+							<field name="attachment_car_image_binary" nolabel="1" readonly="1" widget="image" style="width: 30% !important;height:175px !important;"/>
+							   <separator/>
+							   <field name="hail_scratches"/>
+							   <field name="small_scratches"/>
+							   <!-- <field name="right_mirror"/> -->
+							   <!-- <field name="left_mirror"/> -->
+							   <field name="spare_tire"/>
+							   <!-- <field name="antena"/> -->
+							   <field name="media_player"/>
+							   <field name="remote_control"/>
+							   <separator/>
+							   <label for="notes" string="Notes and Comments"/>
+							 <field name="notes" nolabel="1" />
+							  <label for="digital_signature" string="Client's Signature"/>
+							  <div>
+							 <field name="digital_signature" nolabel="1" widget="image" style="width: 100% !important;height:175px !important;"/>
+							  <field name="digital_signature_date" style="margin-left:50px !important;"/>
+							  </div>
+							</group>
+				
+				<hr/>
+					<separator/>
+					<notebook>
+						<page string="Post Notes and Images">
+							<field name="note_line_ids" nolabel="1" readonly="1">
+								<tree>
+									<field name="image"/>
+									<field name="user_name"/>
+									<field name="note"/>
+								</tree>
+			
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_bassami_inspection_needs_action" model="ir.actions.act_window">
+		<field name="name">Waiting Car Inspection</field>
+		<field name="res_model">bassami.inspection</field>
+<!--		&lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;form</field>-->
+		<field name="domain">[('state', '=','draft')]</field>
+		<field name="view_mode">tree,form</field>
+	</record>>
+
+	<record id="action_bassami_inspection" model="ir.actions.act_window">
+		<field name="name">Processed Car Inspection</field>
+		<field name="res_model">bassami.inspection</field>
+<!--		&lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;form</field>-->
+		<field name="domain">[('state', '!=','draft')]</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record id="view_inspection_assign" model="ir.ui.view">
+	<field name="name">view.inspection.assign</field>
+	<field name="model">inspection.assign</field>
+	<field name="arch" type="xml">
+		<form string="Assign Employee">
+			<group>
+				<field name="branch_id" invisible="1"/>
+				<field name="employee_id" domain="[('branch_id', '=', branch_id), ('is_inspection_employee', '=', True)]" widget="selection"/>
+			</group>
+		<footer>
+			<button name="confirm_assign" type="object" string="Confirm" class="btn btn-primary"/>
+			<button name="cancel" string="Cancel" special="cancel" class="btn btn-primary pull-right"/>
+		</footer>
+		</form>
+	</field>
+	</record>
+
+	<record id="action_inspection_assign" model="ir.actions.act_window">
+		<field name="name">Inspection Assign</field>
+		<field name="res_model">inspection.assign</field>
+<!--		&lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;form</field>-->
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+	<menuitem name="Car Inspection" id="root_car_inspection"
+			parent="sale.sale_menu_root" groups="bassami_inspection.group_car_inspection" sequence="1"/>
+
+	<menuitem name="Waiting Car Inspection" id="action_bassami_inspection_needs_action_menue" action="action_bassami_inspection_needs_action" 
+			parent="root_car_inspection" groups="bassami_inspection.group_car_inspection" sequence="1"/>
+
+	<menuitem name="Processed Car Inspection" id="action_bassami_inspection_menue" action="action_bassami_inspection" 
+			parent="root_car_inspection" groups="bassami_inspection.group_car_inspection" sequence="2"/>
+			
+	
+	<record id="action_web_came_screen" model="ir.actions.client">
+		<field name="name">Camera Screen</field>
+		<field name="tag">web_came_screen</field>
+		<field name="context">{}</field>
+		<field name="target">main</field>
+	</record>
+
+</odoo>

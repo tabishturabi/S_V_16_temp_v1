@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="assets_backend" name="bsg_cargo_sale assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/bsg_support_team/static/js/disable_delete.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+</odoo>

@@ -1,0 +1,100 @@
+<odoo>
+  <data>
+
+
+    <record id="view_res_partner_filter_custom_inherits" model="ir.ui.view">
+          <field name="name">res.partner.filter</field>
+          <field name="model">res.partner</field>
+          <field name="inherit_id" ref="base.view_res_partner_filter"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+              <separator/>
+                <field name="mobile" string="Mobile"/>
+                <field name="iqama_no" string="Iqama/ID "/>
+                <field name="customer_id_card_no" string="ID Card No"/>
+                <field name="customer_number" string="Customer Number"/>
+                <field name="commmercial_number" string="Commercial Number"/>
+            </xpath>
+          </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_view_partner_base_formform_custom_inherit">
+        <field name="name">view_bsg_cargo_sale_res_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base_customer.view_view_partner_base_formform" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_types']" position="replace"/>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_bsg_cargo_sale_res_partner_form_inherit">
+        <field name="name">view_bsg_cargo_sale_res_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+    			<div name="button_box" position="inside">
+    				<button name="action_contract_view" type="object" class="oe_stat_button" icon="fa-file-text">
+    					<span>View Contract</span>
+    				</button>
+    			</div>
+            <xpath expr="//span[@name='address_name']" position="before">
+            <field name="partner_types" required="1" options="{'no_create': True,'no_open': True}"/>
+            <field name="customer_rank" invisible="1"/>
+            <field name="is_from_cargo_sale" invisible="1"/>
+            <field name="customer_type" attrs="{'invisible': [('customer_rank','=', 0)],'required': [('is_from_cargo_sale','=', True)]}"/>
+            <field name="customer_nationality" attrs="{'invisible': [('customer_rank','=', 0)]}"/>
+            <field name="customer_id_type" attrs="{'invisible': [('customer_type','=', '3')]}"/>
+            <field name="customer_id_card_no" attrs="{'invisible':[('customer_type','=','3')],'required': [('customer_type','=', '1')]}"/>
+            <field name="iqama_no" attrs="{'invisible':[('customer_type','=','3')],'required': [('customer_type','=', '2')]}"/>
+            <field name="customer_visa_no" attrs="{'invisible':[('customer_type','=','3')]}"/>
+            <!-- 'required':[('customer_type','=','2')],-->
+            <field name="no_of_copy" attrs="{'required':[('customer_rank','&gt;',0)],'invisible':[('customer_type','=','3')]}"/>
+            <field name="customer_number" attrs="{'invisible':[('customer_rank','=', 0)]}"/>
+              <field name="po_box" force_save="1"/>
+              <field name="attention" force_save="1"/>
+              <field name="fax" force_save="1"/>
+          </xpath>
+          <!-- <xpath expr="//div[hasclass('o_address_format')]" position="after"> -->
+          <xpath expr="//field[@name='vat']" position="after">
+
+              <field name="customer_business" attrs="{'invisible': [('is_company','=', False)]}"/>
+              <field name="allow_rates" string="Define Rates" invisible="1"/>
+              <field name="default_discount" attrs="{'invisible': [('customer_rank','=', 0)]}"/>
+              <field name="block_list" string="Block List" groups="base_customer.group_blacklist_clients"/>
+              <field name="block_list_reason" string="Reason" groups="base_customer.group_blacklist_clients"/>
+              <field name="cc_sms" string="CC Sms"/>
+          </xpath>
+          <xpath expr="//field[@name='vat']" position="replace"/>
+          
+          <xpath expr="//field[@name='function']" position="before">
+              <field name="vat" /><!--attrs="{'required': [('is_dealer','=', True)]}"-->
+              <field name="commmercial_number" attrs="{'required': ['|',('customer_type','=','3'),('is_dealer','=', True)]}"/>
+               <field name="is_credit_customer" invisible="1"></field>
+               <field name="is_customer" invisible="1"></field>
+              <field name="commercial_reg_expiry_date" class="with_hijri" attrs="{'required': [('is_customer','=',True),('is_credit_customer','=',True),('company_type','=','company')]}"/>
+              <!-- attrs="{'invisible': [('supplier','=', False)]}"-->
+              <field name="max_credit_limit" attrs="{'invisible': [('is_company','=', False)]}"/>
+          </xpath>
+         <!--  <xpath expr="//field[@name='company_type']" position="attributes">
+            <attribute name="groups">sales_team.group_sale_manager</attribute>
+          </xpath>  not visible for sale user  -->         
+          <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+            <page name="rates" string="Rates" attrs="{'invisible': [['allow_rates','=',False]]}">
+              <field name="bsg_rate_ids" nolabel="1" >
+                <tree string="Rates" editable="bottom">
+                  <field name="loc_from" string="From" can_create="false" can_write="false" modifiers="{}"/>
+                  <field name="loc_to" string="To" can_create="false" can_write="false" modifiers="{}"/>
+                  <field name="car_size" can_create="false" can_write="false" modifiers="{}"/>
+                  <field name="price" string="Price"/>
+                </tree>
+              </field>
+            </page>
+          </xpath>
+        </field>
+    </record>
+
+
+  </data>
+</odoo>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_cargo_shipment_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+                id="report_for_branches_ledger"
+                model="bsg_vehicle_cargo_sale"
+                name="bassami_cargo_shipment_report.cargo_shipment_report"
+                file="bassami_cargo_shipment_report.cargo_shipment_report"
+                report_type="qweb-html"
+                string="Cargo Shipment Report"
+                paperformat="paperformat_cargo_shipment_template"
+                menu="False"/>
+        <report id="sale_revenue_partner_type_report_id"
+                model="sale.revenue.by.partner.type"
+                string="Sale Revenue Partner Type"
+                report_type="xlsx"
+                name="bassami_cargo_shipment_report.sale_revenue_partner_xlsx"
+                file="bassami_cargo_shipment_report.sale_revenue_partner_xlsx"/>
+
+        <record id="cargo_shipment_records_wizard" model="ir.ui.view">
+            <field name="name">cargo_shipment_records_wizard</field>
+            <field name="model">cargo.shipment.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="to"/>
+                            <field name="report_type"/>
+                            <field name="cargo_sale_type"/>
+
+                        </group>
+
+                        <group name="group_right">
+                            <field name="loc_from" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                   domain="[('id','!=',loc_to)]"/>
+                            <field name="loc_to" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                   domain="[('id','!=',loc_from)]"/>
+                            <field name="customer_id" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                   attrs="{'invisible':[('report_type','!=','detail')]}"/>
+                            <field name="user_id" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                   attrs="{'invisible':[('report_type','!=','detail')]}"/>
+                            <!-- <field name="user_id" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('user_type','!=','specific')],'required':[('user_type','=','specific')]}" widget="many2many_tags"/> -->
+
+                        </group>
+                        <group name="group_left">
+                            <field name="state"/>
+                            <field name="payment_method_ids" widget="many2many_tags"
+                                   options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="cc_invoice" attrs="{'invisible':[('report_type','!=','detail')]}"/>
+                            <field name="invoice_status" attrs="{'invisible':[('report_type','!=','detail')]}"/>
+
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="cargo_shipment_menu_action" model="ir.actions.act_window">
+            <field name="name">Cargo Shipment Report</field>
+            <field name="res_model">cargo.shipment.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="cargo_shipment_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="sale_revenue_by_partner_type_wizard" model="ir.ui.view">
+            <field name="name">sale.revenue.by.partner.type</field>
+            <field name="model">sale.revenue.by.partner.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+
+                        <field name="form"/>
+                        <field name="to"/>
+                        <field name="cargo_sale_type"/>
+                        <field name="report_type"/>
+                        <field name="satha_only"/>
+                        <field name="link" invisible="1"/>
+                        <field name="affected_records" invisible="1"/>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class="oe_highlight"/>
+                        <button name="print_xls_report" type="object" string="Print XLS" class="oe_highlight"/>
+                        <button name="link_trip_to_sale_line" type="object" string="Link Trip To Sale"
+                                class="oe_highlight" invisible="1"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_revenue_by_partner_type_action" model="ir.actions.act_window">
+            <field name="name">Sale Revenue By Partner Type</field>
+            <field name="res_model">sale.revenue.by.partner.type</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sale_revenue_by_partner_type_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="cargo_sale_state_menu_action" model="ir.actions.act_window">
+            <field name="name">Cargo sale states</field>
+            <field name="res_model">cargo.sale.line.state</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem id="branches_reporting_menu_item" name="Branch Reporting" parent="account.menu_finance"/> -->
+
+        <!-- account.menu_finance -->
+        <!-- account_accountant.menu_accounting -->
+
+        <menuitem id="cargo_shipment_menu_item" name="Cargo Shipment Report" action="cargo_shipment_menu_action"
+                  parent="bsg_cargo_sale.cargo_sale_root_meun" sequence="4"/>
+        <menuitem id="sale_revenue_by_partner_type_menu_item" name="Revenue by Partner Type"
+                  action="sale_revenue_by_partner_type_action" parent="bsg_cargo_sale.cargo_sale_root_meun"
+                  sequence="6"/>
+        <!-- <menuitem id="cargo_sale_state_menu_item" name="Cargo Sale State" action="cargo_sale_state_menu_action" parent="bsg_cargo_sale.cargo_sale_root_meun" sequence="5"/> -->
+        <!-- <menuitem id="cargo_sale_state_menu_item"  name="Cargo Sale State" action="cargo_sale_state_menu_action" parent="sale.sale_menu_root" 
+        groups="base.group_erp_manager"  sequence="100"/> -->
+
+
+    </data>
+</odoo>

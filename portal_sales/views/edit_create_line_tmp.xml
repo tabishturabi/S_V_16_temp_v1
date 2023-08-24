@@ -1,0 +1,836 @@
+<odoo>
+
+            <template id="cargo_sale_line_detail_form" name="Cargo Line Edit PopUp">
+
+                <!--######################### Edit Form########################-->
+                <div t-att-id="'o_portal_cargo_sale_order_line_edit_'+str(line_index)">
+                            <input type="hidden" name="order_line_id" t-att-value="line.id"/>
+                            <input type="hidden" name="bsg_cargo_sale_id" t-att-value="shipment.id" />
+                            <input type="hidden" name="shipment_date" t-att-value="shipment.shipment_date" />
+                            <input type="hidden" name="loc_from" t-att-value="shipment.loc_from.id" />
+                            <input type="hidden" name="loc_to" t-att-value="shipment.loc_to.id" />
+                            <input type="hidden" name="shipment_type" t-att-value="line.shipment_type.id" />
+                            <input type="hidden" name="year" t-att-value="line.year.id" />
+                            <input type="hidden" name="car_make" t-att-value="line.car_make.id" />
+                            <input type="hidden" name="car_color" t-att-value="line.car_color.id" />
+                            <input type="hidden" name="car_model" t-att-value="line.car_model.id" />
+                            <input type="hidden" name="expected_delivery" t-att-value="line.expected_delivery" />
+                            <input type="hidden" name="car_size" t-att-value="line.car_size.id" />
+                            <input type="hidden" name="plate_registration" t-att-value="line.plate_registration" />
+                            <input type="hidden" name="palte_third" t-att-value="line.palte_third" />
+                            <input type="hidden" name="palte_second" t-att-value="line.palte_second" />
+                            <input type="hidden" name="palte_one" t-att-value="line.palte_one" />
+                            <input type="hidden" name="plate_no" t-att-value="line.plate_no" />
+                            <input type="hidden" name="non_saudi_plate_no" t-att-value="line.non_saudi_plate_no" />
+                            <input type="hidden" name="plate_type" t-att-value="line.plate_type.id" />
+                            <input type="hidden" name="customer_price_list" t-att-value="line.customer_price_list.id" />
+                            <input type="hidden" name="chassis_no" t-att-value="line.chassis_no" />
+                            <input type="hidden" name="type" t-att-value="line.type" />
+                            <input type="hidden" name="service_type" t-att-value="line.service_type.id" />
+                            <input type="hidden" name="tax_amount" t-att-value="line.tax_amount" />
+                            <input type="hidden" name="amount_with_satah" t-att-value="line.amount_with_satah" />
+                            <input type="hidden" name="total_without_tax" t-att-value="line.total_without_tax" />
+                            <input type="hidden" name="charges" t-att-value="line.charges" />
+                            <input type="hidden" name="car_classfication" t-att-value="line.car_classfication.id"/>
+                            <input type="hidden" name="unit_charge" t-att-value="line.unit_charge"  style="display:none;" />
+
+                            <input type="hidden"  t-attf-class="form-control" name="est_max_no_delivery_days" t-att-value="line.est_max_no_delivery_days"/>
+                            <input type="hidden"  t-attf-class="form-control" name="est_max_no_hours" t-att-value="line.est_max_no_hours"/>
+                            <input type="hidden"  t-attf-class="form-control" name="est_no_delivery_days" t-att-value="line.est_no_delivery_days"/>
+                            <input type="hidden"  t-attf-class="form-control" name="est_no_hours" t-att-value="line.est_no_hours"/>
+                            
+                            <input type="hidden"  t-attf-class="form-control" name="discount" t-att-value="line.discount"/>
+                            <input type="hidden"  t-attf-class="form-control" name="fixed_discount" t-att-value="line.fixed_discount"/>
+                            
+                                                
+                </div>    
+                <!--########################End Edit Form######################-->  
+
+            </template>
+
+
+
+
+            <template id="cargo_sale_line_edit_popup" name="Cargo Line Edit PopUp">
+
+                <!--######################### Edit PopUp########################-->
+
+                    <div class="modal fade" id="edit_cargo_sale_line" tabindex="-1" role="dialog" aria-labelledby="edit_cargo_sale_line" aria-hidden="true" style="padding-right: 14px;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="Heading">Edit Order Line</h4>
+                                        <button type="button" class="close" data-dismiss="modal" id="edit_order_line_popup_close"><i class="fa fa-remove" ></i></button>
+                                    </div>
+                                    <div id="edit-price-warnning"></div>
+                                    <form action="/shipment/edit_cargo_line"  method="post" id="edit_cargo_sale_line_form">
+                                        <div class="modal-body">
+                                            <div class="row" style="margin-left:20px;margin-right:20px;">
+                                            
+                                                <div class="row">
+                                                    
+                                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> 
+                                                    <input type="hidden" name="order_line_id" />
+                                                    <input type="hidden" name="bsg_cargo_sale_id" />
+                                                    <input type="hidden" name="loc_from" />
+                                                    <input type="hidden" name="loc_to" />
+                                                    <input type="hidden" name="default_cargo_service_id" t-att-value="default_cargo_service_id"/>
+                                                    <input type="hidden" name="car_classfication" />
+                                                    <input type="hidden" name="unit_charge"  style="display:none;" />
+                                                    <input type="hidden" name="shipment_date" />
+                                                    <!--input type="hidden" name="tax_ids" t-att-value="default_tax_ids" style="display:none;"/-->
+                                                    
+                                                    
+                                                    <div t-attf-class="form-group row #{error.get('shipment_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="shipment_type">Shipment</label>
+                                                        <div class="col-xl-8">
+                                                        <select name="shipment_type"  t-attf-class="form-control #{error.get('sender_type') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Shipment Type..</option>
+                                                            <t t-foreach="shipment_types" t-as="type">
+                                                                <option t-att-value="'%s' % (type.id)" t-esc="type.car_shipment_name"/>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('year') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="year">Year</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="year" t-attf-class="form-control #{error.get('year') and 'is-invalid' or ''}" required="required" >
+                                                                <option value="">..Year..</option>
+                                                                <t t-foreach="years" t-as="year">
+                                                                    <option t-att-value="'%s' % (year.id)" t-esc="year.car_year_name"/>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('car_make') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="car_make">Car Maker</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="car_make" t-attf-class="form-control #{error.get('car_make') and 'is-invalid' or ''}" required="required" >
+                                                                <option value="">..Car Maker..</option>
+                                                                <t t-foreach="car_makes" t-as="make">
+                                                                    <option t-att-value="'%s' % (make.id)" t-att-maker="'%s' % (make.car_maker.id)" t-esc=" 'ar' in default_lang and make.car_maker.car_make_ar_name or make.car_maker.car_make_name" />
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div t-attf-class="form-group row #{error.get('car_color') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="car_color">Color</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="car_color" t-attf-class="form-control #{error.get('car_color') and 'is-invalid' or ''}"  required="required">
+                                                                <option value="">..Color..</option>
+                                                                <t t-foreach="car_colors" t-as="color">
+                                                                    <option t-att-value="'%s' % (color.id)" t-esc="color.vehicle_color_name" />
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('car_model') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="car_model">Model</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="car_model" t-attf-class="form-control #{error.get('car_model') and 'is-invalid' or ''}" required="required" >
+                                                                <option value="">..Model..</option>
+                                                                <t t-foreach="car_models" t-as="model">
+                                                                    <option t-att-value="'%s' % (model.id)" style="display:none;" t-att-data-maker="'%s' % (model.car_maker_id.id)" t-esc="model.car_model_name"/>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('expected_delivery') and 'o_has_error' or ''} col-xl-6" style="display:none;">
+                                                        <label class="col-xl-4 col-form-label" for="expected_delivery">Delivery Date</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" disabled="disabled" t-attf-class="form-control" name="expected_delivery"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('car_size') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="car_size">Car Size</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="car_size" disabled="disabled" t-attf-class="form-control #{error.get('car_size') and 'is-invalid' or ''}"  >
+                                                                <option value="">..Car Size..</option>
+                                                                <t t-foreach="car_sizes" t-as="size">
+                                                                    <option t-att-value="'%s' % (size.id)" t-esc="size.car_size_name" />
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                <input type="hidden"  t-attf-class="form-control" name="est_max_no_delivery_days"/>
+                                                <input type="hidden"  t-attf-class="form-control" name="est_max_no_hours"/>
+                                                <input type="hidden"  t-attf-class="form-control" name="est_no_delivery_days"/>
+                                                <input type="hidden"  t-attf-class="form-control" name="est_no_hours"/>
+                                                
+                                                <div t-attf-class="form-group row #{error.get('est_no_delivery_days') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="est_no_delivery_days">Est Days</label>
+                                                    <div id="deliver_ex_detail" class="col-xl-8 form-inline">
+
+                                                                <span style="padding:5px;">From</span>
+                                                                <span style="padding:5px;" id="est_no_delivery_days">0</span>
+                                                                <span style="padding:5px;display:none;" id="est_no_hours"></span>
+                                                                <span style="padding:5px;">TO</span>
+                                                                
+                                                                <span style="padding:5px;" id="est_max_no_delivery_days">0</span>
+                                                                <span style="padding:5px;display:none;" id="est_max_no_hours"></span>
+                                                                <span style="padding:5px;">Days</span>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('plate_registration') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="plate_registration">Registration</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="plate_registration" t-attf-class="form-control #{error.get('plate_registration') and 'is-invalid' or ''}"  required="required">
+                                                                <t t-foreach="plate_registrations" t-as="plate_reg">
+                                                                    <option t-att-value="'%s' % (plate_reg[0])" t-esc="plate_reg[1]" />
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('plate_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="plate_type">Plate Type</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="plate_type" t-attf-class="form-control #{error.get('plate_type') and 'is-invalid' or ''}"  >
+                                                                <option value="">..Plate Type..</option>
+                                                                <t t-foreach="plate_types" t-as="plate_type">
+                                                                    <option t-att-value="'%s' % (plate_type.id)" t-esc="plate_type.plate_config_name"/>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('palte_one') and 'o_has_error' or ''} col-xl-12">
+                                                    <label class="col-xl-2 col-form-label" for="palte_one">Plate No</label>
+                                                    <t t-set="direction" t-value="request.env['res.lang'].sudo().search([('code', '=', request.env.lang)]).direction"/>
+                                                      
+                                                                <!--t t-if="direction == 'ltr'">
+                                                                <div id="saudi_edit" class="col-xl-10 form-inline">
+                                                                    <input type="number" t-attf-class="form-control" name="plate_no"/>
+                                                                    
+                                                                    -
+                                                                        <select name="palte_third" t-attf-class="form-control #{error.get('palte_third') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Third..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                            </t>
+                                                                        </select>
+                                                                            -
+                                                                        <select name="palte_second" t-attf-class="form-control #{error.get('palte_second') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Second..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                            </t>
+                                                                        </select>  -
+                                                                        <select name="palte_one" t-attf-class="form-control #{error.get('palte_one') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..First..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                            </t>
+                                                                        </select>
+                                                                    <div class="col-xl-9 alert alert-danger" role="alert" style="display:none;"></div>    
+                                                                </div>
+                                                                
+                                                                <div id="non-saudi_edit" class="col-xl-8">
+                                                                        <input type="text" t-attf-class="form-control" name="non_saudi_plate_no" placeholder="Non Saudi"/>
+                                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                                </div>  
+                                                                
+                                                            </t-->
+
+                                                        <!--t t-if="direction == 'rtl'"-->
+                                                                <div id="saudi_edit" class="col-xl-10 form-inline">
+                                                                    <select name="palte_one" t-attf-class="form-control #{error.get('palte_one') and 'is-invalid' or ''}"  >
+                                                                        <option value="">..First..</option>
+                                                                        <t t-foreach="palte_letter" t-as="letter">
+                                                                            <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                        </t>
+                                                                    </select> -
+                                                                    <select name="palte_second" t-attf-class="form-control #{error.get('palte_second') and 'is-invalid' or ''}"  >
+                                                                        <option value="">..Second..</option>
+                                                                        <t t-foreach="palte_letter" t-as="letter">
+                                                                            <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                        </t>
+                                                                    </select> - 
+                                                                    <select name="palte_third" t-attf-class="form-control #{error.get('palte_third') and 'is-invalid' or ''}"  >
+                                                                        <option value="">..Third..</option>
+                                                                        <t t-foreach="palte_letter" t-as="letter">
+                                                                            <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]"/>
+                                                                        </t>
+                                                                    </select>
+
+                                                                    <input type="text" placeholder="Number..." t-attf-class="form-control" name="plate_no"/>
+                                                                    <div class="col-xl-9 alert alert-danger" max="4" min="4" role="alert" style="display:none;"></div>
+                                                                </div>
+                                                                <div id="non-saudi_edit" class="col-xl-8">
+                                                                        <input type="text" t-attf-class="form-control" name="non_saudi_plate_no" placeholder="Non Saudi"/>
+                                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                                </div>
+                                                        <!--/t-->
+                                                    </div>
+                                                    
+                                                    <div t-attf-class="form-group row #{error.get('chassis_no') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="chassis_no">Chasis No</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="chassis_no"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!--div t-attf-class="form-group row #{error.get('qr_code') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="qr_code">QR Code</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="qr_code"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div-->
+
+
+                                                    <!--div t-attf-class="form-group row #{error.get('type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="type">Satah Type</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="type" t-attf-class="form-control #{error.get('type') and 'is-invalid' or ''}"  >
+                                                                <t t-foreach="types" t-as="typ">
+                                                                    <option t-att-value="'%s' % (typ[0])" t-esc="typ[1]"/>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div-->
+
+                                                    <div t-attf-class="form-group row #{error.get('service_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="service_type">Service</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="service_type"  disabled="disabled" t-attf-class="form-control #{error.get('service_type') and 'is-invalid' or ''}"  >
+                                                                <option value="">..Service..</option>
+                                                                <t t-foreach="service_types" t-as="service">
+                                                                    <option t-att-value="'%s' % (service.id)" t-esc="service.name"/>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--div t-attf-class="form-group row #{error.get('tax_ids') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="tax_ids">Taxes</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="tax_ids"  disabled="disabled" multiple="multiple" t-attf-class="form-control #{error.get('tax_ids') and 'is-invalid' or ''}"  >
+                                                                <t t-if="default_tax_ids">
+                                                                    <t t-foreach="default_tax_ids" t-as="tax">
+                                                                        <option t-att-value="'%s' % (tax.id)" t-esc="tax.name" t-att-selected="true"/>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <option value="">..No Tax..</option>
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div-->
+
+                                                    <div t-attf-class="form-group row #{error.get('customer_price_list') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="customer_price_list">Price List</label>
+                                                        <div class="col-xl-8">
+                                                            <select name="customer_price_list" disabled="disabled" t-attf-class="form-control #{error.get('customer_price_list') and 'is-invalid' or ''}"  >
+                                                                <option value="">..Price List..</option>
+                                                                <t t-foreach="customer_price_lists" t-as="price_list">
+                                                                    <option t-att-value="'%s' % (price_list.id)" t-att-is-public="price_list.is_public" t-att-is-qr="price_list.is_qr_required"
+                                                                        t-esc="price_list.name" />
+                                                                </t>
+                                                            </select>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                <div t-attf-class="form-group row #{error.get('discount') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="discount">Discount (%)</label>
+                                                    <div class="col-xl-8">
+                                                        <input name="discount" disabled="disabled" t-attf-class="form-control #{error.get('discount') and 'is-invalid' or ''}"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div> 
+
+
+
+                                                    <!--div t-attf-class="form-group row #{error.get('amount_with_satah') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="amount_with_satah">Satah Amount</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="amount_with_satah" disabled="disabled"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div-->
+
+                                                    <div t-attf-class="form-group row #{error.get('total_without_tax') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="total_without_tax">Amount without Tax</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="total_without_tax" disabled="disabled"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                <div t-attf-class="form-group row #{error.get('fixed_discount') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="fixed_discount">Fixed Discount</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="fixed_discount" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('tax_amount') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="tax_amount">Tax Amount</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="tax_amount" disabled="disabled"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group row #{error.get('charges') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-xl-4 col-form-label" for="charges">Amount with Tax</label>
+                                                        <div class="col-xl-8">
+                                                            <input type="text" t-attf-class="form-control" name="charges" disabled="disabled"/>
+                                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div> 
+                                </form>
+                                <div class="modal-footer">
+                                        <button  id="order_line_edit_submit_btn" class="btn btn-primary" ><i class="fa fa-ok-sign"></i>SAVE</button>
+                                </div>
+                                </div>
+                            </div>
+                    </div>
+                <!--########################End Edit Popup######################-->  
+
+            </template>         
+
+            <template id="cargo_sale_line_create_new" name="Cargo Line Create PopUp">
+
+                <!--######################### Create PopUp########################--> 
+                    <div class="modal fade" id="create_new" tabindex="-1" role="dialog" aria-labelledby="create_new" aria-hidden="true" style="padding-right: 14px;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header"><h4 class="modal-title" id="Heading">Create Order Line</h4>
+                                    <button type="button" id="create_order_line_popup_close" class="close" data-dismiss="modal"><i class="fa fa-remove" ></i></button>
+                                </div>
+                                <div id="create-price-warnning"></div>
+                                <form action="/shipment/create_new_line"  method="post" id='o_portal_cargo_sale_order_line_form'>
+                                    <div class="modal-body">
+                                        <div class="row" style="margin-left:20px;margin-right:20px;">
+                                        
+                                            <div class="row">
+                                                
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> 
+                                                <input type="hidden" name="bsg_cargo_sale_id" t-att-value="shipment.id" />
+                                                <input type="hidden" name="loc_from" t-att-value="shipment.loc_from.id" />
+                                                <input type="hidden" name="loc_to" t-att-value="shipment.loc_to.id" />
+                                                <input type="hidden" name="default_cargo_service_id" t-att-value="default_cargo_service_id"/>
+                                                <input type="hidden" name="car_classfication" />
+                                                <input type="hidden" name="unit_charge" t-att-value="0"  style="display:none;" />
+                                                <input type="hidden" name="tax_ids" t-att-value="default_tax_ids" style="display:none;"/>
+                                                <input type="hidden" name="shipment_date" t-att-value="shipment.shipment_date" />
+                                                
+                                                <div t-attf-class="form-group row #{error.get('shipment_type') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="shipment_type">Shipment</label>
+                                                    <div class="col-xl-8">
+                                                    <select name="shipment_type"  t-attf-class="form-control #{error.get('sender_type') and 'is-invalid' or ''}" required="required" >
+                                                        <option value="">..Shipment Type..</option>
+                                                        <t t-foreach="shipment_types" t-as="type">
+                                                            <option t-att-value="'%s' % (type.id)" t-esc="type.car_shipment_name" />
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('year') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="year">Year</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="year" t-attf-class="form-control #{error.get('year') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Year..</option>
+                                                            <t t-foreach="years" t-as="year">
+                                                                <option t-att-value="'%s' % (year.id)" t-esc="year.car_year_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('car_make') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="car_make">Car Maker</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="car_make" t-attf-class="form-control #{error.get('car_make') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Car Maker..</option>
+                                                            <t t-foreach="car_makes" t-as="make">
+                                                                <option t-att-value="'%s' % (make.id)" t-att-maker="'%s' % (make.car_maker.id)" t-esc=" 'ar' in default_lang and make.car_maker.car_make_ar_name or make.car_maker.car_make_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div t-attf-class="form-group row #{error.get('car_color') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="car_color">Color</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="car_color" t-attf-class="form-control #{error.get('car_color') and 'is-invalid' or ''}"  required="required">
+                                                            <option value="">..Color..</option>
+                                                            <t t-foreach="car_colors" t-as="color">
+                                                                <option t-att-value="'%s' % (color.id)" t-esc="color.vehicle_color_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('car_model') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="car_model">Model</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="car_model" t-attf-class="form-control #{error.get('car_model') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Model..</option>
+                                                            <t t-foreach="car_models" t-as="model">
+                                                                <option t-att-value="'%s' % (model.id)" style="display:none;" t-att-data-maker="'%s' % (model.car_maker_id.id)" t-esc="model.car_model_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('expected_delivery') and 'o_has_error' or ''} col-xl-6" style="display:none;">
+                                                    <label class="col-xl-4 col-form-label" for="expected_delivery">Delivery Date</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" disabled="disabled" t-attf-class="form-control" name="expected_delivery" />
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('car_size') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="car_size">Car Size</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="car_size" disabled="disabled" t-attf-class="form-control #{error.get('car_size') and 'is-invalid' or ''}"  >
+                                                            <option value="">..Car Size..</option>
+                                                            <t t-foreach="car_sizes" t-as="size">
+                                                                <option t-att-value="'%s' % (size.id)" t-esc="size.car_size_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <input type="hidden" t-attf-class="form-control" name="est_max_no_delivery_days"/>
+                                                <input type="hidden" t-attf-class="form-control" name="est_max_no_hours"/>
+                                                <input type="hidden" t-attf-class="form-control" name="est_no_delivery_days"/>
+                                                <input type="hidden" t-attf-class="form-control" name="est_no_hours"/>
+                                                
+                                                <div t-attf-class="form-group row #{error.get('est_no_delivery_days') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="est_no_delivery_days">Est Days</label>
+                                                    <div id="deliver_ex_detail" class="col-xl-8 form-inline">
+
+                                                                <span style="padding:5px;">From</span>
+                                                                <span style="padding:5px;" id="est_no_delivery_days">0</span>
+                                                                <span style="padding:5px;display:none;" id="est_no_hours"></span>
+                                                                <span style="padding:5px;">TO</span>
+                                                                
+                                                                <span style="padding:5px;" id="est_max_no_delivery_days">0</span>
+                                                                <span style="padding:5px;display:none;" id="est_max_no_hours"></span>
+                                                                <span style="padding:5px;">Days</span>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div t-attf-class="form-group row #{error.get('plate_registration') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="plate_registration">Registration</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="plate_registration" t-attf-class="form-control #{error.get('plate_registration') and 'is-invalid' or ''}"  required="required">
+                                                            <t t-foreach="plate_registrations" t-as="plate_reg">
+                                                                <option t-att-value="'%s' % (plate_reg[0])" t-esc="plate_reg[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('plate_type') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="plate_type">Plate Type</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="plate_type" t-attf-class="form-control #{error.get('plate_type') and 'is-invalid' or ''}"  >
+                                                            <option value="">..Plate Type..</option>
+                                                            <t t-foreach="plate_types" t-as="plate_type">
+                                                                <option t-att-value="'%s' % (plate_type.id)" t-esc="plate_type.plate_config_name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div> 
+
+                                                <div t-attf-class="form-group row #{error.get('palte_one') and 'o_has_error' or ''} col-xl-12">
+                                                    <label class="col-xl-2 col-form-label" for="palte_one">Plate No</label>
+                                                                <t t-set="direction" t-value="request.env['res.lang'].sudo().search([('code', '=', request.env.lang)]).direction"/>
+                                                                <!--t t-if="direction == 'ltr'">
+                                                                    <div id="saudi_create" class="col-xl-10 form-inline">
+                                                                        <input type="text" t-attf-class="form-control" name="plate_no"/>
+                                                                        -
+                                                                        <select name="palte_third" t-attf-class="form-control #{error.get('palte_third') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Third..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select>
+                                                                            -
+                                                                        <select name="palte_second" t-attf-class="form-control #{error.get('palte_second') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Second..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select>  
+                                                                        -
+                                                                        <select name="palte_one" t-attf-class="form-control #{error.get('palte_one') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..First..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select>
+                                                                        <div class="col-xl-9 alert alert-danger" role="alert" style="display:none;"></div>
+                                                                    </div>
+                                                                </t-->    
+
+                                                                <!--t t-if="direction == 'rtl'"-->
+                                                                    <div id="saudi_create" class="col-xl-10 form-inline">
+                                                                        <select name="palte_one" t-attf-class="form-control #{error.get('palte_one') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..First..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select> - 
+
+                                                                        <select name="palte_second" t-attf-class="form-control #{error.get('palte_second') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Second..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select>  -
+
+                                                                        
+                                                                        <select name="palte_third" t-attf-class="form-control #{error.get('palte_third') and 'is-invalid' or ''}"  >
+                                                                            <option value="">..Third..</option>
+                                                                            <t t-foreach="palte_letter" t-as="letter">
+                                                                                <option t-att-value="'%s' % (letter[0])" t-esc="letter[1]" />
+                                                                            </t>
+                                                                        </select>-
+                                                                        <input type="text" placeholder="Number..." t-attf-class="form-control" name="plate_no"/>
+                                                                        <div class="col-xl-9 alert alert-danger" role="alert" style="display:none;"></div>
+                                                                    </div>
+                                                                <!--/t-->
+                                                                    
+
+                                                                <div id="non-saudi_create" class="col-xl-8">
+                                                                    <input type="text" t-attf-class="form-control" name="non_saudi_plate_no" placeholder="Non Saudi"/>
+                                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                                </div>  
+                                                </div>
+
+
+
+                                                <div t-attf-class="form-group row #{error.get('chassis_no') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="chassis_no">Chasis No</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control #{error.get('chassis_no') and 'is-invalid' or ''" name="chassis_no" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('service_type') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="service_type">Service</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="service_type"  t-attf-class="form-control #{error.get('service_type') and 'is-invalid' or ''}"  >
+                                                            <option value="">..Service..</option>
+                                                            <t t-foreach="service_types" t-as="service">
+                                                                <option t-att-value="'%s' % (service.id)" t-esc="service.name" t-att-selected="str(default_cargo_service_id) == str(service.id)"/>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('customer_price_list') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="customer_price_list">Price List</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="customer_price_list" disabled="disabled" t-attf-class="form-control #{error.get('customer_price_list') and 'is-invalid' or ''}"  >
+                                                            <option value="">..Price List..</option>
+                                                            <t t-foreach="customer_price_lists" t-as="price_list">
+                                                                <option t-att-value="'%s' % (price_list.id)" t-att-is-public="price_list.is_public" t-att-is-qr="price_list.is_qr_required"
+                                                                    t-esc="price_list.name" t-att-selected="price_list.id == (default_customer_price_list)"/>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('discount') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="discount">Discount (%)</label>
+                                                    <div class="col-xl-8">
+                                                        <input name="discount" disabled="disabled" t-attf-class="form-control #{error.get('discount') and 'is-invalid' or ''}" t-att-value="discount"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div> 
+                                                <!--div t-attf-class="form-group row #{error.get('qr_code') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="qr_code">QR Code</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="qr_code"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div-->
+
+
+                                                <!--div t-attf-class="form-group row #{error.get('type') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="type">Satah Type</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="type" t-attf-class="form-control #{error.get('type') and 'is-invalid' or ''}"  >
+                                                            <t t-foreach="types" t-as="typ">
+                                                                <option t-att-value="'%s' % (typ[0])" t-esc="typ[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div-->
+
+                                                
+
+                                                <!--div t-attf-class="form-group row #{error.get('tax_ids') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="tax_ids">Taxes</label>
+                                                    <div class="col-xl-8">
+                                                        <select name="tax_ids"  disabled="disabled" multiple="multiple" t-attf-class="form-control #{error.get('tax_ids') and 'is-invalid' or ''}"  >
+                                                            <t t-if="default_tax_ids">
+                                                                <t t-foreach="default_tax_ids" t-as="tax">
+                                                                    <option t-att-value="'%s' % (tax.id)" t-esc="tax.name" t-att-selected="true"/>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <option value="">..No Tax..</option>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div-->
+
+                                                
+
+                                                <!--div t-attf-class="form-group row #{error.get('amount_with_satah') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="amount_with_satah">Satah Amount</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="amount_with_satah" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div-->
+
+                                                <div t-attf-class="form-group row #{error.get('total_without_tax') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="total_without_tax">Amount without Tax</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="total_without_tax" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('fixed_discount') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="fixed_discount">Fixed Discount</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="fixed_discount" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div t-attf-class="form-group row #{error.get('tax_amount') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="tax_amount">Tax Amount</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="tax_amount" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group row #{error.get('charges') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="charges">Amount with Tax</label>
+                                                    <div class="col-xl-8">
+                                                        <input type="text" t-attf-class="form-control" name="charges" disabled="disabled"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                
+                                </form>
+                            <div class="modal-footer">
+                                <button  id="order_line_submit_btn" class="btn btn-primary" ><i class="fa fa-ok-sign"></i>SAVE</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                <!--########################End Create Popup######################-->  
+
+            </template>  
+
+            <template id="cargo_sale_line_delete" name="Cargo Line Delete PopUp">
+
+                <!--######################### Delete PopUp########################-->
+                    <div  class="modal fade"  id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="Heading">Delete Line</h4>
+                                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-remove"></i></button>
+
+                                </div>
+                                <div class="modal-body">
+                                        <div class="alert alert-danger">
+                                            <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?
+                                        </div>
+                                </div>
+                                <div class="modal-footer ">
+                                    <form action="/shipment/delete/" name="DeleteForm" method="post">
+
+                                        <input type="hidden" name="order_line_id" t-att-value="line.id"/>
+                                        <input type="hidden" name="order_id" t-att-value="shipment.id"/>
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <button type="submit" class="btn btn-success" > Yes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
+                <!--########################End Delete Popup######################-->  
+
+            </template>                                                               
+</odoo>

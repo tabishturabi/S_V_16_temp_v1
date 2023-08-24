@@ -1,0 +1,178 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_fleet_trip_template" model="report.paperformat">
+            <field name="name">European A3 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A3</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="report_for_fleet_trip" 
+            model="fleet.vehicle"
+            name="bassami_fleet_trip_report.fleet_trip_report"
+            file="bassami_fleet_trip_report.fleet_trip_report"
+            report_type="qweb-html"
+            string="Fleet Trip Report"
+            paperformat="paperformat_fleet_trip_template"
+            menu="False"/>
+
+        <record id="fleet_trip_records_wizard" model="ir.ui.view">
+            <field name="name">fleet_trip_records_wizard</field>
+            <field name="model">fleet.trip.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="report_type"/>
+                            <field name="group_by" attrs="{'invisible':[('report_type','!=','trip')]}"/>
+                        </group>
+
+                        <group name="group_right">
+                            <field name="driver_link" attrs="{'invisible':[('report_type','!=','fleet')]}"/>
+                        </group>
+                        <group name="group_left">
+                            <field name="filter_date_by" attrs="{'invisible':[('report_type','!=','trip')]}" />
+                        </group>
+                        <group name="group_right">
+                        </group>
+                        <group name="group_left">
+                            <field name="sa_date_condition" attrs="{'invisible':[('filter_date_by','=',False)]}"></field>
+                        </group>
+                        <group name="group_right">
+                            <field name="form"  attrs="{'invisible':['|',('sa_date_condition','!=','is_between'),('filter_date_by','=',False)],'required':[('sa_date_condition','=','is_between')]}" />
+                            <field name="to"  attrs="{'invisible':['|',('sa_date_condition','!=','is_between'),('filter_date_by','=',False)],'required':[('sa_date_condition','=','is_between')]}" />
+                            <field name="date"  attrs="{'invisible':['|',('sa_date_condition','in',['all','is_set','is_not_set','is_between']),('filter_date_by','=',False)],'required':[('sa_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+                        </group>
+
+                        <group name="group_left">
+<!--                            <field name="form"/>-->
+                            <field name="fleet_id" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="vehicle_type" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="branch_from" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="trip_status"/>
+                            <field name="truck_load" />
+                            <field name="user_id" />
+                            <field name="trailer_sticker_no" />
+                        </group>
+
+                        <group name="group_right">
+<!--                            <field name="to" />-->
+                            <field name="driver_code" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="trip_type" />
+                            <field name="branch_to" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                             <field name="vehicle_group_id" options="{'no_create':True,'no_edit':True}"/>
+                             <field name="fuel_expense_type_id" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="license_plate_no" />
+                            <field name="license_plate_no" />
+                            <field name="vehicle_state_id" options="{'no_open':True,'no_create':True,'no_edit':True}"/>
+                        </group>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print PDF" class = "oe_highlight" />
+                        <button name="print_report_xlsx" type="object" string="Print EXCEL" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="fleet_trip_menu_action" model="ir.actions.act_window">
+            <field name="name">Fleet Trip Report</field>
+            <field name="res_model">fleet.trip.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="fleet_trip_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="fleet_trip_menu_item" name="Fleet Trip Report" action="fleet_trip_menu_action" parent="bsg_trip_mgmt.root_trip_reports" groups="bsg_trip_mgmt.group_plan_trip_fleet_report"/>
+
+        <report
+            id="action_report_for_fleet_trip"
+            string="Fleet Trip Report"
+            model="fleet.vehicle.trip"
+            report_type="xlsx"
+            file="Branches Voucher Report"
+            name="bassami_fleet_trip_report.fleet_trip_report_xlsx"
+            menu="False"
+        />
+        
+
+
+
+
+        <record id="so_wise_revenue_wizard" model="ir.ui.view">
+            <field name="name">so.wise.revenue.form</field>
+            <field name="model">so.wise.revenue</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="fleet_id" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+                            <field name="vehicle_type" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+
+
+                        </group>
+
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="driver_code" widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <!-- <button name="generate_report" type="object" string="Print PDF" class = "oe_highlight" /> -->
+                        <button name="print_report_xlsx" type="object" string="Print EXCEL" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_act_window_sale_wise_revenue" model="ir.actions.act_window">
+            <field name="name">Sale Line Revenue</field>
+            <field name="res_model">so.wise.revenue</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="so_wise_revenue_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="so_revenue_item_menu" name="Sale Lines Report" action="action_act_window_sale_wise_revenue" parent="bsg_trip_mgmt.root_trip_reports"/>
+
+        <report
+            id="action_so_wise_revenue_report"
+            string="Sale Line Revenue"
+            model="fleet.vehicle.trip.pickings"
+            report_type="xlsx"
+            file="Sale Line Revenue"
+            name="bassami_fleet_trip_report.so_wise_revenue_report_xlsx"
+            menu="False"
+        />
+        
+
+
+    </data>
+</odoo>

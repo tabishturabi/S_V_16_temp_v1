@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+    <!-- form view single trip cancelation -->
+    
+    <record model="ir.ui.view" id="bsg_single_trip_cancel_view_form">
+      <field name="name">bsg_single_trip_cancel_view_form</field>
+      <field name="model">single.trip.cancel</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Single Trip Cancel">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                  <field name="stc_reason_name" required="1" placeholder="Reason"/>
+              </h1>
+            </div>
+            <group name="top">
+              <group name="left">
+                <field name="stc_account_id" string="Account ID"/>
+                <field name="tax_ids" widget="many2many_tags"/>
+                <field name="stc_reason_type" string="Type"/>
+              </group>
+              <group name="right">
+                <field name="stc_value" string="Value" attrs="{'invisible':[('stc_reason_type','=','na')]}"/>
+                <field name="is_cancel"/>
+              </group>
+            </group> 
+
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>             
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view single trip cancelation  -->
+    <record model="ir.ui.view" id="bsg_single_trip_cancel_view_tree">
+      <field name="name">bsg_single_trip_cancel_view_tree</field>
+      <field name="model">single.trip.cancel</field>
+      <field name="arch" type="xml">
+        <tree string="Single Trip Cancel">
+          <field name="stc_reason_name" string="Reason"/>
+          <field name="stc_reason_type" string="Type"/>
+          <field name="stc_value" string="Value"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="single_trip_cancel_action">
+      <field name="name">Single Trip Cancel</field>
+      <field name="res_model">single.trip.cancel</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

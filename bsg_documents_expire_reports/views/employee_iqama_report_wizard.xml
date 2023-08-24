@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_iqama_report_wizard">
+      <field name="name">Employee Iqama Report Wizard</field>
+      <field name="model">employee.iqama.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="mode" />
+                <field name="branches" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_branch')],'required':[('mode','=','by_branch')]}" />
+                <field name="department" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_department')],'required':[('mode','=','by_department')]}" />
+                <field name="company" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_company')],'required':[('mode','=','by_company')]}" />
+                <field name="employee_tag" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_employee_tag')],'required':[('mode','=','by_employee_tag')]}" />
+                <field name="guarantor" widget="many2many_tags" attrs="{'invisible':[('mode','!=','specific_guarantor')],'required':[('mode','=','specific_guarantor')]}" />
+                <field name="grouping_by"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="expiry_date_by" widget="radio" options="{'horizontal':true}" attrs="{'invisible':[('expire_date_condition','in',['all','is_set','is_not_set'])]}"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="expire_date_condition" />
+              </group>
+              <group>
+                <field name="date_from" class="with_hijri" attrs="{'invisible':[('expire_date_condition','!=','is_between')],'required':[('expire_date_condition','=','is_between')]}" />
+                <field name="date_to" class="with_hijri" attrs="{'invisible':[('expire_date_condition','!=','is_between')],'required':[('expire_date_condition','=','is_between')]}" />
+                <field name="expiry_date" class="with_hijri" attrs="{'invisible':[('expire_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('expire_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="employee_state" />
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+            <button name="get_notification" type="object" string="Mail" class="oe_highlight"/>
+
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_iqama_report_action">
+      <field name="name">Employee Iqama Report</field>
+      <field name="res_model">employee.iqama.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="employee_iqama_report_wizard"></field>
+      <field name="target">new</field>
+    </record>
+    <menuitem name="Employee Iqama Report"
+              id="menu_employee_iqama_report"
+              parent="bsg_documents_expire_reports.menu_documents_expire_reports"
+              sequence="1"
+              action="employee_iqama_report_action"
+              groups="bsg_documents_expire_reports.group_employees_iqama_reports"
+    />
+  </data>
+</odoo>

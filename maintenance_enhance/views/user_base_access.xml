@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="view_lines_tree_add_an_item" model="ir.ui.view">
+            <field name="name">view.lines.tree.add.an.item</field>
+            <field name="model">maintenance.request.enhance</field>
+            <field name="inherit_id" ref="maintenance_enhance.maintenance_req_enh_form_view"/>
+<!--            <field name="groups_id" eval="[(6, 0, [ref('maintenance_enhance.group_wo_mm_approve'), ref('maintenance_enhance.group_wo_add_service_on_wo'), ref('base.group_system')])]"/>-->
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]/field[@name='wo_child_ids']/tree" position="attributes">
+                    <attribute name="create">1</attribute>
+                    <attribute name="edit">1</attribute>
+                    <attribute name="delete">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

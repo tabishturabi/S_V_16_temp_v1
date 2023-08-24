@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="view_view_move_formform" model="ir.ui.view">-->
+<!--            <field name="name">account.movecus.form</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="ref" position="after">-->
+<!--                &lt;!&ndash; attrs="{'invisible': [('collection', '=', False)]}" &ndash;&gt;-->
+<!--                    <field name="collection" invisible="1"/>-->
+
+<!--                </field>-->
+
+<!--                <xpath expr="//notebook/page/field/tree/field[@name='partner_id']" position="after">-->
+<!--                    <field name="branch_name" invisible="1"/>-->
+
+<!--                </xpath>-->
+
+<!--&lt;!&ndash;                <xpath expr="//notebook/page/field/tree/field[@name='analytic_account_id']" position="attributes">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <attribute name="domain">"[('group_id','!=', False)]"</attribute>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="ext_account_move_inherit_custom" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account_analytic_parent.ext_account_move"/>
+            <field name="arch" type="xml">
+                <field name="ext_department" position="replace">
+                    <field name="bsg_branches_id" options='{"no_open": True,"no_create": True}'/>
+                    <field name="department_id" options='{"no_open": True,"no_create": True}'/>
+                    <field name="fleet_vehicle_id" options='{"no_open": True,"no_create": True}'/>
+<!--                    <field name="trailer_id" options='{"no_open": True,"no_create": True}' attrs="{'invisible':[('trailer_id','=',False)]}"/>-->
+                 </field>
+            </field>
+        </record>
+    
+    
+    </data>
+</odoo>

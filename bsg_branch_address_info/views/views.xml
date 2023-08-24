@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="branch_address_info_search">
+          <field name="name">branch.address.info.search</field>
+          <field name="model">bsg_branches.bsg_branches</field>
+          <field name="arch" type="xml">
+              <search>
+                <field name = "branch_ar_name"/>
+                <field name = "branch_no"></field>
+                <field name = "street"/>
+                <field name = "street2"></field>
+                <field name = "city"/>
+                <field name = "state_id"></field>
+                <field name = "state_zip"/>
+                <field name = "country_id"/>
+                <field name = "region"></field>
+                <field name = "zone_id"/>
+                <field name = "mobile"></field>
+                <field name = "weekly_working_hours"/>
+                <field name = "friday_working_hours"/>
+              </search>
+          </field>
+      </record>
+    <record model="ir.ui.view" id="branch_address_info_list">
+        <field name="name">branch.address.info.tree</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="arch" type="xml">
+          <tree create="false">
+              <field name = "branch_ar_name"/>
+              <field name = "branch_no"></field>
+              <field name = "street"/>
+              <field name = "street2"></field>
+              <field name = "city"/>
+              <field name = "state_id"></field>
+              <field name = "state_zip"/>
+              <field name = "country_id"/>
+              <field name = "region"></field>
+              <field name = "zone_id"/>
+              <field name = "mobile"></field>
+              <field name = "weekly_working_hours"/>
+              <field name = "friday_working_hours"/>
+          </tree>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="branch_address_info_form">
+          <field name="name">branch.address.info.form</field>
+          <field name="model">bsg_branches.bsg_branches</field>
+          <field name="arch" type="xml">
+              <form create="false" edit="false">
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="branch_ar_name" readonly="1"></field>
+                          </group>
+                          <group>
+                              <field name="branch_no" readonly="1"></field>
+                          </group>
+                      </group>
+                      <group>
+                          <group>
+                              <label for="street" string="Address"/>
+                              <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                                <field name="state_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                              </div>
+                              <field name="region" options="{'no_create_edit': True, 'no_open': True}" />
+                              <field name="zone_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                              <field name="is_closed_branch"/>
+                          </group>
+                          <group>
+                              <field name="mobile"></field>
+                              <field name="po_box_no" />
+                              <field name="fax" />
+                              <field name="weekly_working_hours" />
+                              <field name="friday_working_hours" />
+                          </group>
+                      </group>
+                      <label for="description" string="Description"/>
+                      <field name="description"></field>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"></field>
+                      <field name="message_ids" widget="mail_thread"></field>
+                  </div>
+              </form>
+          </field>
+      </record>
+      <record model="ir.actions.act_window" id="branch_address_info_action">
+          <field name="name">Branch Address Info</field>
+          <field name="res_model">bsg_branches.bsg_branches</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('branch_address_info_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('branch_address_info_form')})]"/>
+          <field name="search_view_id" ref="branch_address_info_search"/>
+      </record>
+   <menuitem name="Branches Address Info"
+             id="branch_address_info_menu"
+             sequence="2"
+             groups="bsg_branch_address_info.groups_branch_address_info"
+             parent="bsg_branch_config.bsg_branches_menu_1"
+             action="branch_address_info_action"
+   />
+      <record model="ir.actions.act_window" id="bsg_branch_config.action_window_bsg_branches">
+          <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('bsg_branch_config.bsg_branches_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('bsg_branch_config.bsg_branches_view_form')})]"/>
+      </record>
+       <record model="ir.ui.menu" id="bsg_branch_config.bsg_branches_menu_2">
+            <field name="name">Branches</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_cargo_sale.group_branch_and_region_config'),
+                                                ])]"/>
+       </record>
+      <record model="ir.ui.menu" id="bsg_branch_config.bsg_branches_menu_1">
+            <field name="name">Branches</field>
+            <field name="groups_id" eval="[(6,0,[])]"/>
+      </record>
+      <record model="ir.ui.menu" id="bsg_branch_config.menu_branch_doc_type_config">
+            <field name="groups_id" eval="[(6,0,[ref('bsg_branch_address_info.groups_branch_doc_type_config')])]"/>
+       </record>
+       <record id="branch_address_info_form_edit" model="ir.ui.view">
+        <field name="name">branch.address.info.edit</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="branch_address_info_form"/>
+<!--        <field name="groups_id" eval="[(6, 0, [ref('bsg_branch_address_info.groups_branch_address_info_edit')])]"/>-->
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

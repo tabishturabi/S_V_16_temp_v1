@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="calculate_value_wizard_form">
+            <field name="name">calculate.value.wizard.form</field>
+            <field name="model">calculate.value.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Check mailing lists">
+                    <field name="yes_no" readonly="1" />
+                    <footer>
+                        <button class="oe_highlight" type="object" name="check_value" string="Confirm Sending" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="calculate_value_wizard_action" model="ir.actions.act_window">
+            <field name="name">Confirmation</field>
+            <field name="res_model">calculate.value.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="calculate_value_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

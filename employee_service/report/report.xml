@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="employee_service_report"
+            model="employee.service"
+            string="Employee Service"
+            report_type="qweb-pdf"
+            name="employee_service.employee_service_pdf"
+            file="employee_service.employee_service_report_pdf"
+            menu="False"
+    />
+
+
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="employee_service/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+    </template>
+    <template id="employee_service_pdf">
+        <t t-call="web.html_container">
+            <t t-call="employee_service.external_layout_standard">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/employee_service//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                            tr,td,div {
+                                font-family: 'Arial';
+                                    }
+
+
+                            .header {
+                            display: none;
+                            }
+                            body {
+                            display: block;
+                            font-size: 15px;
+                            margin: 0 auto;
+                            margin-bottom: 0.5cm;
+                            }
+                            .footer {
+                            display: none !important;
+                            }
+                            .centered {
+                            width: 1000px;
+                            margin: auto;
+                            }
+                            .address {
+                            width: 45%;
+                            float: right;
+                            margin: 15px 0px 15px 0px;
+                            }
+
+                            .fixed {
+                            width: 200px;
+                            font-family: Tahoma, Verdana, Segoe, sans-serif;
+                            padding: 10px;
+                            }
+                            .address p {
+                            text-align: right;
+                            }
+                            .span_left {
+                            margin-left: 80px;
+                            font-size:medium;
+                            }
+                            .span_right {
+                            float: right;
+                            font-weight:bold;
+                            font-size:large;
+                            }
+                            .p_text_bold {
+                            font-weight:bold;
+                            }
+                            .span_center {
+                            float: center;
+                            font-size:medium;
+                            }
+                        </style>
+                        <page size="A4">
+                            <div class="page">
+                                <t t-if="o.service_type.service_name == 'letter_of_authority'">
+                                    <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+
+
+                                    <h2 align="center">إلى من يهمه الأمر</h2>
+
+                                    <h4 align="right">السلام عليكم ورحمة الله وبركاته ،، وبعد</h4>
+                                    <div dir="rtl" style="font-size:20px;">
+                                      <p align="right">
+                                          <span>نحن</span>
+                                          <span><t t-esc="o.with_context(lang='ar_001').company_id.name" /></span>
+                                          <span> نفيدكم بأننا فوضنا منسوبنا السيد</span>
+                                          <span>/</span>
+                                          <span>(<t t-esc="o.employee_id.name" />)</span>
+                                          <span>-</span>
+                                          <span>الجنسية</span>
+                                          <span>(<t t-esc="o.with_context(lang='ar_AA').employee_id.country_id.name"/>)</span>
+                                          <span>-</span>
+                                          <span>بموجب هوية وطنية رقم</span>
+                                          <span>
+                                              <t t-if="o.employee_id.country_id.code=='SA'">
+                                                <t t-esc="o.employee_id.bsg_national_id.bsg_nationality_name" />
+                                              </t>
+                                              <t t-else="">
+                                                <t t-esc="o.employee_id.bsg_empiqama.bsg_iqama_name" />
+                                              </t>
+                                          </span>
+                                          <span>،</span>
+                                          <span>وذلك في مراجعة الجهات المختصة مثل : وزارة النقل – الجوزات – الأحوال المدنية- مكتب العمل  - وزارة الخارجية – البلدية – الدفاع المدني – المرور- مراكز الشرطة – حرس الحدود – وأي جهة حكومية أخرى لها علاقة بأ عمالنا والتي لم يرد ذكرها أعلاه، وهذا التفويض صالح لمدة ستة أشهر من تاريخه</span>
+                                          <span>.</span>
+                                      </p>
+                                    </div>
+                                    <h4 align="center">ولكم منا جزيل الشكر والتقدير</h4>
+                                    <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:left;margin-top:40px;font-size:25px;font-weight:bold;" class="row">
+                                            <div class="col-3">إدارة الموارد البشرية</div>
+                                            <div class="col-5"/>
+                                            <div class="col-5"/>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:left;margin-top:40px;font-size:25px;font-weight:bold;" class="row" dir="ltr">
+                                            <div class="col-3">إدارة الموارد البشرية</div>
+                                            <div class="col-5"/>
+                                            <div class="col-5"/>
+                                        </div>
+                                    </t>
+
+<!--                                    <table width="100%" border="0" height="87" cellspacing="0" cellpadding="0" style="border:2px solid black;margin-top:40px;">-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">الرقم التسلسلي للخطاب ويكون آلياً مثال (الرقم : م ب / 15/23) 15 هو رقم التسلسل للخطاب اما 23 هو السنة التي صدر فيها الخطاب وهكذا</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">11</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">22</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">جنسية الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">33</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">رقم الهوية</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">44</td>-->
+<!--                                      </tr>-->
+<!--                                    </table>-->
+                                </t>
+                                <t t-elif="o.service_type.service_name == 'salary_intro_letter'">
+                                   <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+                                     <div style="text-align:right;margin-top:40px;;font-size:20px;" dir="rtl">
+                                       <span>السادة</span>
+                                       <span>/ </span>
+                                       <span><t t-esc="o.service_to"/></span>
+                                          &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        <span>المحترمين </span>
+                                     </div>
+<!--                                     <div style="text-align:right;margin-top:20px;;font-size:20px;">المحترمين </div>-->
+
+                                    <!--<h2 align="center">الموضوع : تثبيت راتب</h2>-->
+
+                                    <h4 align="right">السلام عليكم ورحمة الله وبركاته ،، وبعد</h4>
+                                    <div dir="rtl" style="font-size:20px;">
+                                      <p align="right">
+                                      <span>تود</span>
+                                        <span><t t-esc="o.with_context(lang='ar_001').company_id.name" /></span>
+                                        <span> الإفادة بـأن الـسيد</span>
+                                        <span>/</span>
+                                        <span>(<t t-esc="o.employee_id.name" />)</span>
+                                        <span>,</span>
+                                        <span>الجنسية</span>
+                                        <span>(<t t-esc="o.with_context(lang='ar_001').employee_id.country_id.name"/>)</span>
+                                        <span>-</span>
+                                        <span>بموجب هوية  رقـم</span>
+                                        <span>
+                                          <t t-if="o.employee_id.country_id.code=='SA'">
+                                            <t t-esc="o.employee_id.bsg_national_id.bsg_nationality_name" />
+                                          </t>
+                                          <t t-else="">
+                                            <t t-esc="o.employee_id.bsg_empiqama.bsg_iqama_name" />
+                                          </t>
+                                        </span>
+                                        <span>
+                                          يعمل لـديـنا بوظيفة
+                                        </span>
+                                        <span>(<t t-esc="o.employee_id.job_id.name"/>)</span>
+                                        <span>،</span>
+                                        <span>اعـتباراً من تاريخ</span>
+                                          <span>(<t t-esc="o.employee_id.bsgjoining_date"/>)</span>
+                                          <span>ولا يزال على رأس العمل حتى تاريخه، ويتقاضى راتب وبدلات يبلغ مجموعها</span>
+                                          <span>(<t t-esc="o.employee_id.line_ids.filtered(lambda l:l.code=='GROSS').total"/>)</span>
+                                          <span>ريال</span>
+                                          <span>،</span>
+                                          <span>موزعة على النحو التالي </span>
+                                          <span>:</span>
+                                      </p>
+<!--                                        <p align="right">-->
+<!--                                            <span>الراتب الأساسي</span>-->
+<!--                                            <span>:</span>-->
+<!--                                            <span>(<t t-esc="o.employee_id.line_ids.filtered(lambda l:l.code=='BASIC').total"/>)</span>-->
+<!--                                            <span>ريال</span>-->
+<!--                                        </p>-->
+                                        <div style="text-align:left;font-size:20px;font-weight:bold;" class="row" dir="ltr">
+                                            <div class="col-3"></div>
+                                            <div class="col-3"></div>
+                                            <div class="col-1"><span>ريال</span></div>
+                                            <div class="col-2"><span>(<t t-esc="o.employee_id.line_ids.filtered(lambda l:l.code=='BASIC').total"/>)</span></div>
+                                            <div class="col-1"><span>:</span></div>
+                                            <div class="col-2"><span>الراتب الأساسي</span></div>
+                                        </div>
+                                        <t t-foreach="o.employee_id.line_ids.filtered(lambda l:l.code not in ['BASIC','NET','GROSS','FCGOSI','CGOSI','GOSI'])" t-as="line">
+                                            <div style="text-align:left;font-size:20px;font-weight:bold;" class="row" dir="ltr">
+                                                <div class="col-3"></div>
+                                                <div class="col-3"></div>
+                                                <div class="col-1"><span>ريال</span></div>
+                                                <div class="col-2"><span>(<t t-esc="line.total"/>)</span></div>
+                                                <div class="col-1"><span>:</span></div>
+                                                <div class="col-2"><span><t t-esc="line.name"/></span></div>
+                                            </div>
+<!--                                            <p align="right">-->
+<!--                                                <span><t t-esc="line.name"/></span>-->
+<!--                                                <span>:</span>-->
+<!--                                                <span>(<t t-esc="line.total"/>)</span>-->
+<!--                                                <span>ريال</span>-->
+<!--                                            </p>-->
+                                        </t>
+
+                                      <p align="right">وقد أعطي هذا التعريف بناءً على طلبه، وذلك دون أدنى مسئولية على الشركة</p>
+                                    </div>
+                                    <!--<h4 align="center">ولكم منا جزيل الشكر والتقدير</h4>-->
+                                     <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:left;margin-top:40px;font-size:25px;font-weight:bold;" class="row">
+                                            <div class="col-6" align="left">ولكم منا جزيل الشكر والتقدير   </div>
+                                            <div class="col-6" align="right"/>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:left;margin-top:40px;font-size:25px;font-weight:bold;" class="row" dir="ltr">
+                                            <div class="col-6" align="left">ولكم منا جزيل الشكر والتقدير   </div>
+                                            <div class="col-6" align="right"/>
+                                        </div>
+                                    </t>
+<!--                                    <table width="100%" border="0" height="87" cellspacing="0" cellpadding="0" style="border:2px solid black;margin-top:40px;">-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">الرقم التسلسلي للخطاب ويكون آلياً مثال (الرقم : م ب / 15/23) 15 هو رقم التسلسل للخطاب اما 23 هو السنة التي صدر فيها الخطاب وهكذا</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">11</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم الجهه الموجه لها الخطاب</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">22</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">33</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">جنسية الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">44</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">رقم الهوية</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">55</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">المنصب الوظيفي</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">66</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">تاريخ التعيين</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">77</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">إجمالي الراتب</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">88</td>-->
+<!--                                      </tr>-->
+<!--                                       <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">الراتب الاساسي</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">99</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">بدل السكن</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">10</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">بدل النقل</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">12</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">بدل طبيعة العمل</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">13</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">يتم تعبئته في النظام يدوي – ممكن يكون التوقيع من الموارد البشرية أو من قبل الإدارة العليا</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">141414</td>-->
+<!--                                      </tr>-->
+<!--                                    </table>-->
+                                </t>
+                                <t t-elif="o.service_type.service_name == 'salary_transfer_letter'">
+                                   <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.date"/>  -: التاريخ </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o._get_hijri_date(o.date)"/> -: الموافق </div>
+                                        <div style="text-align:right;margin-top:20px;;font-size:20px;" dir="ltr"><t t-esc="o.name"/>: - الرقم </div>
+                                    </t>
+                                    <div style="text-align:right;margin-top:40px;;font-size:20px;" dir="rtl">
+                                       <span>السادة</span>
+                                       <span>/ </span>
+                                       <span><t t-esc="o.service_to"/></span>
+                                        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                        <span>المحترمين </span>
+                                     </div>
+                                    <h2 align="center">الموضوع : تثبيت راتب</h2>
+
+                                    <h4 align="right">السلام عليكم ورحمة الله وبركاته ،، وبعد</h4>
+                                    <div dir="rtl" style="font-size:20px;">
+                                      <p align="right">
+                                      <span>تود</span>
+                                        <span><t t-esc="o.with_context(lang='ar_001').company_id.name" /></span>
+                                        <span> الإفادة بـأن الـسيد</span>
+                                        <span>/</span>
+                                        <span>(<t t-esc="o.employee_id.name" />)</span>
+                                        <span>،</span>
+                                        <span>الجنسية</span>
+                                        <span>(<t t-esc="o.with_context(lang='ar_001').employee_id.country_id.name"/>)</span>
+                                        <span>-</span>
+                                        <span>بموجب هوية  رقـم</span>
+                                        <span>
+                                          <t t-if="o.employee_id.country_id.code=='SA'">
+                                            <t t-esc="o.employee_id.bsg_national_id.bsg_nationality_name" />
+                                          </t>
+                                          <t t-else="">
+                                            <t t-esc="o.employee_id.bsg_empiqama.bsg_iqama_name" />
+                                          </t>
+                                        </span>
+                                        <span>
+                                          يعمل لـديـنا بوظيفة
+                                        </span>
+                                        <span>(<t t-esc="o.employee_id.job_id.name"/>)</span>
+                                        <span>،</span>
+                                        <span>اعـتباراً من تاريخ</span>
+                                          <span>(<t t-esc="o.employee_id.bsgjoining_date"/>)</span>
+                                          <span>ولا يزال على رأس العمل حتى تاريخه, ونتعهد بتثبيت راتبه ومستحقات نهاية التعاقد لدى بنك</span>
+                                          <span>(<t t-esc="o.service_to"/>)</span>
+                                          <span>في حسابه رقم</span>
+                                          <span>(<t t-esc="o.employee_id.bsg_bank_id.bsg_acc_number"/>)</span>
+                                          <span>وعدم تحويله الى أي بنك آخر إلا بخطاب إخلاء طرف منكم </span>
+                                          <span>.</span>
+                                      </p>
+                                    </div>
+                                    <h4 align="center">ولكم منا جزيل الشكر والتقدير</h4>
+
+
+
+                                     <t t-if="o.get_user_lang() == 1">
+                                        <div style="text-align:left;margin-top:40px;font-size:20px;font-weight:bold;" class="row">
+                                            <div class="col-6" align="left">رئيس مجلس الادارة</div>
+                                            <div class="col-6" align="left"></div>
+                                        </div>
+
+                                         <div style="text-align:left;margin-top:20px;font-size:20px;font-weight:bold;" class="row">
+                                            <div class="col-6" align="left"><span><t t-esc="o.company_id.chairman_id.name" /></span></div>
+                                            <div class="col-6" align="right"></div>
+                                         </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="text-align:left;margin-top:40px;font-size:20px;font-weight:bold;" class="row" dir="ltr">
+                                            <div class="col-6" align="left">رئيس مجلس الادارة</div>
+                                            <div class="col-6" align="left"></div>
+                                        </div>
+
+                                         <div style="text-align:left;margin-top:20px;font-size:20px;font-weight:bold;" class="row" dir="ltr">
+                                            <div class="col-6" align="left"><span><t t-esc="o.company_id.chairman_id.name" /></span></div>
+                                            <div class="col-6" align="right"></div>
+                                         </div>
+                                    </t>
+<!--                                    <table width="100%" border="0" height="87" cellspacing="0" cellpadding="0" style="border:2px solid black;margin-top:40px;">-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">الرقم التسلسلي للخطاب ويكون آلياً مثال (الرقم : م ب / 15/23) 15 هو رقم التسلسل للخطاب اما 23 هو السنة التي صدر فيها الخطاب وهكذا</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">11</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم الجهه الموجه لها الخطاب</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">22</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">33</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">جنسية الموظف</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">44</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">رقم الهوية</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">55</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">المنصب الوظيفي</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">66</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">تاريخ التعيين</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">77</td>-->
+<!--                                      </tr>-->
+<!--                                      <tr>-->
+<!--                                        <td width="90%" align="right" style="border:2px solid black;">اسم البنك</td>-->
+<!--                                        <td width="10" align="center" style="border:2px solid black;">88</td>-->
+<!--                                      </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td width="90%" align="right" style="border:2px solid black;">الحساب البنكي</td>-->
+<!--                                            <td width="10" align="center" style="border:2px solid black;">99</td>-->
+<!--                                        </tr>-->
+<!--                                    </table>-->
+                                </t>
+                                <t t-elif="o.service_type.service_name == 'experience_certificate'">
+                                    <t t-if="o.get_user_lang() == 1">
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o.date"/></div>
+                                            <div class="col-3" align="right" style="border:1px solid black"> التاريخ</div>
+                                         </div>
+                                         <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Hijri Date</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o._get_hijri_date(o.date)"/></div>
+                                            <div class="col-3" align="right" style="border:1px solid black"> الموافق</div>
+                                         </div>
+
+
+                                        <div style="margin-top:30px;margin-bottom:20px;">
+                                          <h2 align="center">شــهــادة خبرة</h2>
+                                          <h2 align="center">Experience Certificate</h2>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Name</div>
+                                            <div class="col-3" align="center" style="border:1px solid black"><t t-esc="o.employee_id.name_english" /></div>
+                                             <div class="col-3" align="right" style="border:1px solid black"><t t-esc="o.employee_id.name" /></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">الإسم</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Nationality</div>
+                                            <div class="col-3" align="left" style="border:1px solid black"><t t-esc="o.employee_id.country_id.name"/></div>
+                                            <div class="col-3" align="right" style="border:1px solid black"><t t-esc="o.with_context(lang='ar_001').employee_id.country_id.name"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">الجنسية</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">ID No.</div>
+                                            <div class="col-6" align="center" style="border:1px solid black">
+                                                <t t-if="o.employee_id.country_id.code=='SA'">
+                                                    <t t-esc="o.employee_id.bsg_national_id.bsg_nationality_name" />
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-esc="o.employee_id.bsg_empiqama.bsg_iqama_name" />
+                                                </t>
+                                            </div>
+                                            <div class="col-3" align="center" style="border:1px solid black">رقم الهوية</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date of Joining</div>
+                                            <div class="col-6" align="center" style="border:1px solid black">
+                                                <t t-esc="o.employee_id.bsgjoining_date" />
+                                            </div>
+                                            <div class="col-3" align="center" style="border:1px solid black">تاريخ بداية العمل</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date of Leaving</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o._get_leaving_date(o)"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">تاريخ نهاية العمل</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row">
+                                            <div class="col-3" align="left" style="border:1px solid black">Last Position</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o.employee_id.job_id.name"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">مهنته نهاية العمل</div>
+                                        </div>
+
+                                         <div style="font-weight:bold;font-size:20px;margin-top:20px;" class="row">
+                                            <div class="col-6" align="left" style="border:1px solid black"><t t-esc="o.company_id.name" /> certifies that the above-mentioned person worked for the company, and upon his request, this certificate was granted to him company, without any liability on the company.</div>
+                                            <div class="col-6" align="right" style="border:1px solid black" dir="rtl">
+                                                <span>تــــــــشهد</span>
+                                                <span><t t-esc="o.with_context(lang='ar_001').company_id.name"/></span>
+                                                <span>بأن الموضح بياناته أعلاه عمل لدى الشركة وبناءً  على طلبه منحت له هذه الشهادة  , وذلك دون أدنى مسؤولية على الشركة.</span>
+                                            </div>
+
+                                        </div>
+
+                                         <div style="margin-top:30px;margin-bottom:20px;">
+                                          <h2 align="center">إدارة الموارد البشرية</h2>
+                                        </div>
+
+    <!--                                    <div>-->
+    <!--                                      <p align="right"> اسم الموظف</p>-->
+    <!--                                      <p align="right">الجنسية</p>-->
+    <!--                                      <p align="right">الهوية / الإقامة</p>-->
+    <!--                                      <p align="right">تاريخ التعيين</p>-->
+    <!--                                      <p align="right">وتاريخ آخر يوم عمل</p>-->
+    <!--                                      <p align="right">المنصب الوظيفي</p>-->
+    <!--                                      <p align="right">ملاحظة : في حال كان الموظف سعودي الجنسية يكتب تلقائي رقم الهوية-->
+    <!--وفي حال كان الموظف غير سعودي يكتب تلقائيا رقم الإقامة.</p>-->
+    <!--                                    </div>-->
+
+                                    </t>
+                                    <t t-else="">
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o.date"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">-: التاريخ</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Hijri Date</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o._get_hijri_date(o.date)"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">-: الموافق</div>
+                                        </div>
+
+
+                                        <div style="margin-top:30px;margin-bottom:20px;">
+                                          <h2 align="center">شــهــادة خبرة</h2>
+                                          <h2 align="center">Experience Certificate</h2>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Name</div>
+                                            <div class="col-3" align="center" style="border:1px solid black"><t t-esc="o.employee_id.name_english" /></div>
+                                             <div class="col-3" align="right" style="border:1px solid black"><t t-esc="o.employee_id.name" /></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">الإسم</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Nationality</div>
+                                            <div class="col-3" align="left" style="border:1px solid black"><t t-esc="o.with_context(lang='en_US').employee_id.country_id.name"/></div>
+                                            <div class="col-6" align="right" style="border:1px solid black"><t t-esc="o.employee_id.country_id.name"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">الجنسية</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">ID No.</div>
+                                            <div class="col-6" align="center" style="border:1px solid black">
+                                                <t t-if="o.employee_id.country_id.code=='SA'">
+                                                    <t t-esc="o.employee_id.bsg_national_id.bsg_nationality_name" />
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-esc="o.employee_id.bsg_empiqama.bsg_iqama_name" />
+                                                </t>
+                                            </div>
+                                            <div class="col-3" align="center" style="border:1px solid black">رقم الهوية</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date of Joining</div>
+                                            <div class="col-6" align="center" style="border:1px solid black">
+                                                <t t-esc="o.employee_id.bsgjoining_date" />
+                                            </div>
+                                            <div class="col-3" align="center" style="border:1px solid black">تاريخ بداية العمل</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Date of Leaving</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o._get_leaving_date(o)"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">تاريخ نهاية العمل</div>
+                                        </div>
+                                        <div style="font-weight:bold;font-size:20px;" class="row" dir="ltr">
+                                            <div class="col-3" align="left" style="border:1px solid black">Last Position</div>
+                                            <div class="col-6" align="center" style="border:1px solid black"><t t-esc="o.employee_id.job_id.name"/></div>
+                                            <div class="col-3" align="center" style="border:1px solid black">مهنته نهاية العمل</div>
+                                        </div>
+
+                                         <div style="font-weight:bold;font-size:20px;margin-top:20px;" class="row" dir="ltr">
+                                            <div class="col-6" align="left" style="border:1px solid black"><t t-esc="o.with_context(lang='en_US').company_id.name" /> certifies that the above-mentioned person worked for the company, and upon his request, this certificate was granted to him company, without any liability on the company.</div>
+                                            <div class="col-6" align="right" style="border:1px solid black" dir="rtl">
+                                                <span>تــــــــشهد</span>
+                                                <span><t t-esc="o.company_id.name" /></span>
+                                                <span>بأن الموضح بياناته أعلاه عمل لدى الشركة وبناءً  على طلبه منحت له هذه الشهادة  , وذلك دون أدنى مسؤولية على الشركة.</span>
+                                            </div>
+
+                                        </div>
+
+                                         <div style="margin-top:30px;margin-bottom:20px;">
+                                          <h2 align="center">إدارة الموارد البشرية</h2>
+                                        </div>
+
+    <!--                                    <div>-->
+    <!--                                      <p align="right"> اسم الموظف</p>-->
+    <!--                                      <p align="right">الجنسية</p>-->
+    <!--                                      <p align="right">الهوية / الإقامة</p>-->
+    <!--                                      <p align="right">تاريخ التعيين</p>-->
+    <!--                                      <p align="right">وتاريخ آخر يوم عمل</p>-->
+    <!--                                      <p align="right">المنصب الوظيفي</p>-->
+    <!--                                      <p align="right">ملاحظة : في حال كان الموظف سعودي الجنسية يكتب تلقائي رقم الهوية-->
+    <!--وفي حال كان الموظف غير سعودي يكتب تلقائيا رقم الإقامة.</p>-->
+    <!--                                    </div>-->
+                                    </t>
+                                </t>
+                            </div>
+                        </page>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+

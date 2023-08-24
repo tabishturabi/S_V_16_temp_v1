@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="cargo_sale_order_config_form" model="ir.ui.view">
+        <field name="name">cargo_sale_order_config.form</field>
+        <field name="model">cargo_sale_order_config</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <sheet>
+                    <group>
+                        <group >
+                            <field name="name"/>
+                            <field name="ar_message" />
+			    <field name="en_message" />
+                            <field name="show" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="cargo_sale_order_config_act">
+            <field name="name">Cargo Sale Order Config</field>
+            <field name="res_model">cargo_sale_order_config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="cargo_sale_order_config_menu" name="Cargo Sale Order Config"
+    parent="sale.sale_menu_root" sequence="10" action="cargo_sale_order_config_act"/>
+
+</data>
+</odoo>

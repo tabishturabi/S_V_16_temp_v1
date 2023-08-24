@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <template id="assets_frontend_extend" name="helpdesk Requests Assets" inherit_id="web.assets_frontend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <link rel="stylesheet" type="text/css" href="/bsg_helpdesk_operations/static/src/css/style.css" />-->
+<!--            <script type="text/javascript" src="/bsg_helpdesk_operations/static/src/js/update.js" />-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <!--     <template id="portal_my_home_users_helpdesk_extend" name="Portal My Home : Employee helpdesk entries" inherit_id="portal.portal_my_home" priority="20"> -->
+    <!--         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside"> -->
+    <!--             <t t-if="helpdesk_count" t-call="portal.portal_docs_entry"> -->
+    <!--                 <t t-set="title">Employee helpdesk</t> -->
+    <!--                 <t t-set="url" t-value="'/my/helpdesk/'" /> -->
+    <!--                 <t t-set="count" t-value="helpdesk_count" /> -->
+    <!--             </t> -->
+    <!--         </xpath> -->
+    <!--     </template> -->
+    <template id="portal_portal_ssearchbar_extend" inherit_id="portal.portal_searchbar">
+        <xpath expr="//nav/div[@id='o_portal_navbar_content']/div" position="inside">
+            <!-- t-if="tickets" -->
+            <div class="form-inline" t-if="is_helpdesk"> 
+                <button class="btn btn-sm btn-secondary" style="margin-left: 5px !important;">
+                    <a class="leave-common" href="/my/new/helpdesk">Add Helpdesk</a>
+                </button>
+            </div>
+        </xpath>
+    </template>
+
+<!--Migration Note-->
+    <!-- <template id="tickets_followup_operation" inherit_id="helpdesk.tickets_followup" name="Helpdesk Tickets">
+        <xpath expr="//div[hasclass('card-header','container')]/div[hasclass('row','gs-0')]" position="inside">
+            <t t-if="ticket.stage_id.is_closed">
+                <a  t-if="ticket.stage_id.is_closed" t-att-href="'/ticket/re-open/%s'%(ticket.id)" class="btn btn-info">
+                        Re-open<i class="fa fa-open"></i>
+                </a>
+            </t>
+        </xpath>
+    </template> -->
+    <!-- <template id="portal_helpdesk_view_inherit" inherit_id="helpdesk.tickets_followup">
+        <xpath expr="//div[hasclass('card-body')]" position="inside">
+            <div class="row mb-4">
+                <strong class="col-lg-2">Employee ID</strong>
+                <div t-if="ticket.emp_id" class="col-lg-10" t-field="ticket.emp_id" />
+                <div t-else="" class="col-lg-10">
+                    <em class="text-muted">
+                        <small>No Employee ID</small>
+                    </em>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <strong class="col-lg-2">Attachment</strong>
+                <ul class="list-group">
+                	<a class="list-group-item list-group-item-action d-flex align-items-center oe_attachments py-1 px-2" t-foreach="ticket.attachment_id" t-as="attachment" t-att-href="'/web/content/%i?download=true' % attachment.id" target="_blank">
+						<div class="oe_attachment_embedded o_image o_image_small mr-2 mr-lg-3" t-att-title="attachment.name" t-att-data-mimetype="attachment.mimetype" />
+						<div class="oe_attachment_name text-truncate">
+							<t t-esc="attachment.name" />
+						</div>
+					</a>
+				</ul>
+            </div>
+        </xpath>
+    </template> -->
+        <!-- <template id="portal_portal_breadcrumbs_helpdesk_extend" inherit_id="portal.portal_breadcrumbs">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'helpdesk'" t-attf-class="breadcrumb-item #{'active ' if not helpdesk else ''}">
+                    <a t-if="helpdesk_id" t-attf-href="/my/helpdesk">Helpdesk</a>
+                    <t t-else="">Helpdesk</t>
+                </li>
+                <li t-if="page_name == 'helpdesk' and helpdesk_id" class="breadcrumb-item active">
+                    <t t-esc="helpdesk_id" />
+                </li>
+            </xpath>
+        </template> -->
+    <template id="portal_helpdesk_modes" name="Create New Helpdesk">
+        <t t-call="portal.portal_layout">
+            <div id="wrap">
+                <div class="container web-portl-form">
+                    <h3 class="h3-title">
+                        <!--  <t t-if="helpdesk_id" t-esc="helpdesk_id.employee_id.name" /> -->
+                        <t>New Request For Helpdesk</t>
+                    </h3>
+                    <form class="form-horizontal" action="/my/helpdesk/process" method="post" enctype="multipart/form-data">
+                        <input type="hidden" t-if="helpdesk_id" name="helpdesk_id" t-att-value="helpdesk_id.id" />
+                        <!-- <input type="hidden" t-if="partner_id" name="partner_id" t-att-value="partner_id.id" /> -->
+                        <div class="row">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="partner_id">Your Name :</label>
+                                    <input class="input_nones" type="text" name="partner_id" size="40" t-att-value="default_values.get('partner_id', '')" readonly="1"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12 ">
+                                    <label class="col-form-label" for="partner_email">Your Email :</label>
+                                    <input class="input_nones" type="email" name="partner_email" size="40" t-att-value="default_values.get('email', '')" readonly="1" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                        	<div class="col-sm-4 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="user">User :</label>
+                                    <input class="input_nones" type="text" name="user" size="25" t-att-value="default_values.get('user', '')" readonly="1" />
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="emp_id">Employee ID :</label>
+                                    <input id="emp_id" class="input_nones" type="text" name="emp_id" size="15" t-att-value="default_values.get('emp_id', '')" readonly="1" />
+                                </div>
+                            </div>
+                            <div class="col-sm-5 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="department_id">Department Id :</label>
+                                    <input id="department_id" class="input_nones" type="text" name="department_id" size="35" t-att-value="default_values.get('department_id', '')" readonly="1" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                            <hr style="background: #f2f7f3; height: 10px; margin-left: -9px; !important"  />
+                        <div class="row">
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Type</label>
+                                    <select id="type_id" name="type_id" class="form-control" required="required">
+                                        <option value="">- | Select Type|</option>
+                                        <t t-foreach="values.get('type_id')" t-as="exp" t-att-selected="helpdesk_id.id if helpdesk_id else None">
+                                            <option t-att-value="exp.id">
+                                                <t t-esc="exp.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">App Name</label>
+                                    <select id="App_type" name="app_name_id" class="form-control" required="required">
+                                        <option value="">- | Select App Type|</option>
+                                        <t t-foreach="values.get('app_name_id')" t-as="ex">
+                                            <option t-att-value="ex.id" t-att-selected="helpdesk_id.id if helpdesk_id else None">
+                                                <t t-esc="ex.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Team Name</label>
+                                    <select id="team_id" name="team_id" class="form-control" required="required">
+                                        <option value="">- | Select Team Name|</option>
+                                        <t t-foreach="values.get('team_id')" t-as="ex">
+                                            <option t-att-value="ex.id" t-att-selected="helpdesk_id.id if helpdesk_id else None">
+                                                <t t-esc="ex.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Importance</label>
+                                    <select id="importance" name="importance" class="form-control" required="required">
+                                        <option value="">- | Select Importance|</option>
+                                        <option value="very_high">هام وعاجل جدا</option>
+                                        <option value="high">عاجل</option>
+                                        <option value="normal" selected="1">عادي</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="so">SO#</label>
+                                    <input id="so" class="form-control" type="text" name="so" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="trip">TRIP ID</label>
+                                    <input id="trip" class="form-control" type="text" name="trip" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="name">Subject</label>
+                                    <input id="name" class="form-control" type="text" name="name" required="required" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="description">Description</label>
+                                    <textarea id="description" class="form-control" type="text" name="description" required="required" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mt4 ">
+                                <div class="col-sm-6">
+                                    <label class="col-form-label" for="attachment_id">Attachments</label>
+                                    <input type="file" class="form-control" name="attachment_id" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Assign To</label>
+                                    <select id="user_id" name="user_id" class="form-control">
+                                        <option value="">- | Select Assign To|</option>
+                                        <t t-foreach="values.get('user_id')" t-as="ex">
+                                            <option t-att-value="ex.id" t-att-selected="helpdesk_id.id if helpdesk_id else None">
+                                                <t t-esc="ex.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row button_div">
+                            <div class="col-sm-12 mt4">
+                                <div class="col-sm-2  pull-right">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    <button type="submit" class="btn btn-default pull-right">
+                                        Submit
+                                        <i class="fa fa-angle-double-right" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

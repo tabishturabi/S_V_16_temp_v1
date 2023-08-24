@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_nagliyat_sales_maangement">
+            <field name="name">Nagliyat Sales Management</field>
+            <field name="description">Nagliyat Sales Management</field>
+            <field name="sequence">23</field>
+        </record>
+       	<record model="res.groups" id="group_create_agreement_for_individual">
+            <field name="name">Create Agreement For Individual</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+       	<record model="res.groups" id="group_confirm_agreement">
+            <field name="name">Confirm Agreement</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+       	<record model="res.groups" id="group_update_agreement_info">
+            <field name="name">Update agreement Info</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_sales_team_update">
+            <field name="name">Sales Team Update</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+       	<record model="res.groups" id="group_view_all_agreements">
+            <field name="name">View All Agreements</field>
+            <field name="implied_ids" eval="[(4, ref('group_update_agreement_info'))]"/>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_view_my_agreement">
+            <field name="name">View My Agreement</field>
+            <field name="implied_ids" eval="[(4, ref('group_update_agreement_info'))]"/>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+       	<record model="res.groups" id="group_create_agreement_for_corporate">
+            <field name="name">Create Agreement For Corporate</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_register_payment_on_agreement">
+            <field name="name">Register Payment On Agreement</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+       	<record model="res.groups" id="group_create_branch_sales_target">
+            <field name="name">Create Branch Sales Target</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_branch_and_region_config">
+            <field name="name">Brach and Region Config</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_show_all_branch_agreements">
+            <field name="name">Show My branch Agreements</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_cancel_agreements">
+            <field name="name">Cancel Agreement</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+            </record>
+        <record model="res.groups" id="group_local_cargo_sale">
+            <field name="name">Local Cargo Sale</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_international_cargo_sale">
+            <field name="name">International Cargo Sale</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+         <record model="res.groups" id="group_shipment_price">
+            <field name="name">Shipment Price</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <!--record model="res.groups" id="group_sale_pricelists">
+            <field name="name">Sale Pricelists</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record-->
+        <record model="res.groups" id="group_product_managemtn">
+            <field name="name">Products Mngt</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_cargo_sale_line_discount">
+            <field name="name">Cargo Sale Line Discount</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_change_location_for_shipment">
+            <field name="name">Change Location For Shipment</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_show_my_branch_corprate_agreements">
+            <field name="name">Show My branch Corprate Agreements</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_show_cargo_sale_line">
+            <field name="name">Cargo Sale Line</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_main_sale_order">
+            <field name="name">Sale Order</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_cargo_sale_archive">
+            <field name="name">Cargo Sale Archive</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_main_to_invoice">
+            <field name="name">To Invoice</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_cancell_so">
+            <field name="name">Cancell SO</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+
+        <record model="res.groups" id="group_cancel_branch_so">
+            <field name="name">Cancel branch SO /SO lines</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_cancel_any_branch_so">
+            <field name="name">Cancel Any SO /SO lines</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+
+        <record model="res.groups" id="group_set_to_draft">
+            <field name="name">Set to draft SO</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_change_receiver_mob_number">
+            <field name="name">Change Receiver Mob Number</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>  
+        <record model="res.groups" id="group_can_add_demurrage_discount">
+            <field name="name">Can add Demurrage discount</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>        
+        <record model="res.groups" id="group_can_show_creating_invoice_to_other_customer">
+            <field name="name">Can Creating Invoice to Other Customer</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_shipment_price_list">
+            <field name="name">Shipment Price List</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+
+        <record model="res.groups" id="group_sms_otp">
+            <field name="name">Show SMS Delivery Code</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+
+        <record model="res.groups" id="group_qitaf_copoun_redeem">
+            <field name="name">View Copoun Log</field>
+            <field name="category_id" ref="module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_own_branch_record_rules">
+            <field name="name">Cargo Sale Own Branch Record rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[('loc_from_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_show_all_branch_agreements'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_branch_line_own_record_rules">
+            <field name="name">Cargo Sale Line Own Branch Record rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">[('loc_from_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_show_all_branch_agreements'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_own_record_rules">
+	        <field name="name">Cargo Sale Own Record rule</field>
+	        <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+	        <field name="domain_force">[('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_view_my_agreement'))]"/>
+	        <field name="perm_create" eval="1"/>
+	        <field name="perm_write" eval="1"/>
+	        <field name="perm_unlink" eval="1"/>
+	        <field name="perm_read" eval="1"/>
+    	</record>
+
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_line_own_record_rules">
+            <field name="name">Cargo Sale Line Own Record rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">[('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_view_my_agreement'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_all_record_rules">
+            <field name="name">Cargo Sale All Record rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_view_all_agreements')),(4, ref('base.group_erp_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_line_all_record_rules">
+            <field name="name">Cargo Sale Line All Record rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_view_all_agreements')),(4, ref('base.group_erp_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+       <!--  <record model="ir.rule" id="bsg_vehicle_cargo_sale_individual_user_rule">
+            <field name="name">Cargo Sale individual User rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[('customer_type','=','individual')]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_create_agreement_for_individual'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_read" eval="1"/>
+        </record>-->
+        <record model="ir.rule" id="bsg_vehicle_cargo_sale_corporate_user_rule">
+            <field name="name">Cargo Sale corporate User rule</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[('customer_type','=','corporate'),('loc_from_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_cargo_sale.group_show_my_branch_corprate_agreements'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record> 
+    </data>
+</odoo>

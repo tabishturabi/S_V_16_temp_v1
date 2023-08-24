@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <data>
+        <!-- Penalty rule dada -->
+        <record id="employee_penalty_rule" model="hr.salary.rule">
+            <field name="sequence" eval="200"/>
+            <field name="code">PENALTY</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="name">Penalty</field>
+			<field name="condition_select">none</field>
+			<field name="amount_select">code</field>
+			<field name="amount_python_compute">result = payslip.env['hr.payslip'].get_employee_penality(payslip)</field>
+        </record>
+    </data>
+</odoo>

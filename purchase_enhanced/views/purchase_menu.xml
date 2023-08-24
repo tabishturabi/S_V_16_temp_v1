@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record model="ir.ui.menu" id="purchase.menu_purchase_root">
+                <field name="groups_id"
+                eval="[(6,0,[])]"/>
+        </record>  
+
+        <record model="ir.ui.menu" id="purchase.menu_purchase_rfq">
+                <field name="groups_id"
+                eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_rfq'),
+                                                    ])]"/>
+        </record>                                            
+
+        <record model="ir.ui.menu" id="purchase.menu_purchase_form_action">
+                <field name="groups_id"
+                eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_purchase_order'),
+                                                    ])]"/>
+        </record>                                            
+
+        <record model="ir.ui.menu" id="purchase.menu_procurement_management_supplier_name">
+            <field name="name">Vendors</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_vendors'),
+                                                ])]"/> 
+        </record>                                                                                   
+
+        <record model="ir.ui.menu" id="purchase.menu_product_pricelist_action2_purchase">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_vendor_price_list'),
+                                                ])]"/>
+        </record>                                                                                    
+
+        <record model="ir.ui.menu" id="purchase.menu_procurement_partner_contact_form">
+        <field name="name">Products</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_product'),
+                                                ])]"/> 
+        </record>  
+
+        <record model="ir.ui.menu" id="purchase.product_product_menu">
+                <field name="name">Product Variants</field>
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_product_variants'),
+                                                        ])]"/> 
+        </record>                                                                                           
+
+
+        <record model="ir.ui.menu" id="purchase_requisition.menu_purchase_requisition_pro_mgt">
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_agreement'),
+                                                        ])]"/>  
+        </record>                                                                                          
+
+
+<!--    Migration Note-->
+        <record model="ir.ui.menu" id="stock.stock_move_menu">
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_incoming_products'),
+                                                        ])]"/>
+        </record>
+
+
+<!--            Migration Note menu_action_move_in_invoice_type does not exist in base of v16-->
+<!--        <record model="ir.ui.menu" id="purchase.account.menu_action_move_in_invoice_type">-->
+        <record model="ir.ui.menu" id="account.menu_action_move_in_invoice_type">
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_vendor_bills'),
+                                                        ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="purchase.purchase_report">
+                <field name="name">Reporting</field>
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_reporting'),
+                                                        ])]"/> 
+        </record>                                                                                           
+
+        <record model="ir.ui.menu" id="purchase.menu_purchase_config">
+                <field name="name">Configuration</field>
+                    <field name="groups_id"
+                    eval="[(6,0,[ref('purchase_enhanced.custom_group_purchase_configuration'),
+                                                        ])]"/> 
+        </record> 
+
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- 	Map View -->
+	<record id="wizard_view_map_wizard" model="ir.ui.view">
+		<field name="name">Google Map Direction</field>
+		<field name="model">map.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Google Map Direction">
+				<style>
+					.o_form_view.o_form_nosheet{
+						padding-top: 0px !important;
+						padding-right: 0px !important;
+						padding-bottom: 0px !important;
+						padding-left: 0px !important;
+					}
+					.codup_gmap {
+						margin-top: 0px !important;
+					}
+					.o_form_view .o_field_widget {
+						margin-bottom: 0px !important;
+					}
+				</style>
+				<group invisible="1">
+					<field name="origin" />
+					<field name="satah_vehicale_id" />
+					<field name="destination" />
+				</group>
+				<field name="map" widget="map"/>
+				<footer>
+					<button name="cancel" string="Cancel" special="cancel" class="btn btn-primary pull-right"/>
+				</footer>
+				</form>
+		</field>
+	</record>
+	
+	<!-- 	Map Action -->
+	<record id="action_map_wizard" model="ir.actions.act_window">
+		<field name="name">Google Map Direction</field>
+		<field name="res_model">map.wizard</field>
+<!--		<field name="view_type">form</field>-->
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="search_view_id" ref="wizard_view_map_wizard"/>
+	</record>
+</odoo>

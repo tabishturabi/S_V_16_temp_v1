@@ -1,0 +1,109 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_bsg_customer_contract_line_form">
+        <field name="name">bsg_customer_contract_line.form</field>
+        <field name="model">bsg_customer_contract_line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                  <div class="oe_button_box" name="button_box">
+                      <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                          <field name="active" widget="boolean_button"
+                          options='{"terminology": "archive"}'/>
+                      </button>
+                  </div>
+                <div class="oe_title">
+                    <h1>
+                      <field name="cust_contract_id" required="1"/>
+                    </h1>
+                  </div>
+                <group>
+                	<group name="top">
+                		<field name="customer_id" readonly="1"/>
+                		<field name="cont_start" readonly="1"/>
+                		<field name="cont_end" readonly="1"/>
+                		<field name="is_invoice" readonly="1"/>
+                	</group>
+                	<group name="right">
+                		<field name="max_sale" readonly="1"/>
+                		<field name="use_amount" readonly="1"/>
+                		<field name="remainder_amt" readonly="1"/>
+                		<field name="free_satha_service" readonly="1"/>
+                		<field name="shipment_type" readonly="1"/>
+                	</group>
+                </group>
+                  <group name="top">
+                    <group name="left">
+                      <field name="loc_from" required="1" string="From"  domain="[('loc_customer_ids','=',partner_id)]" attrs="{'readonly': [('id', '!=', False)]}" options="{'no_open':True}"/>
+                      <field name="car_size" required="1" attrs="{'readonly': [('id', '!=', False)]}" options="{'no_open':True}"/>
+                    </group>
+                    <group name="right">
+                      <field name="loc_to" string="To" required="1" domain="[('loc_customer_ids','=',partner_id)]" attrs="{'readonly': [('id', '!=', False)]}" options="{'no_open':True}"/>
+                      <field name="price" string="Price"/>
+                      <field name="service_type" required="1" options="{'no_open':True}"/>
+                      <field name="cust_contract_id" invisible="1"/>
+                      <field name="partner_id" invisible="1"/>
+                    </group>
+                  </group>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_bsg_customer_contract_line_tree">
+        <field name="name">bsg_customer_contract_line.tree</field>
+        <field name="model">bsg_customer_contract_line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="cust_contract_id" string="Contract No."/>
+              <field name="customer_id" string="Customer Name"/>
+              <field name="id" string="Line No." class="text-center"/>
+              <field name="loc_from" string="From"  domain="[('loc_customer_ids','=',partner_id)]"/>
+              <field name="loc_to" string="To" domain="[('loc_customer_ids','=',partner_id)]"/>
+              <field name="car_size" />
+              <field name="price" string="Price"/>
+              <field name="cust_contract_id" invisible="1"/>
+              <field name="partner_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- search View -->
+   <record id="student_search_view" model="ir.ui.view">
+   <field name="name">bsg_customer_contract_line Search View</field>
+   <field name="model">bsg_customer_contract_line</field>
+   <field name="arch" type="xml">
+       <search string="Search Customer Contract Line">
+          <field name="cust_contract_id"/>
+          <field name="loc_from"/>
+          <field name="loc_to"/>
+       </search>
+   </field>
+</record>
+
+    <record model="ir.actions.act_window" id="action_bsg_customer_contract_line">
+        <field name="name">Customer Contract Line</field>
+        <field name="res_model">bsg_customer_contract_line</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Contract Line"
+        id="menu_customer_contract_line"
+        parent="root_customer_contract_menu"
+        action="action_bsg_customer_contract_line"
+        sequence="2" 
+        />
+
+  </data>
+</odoo>

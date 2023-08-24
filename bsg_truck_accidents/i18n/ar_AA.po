@@ -1,0 +1,1728 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* bsg_truck_accidents
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-21 05:48+0000\n"
+"PO-Revision-Date: 2022-03-21 05:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid ": اسم السائق"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":إلي"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":إنه في يوم"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":اتفاقيــــــــة رقم"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid ":الافادة عن كيفية وقوع الضرر"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":المـــــــوافق"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":بموقف رقم"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":تبين وجود الملاحظات التالية"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid ":رقم التريلا"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":شروط هامة"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid ":كمبيوتر السائق"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":لوحة رقم"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":موظف التشيك  لسيارة نوع"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":والتابعة للعميل"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid ":والقادمة من"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\"> : توقيع المتسبب</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">:Responsible</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">:Signature</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">:اسم المتسبب</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">أسم مشرف الفرع</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">اسم موظف</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "<span style=\"font-weight:bold\">التوقيــــــــــــــــع</span>"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "ATTACH DOCUMENT"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__accident_agreement_type
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__accident_agreement_type
+msgid "Accident Agreement Type"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__accident_date
+msgid "Accident Date"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__accident_location
+msgid "Accident Location"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: selection:bsg.truck.accident,state_clear_cars:0
+#: selection:bsg.truck.accident,state_shaamil:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_6
+msgid "Accountant Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_claims_account_config
+msgid "Accounting Configuration"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,estimated_by:0
+msgid "Agency Estimate"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,accident_agreement_type:0
+#: selection:claims.report,accident_agreement_type:0
+msgid "Agreement Company"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,accident_agreement_type:0
+#: selection:claims.report,accident_agreement_type:0
+msgid "Agreement Customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_bsg_truck_accident
+msgid "All About Bsg Truck Accidents"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__analytic_account_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__assign_deduction_drivers
+msgid "Assign deduction to other drivers"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__attachment_ids
+msgid "Attachment"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:375
+#: code:addons/bsg_truck_accidents/models/ir_attachments.py:28
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.view_attachment_for_truck_accident_tree
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.view_attachment_form_for_truck_accident
+#, python-format
+msgid "Attachments"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_attachment_for_truck_accident
+msgid "Attachments For Truck Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: selection:bsg.truck.accident,state_clear_cars:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_3
+msgid "Audit Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__bassami_representative
+msgid "Bassami Representative"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,accident_agreement_type:0
+#: selection:claims.report,accident_agreement_type:0
+msgid "Bassami Truck"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__vendor_bill_id
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:1253
+#, python-format
+msgid "Bill already created in one of lines"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__bool_readonly_financials_1
+msgid "Bool Readonly Financials 1"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__bool_readonly_financials_2
+msgid "Bool Readonly Financials 2"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__branch_id
+msgid "Branch"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_branch_claim_invoices
+msgid "Branch Claim Invoices"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_invoice__branches_ids
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__branches_ids
+msgid "Branches"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.reject_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.view_attachment_form_for_truck_accident
+msgid "Cancel"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:505
+#, python-format
+msgid "Cant approve claim until mark damaged assessed"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__car_amount
+msgid "Car Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_make
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_car_make
+msgid "Car Maker"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__car_places
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_car_place_config
+msgid "Car Places"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_car_place_config
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_car_place_config_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_car_place_config
+msgid "Car Places Config"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__cars_account_id
+msgid "Cars Account"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.report,name:bsg_truck_accidents.case_proof_report_report
+msgid "Case Proof Report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_chassis
+msgid "Chassis"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_chassis_no
+msgid "Chassis No#"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__bool_group_check
+msgid "Check Has Group"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__claim_account_id
+msgid "Claim Account"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__claim_amount
+msgid "Claim Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__ta_claim_ref
+msgid "Claim Ref"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.truck_accidents_claim_report_action
+msgid "Claim Report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__claim_type
+msgid "Claim Type"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_claims_account_config
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_claims_account_config_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_claims_account_config
+msgid "Claims Account Config"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_invoice__claims_branch_id
+msgid "Claims Paid By Branch"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.report,name:bsg_truck_accidents.truck_accidents_claims_report_xlsx_id
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accidents_claims_report
+msgid "Claims Report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_bta_clear_car_claim
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident_clear_cars
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bta_clear_car_claim_view
+msgid "Clear Car Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,claim_type:0
+msgid "Clear Cars"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_color
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_car_color
+msgid "Color"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_color
+msgid "Color of the vehicle"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__company_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__company_id
+msgid "Company"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_bsg_company_claims
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Company Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Company Insurance"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__company_id
+msgid "Company related to this Bsg Truck Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_claims_account_config__company_id
+msgid "Company related to this Claims Account Config"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__compensation_amount
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__compensation_amount_2
+msgid "Compensation Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_invoice__compensation_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__compensation_bill_id
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Compensation Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident_config
+msgid "Configuration"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Create Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_truck_company_claims
+msgid "Create Company Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_create_compensation
+msgid "Create Compensation"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Create Compensation Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_individual_claims
+msgid "Create Individual Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_truck_accident
+msgid "Create Truck accidents"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__create_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__credit_collection_id
+msgid "Credit Collection"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__current_user_branch_id
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__current_user_branch_id
+msgid "Current User Branch"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_partner_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__customer_id
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "Customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__customer_tax_id
+msgid "Customer Taxes"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.report,name:bsg_truck_accidents.damage_preview_report_report
+msgid "Damage Preview Report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__tpc_has_damaged
+msgid "Damaged Assessed"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__special_customer
+msgid "Deduction Customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Details Of The Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Details Of The Accident..."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__detail_of_accident
+msgid "Details of the accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_driver_deduction_report_xlsx__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_truck_accidents_claims_report_xlsx__display_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_ir_attachment
+msgid "Document"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: selection:bsg.truck.accident,state_clear_cars:0
+#: selection:bsg.truck.accident,state_shaamil:0
+msgid "Done"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__driver_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__driver_id
+msgid "Driver"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__driver_code
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_driver_code
+msgid "Driver Code"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "Driver Computer:"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Driver Deduction"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.truck_accidents_driver_deduction_report_action
+#: model:ir.actions.report,name:bsg_truck_accidents.driver_deduction_report_xlsx_id
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accidents_driver_deduction
+msgid "Driver Deduction Report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__driver_mistake_account_id
+msgid "Driver Mistake Account"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__driver_mobile
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_driver_mobile
+msgid "Driver Mobile"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__driver_name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_driver_name
+msgid "Driver Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "Driver Name:"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__estimate_after_accident
+msgid "Estimate After Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__estimate_before_accident
+msgid "Estimate Before Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__estimated_by
+msgid "Estimated By"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_clear_cars:0
+msgid "Financial Control"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_4
+msgid "Financial Control Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Financial Details"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: selection:bsg.truck.accident,state_clear_cars:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_5
+msgid "Financial Manager Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_trailer_id
+msgid "Fleet Trailer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_loc_from
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__from_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__from_date
+msgid "From"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "Group By"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__hand_wages_amount
+msgid "Hand Wages Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "How The Damage Happen :"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_driver_deduction_report_xlsx__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_truck_accidents_claims_report_xlsx__id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__id
+msgid "ID"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_unread
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_bsg_individual_claims
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_bsg_individual_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bsg_individual_claims
+msgid "Individual Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_clear_cars:0
+msgid "Insurance Accountant"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_1
+msgid "Insurance Accountant Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__insurance_company
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__insurance_company_name
+msgid "Insurance Company"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__insurance_partner
+msgid "Insurance Customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_11
+msgid "Insurance Manager Transfer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state:0
+#: selection:bsg.truck.accident,state_clear_cars:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_2
+msgid "Insurance Manger"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_shaamil:0
+msgid "Insurance Manger Transfer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,estimated_by:0
+msgid "Insurance Workshop"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__internal_note
+msgid "Internal Note"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_clear_cars:0
+msgid "Investment Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__cc_partner_id
+msgid "Invoice To"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__invoice_to_other
+msgid "Invoice To Other Customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_pics_attach
+msgid "Is Accident Pics Attached"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_compensation_amount_2
+msgid "Is Compensation Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_external_maintenance
+msgid "Is External Maintenance"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_hand_wages_amount_tax
+msgid "Is Hand Wages Amount Price"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_path_to_audit
+msgid "Is Path To Audit"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__rfq_price_paid
+msgid "Is RFQ Paid By Branch"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__is_required
+msgid "Is Required"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_send_to_audit
+msgid "Is Send To Audit"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_shipped
+msgid "Is Shipped"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_compensation_amount_tax
+msgid "Is Tax Compensation Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_less_rfq_price_tax
+msgid "Is Tax Less Rfq Price"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_rfq_price_tax
+msgid "Is Tax RFQ Price"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_raw_materials_amount_tax
+msgid "Is Tax Raw Materials Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_spare_parts_amount_tax
+msgid "Is Tax Spare Parts Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__is_consists
+msgid "Is consists"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__move_id
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Journal Entry"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__kilometer
+msgid "Kilometer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__label
+msgid "Label"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__last_accident
+msgid "Last Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_driver_deduction_report_xlsx____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_report_bsg_truck_accidents_truck_accidents_claims_report_xlsx____last_update
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__last_trip_id
+msgid "Last Trip"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__write_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__less_rfq_price
+msgid "Less Rfq Price"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__licence_plate
+msgid "License Plate"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__fleet_plate_type
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__licence_plate
+msgid "License plate number of the vehicle (i = plate number for a car)"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__move_id
+msgid "Link to the automatically generated Journal Items."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_shaamil:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_10
+msgid "Maintenance Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__mistake_percentage
+msgid "Mistake Percentage"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_model
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_car_model
+msgid "Model"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_make
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__truck_id
+msgid "Model of the vehicle"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.server,name:bsg_truck_accidents.action_create_bill_claims
+msgid "Multi Create Bill Claim"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__name
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_truck_accident_attachment__name
+msgid "Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:33
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:506
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:507
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:512
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:513
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:520
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:521
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:551
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:552
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__note
+msgid "Note"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__number_of_accident
+msgid "Number of Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__attachment_number
+msgid "Number of Attachments"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__bill_number
+msgid "Number of Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__compensation_bill_number
+msgid "Number of Compensation Bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__jv_number
+msgid "Number of Journal Entry"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_has_error_counter
+msgid "Number of error"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_shaamil:0
+#: model:res.groups,name:bsg_truck_accidents.group_state_shaamil_claims_4
+msgid "Operation"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_order_date
+msgid "Order Date"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__owner_name
+msgid "Owner Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_car_places_config__name
+msgid "Place Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_general_plate_no
+msgid "Plate No#"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__chassis_no
+msgid "Plate Number"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_plate_type
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_plate_type
+msgid "Plate Type"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:563
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:610
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:657
+#, python-format
+msgid "Please make configuration for claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:1255
+#, python-format
+msgid "Please select lines having same customer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:413
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:460
+#, python-format
+msgid "Please select partner."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:447
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:700
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:888
+#, python-format
+msgid "Please send to audit for confirmation"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:704
+#, python-format
+msgid "Please set note for creating bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:400
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:445
+#, python-format
+msgid "Please set note for move line"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:559
+#, python-format
+msgid "Please set reference for creating bill"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.truck_accidents_claim_report_form
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.truck_accidents_driver_deduction_report_form
+msgid "Print Excel"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__claim_product_id
+msgid "Product"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__rfq_price
+msgid "RFQ Price"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__raw_materials_amount
+msgid "Raw Material Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_reject_wizard__reason
+msgid "Reason"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.truck_accident_reject_wizard_action
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.reject_wizard_view_form
+msgid "Reason To Reject"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+msgid "Receive Car"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__name
+msgid "Reference"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.reject_wizard_view_form
+msgid "Refuse"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "Register Payment"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident
+msgid "Register Truck Accidents"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_clear_car_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+msgid "Reject"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/wizard/refuse.py:35
+#: code:addons/bsg_truck_accidents/wizard/refuse.py:49
+#, python-format
+msgid "Reject Reason"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accidents_reports_main
+msgid "Reporting"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+#: model:res.groups,name:bsg_truck_accidents.group_reset_to_draft
+msgid "Reset To Draft"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__responsibility_ratio
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+msgid "Responsibility Ratio"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_invoice__reverse_entry_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__compensation_reverse_entry_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__inv_reverse_entry_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__reverse_entry_id
+msgid "Reverse Entry"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.view_attachment_form_for_truck_accident
+msgid "Save & Close"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.view_attachment_form_for_truck_accident
+msgid "Save & New"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__expected_start_date
+msgid "Scheduled Start Date"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+msgid "Shaamil Car Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,claim_type:0
+msgid "Shaamil Claim"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_bta_shaamil_claim
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bta_shaamil_claim_xml_view
+#: model:res.groups,name:bsg_truck_accidents.group_shaamil_claims
+msgid "Shaamil Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,estimated_by:0
+msgid "Sheikh Dealers"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__shipment_no_id
+msgid "Shipment No"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_shaamil_claim_view
+msgid "Shipping"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__spare_parts_amount
+msgid "Spare Parts Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__state
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "State"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__state_clear_cars
+msgid "State Clear Cars"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__state_shaamil
+msgid "State Shaamil"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,state_shaamil:0
+#: model:res.groups,name:bsg_truck_accidents.group_shaamil_claims_state_1
+msgid "Technical Support"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:702
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:738
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:770
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:816
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:897
+#, python-format
+msgid "The amount must be Strictly positive."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:890
+#, python-format
+msgid "The compensation amount must be Strictly positive."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:398
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:443
+#, python-format
+msgid "The mistake amount must be Strictly positive."
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: selection:bsg.truck.accident,claim_type:0
+msgid "Third Party Claim"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_bta_third_party_claim
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident_third_party
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bta_third_party_claim_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bta_third_party_claim_view
+msgid "Third Party Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "This Month"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "This Week"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "This Year"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__so_line_loc_to
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_report__to_date
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_driver_deduction_report__to_date
+msgid "To"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.search_bsg_individuals_claims
+msgid "Today"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bsg_company_claims
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bsg_individual_claims
+msgid "Total EST Amount"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__trailer_id
+msgid "Trailer"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_invoice__truck_accident_id
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_account_move__bsg_truck_accident
+msgid "Truck Accident"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_truck_accident_configuration
+msgid "Truck Accident Configuration"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_reject_wizard
+msgid "Truck Accident Reject Reason Wizard"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_ir_attachment__truck_accident_attach
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_mrp_document__truck_accident_attach
+msgid "Truck Accident Type"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.module.category,name:bsg_truck_accidents.module_truck_accident_mangement
+#: model:ir.ui.menu,name:bsg_truck_accidents.bsg_truck_accidents
+msgid "Truck Accidents"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.actions.act_window,name:bsg_truck_accidents.action_truck_accident_attachment
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident_attachment_type
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_accident_attachment
+msgid "Truck Accidents Attachment"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.module.category,description:bsg_truck_accidents.module_truck_accident_mangement
+msgid "Truck Accidents Management"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_truck_accidents_reporting
+msgid "Truck Accidents Reporting"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "Truck NO:"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__truck_id
+msgid "Truck Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_chassis
+msgid "Unique number written on the vehicle motor (VIN/SN number)"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__fleet_id
+msgid "Vehicle No"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__trip_id
+msgid "Vehicle Trip"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_claims_account_config__vendor_tax_id
+msgid "Vendor Taxes"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_7
+msgid "View All Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_8
+msgid "View My Branch Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_company_claims_view
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.form_bsg_individual_claims_view
+msgid "With Tax"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,field_description:bsg_truck_accidents.field_bsg_truck_accident__workshop
+msgid "Workshop Name"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model.fields,help:bsg_truck_accidents.field_bsg_truck_accident__fleet_car_model
+msgid "Year of the model"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:1026
+#, python-format
+msgid "You can only delete this record in draft state"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: code:addons/bsg_truck_accidents/models/bsg_truck_accident.py:1238
+#, python-format
+msgid "You cannot set future accident date"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_car_places_config
+msgid "car.places.config"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_claims_report
+msgid "claims.report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_claims_account_config
+msgid "claims_account_config"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.tree_bsg_company_claims
+msgid "company Claims"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_driver_deduction_report
+msgid "driver.deduction.report"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:res.groups,name:bsg_truck_accidents.group_state_accident_state_9
+msgid "investment Confirm"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_report_bsg_truck_accidents_driver_deduction_report_xlsx
+msgid "report.bsg_truck_accidents.driver_deduction_report_xlsx"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_report_bsg_truck_accidents_truck_accidents_claims_report_xlsx
+msgid "report.bsg_truck_accidents.truck_accidents_claims_report_xlsx"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.model,name:bsg_truck_accidents.model_truck_accident_attachment
+msgid "truck.accident.attachment"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid "تحويل معاينة أضرار"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid "عند استلام"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid "لا يحـق للعميل مطالـبة مجموعـة أعمــال البسامي الدولية بأي مطالبة تخص سيارته من بعد مضي خمسة عشر يوماً على تاريخ التحويل -"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid "لا يمكن اصلاح السيارة سوى بعد ابلاغ مسئول التأمين على الأضرار والموافقة عليها -"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model:ir.ui.menu,name:bsg_truck_accidents.menu_truck_accident_shaamil
+msgid "مطالبات الشامل"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.case_proof_report_pdf_template
+msgid "نموذج إثبات الحالة"
+msgstr ""
+
+#. module: bsg_truck_accidents
+#: model_terms:ir.ui.view,arch_db:bsg_truck_accidents.damage_preview_report_pdf_template
+msgid "يعتبر التحويل هذا ساري المفعول لمدة (خمسة عشر يوم) فقط من تاريخه -"
+msgstr ""
+

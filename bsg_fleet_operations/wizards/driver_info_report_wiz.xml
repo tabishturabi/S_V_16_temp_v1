@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="driver_info_report_wizard_form">
+      <field name="name">driver.info.report.wizard</field>
+      <field name="model">driver.info.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="form"/>
+              </group>
+              <group>
+                <field name="to"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="driver_info_report_action">
+      <field name="name">Driver Information Reports</field>
+      <field name="res_model">driver.info.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="driver_info_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+    <menuitem name="Driver Information Report xlsx"
+              id="menu_driver_info_report"
+              parent="bsg_fleet_operations.root_driver_master"
+              sequence="4"
+              action="driver_info_report_action"
+              groups="bsg_fleet_operations.group_driver_assign,bsg_fleet_operations.group_driver_unassign"
+    />
+  </data>
+</odoo>

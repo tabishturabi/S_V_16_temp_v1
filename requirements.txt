@@ -1,0 +1,4 @@
+num2words==0.5.10
+pandas==0.24.2
+ummalqura==2.0.1
+plotly==4.11.0

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record id="employee_directory_report_form" model="ir.ui.view">
+    <field name="name">employee.directory.report.form</field>
+    <field name="model">employee.directory.report.wizard</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Employee Directory Report">
+        <group>
+          <field name="grouping_by" />
+        </group>
+        <group name="group_top">
+          <group name="group_left">
+            <field name="mode"/>
+            <field name="employee_ids" options="{'no_create':True,'no_edit':True}"
+                   attrs="{'invisible':[('mode','!=','specific')],'required':[('mode','=','specific')]}"
+                   widget="many2many_tags"/>
+            <field name="branch_ids" options="{'no_create':True,'no_edit':True}"
+                   attrs="{'invisible':[('mode','!=','branch')],'required':[('mode','=','branch')]}"
+                   widget="many2many_tags"/>
+            <field name="department_ids" options="{'no_create':True,'no_edit':True}"
+                   attrs="{'invisible':[('mode','!=','dept')],'required':[('mode','=','dept')]}"
+                   widget="many2many_tags"/>
+            <field name="is_parent_dempart"
+                   attrs="{'invisible':[('mode','!=','dept')],'required':[('mode','=','dept')]}"/>
+            <field name="company_ids" options="{'no_create':True,'no_edit':True}"
+                   attrs="{'invisible':[('mode','!=','company')],'required':[('mode','=','company')]}"
+                   widget="many2many_tags"/>
+            <field name="employee_tags_ids" options="{'no_create':True,'no_edit':True}"
+                   attrs="{'invisible':[('mode','!=','emp_tag')],'required':[('mode','=','emp_tag')]}"
+                   widget="many2many_tags"/>
+          </group>
+
+          <group name="group_right">
+            <field name="employee_status"/>
+
+          </group>
+
+        </group>
+
+        <footer style="height: 30px !important; border: none !important;">
+          <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+        </footer>
+
+      </form>
+    </field>
+  </record>
+
+
+  <record id="employee_directory_report_action" model="ir.actions.act_window">
+    <field name="name">Employee Directory Report</field>
+    <field name="res_model">employee.directory.report.wizard</field>
+<!--    <field name="view_type">form</field>-->
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="employee_directory_report_form"/>
+    <field name="target">new</field>
+  </record>
+
+  <!--  report menus -->
+  <menuitem id="employee_directory_report_action_menu"
+            name="Employee Directory Report"
+            action="employee_directory_report_action"
+            parent="employee_info_report.employee_info_report_main_menu_item"
+            groups="groups_employee_directory_report"
+  />
+
+  <menuitem id="employee_directory_report_sale_menu"
+            name="Employee Directory Report"
+            action="employee_directory_report_action"
+            parent="sale.sale_menu_root"
+            groups="groups_employee_directory_report"
+            sequence="16"
+  />
+
+  <!-- change access rights for sales report menu -->
+
+  <record model="ir.ui.menu" id="sale.menu_sale_report">
+    <field name="groups_id" eval="[(4, ref('group_sale_report'))]"/>
+  </record>
+
+</odoo>

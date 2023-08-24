@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="maintenance_access_group">
+            <field name="name">Maintenance Access</field>
+            <field name="description">Maintenance Access Management</field>
+            <field name="sequence">20</field>
+        </record>
+        <record model="res.groups" id="group_maintenance_user">
+            <field name="name">User</field>
+            <field name="category_id" ref="maintenance_access_group"/>
+        </record>
+    </data>
+</odoo>

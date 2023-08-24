@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="entry_permission_notification" model="ir.cron">
+            <field name="name">Entry Permission Notification</field>
+            <field name="model_id" ref="model_maintenance_request_enhance"/>
+            <field name="state">code</field>
+            <field name="code">model.entry_permission_notification()</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>

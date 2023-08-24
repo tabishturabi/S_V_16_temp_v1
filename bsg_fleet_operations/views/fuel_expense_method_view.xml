@@ -1,0 +1,108 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    
+    <record model="ir.ui.view" id="view_bsg_fuel_expense_method_form">
+      <field name="name">view.bsg.fuel.expense.method.form</field>
+      <field name="model">bsg.fuel.expense.method</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+          </header>
+          <sheet string="Fuel Expense Method">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                  <field name="vehicle_type" required="1" placeholder="Vehicle Type"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <field name="fuel_expense_type" required="1"/>
+                <field name="route_type"/>
+                <field name="fuel_amount" invisible="1"/>
+                  <!-- attrs="{'invisible':[('fuel_expense_type','not in',['port','route'])]}" -->
+              </group>
+              <group>
+                <field name="route_id" attrs="{'invisible':[('fuel_expense_type','not in',['route'])]}" options="{'no_create': True, 'no_open': True}"/>
+                <field name="expense_amount" attrs="{'invisible':[('fuel_expense_type','not in',['route'])]}"/>
+                <field name="port_fuel_amt_id" invisible="1" string="Port Fuel Rule"/>
+                <!-- attrs="{'invisible':[('fuel_expense_type','not in',['port'])]}" -->
+                <field name="port_rule_option" attrs="{'invisible':[('fuel_expense_type','not in',['port','local']),('route_type','not in',['hybrid'])]}"/>
+                <!-- <field name="int_fuel_amt_id" attrs="{'invisible':[('fuel_expense_type','not in',['route'])]}" string="International Fuel Rule"/> -->
+              </group>
+            </group>
+            <!-- Group for Driver With Rewards -->
+            <group name="driver_with_reward" string="Driver With Rewards" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}">
+              <group name="left">
+                <field name="empty_load_amt" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}"/>
+                   <field name="el_reward" attrs="{'invisible':['|',('fuel_expense_type','not in',['km','hybrid']),('port_rule_option','not in',['na', 'km'])]}"/>
+              </group>
+              <group name="right">
+                  <field name="full_load_amt" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}"/>
+                  <field name="fl_reward" attrs="{'invisible':['|',('fuel_expense_type','not in',['km','hybrid']),('port_rule_option','not in',['na', 'km'])]}"/>
+              </group>
+            </group>
+
+            <!-- Group for Driver Without Rewards -->
+            <group name="driver_without_reward" string="Driver Without Rewards" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}">
+              <group name="left">
+                <field name="amt_empty_without_reward" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}"/>
+                  <field name="nel_reward" attrs="{'invisible':['|',('fuel_expense_type','not in',['km','hybrid']),('port_rule_option','not in',['na'])]}"/>
+              </group>
+              <group name="right">
+                <field name="amt_full_without_reward" attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])]}"/>
+                <field name="nfl_reward" attrs="{'invisible':['|',('fuel_expense_type','not in',['km','hybrid']),('port_rule_option','not in',['na'])]}"/>
+              </group>
+            </group>
+
+            <notebook>
+
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>          
+        </form>
+      
+      
+      </field>
+    </record>
+    
+    <!-- Tree view   -->
+    <record model="ir.ui.view" id="view_bsg_fuel_expense_method_tree">
+      <field name="name">view.bsg.fuel.expense.method.tree</field>
+      <field name="model">bsg.fuel.expense.method</field>
+      <field name="arch" type="xml">
+        <tree string="Fuel Expense Method">
+          <field name="vehicle_type"/>
+          <field name="fuel_expense_type"/>
+          <field name="route_type"/>
+          <field name="empty_load_amt" string="EL Fuel Amt"/>
+          <field name="full_load_amt" string="FL Fuel Amt"/>
+          <field name="amt_empty_without_reward" string="nEL Fuel Amt"/>
+          <field name="amt_full_without_reward" string="nFL Fuel Amt"/>
+          <field name="el_reward" string="EL Reward"/>
+          <field name="fl_reward" string="FL Reward"/>
+          <field name="nel_reward" string="nEL Reward"/>
+          <field name="nfl_reward" string="nFL Reward"/>
+          <field name="route_id"/>
+          <field name="expense_amount"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="bsg_fuel_expense_method_action">
+      <field name="name">Fuel Expense Method</field>
+      <field name="res_model">bsg.fuel.expense.method</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

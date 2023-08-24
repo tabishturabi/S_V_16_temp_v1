@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+
+
+        <!-- ioud region form view definition -->
+        <record model="ir.ui.view" id="ioud_region_config_view_form">
+            <field name="name">ioud_region_config_view_form</field>
+            <field name="model">region.config</field>
+            <field name="arch" type="xml">
+                <form string="Region">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="bsg_region_code" default_focus="1" placeholder="Region Code"/>
+                            </h1>
+                        </div>
+                        <group name="top">
+                            <group name="left">
+                                <field name="bsg_region_name" string="Region English Name"/>
+                            </group>
+                            <group name="right">
+                                <field name="bsg_region_name_ar" string="Region Arabic Name"/>
+                                <field name="bayan_region_id"></field>
+                                <field name="region_arabic_name"></field>
+                            </group>
+                        </group>
+                        <field name="region_line">
++                            <tree editable="bottom">
++                                <field name="region_id" invisible="1"></field>
++                                <field name="city_name"></field>
++                                <field name="city_code"></field>
++                                <field name="bayan_city_id"></field>
++                            </tree>
++                       </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ioud region tree view definition -->
+        <record model="ir.ui.view" id="ioud_region_config_view_tree">
+            <field name="name">ioud_region_config_view_tree</field>
+            <field name="model">region.config</field>
+            <field name="arch" type="xml">
+                <tree string="Region">
+                    <field name="bsg_region_code" string="Region Code"/>
+                    <field name="bsg_region_name" string="Region English Name"/>
+                    <field name="bsg_region_name_ar" string="Region Arabic Name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ioud region action -->
+
+        <record model="ir.actions.act_window" id="action_window_ioud_region">
+            <field name="name">Region</field>
+            <field name="res_model">region.config</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- ioud branches menu item -->
+        <menuitem name="Region Configuration"
+                  id="menu_region_config"
+                  parent="bsg_branch_config.bsg_branches_menu_1"
+                  groups="bsg_branch_config.groups_region_config"
+                  action="action_window_ioud_region"
+                  sequence="4"
+        />
+
+    </data>
+</odoo>

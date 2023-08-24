@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	<record id="paperformat_journal_entry_report" model="report.paperformat">
+            <field name="name">Journal Entries report</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+        </record>
+	
+	<report id="journal_entry_report_id"
+				string="طباعة قيد اليومية"
+				model="account.move"
+				report_type="qweb-pdf"
+				file="bassami_print_journal_entries.journal_entry_report_template_id"
+				name="bassami_print_journal_entries.journal_entry_report_template_id"
+				paperformat="paperformat_journal_entry_report"/>
+					
+	<report id="payment_journal_entry_report_id"
+				string="طباعة قيد اليومية"
+				model="account.payment"
+				report_type="qweb-pdf"
+				file="bassami_print_journal_entries.payment_journal_entry_report_template_id"
+				name="bassami_print_journal_entries.payment_journal_entry_report_template_id"
+				paperformat="paperformat_journal_entry_report"/>	
+							
+	</data>
+</odoo>

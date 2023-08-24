@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="paperformat_emp_slips" model="report.paperformat">
+        <field name="name">Employee Slips</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">60</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">60</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="employee_payslip_report_pdf_id"
+            paperformat="paperformat_emp_slips"
+            model="employee.payslip.report.wizard"
+            string="Employee Payslip Report"
+            report_type="qweb-pdf"
+            name="bsg_employee_payslip_report.employee_payslip_report_pdf"
+            file="bsg_employee_payslip_report.employee_payslip_report_pdf"/>
+
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="bsg_employee_payslip_report/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+            <div align="center">
+                <h3 t-if="user_lang==0"> Employee Payslips Report</h3>
+                <h3 t-if="user_lang==1"> كشف رواتب موظف  </h3>
+            </div>
+            <div align="center">
+                <h5> From   <span t-esc="period_from"/> To  <span t-esc="period_to"/></h5>
+            </div>
+            <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" cellspacing="0" width="1200px"
+                    style="font-family:Arial,sans-serif; font-size: 12px;border:1px solid black;" >
+                <tbody>
+                    <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black;  };">
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">Employee ID</td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">Employee Name</td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">ID </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">Country </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">Joining Date</td>
+                    </tr>
+                    <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; };">
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">
+                            <span t-esc="employee.employee_code" /> </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">
+                            <span t-esc="employee.name" /> </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">
+                            <t t-if="employee.bsg_empiqama"><span t-field="employee.bsg_empiqama"/></t>
+                            <t t-if="employee.bsg_national_id"><span t-field="employee.bsg_national_id"/></t>
+                        </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">
+                            <span t-esc="employee.country_id.name" /> </td>
+                        <td t-attf-style="border:1px solid black;" align="center" width="20%">
+                            <span t-esc="employee.bsgjoining_date"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')"> <t t-raw="0"/> </div>
+        <div class="footer o_standard_footer">
+            <div class="row">
+                <div class="col-3 mb4 text-center"> <span t-esc="'الادارة المالية '"/></div>
+                <div class="col-3 mb4 text-center"> <span t-esc="'مدير ادارة المراجعة والتدقيق الداخلي '"/></div>
+                <div class="col-3 mb4 text-center"> <span t-esc="'مدير ادارة الموارد البشرية '"/></div>
+                <div class="col-3 mb4 text-center"> <span t-esc="'محاسب الرواتب والاجور'"/></div>
+
+            </div>
+            <br/>
+            <div class="row text-center" style="border-top: 1px solid black;" >
+                <div class="col-3 mb4 text-center"> <t t-if="docs.print_date" class="list-inline-item">
+                    Print Date: <span t-field="docs.print_date"/></t></div>
+                <div class="col-3 mb4 text-center"> <t t-if="docs.env.user.id" class="list-inline-item">
+                    Print By: <span t-field="docs.env.user.name"/></t></div>
+                <div class="col-3 mb4 text-center">
+                    <t t-if="report_type == 'pdf'" class="list-inline-item">Page: <span class="page"/> - <span class="topage"/></t></div>
+                <div class="col-3 mb4 text-center"> <span t-esc="''"/></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="employee_payslip_report_pdf">
+        <t t-name="bsg_employee_payslip_report.employee_payslip_report_pdf">
+            <t t-call="web.html_container">
+                <t t-call="bsg_employee_payslip_report.external_layout_standard">
+
+                    <t t-foreach="employee_data" t-as="o">
+                        <!-- employee info -->
+                        <!--                        <br />-->
+                        <div class="page" style="page-break-after: always; margin-top: 4px;">
+
+                            <div class="oe_structure"/>
+                            <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" cellspacing="0"
+                                   style="font-family:Arial,sans-serif; font-size: 12px;border:1px solid black;" width="1200px">
+                                <thead>
+                                    <t t-set="count" t-value="0"/>
+                                    <t t-set="total" t-value="[]"/>
+                                    <t t-set="emp_payslips" t-value="docs.get_payslip(o.id)" />
+                                    <t t-set="rule_dict" t-value="docs.get_rule_dict(emp_payslips)" />
+                                    <tr t-attf-style="page-break-inside: avoid !important; background-color:#D2D3D5;color:black;};">
+                                        <td t-attf-style="border:1px solid black;" align="center" >
+                                            <span style="font-size: 14px; font-weight: bold;">Month</span></td>
+                                        <td t-attf-style="border:1px solid black;" align="center">
+                                            <span style="font-size: 14px; font-weight: bold;">Branch</span></td>
+                                        <td t-attf-style="border:1px solid black;" align="center">
+                                            <span style="font-size: 14px; font-weight: bold;">Department</span></td>
+                                        <td t-attf-style="border:1px solid black;" align="center">
+                                            <span style="font-size: 14px; font-weight: bold;">Job Description</span></td>
+                                        <t t-foreach="rule_dict.values()" t-as="rule">
+                                            <td t-attf-style="border:1px solid black;" align="center">
+                                                <span style="font-size: 14px; font-weight: bold;" t-esc="rule.get('name')"/></td></t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="dict_list" t-value="[]"/>
+                                    <t t-foreach="emp_payslips" t-as="payslip">
+                                        <t t-set="rule_dict_amount" t-value="docs.update_rule_dict(payslip, emp_payslips)"/>
+                                        <t t-set="dict_list" t-value="docs.get_dict_list(payslip,emp_payslips,dict_list)"/>
+                                        <tr t-attf-style="page-break-inside: avoid !important;border:1px solid black;  background-color:white; color:black;};">
+                                            <td align="center" t-attf-style="border:1px solid black;"><span style="font-size: 12px;" t-esc="payslip.date_from.strftime('%B %Y')"/></td>
+                                            <td align="center" t-attf-style="border:1px solid black;"><span style="font-size: 12px;" t-esc="payslip.branch_id.branch_ar_name"/></td>
+                                            <td align="center" t-attf-style="border:1px solid black;"><span style="font-size: 12px;" t-esc="payslip.department_id.name"/></td>
+                                            <td align="center" t-attf-style="border:1px solid black;"><span style="font-size: 12px;" t-esc="payslip.job_id.name"/></td>
+                                            <t t-foreach="rule_dict_amount.values()" t-as="rule">
+                                                <td align="center" t-attf-style="border:1px solid black;">
+                                                    <!--                                                    <span style="font-size: 12px;" t-esc="rule.get('amount')"/>-->
+                                                    <span t-esc="'{0:,.2f}'.format(float(rule.get('amount')))"/>
+                                                </td></t>
+                                        </tr>
+                                    </t>
+                                    <t t-set="total" t-value="docs._get_total(dict_list,emp_payslips)" />
+
+                                    <tr t-attf-style="page-break-inside: avoid !important; border:1px solid black;
+                                                    background-color:#D2D3D5;};">
+                                        <td align="center"/>
+                                        <td align="left"><span style="font-size: 14px; font-weight: bold;">Total</span></td>
+                                        <td align="center"/>
+                                        <td align="center"/>
+
+                                        <t t-foreach="total.values()" t-as="total">
+                                            <td align="center" t-attf-style="border:1px solid black;">
+<!--                                                                                                <span t-esc="'{0:,.2f}'.format(float(total.get('amount')))"/>-->
+                                                <span style="font-size: 14px; font-weight: bold;" t-esc="total.get('amount')"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="oe_structure"/>
+                            <br />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

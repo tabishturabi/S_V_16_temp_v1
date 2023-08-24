@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="report_purchase_order_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <style>
+                        table,td, th,div,p {
+                        font-size: 13px;padding: 3px;
+                        }
+
+                    </style>
+                    <div class="page">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <img t-att-src="image_data_uri(o.company_id.logo)" width="270" height="80" alt=""/>
+                                </td>
+                                <td style="vertical-align:top;">
+                                    <div name="company_address" style="text-align:right;margin-right: 20px;">
+                                        <span class="company_address" t-field="o.company_id.partner_id"
+                                              t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                        <span t-if="o.company_id.vat" class="mt16"><t t-esc="'Tax ID'"/>:
+                                            <span t-field="o.company_id.vat"/>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:210mm">
+                            <tr>
+                                <td style="width:50mm">
+
+                                </td>
+                                <td style="width:50mm">
+
+                                </td>
+                                <td style="width:50mm">
+
+                                </td>
+                                <td style="width:50mm">
+
+                                </td>
+
+                                <td style="width:75mm">
+                                    <h5>PO
+                                        <span t-field="o.name"/>
+                                    </h5>
+                                </td>
+                                <td style="width:50mm">
+
+                                </td>
+                                <td style="width:50mm">
+
+                                </td>
+                                <td style="width:110mm">
+                                    Date:
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:210mm;border: 1px solid;">
+                            <tr>
+                                <td style="width:120mm">
+                                    <p>
+                                        <strong>Issue To:</strong>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <strong>Name:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.name"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>P.O Box:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.po_box"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>City:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.city"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Country:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.country_id.name"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Tel:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.phone"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Fax:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.fax"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Attn:</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <span t-field="o.partner_id.attention"/>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </p>
+
+                                </td>
+                                <td style="width:90mm;border-left: 1px solid;">
+                                    <p>
+                                        <strong>Delivery Address:</strong>
+                                        <div style="text-align:center;">
+                                            <span t-field="o.picking_type_id.display_name"/>
+                                            <br/>
+                                            <span t-field="o.partner_id.city"/>
+                                            <br/>
+                                            <span t-field="o.partner_id.country_id.name"/>
+                                        </div>
+                                    </p>
+                                    <p>
+                                        <strong>Delivery Schedule:</strong>
+                                        <div style="text-align:center;">
+                                            <span t-field="o.date_planned"/>
+                                        </div>
+                                    </p>
+                                    <p>
+                                        <strong>Payment Term:</strong>
+                                        <div style="text-align:center;">
+                                            <span t-field="o.payment_term_id.name"/>
+                                        </div>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:5mm;width:210mm;border: 1px solid;">
+                            <tr>
+                                <th style="width:15mm;border-right: 1px solid;border-bottom: 1px solid;">
+                                    SI
+                                </th>
+                                <!--                                <th style="width:15mm;border-right: 1px solid;border-bottom: 1px solid;">-->
+                                <!--                                    PRF NO-->
+                                <!--                                </th>-->
+                                <th style="width:200mm;border-right: 1px solid;border-bottom: 1px solid;">
+                                    Description
+                                </th>
+                                <th style="border-right: 1px solid;border-bottom: 1px solid;width: 13%;">
+                                    Unit of Measures
+                                </th>
+                                <th style="width:15mm;border-right: 1px solid;border-bottom: 1px solid;">
+                                    Quantity
+                                </th>
+                                <th style="width:15mm;border-right: 1px solid;border-bottom: 1px solid;">
+                                    Unit Price
+                                </th>
+                                <th style="width:15mm;border-right: 1px solid;border-bottom: 1px solid;">
+                                    Total Price
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="width:15mm;border-right: 1px solid;">
+
+                                </td>
+                                <td style="width:15mm;border-right: 1px solid;">
+
+                                </td>
+                                <td style="width:100mm;border-right: 1px solid;">
+
+                                </td>
+                                <td style="width:15mm;border-right: 1px solid;">
+
+                                </td>
+                                <td style="width:15mm;border-right: 1px solid;">
+
+                                </td>
+                                <td style="width:25mm;border-right: 1px solid;">
+
+                                </td>
+                                <!--                                <td style="width:25mm;border-right: 1px solid;">-->
+
+                                <!--                                </td>-->
+                            </tr>
+                            <t t-set="count" t-value="1"/>
+
+                            <t t-foreach="o.order_line" t-as="line">
+                                <tr>
+                                    <td style="width:15mm;border-right: 1px solid;">
+                                        <span t-esc="count"/>
+                                    </td>
+                                    <!--                                <td style="width:15mm;border-right: 1px solid;">-->
+
+                                    <!--                                </td>-->
+                                    <td style="width:100mm;border-right: 1px solid;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td style="width:15mm;border-right: 1px solid;text-align:centre">
+                                        <span t-field="line.product_uom.name"/>
+                                    </td>
+                                    <td style="width:15mm;border-right: 1px solid;text-align:centre">
+                                        <span t-field="line.product_qty"/>
+                                    </td>
+                                    <td style="width:25mm;border-right: 1px solid;text-align:right">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td style="width:25mm;border-right: 1px solid;text-align:right">
+                                        <span t-field="line.price_subtotal"/>
+                                    </td>
+                                    <t t-set="count" t-value="count + 1"/>
+
+                                </tr>
+                            </t>
+
+                        </table>
+                        <div style="float:right">
+                            <table style="width:60mm;margin-right:-23px;">
+                                <tr>
+                                    <td style="width:15mm;border-left: 1px solid;border-right: 1px solid;">
+                                        Price
+                                    </td>
+                                    <td style="width:100mm;border-left: 1px solid;border-right: 1px solid;text-align:right">
+                                        <span t-field="o.total_amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:130mm;border: 1px solid;">
+                                        VAT
+                                    </td>
+                                    <td style="width:30mm;border: 1px solid;text-align:right">
+                                        <span t-field="o.amount_tax"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:30mm;border: 1px solid;">
+                                        Freight Cost
+                                    </td>
+                                    <td style="width:30mm;border: 1px solid;text-align:right">
+                                        <t t-if="o.freight_cost_type == 'excluded'">
+                                            <span t-esc="o.freight_cost"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span>Included</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:30mm;border: 1px solid;">
+                                        Total Price
+                                    </td>
+                                    <td style="width:30mm;border: 1px solid;text-align:right">
+                                        <span t-esc="o.amount_total + o.freight_cost"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <h6 style="margin-top:50mm">PRF #
+                            <span t-esc="o.name"/>
+                        </h6>
+                        <h6>Work Order #
+                            <t t-if="len(o.order_line) > 0">
+                                <span t-esc="o.order_line[0].account_analytic_id.name"/>
+                            </t>
+                        </h6>
+                        <div style="border:1px solid;width: 100%;">
+                            <strong>Enclosures:</strong>
+                            <br/>
+                            <span t-field="o.enclosures"/>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        <p>Signature: _____________________</p>
+                        <p>Date:
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+
+                        <p>Contribution List</p>
+                        <table width="100%">
+                            <tr>
+                                <td>1)Finance:</td>
+                                <td>2)Originator:</td>
+                                <td>3)QC Dept:</td>
+                                <td>4)Store:</td>
+                                <td>5)File:</td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_purchase_order_report" model="report.paperformat">
+        <field name="name">PO Paper format</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <report id="action_purchase_order_pdf_report" model="purchase.order" string="PO ISO Report" report_type="qweb-pdf"
+            name="purchase_order_pdf_report.report_purchase_order_pdf"
+            file="purchase_order_pdf_report.report_purchase_order_pdf"
+            paperformat="purchase_order_pdf_report.paperformat_purchase_order_report"/>
+</odoo>

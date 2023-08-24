@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="refuse_wizard_view_form" model="ir.ui.view">
+        <field name="name">refuse_wizard_view_form</field>
+        <field name="model">refuse.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sim Card refuse reason">
+                <separator string="Reason To Refuse Sim Card"/>
+                <field name="sim_card_ids" invisible="1"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="sim_card_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="sim_card_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">Refuse Sim Card</field>
+        <field name="res_model">refuse.wizard</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="refuse_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <record id="lost_refuse_wizard_view_form" model="ir.ui.view">
+        <field name="name">lost_sim_refuse_wizard_view_form</field>
+        <field name="model">lost.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lost Sim refuse reason">
+                <separator string="Reason To Refuse"/>
+                <field name="lost_ids" invisible="1"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="lost_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="lost_sim_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">Refuse Reason</field>
+        <field name="res_model">lost.wizard</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lost_refuse_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

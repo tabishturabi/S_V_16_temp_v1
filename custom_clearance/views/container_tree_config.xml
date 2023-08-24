@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_container_to_config" model="ir.ui.view">
+            <field name="name">To Quote</field>
+            <field name="model">to.quote</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="To Quote">
+                    <div class="oe_button_box" name="button_box">
+                    		<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    			<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                    		</button>
+                    	</div>
+                    	<group>
+                    		<div class="oe_title">
+                    			<h1><field name="name" placeholder="To Quote" required="1"/></h1>
+                    		</div>
+                    	</group>
+                    	<group>
+                            <group>
+                            
+                            </group>
+                            <group>
+                            
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_container_to_config" model="ir.ui.view">
+            <field name="name">To Quote</field>
+            <field name="model">to.quote</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="To Quote" >
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_container_to_config" model="ir.actions.act_window">
+            <field name="name">To Quote</field>
+            <field name="res_model">to.quote</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_container_to_config" />
+        </record>
+        <menuitem id="container_config_menu" name="Container Config" parent="sale.menu_sale_config" sequence="1"/>
+        <menuitem action="action_container_to_config" id="config_submenu_config_to" name="To" parent="container_config_menu"  sequence="1"/>
+        
+        <record id="view_container_from_config" model="ir.ui.view">
+            <field name="name">From Quote</field>
+            <field name="model">from.quote</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="From Quote">
+                    <div class="oe_button_box" name="button_box">
+                    		<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    			<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                    		</button>
+                    	</div>
+                    	<group>
+                    		<div class="oe_title">
+                    			<h1><field name="name" placeholder="From Quote" required="1"/></h1>
+                    		</div>
+                    	</group>
+                    	<group>
+                            <group>
+                            
+                            </group>
+                           
+                        </group>
+                    	
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_container_from_config" model="ir.ui.view">
+            <field name="name">From Quote</field>
+            <field name="model">from.quote</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="From Quote" >
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_container_from_config" model="ir.actions.act_window">
+            <field name="name">From Quote</field>
+            <field name="res_model">from.quote</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_container_from_config" />
+        </record>
+        <menuitem action="action_container_from_config" id="config_submenu_config_from" name="From " parent="container_config_menu"  sequence="2"/>
+        
+         <record id="view_container_fleet_config" model="ir.ui.view">
+            <field name="name">Fleet Type</field>
+            <field name="model">fleet.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Fleet Type">
+                    <div class="oe_button_box" name="button_box">
+                    		<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    			<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                    		</button>
+                    	</div>
+                    	<group>
+                    		<div class="oe_title">
+                    			<h1><field name="name" placeholder="Fleet Type" required="1"/></h1>
+                    		</div>
+                    	</group>
+                    	<group>
+                            <group>
+                            
+                            </group>
+                           
+                        </group>
+                    	
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_container_fleet_config" model="ir.ui.view">
+            <field name="name">Fleet Type</field>
+            <field name="model">fleet.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Fleet Type" >
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_container_fleet_config" model="ir.actions.act_window">
+            <field name="name">Fleet Type</field>
+            <field name="res_model">fleet.type</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_container_fleet_config" />
+        </record>
+        <menuitem action="action_container_fleet_config" id="config_submenu_config_fleet" name="Fleet " parent="container_config_menu"  sequence="3"/>
+        
+</odoo>

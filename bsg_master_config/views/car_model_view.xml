@@ -1,0 +1,62 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    
+    <record model="ir.ui.view" id="bsg_car_model_view_form">
+      <field name="name">bsg_car_model_view_form</field>
+      <field name="model">bsg_car_model</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Car Model">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                <field name="car_model_name" required="1" placeholder="Arabic Name"/>
+              </h1>
+              <h1>
+                <field name="car_model_en_name" required="1" placeholder="English Name"/>
+              </h1>
+            </div>
+            <group name="top">
+              <group name="left">
+                <field name="car_maker_id" required="1"/>
+              </group>
+              <group name="right">
+                <field name="car_model_old_sys_id" invisible="1"/>
+              </group>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>            
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view   -->
+    <record model="ir.ui.view" id="bsg_car_model_view_tree">
+      <field name="name">bsg_car_model_view_tree</field>
+      <field name="model">bsg_car_model</field>
+      <field name="arch" type="xml">
+        <tree string="Car Model">
+          <field name="car_model_name" modifiers="{}"/>
+          <field name="car_model_en_name" modifiers="{}"/>
+          <field name="car_maker_id"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="bsg_car_model_action">
+      <field name="name">Car Model</field>
+      <field name="res_model">bsg_car_model</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

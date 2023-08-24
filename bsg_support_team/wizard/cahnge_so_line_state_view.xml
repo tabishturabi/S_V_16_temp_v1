@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="cange_so_line_state_form">
+            <field name="name">cange_so_line_state.form</field>
+            <field name="model">cange_so_line_state</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                      <group>
+                          <field name="cargo_sale_line_id" readonly="1"/>
+                          <field name="is_show_pick" invisible="1"/>
+                          <field name="pickup_loc" attrs="{'invisible':[('is_show_pick','=',False)],'required':[('is_show_pick','=',True)]}" />
+                          <field name="drop_loc" attrs="{'invisible':[('is_show_pick','=',False)],'required':[('is_show_pick','=',True)]}" />
+                      </group>
+                      <group>
+                          <field name="cargo_sale_state" string="Current State"/>
+                          <field name="cargo_sale_new_state" string="New State"/>
+                          <field name="delivery_date" attrs="{'invisible':[('cargo_sale_new_state','!=','Delivered')],'required':[('cargo_sale_new_state','=','Delivered')]}"/>
+                          <field name="sms_sent" invisible="1"/>
+                          <field name="send_sms" attrs="{'invisible':['|',('sms_sent','=', True), ('cargo_sale_new_state','!=','Delivered')]}"/>
+                      </group>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="update_state" string="Change State" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!-- Action -->
+        <record id="cange_so_line_state_action" model="ir.actions.act_window">
+            <field name="name">Change Cargo Sake Line State</field>
+            <field name="res_model">cange_so_line_state</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cange_so_line_state_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

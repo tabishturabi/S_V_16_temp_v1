@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="web_digital_sign_backend" name="web_digital_sign assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+			
+			<!-- <script src="/web_digital_sign/static/src/js/sign.js"></script> -->
+        	<!-- <script src="/web_digital_sign/static/src/libs/modernizr.js"></script> -->
+        	<!-- <script src="/web_digital_sign/static/src/js/jSignature.js"></script> -->
+        	<!-- <link rel="stylesheet" href="/web_digital_sign/static/src/assets/jquery.signaturepad.css"/> -->
+<!--			<script src="/web_digital_sign/static/src/js/jquery.signaturepad.js"></script>-->
+			<!-- <script src="/web_digital_sign/static/src/plugins/jSignature.CompressorSVG.js"></script>
+			<script src="/web_digital_sign/static/src/plugins/jSignature.UndoButton.js"></script> 
+			<script src="/web_digital_sign/static/src/plugins/signhere/jSignature.SignHere.js"></script>  -->
+<!--            <script type="text/javascript" src="/web_digital_sign/static/src/js/digital_sign.js"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>
+

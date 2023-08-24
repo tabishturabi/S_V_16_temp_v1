@@ -1,0 +1,2337 @@
+<odoo>
+  <data>
+
+    <record id="paperformat_shipment_template" model="report.paperformat">
+      <field name="name">European A4 low margin</field>
+      <field name="default" eval="True" />
+      <field name="format">A4</field>
+      <field name="orientation">Portrait</field>
+      <field name="margin_top">0</field>
+      <field name="margin_bottom">0</field>
+      <field name="margin_left">15</field>
+      <field name="margin_right">20</field>
+      <field name="header_line" eval="False" />
+      <field name="header_spacing">5</field>
+      <field name="dpi">90</field>
+    </record>
+
+
+     <report
+            id="report_inspection_report"
+            string="Inspection Report"
+            model="bsg_vehicle_cargo_sale_line"
+            report_type="qweb-html"
+            file="bsg_cargo_sale.report_inspection_template_call"
+            name="bsg_cargo_sale.report_inspection_template_call"
+            paperformat="paperformat_shipment_template"
+            menu="False"
+    />
+
+    <report
+            id="report_shipment_report"
+            string="Shipment Report"
+            model="bsg_vehicle_cargo_sale_line"
+            report_type="qweb-html"
+            file="bsg_cargo_sale.report_shipment_template_call"
+            name="bsg_cargo_sale.report_shipment_template_call"
+            paperformat="paperformat_shipment_template"
+            menu="False"
+    />
+
+    <!-- <template id="internal_layout">
+      <t t-if="not o" t-set="o" t-value="doc"/>
+
+      <t t-if="not company">
+          <t t-if="company_id">
+              <t t-set="company" t-value="company_id"/>
+          </t>
+          <t t-elif="o and 'company_id' in o">
+              <t t-set="company" t-value="o.company_id.sudo()"/>
+          </t>
+          <t t-else="else">
+              <t t-set="company" t-value="res_company"/>
+          </t>
+      </t>
+
+      <div class="header">
+
+      </div>
+      <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+        <t t-raw="0"/>
+      </div>
+  </template> -->
+
+    <template id="report_header_custom" inherit_id="web.internal_layout">
+      <xpath expr="//div[@class='header']" position="replace">
+        <div class ="header">
+          <p> </p>
+        </div>
+      </xpath>
+    </template>
+
+
+    <template id="report_inspection_template_call">
+      <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+          <t t-foreach="docs" t-as="o">
+
+            <div class="page">
+              <!-- <link rel="stylesheet" href="/bsg_cargo_sale/static/src/css/A4.css" /> -->
+
+              <!-- Micheal  -->
+              <style>
+
+                body {
+                display: block;
+                font-size: 12px;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                }
+                p {
+                margin:3px;
+                }
+
+                .report-container {
+                width: 950px;
+                margin: 0px auto;
+                }
+
+                .report_head {
+                width: 100%;
+                margin: 0px auto;
+                text-align: center;
+                }
+
+                page {
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                }
+                page[size="A4"] {
+                width: 24cm;
+                height: 27.7cm;
+                text-align: center;
+                }
+                .alignLeft {
+                text-align: left;
+                }
+                .alignRight {
+                text-align: right;
+                }
+                .red {
+                color: red;
+                }
+                .span_left {
+                float: left;
+                }
+                .span_right {
+                float: right;
+                font-weight:bold;
+                }
+                .p_text_bold {
+                font-weight:bold;
+                }
+                .main_div {
+                display: flex;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                .fixed {
+                width: 200px;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                .flex-item {
+                flex-grow: 1;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                table tr th,
+                table tr td {
+                border-right: 1px solid #000;
+                text-align: center;
+                }
+
+                table tr th {
+                padding: 10px 0px;
+                background: #ccc;
+
+                }
+
+                table tr td {
+                border-top: 1px solid #000;
+                padding: 5px 0px;
+                }
+
+                .header{
+                display:none !important;
+                }
+
+                .footer{
+                display:none !important;
+                }
+
+              </style>
+              <!-- <div class="report-container"> -->
+              <page size="A4">
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:hidden">
+                  <tbody>
+                    <tr style="border:hidden">
+
+                      <!--  <t t-if="lang_id == 0">
+                         <td style="border:hidden" class="width33"><p><img t-if="o.bsg_cargo_sale_id.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.bsg_cargo_sale_id.barcode, 1200, 400)" style="width:50%;height:20%;margin-right: 70px;"/></p></td>
+
+                         <td style="border:hidden"><img src="/bsg_cargo_sale/static/src/img/albassami_transport_logoWP.png" width="150" height="50" style="margin-right: 80px;" alt=""/></td>
+
+                         <td style="border:hidden" class="width33"><img src="/bsg_cargo_sale/static/src/img/rightHeader.png" width="210" height="100" alt=""/></td>
+                       </t> -->
+
+                      <div style="width:100%;float:left">
+                        <div style="width:30%;float:left">
+                          <img t-if="o.sale_line_rec_name" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.sale_line_rec_name, 1200, 400)" style="margin-right: 20px;" width="210px" height="80px"/>
+                        </div>
+                        <div style="width:30%;float:left">
+                          <t t-if="o.company_id.logo">
+                          <img t-att-src="image_data_uri(o.company_id.logo)" width="180" height="75" style="margin-right: -63px;" alt=""/>
+                          </t>
+                        </div>
+                        <div style="width:30%;float:left">
+                          <t t-if="o.company_id.custom_right_header">
+                          <img t-att-src="image_data_uri(o.company_id.custom_right_header)" width="210" height="100" alt="" style="margin-left:120px"/>
+                          </t>
+                          </div>
+                      </div>
+
+
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+                <!-- <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+
+                      <td style="border:hidden;text-align:right" class="width33">
+                        <span t-esc="o.bsg_cargo_sale_id.order_date" t-options="{'widget': 'date'}"></span>
+                      </td>
+
+                      <td style="border:hidden">
+                        <span class="p_text_bold"> : تاريخ الشحن</span>
+                      </td>
+
+                      <td style="border:hidden;text-align:right" >
+                        <span  t-esc="o.sale_line_rec_name"></span>
+                      </td>
+                      <td style="border:hidden">
+                        <span class="p_text_bold"> : رقم الاتفاقية</span>
+                      </td>
+
+
+                      <td style="border:hidden;text-align:right">
+                          <t t-if="o.bsg_cargo_sale_id.shipment_type == 'oneway'">
+                            <span> اتجاه واحد</span>
+                          </t>
+                          <t t-if="o.bsg_cargo_sale_id.shipment_type == 'return'">
+                            <span> جولة</span>
+                          </t>
+                      </td>
+
+                      <td style="border:hidden" class="width33">
+                        <span class="p_text_bold"> : اتفاقية شحن</span>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table> -->
+
+
+                <div style="width:100%;float:left;margin-top:20px">
+                  <div style="width:15%;float:left;">
+                    <span t-esc="cargo_id.order_date" t-options="{'widget': 'date'}"/>
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold">  تاريخ الشحن</span>
+
+                  </div>
+                  <div style="width:15%;float:left;margin-left:30px">
+                    <span t-esc="o.sale_line_rec_name"/>
+
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold">  رقم الاتفاقية</span>
+
+                  </div>
+                  <div style="width:15%;float:left;margin-left:45px">
+                    <t t-if="cargo_id.shipment_type == 'oneway'">
+                      <span> اتجاه واحد</span>
+                    </t>
+                    <t t-if="cargo_id.shipment_type == 'return'">
+                      <span> ذهاب وعـودة</span>
+                    </t>
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold"> اتفاقية شحن</span>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;margin-top:5px">
+                  <div style="width:15%;float:left;">
+                    <span t-esc="o.expected_delivery" t-options="{'widget': 'date'}"/>
+                  </div>
+                </div>
+                    
+                    
+                <!--  <div class="width:100%;float:left;margin-top:30px">
+                   <hr class="width90Solid"/>
+                 </div> -->
+
+                <!-- <hr class="width90Solid"/> -->
+
+                <!--  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0" style="border-right:1px solid;">
+                     <tbody>
+                       <tr>
+                         <td style="border-left:1px solid;border-bottom:1px solid;text-align:right;padding-right:5px;border-right:hidden;width:250px;min-width:250px;max-width:250px">
+                           <span t-esc="o.bsg_cargo_sale_id.loc_to.loc_branch_id.branch_ar_name"></span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;width:110px;min-width:110px;max-width:110px">
+                           <span style="font-weight:bold"> : فرع الوصول</span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;border-right:hidden;width:250px;min-width:250px;max-width:250px">
+                           <span t-esc="o.bsg_cargo_sale_id.loc_from.loc_branch_id.branch_ar_name"></span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;width:110px;min-width:110px;max-width:110px">
+                           <span style="font-weight:bold">:فرع الشحن</span>
+                         </td>
+                       </tr>
+                     </tbody>
+                 </table> -->
+
+
+
+                <div style="width:100%;float:left;margin-top:10px;border: 1px solid">
+
+                  <div style="width:30%;float:left;text-align:right;padding:3px">
+                    <span t-esc="to_loc"/>
+                  </div>
+
+                  <div style="width:18%;float:left;text-align:right;padding:3px">
+                    <span style="font-weight:bold"> فرع الوصول</span>
+
+                  </div>
+
+                  <div style="width:30%;float:left;margin-left:30px;text-align:right;border-left: 1px solid;padding:3px">
+                    <span t-esc="from_loc"/>
+                  </div>
+
+                  <div style="width:18%;float:left;text-align:right;padding:3px">
+                    <span style="font-weight:bold">فرع الشحن</span>
+
+                  </div>
+
+                </div>
+
+
+                <!--  <div class="width:100%;float:left;margin-top:50px">
+                   <hr class="width90Solid"/>
+                 </div> -->
+
+
+                <!-- <hr class="width90" /> -->
+
+
+                <t t-if="lang_id == 5">
+                  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0">
+                    <tbody>
+
+                      <tr style="border-left:1px solid">
+                        <td style="border-left:1px solid:text-align:center;font-weight:bold;width:315px;max-width:315px;min-width:315px" colspan="2">
+                          <span>: بيانات السداد</span>
+                        </td>
+                        <td style="font-weight:bold:text-align:center;font-weight:bold;width:270px;max-width:270px;min-width:270px" colspan="2">
+                          <span>: بيانات السيارة</span>
+                        </td>
+                        <td style="font-weight:bold:text-align:center;font-weight:bold;width:315px;max-width:315px;min-width:315px" colspan="2">
+                          <span>: معلومات العميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.unit_charge"></span>  -->
+                          <t t-if="international_sale_check == 0">
+                            <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"/>
+                          </t>
+                          <t t-else="">
+                            <span t-esc="international_sale_unit"/>
+                          </t>
+
+                          <!-- <span style="font-weight:bold">: مبلغ الشحن</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:130px;max-width:130px;min-width:130px">
+                          <!-- <span t-esc="o.unit_charge"></span>  -->
+                          <span style="font-weight:bold">: مبلغ الشحن</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.palte_third"/>
+                          <span t-esc="o.palte_second"/>
+                          <span t-esc="o.palte_one"/>
+                          <span t-esc="o.plate_no"/>
+                          <!-- <span style="font-weight:bold">: رقم اللوحة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:110px;max-width:110px;min-width:110px">
+                          <!-- <span t-esc="o.plate_no"></span> -->
+                          <span style="font-weight:bold">: رقم اللوحة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.ref"/>
+                          <!-- <span style="font-weight:bold">: رقم حساب العميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:145px;max-width:145px;min-width:145px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.iqama_no"></span> -->
+                          <span style="font-weight:bold">: رقم حساب العميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.discount_price"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.discount_price))"/>
+
+                          <!-- <span>8888888</span> -->
+                          <!-- <span style="font-weight:bold">: قيمة الخصم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.discount"></span> -->
+                          <span style="font-weight:bold">: قيمة الخصم</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.chassis_no"/>
+                          <!-- <span style="font-weight:bold">: رقم الهيكل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.chassis_no"></span> -->
+                          <span style="font-weight:bold">: رقم الهيكل</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.vat"/>
+                          <!-- <span style="font-weight:bold">: الرقم الضريبي للعميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.vat"></span> -->
+                          <span style="font-weight:bold">: الرقم الضريبي للعميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.tax_amount"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.tax_amount))"/>
+
+                          <!-- <span style="font-weight:bold">: ض. القيمة المضافة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.tax_amount"></span> -->
+                          <span style="font-weight:bold">: ض. القيمة المضافة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_make.car_maker.car_make_ar_name"/>
+                          <!-- <span style="font-weight:bold">: ماركة السيارة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_make.car_maker.car_make_name"></span> -->
+                          <span style="font-weight:bold">: ماركة السيارة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.owner_id_card_no"/>
+                          <!-- <span style="font-weight:bold">: رقم الهوية</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.iqama_no"></span> -->
+                          <span style="font-weight:bold">: رقم الهوية</span>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.charges"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.charges))"/>
+                          <!-- <span style="font-weight:bold">: إجمالي المبلغ</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.charges"></span> -->
+                          <span style="font-weight:bold">: إجمالي المبلغ</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_model.car_model_name"/>
+                          <!-- <span style="font-weight:bold">: الموديل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_model.car_model_name"></span> -->
+                          <span style="font-weight:bold">: الموديل</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.owner_name"/>
+                          <!-- <span style="font-weight:bold">: المالك</span> -->
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.owner_name"></span> -->
+                          <span style="font-weight:bold">: المالك</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.tax_amount" class="span_left"></span><span class="span_right">: ض. القيمة المضافة</span></p></td>
+                        <td><p><span t-esc="o.car_make.car_maker.car_make_name" class="span_left"></span><span class="span_right">: ماركة السيارة</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.customer.iqama_no" class="span_left"></span><span class="span_right">: رقم الهوية</span></p></td>
+                      </tr> -->
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.charges" class="span_left" ></span><span class="span_right">: إجمالي المبلغ</span></p></td>
+                        <td><p><span t-esc="o.car_model.car_model_name"  class="span_left"></span><span class="span_right">: الموديل</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.owner_name" class="span_left" ></span><span class="span_right">: المالك</span></p></td>
+                      </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.payment_method.payment_method_name"/>
+                          <!-- <span style="font-weight:bold">: طريقة السداد</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.payment_method.payment_method_name"></span> -->
+                          <span style="font-weight:bold">: طريقة السداد</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.year.car_year_name"/>
+                          <!-- <span style="font-weight:bold">: سنة الصنع</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.year.car_year_name"></span> -->
+                          <span style="font-weight:bold">: سنة الصنع</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.sender_name"/>
+                          <!-- <span style="font-weight:bold">: الشاحن</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.sender_name"></span> -->
+                          <span style="font-weight:bold">: الشاحن</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.payment_method.payment_method_name" class="span_left"></span><span class="span_right">: طريقة السداد</span></p></td>
+                        <td><p><span t-esc="o.year.car_year_name" class="span_left"></span><span class="span_right">: سنة الصنع</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.sender_name" class="span_left"></span><span class="span_right">: الشاحن</span></p></td>
+                      </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <t t-set="pay_value" t-value="0"/>
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                            <t t-foreach="p.payment_ids" t-as="v">
+                              <t t-set="pay_value" t-value="pay_value+v.amount"/>
+                            </t>
+                          </t>
+
+                          <span t-esc="'{0:,.2f}'.format(float(pay_value))"/>
+                          <!-- <span>555555555555555555555</span> -->
+                          <!-- <span style="font-weight:bold">: المبلغ المدفوع</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o._get_invoice_amount()"></span> -->
+                          <span style="font-weight:bold">: المبلغ المدفوع</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_color.vehicle_color_name"/>
+                          <!-- <span style="font-weight:bold">: اللون</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_color.vehicle_color_name"></span> -->
+                          <span style="font-weight:bold">: اللون</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.receiver_name"/>
+                          <!-- <span style="font-weight:bold">: المستلم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.receiver_name"></span> -->
+                          <span style="font-weight:bold">: المستلم</span>
+                        </td>
+                      </tr>
+
+                      <!--  <tr>
+                         <td style="border-left:1px solid"><p><span t-esc="o._get_invoice_amount()" class="span_left"></span><span class="span_right">: المبلغ المدفوع</span></p></td>
+                         <td><p><span t-esc="o.car_color.vehicle_color_name" class="span_left"></span><span class="span_right">: اللون</span></p></td>
+                         <td><p><span t-esc="o.bsg_cargo_sale_id.receiver_name" class="span_left"></span><span class="span_right">: المستلم</span></p></td>
+                       </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                            <t t-foreach="p.payment_ids" t-as="v">
+                              <span t-esc="v.name"/><span>	</span>
+                            </t>
+                          </t>
+
+                          <!-- <span style="font-weight:bold">: سند قبض</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o._get_payment_no()"></span> -->
+                          <span style="font-weight:bold">: سند قبض</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.plate_type.plate_config_name"/>
+                          <!-- <span style="font-weight:bold">: نوع الملكية</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.plate_type.plate_config_name"></span> -->
+                          <span style="font-weight:bold">: نوع الملكية</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.mobile"/>
+                          <!-- <span style="font-weight:bold">: جوال العميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.mobile"></span> -->
+                          <span style="font-weight:bold">: جوال العميل</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o._get_payment_no()" class="span_left"></span><span class="span_right">: سند قبض</span></p></td>
+                        <td><p><span t-esc="o.plate_type.plate_config_name" class="span_left"></span><span class="span_right">: نوع الملكية</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.customer.mobile" class="span_left"></span><span class="span_right">: جوال العميل</span></p></td>
+                      </tr>
+                       -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+<!--                            <span t-esc="p.number"/><span>	</span>-->
+                            <span t-esc="p.name"/><span>	</span>
+                          </t>
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next"></span> -->
+                          <!-- <span>888888888</span> -->
+                          <!-- <span style="font-weight:bold">: فاتورة رقم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next_prefix"></span> -->
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next"></span> -->
+                          <span style="font-weight:bold">: فاتورة رقم</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <span t-esc="o.car_size.car_size_name"/>
+                          <!-- <span style="font-weight:bold">: حجم السيارة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.car_size.car_size_name"></span> -->
+                          <span style="font-weight:bold">: حجم السيارة</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <span t-esc="cargo_id.receiver_mob_no"/>
+                          <!-- <span style="font-weight:bold">: جوال المستلم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.receiver_mob_no"></span> -->
+                          <span style="font-weight:bold">: جوال المستلم</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid;border-bottom:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next_prefix" class="span_left"></span><span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next" class="span_left"></span><span class="span_right">: فاتورة رقم</span></p></td>
+                        <td style="border-right:1px solid;border-bottom:1px solid"><p>
+                          <span t-esc="o.car_size.car_size_name" class="span_left"></span>
+                          <span class="span_right">: حجم السيارة</span>
+                        </p></td>
+                        <td style="border-left:1px solid;border-bottom:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.receiver_mob_no" class="span_left"></span><span class="span_right">: جوال المستلم</span></p></td>
+                      </tr> -->
+
+                    </tbody>
+
+                  </table>
+                </t>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid;margin-top:30px">
+                  <div style="width:35%;float:left;text-align:center;;font-weight:bold;padding:3px">
+                    <span> بيانات السداد</span>
+                  </div>
+                  <div style="width:30%;float:left;text-align:center;border-left:1px solid;font-weight:bold;padding:3px">
+                    <span> بيانات السيارة</span>
+                  </div>
+                  <div style="width:35%;float:left;text-align:center;border-left:1px solid;font-weight:bold;padding:3px">
+                    <span> معلومات العميل</span>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-if="international_sale_check == 0">
+                        <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"/>
+                      </t>
+                      <t t-else="">
+                        <!-- <span t-esc="international_sale"></span>
+                        <span t-esc="local_sale"></span> -->
+                        <div style="float:right;margin-left:8px">
+                          <span t-esc="international_sale_unit"/>
+                        </div>
+                        <div style="float:right">
+                          <span t-esc="local_sale_unit"/>
+                        </div>
+                      </t>
+                      <!-- <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"></span> -->
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span>مبلغ الشحن </span>
+                    </div>
+                  </div>
+
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <t t-if="o.plate_registration == 'saudi'">
+                      <div style="width:60%;float:left;text-align:right;padding:3px">
+                        <span t-esc="o.palte_third"/>
+                        <span t-esc="o.palte_second"/>
+                        <span t-esc="o.palte_one"/>
+                        <span t-esc="o.plate_no"/>
+                      </div>
+                    </t>
+                    <t t-else="">
+                      <div style="width:60%;float:left;text-align:right;padding:3px">
+                        <span t-esc="o.non_saudi_plate_no"/>
+                      </div>
+                    </t>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold;"> رقم اللوحة</span>
+                    </div>
+                  </div>
+
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.ref"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">رقم حساب العميل </span>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="'{0:,.2f}'.format(float(o.discount_price))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold;"> قيمة الخصم </span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.chassis_no"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <!-- <span style="font-weight:bold">رقم اللوحة </span> -->
+                      <span style="font-weight:bold"> رقم الهيكل</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:53%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.vat"/>
+                    </div>
+                    <div style="width:45%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الرقم الضريبي للعميل </span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="'{0:,.2f}'.format(float(o.tax_amount))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> ض. القيمة المضافة </span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_make.car_maker.car_make_ar_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> ماركة السيارة</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.owner_id_card_no"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> رقم الهوية</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+<!--                    <div style="width:59%;float:left;text-align:right;padding:3px">-->
+<!--                          <span t-esc="local_sale"></span>-->
+<!--                        </div>-->
+<!--                    <div style="width:59%;float:left;text-align:right;padding:3px">-->
+<!--                      <span t-esc="'{0:,.2f}'.format(float(o.charges))"></span>-->
+<!--                    </div>-->
+
+
+
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-if="international_sale_check == 0">
+                        <span t-esc="'{0:,.2f}'.format(float(o.charges))"/>
+                      </t>
+                      <t t-else="">
+                        <!-- <span t-esc="international_sale"></span>
+                        <span t-esc="local_sale"></span> -->
+                        <div style="float:right;margin-left:8px">
+                          <span t-esc="international_sale"/>
+                        </div>
+                        <div style="float:right">
+                          <span t-esc="local_sale"/>
+                        </div>
+                      </t>
+                      <!-- <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"></span> -->
+                    </div>
+
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">إجمالي المبلغ</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_model.car_model_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الموديل</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.owner_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المالك</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.payment_method.payment_method_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> طريقة السداد</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.year.car_year_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">سنة الصنع</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.sender_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الشاحن</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-set="pay_value" t-value="0"/>
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                        <t t-foreach="p.payment_ids" t-as="v">
+                          <t t-set="pay_value" t-value="pay_value+v.amount"/>
+                        </t>
+                      </t>
+
+                      <span t-esc="'{0:,.2f}'.format(float(pay_value))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المبلغ المدفوع</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_color.vehicle_color_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">اللون</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.receiver_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المستلم</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                        <t t-foreach="p.payment_ids" t-as="v">
+                          <span t-esc="v.name"/><span>	</span>
+                        </t>
+                      </t>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">سند قبض</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.plate_type.plate_config_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">نوع الملكية</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.mobile"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> جوال العميل</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+<!--                        <span t-esc="p.number"/><span>	</span>-->
+                        <span t-esc="p.name"/><span>	</span>
+                      </t>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> فاتورة رقم</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_size.car_size_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">حجم السيارة</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.receiver_mob_no"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">جوال المستلم</span>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+                <div style="width:100%;float:left;border:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:40%;float:left;text-align:right;padding:3px">
+                       <t t-if="o.recieved_from_customer_date">
+                         <span t-esc="o.recieved_from_customer_date.date()"/>
+                       </t>
+
+                    </div>
+                    <div style="width:59%;float:right;text-align:right;font-weight:bold;padding:3px">
+                       <span style="font-weight:bold">تاريخ الاستلام من العميل</span>
+
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;">
+                    <div style="width:58%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.shipment_type.car_shipment_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">نوع الشحن</span>
+                    </div>
+                  </div>
+                  
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                     <span t-esc="o.est_no_delivery_days"/>
+                      الي
+                      <span t-esc="o.est_max_no_delivery_days"/>
+                      ايام
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"><span t-esc="'الوصول المتوقع من'"/></span>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <!-- <hr class="width90" /> -->
+                <div class="main_div" style="border: solid black 1px;float:left;margin-bottom:10px;width:100%;margin-top:20px">
+                  <div class="fixed" style="width: 28%; height: 230px;float:left">
+                    <div class="fixed" style="height: 62%;">
+                      <p class="alignRight"><span><b> أسم المشيك </b></span> </p>
+                      <p class="alignRight"><span><b>  _________________ : التوقيع  </b></span> </p>
+                      <p class="alignRight"><span><b> مأمور الحركة </b></span> </p>
+                      <p class="alignRight"><span><b>  _________________ : التوقيع  </b></span> </p>
+                    </div>
+                  </div>
+
+
+                  <div class="flex-item" style="width: 65%;height: 230px;float:left">
+                    <img class="img img-responsive w-100" t-if="image_cargo['car_image']" t-att-src="image_data_uri(image_cargo['car_image'])" width="490px" height="230px" style="margin-left: -3px;margin-top: -17px;" alt=""/>
+                  </div>
+
+                </div>
+
+                <div class="flex-item" style="width: 50%;height: 230px;float:left">
+                  <img class="img img-responsive w-100" t-if="image_cargo['bottom']" t-att-src="image_data_uri(image_cargo['bottom'])" height="150"/>
+                </div>
+
+                <div class="flex-item" style="width: 50%;height: 230px;float:left">
+                  <img class="img img-responsive w-100" t-if="image_cargo['top']" t-att-src="image_data_uri(image_cargo['top'])" height="150"/>
+                </div>
+
+                <div class="flex-item" style="width: 50%;height: 230px;float:left">
+                  <img class="img img-responsive w-100" t-if="image_cargo['left']" t-att-src="image_data_uri(image_cargo['left'])" height="150"/>
+                </div>
+
+                <div class="flex-item" style="width: 50%;height: 230px;float:left">
+                  <img class="img img-responsive w-100" t-if="image_cargo['right']" t-att-src="image_data_uri(image_cargo['right'])" height="150"/>
+                </div>
+
+                <!-- <hr class="width90" /> -->
+
+                <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0" style="margin-bottom:10px">
+                  <tbody>
+                    <tr>
+                      <td style="border-left:1px solid;border-bottom:1px solid;text-align:right;font-size:16px"><p class="red">
+                        <span>أقر أنا  (<span t-esc="cargo_id.sender_name" style="color:black;font-size:"/>) شاحن السيارة الموضح تفاصيلها بهذه الاتفاقية بأن أي موجودات تترك داخل السيارة هي تحت مسئوليتي الخاصة</span>
+                        <span>وأن الشركة غير مسئولة عن فقدان الأشياء أو تلفها كما أتعهد بعدم وضع أو ترك أي أشياء تحظرها الأنظمة والتعليمات أو يحظر نقلها أو تداولها كالأسلحة والمخدرات</span>
+                        <span>وأقر بمسئوليتي التامة عن أي مخالفة لذلك علما بأن بنود الاتفاقية بالخلف تعتبر جزء لا يتجزأ من بنود اتفاقية الشحن ، كما أنني إطلعت علي جميع بنود هذه الاتفاقية و أوافق عليها</span>
+                        <span>تنبيه هام ، سيتم احتساب أرضيات علي كل سيارة لم يتم استلامها بعد ثلاثة أيام من موعد التسليم المتوقع (بنود اتفاقية الشحن بالخلف).</span>
+                      </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+                <t t-if="lang_id == 5">
+                  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0">
+                    <tbody>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;min-width: 150px;max-width: 150px;border-right:hidden">
+                          <span t-esc="cargo_id.user_id.name"/>
+                          <!-- <span style="font-weight:bold;"> : اسم المستخدم</span> -->
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.user_id.name"></span> -->
+                          <span style="font-weight:bold;"> : اسم المستخدم</span>
+                        </td>
+                        <td style="text-align:right;font-weight:bold;padding-right:5px;"><span> : توقيع شاحن السيارة</span></td>
+                      </tr>
+
+                      <tr>
+                        <td colspan="2" style="border-left:1px solid;border-bottom:1px solid;text-align:right;font-weight:bold;padding-right:5px;"><span>: توقيع الموظف</span></td>
+                        <td style="border-bottom:1px solid;text-align:right;font-weight:bold;padding-right:5px"><span class="red">عزيزي العميل : نرجوا التأكد من صحة بيانات الإتفاقية قبل التوقيع</span></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </t>
+
+                <div style="width:100%;float:left;border-left:1px solid;border-right:1px solid;border-top:1px solid">
+                  <div style="width:50%;float:left;padding:3px;text-align:right">
+                    <div style="width:48%;float:left">
+                      <span t-esc="cargo_id.user_id.name"/>
+                    </div>
+                    <div style="float:right;font-weight:bold">
+                      <span style="font-weight:bold;"> : اسم المستخدم</span>
+                    </div>
+                  </div>
+                  <div style="width:50%;float:left;border-left:1px solid;padding:3px;text-align:right;font-weight:bold">
+                    <span> : توقيع شاحن السيارة</span>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border:1px solid;margin-bottom:10px">
+                  <div style="width:50%;float:left;padding:3px;text-align:right;font-weight:bold">
+                    <span>: توقيع الموظف</span>
+                  </div>
+                  <div style="width:50%;float:left;border-left:1px solid;padding:3px;text-align:right;font-weight:bold">
+                    <span class="red">عزيزي العميل : نرجوا التأكد من صحة بيانات الإتفاقية قبل التوقيع</span>
+                  </div>
+                </div>
+
+
+                <!-- <hr class="width90" /> -->
+
+                <!-- <table width="100%">
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                </table> -->
+                <table width="100%" border="1" cellspacing="0" cellpadding="0" style="border-left:1px solid;border-bottom:1px solid">
+                  <tbody>
+                    <t t-if="other_service_check == 1">
+                      <tr>
+                        <td style="text-align:right">
+                          <div style="100%">
+                            <div style="float:right;font-weight:bold;margin-left:10px"> الملاحظات
+                            </div>
+                            <div style="float:right">
+                              <span t-esc="other_service"/>
+                            </div>
+                            <div style="float:right;margin-right:8px">
+                              <span t-esc="local_service"/>
+                            </div>
+                          </div>
+                          <!--  <span t-esc="other_service"></span>
+                           <span><b>  :  </b></span>
+                           <span><b>  الملاحظات   </b></span> -->
+                        </td>
+                      </tr>
+                    </t>
+                    <t t-else="">
+                      <tr>
+                        <td style="text-align:right"><p>.............................................................................................................,........................................................................................<b>: الملاحظات </b></p>
+                          <p>.........................................................................................................................................................................................................................</p>
+                          <p>.........................................................................................................................................................................................................................</p></td>
+                      </tr>
+                    </t>
+
+                  </tbody>
+                </table>
+
+                <div style="width:45%;float:left;margin-top:10px">
+                  <span style="font-weight:bold;text-align:left;margin_right:10px;">Print Date</span>
+                  <!-- <span style="text-align:left">Print Date</span> -->
+                  <span style="margin-left:10px" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                </div>
+
+                <div style="width:45%;float:right;margin-top:10px">
+                  <div style="width:48%;float:left;text-align:right">
+                    <span style="font-weight:bold;text-align:right">Print By</span>
+                  </div>
+                  <div style="width:48%;float:left;text-align:left">
+                    <span style="text-align:right;margin-left:10px" t-esc="user.name"/>
+                  </div>
+                  <!-- <table width="100%">
+                    <tr>
+                      <td style="border:hidden;text-align:right">
+                        <span style="font-weight:bold;text-align:right">Print By : </span>
+                      </td>
+                      <td style="border:hidden;text-align:left">
+                        <span style="text-align:right;margin_left:10px" t-esc="user.name"></span>
+                      </td>
+                    </tr> -->
+                  <!-- </table> -->
+                </div>
+                <!--  <img src="/bsg_cargo_sale/static/src/img/footer.png" width="720" height="130" alt="" style="margin_top: 5px;"/> -->
+
+              </page>
+              <!-- </div> -->
+
+              <!--  -->
+            </div>
+          </t>
+        </t>
+      </t>
+    </template>
+
+    <template id="report_shipment_template_call">
+      <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+          <t t-foreach="docs" t-as="o">
+
+            <div class="page">
+              <!-- <link rel="stylesheet" href="/bsg_cargo_sale/static/src/css/A4.css" /> -->
+
+              <!-- Micheal  -->
+              <style>
+
+                body {
+                display: block;
+                font-size: 12px;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                }
+                p {
+                margin:3px;
+                }
+
+                .report-container {
+                width: 950px;
+                margin: 0px auto;
+                }
+
+                .report_head {
+                width: 100%;
+                margin: 0px auto;
+                text-align: center;
+                }
+
+                page {
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                }
+                page[size="A4"] {
+                width: 24cm;
+                height: 27.7cm;
+                text-align: center;
+                }
+                .alignLeft {
+                text-align: left;
+                }
+                .alignRight {
+                text-align: right;
+                }
+                .red {
+                color: red;
+                }
+                .span_left {
+                float: left;
+                }
+                .span_right {
+                float: right;
+                font-weight:bold;
+                }
+                .p_text_bold {
+                font-weight:bold;
+                }
+                .main_div {
+                display: flex;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                .fixed {
+                width: 200px;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                .flex-item {
+                flex-grow: 1;
+                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                padding: 10px;
+                }
+
+                table tr th,
+                table tr td {
+                border-right: 1px solid #000;
+                text-align: center;
+                }
+
+                table tr th {
+                padding: 10px 0px;
+                background: #ccc;
+
+                }
+
+                table tr td {
+                border-top: 1px solid #000;
+                padding: 5px 0px;
+                }
+
+                .header{
+                display:none !important;
+                }
+
+                .footer{
+                display:none !important;
+                }
+
+              </style>
+              <!-- <div class="report-container"> -->
+              <page size="A4">
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:hidden">
+                  <tbody>
+                    <tr style="border:hidden">
+
+                      <!--  <t t-if="lang_id == 0">
+                         <td style="border:hidden" class="width33"><p><img t-if="o.bsg_cargo_sale_id.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.bsg_cargo_sale_id.barcode, 1200, 400)" style="width:50%;height:20%;margin-right: 70px;"/></p></td>
+
+                         <td style="border:hidden"><img src="/bsg_cargo_sale/static/src/img/albassami_transport_logoWP.png" width="150" height="50" style="margin-right: 80px;" alt=""/></td>
+
+                         <td style="border:hidden" class="width33"><img src="/bsg_cargo_sale/static/src/img/rightHeader.png" width="210" height="100" alt=""/></td>
+                       </t> -->
+
+                      <div style="width:100%;float:left">
+                        <div style="width:30%;float:left">
+                          <img t-if="o.sale_line_rec_name" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.sale_line_rec_name, 1200, 400)" style="margin-right: 20px;" width="210px" height="80px"/>
+                        </div>
+                        <div style="width:30%;float:left">
+                          <t t-if="o.company_id.logo">
+                          <img t-att-src="image_data_uri(o.company_id.logo)" width="180" height="75" style="margin-right: -63px;" alt=""/>
+                          </t>
+                        </div>
+                        <div style="width:30%;float:left">
+                          <t t-if="o.company_id.custom_right_header">
+                          <img t-att-src="image_data_uri(o.company_id.custom_right_header)" width="210" height="100" alt="" style="margin-left:120px"/>
+                          </t>
+                          </div>
+                      </div>
+
+
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+                <!-- <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+
+                      <td style="border:hidden;text-align:right" class="width33">
+                        <span t-esc="o.bsg_cargo_sale_id.order_date" t-options="{'widget': 'date'}"></span>
+                      </td>
+
+                      <td style="border:hidden">
+                        <span class="p_text_bold"> : تاريخ الشحن</span>
+                      </td>
+
+                      <td style="border:hidden;text-align:right" >
+                        <span  t-esc="o.sale_line_rec_name"></span>
+                      </td>
+                      <td style="border:hidden">
+                        <span class="p_text_bold"> : رقم الاتفاقية</span>
+                      </td>
+
+
+                      <td style="border:hidden;text-align:right">
+                          <t t-if="o.bsg_cargo_sale_id.shipment_type == 'oneway'">
+                            <span> اتجاه واحد</span>
+                          </t>
+                          <t t-if="o.bsg_cargo_sale_id.shipment_type == 'return'">
+                            <span> جولة</span>
+                          </t>
+                      </td>
+
+                      <td style="border:hidden" class="width33">
+                        <span class="p_text_bold"> : اتفاقية شحن</span>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table> -->
+
+
+                <div style="width:100%;float:left;margin-top:20px">
+                  <div style="width:15%;float:left;">
+                    <span t-esc="cargo_id.order_date" t-options="{'widget': 'date'}"/>
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold">  تاريخ الشحن</span>
+
+                  </div>
+                  <div style="width:15%;float:left;margin-left:30px">
+                    <span t-esc="o.sale_line_rec_name"/>
+
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold">  رقم الاتفاقية</span>
+
+                  </div>
+                  <div style="width:15%;float:left;margin-left:45px">
+                    <t t-if="cargo_id.shipment_type == 'oneway'">
+                      <span> اتجاه واحد</span>
+                    </t>
+                    <t t-if="cargo_id.shipment_type == 'return'">
+                      <span> جولة</span>
+                    </t>
+                  </div>
+                  <div style="width:15%;float:left;">
+                    <span class="p_text_bold"> اتفاقية شحن</span>
+                  </div>
+                </div>
+                <div style="width:100%;float:left;margin-top:5px">
+                  <div style="width:15%;float:left;">
+                    <span t-esc="o.expected_delivery" t-options="{'widget': 'date'}"/>
+                  </div>
+                </div>
+
+
+                <!--  <div class="width:100%;float:left;margin-top:30px">
+                   <hr class="width90Solid"/>
+                 </div> -->
+
+                <!-- <hr class="width90Solid"/> -->
+
+                <!--  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0" style="border-right:1px solid;">
+                     <tbody>
+                       <tr>
+                         <td style="border-left:1px solid;border-bottom:1px solid;text-align:right;padding-right:5px;border-right:hidden;width:250px;min-width:250px;max-width:250px">
+                           <span t-esc="o.bsg_cargo_sale_id.loc_to.loc_branch_id.branch_ar_name"></span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;width:110px;min-width:110px;max-width:110px">
+                           <span style="font-weight:bold"> : فرع الوصول</span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;border-right:hidden;width:250px;min-width:250px;max-width:250px">
+                           <span t-esc="o.bsg_cargo_sale_id.loc_from.loc_branch_id.branch_ar_name"></span>
+                         </td>
+                         <td style="border-bottom:1px solid;text-align:right;padding-right:5px;width:110px;min-width:110px;max-width:110px">
+                           <span style="font-weight:bold">:فرع الشحن</span>
+                         </td>
+                       </tr>
+                     </tbody>
+                 </table> -->
+
+
+
+                <div style="width:100%;float:left;margin-top:10px;border: 1px solid">
+
+                  <div style="width:30%;float:left;text-align:right;padding:3px">
+                    <span t-esc="to_loc"/>
+                  </div>
+
+                  <div style="width:18%;float:left;text-align:right;padding:3px">
+                    <span style="font-weight:bold"> فرع الوصول</span>
+
+                  </div>
+
+                  <div style="width:30%;float:left;margin-left:30px;text-align:right;border-left: 1px solid;padding:3px">
+                    <span t-esc="from_loc"/>
+                  </div>
+
+                  <div style="width:18%;float:left;text-align:right;padding:3px">
+                    <span style="font-weight:bold">فرع الشحن</span>
+
+                  </div>
+
+                </div>
+
+
+                <!--  <div class="width:100%;float:left;margin-top:50px">
+                   <hr class="width90Solid"/>
+                 </div> -->
+
+
+                <!-- <hr class="width90" /> -->
+
+
+                <t t-if="lang_id == 5">
+                  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0">
+                    <tbody>
+
+                      <tr style="border-left:1px solid">
+                        <td style="border-left:1px solid:text-align:center;font-weight:bold;width:315px;max-width:315px;min-width:315px" colspan="2">
+                          <span>: بيانات السداد</span>
+                        </td>
+                        <td style="font-weight:bold:text-align:center;font-weight:bold;width:270px;max-width:270px;min-width:270px" colspan="2">
+                          <span>: بيانات السيارة</span>
+                        </td>
+                        <td style="font-weight:bold:text-align:center;font-weight:bold;width:315px;max-width:315px;min-width:315px" colspan="2">
+                          <span>: معلومات العميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.unit_charge"></span>  -->
+                          <t t-if="international_sale_check == 0">
+                            <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"/>
+                          </t>
+                          <t t-else="">
+                            <span t-esc="international_sale_unit"/>
+                          </t>
+
+                          <!-- <span style="font-weight:bold">: مبلغ الشحن</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:130px;max-width:130px;min-width:130px">
+                          <!-- <span t-esc="o.unit_charge"></span>  -->
+                          <span style="font-weight:bold">: مبلغ الشحن</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.palte_third"/>
+                          <span t-esc="o.palte_second"/>
+                          <span t-esc="o.palte_one"/>
+                          <span t-esc="o.plate_no"/>
+                          <!-- <span style="font-weight:bold">: رقم اللوحة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:110px;max-width:110px;min-width:110px">
+                          <!-- <span t-esc="o.plate_no"></span> -->
+                          <span style="font-weight:bold">: رقم اللوحة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.ref"/>
+                          <!-- <span style="font-weight:bold">: رقم حساب العميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;width:145px;max-width:145px;min-width:145px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.iqama_no"></span> -->
+                          <span style="font-weight:bold">: رقم حساب العميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.discount_price"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.discount_price))"/>
+
+                          <!-- <span>8888888</span> -->
+                          <!-- <span style="font-weight:bold">: قيمة الخصم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.discount"></span> -->
+                          <span style="font-weight:bold">: قيمة الخصم</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.chassis_no"/>
+                          <!-- <span style="font-weight:bold">: رقم الهيكل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.chassis_no"></span> -->
+                          <span style="font-weight:bold">: رقم الهيكل</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.vat"/>
+                          <!-- <span style="font-weight:bold">: الرقم الضريبي للعميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.vat"></span> -->
+                          <span style="font-weight:bold">: الرقم الضريبي للعميل</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.tax_amount"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.tax_amount))"/>
+
+                          <!-- <span style="font-weight:bold">: ض. القيمة المضافة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.tax_amount"></span> -->
+                          <span style="font-weight:bold">: ض. القيمة المضافة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_make.car_maker.car_make_ar_name"/>
+                          <!-- <span style="font-weight:bold">: ماركة السيارة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_make.car_maker.car_make_name"></span> -->
+                          <span style="font-weight:bold">: ماركة السيارة</span>
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.owner_id_card_no"/>
+                          <!-- <span style="font-weight:bold">: رقم الهوية</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.iqama_no"></span> -->
+                          <span style="font-weight:bold">: رقم الهوية</span>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <!-- <span t-esc="o.charges"></span> -->
+                          <span t-esc="'{0:,.2f}'.format(float(o.charges))"/>
+                          <!-- <span style="font-weight:bold">: إجمالي المبلغ</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.charges"></span> -->
+                          <span style="font-weight:bold">: إجمالي المبلغ</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_model.car_model_name"/>
+                          <!-- <span style="font-weight:bold">: الموديل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_model.car_model_name"></span> -->
+                          <span style="font-weight:bold">: الموديل</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.owner_name"/>
+                          <!-- <span style="font-weight:bold">: المالك</span> -->
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.owner_name"></span> -->
+                          <span style="font-weight:bold">: المالك</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.tax_amount" class="span_left"></span><span class="span_right">: ض. القيمة المضافة</span></p></td>
+                        <td><p><span t-esc="o.car_make.car_maker.car_make_name" class="span_left"></span><span class="span_right">: ماركة السيارة</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.customer.iqama_no" class="span_left"></span><span class="span_right">: رقم الهوية</span></p></td>
+                      </tr> -->
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.charges" class="span_left" ></span><span class="span_right">: إجمالي المبلغ</span></p></td>
+                        <td><p><span t-esc="o.car_model.car_model_name"  class="span_left"></span><span class="span_right">: الموديل</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.owner_name" class="span_left" ></span><span class="span_right">: المالك</span></p></td>
+                      </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.payment_method.payment_method_name"/>
+                          <!-- <span style="font-weight:bold">: طريقة السداد</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.payment_method.payment_method_name"></span> -->
+                          <span style="font-weight:bold">: طريقة السداد</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.year.car_year_name"/>
+                          <!-- <span style="font-weight:bold">: سنة الصنع</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.year.car_year_name"></span> -->
+                          <span style="font-weight:bold">: سنة الصنع</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.sender_name"/>
+                          <!-- <span style="font-weight:bold">: الشاحن</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.sender_name"></span> -->
+                          <span style="font-weight:bold">: الشاحن</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.payment_method.payment_method_name" class="span_left"></span><span class="span_right">: طريقة السداد</span></p></td>
+                        <td><p><span t-esc="o.year.car_year_name" class="span_left"></span><span class="span_right">: سنة الصنع</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.sender_name" class="span_left"></span><span class="span_right">: الشاحن</span></p></td>
+                      </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <t t-set="pay_value" t-value="0"/>
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                            <t t-foreach="p.payment_ids" t-as="v">
+                              <t t-set="pay_value" t-value="pay_value+v.amount"/>
+                            </t>
+                          </t>
+
+                          <span t-esc="'{0:,.2f}'.format(float(pay_value))"/>
+                          <!-- <span>555555555555555555555</span> -->
+                          <!-- <span style="font-weight:bold">: المبلغ المدفوع</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o._get_invoice_amount()"></span> -->
+                          <span style="font-weight:bold">: المبلغ المدفوع</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.car_color.vehicle_color_name"/>
+                          <!-- <span style="font-weight:bold">: اللون</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.car_color.vehicle_color_name"></span> -->
+                          <span style="font-weight:bold">: اللون</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.receiver_name"/>
+                          <!-- <span style="font-weight:bold">: المستلم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.receiver_name"></span> -->
+                          <span style="font-weight:bold">: المستلم</span>
+                        </td>
+                      </tr>
+
+                      <!--  <tr>
+                         <td style="border-left:1px solid"><p><span t-esc="o._get_invoice_amount()" class="span_left"></span><span class="span_right">: المبلغ المدفوع</span></p></td>
+                         <td><p><span t-esc="o.car_color.vehicle_color_name" class="span_left"></span><span class="span_right">: اللون</span></p></td>
+                         <td><p><span t-esc="o.bsg_cargo_sale_id.receiver_name" class="span_left"></span><span class="span_right">: المستلم</span></p></td>
+                       </tr> -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                            <t t-foreach="p.payment_ids" t-as="v">
+                              <span t-esc="v.name"/><span>	</span>
+                            </t>
+                          </t>
+
+                          <!-- <span style="font-weight:bold">: سند قبض</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o._get_payment_no()"></span> -->
+                          <span style="font-weight:bold">: سند قبض</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="o.plate_type.plate_config_name"/>
+                          <!-- <span style="font-weight:bold">: نوع الملكية</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.plate_type.plate_config_name"></span> -->
+                          <span style="font-weight:bold">: نوع الملكية</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-right:hidden">
+                          <span t-esc="cargo_id.customer.mobile"/>
+                          <!-- <span style="font-weight:bold">: جوال العميل</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.customer.mobile"></span> -->
+                          <span style="font-weight:bold">: جوال العميل</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid"><p><span t-esc="o._get_payment_no()" class="span_left"></span><span class="span_right">: سند قبض</span></p></td>
+                        <td><p><span t-esc="o.plate_type.plate_config_name" class="span_left"></span><span class="span_right">: نوع الملكية</span></p></td>
+                        <td><p><span t-esc="o.bsg_cargo_sale_id.customer.mobile" class="span_left"></span><span class="span_right">: جوال العميل</span></p></td>
+                      </tr>
+                       -->
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <t t-foreach="cargo_id.invoice_ids" t-as="p">
+<!--                            <span t-esc="p.number"/><span>	</span>-->
+                            <span t-esc="p.name"/><span>	</span>
+                          </t>
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next"></span> -->
+                          <!-- <span>888888888</span> -->
+                          <!-- <span style="font-weight:bold">: فاتورة رقم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next_prefix"></span> -->
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next"></span> -->
+                          <span style="font-weight:bold">: فاتورة رقم</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <span t-esc="o.car_size.car_size_name"/>
+                          <!-- <span style="font-weight:bold">: حجم السيارة</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.car_size.car_size_name"></span> -->
+                          <span style="font-weight:bold">: حجم السيارة</span>
+                        </td>
+
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;border-bottom:1px solid;border-right:hidden">
+                          <span t-esc="cargo_id.receiver_mob_no"/>
+                          <!-- <span style="font-weight:bold">: جوال المستلم</span> -->
+                        </td>
+                        <td style="text-align:right;padding-right:5px;border-bottom:1px solid">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.receiver_mob_no"></span> -->
+                          <span style="font-weight:bold">: جوال المستلم</span>
+                        </td>
+                      </tr>
+
+                      <!-- <tr>
+                        <td style="border-left:1px solid;border-bottom:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next_prefix" class="span_left"></span><span t-esc="o.bsg_cargo_sale_id.invoice_ids.sequence_number_next" class="span_left"></span><span class="span_right">: فاتورة رقم</span></p></td>
+                        <td style="border-right:1px solid;border-bottom:1px solid"><p>
+                          <span t-esc="o.car_size.car_size_name" class="span_left"></span>
+                          <span class="span_right">: حجم السيارة</span>
+                        </p></td>
+                        <td style="border-left:1px solid;border-bottom:1px solid"><p><span t-esc="o.bsg_cargo_sale_id.receiver_mob_no" class="span_left"></span><span class="span_right">: جوال المستلم</span></p></td>
+                      </tr> -->
+
+                    </tbody>
+
+                  </table>
+                </t>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid;margin-top:30px">
+                  <div style="width:35%;float:left;text-align:center;;font-weight:bold;padding:3px">
+                    <span> بيانات السداد</span>
+                  </div>
+                  <div style="width:30%;float:left;text-align:center;border-left:1px solid;font-weight:bold;padding:3px">
+                    <span> بيانات السيارة</span>
+                  </div>
+                  <div style="width:35%;float:left;text-align:center;border-left:1px solid;font-weight:bold;padding:3px">
+                    <span> معلومات العميل</span>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-if="international_sale_check == 0">
+                        <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"/>
+                      </t>
+                      <t t-else="">
+                        <!-- <span t-esc="international_sale"></span>
+                        <span t-esc="local_sale"></span> -->
+                        <div style="float:right;margin-left:8px">
+                          <span t-esc="international_sale_unit"/>
+                        </div>
+                        <div style="float:right">
+                          <span t-esc="local_sale_unit"/>
+                        </div>
+                      </t>
+                      <!-- <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"></span> -->
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span>مبلغ الشحن </span>
+                    </div>
+                  </div>                       
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <t t-if="o.plate_registration == 'saudi'">
+                      <div style="width:60%;float:left;text-align:right;padding:0px">
+                                              <span t-esc="o.plate_no"/>
+                                              <span t-esc="o.palte_third"/>
+                                              <span t-esc="o.palte_second"/>
+                                                <span t-esc="o.palte_one"/>
+                                            </div>
+                    </t>
+                    <t t-else="">
+                      <div style="width:60%;float:left;text-align:right;padding:3px">
+                        <span t-esc="o.non_saudi_plate_no"/>
+                      </div>
+                    </t>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold;"> رقم اللوحة</span>
+                    </div>
+                  </div>
+
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.ref"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">رقم حساب العميل </span>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="'{0:,.2f}'.format(float(o.discount_price))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold;"> قيمة الخصم </span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.chassis_no"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <!-- <span style="font-weight:bold">رقم اللوحة </span> -->
+                      <span style="font-weight:bold"> رقم الهيكل</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:53%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.vat"/>
+                    </div>
+                    <div style="width:45%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الرقم الضريبي للعميل </span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="'{0:,.2f}'.format(float(o.tax_amount))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> ض. القيمة المضافة </span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_make.car_maker.car_make_ar_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> ماركة السيارة</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.owner_id_card_no"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> رقم الهوية</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+<!--                    <div style="width:59%;float:left;text-align:right;padding:3px">-->
+<!--                          <span t-esc="local_sale"></span>-->
+<!--                        </div>-->
+<!--                    <div style="width:59%;float:left;text-align:right;padding:3px">-->
+<!--                      <span t-esc="'{0:,.2f}'.format(float(o.charges))"></span>-->
+<!--                    </div>-->
+
+
+
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-if="international_sale_check == 0">
+                        <span t-esc="'{0:,.2f}'.format(float(o.charges))"/>
+                      </t>
+                      <t t-else="">
+                        <!-- <span t-esc="international_sale"></span>
+                        <span t-esc="local_sale"></span> -->
+                        <div style="float:right;margin-left:8px">
+                          <span t-esc="international_sale"/>
+                        </div>
+                        <div style="float:right">
+                          <span t-esc="local_sale"/>
+                        </div>
+                      </t>
+                      <!-- <span t-esc="'{0:,.2f}'.format(float(o.unit_charge))"></span> -->
+                    </div>
+
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">إجمالي المبلغ</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_model.car_model_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الموديل</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.owner_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المالك</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.payment_method.payment_method_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> طريقة السداد</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.year.car_year_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">سنة الصنع</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.sender_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> الشاحن</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-set="pay_value" t-value="0"/>
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                        <t t-foreach="p.payment_ids" t-as="v">
+                          <t t-set="pay_value" t-value="pay_value+v.amount"/>
+                        </t>
+                      </t>
+
+                      <span t-esc="'{0:,.2f}'.format(float(pay_value))"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المبلغ المدفوع</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_color.vehicle_color_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">اللون</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.receiver_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">المستلم</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+                        <t t-foreach="p.payment_ids" t-as="v">
+                          <span t-esc="v.name"/><span>	</span>
+                        </t>
+                      </t>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">سند قبض</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.plate_type.plate_config_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">نوع الملكية</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.customer.mobile"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> جوال العميل</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border-top:1px solid;border-left:1px solid;border-right:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <t t-foreach="cargo_id.invoice_ids" t-as="p">
+<!--                        <span t-esc="p.number"/><span>	</span>-->
+                        <span t-esc="p.name"/><span>	</span>
+                      </t>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"> فاتورة رقم</span>
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;border-left:1px solid;">
+                    <div style="width:60%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.car_size.car_size_name"/>
+                    </div>
+                    <div style="width:35%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">حجم السيارة</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                      <span t-esc="cargo_id.receiver_mob_no"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">جوال المستلم</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div style="width:100%;float:left;border:1px solid">
+
+                  <div style="width:35%;float:left;text-align:center;">
+                    <div style="width:49%;float:left;text-align:right;padding:3px">
+                      <span/>
+
+                    </div>
+                    <div style="width:50%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span/>
+
+                    </div>
+                  </div>
+
+                  <div style="width:28%;float:left;text-align:center;">
+                    <div style="width:58%;float:left;text-align:right;padding:3px">
+                      <span t-esc="o.shipment_type.car_shipment_name"/>
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold">نوع الشحن</span>
+                    </div>
+                  </div>
+
+                  <div style="width:35%;float:right;text-align:center;border-left:1px solid;">
+                    <div style="width:59%;float:left;text-align:right;padding:3px">
+                     <span>من <span t-esc="o.est_no_delivery_days"/>  </span>
+                      
+                      <span> الى  <span t-esc="o.est_max_no_delivery_days"/></span>
+                      <span>ايام</span>
+                      
+                    </div>
+                    <div style="width:40%;float:right;text-align:right;font-weight:bold;padding:3px">
+                      <span style="font-weight:bold"><span t-esc="'الوصول المتوقع '"/></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <hr class="width90" /> -->
+                <div class="main_div" style="border: solid black 1px;float:left;margin-bottom:10px;width:100%;margin-top:20px">
+                    <div class="fixed" style="height: 62%;">
+                      <p class="alignRight"><span><b> أسم المشيك </b></span> </p>
+                      <p class="alignRight"><span><b>  _________________ : التوقيع  </b></span> </p>
+                      <p class="alignRight"><span><b> مأمور الحركة </b></span> </p>
+                      <p class="alignRight"><span><b>  _________________ : التوقيع  </b></span> </p>
+                    </div>
+                  <div class="flex-item" style="width: 65%;height: 230px;float:left">
+
+                    <img src="/bsg_cargo_sale/static/src/img/car_image_Form.png" width="490px" height="230px" style="margin-left: -3px;margin-top: -17px;" alt=""/>
+
+                    <!-- <table width="100%" border="0" align="center" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr>
+                            <td style="height: 227px;"><img src="/bsg_cargo_sale/static/src/img/car_image_Form.png" width="490px" height="230px" style="margin-left: -3px;margin-top: -17px;" alt=""/></td>
+                          </tr>
+                        </tbody>
+                    </table>   -->
+                  </div>
+                </div>
+
+                <!-- <hr class="width90" /> -->
+
+                <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0" style="margin-bottom:10px">
+                  <tbody>
+                    <tr>
+                      <td style="border-left:1px solid;border-bottom:1px solid;text-align:right;font-size:16px"><p class="red">
+                        <span>أقر أنا  (<span t-esc="cargo_id.sender_name" style="color:black;font-size:"/>) شاحن السيارة الموضح تفاصيلها بهذه الاتفاقية بأن أي موجودات تترك داخل السيارة هي تحت مسئوليتي الخاصة</span>
+                        <span>وأن الشركة غير مسئولة عن فقدان الأشياء أو تلفها كما أتعهد بعدم وضع أو ترك أي أشياء تحظرها الأنظمة والتعليمات أو يحظر نقلها أو تداولها كالأسلحة والمخدرات</span>
+                        <span>وأقر بمسئوليتي التامة عن أي مخالفة لذلك علما بأن بنود الاتفاقية بالخلف تعتبر جزء لا يتجزأ من بنود اتفاقية الشحن ، كما أنني إطلعت علي جميع بنود هذه الاتفاقية و أوافق عليها</span>
+                        <span>تنبيه هام ، سيتم احتساب أرضيات علي كل سيارة لم يتم استلامها بعد ثلاثة أيام من موعد التسليم المتوقع (بنود اتفاقية الشحن بالخلف).</span>
+                      </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+                <t t-if="lang_id == 5">
+                  <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0">
+                    <tbody>
+
+                      <tr>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;min-width: 150px;max-width: 150px;border-right:hidden">
+                          <span t-esc="cargo_id.user_id.name"/>
+                          <!-- <span style="font-weight:bold;"> : اسم المستخدم</span> -->
+                        </td>
+                        <td style="border-left:1px solid;text-align:right;padding-right:5px;">
+                          <!-- <span t-esc="o.bsg_cargo_sale_id.user_id.name"></span> -->
+                          <span style="font-weight:bold;"> : اسم المستخدم</span>
+                        </td>
+                        <td style="text-align:right;font-weight:bold;padding-right:5px;"><span> : توقيع شاحن السيارة</span></td>
+                      </tr>
+
+                      <tr>
+                        <td colspan="2" style="border-left:1px solid;border-bottom:1px solid;text-align:right;font-weight:bold;padding-right:5px;"><span>: توقيع الموظف</span></td>
+                        <td style="border-bottom:1px solid;text-align:right;font-weight:bold;padding-right:5px"><span class="red">عزيزي العميل : نرجوا التأكد من صحة بيانات الإتفاقية قبل التوقيع</span></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </t>
+
+                <div style="width:100%;float:left;border-left:1px solid;border-right:1px solid;border-top:1px solid">
+                  <div style="width:50%;float:left;padding:3px;text-align:right">
+                    <div style="width:48%;float:left">
+                      <span t-esc="cargo_id.user_id.name"/>
+                    </div>
+                    <div style="float:right;font-weight:bold">
+                      <span style="font-weight:bold;"> : اسم المستخدم</span>
+                    </div>
+                  </div>
+                  <div style="width:50%;float:left;border-left:1px solid;padding:3px;text-align:right;font-weight:bold">
+                    <span> : توقيع شاحن السيارة</span>
+                  </div>
+                </div>
+
+                <div style="width:100%;float:left;border:1px solid;margin-bottom:10px">
+                  <div style="width:50%;float:left;padding:3px;text-align:right;font-weight:bold">
+                    <span>: توقيع الموظف</span>
+                  </div>
+                  <div style="width:50%;float:left;border-left:1px solid;padding:3px;text-align:right;font-weight:bold">
+                    <span class="red">عزيزي العميل : نرجوا التأكد من صحة بيانات الإتفاقية قبل التوقيع</span>
+                  </div>
+                </div>
+
+
+                <!-- <hr class="width90" /> -->
+
+                <!-- <table width="100%">
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                  <tr>
+                    <td>88</td>
+                  </tr>
+                </table> -->
+                <table width="100%" border="1" cellspacing="0" cellpadding="0" style="border-left:1px solid;border-bottom:1px solid">
+                  <tbody>
+                    <t t-if="other_service_check == 1">
+                      <tr>
+                        <td style="text-align:right">
+                          <div style="100%">
+                            <div style="float:right;font-weight:bold;margin-left:10px"> الملاحظات
+                            </div>
+                            <div style="float:right">
+                              <span t-esc="other_service"/>
+                            </div>
+                            <div style="float:right;margin-right:8px">
+                              <span t-esc="local_service"/>
+                            </div>
+                          </div>
+                          <!--  <span t-esc="other_service"></span>
+                           <span><b>  :  </b></span>
+                           <span><b>  الملاحظات   </b></span> -->
+                        </td>
+                      </tr>
+                    </t>
+                    <t t-else="">
+                      <tr>
+                        <td style="text-align:right"><p>.............................................................................................................,........................................................................................<b>: الملاحظات </b></p>
+                          <p>.........................................................................................................................................................................................................................</p>
+                          <p>.........................................................................................................................................................................................................................</p></td>
+                      </tr>
+                    </t>
+
+                  </tbody>
+                </table>
+
+                <div style="width:45%;float:left;margin-top:10px">
+                  <span style="font-weight:bold;text-align:left;margin_right:10px;">Print Date</span>
+                  <!-- <span style="text-align:left">Print Date</span> -->
+                  <span style="margin-left:10px" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                </div>
+
+                <div style="width:45%;float:right;margin-top:10px">
+                  <div style="width:48%;float:left;text-align:right">
+                    <span style="font-weight:bold;text-align:right">Print By</span>
+                  </div>
+                  <div style="width:48%;float:left;text-align:left">
+                    <span style="text-align:right;margin-left:10px" t-esc="user.name"/>
+                  </div>
+                  <!-- <table width="100%">
+                    <tr>
+                      <td style="border:hidden;text-align:right">
+                        <span style="font-weight:bold;text-align:right">Print By : </span>
+                      </td>
+                      <td style="border:hidden;text-align:left">
+                        <span style="text-align:right;margin_left:10px" t-esc="user.name"></span>
+                      </td>
+                    </tr> -->
+                  <!-- </table> -->
+                </div>
+                <!--  <img src="/bsg_cargo_sale/static/src/img/footer.png" width="720" height="130" alt="" style="margin_top: 5px;"/> -->
+
+              </page>
+              <!-- </div> -->
+
+              <!--  -->
+            </div>
+          </t>
+        </t>
+      </t>
+
+    </template>
+
+
+    <!-- <template id="report_shipment_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.customer_id.lang"/>
+                <t t-call="bsg_cargo_sale.report_shipment_template_call" t-lang="lang"/>
+            </t>
+        </t>
+    </template> -->
+
+
+
+  </data>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_bx_credit_customer_collection">
+            <field name="name">BX Credit Customer Collection</field>
+            <field name="description">Collection Invoice Management Management</field>
+            <field name="sequence">20</field>
+        </record>
+       	<record model="res.groups" id="group_bx_create_cc">
+            <field name="name">Create CC</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_bx_confirm_send_cc">
+            <field name="name">Confirm &amp; send CC</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_bx_cc_create_invoice">
+            <field name="name">Create Invoice</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_bx_register_payment_invoice">
+            <field name="name">Register Payment</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_bx_cc_set_to_draft">
+            <field name="name">Set to Draft</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>       
+        <record model="res.groups" id="group_bx_cancel_cc">
+            <field name="name">Cancel CC</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>    
+        <record model="res.groups" id="group_tranport_management_line">
+            <field name="name">Trasport Management Line</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_view_bx_credit_customer_collection">
+            <field name="name">View BX Credit Customer Collection</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record model="res.groups" id="group_archive_credit_customer_collection">
+            <field name="name">Credit Customer Collection Archive</field>
+            <field name="category_id" ref="payments_enhanced.module_category_accounting_invoice"/>
+        </record>
+        <record id="group_allow_to_edit_bx_price" model="res.groups">
+            <field name="name">Allowed To Edit Bx Price after confirm</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+        <record id="group_bx_ccc_attachment_view" model="res.groups">
+            <field name="name">Bx CCC View Attachment</field>
+            <field name="comment">The user will have access to view Bx CCC documents tab.</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+
+        <record id="group_bx_ccc_attachment_add" model="res.groups">
+            <field name="name">Bx CCC Add Attachment</field>
+            <field name="comment">The user will have access to add documents for Bx CCC</field>
+            <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+
+        <record id="group_bx_ccc_attachment_delete" model="res.groups">
+            <field name="name">Bx CCC Delete Attachment</field>
+            <field name="comment">The user will have access to delete documents for Bx CCC</field>
+           <field name="category_id" ref="module_bx_credit_customer_collection"/>
+        </record>
+    </data>
+</odoo>

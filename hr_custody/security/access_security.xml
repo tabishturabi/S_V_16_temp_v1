@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="res.groups" id="group_custody_request">
+            <field name="name">Custody Request</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+
+         <record model="res.groups" id="group_custody_request_approve">
+            <field name="name">Custody Approve</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+         </record>
+
+        <record model="res.groups" id="group_custody_request_return">
+            <field name="name">Custody Return</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+    </data>
+</odoo>

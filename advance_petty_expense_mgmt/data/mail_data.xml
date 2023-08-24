@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<record id="mail_petty_cash_expense_tmpl" model="mail.template">
+			<field name="name">Petty: Send By Mail For Employee</field>
+			<field name="model_id" ref="advance_petty_expense_mgmt.model_petty_cash_expense_accounting"/>
+			<field name="subject">Petty Cash | : ${object.name} | Request Approved </field>
+			<field name="body_html">
+			<![CDATA[
+			<div>
+				<table border="0" width="100%" cellpadding="0" bgcolor="#ededed" style="padding: 20px; background-color: #ededed; border-collapse:separate;" summary="o_mail_notification">
+					<tbody>
+						<tr>
+							<td align="center" style="min-width: 650px;">
+								<table width="650" border="0" cellpadding="0" bgcolor="#3c73aa" style="background-color: #3c73aa;min-width: 650px; padding: 10px; border-collapse:separate;">
+									<tr><td valign="middle">
+										<p style="margin: 0 0 0.0em;font-size: 12px;color: #fff;">My Petty Cash:</p>
+										<span style="font-size:20px; color:#fff; font-weight: bold;">
+										${object.name}
+									</span>
+									</td>
+										<td valign="middle" align="right">
+										<h5 style="color: #fff;"></h5>
+										</td>
+									</tr>
+					            </table>
+					        </td>
+					    </tr>
+					    <tr>
+					        <td align="center" style="min-width: 590px;">
+					            <table width="590" border="0" cellpadding="0" bgcolor="#ffffff" style="min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;">
+					                <tbody>
+					                	<tr>
+						                	<td valign="top" style="font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;">
+						                    	<p>Hi, Good Day!</p>
+						                    	<p style="margin: 0 0 0.3em;">Your Requesting we are approved | Approved by <strong>${object.write_uid.name}</strong></p>
+						                    	<p style="margin: 0 0 0.3em;">Your requested : <strong>${object.amount_request}</strong></p>
+						                    	<p style="margin: 0 0 0.3em;">Amount Approved : <strong>${object.amount_approval}</strong></p>
+						                	</td>
+					                	</tr>
+					                	<tr> 
+								       <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size: 11px;"> 
+									        <hr width="100%" style="background-color: #3c73aa; border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 4px 0px;"> 
+									        <b>QECH - FUll NAME</b><br> 
+									        <div style="color: #3c73aa;padding-top: 10px;">
+									          +966 12 6700 333 | 
+									         <a style="text-decoration: none; color: #3c73aa;" href="mailto:hi@qech.com" class="mailto-link" target="_blank">hi@qech.com</a> | 
+									         <a style="text-decoration: none; color: #3c73aa;" href="#" target="_blank" rel="noopener"> http://www.qech.com </a> 
+									        </div> </td> 
+									      </tr>
+					                </tbody>
+					            </table>
+					        </td>
+					    </tr>
+					    
+					</tbody>
+				</table>
+			</div>
+			]]>
+			</field>
+<!--			Migration Note-->
+<!--			<field name="user_signature" eval="False"/>-->
+			<field name="auto_delete" eval="True"/>
+		</record>
+	</data>
+</odoo>

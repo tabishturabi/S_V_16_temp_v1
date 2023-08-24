@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <record id="hr_salary_rule_form_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='company_id']" position="after">-->
+<!--                </xpath>-->
+                <xpath expr="//page[@name='general']" position="after">
+                    <page name="rules" string="Child Rules">
+                       <field name="parent_rule_id"/>
+                       <separator string="Children Definition"/>
+                       <field name="child_ids"/>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='appears_on_payslip']" position="after">
+                                        <field name="leave_clearance" />
+
+                        <field name="per_day"/>
+                        <field name="in_holiday"/>
+                        <field name="is_housing"/>
+                        <field name="is_eos"/>
+                        <field name="move_per_employee"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_form_debit_credit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.debit.credit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_view_form"/>
+            <field name="arch" type="xml">
+<!--              <xpath expr="/form/notebook/page[3]" position="inside">-->
+                <xpath expr="//page[@name='accounting']" position="after">
+                     <page string="Inputs">
+                            <field name="input_ids" mode="tree">
+                                <tree string="Input Data" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </tree>
+                            </field>
+                       </page>
+                </xpath>
+                <xpath expr="//field[@name='not_computed_in_net']" position="after">
+                    <field name="is_get_from_leave"/>
+                    <field name="leave_debit_account_id"/>
+                    <field name="leave_credit_account_id"/>
+                    <field name="account_tax_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_salary_structure_form_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.structure.form.inherit</field>
+            <field name="model">hr.payroll.structure</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_employee_grade_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_id']" position="after">
+                    <field name="parent_id" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

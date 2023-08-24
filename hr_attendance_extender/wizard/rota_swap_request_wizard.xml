@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Swap Request Form -->
+        <record id="rota_swab_request_wizard_form" model="ir.ui.view">
+            <field name="name">Swap Request Wizard</field>
+            <field name="model">swap.request.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Swap Request">
+                    <sheet>
+                        <group>
+                            <group string="Employee Information" colspan="4" col="4">
+                                <field name="employee_id"/>
+                                <field name="rota_id"/>
+                                <field name="shift_id"/>
+                                <field name="rota_calendar_id"/>
+                                <field name="rota_calender_line"/>
+                                <field name="date"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group string="Swap Information" colspan="4" col="4">
+                                <field name="employee_swap_id"/>
+                                <field name="rota_swap_id"/>
+                                <field name="shift_swap_id"/>
+                                <field name="calendar_swap_id"/>
+                                <field name="rota_calender_line_swap" invisible="0"/>
+                                <field name="swap_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Submit" name="action_create_swap_request" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="swap_request_wizard_action" model="ir.actions.act_window">
+            <field name="name">Swap Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">swap.request.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

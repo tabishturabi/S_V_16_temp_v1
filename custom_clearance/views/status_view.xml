@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+		 <record id="view_import_status_form" model="ir.ui.view">
+            <field name="name">Import Status</field>
+            <field name="model">import.status</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Status">
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                            
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_custom_import_status" model="ir.ui.view">
+            <field name="name">Import Status</field>
+            <field name="type">tree</field>
+            <field name="model">import.status</field>
+            <field name="arch" type="xml">
+                <tree string="Import status">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_custom_import_status" model="ir.actions.act_window">
+            <field name="name">Import Status</field>
+            <field name="res_model">import.status</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_custom_import_status" />
+        </record>
+        
+        <menuitem action="action_custom_import_status" id="custom_clearance_submenu_import_status" groups="custom_clearance.group_custom_clearance_as_manager" name="Import Export status" parent="custom_clearance.custom_clearance_submenu" sequence="4" />
+	</data>
+</odoo>

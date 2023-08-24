@@ -1,0 +1,66 @@
+<odoo>   
+
+    <template id='cargo_bassami_coupon_form' name='Bassami Coupon form'>
+        <form action="/cargo/bassami_coupon_apply" method="post"  name="bassami_coupon_code">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+            <input type="hidden" name="shipment" t-att-value="shipment.id"/>
+            <div class="input-group form-group col-xl-6">
+                <input name="promo" class="form-control" type="text" placeholder="code..." required="required"/>
+                <div class="input-group-append">
+                    <button type="submit"  id="bassami_cargo_promo_submit_form" class="btn btn-secondary">
+                        Apply
+                    </button>
+                </div>
+            </div>
+           
+        </form>
+    </template>
+
+
+    <template id="portal_cargo_page_inherit_promo_coupon_code" inherit_id="portal_sales.shipment_order_details" active="True" customize_show="True" name="Coupon Promo Code">
+        <xpath expr="//div[hasclass('card-footer')]" position="after">
+            <t t-if="shipment.payment_method.payment_type != 'credit'">
+                <div t-attf-class="form-group">
+                    <t t-if="not shipment.loc_from.is_international and not shipment.loc_to.is_international">
+                        <div t-attf-class="form-group" t-if="not shipment.sudo()._cargo_is_global_discount_already_applied()">
+                            <a  t-if="shipment.state not in ['done','cancel','cancel_request'] and shipment.total_so_amount and (pending_manual_txs or not tx_ids)"
+                                class="btn btn-warning show_bassami_coupon">
+                                Apply a Coupon    <i class="fa fa-tag fa-lg"></i>
+                            </a>
+                        </div>
+
+                        <div t-attf-class="form-group" t-if="shipment.sudo()._cargo_is_global_discount_already_applied()">
+                            <a  t-att-href="'/shipment/remove_bassami_promo_code/'+str(shipment.id)" t-if="shipment.state not in ['done','cancel','cancel_request'] and shipment.total_so_amount and (pending_manual_txs or not tx_ids)"
+                                class="btn btn-warnning">
+                                Remove Applied Coupon <i class="fa fa-remove fa-lg"></i>
+                            </a>
+                        </div>
+
+                    </t>
+                    
+                    <div t-attf-class="bassami_coupon_form" style="display:none">
+                        <t t-call="bsg_sale_coupon_enhanced.cargo_bassami_coupon_form"/>
+                    </div>
+                    <t t-if="shipment.sudo()._cargo_is_global_discount_already_applied()">
+                            <div class="card bg-success text-white mt16">
+                                <div class="card-header clearfix">
+                                    <span class="float-left">You have successfully applied following coupon code : <b t-esc="shipment.sudo()._get_applied_coupon_code()"/></span>
+                                </div>
+                            </div>
+                    </t>
+                    <t t-if="shipment.sudo().get_promo_code_error(delete=False)">
+                        <div class="card bg-danger text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left"><t t-esc="shipment.sudo().get_promo_code_error()" /></span>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>    
+        </xpath>
+    </template>
+
+
+
+
+</odoo>     

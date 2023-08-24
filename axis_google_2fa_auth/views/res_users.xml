@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="users_form_inherit_auth_2fa" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']" position="after">
+                <page name="two_step_authentication" string="Two Step Authentication">
+                    <group>
+                        <field name="is_2fa_enable"/>
+                        <field name="secret_key" readonly="0"/>
+                        <field name="image_2fa" widget="image" class="oe_avatar" options="{'size': [350, 350]}" readonly="0"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button string="Send QR-code via Mail" class="btn btn-primary" type="object"
+                    name="action_send_qrcode" attrs="{'invisible': ['|', ('state', '!=', 'active'), ('is_2fa_enable', '!=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_users_form_simple_modif_inherit_auth_2fa" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preferences']" position="after">
+                <group string="2FA Preferences">
+                    <field name="is_2fa_enable" readonly="0"/>
+                    <field name="secret_key" readonly="0"/>
+                    <field name="image_2fa" widget="image" class="oe_avatar" options="{'size': [350, 350]}" readonly="0"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

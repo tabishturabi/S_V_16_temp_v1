@@ -1,0 +1,246 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_credit_customer_form">
+        <field name="name">credit.customer.collection.form</field>
+        <field name="model">credit.customer.collection</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="confirm_button" groups="bsg_corporate_invoice_contract.group_confirm_send_cc" class="oe_highlight" states="draft" string="Confirm" type="object"/>
+                    <button name="create_invoice" groups="bsg_corporate_invoice_contract.group_cc_create_invoice"  class="oe_highlight" states="confirm" string="Create Invoice" type="object"/>
+                    <button name="set_to_draft" groups="bsg_corporate_invoice_contract.group_cc_set_to_draft" class="oe_highlight" string="Set To Draft" attrs="{'invisible': [('state', 'in', ['draft','invoiced'])]}" type="object"/>
+                    <button name="cancel_collection" groups="bsg_corporate_invoice_contract.group_cancel_cc" class="oe_highlight" string="Cancel" attrs="{'invisible': [('state', 'in', ['draft','cancel'])]}" type="object"/>
+                    <button name="action_quotation_send" groups="bsg_corporate_invoice_contract.group_confirm_send_cc"  states="draft" string="Send by Email" type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_tranport_bx_credit_customer_collection.group_archive_credit_customer_collection">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
+                        </button>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" attrs="{'invisible': [('has_line_without_pickup_other_services','!=',True)]}">
+                      Warning you have SO Without Pickup Services <button name="view_so_without_pickup_other_services" type="object" string="Open"/>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" attrs="{'invisible': [('has_line_without_delivery_other_services','!=',True)]}">
+                      Warning you have SO Without Delivery Services <button name="view_so_without_delivery_other_services" type="object" string="Open"/>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <!-- domain="[('id', 'in', child_ids)]"  -->
+                        <group>
+                            <field name="customer_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+
+                            <field name="invoice_to" string="Invoice To" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="currency_id" invisible="1"/> 
+                            <field name="has_line_without_pickup_other_services" invisible="1"/> 
+                            <field name="has_line_without_delivery_other_services" invisible="1"/>        
+                            <field name="report_branch_wise"/>        
+                            <field name="report_branch_wise_delivery"/>        
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly':[('state','!=','draft')]}"/>   
+                            <field name="internal_note" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="received_date" attrs="{ 'invisible': [('state', '=', 'draft')], 'readonly': [('state', '!=', 'confirm')]}" groups="bsg_corporate_invoice_contract.group_cc_create_invoice,bsg_corporate_invoice_contract.group_view_and_edit_credit_collection"/>
+                        </group>
+                    </group>
+                      <!--   <group>
+                            <group>
+                                <field name="loc_from" attrs="{'required':[('is_domain','=',True)],'invisible':[('is_domain','=',False)],'readonly':[('state','!=','draft')]}"/>
+                                <field name="from_date" attrs="{'required':[('is_domain','=',True)],'invisible':[('is_domain','=',False)],'readonly':[('state','!=','draft')]}"/>
+                                <field name="trip_number" widget="many2many_tags" attrs="{'required':[('is_domain','=',True)],'invisible':[('is_domain','=',False)],'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="loc_to" attrs="{'required':[('is_domain','=',True)],'invisible':[('is_domain','=',False)],'readonly':[('state','!=','draft')]}"/>
+                                <field name="to_data" attrs="{'required':[('is_domain','=',True)],'invisible':[('is_domain','=',False)],'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                        </group> -->
+<!--                         ('fleet_trip_id','!=',False),-->
+<!--                    <group>-->
+                            <separator string="Cargo Sale Lines"/>
+                            <field name="cargo_sale_line_ids" domain="[('customer_id', '=', customer_id),('add_to_cc','=',False),('state','not in',['draft','cancel'])]" attrs="{'invisible': [('customer_id', '=', False)],'readonly':[('state','!=','draft')]}" 
+                               options="{'no_create': True}">
+                                    <tree>
+                                        <field name="sale_line_rec_name" string="Agreement No"/>
+                                        <field name="service_type" string="Service Type"/>
+                                        <field name="plate_no" string="Plate"/>
+                                        <field name="chassis_no" string="Chassis"/>
+                                        <field name="loc_from" string="Shipping Branch"/>
+                                        <field name="loc_to" string="Delivery Branch"/>
+                                        <field name="unit_charge" string="Amount"/>
+                                        <field name="discount" string="Discount%"/>
+                                        <field name="total_without_tax" string="After Discount"/>
+                                        <field name="other_service_amount"/>
+                                        <field name="tax_ids" widget="many2many_tags" string="Tax%"/>
+                                        <field name="tax_amount" string="Tax Amount"/>
+                                        <field name="charges" string="Total Amount"/>
+                                        <field name="add_to_cc" />
+                                        <field name="report_seq" invisible="1"/>
+                                    </tree>
+                            </field>
+<!--                    </group>-->
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total" attrs="{'invisible': [('customer_id', '=', False)],'readonly':[('state','!=','draft')]}">
+                        <group>
+                            <div>
+                                <label for="amount_total"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>  
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="view_credit_customer_tree">
+        <field name="name">credit.customer.collection.tree</field>
+        <field name="model">credit.customer.collection</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" decoration-success="state=='invoiced'" decoration-warning="state == 'cancel'">
+                <field name="name"/>
+                <field name="create_uid"/>
+                <field name="customer_id"/>
+                <field name="date"/>
+                <field name="state"/>
+                <field name="amount_total"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Sequence  
+    <record id="ir_sequence_customercollection" model="ir.sequence">
+        <field name="name">account.collection</field>
+        <field name="code">account.collection</field>
+        <field name="prefix">CVU/%(range_year)s/</field>
+        <field name="padding">5</field>
+    </record>-->
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_credit_customer_collection">
+        <field name="name">Credit Customer Collection</field>
+        <field name="res_model">credit.customer.collection</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+    
+    <!-- Search view  -->
+    <record id="bsg_credit_customer_search" model="ir.ui.view">
+     <field name="name">Credit Customer Collection Search</field>
+     <field name="model">credit.customer.collection</field>
+     <field name="arch" type="xml">
+      <search string="Credit Customer Collection">
+      	   <field name="name" string="Credit Customer Seq"/>
+           <field name="invoice_to" string="Invoice To"/>
+           <field name="customer_id" string="Customer"/>
+           <group expand="1" string="Group By">
+              <filter name="groupby_status" domain="[('state','=','invoiced')]" string="State Invoiced"/>
+          </group>
+       </search>
+     </field>
+   </record>
+   
+   <!-- Graph view  -->
+   <record id="view_credit_customer_collection_graph" model="ir.ui.view">
+   <field name="name">credit.customer.collection.graph</field>
+   <field name="model">credit.customer.collection</field>
+   <field name="type">graph</field>
+   <field name="arch" type="xml">
+       <graph string="Credit Customer Collection">
+       	   <field name="customer_id" />
+           <field name="invoice_to"/>
+           <field name="amount_total" />
+           <field name="state" type="measure"/>
+       </graph>
+   </field>
+   </record>
+   
+   <record id="view_credit_customer_collection_pivot" model="ir.ui.view">
+   <field name="name">credit.customer.collection.pivot</field>
+   <field name="model">credit.customer.collection</field>
+   <field name="arch" type="xml">
+       <pivot string="Credit Customer Collection">
+       	   <field name="customer_id" />
+       	   <field name="amount_total" type="measure"/>
+       </pivot>
+   </field>
+   </record>
+    
+    <menuitem name="Credit Customer Collection" 
+      id="credit_customer_root_menu" 
+      parent="account.menu_finance_receivables" 
+      action="action_credit_customer_collection"
+      sequence="12"
+      groups="bsg_corporate_invoice_contract.group_cc_create_invoice,bsg_corporate_invoice_contract.group_view_and_edit_credit_collection"
+      />
+
+      <record model="ir.ui.menu" id="account.menu_finance">
+            <field name="name">Accounting</field>
+            <field name="groups_id" eval="[(4,ref('bsg_corporate_invoice_contract.group_view_and_edit_credit_collection'))]"/>
+      </record>
+
+       <record model="ir.ui.menu" id="account_accountant.menu_accounting">
+            <field name="name">Accounting</field>
+            <field name="groups_id" eval="[(4,ref('bsg_corporate_invoice_contract.group_view_and_edit_credit_collection'))]"/>
+      </record>
+
+      <record model="ir.ui.menu" id="account.menu_finance_receivables">
+            <field name="name">Customers</field>
+            <field name="groups_id" eval="[(4,ref('bsg_corporate_invoice_contract.group_view_and_edit_credit_collection'))]"/>
+        </record>
+
+       <!-- Action create_invoice for one -->
+        <record id="account.action_account_confirm_payments" model="ir.actions.server">
+            <field name="name">Create Collection Invoice</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_credit_customer_collection"/>
+            <field name="binding_model_id" ref="model_credit_customer_collection"/>
+            <field name="code">records.create_collection_invoice()
+            </field>
+        </record>
+
+        <!-- Action create_invoice for multi -->
+        <record id="action_credit_account_create_inv" model="ir.actions.server">
+            <field name="name">Multi Create Collection Invoice</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_credit_customer_collection"/>
+            <field name="binding_model_id" ref="model_credit_customer_collection"/>
+            <field name="code">records.create_multi_invoice()
+            </field>
+        </record>
+
+       <record model="ir.actions.act_window" id="action_credit_customer_collection2">
+          <field name="name">Credit Customer Collection</field>
+          <field name="res_model">credit.customer.collection</field>
+          <!--            <field name="view_type">form</field>-->
+          <field name="view_mode">tree,form,graph,pivot</field>
+          <field name="context">{'create': False, 'delete': False,'edit': False}</field>
+      </record>
+
+       <menuitem
+                name="Credit Customer Collection"
+                id="menu_credit_customer_collection1"
+                parent="bsg_hr.menu_incentive_reports"
+                action="action_credit_customer_collection2"
+                sequence="3"
+                groups="bsg_hr.group_incentive_reports"
+        />
+  </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+                <record id="view_account_account_form_soa_inherit" model="ir.ui.view">
+                    <field name="name">account.account.form.soa.inherit</field>
+                    <field name="model">account.account</field>
+                    <field name="inherit_id" ref="account.view_account_form"/>
+                    <field name="arch" type="xml">
+                        <field name="deprecated" position="after">
+                            <field name="is_soa_account"  />
+                            <field name="is_allowed_entry"  />
+                        </field>
+                    </field>
+                </record>
+                
+
+
+                <record id="view_partner_type_form_soa_inherit" model="ir.ui.view">
+                    <field name="name">view.partner.type.form.soa.inherit</field>
+                    <field name="model">partner.type</field>
+                    <field name="inherit_id" ref="base_customer.view_partner_type_form"/>
+                    <field name="arch" type="xml">
+                        <field name="pricing_type" position="after">
+                            <field name="is_soa_partner"  />
+                            <field name="is_soa_vendor"  />
+                        </field>
+                    </field>
+                </record>  
+
+
+
+<!--record model="ir.ui.menu" id="account.menu_finance">
+            <field name="name">Accounting</field>
+            <field name="groups_id" eval="[(4, ref('bassami_statement_of_accounts.group_soa_report'))]"/>
+</record>            
+
+ <record model="ir.ui.menu" id="account.menu_finance_reports">
+            <field name="name">Reporting</field>
+            <field name="groups_id" eval="[(4, ref('bassami_statement_of_accounts.group_soa_report'))]"/>
+ </record--> 
+
+</odoo>
+    
+    
+    

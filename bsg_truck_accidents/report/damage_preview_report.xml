@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="damage_preview_report_report"
+            model="bsg.truck.accident"
+            string="Damage Preview Report"
+            report_type="qweb-pdf"
+            name="bsg_truck_accidents.damage_preview_report_pdf"
+            file="bsg_truck_accidents.damage_preview_report_pdf"/>
+
+
+
+    <template id="damage_preview_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.so_line_partner_id.lang"/>
+                <t t-call="bsg_truck_accidents.damage_preview_report_pdf_template" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="damage_preview_report_pdf_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang': lang})"/>
+
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <style>
+
+                        </style>
+                        <div class="page">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:hidden">
+                                <tbody>
+                                    <tr style="border:hidden">
+                                        <div style="width:100%;float:left">
+                                            <div style="width:30%;float:left">
+                                                <img t-att-src="image_data_uri(o.company_id.logo)" width="180" height="75" style="margin-right: -63px;" alt=""/>
+                                            </div>
+                                        </div>
+                                        <div style="text-align:center;margin-top:20px;;font-size:30px;font-weight:bold;">تحويل معاينة أضرار</div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="width:100%">
+                                <table style="width:100%;border:1px solid black;">
+                                    <tr>
+                                        <td></td>
+                                        <td  class="text-center">عند استلام</td>
+                                        <td class="text-right">
+                                            <span t-esc="o.accident_date"/>
+                                        </td>
+                                        <td class="text-center">:المـــــــوافق</td>
+                                        <td class="text-right">
+                                            <span t-esc="o.accident_date.strftime('%A')"/>
+                                        </td>
+                                        <td class="text-right" style="padding-right:25px;"> :إنه في يوم </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">
+                                            <span t-esc="o.so_line_general_plate_no"/>
+                                        </td>
+                                        <td class="text-center">:لوحة رقم</td>
+                                        <td class="text-right">
+                                            <span t-esc="o.shipment_no_id.sale_line_rec_name"/>
+                                        </td>
+                                        <td class="text-center">:اتفاقيــــــــة رقم </td>
+                                        <td class="text-right">
+                                            <span t-esc="o.so_line_car_make.car_maker.car_make_ar_name"/>
+                                        </td>
+                                        <td class="text-right" style="padding-right:25px;">:موظف التشيك  لسيارة نوع </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">
+                                            <span t-esc="o.shipment_no_id.parking_no"/>
+                                        </td>
+                                        <td class="text-center">:بموقف رقم</td>
+                                        <td class="text-right">
+                                            <span t-esc="o.so_line_loc_to.route_waypoint_name"/>
+                                        </td>
+                                        <td class="text-center">:إلي </td>
+                                        <td class="text-right">
+                                            <span t-esc="o.so_line_loc_from.route_waypoint_name"/>
+                                        </td>
+                                        <td class="text-right" style="padding-right:25px;">:والقادمة من </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" class="text-right">
+                                            <span t-esc="o.so_line_partner_id.name"/>
+                                        </td>
+                                        <td class="text-right" style="padding-right:25px;">:والتابعة للعميل </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div>
+                                <div style="text-align:right;margin-top:20px;;font-size:30px;">:تبين وجود الملاحظات التالية</div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -1</div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -2</div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -3</div>
+                            </div>
+                            <div style="text-align:right;margin-top:20px;;font-size:30px;font-weight:bold;">:شروط هامة</div>
+                            <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;font-weight:bold;">يعتبر التحويل هذا ساري المفعول لمدة (خمسة عشر يوم) فقط من تاريخه -</div>
+                            <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;font-weight:bold;">لا يمكن اصلاح السيارة سوى بعد ابلاغ مسئول التأمين على الأضرار والموافقة عليها -</div>
+                            <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;font-weight:bold;">لا يحـق للعميل مطالـبة مجموعـة أعمــال البسامي الدولية بأي مطالبة تخص سيارته من بعد مضي خمسة عشر يوماً على تاريخ التحويل -</div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

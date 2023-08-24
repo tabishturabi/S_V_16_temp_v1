@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+
+
+  <!--  form view definition -->
+    <record model="ir.ui.view" id="bsg_customer_locations_view_form">
+      <field name="name">bsg_customer_locations_view_form</field>
+      <field name="model">bsg.customer.locations</field>
+      <field name="arch" type="xml">
+        <form string="Location">
+          <sheet>
+              <div class="oe_title">
+                  <h1>
+                      <field name="bsg_loc_customer_id" default_focus="1" placeholder="Customer"  domain="[('customer_rank','&gt;=',1)]"/>
+                  </h1>
+              </div>
+              <group string="Location Configuration">
+
+              </group>
+              <field name="bsg_locations_ids" nolabel="1">
+                <tree editable="bottom" >
+                  <field name="location_name"/>
+                </tree>
+              </field>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>  
+        </form>
+      </field>
+    </record>
+
+  <!--  tree view definition -->
+    <record model="ir.ui.view" id="bsg_customer_locations_view_tree">
+      <field name="name">bsg_customer_locations_view_tree</field>
+      <field name="model">bsg.customer.locations</field>
+      <field name="arch" type="xml">
+        <tree string="Location">
+            <field name="bsg_loc_customer_id" string="Name"/>
+        </tree>
+      </field>
+    </record>
+
+  <!--  action -->
+    
+    <record model="ir.actions.act_window" id="action_window_customer_location">
+      <field name="name">Customer Location</field>
+      <field name="res_model">bsg.customer.locations</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>

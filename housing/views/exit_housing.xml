@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="exit_housing_entry_form_view" model="ir.ui.view">
+            <field name="name">housing_entry_form_view</field>
+            <field name="model">exit.housing</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Exit Housing">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_validate" type="object" string="Validate" class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="housing.all_permission_settings_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="employee_id" force_save="1" options="{'no_open': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="exit_id" force_save="1"/>
+                                <field name="manager_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="company_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="mobile_phone" force_save="1"/>
+                                <field name="sticker_no" force_save="1"/>
+                                <field name="vehicle_name" force_save="1" options="{'no_open': True}"/>
+                                <field name="vehicle_type_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="reason_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="days_count" force_save="1"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="date"/>
+                                <field name="validate_date" force_save="1" attrs="{'invisible':[('state','=','draft')]}"/>
+                                <field name="entry_date" force_save="1"/>
+                                <field name="branch_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="department_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="job_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="analytic_account_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="analytic_tag_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                                <field name="employee_code" force_save="1" options="{'no_open': True}"/>
+                                <field name="bsg_empiqama" force_save="1" attrs="{'invisible':[('bsg_national_id','!=',False)]}" options="{'no_open': True}"/>
+                                <field name="bsg_national_id" force_save="1" attrs="{'invisible':[('bsg_empiqama','!=',False)]}" options="{'no_open': True}"/>
+                                <field name="house_location" force_save="1" options="{'no_open': True}"/>
+                                <field name="date1" invisible="1"/>
+                                <field name="created_id" invisible="1"/>
+                            </group>
+                        </group>
+
+                        <group string="Description">
+                            <field name="description" nolabel="1" placeholder="This note is only for Housing purposes."/>
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+
+
+            </field>
+        </record>
+
+        <record id="exit_housing_entry_tree_view" model="ir.ui.view">
+            <field name="name">housing_entry_tree_view</field>
+            <field name="model">exit.housing</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree default_order="date desc">
+                     <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="house_location"/>
+                    <field name="mobile_phone"/>
+                    <field name="sticker_no"/>
+                    <field name="vehicle_name"/>
+                    <field name="branch_id"/>
+                    <field name="job_id"/>
+                    <field name="exit_id"/>
+                    <field name="entry_date"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="exit_housing_entry_view_search" model="ir.ui.view">
+            <field name="name">entry.housing.search</field>
+            <field name="model">exit.housing</field>
+            <field name="arch" type="xml">
+                <search string="Exit Housing">
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mobile_phone"/>
+                    <field name="sticker_no"/>
+                    <field name="vehicle_name"/>
+                    <field name="vehicle_type_id"/>
+                    <field name="house_seq"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="analytic_account_id"/>
+                    <field name="employee_code"/>
+                    <field name="bsg_empiqama"/>
+                    <field name="bsg_national_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="exit_housing_permission_action" model="ir.actions.act_window">
+            <field name="name">Exit Housing</field>
+            <field name="res_model">exit.housing</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="exit_housing_permission_menu" name="Exit Housing" action="exit_housing_permission_action"
+                  parent="housing_permission_main_menu" sequence="1" groups="housing.exit_housing_group"/>
+    </data>
+</openerp>

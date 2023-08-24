@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>      
+        <record id="view_partner_form_custom_inherit" model="ir.ui.view">
+            <field name="name">res.partner.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                   <field name="balance_payment" />
+                </xpath> -->
+                 <xpath expr="//page[@name='sales_purchases']//field[@name='industry_id']" position="after">
+                <!-- <field name="is_accouting_manage_by_child" position="after"> -->
+                    <field name="is_petty_vendor"/>
+                <!-- </field> -->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_supplier_expense_product" model="ir.ui.view">
+            <field name="name">product.template.landed.cost.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="is_expense_product"/>
+                        <label for="is_expense_product"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="product_template_form_view_custom_inherits" model="ir.ui.view">
+            <field name="name">product.template.form</field>
+            <field name="model">product.template</field>
+<!--            Migration Note-->
+<!--            <field name="inherit_id" ref="product.product_template_form_view"/>-->
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="property_account_expense_id" position="replace">
+                    <field name="property_account_expense_id"
+                                    domain="[('internal_type','=','other'),('deprecated','=',False),('user_type_id','=',16)]"
+                                    groups="account.group_account_user"/>
+                </field>
+            </field>
+        </record>  
+
+
+        <record id="mail_activity_view_form_popup_inherit_petty_cash" model="ir.ui.view">
+            <field name="name">mail.activity.view.form.popup.petty.inherit</field>
+            <field name="model">mail.activity</field>
+            <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="replace">
+                    <field name="user_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>   
+
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_item_gatepass,access_item_gatepass,model_item_gatepass,base.group_system,1,1,1,1
+access_item_gatepass_line,access_item_gatepass_line,model_item_gatepass_line,base.group_system,1,1,1,1
+access_item_gatepass,access_item_gatepass,model_item_gatepass,bsg_items_gatepass.groups_items_gatepass,1,1,1,1
+access_item_gatepass_line,access_item_gatepass_line,model_item_gatepass_line,bsg_items_gatepass.groups_items_gatepass,1,1,1,1
+
+

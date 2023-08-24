@@ -1,0 +1,23 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Sequence  -->
+    <record id="ir_sequence_credit_customer_collection" model="ir.sequence">
+        <field name="name">Credit Customer Collection</field>
+        <field name="code">credit.customer.collection</field>
+        <field name="prefix">CC-</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="ir_cron_reverse_entry" model="ir.cron">
+        <field name="name">Update Crdti Customer Collection</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+        <field name="code">model._update_credit_collection_id()</field>
+        <field name="state">code</field>
+    </record>
+
+  </data>
+</odoo>

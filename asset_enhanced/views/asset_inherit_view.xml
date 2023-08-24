@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- inherit for adding new filed on assert category -->
+        <record id="view_account_asset_asset_form_inherit" model="ir.ui.view">
+            <field name="name">account.asset.asset.form</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">                
+                <field name="journal_id" position="after">
+                    <field name="bsg_branches_id" attrs="{ 'invisible': ['|',('asset_type', '!=', 'purchase'), ('state', '=', 'model')]}" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="department_id" attrs="{ 'invisible': ['|',('asset_type', '!=', 'purchase'), ('state', '=', 'model')]}" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="fleet_vehicle_id" attrs="{ 'invisible': ['|',('asset_type', '!=', 'purchase'), ('state', '=', 'model')]}" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="is_sold" attrs="{ 'invisible': ['|',('asset_type', '!=', 'purchase'), ('state', '=', 'model')]}" />
+                    <field name="sale_date" attrs="{ 'invisible': ['|',('asset_type', '!=', 'purchase'), ('state', '=', 'model')]}" />
+                </field>
+                <field name="salvage_value" position="after">
+                    <field name="accumulated_depreciation" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('asset_type','=','sale')]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="violation_action_form_view">
+            <field name="name">violation_action_form_view</field>
+            <field name="model">violation.action</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view  -->
+        <record model="ir.ui.view" id="violation_action_tree_view">
+            <field name="name">violation_action_tree_view</field>
+            <field name="model">violation.action</field>
+            <field name="arch" type="xml">
+                <tree string="Violation Action">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search view  -->
+        <record id="violation_action_view_search" model="ir.ui.view">
+            <field name="name">violation_action_search</field>
+            <field name="model">violation.action</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+                <record model="ir.actions.act_window" id="config_violation_action">
+            <field name="name">Config Violation Action</field>
+            <field name="res_model">violation.action</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+</odoo>

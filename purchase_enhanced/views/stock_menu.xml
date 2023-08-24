@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.menu" id="stock.menu_stock_root">
+        <field name="name">Inventory</field>
+        <field name="groups_id"
+        eval="[(6,0,[])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock.menu_warehouse_report">
+        <field name="name">Reporting</field>
+        <field name="groups_id"
+        eval="[(6,0,[])]"/>
+    </record>
+
+   <record model="ir.ui.menu" id="stock.menu_warehouse_config">
+        <field name="name">Warehouse Management</field>
+        <field name="groups_id"
+        eval="[(6,0,[])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock.all_picking">
+        <field name="name">Transfers</field>
+        <field name="groups_id"
+        eval="[(6,0,[ref('purchase_enhanced.group_stock_user_all'),
+                                            ])]"/>
+    </record>
+
+
+
+    <record model="ir.ui.menu" id="stock.stock_picking_type_menu">
+            <field  name="name">Overview</field>
+            <field name="groups_id" eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_overview'),
+                                    ])]"/>
+    </record>        
+
+
+    <record model="ir.ui.menu" id="stock_picking_batch.stock_picking_batch_menu">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_batch_picking'),
+                                                ])]"/>
+    </record>
+
+<!--    Migration Note-->
+<!--    <record model="ir.ui.menu" id="stock.menu_action_inventory_form">-->
+    <record model="ir.ui.menu" id="stock.menu_action_inventory_tree">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_inventory_adjustment'),
+                                                ])]"/>
+    </record>
+
+
+    <record model="ir.ui.menu" id="stock.menu_stock_scrap">
+        <field name="name">Scrap</field>
+        <field name="groups_id"
+        eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_inventory_scrap'),
+                                                ])]"/>
+    </record>    
+
+
+    <record model="ir.ui.menu" id="stock_landed_costs.menu_stock_landed_cost">
+        <field name="name">Landed Costs</field>
+        <field name="groups_id"
+        eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_land_costs'),
+                                                ])]"/>
+    </record>    
+
+
+    <record model="ir.ui.menu" id="stock.menu_procurement_compute">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_run_scheduler'),
+                                                ])]"/>
+    </record>
+
+
+    <record model="ir.ui.menu" id="stock.menu_reordering_rules_config">
+        <field name="name">Reordering Rules</field>
+        <field name="groups_id"
+        eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_reordering_rules'),
+                                            ])]"/>
+    </record>    
+
+    <record model="ir.ui.menu" id="stock.menu_action_production_lot_form">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_serial_number'),
+                                                ])]"/>
+    </record>
+
+
+    <record model="ir.ui.menu" id="stock.menu_package">
+         <field name="name">Packages</field>
+         <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_user_packages'),
+                                                ])]"/>
+    </record>     
+
+    <record model="ir.ui.menu" id="stock.menu_product_variant_config_stock">
+        <field name="name">Products</field>
+        <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_create_product'),
+                        ref('purchase_enhanced.custom_group_stock_view_product')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock.product_product_menu">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_create_product'),
+                        ref('purchase_enhanced.custom_group_stock_view_product')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock.menu_stock_config_settings">
+            <field name="name">Configuration</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_configuration'),
+                                                ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_enterprise.stock_dashboard_menuitem">
+            <field name="name">Warehouse Dashboard</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_dashboard'),
+                                                ])]"/>
+    </record>        
+
+    <record model="ir.ui.menu" id="stock.menu_valuation">
+            <field name="name">Inventory Report</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_inventory_report'),
+                                                ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_account.menu_valuation">
+            <field name="name">Inventory Valuation</field>
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_inventory_valuation'),
+                                                ])]"/>
+    </record>        
+
+
+    <record model="ir.ui.menu" id="stock.stock_move_menu">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_moves'),
+                                                ])]"/>
+    </record>                                            
+
+
+    <record model="ir.ui.menu" id="stock.stock_move_line_menu">
+            <field name="groups_id"
+            eval="[(6,0,[ref('purchase_enhanced.custom_group_stock_product_moves'),
+                                                ])]"/>
+    </record>
+
+</odoo>

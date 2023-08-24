@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="res_company_view_extend" model="ir.ui.view">
+            <field name="name">res.company.view.extend</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]" position="after">
+                    <page string="Report Information">
+                        <group>
+                            <group>
+                                <field name="custom_right_header" widget="image" class="oe_avatar"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

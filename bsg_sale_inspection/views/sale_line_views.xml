@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_form_inherited">
+        <field name="name">view.bsg.vehicle.cargo.sale.line.form.inherited</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+        <field name="arch" type="xml">
+            <button name="register_other_service_payment" position="after">
+                <field name="is_inspected" invisible="1"/>
+                <button name="%(bsg_sale_inspection.add_inspection_wizard_form_action)d"
+                        type="action" string="Add Inspection"
+                        attrs="{'invisible': ['|', ('is_inspected','=', True), ('state', '=', 'cancel')]}"
+                />
+            </button>
+            <xpath expr="//sheet/notebook" position="inside">
+                <page name="inspection" string="Inspection Details">
+                    <field name="inspection_lines">
+                        <tree editable="top" create="0" edit="1">
+                            <field name="pickup_loc" invisible="1"  />
+                            <field name="drop_loc" invisible="1"  />
+                            <field name="allowed_branched" invisible="1"  />
+                            <field name="allowed_to_edit" invisible="1"  />
+                            <field name="sequence" widget="handle" />
+                            <field name="employee_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"
+                                   required="1"  attrs="{'readonly': [('allowed_to_edit','=', False)]}"/>
+                            <field name="inspection_type" required="1"
+                                   attrs="{'readonly': [('allowed_to_edit','=', False)]}"/>
+                            <field name="branch_id" options="{'no_create':True,'no_edit':True, 'no_open': True}" required="1"
+                                   readonly="1"/>
+                            <field name="date" readonly="1" />
+                            <field name="user_id" options="{'no_create':True,'no_edit':True, 'no_open': True}" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="extends_view_vehicle_cargo_sale_form" model="ir.ui.view">
+        <field name="name">extends_view_vehicle_cargo_sale_form</field>
+        <field name="model">bsg_vehicle_cargo_sale</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='order']/field[@name='order_line_ids']/tree/button[@name='action_inspect_view']" position="after">
+                <field name="is_inspected" invisible="1"/>
+                <button name="action_add_inspection"
+                        attrs="{'invisible': ['|', ('is_inspected','=', True), ('state', '=', 'cancel')]}"
+                        type="object" icon="fa-pencil-square-o" style="color:orange;" class="btn-primary" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

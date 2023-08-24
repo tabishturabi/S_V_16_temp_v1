@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="view_bsg_driver_unassign_form">
+            <field name="name">driver.unassign.form</field>
+            <field name="model">driver.unassign</field>
+            <field name="arch" type="xml">
+                <form>
+                	<header>
+                    	<field name="state" widget="statusbar"/>
+	                    <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible':[('state','!=','draft')]}"/>
+	                    <button name="action_draft" type="object" string="Set to Draft" class="oe_link" attrs="{'invisible': [('state', 'in', ['draft','confirm'])]}"/>
+	                    <button name="action_cancel" type="object" string="Cancel" class="oe_link" attrs="{'invisible':[('state','in', ['confirm','cancel'])]}"/>
+                	</header>
+                    <sheet string="Driver Unassignment">
+                         <div class="oe_title">
+                            <h1> <field name="unassignment_no" class="oe_inline" readonly="1" /></h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="fleet_vehicle_id" options="{'no_create': True,'no_open':True}" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="serial_no" attrs="{'readonly':[('state','!=','draft')]}"/>
+<!--                                 <field name="truck_no" /> -->
+<!--                                 <field name="truck_type_name" /> -->
+<!--                                 <field name="trailer_no" /> -->
+                                <field name="unassign_driver_id" readonly="1" force_save="1" domain="[('is_driver','=',True)]" />
+                                <field name="unassign_driver_code" readonly="1" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="unassign_date" readonly="1" />
+                                <field name="model_id" readonly="1" force_save="1"/>
+<!--                                 <field name="trailer_name" /> -->
+<!--                                 <field name="manufacturing_year" /> -->
+                                <field name="assign_driver_id"  force_save="1" domain="[('is_driver','=',True)]" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="assign_driver_code" readonly="1" force_save="1"/>
+                                <field name="maintenence_work" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="assign_id" invisible="1"/>
+                            </group>
+                        </group>
+                        
+                         <notebook>
+                            <page name="genral" string="Genral Information">
+                                <group string="Truck Information">
+                                    <group>
+                                        <field name="vehicle_type_id" readonly="1" force_save="1"/>
+                                        <field name="chassis_no" readonly="1" force_save="1"/>
+                                        <field name="location_id" force_save="1" required="1"/>
+                                    </group>
+                                    <group>
+                                            <field name="x_vehicle_type_id" force_save="1" required="1"/>
+                                        <field name="truck_status_id" force_save="1" required="1"/>
+                                        <field name="manufactr_year" readonly="1" force_save="1"/>
+                                        <field name="plat_no" readonly="1" force_save="1"/>
+                                    </group>
+                                </group>
+                                 <group>
+                                    <field name="comme" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                                <br/>
+                                <group string="Trailer Information">
+                                    <group string="Previous Trailer">
+                                    	<field name="previous_trailer_no" force_save="1" readonly="1"/>
+                                        <field name="trailer_type_id" readonly="1" force_save="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                        <field name="trailer_asset_status" force_save="1" readonly="1"/>
+                                        <field name="pre_location_id" force_save="1" readonly="1"/>
+                                    </group>
+                                    <group string="New Trailer">
+                                        <field name="trailer_names" readonly="1" force_save="1"/>
+                                        <field name="trailer_id" force_save="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                        <field name="new_trailer_asset_status" force_save="1" required="1"/>
+                                        <field name="new_location_id" force_save="1" required="1"/>
+                                    </group>
+                                </group>
+                                 <group>
+                                    <field name="comm" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                            </page>
+                             <page name="TAMM" string="Document Info">
+                                <group>
+                                    <group>
+                                        <field name="register" widget="radio" options="{'horizontal':true}"/>
+                                        <field name="register_tamm" attrs="{'invisible':[('register','!=','yes')]}"/>
+                                        <field name="original_form" widget="radio" options="{'horizontal':true}" />
+                                        <field name="original_periodic_check" widget="radio" options="{'horizontal':true}" />
+                                    </group>
+                                    <group>
+                                        <field name="register_date"  class="with_hijri" attrs="{'required':[('register','=','yes')],'invisible':[('register','!=','yes')]}"/>
+                                        <field name="description" attrs="{'required':[('register','=','no')],'invisible':[('register','!=','no')]}"/>
+                                        <field name="original_form_reason" attrs="{'required':[('original_form','=','no')],'invisible':[('original_form','!=','no')]}"/>
+                                        <field name="original_periodic_check_reason" attrs="{'required':[('original_periodic_check','=','no')],'invisible':[('original_periodic_check','!=','no')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="driver" string="Driver Custody">
+                            	<group>
+                            		<group>
+		                                <field name="jack" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="fire_extinguisher" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="triangel" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="tire_wrench_tractor" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="tire_wrench_trailer" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="battery" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                        <field name="driver_receipt_original_istimara"/>
+                                        <field name="reason" attrs="{'invisible':[('driver_receipt_original_istimara','!=','no')],'required':[('driver_receipt_original_istimara','=','no')]}"/>
+		                            </group>
+		                            <group>
+		                            	<field name="fixing_tools" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="belt" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="lock" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                                <field name="cover" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                		<field name="chain" attrs="{'readonly':[('state','!=','draft')]}"/>
+		                            </group>
+                            	</group>
+                            	<group>
+                                    <field name="other_tools" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                                <group>
+                                    <field name="driver_comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                            </page>
+                            <page name="vehicle" string="Vehicle Custody">
+                            	<group string="Values">
+                            <group>
+                                <field name="kilometrage" string="Odometer value" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                            	<field name="fuel_qty" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                        <group string="Truck Documents">
+                            <group>
+                                <field name="truck_license" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="insurance_card" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="weight_card" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="truck_inspection_card" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="oil_card" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="truck_head" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="trailer_tire" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="plate" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                        <group string="Spare Tires">
+                            <group>
+                                <field name="spare_tire_truck" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="spare_tire_trailer" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                        <group string="Truck Tools">
+                            <group>
+                                <field name="tire_unfix_lieber" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="hands_lifted_trailer" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="lift_tool_truck_head" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="unfix_tool_spare_tire" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="pliers" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="spanner_musharshar" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="spanner_baladi" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="hammer" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="spanner" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="screw_drivers" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="sixfold_key" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="ladders" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="air_condition" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                 <field name="cabin_cleaner" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="recoder" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="cooler" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="cover_battery" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="cover_of_diesel_tank" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="emergency_rotaing_light" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="curtains" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="bed" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="trailer_plate" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="air_pipe" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                        <group string="Body &amp; content of external Truck">
+                            <group name="left">
+                                <field name="front_glass" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="side_glass" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="lights" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="front_light" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="back_light" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="side_flashing_tractor" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="side_flashing_trailer" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="shocks_scratches" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="big_side_mirror" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="small_side_mirror" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group name="right" />
+                        </group>
+                        <group>
+                            <field name="comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                            </page>
+                            
+                        <page name="document" string="Other Info">
+                        	<group string="Document Reference">
+                        		<field name="document_ref" readonly="1"/>
+                        	</group>
+                        </page>
+                        
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree view   -->
+        <record model="ir.ui.view" id="view_bsg_driver_unassign_tree">
+            <field name="name">driver.unassign.tree</field>
+            <field name="model">driver.unassign</field>
+            <field name="arch" type="xml">
+                <tree string="Driver Unassignment" default_order='unassign_date desc,unassignment_no desc'>
+                    <field name="unassignment_no"/>
+                    <field name="fleet_vehicle_id"/>
+                    <field name="model_id"/>
+                    <field name="assign_driver_id"/>
+                    <field name="unassign_driver_id"/>
+                    <field name="trailer_id"/>
+                    <field name="unassign_date"/>
+                    <field name="document_ref"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Serach view  -->
+	    <record id="view_bsg_driver_unassign_search" model="ir.ui.view">
+	            <field name="name">driver.unassign.search</field>
+	            <field name="model">driver.unassign</field>
+	            <field name="arch" type="xml">
+	                <search string="Driver Unassignment">
+	                    <field name="unassignment_no"/>
+	                    <field name="fleet_vehicle_id"/>
+	                    <field name="model_id"/>
+	                    <field name="assign_driver_id"/>
+	                    <field name="unassign_driver_id"/>
+	                    <field name="trailer_id"/>
+	                    <field name="unassign_date"/>
+	                    <field name="document_ref"/>
+	                </search>
+	            </field>
+	    </record>
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="bsg_driver_unassign_action">
+            <field name="name">Driver Unassignment</field>
+            <field name="res_model">driver.unassign</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_bsg_driver_unassign_tree" />
+        </record>
+        <menuitem name="Driver Unassignment" id="driver_unassign_menu" parent="bsg_fleet_operations.root_driver_master" sequence="2" action="bsg_driver_unassign_action" />
+    </data>
+</odoo>

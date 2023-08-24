@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="resource_calendar_form_inherit" model="ir.ui.view">
+            <field name="name">resource.calendar.form</field>
+            <field name="model">resource.calendar</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="resource.resource_calendar_form"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <field name="max_late_minutes" position="after">
+                    <field name="max_early_muintes" widget="float_time"/>
+                </field>
+            </field>
+    	</record>
+
+		<record id="view_resource_calendar_attendance_tree_inherit" model="ir.ui.view">
+            <field name="name">resource.calendar.attendance.tree</field>
+            <field name="model">resource.calendar.attendance</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="resource.view_resource_calendar_attendance_tree"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <field name="day_period" position="after">
+                    <field name="begin_in"  widget="float_time"/>
+                    <field name="end_in"  widget="float_time"/>
+                    <field name="begin_out"  widget="float_time"/>
+                    <field name="end_out"  widget="float_time"/>
+                </field>
+            </field>
+    	</record>
+
+		<record id="view_resource_calendar_attendance_form_inherit" model="ir.ui.view">
+            <field name="name">resource.calendar.attendance.form</field>
+            <field name="model">resource.calendar.attendance</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="resource.view_resource_calendar_attendance_form"/>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <field name="day_period" position="after">
+                    <label for="begin_in" string="Checkin"/>
+                    <div>
+                        <field name="begin_in" widget="float_time" class="oe_inline"/> -
+                        <field name="end_in" widget="float_time" class="oe_inline"/>
+                    </div>
+                    <label for="begin_out" string="Checkout"/>
+                    <div>
+                        <field name="begin_out" widget="float_time" class="oe_inline"/> -
+                        <field name="end_out" widget="float_time" class="oe_inline"/>
+                    </div>
+                </field>
+            </field>
+    	</record>
+    </data>
+</odoo>

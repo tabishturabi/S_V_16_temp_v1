@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_fleet_vehicle_bayan">
+            <field name="name">view.fleet.vehicle.bayan</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]/group[2]/label[@for='odometer']" position="before">
+                    <field name="bayan_plate_type_id" force_save="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

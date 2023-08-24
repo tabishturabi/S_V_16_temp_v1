@@ -1,0 +1,19 @@
+<odoo>
+    <data noupdate="1">
+        <record id="ir_sequence_government_sale" model="ir.sequence">
+            <field name="name">Government Sale</field>
+            <field name="code">government.sale</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="ir_sequence_government_cc_sale" model="ir.sequence">
+            <field name="name">Government CC Sale</field>
+            <field name="code">government.cc.sale</field>
+            <field name="prefix"></field>
+            <field name="padding">4</field>
+        </record>
+
+
+    </data>
+</odoo>

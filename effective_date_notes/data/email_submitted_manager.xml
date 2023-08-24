@@ -1,0 +1,143 @@
+<odoo>
+    <data noupdate="0">
+
+        <record id="effect_mail_employee_manager_temp" model="mail.template">
+            <field name="name">Employee Effective Notice Date Report</field>
+            <field name="model_id" ref="effective_date_notes.model_effect_request"/>
+            <field name="subject">Effective Notice Date | : ${object.name} | Request Manager</field>
+
+            <field name="body_html">
+                <![CDATA[
+			<div>
+				<table border="0" width="100%" cellpadding="0" bgcolor="#ededed" style="padding: 20px; background-color: #ededed; border-collapse:separate;" summary="o_mail_notification">
+					<tbody>
+						<tr>
+							<td align="center" style="min-width: 500px;">
+								<table width="500" border="0" cellpadding="0" bgcolor="#3c73aa" style="background-color: #90EE90;min-width: 650px; padding: 10px; border-collapse:separate;">
+									<tr><td valign="middle">
+									<p><img t-att-src="image_data_uri(object.company_id.logo)" height="100px" width="100px"/></p>
+									</span>
+									</td>
+										<td valign="middle" align="right">
+										<h5 style="color: #fff;"></h5>
+										</td>
+									</tr>
+					            </table>
+					        </td>
+					    </tr>
+
+					    <tr>
+					        <td align="center" style="min-width: 590px;">
+					            <table width="590" border="0" cellpadding="0" bgcolor="#ffffff" style="min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;">
+					                <tbody>
+
+					                <tr>
+						                    	<p style="margin: 0 0 0.0em;font-size: 12px;color: #555;">Reference No:</p>
+										       <span style="font-size:20px; color:#555; font-weight: bold;">
+										         ${object.name}
+						                	<td valign="top" style="font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;">
+
+<!--						                    	<p style="margin: 0 0 0.3em;">Entry Date: <strong>${object.entry_date}</strong></p>-->
+						                	</td>
+					                	</tr>
+
+					                	<tr>
+								       <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size: 11px;">
+									        <hr width="100%" style="background-color: #3c73aa; border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 4px 0px;">
+										${object.employee_id.name}
+									        <div style="color: #3c73aa;padding-top: 10px;">
+									          92000 5353 |
+									         <a style="text-decoration: none; color: #3c73aa;" href="mailto:info@albassami.com" class="mailto-link" target="_blank">info@albassami.com</a> |
+									         <a style="text-decoration: none; color: #3c73aa;" href="#" target="_blank" rel="noopener"> https:www:albassamitransport.com </a>
+									        </div>
+									        </td>
+									      </tr>
+					                </tbody>
+					            </table>
+					        </td>
+					    </tr>
+					</tbody>
+				</table>
+			</div>
+
+
+            <a target="_blank" href="${object.base_url()}/web#id=${object.id}&action=1518&model=effect.request&view_type=form&menu_id=1255"
+               style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
+                View Request</a>
+
+			]]>
+            </field>
+        </record>
+
+        <record id="vacation_mail_employee_manager_temp" model="mail.template">
+            <field name="name">Employee Return Vacation Date Report</field>
+            <field name="model_id" ref="effective_date_notes.model_return_vacation"/>
+            <field name="subject">Employee Return Vacation | : ${object.name} | Request Manager</field>
+
+            <field name="body_html">
+                <![CDATA[
+			<div>
+				<table border="0" width="100%" cellpadding="0" bgcolor="#ededed" style="padding: 20px; background-color: #ededed; border-collapse:separate;" summary="o_mail_notification">
+					<tbody>
+						<tr>
+							<td align="center" style="min-width: 500px;">
+								<table width="500" border="0" cellpadding="0" bgcolor="#3c73aa" style="background-color: #90EE90;min-width: 650px; padding: 10px; border-collapse:separate;">
+									<tr><td valign="middle">
+									<p><img t-att-src="image_data_uri(object.company_id.logo)" height="100px" width="100px"/></p>
+									</span>
+									</td>
+										<td valign="middle" align="right">
+										<h5 style="color: #fff;"></h5>
+										</td>
+									</tr>
+					            </table>
+					        </td>
+					    </tr>
+
+					    <tr>
+					        <td align="center" style="min-width: 590px;">
+					            <table width="590" border="0" cellpadding="0" bgcolor="#ffffff" style="min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;">
+					                <tbody>
+
+					                <tr>
+						                    	<p style="margin: 0 0 0.0em;font-size: 12px;color: #555;">Reference No:</p>
+										       <span style="font-size:20px; color:#555; font-weight: bold;">
+										         ${object.name}
+						                	<td valign="top" style="font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;">
+
+<!--						                    	<p style="margin: 0 0 0.3em;">Entry Date: <strong>${object.entry_date}</strong></p>-->
+						                	</td>
+					                	</tr>
+
+					                	<tr>
+								       <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size: 11px;">
+									        <hr width="100%" style="background-color: #3c73aa; border: none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 4px 0px;">
+										${object.employee_id.name}
+									        <div style="color: #3c73aa;padding-top: 10px;">
+									          92000 5353 |
+									         <a style="text-decoration: none; color: #3c73aa;" href="mailto:info@albassami.com" class="mailto-link" target="_blank">info@albassami.com</a> |
+									         <a style="text-decoration: none; color: #3c73aa;" href="#" target="_blank" rel="noopener"> https:www:albassamitransport.com </a>
+									        </div>
+									        </td>
+									      </tr>
+					                </tbody>
+					            </table>
+					        </td>
+					    </tr>
+					</tbody>
+				</table>
+			</div>
+
+
+            <a target="_blank" href="${object.base_url()}/web#id=${object.id}&action=1525&model=return.vacation&view_type=form&menu_id=1255"
+               style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
+                View Request</a>
+
+
+			]]>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

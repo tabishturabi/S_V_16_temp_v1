@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="reason_housing_form_view" model="ir.ui.view">
+            <field name="name">reason.housing_entry_form_view</field>
+            <field name="model">reason.entry</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Entry Reason">
+                    <header>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="housing.all_permission_settings_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+
+                        <group>
+                            <field name="description" nolabel="1" placeholder="e.g Entry reason"/>
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="reason_housing_tree_view" model="ir.ui.view">
+            <field name="name">reason.housing_entry_tree_view</field>
+            <field name="model">reason.entry</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="housing_reason_housing_view_search" model="ir.ui.view">
+            <field name="name">configuration.housing.search</field>
+            <field name="model">reason.entry</field>
+            <field name="arch" type="xml">
+                <search string="Housing">
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="housing_reason_action" model="ir.actions.act_window">
+            <field name="name">Entry Reason</field>
+            <field name="res_model">reason.entry</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+
+        <menuitem id="reason_housing_permission_menu" name="Entry Reason" action="housing_reason_action"
+                  parent="config_permission_main_menu" sequence="2" groups="housing.reason_entry_housing_group"/>
+    </data>
+</openerp>

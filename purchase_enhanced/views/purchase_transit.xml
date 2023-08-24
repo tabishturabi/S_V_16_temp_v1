@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+    <!-- Form View  -->
+        <record model="ir.ui.view" id="view_purchase_req_form">
+            <field name="name">purchase.transit.form</field>
+            <field name="model">purchase.transit</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Transit">
+                    <group>
+                        <group>
+                            <field name="partner"/>
+                            <field name="picking_type_id"/>
+                            <field name="location_id"/>
+                            <field name="location_dest_id"/>
+                        </group>
+                        <group>
+                            <field name="datetime"/>
+                            <field name="origin"/>
+                            
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Transit Line">
+                            <field name="purchase_transit">
+                                 <tree string="Purchase Request" editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="intial"/>
+                                    <field name="reserved"/>
+                                    <field name="done"/>
+                                 
+                                 </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                
+                </form>
+            </field>
+        </record>
+        
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_purchase_req_tree">
+            <field name="name">purchase.req._tree</field>
+            <field name="model">purchase.req</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Reference"/>
+                    <field name="date_pr"/>
+                </tree>
+            </field>
+        </record>
+        
+        
+    </data>
+</odoo>

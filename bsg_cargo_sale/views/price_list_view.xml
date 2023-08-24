@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+<record id="product_pricelist_view_form" model="ir.ui.view">
+            <field name="name">cargo.sale.product.pricelist.form.inherit</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="before">
+                        <field name="pricelist_code"/>
+                       <field name="date_from" />
+                       <field name="date_to" />
+                       <field name="is_public" />
+                       <field name="is_attachment_required"/>
+                       <field name="is_cash" />
+                       <field name="is_qr_required" />
+                       <field name="agreement_type" />
+                       <field name="location_domain" />
+                       <field name="loc_from_ids" attrs="{'invisible':[('location_domain','!=',True)]}"/>
+                       <field name="loc_to_ids" attrs="{'invisible':[('location_domain','!=',True)]}"/>
+                       <field name="shipment_type" />
+                       <field name="partner_types" />
+                </field>
+            </field>
+</record>
+
+</odoo>        

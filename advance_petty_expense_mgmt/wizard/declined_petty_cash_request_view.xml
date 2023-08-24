@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="declined_petty_cash_request_form">
+            <field name="name">declined_petty_cash_request.form</field>
+            <field name="model">declined_petty_cash_request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Reject Petty Cash Request">
+                    <group>
+                      <group>
+                          <field name="petty_cash_id" invisible="1"/>
+                          <field name="reject_reason" required="1"/>
+                      </group>
+                     
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="reject_petty_cash_request" string="Reject Request" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="declined_petty_cash_request_action" model="ir.actions.act_window">
+            <field name="name">Reject Petty Cash Request</field>
+            <field name="res_model">declined_petty_cash_request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="declined_petty_cash_request_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

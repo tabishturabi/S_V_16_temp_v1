@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data noupdate="0">
+          <record id="groups_vehicle_documents_reports" model="res.groups">
+              <field name="name">Vehicle Documents Reports</field>
+              <field name="comment">The user will have access to vehicle documents report menu.</field>
+              <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>
+          </record>
+    </data>
+</odoo>

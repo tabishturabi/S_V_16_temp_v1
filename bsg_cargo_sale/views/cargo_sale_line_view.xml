@@ -1,0 +1,508 @@
+<odoo>
+  <data>
+
+
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_form">
+        <field name="name">bsg_vehicle_cargo_sale_line.form</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form delete="false" create="false" >
+                <header>
+                  <!--attrs="{'invisible':['|','|',('is_demurrage_inovice','=',True),('demurrage_check','=',True),('state','!=','Delivered'),]}"-->
+                  <button style="color:blue;" name="calculated_no_of_days" type="object" class="btn-primary" state="Delivered"
+                          attrs="{'invisible':[('state','!=','Delivered')]}" confirm="Are you sure you want to confim?" string="Release Car"/>
+                  <button name="print_delivery_report_done_sate" string="Print Delivery Report" attrs="{'invisible':[('state','!=','done')]}" type="object" class="btn-primary" groups="bsg_trip_mgmt.group_delivery_report"/>
+                  <button name="cancel_so_line" string="Cancel So Line" type="object" class="o_sale_confirm" attrs="{'invisible':[('state','=','cancel')]}" groups="bsg_cargo_sale.group_cancel_agreements"  />
+                  <button name="register_payment"
+                                groups="bsg_cargo_sale.group_cancell_so,bsg_cargo_sale.group_register_payment_on_agreement"
+                                string="Register Payment"
+                                type="object"
+                                class="o_sale_confirm"
+                                invisible="1"/>
+
+                  <button name="register_other_service_payment"
+                                groups="bsg_cargo_sale.group_cancell_so,bsg_cargo_sale.group_register_payment_on_agreement"
+                                string="Register Other Service Payment"
+                                type="object"
+                                class="o_sale_confirm"
+                                invisible="1"/>
+
+
+                  <button name="register_payment_for_all_invoices"
+                                groups="bsg_cargo_sale.group_cancell_so,bsg_cargo_sale.group_register_payment_on_agreement"
+                                string="Register Payment"
+                                type="object"
+                                class="o_sale_confirm"
+                                attrs="{'invisible':['|',    ('state','=','cancel')
+                                                    ,'|',    ('is_warning_message','!=',False)
+                                                    ,'|',    ('payment_method_code','not in',['cash','pod','credit'])
+                                                    ,'&amp;',('no_cargo_inv_line_to_pay','=',True)
+                                                    ,'&amp;',('no_other_inv_line_to_pay','=',True)
+                                                            ,('no_demurrage_inv_line_to_pay','=',True)]}"
+                                />
+                  <field name="state" widget="statusbar"/>
+                </header>
+               
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                            <field name="invoice_count" widget="statinfo" string="Demurrage Invoices"/>
+                        </button>
+                    </div>                 
+                    <div class="oe_title">
+                      <h1>
+                          <field name="sale_line_rec_name" readonly="1"/>
+                      </h1>
+                    </div>
+
+                    <div class="alert alert-info" role="alert" attrs="{'invisible': [('is_warning_message','!=',False)]}">
+                      Warning you have SO amount <field name="warning_so_amount" nolabel="1" style="margin-left:2px;margin-right:8px;color:red;"/>and you have Demerage Fees <field name="warning_demurrage_amount" nolabel="1" style="margin-left:2px;margin-right:8px;color:red;"/>, Other Service<field name="warning_other_service_amount" nolabel="1" style="margin-left:4px;color:red;"/>
+                    </div>
+
+                  <group name="top" >
+                    <group name="left" >
+                      <field name="is_warning_message" invisible="1"/>
+                      <field name="sequence" invisible="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="sequence2" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="order_date"/>
+                      <field name="recieved_from_customer_date" readonly="1"/>
+                      <field name="customer_id" options="{'no_open': True,}"/>
+                      <field name="expected_delivery" options="{'no_open': True,}"/>
+                        <label for="est_no_delivery_days" string="Est Days From"/>
+                        <div>
+                            <field name="est_no_delivery_days" force_save="1" readonly="1" class="oe_inline"/>
+                            <span style="margin-right: 12px;">  الي </span>
+                            <field name="est_max_no_delivery_days" force_save="1" readonly="1" class="oe_inline" style="margin-right: 12px;"/>
+                            <span style="margin-right: 12px;">أيام</span>
+                        </div>
+                      <field name="loc_from" options="{'no_open': True}"/>
+                      <field name="return_loc_from" options="{'no_open': True}"/>
+                      <field name="cargo_sale_state" invisible="1"/>
+                      <field name="sms_sent" invisible="1"/>
+                        <field name="check_sales_team_update" invisible="1"/>
+
+                      <field name="car_make" required="1" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="car_model" readonly="1" string="Model" required="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="car_size" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="customer_price_list" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="discount_price" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}"/>
+                      <field name="year" string="Year" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="car_color" string="Color" attrs="{'readonly': [('check_sales_team_update', '=', False)]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="is_satah" readonly="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}"/>
+                      <field name="pickup_loc" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="drop_loc" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="receiver_name" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="sale_shipment_type"/>
+                      <field name="sms_otp" groups="bsg_cargo_sale.group_sms_otp" />
+                      <field name="revenue_type" invisible="1"/>
+<!--                       <field name="act_receiver_name"/>
+ -->                      <!-- <field name="receiver_mob_no" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/> -->
+                    </group>
+                    <group name="right">
+                        <field name="currency_id" invisible="1" />
+                        <field name="company_currency_id" invisible="1" />
+                        <field name="is_currency_diff" invisible="1"/>
+                        <field name="delivery_date" readonly="1"  attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}"/>
+                        <field name="partner_add_to_trip_id" readonly="1" options="{'no_open': True}"></field>
+                        <field name="chassis_no"  string="Chasis No" attrs="{'readonly': [('check_sales_team_update', '=', False)]}"/>
+                        <field name="plate_registration" required="1" readonly="1"  string="Registration Type" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}"/>
+                        <field name="plate_type" readonly="1"  string="Plate Type" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" options="{&quot;no_open&quot;: True,&quot;no_create&quot;: True}"/>
+                        <field name="loc_to" options="{'no_open': True}"/>
+                        <field name="return_loc_to" options="{'no_open': True}"/>
+                        <field name="non_saudi_plate_no" readonly="1"  attrs="{'readonly': [('state','not in', ['draft','registered'])]}"/>
+                        <label for="plate_no" />
+                        <div class="o_address_format"  >
+                            <field name="plate_no"  class="o_address_zip" attrs="{'readonly': [('check_sales_team_update', '=', False)]}"/>
+                            <field name="palte_one" class="oe_inline" style="margin-left: 12px;" attrs="{'readonly': [('check_sales_team_update', '=', False)]}"/>
+                            <field name="palte_second" class="oe_inline" style="margin-left: 12px;" attrs="{'readonly': [('check_sales_team_update', '=', False)]}"/>
+                            <field name="palte_third" class="oe_inline" style="margin-left: 12px;" attrs="{'readonly': [('check_sales_team_update', '=', False)]}"/>
+                        </div>
+                        <field name="service_type" string="Service" required="1" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" readonly="1" options="{&quot;no_open&quot;: True,&quot;no_create&quot;: True}"/>
+                        <field name="charges" readonly="1" string="Charges" attrs="{'readonly': [('state', 'not in', ['draft','registered'])]}" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="original_charges"  string="Currency Amount" attrs="{'invisible':[('is_currency_diff','=',False)]}"  widget='monetary' options="{'currency_field': 'company_currency_id'}"/>
+                        <field name="revenue_amount"/>
+                        <field name="bsg_cargo_sale_id" readonly="1" />
+                        <field name="return_source_id" options='{"no_create_edit": True}' attrs="{'invisible':[('return_source_id','=',False)]}"/>
+                        <field name="shipping_source_id" options='{"no_create_edit": True}' attrs="{'invisible':[('shipping_source_id','=',False)]}"/>
+                        <field name="bsg_cargo_return_sale_id" readonly="1" attrs="{'invisible': [('bsg_cargo_sale_id', '!=', False)]}" />
+                        <field name="account_id" attrs="{'readonly': [('state','not in', ['draft','registered'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" readonly="1"/>
+                        <field name="payment_method" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" readonly="1"/>
+                        <field name="is_old_order" invisible="1"/>
+                        <field name="payment_method_code" invisible="1"/>
+                        <field name="invoie_state" attrs="{'invisible':[('is_old_order','!=',True)]}"/>
+                        <field name="other_invoice_state" attrs="{'invisible':[('is_old_order','!=',True)]}"/>
+                        <field name="single_trip_reason" attrs="{'invisible': [('single_trip_reason', '=', False)]}"/>
+                        <field name="round_trip_reason" attrs="{'invisible': [('round_trip_reason', '=', False)]}"/>
+                        <field name="qitaf_coupon"  readonly="1"/>
+                        <field name="recieved_from_customer_date" readonly="1"/>
+                    </group>
+                  </group>
+                  <notebook name="notebook">
+                                              <page name="receiver_infomation" 
+                          string="Receiver Infomation" 
+                         >
+                        <group string="Receiver As per So">
+                           <group>
+                              <field name="receiver_name" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" />
+                              <field name="receiver_type" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                              <field name="receiver_nationality" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" />
+                            </group>
+                            <group>
+                              <field name="receiver_id_type" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" />
+                              <field name="receiver_id_card_no" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                              <field name="receiver_visa_no" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"  />  
+                              
+                            <label for="receiver_mob_no"/> 
+                            <div class="o_address_format">
+                              <field name="receiver_mob_country_code"  class="oe_inline" style="width:25%;" readonly="1" /> 
+                              <field name="receiver_mob_no" class="o_address_zip" style="width:86%;" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" />
+                            </div>
+
+                              <field name="no_of_copy" readonly="1"/>
+                              <field name="is_change_receiver_mob" invisible="1" />
+                              <field name="change_receiver_mob" attrs="{'readonly':['|',('is_change_receiver_mob','=',False),('check_sales_team_update', '=', False)]}" groups="bsg_cargo_sale.group_change_receiver_mob_number"/>
+                            </group>
+                        </group>
+
+                        <group string="Actual Receiver">
+                          <group>
+                               <field name="same_as_so_customer"   attrs="{'readonly':[('state','=','done')]}"/>
+                          </group>  
+                          <group></group>
+                           <group>
+                              <field name="act_receiver_name" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered')]}"/>
+                              <field name="act_receiver_type" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered')]}"/>
+                              <field name="is_from_contract_api" invisible="1"/>
+                              <field name="act_receiver_nationality" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered'), ('is_from_contract_api', '!=', True)]}" />
+                            </group>
+                            <group>
+                              <field name="act_receiver_id_type" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered'),('is_from_contract_api', '!=', True)]}" />
+                              <field name="act_receiver_id_card_no" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered'),('is_from_contract_api', '!=', True)]}"/>
+                              <field name="act_receiver_visa_no" attrs="{'readonly':[('state','=','done')]}" />
+                              <field name="act_receiver_mob_no" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered')]}"/>
+                             <!--  <field name="change_receiver_mob" attrs="{'readonly':[('is_change_receiver_mob','=',False)]}" groups="bsg_cargo_sale.group_change_receiver_mob_number"/> -->
+                              <!-- ,('state','=','done') 'is_change_receiver_mob', '=', False)-->
+                              <field name="act_no_of_copy" attrs="{'readonly':[('state','=','done')],'required':[('state','=','Delivered')]}"/>
+                            </group>
+                        </group>
+                      </page>
+
+                        <page name="demurrage_charges" 
+                          string="Demurrage Charges" 
+                         ><!--  attrs="{'invisible':[('state','!=','Delivered')]}" "khaleed want these page as need to see" -->
+                           <group> 
+                              <group>
+                                  <field name="no_of_days" readonly="1"/>
+                                  <field name="current_date" readonly="1"/>
+                                  <field name="is_demurrage_inovice" readonly="1"/>
+                                  <field name="demurrage_check" readonly="1"/>
+                              </group>
+                              <group string="Price Info">
+                                  <field name="without_discount_price" widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                 <field name="dummurrage_discount" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'readonly':[('state','in',['done','released','cancel'])]}" 
+                                  groups="bsg_cargo_sale.group_can_add_demurrage_discount"/>
+                                  <field name="final_without_tax_price" widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                  <field name="demmurage_tax_price" widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                  <field name="final_price" widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                              </group> 
+                            </group>
+                        </page>
+                        <page name="delivery_history" string="Delivery Report History">
+                          <field name="delivery_report_history_ids" nolabel="1" readonly="1" >
+                            <tree string="Report Delivery History" >
+                              <field name="dr_print_no" string="Seq#"/>
+                              <field name="dr_print_date"/>
+                              <field name="act_receiver_name"/>
+                              <field name="dr_user_id"/>
+                              <field name="number"/>
+                              <field name="exit_by" readonly="1" />
+                              <field name="exit_date" readonly="1"/>
+                            </tree>
+                            <form>
+                              <group>
+                                  <group>
+                                    <field name="dr_print_no"/>
+                                    <field name="dr_user_id"/>
+                                  </group>
+                                  <group>
+                                    <field name="dr_print_date"/>
+                                  </group>
+                              </group>
+                            </form>
+                          </field>
+                        </page>
+                        <page name="shipment_history" string="Shipment Report History">
+                          <field name="shipment_report_history_ids" nolabel="1" readonly="1" >
+                            <tree string="Report Shipment History" >
+                              <field name="sr_print_no" string="Seq#"/>
+                              <field name="sr_print_date"/>
+                              <field name="sr_user_id"/>
+                            </tree>
+                            <form>
+                              <group>
+                                  <group>
+                                    <field name="sr_print_no"/>
+                                    <field name="sr_user_id"/>
+                                  </group>
+                                  <group>
+                                    <field name="sr_print_date"/>
+                                  </group>
+                              </group>
+                            </form>
+                          </field>
+                        </page>
+                        <page name="payments" string="Payments">
+                            <group>
+                              <field name="invoice_line_ids" readonly="True">
+                                    <tree>
+                                      <field name="name" />
+                                      <field name="price_total" />
+                                      <field name="paid_amount" />
+                                      <field name="is_paid" string="Is Paid"/>
+                                      <field name="is_refund" string="Is Refund"/>
+                                      <field name="is_other_service_line" string="Is Other Service"/>
+                                      <field name="is_demurrage_line" string="Is Demurrage"/>
+                                      <field name="currency_id"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="price_total" />
+                                            <field name="paid_amount" />
+                                            <field name="is_paid" />
+                                            <field name="is_refund" />
+                                            <field name="is_other_service_line" />
+                                            <field name="is_demurrage_line" />
+                                        </group>
+                                    </form>  
+                                      
+                              </field>
+                              <field name="payment_ids" readonly="True">
+                                      <tree>
+                                          <field name="account_payment_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                          <field name="account_invoice_line_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                          <field name="total" />
+                                          <field name="amount" />
+                                          <field name="payment_currency_id"/>
+                                          <field name="currency_amount" />
+                                    </tree>
+                                    <form>
+                                          <group>
+                                          <group>
+                                              <field name="account_payment_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                              <field name="account_invoice_line_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                              <field name="total" />
+                                              <field name="amount" />
+                                          </group>
+                                          </group>
+                                    </form>
+                              </field>
+                            </group>  
+                              <group>
+                                  <field name="paid_amount" readonly="True"/>
+                                  <field name="is_paid" readonly="True"/>
+                                  <field name="no_cargo_inv_line_to_pay" readonly="True"/>
+                                  <field name="no_other_inv_line_to_pay" readonly="True"/>
+                                  <field name="no_demurrage_inv_line_to_pay" readonly="True"/>
+                                  <field name="is_return_canceled" readonly="True"/>
+                              </group>
+                        </page>           
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>                
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_tree">
+        <field name="name">bsg_vehicle_cargo_sale_line.tree</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree decoration-warning="state in ['draft','confirm']" decoration-info="state=='shipped'" decoration-success="state=='Delivered'" delete="false" create="false">
+              <field name="sequence" invisible="1"/>
+              <field name="sequence2" invisible="1"/>
+              <field name="sale_line_rec_name"/>
+              <field name="customer_id"/>
+              <field name="order_date"/>
+              <field name="recieved_from_customer_date" readonly="1"/>
+              <field name="expected_delivery"/>
+              <field name="loc_from"/>
+              <field name="loc_to"/>
+              <field name="car_make"/>
+              <field name="car_model" string="Model"/>
+              <field name="car_size"/>
+              <field name="is_satah"/>
+              <field name="year" string="Year"/>
+              <field name="car_color" string="Color"/>
+              <field name="chassis_no" string="Chasis No"/>
+              <field name="plate_type" string="Plate Type"/>
+              <field name="general_plate_no" />
+              <!-- <field name="invoie_state"/> -->
+              <field name="service_type" string="Service"/>
+              <field name="state" string="Status" readonly="1"/>
+              <field name="ar_plate_no" invisible="1"/>
+              <field name="delivery_date"/>
+              <field name="charges" string="Charges"/>             
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View Of Trip -->
+    <record id="view_bsg_vehicle_cargo_sale_line_search" model="ir.ui.view">
+        <field name="name">view_bsg_vehicle_cargo_sale_line_search</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="arch" type="xml">
+            <search> 
+              <field name="sale_line_rec_name"/>
+              <field name="loc_from"/>
+              <field name="loc_to"/>
+              <field name="car_make"/>
+              <field name="receiver_mob_no" string="Receiver Mobile No"/>
+              <field name="car_model" string="Model"/>
+              <field name="car_size"/>
+              <field name="year" string="Year"/>
+              <field name="car_color" string="Color"/>
+              <field name="chassis_no" string="Chasis No"/>
+              <field name="plate_type" string="Plate Type"/>
+                <field name="customer_contract"></field>
+              <field name="general_plate_no" 
+                filter_domain="['|','|','|',('plate_no','ilike',self),('non_saudi_plate_no','ilike',self),('general_plate_no','=',self),('ar_plate_no','=',self)]"
+                string="Plate No"/>
+              <field name="service_type" string="Service"/>
+              <field name="state" string="Status" readonly="1"/>
+              <field name="charges" string="Charges"/>
+              <filter string="Payment Method - Cash" name="cash" domain="[('bsg_cargo_sale_payment', '=', 'cash')]"/>
+              <filter string="Payment Method - Credit" name="credit" domain="[('bsg_cargo_sale_payment', '=', 'credit')]"/>
+              <filter string="Payment Method - Payment On Delivery" name="pod" domain="[('bsg_cargo_sale_payment', '=', 'pod')]"/>
+              <group expand="0" name="group_by" string="Group By">
+                <filter name="group_pick_up" string="Pick UP" icon="terp-partner" context="{'group_by':'pickup_loc'}"/>
+                <filter name="group_drop_up" string="Drop UP" icon="terp-partner" context="{'group_by':'drop_loc'}"/>
+                <filter name="group_bsg_cargo_sale_payment" string="Payment Method" context="{'group_by':'payment_method'}"/>
+                <filter name="group_bsg_cargo_sale_car_size" string="Car Size" context="{'group_by':'car_size'}"/>
+                  <filter name="customer_contract" string="Select Contract" context="{'group_by':'customer_contract'}"/>
+              </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- kanban view -->
+    <record model="ir.ui.view" id="bsg_vehicle_cargo_sale_line_kanban">
+        <field name="name">bsg_vehicle_cargo_sale_line.kanban</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="sale_line_rec_name"/>
+                <field name="customer_id"/>
+                <field name="charges"/>
+                <field name="order_date"/>
+                <field name="state"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title"><span><t t-esc="record.customer_id.value"/></span></strong>
+                                </div>
+                                <strong><field name="charges" widget="monetary"/></strong>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span><t t-esc="record.sale_line_rec_name.value"/> <t t-esc="record.order_date.value"/></span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <span class="float-right text-right">
+                                        <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'none': 'danger', 'cancel': 'warning',
+                                        'Delivered': 'success'}}"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- pivot view -->
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_pivot">
+        <field name="name">bsg_vehicle_cargo_sale_line.pivot</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="arch" type="xml">
+            <pivot string="Cargo Sale Line" display_quantity="true">
+                <field name="customer_id" />
+                <field name="unit_charge" string="Charges" type="measure"/>
+                <field name="discount" invisible="1"/>
+                <field name="unit_charge" invisible="1"/>
+                <field name="tax_amount" invisible="1"/>
+                <field name="total_without_tax" invisible="1"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- graph view -->
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_graph">
+        <field name="name">bsg_vehicle_cargo_sale_line.graph</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="arch" type="xml">
+            <graph string="Cargo Sale Line">
+                <field name="customer_id"/>
+                <field name="charges" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Sequence  -->
+    <record id="ir_sequence_bsg_cargo_sale_line" model="ir.sequence">
+        <field name="name">bsg_vehicle_cargo_sale_line</field>
+        <field name="code">bsg_vehicle_cargo_sale_line</field>
+        <field name="prefix"></field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- Sequence  -->
+    <record id="ir_sequence_bsg_cargo_sale_line_delivery" model="ir.sequence">
+        <field name="name">bsg_vehicle_cargo_sale_line_delivery</field>
+        <field name="code">bsg_vehicle_cargo_sale_line_delivery</field>
+        <field name="prefix">%(y)s</field>
+        <field name="padding">6</field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_line">
+        <field name="name">Cargo Sale Line</field>
+        <field name="res_model">bsg_vehicle_cargo_sale_line</field>
+<!--        <field name="view_type">form</field>-->
+         <field name="domain">[
+          '|',
+            ('sale_order_state','in',['done','pod','Delivered']),
+            ('bsg_cargo_return_sale_id','!=',False),
+            ('state','in',['draft','confirm','on_transit','Delivered','shipped','done','released','confirm'])
+            ]</field>
+        <field name="view_mode">tree,kanban,pivot,graph,form</field>
+    </record>
+
+
+    <menuitem name="Cargo Sale Line" 
+      id="cargo_sale_line_root_meun" 
+      parent="sale.sale_menu_root" 
+      action="action_bsg_vehicle_cargo_sale_line"
+      sequence="1"
+      />
+
+      <record model="ir.ui.menu" id="cargo_sale_line_root_meun">
+          <field name="name">Cargo Sale Line</field>
+          <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                              ref('bsg_cargo_sale.group_show_cargo_sale_line'),
+                                              ])]"/>
+      </record>
+
+  </data>
+</odoo>

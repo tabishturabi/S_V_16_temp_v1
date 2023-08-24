@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+
+    <record id="group_stock_restriction_user" model="res.groups">
+        <field name="name">User Restriction</field>
+<!--        Migration Note-->
+<!--        <field name="category_id" ref="base.module_category_warehouse_management"/>-->
+        <!--field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/-->
+    </record>
+
+</data>
+<data noupdate="0">
+<!-- multi -->
+    <record model="ir.rule" id="stock_picking_restriction_rule">
+        <field name="name">Stock Picking Restriction</field>
+        <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('picking_type_id','in', [p.id for p in user.default_picking_type_ids]),
+        ('location_id','in',[p.id for p in user.default_location_ids]),('location_dest_id', 'in', [p.id for p in user.default_location_ids]),'|',('move_ids_without_package','=',False),'|',('move_ids_without_package.product_id.is_out_of_restruction','=',True),('move_ids_without_package.product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+    </record>
+
+    <record model="ir.rule" id="stock_picking_type_rule">
+        <field name="name">Stock Operation Type Restriction</field>
+        <field name="model_id" ref="stock.model_stock_picking_type"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('id','in',[p.id for p in user.default_picking_type_ids])]</field>
+    </record>
+
+
+
+    <record model="ir.rule" id="stock_warehouse_restriction_rule">
+        <field name="name">Warehouse Restriction</field>
+        <field name="model_id" ref="stock.model_stock_warehouse"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('id','in', [p.id for p in user.stock_warehouse_ids])]</field>
+    </record>
+
+    <record model="ir.rule" id="stock_location_restriction_rule">
+        <field name="name">Location Restriction</field>
+        <field name="model_id" ref="stock.model_stock_location"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('id','in',[p.id for p in user.default_location_ids])]</field>
+    </record>
+
+     <record model="ir.rule" id="stock_move_restriction_rule">
+         <field name="name">Stock Move Restriction</field>
+        <field name="model_id" search="[('model','=','stock.move')]" model="ir.model"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('location_id','in',[p.id for p in user.default_location_ids]),('location_dest_id', 'in', [p.id for p in user.default_location_ids]),'|',('product_id','=',False),'|',('product_id.is_out_of_restruction','=',True),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+     </record>
+
+    <record model="ir.rule" id="stock_move_line_restriction_rule">
+         <field name="name">Stock Move Line Restriction</field>
+        <field name="model_id" search="[('model','=','stock.move.line')]" model="ir.model"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('location_id','in',[p.id for p in user.default_location_ids]),('location_dest_id', 'in', [p.id for p in user.default_location_ids]),'|',('product_id','=',False),'|',('product_id.is_out_of_restruction','=',True),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+     </record>
+
+    <record model="ir.rule" id="stock_move_line_all_rule">
+        <field name="name">Stock Move Line All</field>
+        <field name="model_id" search="[('model','=','stock.move.line')]" model="ir.model"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+     </record>     
+
+    <record model="ir.rule" id="stock_quant_restriction_rule">
+        <field name="name">Stock Quant Restriction</field>
+        <field name="model_id" ref="stock.model_stock_quant"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('location_id','in',[p.id for p in user.current_location_ids])]</field>
+    </record>
+
+<!--    Migration NOte-->
+
+<!--    <record model="ir.rule" id="stock_inventory_line_restriction_rule">-->
+<!--        <field name="name">Inventory Line Restriction</field>-->
+<!--        <field name="model_id" ref="stock.model_stock_inventory_line"/>-->
+<!--        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>-->
+<!--        <field name="domain_force">[('location_id','in',[p.id for p in user.default_location_ids])]</field>-->
+<!--    </record>-->
+
+<!--    <record model="ir.rule" id="stock_inventory_restriction_rule">-->
+<!--        <field name="name">Inventory Restriction</field>-->
+<!--        <field name="model_id" ref="stock.model_stock_inventory"/>-->
+<!--        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>-->
+<!--        <field name="domain_force">[('location_id','in',[p.id for p in user.default_location_ids])]</field>-->
+<!--    </record>-->
+
+    <record model="ir.rule" id="product_product_restriction_rule">
+        <field name="name">Product Product Restriction</field>
+        <field name="model_id" ref="stock.model_product_product"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('is_out_of_restruction','=',True),('categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+    </record>
+
+    <record model="ir.rule" id="product_product_all_rule">
+        <field name="name">Product Product All</field>
+        <field name="model_id" ref="stock.model_product_product"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+
+    <record model="ir.rule" id="product_product_category_restriction_rule">
+        <field name="name">Product Category Restriction</field>
+        <field name="model_id" ref="stock.model_product_category"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">[('id','in',[p.id for p in user.product_category_ids])]</field>
+    </record>
+
+    <record model="ir.rule" id="product_product_category_all_rule">
+        <field name="name">Product Category All</field>
+        <field name="model_id" ref="stock.model_product_category"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+
+    <record model="ir.rule" id="product_template_restriction_rule">
+        <field name="name">Product Template Restriction</field>
+        <field name="model_id" ref="stock.model_product_template"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('is_out_of_restruction','=',True),('categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+    </record>
+    <!--record model="ir.rule" id="stock_warehouse_orderpoint_restriction_rule">
+        <field name="name">Stock Warehouse Orderpoint Restriction</field>
+        <field name="model_id" search="[('model','=','stock.warehouse.orderpoint')]" model="ir.model"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
+    </record>
+
+     <record model="ir.rule" id="product_pulled_flow_restriction_rule">
+        <field name="name">Product Pulled Flow Restriction</field>
+        <field name="model_id" ref="model_stock_rule"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record model="ir.rule" id="stock_location_route_restriction_rule">
+        <field name="name">Stock Location Route Restriction</field>
+        <field name="model_id" ref="model_stock_location_route"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record model="ir.rule" id="product_pulled_flow_restriction_rule">
+        <field name="name">Product Pulled Flow Restriction</field>
+        <field name="model_id" ref="model_stock_rule"/>
+        <field name="groups" eval="[(4, ref('group_stock_restriction_user'))]"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record-->
+
+
+    <!--##############################         Purchase Enhance ###################################-->
+        <record id="purchase_order_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Order Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_order"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['|',('order_line','=',False),'|',('order_line.product_id.is_out_of_restruction','=',True),('order_line.product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+        <record id="purchase_order_line_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Order Line Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_order_line"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['|','|',('product_id.is_out_of_restruction','=',True),('product_id','=',False),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+
+
+
+        <record id="purchase_request_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Request Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('user_warehouse_id','=',False),('user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('preq_line','=',False),'|',('preq_line.product_id.is_out_of_restruction','=',True),('preq_line.product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+        <record id="purchase_request_line_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Request Line Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_line"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('preq.user_warehouse_id','=',False),('preq.user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('product_id','=',False),'|',('product_id.is_out_of_restruction','=',True),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+
+        <record id="purchase_req_transfer_rules" model="ir.rule">
+            <field name="name">Purchase Request Transfer</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_transfer"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('user_warehouse_id','=',False),('user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('purchase_line','=',False),'|',('purchase_line.product_id.is_out_of_restruction','=',True),('purchase_line.product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+        <record id="purchase_req_transfer_line_rules" model="ir.rule">
+            <field name="name">Purchase Request Transfer Line</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_transfer_line"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('preq.user_warehouse_id','=',False),('preq.user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('product_id','=',False),'|',('product_id.is_out_of_restruction','=',True),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+
+        <record id="purchase_request_rec_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Request Recieve Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_rec"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('user_warehouse_id','=',False),('user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('preq_rec_line','=',False),'|',('preq_rec_line.product_id.is_out_of_restruction','=',True),('preq_rec_line.product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+        <record id="purchase_request_rec_line_restruction_rules" model="ir.rule">
+            <field name="name">Purchase Request Recieve Line Restruction</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_rec_line"/>
+            <field name="groups" eval="[(4, ref('bsg_warehouse_restrictions.group_stock_restriction_user'))]"/>
+            <field name="domain_force">['&amp;',
+                                        '|',('preq_rec.user_warehouse_id','=',False),('preq_rec.user_warehouse_id','in',[w.id for w in user.stock_warehouse_ids]),
+                                        '|',('product_id','=',False),'|',('product_id.is_out_of_restruction','=',True),('product_id.categ_id.id','in',[p.id for p in user.product_category_ids])]</field>
+        </record>
+
+
+</data>
+</odoo>

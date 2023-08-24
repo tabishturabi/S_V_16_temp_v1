@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="purchase_order_report_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+
+                                h1 {
+                                    margin: 0px auto;
+                                    width: 60%
+
+                                }
+
+                                table {
+                                    border: 1px solid #000;
+                                    margin: 10px 0px 0px;
+                                    width: 100%;
+                                    float: left;
+                                    border-spacing: 0px;
+                                }
+
+                                table tr th,
+                                table tr td {
+                                    border-right: 1px solid #000;
+                                    text-align: center;
+                                }
+
+                                table tr th {
+                                    padding: 10px 0px;
+                                    background: #ccc;
+                                                                    
+                                }
+
+                                table tr td {
+                                    border-top: 1px solid #000;
+                                    padding: 5px 0px;
+                                }
+
+
+                                .date {
+                                    margin-top: 30px;
+                                    width: 20%;
+                                    float: left;
+
+                                }
+
+
+
+                                .pre {
+                                    margin-top: 30px;
+                                    width: 20%;
+                                    float: left;
+                                    margin-left: 65px;
+
+
+                                }
+
+                                .app {
+                                    margin-top: 30px;
+                                    width: 20%;
+                                    float: left;
+                                    margin-left: 65px;
+
+
+                                }
+
+                                
+                                .app1 {
+                                    margin-top: 30px;
+                                    width: 20%;
+                                    float: left;
+                                    margin-left: 65px;
+
+
+                                }
+
+                                .header {
+                                    display : none !importnat;
+                                }
+
+                                .footer {
+                                    display : none !importnat;
+                                }
+                                    
+                            </style>
+
+                            <div class="report-container">
+
+
+                                <table>
+
+
+                                    <tr>
+                                        <th style="font-size: 20px">
+                                            <span t-if="o.state in ('draft','sent') or o.is_copy">Request for Quotation</span>
+                                            <span t-if="o.state not in ('draft','sent') and not o.is_copy">Purchase Order</span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 20px">
+                                        <span t-if="o.state in ('draft','sent') or o.is_copy">
+                                           <span>طـلـب</span>
+                                           <span>عـرض سـعر</span>
+                                        </span>
+
+                                        <span t-if="o.state not in ('draft','sent') and not o.is_copy">
+                                           <span>أمـــــر‬</span>
+                                           <span>شــــــراء‬</span>
+                                        </span>   
+                                        </th>
+                                    </tr>
+
+                                </table>
+
+
+                                <table style="border-left:hidden;border-right: hidden;">
+
+                                    <tr t-if="o.state not in ('draft','sent') and not o.is_copy">
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span ><span>PO Date :</span></span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.date_order"></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>:</span>
+                                            <span><span>تاريخ امر الشراء‬</span></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span><span>PO No :</span></span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.name"></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px">
+                                            <span><span>: رقم امر الشراء‬</span></span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>RFQ Date :</span>
+                                        </td>
+
+                                        <td>
+                                            <span t-if="o.state in ('draft','sent') or o.is_copy"><span t-field="o.date_order"></span></span>
+                                            <t t-if="o.origin_rfq">
+                                                <span t-if="o.state not in ('draft','sent') and not o.is_copy"><span t-field="o.origin_rfq.date_order"></span></span>
+                                            </t>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>:</span>
+                                            <span>تاريخ طلب عرض السعر </span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>RFQ No :</span>
+                                        </td>
+
+                                        <td>
+                                            <span t-if="o.state in ('draft','sent') or o.is_copy"><span t-field="o.name"></span></span>
+                                            <t t-if="o.origin_rfq">
+                                                <span t-if="o.state not in ('draft','sent') and not o.is_copy"><span t-field="o.origin_rfq.name"></span></span>
+                                            </t>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px">
+                                            <span>: رقم طلب عرض السعر‬</span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td  style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>PR Date :</span>
+                                        </td>
+
+                                        <td>
+                                            <t t-if="o.request_id.date_pr">
+                                            <span><span t-field="o.sudo().request_id.date_pr"/></span>
+                                            </t>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: تاريخ طلب الشراء‬</span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>PR No :</span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.request_id.name"></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: رقم طلب الشراء‬</span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Delivery Address :</span>
+                                        </td>
+
+                                        <td>
+                                            <t t-if="o.deliver_line_ids">
+                                                <span t-esc="str(o.sudo().deliver_line_ids.mapped('picking_type_id.warehouse_id.name')).replace('[','').replace(']','').replace('\'','')"></span>
+                                            </t>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: مكان التوريد‬</span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Job Card No. :</span>
+                                        </td>
+
+                                        <td>
+                                            <span></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: رقم كارت الصيانة‬</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Vendor Name :</span>
+                                        </td>
+                                        
+                                        <td colspan="4">
+                                            <span t-field="o.partner_id.name"></span>
+                                        </td>
+                                        
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: إسم المورد‬</span>
+                                        </td>
+                                    </tr>
+
+                                    <!--tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Contact Name :</span>
+                                        </td>
+                                        
+                                        <td colspan="4">
+                                            <span></span>
+                                        </td>
+                                        
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: ‫المعنى‬ ‫الشخص‬</span>
+                                        </td>
+                                    </tr-->
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Delivery Schedule :</span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.date_planned"></span>
+                                        </td>
+
+                                        <td style="text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: تاريخ التوريد </span>
+                                        </td>
+
+                                        <td style="text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Payment Terms:</span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.payment_term_id.name"></span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: شروط الدفع </span>
+                                        </td>
+                                    </tr>
+
+                                    <!--tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Payment Terms :</span>
+                                        </td>
+                                        
+                                        <td colspan="4" style="border-bottom:1px solid">
+                                            <span t-esc="o.payment_term_id.name"></span>
+                                        </td>
+                                        
+                                        <td style="border-top: hidden;border-right:hidden;border-bottom:hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>: ‫الدفع‬ ‫شروط‬</span>
+                                        </td>
+                                    </tr-->
+
+
+                                </table>
+
+                                <table>
+
+                                    <tr>
+                                        <th>NO</th>
+                                        <th>Code No.</th>
+                                        <th>Description</th>
+                                        <th>Part No.</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th>Untaxed Amount</th>
+                                        <th>Vat</th>
+                                        <th>Total</th>
+                                    </tr>
+
+                                    <t t-set="sr_no" t-value="0" />
+                                    <t t-set="total" t-value="0" />
+                                    <t t-foreach="o.order_line" t-as="line">
+
+                                        <tr>
+
+                                            <t t-set="sr_no" t-value="sr_no + 1" />
+                                            <td>
+                                                <span t-esc="sr_no"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.product_id.default_code"></span>  
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.name"></span> 
+                                            </td>
+
+                                            <td>
+                                                <span></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(line.product_qty))"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(line.price_unit))"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(line.price_subtotal))"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(line.price_tax))"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(line.price_total))"></span>
+                                            </td>
+
+                                        </tr>
+
+                                    </t>
+                                </table>
+                                <table>
+                                    <div id="total" class="row justify-content-end">
+                                        <div class="col-4">
+                                            <table class="table table-sm">
+                                                <tr class="border-black">
+                                                    <td><strong>Untaxed Amount</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_untaxed"
+                                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Taxes</td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_tax"
+                                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-black o_total">
+                                                    <td><strong>Total</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_total"
+                                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </table>
+                                <table style="border:hidden;">
+                                    <tr>
+                                        <td style="border:hidden;text-decoration:underline;font-weight:bold">‫
+                                            <span>
+                                                <img src="/bassami_purchase_order_report/static/src/img/arabic1.png" style="width:800px; height: 35px; "/>
+                                            </span>  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:hidden;text-decoration:underline;font-weight:bold">Note : Any modification or deletion in any word or price on the PO, Is only acceptable through ABIG Approved procedures</td>
+                                    </tr>
+                                </table>
+
+
+                                <div class="date">
+
+                                    <table>
+                                        <tr>
+                                            <th>Prepared By</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-bottom: 77px">
+                                                <span t-field="o.user_id.name"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <div class="pre">
+
+                                    <table>
+                                        <tr>
+                                            <th>Procurement Manager</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-bottom: 100px">
+                                                <span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </div>
+
+                                <div class="app">
+
+                                    <table>
+                                        <tr>
+                                            <th>Finance Manager</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-bottom: 100px">
+                                                <span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </div>
+
+                                <div class="app1">
+
+                                    <table>
+                                        <tr>
+                                            <th>CEO</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-bottom: 100px">
+                                                <span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </div>
+
+                                <div>
+                                    <img src="/bassami_purchase_order_report/static/src/img/arabic2.png" style="width:1000px; height: 80px;margin-top:20px "/>
+                                </div>
+
+                                <table style="border:hidden;">
+
+                                    <tr>
+                                        <td style="border:hidden;font-weight:bold">Print Date</td>
+                                        <td style="border:hidden;"><t t-esc="o.get_current_tz_time()"/></td>
+                                        <td style="border:hidden;font-weight:bold">Purchasing Representative :</td>
+                                        <td style="border:hidden;">
+                                            <span t-esc="o.purchase_representative.name"></span>
+                                        </td>
+                                        <td style="border:hidden;font-weight:bold">: اسم مندوب المشتريات</td>
+                                    </tr>
+                                    
+                                </table>                  
+
+                            </div>
+                                                
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</openerp>

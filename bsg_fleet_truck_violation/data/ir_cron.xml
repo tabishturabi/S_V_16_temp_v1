@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="test_all_cameras_cron" model="ir.cron">
+            <field name="name">Clean Logs</field>
+            <field name="model_id" ref="model_camera_camera"/>
+            <field name="state">code</field>
+            <field name="code">model.test_cameras()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

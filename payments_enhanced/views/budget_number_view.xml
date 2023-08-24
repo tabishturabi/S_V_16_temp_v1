@@ -1,0 +1,40 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="view_budget_voucher_number_from">
+            <field name="name">budget_voucher_number</field>
+            <field name="model">budget_voucher_number</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Add to Trip">
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="add_budget_number" string="Confirm" type="object"  class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+    </record>
+<!--        Migration NOTE-->
+<!--    <act_window-->
+<!--            id="action_add_budget_number"-->
+<!--            name="Budget Number"-->
+<!--            res_model="budget_voucher_number"-->
+<!--            src_model="account.payment"-->
+<!--            view_mode="form"-->
+<!--            multi="True"-->
+<!--            target="new"-->
+<!--            key2="client_action_multi"-->
+<!--    />-->
+      <act_window
+            id="action_add_budget_number"
+            name="Budget Number"
+            res_model="budget_voucher_number"
+            view_mode="form"
+            target="new"
+      />
+  </data>
+</odoo>

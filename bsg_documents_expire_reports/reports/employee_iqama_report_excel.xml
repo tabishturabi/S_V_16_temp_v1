@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="employee_payslip_report_xlsx_id"
+                model="employee.iqama.report.wizard"
+                string="Employee Iqama Report"
+                report_type="xlsx"
+                name="bsg_documents_expire_reports.employee_iqama_report_xlsx"
+                file="employee_iqama_report"/>
+</odoo>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- expense -->
+    <record model="ir.ui.view" id="view_account_asset_expense_tree">
+        <field name="name">account.asset.asset.expense.tree</field>
+        <field name="model">account.asset</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <tree string="Deferred Expenses" create="0" edit="0"
+                  decoration-info="(state == 'draft')" decoration-muted="(state == 'close')">
+                <field name="name" string="Expense Name"/>
+<!--                Migration Note-->
+<!--                category_id does not exists in model-->
+<!--                <field name="category_id"/>-->
+<!--                <field name="date"/>-->
+                <field name="disposal_date"/>
+<!--                <field name="partner_id" string="Supplier"/>-->
+<!--                <field name="value"/>-->
+                <field name="gross_increase_value"/>
+                <field name="value_residual" widget="monetary"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    Migration Note-->
+    <!--                    action_asset_modify button is added in base in object type and removed it from header of below form-->
+<!--                    <button name="%(account_asset.action_asset_modify)d" states="open" string="Modify Expense" type="action"/>-->
+
+    <record model="ir.ui.view" id="view_account_asset_expense_form_ori">
+        <field name="name">account.asset.asset.expense.form</field>
+        <field name="model">account.asset</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <header>
+                    <button name="validate" states="draft" string="Confirm" type="object" class="oe_highlight"/>
+                    <button type="object" name="compute_depreciation_board" string="Compute Expense" states="draft"/>
+<!--                    <button name="set_to_close" states="open" string="Sell or Dispose" type="object" class="oe_highlight"/>-->
+<!--                    <button name="set_to_draft" string="Set to Draft" type="object" attrs="{'invisible': ['|', ('entry_count', '!=', 0), ('state', '!=', 'open')]}"/>-->
+                    <button name="set_to_draft" string="Set to Draft" type="object" attrs="{'invisible': ['|', ('depreciation_entries_count', '!=', 0), ('state', '!=', 'open')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive"
+                                groups="account_expense_deferred.group_def_expense_archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                        <button class="oe_stat_button" name="open_entries"  type="object" icon="fa-pencil">
+<!--                            Migration Note-->
+<!--                            <field string="Items" name="entry_count" widget="statinfo" />-->
+                            <field string="Items" name="depreciation_entries_count" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Deferred Expense name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+<!--                            <field name="category_id" domain="[('type', '=', 'expense')]"-->
+<!--                                   context="{'form_view_ref': 'account_expense_deferred.view_account_asset_category_form_inherit', 'default_type': 'expense'}"-->
+<!--                                   help="Category of asset"/>-->
+<!--                            <field name="code"/>-->
+<!--                            <field name="date" help="Date of asset"/>-->
+                            <field name="disposal_date" help="Date of asset"/>
+                            <field name="expense_mode" attrs="{'readonly':[('state','!=', 'draft')]}" required="1"/>
+                            <field name="employee_id"
+                                   groups="base.group_multi_company"
+                                   attrs="{'required':[('expense_mode','=', 'employee')], 'readonly':[('state','!=', 'draft')],
+                                   'invisible':[('expense_mode','!=', 'employee')]}"/>
+                            <field name="fleet_vehicle_id"
+                                   attrs="{'readonly':[('state','!=', 'draft')], 'required':[('expense_mode','=', 'vehicle')]}" groups="base.group_multi_company"/>
+                            <field name="asset_type" invisible="1"/>
+                            <field name="bsg_branches_id" attrs="{'readonly':[('state','!=', 'draft')]}" groups="base.group_multi_company"/>
+                            <field name="department_id" attrs="{'readonly':[('state','!=', 'draft')]}" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+<!--                            <field name="value" widget="monetary" options="{'currency_field': 'currency_id'}" help="Gross value of asset"/>-->
+                            <field name="value_residual" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+<!--                            <label for="partner_id" string="Partner" />-->
+<!--                            expense_mode-->
+<!--                            <field name="partner_id" string="Partner" nolabel="1" attrs="{'readonly':[('expense_mode','=', 'employee')]}"/>-->
+                            <!--                            <field name="invoice_id" string="Invoice"/>-->
+<!--                            <field name="account_analytic_id"-->
+<!--                                   attrs="{'readonly':[('state','!=', 'draft')]}"/>-->
+<!--                            <field name="analytic_tag_ids"-->
+<!--                                   attrs="{'readonly':[('state','!=', 'draft')]}"-->
+<!--                                   widget="many2many_tags"/>-->
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+<!--                        <page string="Expense Board">-->
+<!--&lt;!&ndash;                            <field name="depreciation_line_ids" mode="tree" options="{'reload_whole_on_button': true}" string="Expense Lines">&ndash;&gt;-->
+<!--                            <field name="depreciation_move_ids" mode="tree" options="{'reload_whole_on_button': true}" string="Expense Lines">-->
+<!--                                <tree string="Expense Lines" decoration-info="(move_check == False)" create="false">-->
+<!--&lt;!&ndash;                                    <field name="depreciation_date" string="Expense Date"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="depreciated_value" string="Cumulative Expense" readonly="1"/>&ndash;&gt;-->
+<!--                                    <field name="amount" widget="monetary" string="Expense"/>-->
+<!--&lt;!&ndash;                                    <field name="remaining_value" readonly="1" widget="monetary" string="Residual"/>&ndash;&gt;-->
+<!--                                    <field name="move_check" widget="deprec_lines_toggler" attrs="{'invisible': [('parent_state', '!=', 'open')]}"/>-->
+<!--                                    <field name="move_posted_check" invisible="1"/>-->
+<!--                                    <field name="parent_state" invisible="1"/>-->
+<!--                                </tree>-->
+<!--                                <form string="Expense Lines">-->
+<!--                                    <group>-->
+<!--                                        <group>-->
+<!--                                            <field name="parent_state" invisible="1"/>-->
+<!--                                            <field name="name" string="Expense Name"/>-->
+<!--                                            <field name="sequence"/>-->
+<!--                                            <field name="move_id" string="Expense Entry"/>-->
+<!--                                            <field name="move_check"/>-->
+<!--                                            <field name="parent_state" invisible="1"/>-->
+<!--                                        </group>-->
+<!--                                        <group>-->
+<!--                                            <field name="amount" widget="monetary" string="Current Expense"/>-->
+<!--                                            <field name="depreciation_date" string="Expense Date"/>-->
+<!--                                            <field name="depreciated_value" string="Cumulative Expense"/>-->
+<!--                                            <field name="remaining_value" string="Next Period Expense"/>-->
+<!--                                        </group>-->
+<!--                                    </group>-->
+<!--                                </form>-->
+<!--                            </field>-->
+<!--                        </page>-->
+                        <page string="Expense Information">
+                            <group>
+<!--                                <label for="method_time"/>-->
+<!--                                <div>-->
+<!--                                    <field name="method_time"/>-->
+<!--                                </div>-->
+<!--                                <field name="prorata" attrs="{'invisible': [('method_time','=','end')]}"/>-->
+                            </group>
+                            <group>
+<!--                                <field name="method_number" string="Number of Expenses" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','=','number')]}"/>-->
+                                <field name="method_number" string="Number of Expenses"/>
+                                <field name="method_period"/>
+<!--                                <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','=','number')]}"/>-->
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_account_expense_form">
+        <field name="name">Deferred Expenses</field>
+        <field name="res_model">account.asset</field>
+        <field name="domain">[('type', '=', 'expense')]</field>
+        <field name="context">{'type': 'expense', 'default_type': 'expense', 'default_bsg_branches_id': 136}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_account_asset_expense_tree')}),
+            (0, 0, {'view_mode': 'kanban'}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_account_asset_expense_form_ori')})]"/>
+    </record>
+
+
+    <menuitem parent="account.menu_finance_entries_management"
+              id="menu_action_account_expense_recognition"
+              action="action_account_expense_form" sequence="104"
+              groups="account_expense_deferred.group_def_expense_read"/>
+
+    <!-- expense create -->
+
+    <record id="view_account_asset_expense_form_ori_inh" model="ir.ui.view">
+        <field name="name">deferred.expense.create.form</field>
+        <field name="model">account.asset</field>
+<!--        <field name="groups_id" eval="[(4, ref('account_expense_deferred.group_def_expense_create'))]" />-->
+        <field name="inherit_id" ref="account_expense_deferred.view_account_asset_expense_form_ori" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">1</attribute>
+                <attribute name="create">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_asset_expense_tree_inh" model="ir.ui.view">
+        <field name="name">deferred.expense.create.form</field>
+        <field name="model">account.asset</field>
+<!--        <field name="groups_id" eval="[(4, ref('account_expense_deferred.group_def_expense_create'))]" />-->
+        <field name="inherit_id" ref="account_expense_deferred.view_account_asset_expense_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="edit">1</attribute>
+                <attribute name="create">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- types -->
+<!--    Migration Note-->
+<!--    <record model="ir.ui.view" id="view_deferred_expense_type_tree">-->
+<!--        <field name="name">account.asset.category.tree</field>-->
+<!--        <field name="model">account.asset.category</field>-->
+<!--        <field name="priority" eval="100"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Deferred Expense" create="0" edit="0">-->
+<!--                <field name="name"/>-->
+<!--                <field name="journal_id"/>-->
+<!--                <field name="method"/>-->
+<!--                <field name="company_id" groups="base.group_multi_company"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record model="ir.ui.view" id="view_account_asset_category_form_inherit">-->
+<!--        <field name="name">asset.category.form.expense</field>-->
+<!--        <field name="model">account.asset.category</field>-->
+<!--        <field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>-->
+<!--        <field name="mode">primary</field>-->
+<!--        <field name="priority" eval="100"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form" position="attributes">-->
+<!--                <attribute name="edit">0</attribute>-->
+<!--                <attribute name="create">0</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet/group" position="before">-->
+<!--                <div class="oe_button_box" name="button_box">-->
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive"-->
+<!--                                groups="account_expense_deferred.group_def_expense_type_archive">-->
+<!--                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>-->
+
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <div class="oe_title" position="replace">-->
+<!--                <div class="oe_title">-->
+<!--                    <label for="name" string="Asset Type" class="oe_edit_only" attrs="{'invisible': [('type','!=','purchase')]}"/>-->
+<!--                    <label for="name" string="Deferred Revenue Type" class="oe_edit_only" attrs="{'invisible': [('type','in',['purchase', 'expense'])]}"/>-->
+<!--                    <label for="name" string="Deferred Expense Type" class="oe_edit_only" attrs="{'invisible': [('type', '!=','expense')]}"/>-->
+<!--                    <h1>-->
+<!--                        <field name="name" placeholder="e.g. Insurance"/>-->
+<!--                    </h1>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <field name="journal_id" position="replace">-->
+<!--                <field name="journal_id" domain="[('type', '=', 'general'), ('company_id', '=', company_id)]"-->
+<!--                       widget="selection"/> </field>-->
+<!--            <xpath expr="//sheet/group/group[2]/div[1]" position="replace">-->
+<!--                <div>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <field name="account_asset_id" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </field>-->
+<!--            <xpath expr="//sheet/group/group[2]/div[2]" position="replace">-->
+<!--                <div>-->
+<!--                    <label for="account_depreciation_id"-->
+<!--                           attrs="{'invisible': [('type','!=','purchase')]}"-->
+<!--                           style="font-weight: bold" class="o_light_label"/>-->
+<!--                    <label for="account_depreciation_id" string="Deferred Expense Account"-->
+<!--                           attrs="{'invisible': [('type','!=','expense')]}"-->
+<!--                           style="font-weight: bold" class="o_light_label"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet/group/group[2]/div[3]" position="replace">-->
+<!--                <div>-->
+<!--                    <label for="account_depreciation_expense_id"-->
+<!--                           attrs="{'invisible': [('type','!=','purchase')]}"-->
+<!--                           style="font-weight: bold" class="o_light_label"/>-->
+<!--                    <label for="account_depreciation_expense_id" string="Expense Account"-->
+<!--                           attrs="{'invisible': [('type','!=','expense')]}"-->
+<!--                           style="font-weight: bold" class="o_light_label"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+
+<!--            <field name="account_depreciation_id" position="attributes">-->
+<!--                <attribute name="domain">[('internal_type', '=', 'other'), ('deprecated', '=', False), ('company_id', '=', company_id)]</attribute>-->
+<!--            </field>-->
+<!--            <field name="account_depreciation_expense_id" position="attributes">-->
+<!--                <attribute name="domain">[('internal_type', '=', 'other'), ('deprecated', '=', False), ('company_id', '=', company_id)]</attribute>-->
+<!--            </field>-->
+<!--            <field name="account_analytic_id" position="attributes">-->
+<!--                <attribute name="domain">['|', ('company_id', '=', False), ('company_id', '=', company_id)]</attribute>-->
+<!--            </field>-->
+<!--            <xpath expr="//sheet/group/group[5]" position="replace">-->
+<!--                &lt;!&ndash;                     <attribute name="attrs">{'invisible': [('type','not in', ['sale', 'expense'])]}</attribute>&ndash;&gt;-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet/group/group[3]" position="replace">-->
+<!--                <group string="Periodicity">-->
+<!--                    <label for="method_number" string="Duration"/>-->
+<!--                    <div class="o_row">-->
+<!--                        <field name="method_number" required="1"/>-->
+<!--                        <field name="method_period_label" required="1" nolabel="1"/>-->
+<!--                    </div>-->
+<!--                    <label for="prorata"/>-->
+<!--                    <div class="o_row">-->
+<!--                        <field name="prorata"/>-->
+<!--                    </div>-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--            <xpath  expr="//sheet" position="after">-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record model="ir.actions.act_window" id="action_account_asset_asset_list_normal_expense">-->
+<!--        <field name="name">Deferred Expense Types</field>-->
+<!--        <field name="res_model">account.asset.category</field>-->
+<!--        <field name="domain">[('type', '=', 'expense')]</field>-->
+<!--&lt;!&ndash;        <field name="view_type">form</field>&ndash;&gt;-->
+<!--        <field name="view_mode">tree,kanban,form</field>-->
+<!--        <field name="view_ids" eval="[(5, 0, 0),-->
+<!--                    (0, 0, {'view_mode': 'tree', 'view_id': ref('view_deferred_expense_type_tree')}),-->
+<!--                    (0, 0, {'view_mode': 'form', 'view_id': ref('view_account_asset_category_form_inherit')}),-->
+<!--            ]"/>-->
+<!--        <field name="context">{'default_type': 'expense'}</field>-->
+<!--    </record>-->
+
+<!--    <menuitem parent="account.menu_finance_entries_management"-->
+<!--              id="menu_action_account_asset_asset_list_normal_expense"-->
+<!--              action="action_account_asset_asset_list_normal_expense"-->
+<!--              groups="group_def_expense_type_read"-->
+<!--              sequence="105"/>-->
+
+<!--    &lt;!&ndash; expense types create &ndash;&gt;-->
+
+<!--    <record id="view_account_exp_category_form_inherit_create" model="ir.ui.view">-->
+<!--        <field name="name">deferred.expense.create.form</field>-->
+<!--        <field name="model">account.asset.category</field>-->
+<!--        <field name="groups_id" eval="[(4, ref('account_expense_deferred.group_def_expense_type_create'))]" />-->
+<!--        <field name="inherit_id" ref="account_expense_deferred.view_account_asset_category_form_inherit" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form" position="attributes">-->
+<!--                <attribute name="edit">1</attribute>-->
+<!--                <attribute name="create">1</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_deferred_expense_type_tree_inh" model="ir.ui.view">-->
+<!--        <field name="name">deferred.expense.create.form</field>-->
+<!--        <field name="model">account.asset.category</field>-->
+<!--        <field name="groups_id" eval="[(4, ref('account_expense_deferred.group_def_expense_type_create'))]" />-->
+<!--        <field name="inherit_id" ref="account_expense_deferred.view_deferred_expense_type_tree" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//tree" position="attributes">-->
+<!--                <attribute name="edit">1</attribute>-->
+<!--                <attribute name="create">1</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>

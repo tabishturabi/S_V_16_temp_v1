@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background: rgb(204,204,204);
+	display: block;
+	font-size: 12px;
+  	margin: 0 auto;
+  	margin-bottom: 0.5cm;
+}
+p {
+	margin:3px;
+}
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+page[size="A4"] {
+	width: 19cm;
+	height: 27.7cm;
+	text-align: center;
+}
+/*page[size="A4"] {
+	width: 21cm;
+	height: 29.7cm;
+	text-align: center;
+}*/
+
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;	
+	}
+  }
+
+@media screen{
+.width33 {
+	width: 33%;
+	text-align: center;
+}
+.width50 {
+	width: 50%;
+}
+.width90 {
+	width: 90%;
+	border-top: 2px solid #C7C7C7;
+}
+	.width90Solid {
+	width: 90%;
+	border-top: 5px solid #069F00;
+}
+
+@media screen{
+}
+.alignRight {
+	text-align: right;
+}
+}
+.alignLeft {
+	text-align: left;
+}
+.red {
+	color: red;
+}

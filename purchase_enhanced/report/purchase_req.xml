@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="purchase_order_req_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                width: 1000px;
+                                margin: 0px auto;
+                                }
+
+                                h1 {
+                                margin: 0px auto;
+                                width: 60%
+
+                                }
+
+                                table {
+                                border: 1px solid #000;
+                                margin: 10px 0px 0px;
+                                width: 100%;
+                                float: left;
+                                border-spacing: 0px;
+                                }
+
+                                table tr th,
+                                table tr td {
+                                border-right: 1px solid #000;
+                                text-align: center;
+                                }
+
+                                table tr th {
+                                padding: 10px 0px;
+                                background: #ccc;
+
+                                }
+
+                                table tr td {
+                                border-top: 1px solid #000;
+                                padding: 5px 0px;
+                                }
+
+
+                                .date {
+                                margin-top: 30px;
+                                width: 20%;
+                                float: left;
+
+                                }
+
+
+                                .pre {
+                                margin-top: 30px;
+                                width: 20%;
+                                float: left;
+                                margin-left: 65px;
+
+
+                                }
+
+                                .app {
+                                margin-top: 30px;
+                                width: 20%;
+                                float: left;
+                                margin-left: 65px;
+
+
+                                }
+
+
+                                .app1 {
+                                margin-top: 30px;
+                                width: 20%;
+                                float: left;
+                                margin-left: 65px;
+
+
+                                }
+
+                                .header {
+                                display : none !importnat;
+                                }
+
+                                .footer {
+                                display : none !importnat;
+                                }
+
+                            </style>
+
+                            <div class="report-container">
+
+
+                                <table>
+
+
+                                    <tr>
+                                        <th style="font-size: 20px">
+                                            <span>Purchase Request
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 20px">
+                                            <span>
+                                                <span>طلب الشراء
+                                                </span>
+                                            </span>
+                                        </th>
+                                    </tr>
+
+                                </table>
+
+
+                                <table style="border-left:hidden;border-right: hidden;">
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>
+                                                <span>PR Date :</span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.date_pr"/>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>:</span>
+                                            <span>
+                                                <span>تاريخ الطلب</span>
+                                            </span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>
+                                                <span>PR No :</span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="o.name"/>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px">
+                                            <span>
+                                                <span>رقم طلب الشراء</span>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Requester Name :</span>
+                                        </td>
+
+                                        <td>
+                                            <span>
+                                                <span t-field="o.requester_id.name"/>
+                                            </span>
+                                        </td>
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px">
+                                            <span>
+                                                <span>اسم الطالب</span>
+                                            </span>
+                                        </td>
+
+                                        <td style="border-top: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Department :</span>
+                                        </td>
+
+                                        <td>
+                                            <span>
+                                                <span t-field="o.department_id.name"/>
+                                            </span>
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right:hidden;text-align:left;font-weight:bold;padding-left:8px">
+                                            <span>قسم</span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="border-top: hidden;border-left: hidden;border-bottom: hidden;text-align:right;font-weight:bold;padding-right:8px;">
+                                            <span>Branch :</span>
+                                        </td>
+
+                                        <td>
+                                            <span>
+                                                <span t-field="o.branches.branch_name"/>
+                                            </span>
+
+                                        </td>
+
+                                        <td style="border-top: hidden;border-right: hidden;border-bottom: hidden;text-align:left;font-weight:bold;padding-left:8px;">
+                                            <span>الفرع</span>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+
+                                <table>
+
+                                    <tr>
+                                        <th>Product Category</th>
+                                        <th>Requested Product</th>
+                                        <th>Part Number</th>
+                                        <th>Analytic Account</th>
+                                        <t t-if="o.request_type  == 'workshop'">
+                                            <th>                                                
+                                                Fleet Ref
+                                            </th>
+                                            <th>
+                                                Work Order
+                                            </th>
+                                        </t>
+                                        <th>Requested Qty</th>
+                                        <th>On Hand</th>
+                                        <th>ISS Qty</th>
+                                        <th>PO Qty</th>
+                                        <th>Net Received Qty</th>
+                                        <th>Description</th>
+                                    </tr>
+
+                                    <t t-set="sr_no" t-value="0"/>
+                                    <t t-set="total" t-value="0"/>
+                                    <t t-foreach="o.preq_line" t-as="line">
+                                        <tr>
+                                            <t t-set="sr_no" t-value="sr_no + 1"/>
+                                            <td>
+                                                <span t-esc="line.product_id.categ_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.product_id.display_name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.product_id.part_number"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.analytic_account_id.name"/>
+                                            </td>
+                                            <t t-if="o.request_type == 'workshop'">
+                                                 <td>
+                                                    <span t-field="line.fleet_id_ref.display_name"/>
+                                                </td>
+                                                <td>
+                                                        <span t-field="line.work_order_id"/>
+                                                </td>
+                                            </t>
+
+
+                                            <td>
+                                                <span t-field="line.qty"/>
+
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.onhand"/>
+                                            </td>
+
+                                            <td>
+                                                <span t-field="line.iss_qty"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.qty_po"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.qty_net_received"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.name"/>
+                                            </td>
+
+                                        </tr>
+
+                                    </t>
+                                </table>
+
+                                <table style="border:hidden;">
+
+                                    <tr>
+                                        <td style="border:hidden;font-weight:bold">Print Date</td>
+                                        <td style="border:hidden;">
+                                            <t t-esc="o.get_current_tz_time()"/>
+                                        </td>
+                                        <!--                                        <td style="border:hidden;font-weight:bold">Purchasing Representative :</td>-->
+                                        <!--                                        <td style="border:hidden;">-->
+                                        <!--                                            &lt;!&ndash;                                            <span t-esc="o.user_id.name"></span>&ndash;&gt;-->
+                                        <!--                                        </td>-->
+                                        <!--                                        <td style="border:hidden;font-weight:bold">: اسم مندوب المشتريات</td>-->
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+    <report
+            id="purchase_req_order_report"
+            model="purchase.req"
+            name="purchase_enhanced.purchase_order_req_report"
+            file="purchase_enhanced.purchase_order_req_report"
+            report_type="qweb-html"
+            string="Purchase Request"/>
+</odoo>

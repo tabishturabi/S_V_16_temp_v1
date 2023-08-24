@@ -1,0 +1,501 @@
+<odoo>
+    <template id="portal_my_cargo_payment" name="Payment on My Cargo" inherit_id="portal_sales.portal_my_shipments">
+        <!--xpath expr="//t[@t-call='portal.portal_table']/thead/tr/th[last()]" position="before">
+            <th class="text-center">Status</th>
+        </xpath-->
+
+        <!--xpath expr="//t[@t-foreach='shipments']/tr/td[last()]" position="before">
+            <t t-if="error or warning" t-call="portal_sales.portal_cargo_error"/>
+            <t t-if="success and (not error and not warning)" t-call="portal_sales.portal_cargo_success"/>
+
+            <td class="text-center">
+                <t t-set="tx_ids" t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))"/>
+                <t t-set="pending_manual_txs" t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider in ('transfer', 'manual'))"/>
+                <a t-if="shipment.state not in ['done','cancel'] and shipment.total_so_amount and (pending_manual_txs or not tx_ids)"
+                    t-att-href="shipment.get_portal_url(anchor='cago_portal_pay')" title="Pay now" aria-label="Pay now" class="btn btn-sm btn-primary" role="button">
+                    <i class="fa fa-arrow-circle-right"/><span class='d-none d-md-inline'> Pay Now</span>
+                </a>
+            </td>
+        </xpath-->
+
+
+        <!--xpath expr="//t[@t-foreach='shipments']/tr/td[hasclass('tx_status')]" position="replace">
+            <t t-set="last_tx" t-value="invoice.get_portal_last_transaction()"/>
+            <td class="tx_status text-center">
+                <t t-if="invoice.state == 'open' and (last_tx.state not in ['pending', 'authorized', 'done', 'cancel'] or (last_tx.state == 'pending' and last_tx.acquirer_id.provider in ('transfer', 'manual')))">
+                    <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o"></i><span class="d-none d-md-inline"> Waiting for Payment</span></span>
+                </t>
+                <t t-if="invoice.state == 'open' and last_tx.state == 'authorized'">
+                    <span class="badge badge-pill badge-primary"><i class="fa fa-fw fa-check"/><span class="d-none d-md-inline"> Authorized</span></span>
+                </t>
+                <t t-if="invoice.state == 'open' and last_tx.state == 'pending' and last_tx.acquirer_id.provider not in ('transfer', 'manual')">
+                  <span class="badge badge-pill badge-warning"><span class="d-none d-md-inline"> Pending</span></span>
+                </t>
+                <t t-if="invoice.state == 'paid' or last_tx.state == 'done'">
+                    <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check"></i><span class="d-none d-md-inline"> Paid</span></span>
+                </t>
+                <t t-if="invoice.state == 'cancel'">
+                    <span class="badge badge-pill badge-danger"><i class="fa fa-fw fa-remove"></i><span class="d-none d-md-inline"> Cancelled</span></span>
+                </t>
+            </td>
+        </xpath-->
+    </template>
+
+
+    <template id="portal_cargo_payment" name="Cargo Payment">
+        <div class="row"
+             t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()"
+             id="cago_portal_pay">
+            <div class="modal fade" id="cargo_pay_with" role="dialog">
+                <div class="modal-dialog modal-content">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Pay with</h3>
+                            <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+                        </div>
+                        <div class="modal-body">
+<!--                            <p><t t-esc="partner_id"/></p>-->
+<!--                            <p><t t-esc="pms"/></p>-->
+<!--                            <p><t t-esc="providers"/></p>-->
+<!--                            <p><t t-esc="transaction_route"/></p>-->
+<!--                            <p><t t-esc="landing_route"/></p>-->
+
+<!--                            <p><t t-esc="access_token"/></p>-->
+
+                            <div t-if="pms or providers" id="payment_method" class="text-left col-md-13">
+                                <div id="cargo_pay_with_content_dialog">
+                                    <t t-call="payment.checkout">
+                                        <t t-set="mode" t-value="'payment'"/>
+                                        <t t-set="partner_id"
+                                           t-value="shipment.customer.id if request.env.user._is_public() else request.env.user.partner_id.id"/>
+                                        <t t-set="success_url" t-value="shipment.get_portal_url()"/>
+                                        <t t-set="transaction_route" t-value="transaction_route"/>
+                                        <t t-set="error_url" t-value="shipment.get_portal_url()"/>
+                                        <t t-set="landing_route" t-value="landing_route"/>
+                                        <t t-set="access_token" t-value="access_token or ''"/>
+                                        <t t-set="callback_method" t-value="''"/>
+                                        <t t-set="form_action"
+                                           t-value="'/shipment/pay/' + str(shipment.id) + '/s2s_token_tx/'"/>
+                                        <t t-set="prepare_tx_url"
+                                           t-value="'/shipment/pay/' + str(shipment.id) + '/form_tx/'"/>
+                                        <t t-set="submit_txt">Pay Now</t>
+                                        <t t-set="icon_class" t-value="'fa-lock'"/>
+                                    </t>
+                                </div>
+                            </div>
+
+                            <div class="row mr16" id="cargo_warnning_pay_with_content_dialog">
+                                <div t-attf-class="'col-lg-12 mr16 ml16 alert alert-dismissable alert-danger"
+                                     role="alert">
+                                    Please Accept Our Term And Condition First
+                                </div>
+                            </div>
+
+                            <t t-if="not shipment.customer.phone or not shipment.customer.street or not shipment.customer.city or not shipment.customer.zip">
+                                <div class="row mr16" id="tamara_required_address">
+                                    <div class="col-lg-12 mr16 ml16 alert alert-dismissable alert-danger" role="alert">
+                                        Please Fill Your Pilling Address
+                                        <a class="info"
+                                           t-attf-href="/my/account?redirect=/my/shipments/#{shipment.id}/?access_token=#{access_token}">
+                                            Address
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        First.
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id='cargo_coupon_form' name='Coupon form'>
+        <form action="/cargo/check_promo_code" method="post" name="coupon_code">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="shipment" t-att-value="shipment.id"/>
+            <div class="input-group form-group col-xl-6">
+                <input name="promo" class="form-control" type="text" placeholder="code..." required="required"/>
+                <div class="input-group-append">
+                    <button type="submit" id="cargo_promo_submit_form" class="btn btn-secondary">
+                        Apply
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </template>
+
+
+    <template id="portal_cargo_page_inherit_promo_code" inherit_id="portal_sales.shipment_order_details" active="True"
+              customize_show="True" name="Promo Code">
+        <xpath expr="//div[hasclass('card-footer')]" position="after">
+            <t t-if="shipment.payment_method.payment_type != 'credit'">
+                <div>
+                    <t t-set="tx_ids"
+                       t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))"/>
+                    <t t-set="pending_manual_txs"
+                       t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider in ('transfer', 'manual'))"/>
+                    <t t-if="not shipment.loc_from.is_international and not shipment.loc_to.is_international">
+                        <div t-attf-class="form-group" t-if="not shipment.coupon_readonly">
+                            <a t-if="shipment.state not in ['done','cancel','cancel_request'] and shipment.total_so_amount and (pending_manual_txs or not tx_ids)"
+                               class="btn btn-success show_coupon">
+                                I have a qitaf coupon
+                                <i class="fa fa-tag fa-lg"></i>
+                            </a>
+                        </div>
+
+                        <div t-attf-class="form-group" t-if="shipment.qitaf_coupon">
+                            <a t-att-href="'/shipment/remove_promo_code/'+str(shipment.id)"
+                               t-if="shipment.state not in ['done','cancel','cancel_request'] and shipment.total_so_amount and (pending_manual_txs or not tx_ids)"
+                               class="btn btn-warnning">
+                                Remove qitaf coupon
+                                <i class="fa fa-remove fa-lg"></i>
+                            </a>
+                        </div>
+
+                    </t>
+
+
+                    <div t-attf-class="coupon_form" style="display:none">
+                        <t t-call="portal_sales.cargo_coupon_form"/>
+                    </div>
+                    <t t-if="shipment.coupon_readonly and shipment.qitaf_coupon">
+                        <div class="card bg-success text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">You have successfully applied following coupon code :
+                                    <b t-esc="shipment.qitaf_coupon"/>
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="request.params.get('code_not_check')">
+                        <div class="card bg-danger text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">Can't Proceed Promo Code Now,Try Later</span>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="request.params.get('remove_code_message')">
+                        <div class="card bg-success text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">Promo Code successfully removed</span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="request.params.get('code_can_not_use')">
+                        <div class="card bg-danger text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">Can't Use Coupon With Your Shipment Type</span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="request.params.get('have_more_discount')">
+                        <div class="card bg-danger text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">You Are Already Have Discount</span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="request.params.get('code_not_available')">
+                        <div class="card bg-danger text-white mt16">
+                            <div class="card-header clearfix">
+                                <span class="float-left">Invalid or expired coupon code</span>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+        </xpath>
+    </template>
+
+
+    <template id="portal_cargo_order_upgrade" active="True" customize_show="True" name="Cargo Order Upgrade">
+
+        <t t-set="color" t-value="False"/>
+        <t t-foreach="upgrade_values" t-as="upgrade_card">
+            <t t-set="diff_price" t-value="round(upgrade_card['total_diff_price'],2)"/>
+
+            <button t-attf-class="btn #{'btn-success' if upgrade_card_index %2==0 else 'btn-warning'} my_tooltip"
+                    t-att-title="Features" style="margin-bottom:5px;white-space:normal;" data-toggle="modal"
+                    t-att-data-target="'#upgrade_'+str(upgrade_card['upgrade_id'])">
+                Upgrade To
+                <t t-esc="upgrade_card['upgrade_name']"/>
+                <span class="badge badge-pill badge-light" style="white-space:normal;">
+                    <t t-esc="diff_price"/>
+                    <t t-esc="request.website.company_id.currency_id.name"/>
+
+                    <t t-if="upgrade_card['upgrde_description_ids']">
+                        <span class="my_tooltiptext">
+                            <div class="card" style="width: 18rem;background-color: #beeb9f;color:#00A388;">
+                                <div class="card-header">
+                                    Features
+                                </div>
+                                <t t-foreach="upgrade_card['upgrde_description_ids']" t-as="feature">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <t t-esc="feature.name"/>
+                                        </li>
+                                    </ul>
+                                </t>
+
+                            </div>
+                        </span>
+                    </t>
+
+
+                </span>
+
+            </button>
+
+            <div class="modal fade" t-att-id="'upgrade_'+str(upgrade_card['upgrade_id'])" tabindex="-1" role="dialog"
+                 aria-labelledby="Upgrade" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="Heading">Upgrade Order</h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="fa fa-remove"></i>
+                            </button>
+
+                        </div>
+                        <form action="/shipment/upgrade/" name="UpgradeForm" method="post">
+                            <div class="modal-body">
+                                <div class="alert alert-info">
+                                    Are you sure you want Upgrade To
+                                    <t t-esc="upgrade_card['upgrade_name']"/>
+                                    By
+                                    <span class="price_total">
+                                        <t t-esc="diff_price"/>
+                                    </span>
+                                    <t t-esc="request.website.company_id.currency_id.name"/>
+                                </div>
+                                <div class="alert alert-danger" style="display:none;">
+                                    Sorry You Must Choose At Least One Line
+                                </div>
+
+                                <t t-if="upgrade_card['line_prices']">
+                                    <table class="table table-bordered mb32 rounded mb-0 bg-white"
+                                           style="table-layout:auto">
+                                        <thead style="background:gray;color:white;">
+                                            <th>#</th>
+                                            <th>Maker</th>
+                                            <th>Model</th>
+                                            <th>Size</th>
+                                            <th>Cost</th>
+                                            <th>Upgrade Amount</th>
+                                            <th>Total</th>
+                                        </thead>
+
+                                        <t t-foreach="upgrade_card['line_prices']" t-as="line_price">
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" t-att-name="line_price['line_id'].id"
+                                                           class="line_upgrade_price_check" checked="checked"
+                                                           t-att-diff-price="round(line_price['diff_price'],2)"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="'ar' in default_lang and line_price['line_id'].car_make.car_maker.car_make_ar_name or line_price['line_id'].car_make.car_maker.car_make_name"></p>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="line_price['line_id'].car_model.car_model_name"></p>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="line_price['line_id'].car_size.car_size_name"></p>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="round(line_price['line_id'].charges,2)"></p>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="round(line_price['diff_price'],2)"></p>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="round((line_price['line_id'].charges+line_price['diff_price']),2)"></p>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </t>
+                            </div>
+                            <div class="modal-footer ">
+                                <input type="hidden" name="order_id" t-att-value="shipment.id"/>
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="shipment_type" t-att-value="upgrade_card['upgrade_id']"/>
+                                <button type="submit" class="btn btn-success order_upgrade_price_btn">Upgrade</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+
+        <t t-if="request.params.get('upgrade_success')">
+            <div class="card bg-success text-white mt16">
+                <div class="card-header clearfix">
+                    <span class="float-left">You have successfully uprade your order</span>
+                </div>
+            </div>
+        </t>
+        <t t-if="request.params.get('upgrade_error')">
+            <div class="card bg-danger text-white mt16">
+                <div class="card-header clearfix">
+                    <span class="float-left">Can't Proceed Upgrade Now,Try Later</span>
+                </div>
+            </div>
+        </t>
+        <br/>
+        <br/>
+    </template>
+
+
+    <template id="portal_cargo_page_inherit_payment" name="Payment on My Shipment"
+              inherit_id="portal_sales.shipment_order_details">
+        <xpath expr="//div[hasclass('card-footer')]" position="after">
+            <t t-if="shipment.state in ['draft'] and shipment.payment_method.payment_type != 'credit'">
+                <t t-call="portal_sales.portal_cargo_order_upgrade"/>
+            </t>
+
+            <t t-set="tx_ids"
+               t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))"/>
+            <t t-set="pending_manual_txs"
+               t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider in ('transfer', 'manual'))"/>
+            <t t-set="pending_out_txs"
+               t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider not in ('transfer', 'manual'))"/>
+            <t t-if="not shipment.customer_contract">
+                <div id="cargo_payment_content">
+                    <div t-attf-class="form-group">
+                        <a href="https://www.albassamitransport.com/terms-and-conditions"
+                           t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()"
+                           class="btn btn-info">
+                            <i class="fa fa-handshake-o"/>
+                            Our Terms And Conditions
+                        </a>
+
+                        <a href="https://www.albassamitransport.com/en_US/shipping-agreement"
+                           t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()"
+                           class="btn btn-info">
+                            <i class="fa fa-handshake-o"/>
+                            Terms of the Shipping, Delivery and Cancellation
+                        </a>
+                        <br/>
+                    </div>
+
+                    <div class="custom-control custom-checkbox"
+                         t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()">
+                        <input type="checkbox" id="cargo_term_agree"/>
+                        <label for="customCheck1">
+                            <b>I have read and agree to the The terms and conditions and the terms of the Shipping,
+                                Delivery and Cancellation
+                            </b>
+                        </label>
+                    </div>
+                    <br/>
+
+
+                    <a href="#"
+                       t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()"
+                       class="btn btn-primary btn-block mb-2" data-toggle="modal" data-target="#cargo_pay_with">
+                        <i class="fa fa-fw fa-arrow-circle-right" id="cargo_pay_with_btn"/>
+                        Pay Now
+                    </a>
+                    <div t-if="tx_ids and pending_out_txs and not pending_manual_txs and shipment.state not in  ['cancel','cancel_request','draft']"
+                         class="alert alert-info py-1 mb-2">
+                        <i class="fa fa-fw fa-check-circle"/>
+                        Pending
+                    </div>
+                    <div t-if="shipment.state not in ['draft','cancel','cancel_request'] and not shipment.geting_portal_order_due_amount()"
+                         class="alert alert-success py-1 mb-2">
+                        <i class="fa fa-fw fa-check-circle"/>
+                        Paid
+                    </div>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[@id='cargo_sale_order_card_details']//div[hasclass('card-body')]" position="after">
+            <div t-if="shipment.transaction_ids and shipment.total_so_amount and not success and not error"
+                 class="o_account_payment_tx_status" t-att-data-invoice-id="shipment.id">
+                <t t-call="payment.payment_confirmation_status">
+                    <t t-set="payment_tx_id" t-value="shipment.get_portal_last_transaction()"/>
+                    <t t-set="reference" t-value="shipment.name"/>
+                </t>
+            </div>
+            <t t-set="tx_ids"
+               t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('authorized', 'done'))"/>
+            <div t-if="shipment.state not in ['cancel','cancel_request'] and shipment.geting_portal_order_due_amount()"
+                 id="cago_portal_pay">
+                <div t-if="pms or providers" id="payment_method">
+                    <t t-call="portal_sales.portal_cargo_payment"/>
+                </div>
+            </div>
+            <div class="panel-body" t-if="existing_token">
+                <div class="offset-lg-3 col-lg-6">
+                    <i class="fa fa-info"></i>
+                    You have credits card registered, you can log-in to be able to use them.
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_cargo_error" name="Cardo error/warning display">
+        <div class="row mr16">
+            <div t-attf-class="'col-lg-12 mr16 ml16 alert alert-dismissable' #{'alert-danger' if error else 'alert-warning'}"
+                 role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <t t-if="error == 'generic'" name="generic">
+                    There was an error processing this page.
+                </t>
+
+                <t t-if="error == 'pay_cargo_invalid_doc'">
+                    There was an error processing your payment: invalid shipment.
+                </t>
+                <t t-if="error == 'pay_cargo_invalid_token'">
+                    There was en error processing your payment: invalid credit card ID.
+                </t>
+                <t t-if="error == 'pay_cargo_tx_fail'">
+                    There was an error processing your payment: transaction failed.
+                    <br/>
+                    <t t-set="tx_id" t-value="shipment.get_portal_last_transaction()"/>
+                    <t t-if="tx_id and tx_id.state_message">
+                        <t t-esc="tx_id.state_message"/>
+                    </t>
+                </t>
+                <t t-if="error == 'pay_cargo_tx_token'">
+                    There was an error processing your payment: issue with credit card ID validation.
+                </t>
+
+            </div>
+        </div>
+    </template>
+
+
+    <template id="portal_cargo_success" name="Cargo success display">
+        <div class="row mr16">
+            <div class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="status">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <t t-if="success == 'pay_cargo'">
+                    <t t-set="payment_tx_id" t-value="shipment.get_portal_last_transaction()"/>
+                    <span t-if='payment_tx_id.acquirer_id.done_msg' t-raw="payment_tx_id.acquirer_id.done_msg"/>
+                    <span t-if='payment_tx_id.acquirer_id.post_msg' t-raw="payment_tx_id.acquirer_id.post_msg"/>
+                    <div t-if="payment_tx_id.acquirer_id.post_msg and payment_tx_id.acquirer_id.provider == 'transfer' and shipment.name">
+                        <b>Communication:</b>
+                        <span t-esc='shipment.name'/>
+                    </div>
+                </t>
+                <t t-if="success == 'pay_cargo' and shipment.state in ['registered','confirm','pod']">
+                    Done, your online payment has been successfully processed. Thank you for your order.
+                </t>
+
+            </div>
+        </div>
+    </template>
+</odoo>

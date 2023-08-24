@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cargo_sale_line_form">
+        <style>
+            .box-card{
+                margin: 20px 0px;
+                background-color: #ffffff;
+                border-radius: 16px;
+                /* -webkit-box-shadow: 0px 2px 4px rgb(0 0 0 / 14%), 0px -1px 1px #ededf4; */
+                box-shadow: 0px 2px 4px rgb(0 0 0 / 14%), 0px -1px 1px #ededf4;
+                float: left;
+                width: 100%;
+                position: relative;
+            }
+            .box-title{
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 37px;
+                text-align: center;
+                letter-spacing: 0.25px;
+                color: #4e4239;
+                margin-bottom: 16px;
+                margin-top: 16px;
+            }
+            .box-footer{
+                background: #ffffff;
+                /* -webkit-box-shadow: 0px -1px 4px rgb(78 66 57 / 5%), 0px -1px 1px #ededf4; */
+                box-shadow: 0px -1px 4px rgb(78 66 57 / 5%), 0px -1px 1px #ededf4;
+                border-radius: 0 0 16px 16px;
+                padding: 24px 40px;
+                /* text-align: center; */
+                position: relative;
+                z-index: 1;
+            }
+        </style>
+        <t t-call="portal.portal_layout">
+                <div class="oe_structure">
+                    <div class="container">
+                            <!-- Start-->
+                            <t t-call="portal_sales.get_so_line_form_model"/>
+                            <!-- END-->
+                    </div>
+                </div>
+        </t>
+    </template>
+    <template id="get_so_line_form_model">
+        <div class="box-card" id="o_cargo_sale_order_line">
+
+            <div class="box-title" >
+               Shipment Information
+            </div>  
+            <form action="/shipment/get_so_line"  method="post" id='cargo_sale_order_line_form'>
+                <div class="box-body" id="shipment-info">
+                    <div class="row" style="margin-bottom:20px">
+                        <div id="create-price-warnning"></div>
+                        <div class="modal-body" id="shipment-info">
+                            <div class="row" style="margin-left:20px;margin-right:20px;">
+
+                                <div class="row">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div t-attf-class="form-group row col-xl-12">
+                                        <div t-attf-class="form-group col-xl-2">
+                                            <input type="checkbox" class="form-check-input" name="agreement_show"/>
+                                        </div>
+                                        <div t-attf-class="form-group col-xl-10">
+                                            <label class="col-form-label"  for="agreement_show">Show Agreement</label>
+                                        </div>
+                                    </div>
+
+                                    <div style="display:none;" t-attf-class="form-group row col-xl-6" id="agreement">
+                                        <label class="col-form-label"  for="agreement">Agreement</label>
+                                        <div class="col-xl-8">
+                                            <input type="text" t-attf-class="form-control" name="agreement" required="required"/>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                    <div t-attf-class="form-group row col-xl-12">
+                                        <div t-attf-class="form-group col-xl-2">
+                                            <input type="checkbox" class="form-check-input" name="chasis_no_show"/>
+                                        </div>
+                                        <div t-attf-class="form-group col-xl-10">
+                                            <label class="col-form-label"  for="chasis_no_show">Show Chasis No</label>
+                                        </div>
+                                    </div>
+                                    <div style="display:none;" t-attf-class="form-group row col-xl-6" id="chasis">
+                                        <label class="col-form-label"  for="chasis_no">Chasis No</label>
+                                        <div class="col-xl-8">
+                                            <input type="text" t-attf-class="form-control" name="chasis_no" required="required"/>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                    <div t-attf-class="form-group row col-xl-12">
+                                        <div t-attf-class="form-group col-xl-2">
+                                            <input type="checkbox" class="form-check-input" name="plate_info_show"/>
+                                        </div>
+                                        <div t-attf-class="form-group col-xl-10">
+                                            <label class="col-form-label"  for="plate_info_show">Show Plates Info</label>
+                                        </div>
+                                    </div>
+                                    <div style="display:none;" t-attf-class="form-group row col-xl-6" id="plate_no">
+                                        <label class="col-form-label" for="plate_no">Plate NO</label>
+                                        <div class="col-xl-8">
+                                            <input type="text" t-attf-class="form-control" name="plate_no" required="required"/>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                     <div style="display:none;" t-attf-class="form-group row col-xl-6" id="plate_one">
+                                        <label class="col-form-label"  for="plate_one">Plate One</label>
+                                        <div class="col-xl-8">
+                                             <select  name="plate_one" t-attf-class="form-control" required="required">
+                                                <option value="">..Plate One..</option>
+                                                <t t-foreach="plate_vals" t-as="plate_one">
+                                                    <option t-att-value="'%s' % (plate_one)" t-esc="plate_one"/>
+                                                </t>
+                                            </select>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                     <div style="display:none;" t-attf-class="form-group row col-xl-6" id="plate_second">
+                                        <label class="col-form-label"  for="plate_second">Plate Second</label>
+                                        <div class="col-xl-8">
+                                             <select  name="plate_second" t-attf-class="form-control" required="required">
+                                                <option value="">..Plate Second..</option>
+                                                <t t-foreach="plate_vals" t-as="plate_second">
+                                                    <option t-att-value="'%s' % (plate_second)" t-esc="plate_second"/>
+                                                </t>
+                                            </select>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                     <div style="display:none;" t-attf-class="form-group row col-xl-6" id="plate_third">
+                                        <label class="col-form-label"  for="plate_third">Plate Third</label>
+                                        <div class="col-xl-8">
+                                            <select  name="plate_third" t-attf-class="form-control" required="required">
+                                                <option value="">..Plate Third..</option>
+                                                <t t-foreach="plate_vals" t-as="plate_third">
+                                                    <option t-att-value="'%s' % (plate_third)" t-esc="plate_third"/>
+                                                </t>
+                                            </select>
+                                            <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="box-footer">
+                <button type="submit" id="get_so_line_submit_btn" class="btn btn-primary float-right mb32 get_price_submit_btn">
+                    Confirm
+                    <span class="fa fa-fw fa-arrow-circle-right" />
+                </button>
+            </div>
+        </div>  
+    </template>
+</odoo>        

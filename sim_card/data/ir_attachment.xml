@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+
+				<record id="action_attachment" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('res_model', '=', 'lost.request'), ('res_id', '=', active_id)]</field>
+            <field name="context">{'default_res_model': 'lost.request', 'default_res_id': active_id }</field>
+        </record>
+
+				<record id="action_attachment_sim_card_define" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('res_model', '=', 'sim.card.define'), ('res_id', '=', active_id)]</field>
+            <field name="context">{'default_res_model': 'sim.card.define', 'default_res_id': active_id }</field>
+        </record>
+
+				<record id="action_attachment_upgrade_request" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('res_model', '=', 'upgrade.request'), ('res_id', '=', active_id)]</field>
+            <field name="context">{'default_res_model': 'upgrade.request', 'default_res_id': active_id }</field>
+        </record>
+
+				<record id="action_attachment_sim_card_delivery" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('res_model', '=', 'sim.card.delivery'), ('res_id', '=', active_id)]</field>
+            <field name="context">{'default_res_model': 'sim.card.delivery', 'default_res_id': active_id }</field>
+        </record>
+
+				<record id="action_attachment_sim_card_receipt" model="ir.actions.act_window">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('res_model', '=', 'sim.card.receipt'), ('res_id', '=', active_id)]</field>
+            <field name="context">{'default_res_model': 'sim.card.receipt', 'default_res_id': active_id }</field>
+        </record>
+    </data>
+</odoo>

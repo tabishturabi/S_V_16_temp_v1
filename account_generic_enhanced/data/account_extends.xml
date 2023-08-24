@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="1">
+    <!-- add data file for Fuel Trip Account -->
+    <record id="data_of_fuel_trip_account" model="account.fuel.trip.configuration">
+        <field name="name">Add Rewards and Fuel Configuration</field>
+    </record>
+</data>
+</odoo>

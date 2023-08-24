@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--       	<record model="res.groups" id="group_view_archive_countries">-->
+        <!--            <field name="name">bsg Archive countries</field>-->
+        <!--        </record>-->
+        <record id="group_payslip_batch_view" model="res.groups">
+            <field name="name">Payslip View Attachment</field>
+            <field name="comment">The user will have access to view documents for payslip batch</field>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+        <record id="group_payslip_batch_add" model="res.groups">
+            <field name="name">Payslip Add Attachment</field>
+            <field name="comment">The user will have access to add documents for payslip batch</field>
+            <field name="implied_ids" eval="[(4, ref('bsg_hr_payroll.group_payslip_batch_view'))]"/>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+
+        <record id="group_payslip_batch_delete" model="res.groups">
+            <field name="name">Payslip Delete Attachment</field>
+            <field name="comment">The user will have access to delete documents for payslip batch</field>
+            <field name="implied_ids"
+                   eval="[(4, ref('bsg_hr_payroll.group_payslip_batch_add')), (4, ref('bsg_hr_payroll.group_payslip_batch_view'))]"/>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+        <record id="group_suspend_salary_access" model="res.groups">
+            <field name="name">Suspend Salary</field>
+            <field name="comment">The user will have access to suspend salary checkbox in employee</field>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+        <record id="group_payslip_branch_accountant" model="res.groups">
+            <field name="name">Branch Accountant</field>
+            <field name="comment">The user will have access to payslips of login user branch</field>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+    </data>
+</odoo>

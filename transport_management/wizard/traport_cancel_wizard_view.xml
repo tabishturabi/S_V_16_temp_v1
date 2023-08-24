@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bsg_inherit_view_account_invoice_refund_inherit" model="ir.ui.view">
+      <field name="name">view_bsg_inherit_view_account_invoice_refund</field>
+      <field name="model">account.move.reversal</field>
+      <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_inherit_view_account_invoice_refund"/>
+        <field name="arch" type="xml">
+            <field name="wizard_cargo_sale_id" position="after">
+                <field name="wizard_transport_id" invisible="1"/>
+                <field name="shipment_transport_type" attrs="{'invisible':[('wizard_transport_id','=',False)]}" string="Agreement Type"/>
+                <field name="transport_single_trip_reason" options="{'no_open': True,}" attrs="{'invisible':[('shipment_transport_type','!=','one_way')]}"/>
+                 <field name="transport_round_trip_reason" options="{'no_open': True,}" attrs="{'invisible':[('shipment_transport_type','!=','round_trip')]}"/>
+            </field>
+
+<!--            Migration Note-->
+<!--            <xpath expr="//field[@name='description']" position="attributes">-->
+<!--                 <attribute name="attrs">{'invisible':['|',('wizard_transport_id','!=',False),('shipment_type','=','oneway')],'required':['|',('wizard_transport_id','=',False),('shipment_type','=','return')]}</attribute>-->
+<!--            </xpath>-->
+<!--             <xpath expr="//field[@name='filter_refund']" position="attributes">-->
+<!--                 <attribute name="attrs">{'invisible':['|',('wizard_transport_id','!=',False),('wizard_cargo_sale_id','!=',False)]}</attribute>-->
+<!--            </xpath> -->
+<!--            Migration NOte-->
+        </field>
+    </record>
+
+
+</odoo>

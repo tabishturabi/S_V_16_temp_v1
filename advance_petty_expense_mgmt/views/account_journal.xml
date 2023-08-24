@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="view_view_move_form_view_form_form_coalevel2" model="ir.ui.view">
+        <field name="name">account.journal.formcw12</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">            
+            <field name="refund_sequence" position="after">
+                <field name="analytical_ids" widget="many2many_tags" options="{'no_create_edit': True}" attrs="{'invisible': [('type', 'not in', ['bank','cash'])]}"/>
+            </field>
+            <field name="suspense_account_id" position="after">
+              <field name="is_payment_journal" />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_move_filter_custom_search" model="ir.ui.view">
+      <field name="name">account.move.filter</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_account_move_filter"/>
+      <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+            <filter string="Petty Cash" name="is_petty_cash" domain="[('is_petty_cash','=',True)]" />
+            <filter string="Petty Expenses" name="is_petty_expense" domain="[('is_petty_expense','=',True)]" />
+        </xpath>
+      </field>
+    </record>
+
+    </data>
+</odoo>

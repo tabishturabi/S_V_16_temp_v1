@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_invoice_bx_form_extendes" model="ir.ui.view">
+		<field name="name">Account Invoice</field>
+		<field name="model">account.move</field>
+<!--		Migration Note-->
+<!--		<field name="inherit_id" ref="account.invoice_form"/>-->
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='payment_reference']" position="after">
+				<field name="transport_cus_inv_id" readonly="1" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

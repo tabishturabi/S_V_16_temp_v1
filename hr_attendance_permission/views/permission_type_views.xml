@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+
+    <record id="view_holidays_status_filter" model="ir.ui.view">
+        <field name="name">hr.permission.type.filter</field>
+        <field name="model">hr.permission.type</field>
+        <field name="arch" type="xml">
+            <search string="Search Permission Type">
+                <field name="name" string="Permission Types"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="edit_holiday_status_form" model="ir.ui.view">
+        <field name="name">hr.permission.type.form</field>
+        <field name="model">hr.permission.type</field>
+        <field name="arch" type="xml">
+            <form string="Permission Type">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+
+                        <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group name="description" string="Options">
+                            <label for="balance" string="Balance"/>
+
+                            <div>
+                                <field name="balance" class="inline"/>
+                                <span class="inline">Min</span>
+
+                            </div>
+
+                        </group>
+                        <group name="validation" string="Validation">
+                            <field name="double_validation"/>
+                        </group>
+                        <group name="options" string="Options">
+                            <field name="unpaid"/>
+
+                            <label for="day_from" string="Month Duraion" />
+                            <div>
+                                <field name="day_from" class="oe_inline" />
+                                To
+                                <field name="day_to" class="oe_inline" />
+                            </div>
+
+                            <field name="on_signin"/>
+                            <field name="on_signout"/>
+
+                        </group>
+                        <group name="validity" string="Validity">
+                            <field name="validity_start"/>
+                            <field name="validity_stop"/>
+                        </group>
+                        <group name="allocation" string="Allocation">
+                            <field name="accrual" />
+                            <field name="interval_number" attrs="{'invisible': [('accrual', '=', False)]}"/>
+
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_permission_type_tree" model="ir.ui.view">
+        <field name="name">hr.permission.type.tree</field>
+        <field name="model">hr.permission.type</field>
+        <field name="arch" type="xml">
+            <tree string="Permission Type">
+                <field name="name"/>
+                <field name="double_validation"/>
+                <field name="validity_start"/>
+                <field name="validity_stop"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="permission_type_action" model="ir.actions.act_window">
+        <field name="name">Permission Types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.permission.type</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_permissions"
+            name="Permissions"
+            parent="hr_attendance.menu_hr_attendance_root"
+            sequence="10"
+            groups="group_attendance_permission_user"/>
+
+    <menuitem
+            id="hr_attendance_permission_type"
+            action="permission_type_action"
+            name="Permission Types"
+            parent="menu_permissions"
+            sequence="10"
+            groups="group_attendance_permission_type_cr"/>
+
+</odoo>

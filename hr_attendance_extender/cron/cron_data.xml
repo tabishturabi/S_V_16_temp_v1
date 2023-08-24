@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+<!--    <data>-->
+<!--        <record forcecreate="True" id="attendance_scheduler" model="ir.cron">-->
+<!--            <field name="name">HR Attendance </field>-->
+<!--            <field name="active" eval="True" />-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doal">1</field>-->
+<!--            <field name="model" eval="'hr.attendance'" />-->
+<!--            <field name="function" eval="'call_attendance_daily_functions'" />-->
+<!--            <field name="args" eval="" />-->
+<!--        </record>-->
+<!--    </data>-->
+</odoo>

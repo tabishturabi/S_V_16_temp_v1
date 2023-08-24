@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <!-- form view -->
+
+        <record model="ir.ui.view" id="bsg_documents_type_view_form">
+            <field name="name">bsg_documents_type_view_form</field>
+            <field name="model">documents.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Documents Types">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="document_type_id" required="1" placeholder="Document Type"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="year_of_renew" required="1"/>
+
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view  -->
+        <record model="ir.ui.view" id="bsg_documents_type_view_tree">
+            <field name="name">bsg_documents_type_view_tree</field>
+            <field name="model">documents.type</field>
+            <field name="arch" type="xml">
+                <tree string="Documents Types">
+                    <field name="document_type_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="bsg_vehicle_documents_type_action">
+            <field name="name">Documents Types</field>
+            <field name="res_model">documents.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

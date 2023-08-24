@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_termination_form_inherit_v1">
+            <field name="name">hr_termination_form_inherit_v1</field>
+            <field name="model">hr.termination</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="employee_service.view_es_termination_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="/form/sheet/div[hasclass('oe_button_box')]" position="inside">-->
+                <xpath expr="/form/sheet/group[1]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_hr_clearance" attrs="{'invisible':[('hr_clearance_count','=',False)]}"
+                                type="object" class="oe_stat_button"
+                                icon="fa-file-text">
+                            <field string="HR Clearance" name="hr_clearance_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_hr_ticket_request"
+                                attrs="{'invisible':[('hr_ticket_request_count','=',False)]}" type="object"
+                                class="oe_stat_button"
+                                icon="fa-file-text">
+                            <field string="HR Tickets" name="hr_ticket_request_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_hr_exit_return"
+                                attrs="{'invisible':[('hr_exit_return_count','=',False)]}" type="object"
+                                class="oe_stat_button"
+                                icon="fa-file-text">
+                            <field string="HR Exit Entry" name="hr_exit_return_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_termination_form_inherit_v2">
+            <field name="name">hr_termination_form_inherit_v2</field>
+            <field name="model">hr.termination</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="employee_human_resource.view_hr_termination_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="/form/sheet/div[hasclass('oe_button_box')]" position="inside">-->
+                 <xpath expr="/form/sheet/group[1]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_hr_clearance" attrs="{'invisible':[('hr_clearance_count','=',0)]}"
+                                type="object" class="oe_stat_button" icon="fa-file-text">
+                            <field string="HR Clearance" name="hr_clearance_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_hr_ticket_request"
+                                attrs="{'invisible':[('hr_ticket_request_count','=',0)]}" type="object"
+                                class="oe_stat_button" icon="fa-file-text">
+                            <field string="HR Tickets" name="hr_ticket_request_count" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_hr_exit_return" attrs="{'invisible':[('hr_exit_return_count','=',0)]}"
+                                type="object" class="oe_stat_button" icon="fa-file-text">
+                            <field string="HR Exit Entry" name="hr_exit_return_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

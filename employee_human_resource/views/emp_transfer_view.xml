@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+
+
+        <record id="hr_job_transfer_wiz_view" model="ir.ui.view">
+            <field name="name">Job Transfer</field>
+            <field name="model">hr.employee.job.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Job Transfer Employee">
+                    <header>
+                        <button name="confirm" string="Confirm" class="oe_highlight" states="draft" type="object"/>
+                        <button name="direct_manager" string="Direct Manager Approve" class="oe_highlight"
+                                states="direct_manager" type="object" groups="hr.group_hr_user"/>
+                        <button name="hr_manager" string="Hr Manager Approve" class="oe_highlight" states="hr_manager"
+                                type="object" groups="hr.group_hr_manager"/>
+                        <button name="assistant_executive" string="Assistant Executive" class="oe_highlight"
+                                states="assistant_executive" type="object"
+                                />
+                        <button string="Executive Director" name="action_transfer" states="executive_executive"
+                                type="object" class="oe_highlight" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+
+                        <group col="4">
+                            <field name="job_id" options="{'no_create':True,'no_edit':True, 'no_open': True}" readonly="1"/>
+
+                            <field name="employee_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                            <field name="transfer_date"/>
+                            <field name="new_job_id" options="{'no_create':True,'no_edit':True, 'no_open': True}" required="1" domain="[('id','!=',job_id)]"/>
+                            <field name="department_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                            <field name="country_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                            <field name="work_email"/>
+                            <field name="mobile_phone"/>
+                            <field name="approve_date"/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_job_transfer_action">
+            <field name="name">Employee Job Transfer</field>
+            <field name="res_model">hr.employee.job.transfer</field>
+            <field name="type">ir.actions.act_window</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="employee_job_transfer_menu" name="Job Transfer" parent="menu_government_relations"  groups="base.group_system"
+                  action="hr_job_transfer_action" sequence="2"/>
+
+    </data>
+</odoo>

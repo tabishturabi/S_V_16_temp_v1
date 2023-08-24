@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="account_invoice_claims_branch_id" model="ir.ui.view">
+            <field name="name">Account Invoice</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']//field[@name='name']" position="after">
+                    <field name="claims_branch_id" readonly="1" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="close_way_bill_wizard_view" model="ir.ui.view">
+            <field name="name">close.way.bill.wizard.view</field>
+            <field name="model">close.way.bill</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Close Way Bill Details">
+                        <group>
+                            <group>
+
+                                <field name="way_bill_id" readonly="1"/>
+                                <field name="actual_delivery_date"/>
+                            </group>
+
+                        </group>
+                        <footer>
+                            <button class="oe_highlight" name="action_close" string="Close WayBill"/>
+                            <button class="oe_highlight" special="cancel" name="cancel" string="Cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

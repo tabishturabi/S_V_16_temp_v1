@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      <!-- form view -->
+        <record model="ir.ui.view" id="cange_fleet_trip_line_state_form">
+            <field name="name">cange_fleet_trip_line_state.form</field>
+            <field name="model">cange_fleet_trip_line_state</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                      <group>
+                          <field name="trip_id" readonly="1"/>
+                      </group>
+                      <group>
+                          <field name="trip_state" string="Current State"/>
+                          <field name="trip_new_state" string="New State"/>
+                      </group>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="update_state" string="Change State" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="cange_so_line_state_action" model="ir.actions.act_window">
+            <field name="name">Change Trip State</field>
+            <field name="res_model">cange_fleet_trip_line_state</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cange_fleet_trip_line_state_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,157 @@
+<odoo>
+  <data>
+    <record id="action_account_invoice_payment1" model="ir.actions.act_window">
+            <field name="name">Register Payment</field>
+<!--        Migration Note-->
+            <field name="res_model">account.payment.register</field>
+<!--            <field name="res_model">account.register.payments</field>-->
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.view_account_payment_register_form"/>
+            <field name="context">{'default_coll_ids1': [(4, active_id, None)]}</field>
+            <field name="target">new</field>
+        </record>
+    <!-- Form View  -->
+<!--    <record model="ir.ui.view" id="view_vendorcollection_form">-->
+<!--        <field name="name">account.collection.vendor.form</field>-->
+<!--        <field name="model">account.collection.vendor</field>-->
+<!--        <field name="type">form</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <header>-->
+<!--                    <button name="confirm" class="oe_highlight" states="draft" string="Confirm" type="object"/>-->
+<!--                    &lt;!&ndash; <button name="posted" class="oe_highlight" states="confirm" string="Post" type="object"/> &ndash;&gt;-->
+<!--                    <button name="action_quotation_send" states="draft" string="Send by Email" type="object" class="btn-primary"/>-->
+<!--                    <button name="action_draft" class="oe_highlight" states="posted" string="Cancel" type="object"/>-->
+<!--                    <button name="action_reset" class="oe_highlight" states="confirm" string="MODIFY CONFIRMED VOUCHER" type="object"/>-->
+<!--                    <button name="action_resetdraftandreconcile" class="oe_highlight" states="cancelled" string="Revert to Draft" type="object"/>-->
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,posted,cancelled"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="action_view_payment" type="object" class="oe_stat_button" icon="fa-university" attrs="{'invisible': [('payment_count', '=', 0)]}">-->
+<!--                            <field name="payment_count" widget="statinfo" string="Payments"/>-->
+<!--                        </button>-->
+<!--                        <button name="action_view_journal" type="object" class="oe_stat_button" icon="fa-bars" attrs="{'invisible': [('journal_count', '=', 0)]}">-->
+<!--                            <field name="journal_count" widget="statinfo" string="Journal"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                   -->
+<!--                    <div class="oe_title">-->
+<!--                        <h1><field name="name"/></h1>-->
+<!--                    </div>-->
+<!--                    <group>-->
+<!--                        -->
+<!--                        <group>-->
+<!--                            <field name="show_branch"/>-->
+<!--                            <field name="partner_id1" domain="[('supplier_rank','>', 0),('is_company','=',True)]"/>-->
+<!--                            <field name="branch_id" attrs="{'invisible': [('show_branch', '=', False)]}" domain="[('supplier_rank','>', 0),('parent_id','=',partner_id1)]"/>-->
+<!--                            <field name="partner_id" invisible="1"/>-->
+<!--                            -->
+<!--                            <field name="invoice_state" invisible="1"/>-->
+<!--                            &lt;!&ndash; <button name="cust_select" class="oe_highlight" attrs="{'invisible': [('invoice_state', '=', False)]}" string="View Invoices" type="object"/> &ndash;&gt;-->
+<!--                            <field name="currency_id" invisible="1"/>-->
+<!--                            <field name="amount"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="payment_date"/>-->
+<!--                            <field name="due_date" readonly="1"/>-->
+<!--                            <field name="communication"/>-->
+<!--                        -->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="account_invoice" attrs="{'invisible': [('partner_id', '=', False)],'readonly':[('state','=','confirm')]}" -->
+<!--                                context="{'form_view_ref':'account.invoice_supplier_form','tree_view_ref':'account.invoice_supplier_tree'}"-->
+<!--                                domain="[('partner_id','=',partner_id),('move_type','in', ['in_invoice', 'in_refund']),('state','=','open')]" options="{'no_create': True}">-->
+<!--                                    <tree>-->
+<!--                                        <field name="seq_no"/>-->
+<!--                                        <field name="date_invoice"/>-->
+<!--&lt;!&ndash;                                        Migration Note&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="number"/>&ndash;&gt;-->
+<!--                                        <field name="name"/>-->
+<!--&lt;!&ndash;                                        Migration Note&ndash;&gt;-->
+<!--                                        <field name="commercial_partner_id" invisible="1"/>-->
+<!--&lt;!&ndash;                                        Migration Note&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="reference" invisible="1"/>&ndash;&gt;-->
+<!--                                        <field name="ref" invisible="1"/>-->
+<!--                                        <field name="name" invisible="1"/>-->
+<!--                                        <field name="journal_id" invisible="1"/>-->
+<!--                                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>-->
+<!--                                        <field name="user_id"/>-->
+<!--                                        &lt;!&ndash; <field name="date_due"/> &ndash;&gt;-->
+<!--&lt;!&ndash;                                        Migration Note&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="origin"/>&ndash;&gt;-->
+<!--                                        <field name="invoice_origin"/>-->
+<!--                                        <field name="amount_untaxed" string="Tax Excluded" sum="Total"/>-->
+<!--                                        <field name="amount_tax" sum="Total"/>-->
+<!--                                        <field name="amount_total_signed" string="Total" sum="Total"/>-->
+<!--&lt;!&ndash;                                        Migration Note&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="residual_signed" string="Amount Due" sum="Amount Due"/>&ndash;&gt;-->
+<!--                                        <field name="amount_residual_signed" string="Amount Due" sum="Amount Due"/>-->
+<!--                                        <field name="currency_id" invisible="1"/>-->
+<!--                                        <field name="company_currency_id" invisible="1"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                        Migration Note-->
+<!--&lt;!&ndash;                                        <field name="type" invisible="context.get('type',True)"/>&ndash;&gt;-->
+<!--                                        <field name="move_type" invisible="context.get('type',True)"/>-->
+<!--                                    </tree>-->
+<!--                                    -->
+<!--                            </field>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">-->
+<!--                        <group>-->
+<!--                            <button name="%(action_account_invoice_payment1)d" type="action" states="confirm" string="Register Payment" groups="account.group_account_invoice" class="oe_highlight"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">-->
+<!--                                <label for="amount_total"/>-->
+<!--                            </div>-->
+<!--                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--    &lt;!&ndash; Tree View &ndash;&gt;-->
+<!--    <record model="ir.ui.view" id="view_vendorcollection_tree">-->
+<!--        <field name="name">account.collection.vendor._tree</field>-->
+<!--        <field name="model">account.collection.vendor</field>-->
+<!--        <field name="type">tree</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="name"/>-->
+<!--                <field name="partner_id"/>-->
+<!--                <field name="amount"/>-->
+<!--                <field name="payment_date"/>-->
+<!--                <field name="communication"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Sequence  &ndash;&gt;-->
+<!--    <record id="ir_sequence_vendorcollection" model="ir.sequence">-->
+<!--        <field name="name">account.collection.vendor</field>-->
+<!--        <field name="code">account.collection.vendor</field>-->
+<!--        <field name="prefix">VVU/%(range_year)s/</field>-->
+<!--        <field name="padding">5</field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action  &ndash;&gt;-->
+<!--    <record model="ir.actions.act_window" id="action_vendorcollection">-->
+<!--        <field name="name">Vendor Collection</field>-->
+<!--        <field name="res_model">account.collection.vendor</field>-->
+<!--&lt;!&ndash;        <field name="view_type">form</field>&ndash;&gt;-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+<!--    -->
+<!--    <menuitem name="Vendor Collection" -->
+<!--      id="account_ccollection_root_menu1" -->
+<!--      parent="account.menu_finance_payables" -->
+<!--      action="action_vendorcollection"-->
+<!--      sequence="11"-->
+<!--      />-->
+
+  </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record model="res.groups" id="group_def_expense_type_read">
+        <field name="name">Deferred Expense Types - Read</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+        <field name="implied_ids" eval="[(4, ref('account.group_account_user')), (4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="res.groups" id="group_def_expense_type_create">
+        <field name="name">Deferred Expense Types - Create/Edit</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+        <field name="implied_ids" eval="[(4, ref('group_def_expense_type_read')), (4, ref('base.group_user'))]"/>
+    </record>
+
+
+    <record model="res.groups" id="group_def_expense_read">
+        <field name="name">Deferred Expense - Read</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+        <field name="implied_ids" eval="[(4, ref('account.group_account_user')), (4, ref('base.group_user'))]"/>
+    </record>
+
+    <record model="res.groups" id="group_def_expense_create">
+        <field name="name">Deferred Expense - Create/Edit</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+        <field name="implied_ids" eval="[(4, ref('group_def_expense_read')), (4, ref('base.group_user'))]"/>
+    </record>
+
+
+    <record model="res.groups" id="group_def_expense_type_archive">
+        <field name="name">Deferred Expense Types - Archive</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+    </record>
+
+    <record model="res.groups" id="group_def_expense_archive">
+        <field name="name">Deferred Expense - Archive</field>
+        <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+    </record>
+
+</odoo>

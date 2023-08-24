@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record id="bsg_employee" model="ir.rule">
+              <field name="name">Employee To Create Request</field>
+              <field name="model_id" ref="model_iqama_renewels" />
+              <field name="domain_force">[('state','in',['draft','submitted_to_manager','rejected_by_manager'])]</field>
+              <field name="groups" eval="[(4,ref('bsg_iqama_renewels.group_iqama_access'))]" />
+          </record>
+           <record id="bsg_manager_rule" model="ir.rule">
+              <field name="name">Manager</field>
+              <field name="model_id" ref="model_iqama_renewels" />
+              <field name="domain_force">[('state','in',['submitted_to_manager','confirmed_by_manager','rejected_by_manager','rejected_by_hrmanager','refused'])]</field>
+              <field name="groups" eval="[(4,ref('bsg_iqama_renewels.group_iqama_department_manager'))]" />
+               <field name="perm_create" eval="False" />
+               <field name="perm_unlink" eval="False" />
+          </record>
+           <record id="bsg_hrmanager_rule" model="ir.rule">
+              <field name="name">Hr Manager</field>
+              <field name="model_id" ref="model_iqama_renewels" />
+              <field name="domain_force">[('state','in',['confirmed_by_manager','confirmed_by_hrmanager','rejected_by_hrmanager','refused'])]</field>
+              <field name="groups" eval="[(4,ref('bsg_iqama_renewels.group_iqama_hr_manager'))]" />
+          </record>
+           <record id="bsg_employee_assiged_to" model="ir.rule">
+              <field name="name">Employee To Create Request</field>
+              <field name="model_id" ref="model_iqama_renewels" />
+              <field name="domain_force">[('user_id','=',user.id),('state','in',['confirmed_by_hrmanager','petty_cash_done','done','refused'])]</field>
+              <field name="groups" eval="[(4,ref('bsg_iqama_renewels.group_iqama_access'))]" />
+          </record>
+          <record id="bsg_employee_all" model="ir.rule">
+              <field name="name">All Employee</field>
+              <field name="model_id" ref="model_iqama_renewels" />
+              <field name="domain_force">[(1,'=',1)]</field>
+              <field name="groups" eval="[(4,ref('base.group_system'))]" />
+          </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!--  the botton is Moved manualy to the view  -->
+        <record model="ir.ui.view" id="view_vehicle_cargo_sale_form_inherit">
+            <field name="name">view_vehicle_cargo_sale_form</field>
+            <field name="model">bsg_vehicle_cargo_sale</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_print_cs_delivery']" postion="after">
+                    <button name="print_tag_report" type="object" class="btn-primary" style="color:green;" icon="fa-tag" string="Cargo Tag"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

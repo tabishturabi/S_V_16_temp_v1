@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+		<record id="view_import_site_form" model="ir.ui.view">
+            <field name="name">ImportSite</field>
+            <field name="model">import.site</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Site">
+                        <group>
+                            <group>
+                                <field name="city" />
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="address" />
+                                <field name="contact" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_custom_import_site" model="ir.ui.view">
+            <field name="name">ImportSite</field>
+            <field name="model">import.site</field>
+            <field name="arch" type="xml">
+                <tree string="Import Site" >
+                	<field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_custom_import_site" model="ir.actions.act_window">
+            <field name="name">ImportSite</field>
+            <field name="res_model">import.site</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_custom_import_site" />
+        </record>
+        <menuitem action="action_custom_import_site" id="custom_clearance_submenu_import_site" name="Site" parent="custom_clearance.custom_clearance_submenu" sequence="3"/>
+	</data>
+</odoo>

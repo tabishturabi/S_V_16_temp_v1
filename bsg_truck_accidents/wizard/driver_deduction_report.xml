@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="truck_accidents_driver_deduction_report_form">
+            <field name="name">driver.deduction.report.wizard.form</field>
+            <field name="model">driver.deduction.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                                <field name="driver_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+                        <!--                        <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="truck_accidents_driver_deduction_report_action">
+            <field name="name">Driver Deduction Report</field>
+            <field name="res_model">driver.deduction.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="truck_accidents_driver_deduction_report_form"></field>
+            <field name="target">new</field>
+        </record>
+        <menuitem name="Reporting"
+                  id="menu_truck_accidents_reports_main"
+                  groups="bsg_truck_accidents.group_truck_accidents_reporting"
+                  parent="bsg_truck_accidents.bsg_truck_accidents"
+                  sequence="4"/>
+
+        <menuitem name="Driver Deduction Report"
+                  id="menu_truck_accidents_driver_deduction"
+                  parent="bsg_truck_accidents.menu_truck_accidents_reports_main"
+                  sequence="4"
+                  groups="bsg_truck_accidents.group_truck_accidents_reporting"
+                  action="truck_accidents_driver_deduction_report_action"/>
+        <report id="driver_deduction_report_xlsx_id"
+                model="driver.deduction.report"
+                string="Driver Deduction Report"
+                report_type="xlsx"
+                name="bsg_truck_accidents.driver_deduction_report_xlsx"
+                file="bsg_truck_accidents.driver_deduction_report_xlsx"/>
+    </data>
+</odoo>

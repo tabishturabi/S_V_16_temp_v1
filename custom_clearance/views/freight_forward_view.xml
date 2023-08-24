@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_freight_forward_form" model="ir.ui.view">
+            <field name="name">Freight Forward</field>
+            <field name="model">freight.forward</field>
+            <field name="arch" type="xml">
+                <form string="Freight Forward">
+                    <header>
+                        <button name="action_create_transport" type="object" string="Create Transport Order" class="btn-primary" attrs="{'invisible': ['|', ('state', '!=', 'draft')]}" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" nolable="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="s_no" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="s_supplier" context="{'default_supplier':True,'default_customer_rank':False,'default_types':'ship_line'}" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="customer" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1" />
+                                <field name="eta" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="etd" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="customer_site" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <field name="book_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="form" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="to" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="cro" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="cro_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <!-- <field name="acct_link" readonly="1" /> -->
+                            </group>
+                        </group>
+                        <div class="oe_title">
+                            <h2>Services</h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="freight" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="store" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <field name="trans" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="custm" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                        </group>
+                        <div class="oe_title">
+                            <h2>Container Info.</h2>
+                        </div>
+                        <group>
+                            <field name="freight_line" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <!-- <field name="line_no" string="#" readonly="1"/> -->
+                                    <field name="cont_no" required="1" />
+                                    <field name="cont_size" />
+                                    <field name="store_charge" />
+                                    <field name="freight_chrg" />
+                                    <field name="stor_supp" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="status_name" />
+                            </group>
+                            <group />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_custom_freight_forward" model="ir.ui.view">
+            <field name="name">Freight Forward</field>
+            <field name="type">tree</field>
+            <field name="model">freight.status</field>
+            <field name="arch" type="xml">
+                <tree string="Freight Forward">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_custom_freight_forward" model="ir.actions.act_window">
+            <field name="name">Freight Forward</field>
+            <field name="res_model">freight.forward</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_custom_freight_forward" />
+        </record>
+        <menuitem action="action_custom_freight_forward" groups="custom_clearance.group_custom_clearance_as_manager" id="custom_clearance_submenu_freight_forward" name="Freight Forward" parent="custom_clearance.custom_clearance_submenu" sequence="2" />
+    </data>
+</odoo>

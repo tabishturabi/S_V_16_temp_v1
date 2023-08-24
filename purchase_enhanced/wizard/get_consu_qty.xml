@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="get_consumable_product_qty_form_view" model="ir.ui.view">
+            <field name="name">get.consumable.product.qty.form.view</field>
+            <field name="model">get.consumable.product.qty</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group class="oe_title">
+                        <field name="purchase_transfer_line_id" required="1" invisible="1"/>
+                        <field name="product_id" required="1"/>
+                        <field name="location_id" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_get_qty" string="Fetch" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="get_consumable_product_qty_action" model="ir.actions.act_window">
+            <field name="name">Get Consumable Qty</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">get.consumable.product.qty</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="get_consumable_product_qty_form_view"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

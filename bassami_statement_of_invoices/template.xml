@@ -1,0 +1,71 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_soi_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_invoice_ledger" 
+            model="res.partner"
+            name="bassami_statement_of_invoices.partner_ledger_report"
+            file="bassami_statement_of_invoices.partner_ledger_report"
+            report_type="qweb-html"
+            string="Statement of Invoices"
+            paperformat="paperformat_soi_template"
+            menu="False"/>
+
+        <record id="invoice_ledger_wizard" model="ir.ui.view">
+            <field name="name">invoice_ledger_wizard</field>
+            <field name="model">invoice.ledger.bassami</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="all_invoices" />
+                            <field name="partner_ids" required="1"/>
+                            <field name="customer_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="has_invoice"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="invoice_ledger_menu_action" model="ir.actions.act_window">
+            <field name="name">Statement of Invoice</field>
+            <field name="res_model">invoice.ledger.bassami</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="invoice_ledger_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="invoice_ledger_menu_item" name="Statement of Invoices" action="invoice_ledger_menu_action" parent="account_reports.account_reports_partners_reports_menu" />
+        
+    </data>
+</odoo>

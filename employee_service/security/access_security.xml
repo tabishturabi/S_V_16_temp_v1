@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_employee_service">
+            <field name="name">Employee Service</field>
+            <field name="description">User access level for this module</field>
+            <field name="sequence">9</field>
+        </record>
+
+        <record id="employee_service_group" model="res.groups">
+            <field name="name">Employee Service Request</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_manager_service_group" model="res.groups">
+            <field name="name">Emp. Service Reporting Employee Manager To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_admin_service_group" model="res.groups">
+            <field name="name">Emp. Service Reporting Employee administrator To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_hr_supervisor_service_group" model="res.groups">
+            <field name="name">Emp. Service Reporting HR Supervisor To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_hr_manager_service_group" model="res.groups">
+            <field name="name">Emp. Service Reporting HR Manager To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_hr_deputy_ceo_approve_group" model="res.groups">
+            <field name="name">Emp. Service Reporting Deputy CEO To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_hr_ceo_approve_group" model="res.groups">
+            <field name="name">Emp. Service Reporting CEO To Approve</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+
+        <record id="employee_active_service_group" model="res.groups">
+            <field name="name">Employee Service Active</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+        <record id="employee_service_type_group" model="res.groups">
+            <field name="name">Employee Service Configuration</field>
+            <field name="category_id" ref="module_employee_service"/>
+        </record>
+
+
+<!--        <record model="ir.rule" id="employee_service_manger_user_id">-->
+<!--            <field name="name">Administrator Manager To Approve</field>-->
+<!--            <field name="model_id" ref="employee_service.model_employee_service"/>-->
+<!--            <field name="groups" eval="[(4,ref('employee_manager_service_group'))]"/>-->
+<!--             <field name="domain_force">[('state','=','submitted'),('manager_id.user_id','=',user.id)]</field>-->
+<!--&lt;!&ndash;             <field name="domain_force">[('state','=','submitted'),('manager_id.user_id','=',user.id)]</field>&ndash;&gt;-->
+<!--            <field eval="1" name="perm_write"/>-->
+<!--            <field eval="0" name="perm_read"/>-->
+<!--            <field eval="0" name="perm_unlink"/>-->
+<!--            <field eval="0" name="perm_create"/>-->
+<!--        </record>-->
+        <record model="res.groups" id="group_legal_department_manager">
+            <field name="name">Legal Department Manager</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_cancel_eos">
+            <field name="name">Cancel EOS</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+
+    </data>
+</odoo>

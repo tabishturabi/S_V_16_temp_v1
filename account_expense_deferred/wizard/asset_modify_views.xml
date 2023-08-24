@@ -1,0 +1,15 @@
+<odoo>
+    <record id="asset_modify_form_def_exp" model="ir.ui.view">
+        <field name="name">asset.modify.form</field>
+        <field name="model">asset.modify</field>
+        <field name="inherit_id" ref="account_asset.asset_modify_form" />
+        <field name="arch" type="xml">
+            <field name="method_period" position="replace">
+                <field name="is_expense" invisible="1"/>
+                <field name="method_period" required="1" attrs="{'invisible': [('is_expense', '=', True)]}"/>
+                <field name="method_period_label" required="1"
+                       nolabel="1" attrs="{'invisible': [('is_expense', '!=', True)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+
+    <!-- add new filed for international products -->     
+    <record id="view_product_trip_product" model="ir.ui.view">
+        <field name="name">product.template.landed.cost.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="is_fuel_expense"/>
+                    <label for="is_fuel_expense"/><br/>
+                    <field name="is_driver_reward"/>
+                    <label for="is_driver_reward"/>
+                </div>
+            </div>
+        </field>
+    </record>
+  
+  </data>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="branch_owner_tab">
+        <field name="name">branch.owner.tab</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='branch_team']" position="after">
+                <page name="branch_owner" string="Branch Owner">
+                    <group>
+                   <group>
+                       <field name="contract_type"></field>
+                       <field name="lessor_name" widget="res_partner_many2one" domain="[('supplier_rank','>',0)]"></field>
+                   </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="contract_no"></field>
+                        <field name="tenancy_start_date" class="with_hijri"></field>
+                        <field name="electricity_meter_number"></field>
+                    </group>
+                    <group>
+                        <field name="contract_amount"></field>
+                        <field name="tenancy_end_date" class="with_hijri"></field>
+                        <field name="water_meter_number"></field>
+                        <field name="attachment_ids" widget="many2many_binary"></field>
+                    </group>
+                </group>
+                <group>
+                    <field name="description"></field>
+                </group>
+                </page>
+            </xpath>
+        </field>
+      </record>
+  </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- iqama form view-->
+        <record model="ir.ui.view" id="view_hr_insurance_form">
+            <field name="name">hr.insurance.form</field>
+            <field name="model">hr.insurance</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Iqama">
+                    <sheet>
+                        <group>
+                            <field name="employee_insurance" />
+                            <field name="yearly_insurance_cost" />
+                            <field name="is_employee" />
+                            <field name="bsg_insurance_company" />
+                            <field name="bsg_insurance_member1" attrs="{'invisible': [('is_employee' ,'=', True)]}" />
+                            <field name="bsg_insurance_member" attrs="{'invisible': [('is_employee' ,'=', False)]}" />
+                            <field name="bsg_startdate" />
+                            <field name="bsg_enddate" />
+                            <field name="bsg_premium" />
+                            <field name="bsg_insurancerelation" />
+                            <field name="bsg_class" />
+                            <field name="bsg_cardcode" />
+                            <field name="bsg_gender" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_hr_insurance_tree">
+            <field name="name">hr.insurance.tree</field>
+            <field name="model">hr.insurance</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_insurance" />
+                    <field name="is_employee" />
+                    <field name="bsg_insurance_company" />
+                    <field name="bsg_insurance_member1" />
+                    <field name="bsg_startdate" />
+                    <field name="bsg_enddate" />
+                    <field name="bsg_premium" />
+                    <field name="bsg_insurancerelation" />
+                    <field name="bsg_class" />
+                    <field name="bsg_cardcode" />
+                    <field name="bsg_gender" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bsg_hr_insurance_action">
+            <field name="name">Employee Insurance</field>
+            <field name="res_model">hr.insurance</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Employee Insurance" id="hr_emp_insurance_menu" parent="bsg_hr.hr_iqama_menu" action="bsg_hr_insurance_action" sequence="14" />
+    </data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bsg_inherit_view_account_invoice_refund" model="ir.ui.view">
+        <field name="name">view_bsg_inherit_view_account_invoice_refund</field>
+        <field name="model">account.move.reversal</field>
+        <field name="inherit_id" ref="account.view_account_move_reversal"/>
+        <field name="arch" type="xml">
+            <field name="refund_method" position="after">
+                <field name="wizard_cargo_sale_id" invisible="1"/>
+                <field name="cancel_return_trip" invisible="1"/>
+                <field name="is_old_order" invisible="1"/>
+                <field name="allow_edit_in_wiz" invisible="1"/>
+                <field name="shipment_type" attrs="{'invisible':[('wizard_cargo_sale_id','=',False)]}"/>
+                <field name="single_trip_reason" options="{'no_open': True,}"
+                       attrs="{'required':[('cancel_return_trip','=',False)],'invisible':[('cancel_return_trip','=',True)]}"/>
+                <!--  <field name="round_trip_reason" options="{'no_open': True,}"
+                   attrs="{'invisible':[('shipment_type','in',['oneway'])],
+                         'required':[('shipment_type','in',['return'])]}"/> -->
+
+                <!--                    Migration Note start fleet_trip_id is in bsg_trip_mgmt that is why i commented this field -->
+
+<!--                <field name="cargo_sale_line_ids" widget="many2many_tags"-->
+<!--                       attrs="{'invisible':['|',('wizard_cargo_sale_id','=',False),('is_old_order','=',True)],'required':[('wizard_cargo_sale_id','!=',False),('is_old_order','!=',True)]}"-->
+<!--                       domain="[('bsg_cargo_sale_id', '=', wizard_cargo_sale_id),                               ('state', 'in', ['draft','cancel_request']),('fleet_trip_id','=',False)]"/>-->
+            </field>
+            <field name="date" position="replace">
+                <field name="date" attrs="{'readonly':[('allow_edit_in_wiz','=',False)]}"/>
+            </field>
+            <field name="date" position="attributes">
+                <attribute name="attrs">{'readonly':[('allow_edit_in_wiz','=',False)]}</attribute>
+            </field>
+            <xpath expr="//field[@name='reason']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible':[('shipment_type','=','oneway')],'required':[('shipment_type','=','return')]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='refund_method']" position="attributes">
+                <attribute name="attrs">{'invisible':[('wizard_cargo_sale_id','!=',False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

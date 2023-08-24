@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* cargo_tag_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e-20200209\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-25 12:41+0000\n"
+"PO-Revision-Date: 2022-05-25 12:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cargo_tag_report
+#: model_terms:ir.ui.view,arch_db:cargo_tag_report.cargo_tag_template
+msgid "<br/>From:"
+msgstr "<br/>من:"
+
+#. module: cargo_tag_report
+#: model_terms:ir.ui.view,arch_db:cargo_tag_report.cargo_tag_template
+msgid "Agreement:"
+msgstr "رقم الاتفاقية: "
+
+#. module: cargo_tag_report
+#: model:ir.model,name:cargo_tag_report.model_bsg_vehicle_cargo_sale_line
+msgid "Cargo Sale Line"
+msgstr "الاتفاقية"
+
+#. module: cargo_tag_report
+#: model:ir.actions.report,name:cargo_tag_report.report_cargo_tag
+#: model_terms:ir.ui.view,arch_db:cargo_tag_report.view_vehicle_cargo_sale_form_inherit
+msgid "Cargo Tag"
+msgstr "ملصق الشحنة"
+
+#. module: cargo_tag_report
+#: model_terms:ir.ui.view,arch_db:cargo_tag_report.cargo_tag_template
+msgid "Name:"
+msgstr "الاسم: "
+
+#. module: cargo_tag_report
+#: model_terms:ir.ui.view,arch_db:cargo_tag_report.cargo_tag_template
+msgid "To:"
+msgstr "الى: "
+

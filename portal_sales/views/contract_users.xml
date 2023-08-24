@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_contract_public_users_tree" model="ir.ui.view">
+        <field name="name">view.contract.public.users.tree</field>
+        <field name="model">contract.public.users</field>
+        <field name="arch" type="xml">
+            <tree string="Customer Portal Users">
+                <field name="customer_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_contract_public_users_form" model="ir.ui.view">
+        <field name="name">view.contract.public.users.form</field>
+        <field name="model">contract.public.users</field>
+        <field name="arch" type="xml">
+            <form string="Customer Portal Users">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="customer_id" class="oe_edit_only"/>
+                        <h1><field name="customer_id" options='{"no_open": True, "no_create": True}'/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="car_make_ids"  widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_quick_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="location_ids"  widget="many2many_tags"
+                                   options="{'no_create_edit': True, 'no_quick_create': True}"/>
+                            <field name="user_id" domain="[('share','=',False)]" options='{"no_open": True, "no_create": True}'/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allowed Users">
+                            <field name="user_lines" nolabel="1">
+                                <tree editable="top">
+                                    <field name="customer_id" invisible="1" />
+                                    <field name="user_id" required="1"/>
+                                    <field name="contract_ids"  widget="many2many_tags" required="1"
+                                           options="{'color_field': 'color', 'no_create_edit': True, 'no_quick_create': True}"/>
+                                    <field name="date_from" required="1"/>
+                                    <field name="date_to" required="1"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_contract_public_users" model="ir.actions.act_window">
+        <field name="name">Contract Portal Users</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">contract.public.users</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem action="action_contract_public_users"
+              id="menu_contract_public_users"
+              parent="bsg_customer_contract.root_customer_contract_menu"
+              sequence="5"/>
+
+</odoo>

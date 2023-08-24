@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Sequence  -->
+        <record model="ir.sequence" id="bsg_fleet_vehicle_trip_sq">
+      		<field name="name">Vehicle Trips</field>
+      		<field name="code">bsg_fleet_vehicle_trip_sq_code</field>
+      		<field name="prefix">%(range_year)s%(range_month)s</field>
+      		<field name="padding">5</field>
+    	</record>
+
+	</data>
+</odoo>

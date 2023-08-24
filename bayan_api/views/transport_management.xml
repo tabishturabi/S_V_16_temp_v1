@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="transport_management_form_view_bayan">
+            <field name="name">transport.management.form.view.bayan</field>
+            <field name="model">transport.management</field>
+            <field name="inherit_id" ref="transport_management.transport_management_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_get_transport_bayan_pdf"
+                            attrs="{'invisible':[('bayan_status','!=','success')]}"
+                            string="Get Bayan Trip PDF" type="object" class="oe_highlight"/>
+                    <button name="action_transport_bayan_create_api" type="object"
+                            attrs="{'invisible':[('bayan_status','!=','success')]}"
+                            string="Create API" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//group/group[2]" position="inside">
+                    <field name="transport_bayan_trip_id" force_save="1" readonly="1"/>
+                    <field name="bayan_status" force_save="1" readonly="1"/>
+                </xpath>
+                <xpath expr="//page/field[@name='transport_management_line']/tree/field[@name='product_uom_qty']"
+                       position="after">
+                    <field name="transport_bayan_way_bill_line_id" invisible="1"/>
+                    <field name="way_bill_line_state" invisible="1"/>
+                    <field name="transport_bayan_goods_type_id"/>
+<!--                    <button name="btn_cancel_waybill"-->
+<!--                            attrs="{'invisible':['|','|',('way_bill_line_state','=','cancelled'),('transport_bayan_way_bill_line_id','=',False)]}"-->
+<!--                            string="Cancel Waybill" type="object" class="oe_highlight"/>-->
+                </xpath>
+                <xpath expr="//page/field[@name='transport_management_line']/form/group/group[3]"
+                       position="inside">
+                    <field name="transport_bayan_goods_type_id" required="1"/>
+
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="government_management_form_view_bayan">
+            <field name="name">government.management.form.view.bayan</field>
+            <field name="model">transport.management</field>
+            <field name="inherit_id" ref="government_sale.government_sale_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_get_transport_bayan_pdf"
+                            attrs="{'invisible':[('bayan_status','!=','success')]}"
+                            string="Get Bayan Trip PDF" type="object" class="oe_highlight"/>
+                    <button name="action_transport_bayan_create_api" type="object"
+                            attrs="{'invisible':[('bayan_status','!=','success')]}"
+                            string="Create API" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//group/group[2]" position="inside">
+                    <field name="transport_bayan_trip_id" force_save="1" readonly="1"/>
+                    <field name="bayan_status" force_save="1" readonly="1"/>
+                </xpath>
+                <xpath expr="//page/field[@name='transport_management_line']/tree/field[@name='product_uom_qty']"
+                       position="after">
+                    <field name="transport_bayan_way_bill_line_id" invisible="1"/>
+                    <field name="way_bill_line_state" invisible="1"/>
+                    <field name="transport_bayan_goods_type_id"/>
+<!--                    <button name="btn_cancel_waybill"-->
+<!--                            attrs="{'invisible':['|','|',('way_bill_line_state','=','cancelled'),('transport_bayan_way_bill_line_id','=',False)]}"-->
+<!--                            string="Cancel Waybill" type="object" class="oe_highlight"/>-->
+                </xpath>
+                <xpath expr="//page/field[@name='transport_management_line']/form/group/group[3]"
+                       position="inside">
+                    <field name="transport_bayan_goods_type_id" options="{'no_create':True,'no_edit':True,'no_open':True}" required="1"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

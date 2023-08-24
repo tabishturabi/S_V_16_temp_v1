@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_bta_clear_car_claim_view" model="ir.ui.view">
+            <field name="name">form.bta.clear.car.claim.view</field>
+            <field name="model">bsg.truck.accident</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"
+                                attrs="{'invisible':['|',('state_clear_cars','in',['7','8']),('bool_group_check','=',False)]}"/>
+                        <button name="%(truck_accident_reject_wizard_action)d" type="action" string="Reject"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|','|',('state_clear_cars','in',['1']),('jv_number', '!=', 0),('bill_number', '!=', 0),('bool_group_check','=',False)]}"/>
+                        <button name="action_create_bill" type="object"
+                                attrs="{'invisible':['&amp;',('inv_reverse_entry_id','=',False),'|',('bill_number','!=',0),('state_clear_cars','!=','7')]}"
+                                string="Create Bill" class="oe_highlight" groups="bsg_truck_accidents.group_state_accident_state_6"/>
+
+                        <!--                        <button name="action_reset" type="object" string="Reset To Draft" class="oe_highlight" attrs="{'invisible':[('state_clear_cars','in',['1'])]}" />-->
+<!--                        <button name="action_driver_deduction" type="object"-->
+<!--                                attrs="{'invisible':['&amp;',('reverse_entry_id','=',False),'|',('jv_number','!=',0),('state_clear_cars','not in',['7','8'])]}"-->
+<!--                                string="Driver Deduction" class="oe_highlight"/>-->
+                        <button name="open_attach_wizard" type="object" string="ATTACH DOCUMENT" highlight="1"
+                                attrs="{'invisible':[('state_clear_cars','!=','1')]}"/>
+                        <field name="state_clear_cars" widget="statusbar"/>
+                    </header>
+                    <sheet string="Clear Car Claims">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('attachment_number', '=', 0)]}">
+                                <field name="attachment_number" widget="statinfo" string="Attachments"/>
+                            </button>
+                            <button name="action_get_bill_view" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('bill_number', '=', 0)]}">
+                                <field name="bill_number" widget="statinfo" string="Bill"/>
+                            </button>
+                            <button name="action_get_jv_view" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('jv_number', '=', 0)]}">
+                                <field name="jv_number" widget="statinfo" string="Journal Entry"/>
+                            </button>
+
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="compensation_reverse_entry_id" invisible="1"/>
+                                <field name="compensation_bill_id" invisible="1"/>
+                                <field name="is_send_to_audit" invisible="1"/>
+                                <field name="reverse_entry_id" invisible="1"/>
+                                <field name="move_id" invisible="1"/>
+                                <field name="vendor_bill_id" invisible="1"/>
+                                <field name="inv_reverse_entry_id" invisible="1"/>
+                                <field name="bool_group_check" invisible="1"/>
+                                <field name="bool_readonly_financials_1" invisible="1"/>
+                                <field name="bool_readonly_financials_2" invisible="1"/>
+                                <field name="claim_type" readonly="1" force_save="1"/>
+                                <field name="accident_agreement_type" readonly="1" force_save="1"/>
+<!--                                Migration Note-->
+<!--                                <field name="shipment_no_id" force_save="1"-->
+<!--                                       options="{'no_create':True,'no_edit':True,'no_open':True}" required="1"-->
+<!--                                       domain="[('payment_method.payment_type','in', ['credit']),('state_clear_cars','in', ['Delivered','done','shipped']),('is_package', '=', False)]"-->
+<!--                                       attrs="{'readonly':[('state_clear_cars','!=','1')]}"/>-->
+                                 <field name="shipment_no_id" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" required="1"
+                                       domain="[('payment_method.payment_type','in', ['credit']),('is_package', '=', False)]"
+                                       attrs="{'readonly':[('state_clear_cars','!=','1')]}"/>
+                                <field name="credit_collection_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':False}"/>
+                                <field name="cc_partner_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':False}"/>
+                                <field name="so_line_partner_id" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="owner_name" readonly="1" force_save="1"/>
+                                <field name="so_line_loc_from" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="so_line_loc_to" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="so_line_car_make" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="so_line_car_model" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="so_line_general_plate_no" force_save="1"/>
+                                <field name="so_line_chassis_no" force_save="1"/>
+                                <field name="so_line_order_date" force_save="1"/>
+                                <field name="so_line_car_color" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="so_line_plate_type" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+
+                                <field name="car_places" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+
+                            </group>
+                            <group>
+                                <field name="accident_date" force_save="1" required="1"
+                                       attrs="{'readonly':[('state_clear_cars','!=','1')]}"/>
+                                <field name="accident_location" force_save="1"
+                                       attrs="{'readonly':[('state_clear_cars','!=','1')]}"/>
+
+                                <field name="trip_id" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                       attrs="{'invisible':[('shipment_no_id','=',False)],'readonly':[('state_clear_cars','!=','1')]}"
+                                       force_save="1"/>
+                                <field name="expected_start_date" readonly="1" force_save="1"/>
+
+                                <field name="truck_id" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="driver_name" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="driver_code" readonly="1" force_save="1"/>
+
+                                <field name="licence_plate" force_save="1"/>
+                                <field name="fleet_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="trailer_id" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="number_of_accident" force_save="1" readonly="1"/>
+                                <field name="last_accident" force_save="1" readonly="1"/>
+
+
+                                <!--                                <field name="estimate_after_accident" force_save="1"/>-->
+                                <!--                                <field name="estimate_before_accident" force_save="1"-->
+                                <!--                                       attrs="{'readonly':[('state_clear_cars','not in',['1','3'])]}"/>-->
+                                <field name="is_pics_attach" force_save="1"/>
+                                <!--                                <field name="assign_deduction_drivers" force_save="1"/>-->
+                                <!--                                <field name="special_customer" force_save="1"-->
+                                <!--                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>-->
+                                <field name="internal_note" force_save="1" attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_2','=',True),('vendor_bill_id','!=',False),('state_clear_cars','not in',['7','8'])]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="bassami_representative"/>
+                                <field name="car_amount"  attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_2','=',True),('vendor_bill_id','!=',False),('state_clear_cars','not in',['7','8'])]}"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <!--                            <page string="Financial Details" invisible="1">-->
+                            <!--                                <group>-->
+                            <!--                                    <group>-->
+                            <!--                                        <field name="rfq_price_paid" force_save="1"-->
+                            <!--                                               attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        <field name="branch_id" force_save="1"-->
+                            <!--                                               options="{'no_create':True,'no_edit':True,'no_open':True}"-->
+                            <!--                                               attrs="{'invisible':[('rfq_price_paid','=',False)],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_2','=',True),('vendor_bill_id','!=',False),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        <field name="estimated_by" force_save="1"-->
+                            <!--                                               attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                        <field name="estimate_after_accident" force_save="1" readonly="1"/>-->
+                            <!--                                        <label for="compensation_amount"-->
+                            <!--                                               attrs="{'invisible':[('estimated_by','in',['agency_estimate','insurance_workshops'])]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('estimated_by','in',['agency_estimate','insurance_workshops'])]}">-->
+                            <!--                                            <field name="compensation_amount" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['agency_estimate','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_compensation_amount_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['agency_estimate','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+                            <!--                                        <label for="less_rfq_price"-->
+                            <!--                                               attrs="{'invisible':[('estimated_by','in',['agency_estimate','sheikh_dealer'])]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('estimated_by','in',['agency_estimate','sheikh_dealer'])]}">-->
+                            <!--                                            <field name="less_rfq_price" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['agency_estimate','sheikh_dealer'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_less_rfq_price_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['agency_estimate','sheikh_dealer'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+                            <!--                                        <label for="rfq_price"/>-->
+                            <!--                                        <div>-->
+                            <!--                                            <field name="rfq_price" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_rfq_price_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+                            <!--                                        <label for="spare_parts_amount"-->
+                            <!--                                               attrs="{'invisible':[('estimated_by','in',['sheikh_dealer'])]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('estimated_by','in',['sheikh_dealer'])]}">-->
+                            <!--                                            <field name="spare_parts_amount" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','=','sheikh_dealer')],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_spare_parts_amount_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','=','sheikh_dealer')],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+                            <!--                                        <label for="raw_materials_amount"-->
+                            <!--                                               attrs="{'invisible':[('estimated_by','in',['insurance_workshops','sheikh_dealer'])]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('estimated_by','in',['insurance_workshops','sheikh_dealer'])]}">-->
+                            <!--                                            <field name="raw_materials_amount" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['sheikh_dealer','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_1','=',True),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_raw_materials_amount_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['sheikh_dealer','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+                            <!--                                        <label for="hand_wages_amount"-->
+                            <!--                                               attrs="{'invisible':[('estimated_by','in',['insurance_workshops','sheikh_dealer'])]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('estimated_by','in',['insurance_workshops','sheikh_dealer'])]}">-->
+                            <!--                                            <field name="hand_wages_amount" force_save="1" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['sheikh_dealer','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_1','=',True),('vendor_bill_id','!=',False),('state_clear_cars','not in',['1','3'])]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_hand_wages_amount_tax" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('estimated_by','in',['sheikh_dealer','insurance_workshops'])],'readonly':['&amp;',('inv_reverse_entry_id','=',False),'|','|',('vendor_bill_id','!=',False),('bool_readonly_financials_2','=',True),('state_clear_cars','not in',['1','3','7','8'])]}"/>-->
+                            <!--                                        </div>-->
+
+                            <!--                                    </group>-->
+                            <!--                                </group>-->
+                            <!--                            </page>-->
+                            <!--                            <page string="Company Insurance" attrs="{'invisible':[('state_clear_cars','=','1')]}">-->
+                            <!--                                <group>-->
+                            <!--                                    <group>-->
+                            <!--                                        <field name="is_create_compensation" force_save="1"-->
+                            <!--                                               attrs="{'readonly':['&amp;',('compensation_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_2','=',True),('compensation_bill_id','!=',False),('state_clear_cars','not in',['7','8'])]}"/>-->
+
+                            <!--                                        <label for="compensation_amount_2"-->
+                            <!--                                               attrs="{'invisible':[('is_create_compensation','=',False)]}"/>-->
+                            <!--                                        <div attrs="{'invisible':[('is_create_compensation','=',False)]}">-->
+                            <!--                                            <field name="compensation_amount_2" force_save="1"-->
+                            <!--                                                   attrs="{'invisible':[('is_create_compensation','=',False)],'readonly':['&amp;',('compensation_reverse_entry_id','=',False),'|','|',('bool_readonly_financials_2','=',True),('compensation_bill_id','!=',False),('state_clear_cars','not in',['7','8'])],'required':[('is_create_compensation','=',True)]}"/>-->
+                            <!--                                            With Tax-->
+                            <!--                                            <field name="is_compensation_amount_2" class="oe_inline"-->
+                            <!--                                                   attrs="{'invisible':[('is_create_compensation','=',False)],'readonly':['&amp;',('compensation_reverse_entry_id','=',False),'|',('compensation_bill_id','!=',False),('state_clear_cars','not in',['7','8'])],'required':[('is_create_compensation','=',True)]}"/>-->
+                            <!--                                        </div>-->
+
+                            <!--                                        <field name="label" force_save="1"-->
+                            <!--                                               attrs="{'invisible':[('is_create_compensation','=',False)],'readonly':['&amp;',('compensation_reverse_entry_id','=',False),'|',('compensation_bill_id','!=',False),('state_clear_cars','not in',['7','8'])],'required':[('is_create_compensation','=',True)]}"/>-->
+                            <!--                                        <field name="insurance_partner" force_save="1"-->
+                            <!--                                               attrs="{'invisible':[('is_create_compensation','=',False)],'readonly':['&amp;',('compensation_reverse_entry_id','=',False),'|',('compensation_bill_id','!=',False),('state_clear_cars','not in',['7','8'])],'required':[('is_create_compensation','=',True)]}"-->
+                            <!--                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>-->
+                            <!--                                    </group>-->
+                            <!--                                </group>-->
+                            <!--                            </page>-->
+
+
+                            <page string="Details Of The Accident">
+                                <field name="detail_of_accident" force_save="1" placeholder="Details Of The Accident..."
+                                       widget="html" attrs="{'readonly':[('state_clear_cars','!=','1')]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="tree_bta_clear_car_claim_view" model="ir.ui.view">
+            <field name="name">tree.bta.clear.car.claim.view</field>
+            <field name="model">bsg.truck.accident</field>
+            <field name="arch" type="xml">
+                <tree string="Clear Car Claims">
+                    <field name="name"/>
+                    <field name="shipment_no_id"/>
+                    <field name="so_line_car_make"/>
+                    <field name="so_line_car_model"/>
+                    <field name="so_line_general_plate_no"/>
+                    <field name="so_line_chassis_no"/>
+                    <field name="licence_plate"/>
+                    <field name="bassami_representative"/>
+                    <field name="car_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_bta_clear_car_claim" model="ir.actions.act_window">
+            <field name="name">Clear Car Claims</field>
+            <field name="res_model">bsg.truck.accident</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="domain">
+                [('accident_agreement_type','in',['bassami_truck']),('claim_type','in',['clear_cars'])]
+            </field>
+            <field name="context">
+                {'default_accident_agreement_type':'bassami_truck','default_claim_type':'clear_cars'}
+            </field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_bta_clear_car_claim_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_bta_clear_car_claim_view')})]"/>
+        </record>
+
+        <menuitem action="action_bta_clear_car_claim" id="menu_truck_accident_clear_cars"
+                  parent="bsg_truck_accidents.menu_truck_accident" name="Clear Car Claims" active="False"/>
+    </data>
+</odoo>

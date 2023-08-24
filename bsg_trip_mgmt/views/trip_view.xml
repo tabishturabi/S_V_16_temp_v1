@@ -1,0 +1,522 @@
+<odoo>
+    <data>
+
+        <record id="view_bsg_vehicle_cargo_sale_line_form_inherit" model="ir.ui.view">
+            <field name="name">bsg_vehicle_cargo_sale_line.form</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+            <field name="arch" type="xml">
+                <button name="calculated_no_of_days" position="replace">
+                    <field name="check_release_car" invisible="1"/>
+                    <button style="color:blue;" name="calculated_no_of_days" type="object" class="btn-primary"
+                            attrs="{'invisible':[('state','not in',['Delivered'])]}"
+                            confirm="Are you sure you want to release car?" string="Release Car"
+                            groups="bsg_trip_mgmt.group_release_car"/>
+                    <button style="color:blue;" name="calculated_no_of_days" type="object" class="btn-primary"
+                            attrs="{'invisible':[('check_release_car','=',False)]}"
+                            confirm="Are you sure you want to release car?" string="Release Car"
+                            groups="bsg_trip_mgmt.group_release_car"/>
+                    <!-- '|',('is_demurrage_inovice','=',True), -->
+                    <button name="print_delivery_report" string="Print Delivery Report"
+                            attrs="{'invisible':[('state','!=','released')]}" type="object" class="btn-primary"
+                            groups="bsg_trip_mgmt.group_delivery_report"/>
+                </button>
+                <xpath expr="//sheet/group/group/field[@name='charges']" position="after">
+                    <field name="fleet_trip_id" readonly="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="last_fleet_trip_id"/>
+                    <field name="actual_start_time"/>
+                    <field name="scheduled_arrival_date"/>
+                    <field name="parking_no"/>
+                    <field name="drawer_no"/>
+                    <field name="no_of_days_hours" readonly="1"/>
+                </xpath>
+                <field name="bsg_cargo_sale_id" position="before">
+                    <field name="refund_discount" force_save="1"/>
+                    <field name="net_revenue" force_save="1"/>
+                </field>
+            </field>
+        </record>
+        <!-- Form View Of Trip -->
+        <record model="ir.ui.view" id="view_fleet_vehicle_trip_form">
+            <field name="name">fleet.vehicle.trip.form</field>
+            <field name="model">fleet.vehicle.trip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Trip" duplicate="false">
+                    <header>
+                        <!--<button name="action_confirm"  states="draft" string="Confirm Trip" type="object" class="oe_highlight"/>-->
+
+                        <button name="action_confirm"
+                                states="draft,on_transit"
+                                string="Confirm Trip"
+                                type="object"
+                                class="oe_highlight"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_confirm_trips"/><!--confirm="Are you sure you want to confim?"-->
+                        <button name="action_start_trip"
+                                string="Start Trip"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|',('check_start_trip','=',True),('state','!=','confirmed')]}"/>
+
+                        <button name="action_print_dispatch"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_dispatch_report"
+                                string="Print Dispatch Report"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|',('check_dispatch_report','=',True),('state','!=','confirmed')]}"/>
+                        <field name="is_done_fuel" invisible="1"/>
+                        <button name="pay_trip_money"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_pay_money_trips"
+                                string="Pay Trip Money"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|','|','|',('is_done_fuel', '=', True),('check_trip_money', '=', True),('show_trip_money', '!=', True),('state', 'in', ['cancel','draft','confirmed'])]}"/>
+                        <field name="create_date" invisible="1"/>
+                        <button name="pay_trip_money_diff"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_pay_money_trips_diff"
+                                string="Pay Trip Money Difference"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|', ('is_done_fuel', '!=', True),'|', ('create_date', '&lt;', '01/01/2020'), ('state', '=', 'draft')]}"/>
+
+                        <button name="compute_fuel_trip_amt"
+                                groups="bsg_trip_mgmt.group_fuel_amt_recal" string="Re-Calculate Amount"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state','in',['done'])]}"/>
+
+                        <button name="pay_additional_fuel"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_pay_money_trips"
+                                string="Pay Additional Fuel"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state','not in',['progress'])]}"/>
+
+                        <button name="pay_driver_reward"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_pay_driver_reward"
+                                string="Pay Driver Reward"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|',('driver_rewards','not in',['by_delivery','by_delivery_b']),('state','in',['draft','cancelled'])]}"/>
+
+                        <button name="action_register_arrival"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_register_arrival"
+                                string="Register Arrival"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':['|',('state','not in',['progress', 'finished']), ('register_arrival_btn_vistible', '!=', True)]}"
+                        />
+
+                        <!--           <button name="action_skip_arrival"
+                        groups="base.group_erp_manager,bsg_trip_mgmt.group_register_arrival"
+                        attrs="{'invisible':[('state','!=','progress')]}"
+                        string="Skip Arrival"
+                        type="object"
+                        class="oe_highlight"
+                        confirm="Are you sure you want to skip ? This action cant be undo."/> -->
+
+                        <button
+                                name="action_get_arrival"
+                                string="Reload Stats"
+                                type="object"
+                                groups="base.group_erp_manager"
+                                confirm="This action can not be undo please proceed carefully!"/>
+
+                        <button name="action_cancel"
+                                groups="base.group_erp_manager,bsg_trip_mgmt.group_cancel_trip"
+                                states="confirmed,progress,done"
+                                string="Cancel Trip"
+                                type="object"/>
+
+                        <button name="action_draft"
+                                states="cancelled"
+                                string="Set to Draft"
+                                type="object"
+                                class="oe_highlight"
+                                groups="base.group_erp_manager"/>
+
+                        <button name="action_on_transit"
+                                states="done"
+                                string="On Transit"
+                                type="object"
+                                class="oe_highlight"/>
+
+                        <button name="register_payment"
+                                string="Fix Trip Money"
+                                type="object"
+                                class="o_sale_confirm"
+                                attrs="{'invisible':[('is_register_payment','=',False)]}"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-usd"
+                                    groups="bsg_trip_mgmt.group_trip_archiving">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                            <button name="return_action_to_open" type="object" class="oe_stat_button"
+                                    icon="fa-tachometer" context="{'xml_id':'fleet_vehicle_odometer_action'}"
+                                    help="show the odometer logs for this vehicle">
+                                <field name="odometer_count" widget="statinfo" string="Odometer"/>
+                            </button>
+                            <button name="action_view_payment" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o">
+                                <field string="Fuel Vouchers" name="payment" widget="statinfo"/>
+                            </button>
+                            <button name="action_view_driver_reward" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o">
+                                <field string="Driver Reward Vouchers" name="driver_payment" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                                <field name="trip_name" invisible="1"/>
+                                <field name="check_trip_money" invisible="1"/>
+                                <field name="check_add_money" invisible="1"/>
+                                <field name="is_user_pay_trip_money" invisible="1"/>
+                                <field name="is_given_drive_reward" invisible="1"/>
+                                <field name="check_dispatch_report" invisible="1"/>
+                                <field name="check_start_trip" invisible="1"/>
+                                <field name="is_trip_started" invisible="1"/>
+                                <field name="show_trip_money" invisible="1"/>
+                                <field name="register_arrival_btn_vistible" invisible="1"/>
+                                <!-- <field name="so_line_status_count" invisible="1" /> -->
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="is_register_payment" invisible="1"/>
+                            <field name="from_route_dedicated_area_id" invisible="1"/>
+
+                            <field name="driver_rewards" invisible="1"/>
+                            <field name="check_user" invisible="1"/>
+                            <field name="registered_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="trip_type" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="route_id" options="{'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="from_route_branch_id" invisible="1"/>
+                            <field name="vehicle_id"
+                                   context="{'route_id':route_id,'is_trip_search':True,'model':'fleet.vehicle.trip','current_branch_id' : from_route_branch_id,'fleet_dedicated_area_id':from_route_dedicated_area_id}"
+                                   attrs="{'readonly':[('state','!=','draft')]}"
+                                   options="{'no_create': True, 'no_open': True}"
+                                   domain="[('current_branch_id','=',from_route_branch_id)]" required="1"/>
+                            <field name="driver_id" readonly="1" attrs="{'invisible':[('is_rented','=',True)]}"
+                                   options="{'no_create':True,'no_edit':True, 'no_open': True}" force_save="1"
+                                   groups="bsg_trip_mgmt.group_trip_rented_vehicle_tab"
+                            />
+                            <field name="driver_mobile_phone" attrs="{'invisible':[('is_rented','=',True)]}"
+                                   readonly="1" groups="bsg_trip_mgmt.group_trip_rented_vehicle_tab"/>
+                            <field name="rented_driver_id" readonly="1" attrs="{'invisible':[('is_rented','!=',True)]}"
+                                   options="{'no_create':True,'no_edit':True, 'no_open': True}" force_save="1"
+                                   groups="bsg_trip_mgmt.group_trip_rented_vehicle_tab"
+                            />
+                            <field name="rented_driver_mobile_phone" attrs="{'invisible':[('is_rented','!=',True)]}"
+                                   readonly="1" force_save="1"
+                                   groups="bsg_trip_mgmt.group_trip_rented_vehicle_tab"
+                            />
+                            <field name="vehicle_sticker_no" invisible="1"/>
+                            <field name="driver_code" invisible="1"/>
+                            <field name="total_capacity" invisible="1"/>
+                            <field name="satha" invisible="1"/>
+                            <field name="recurring"
+                                   attrs="{'readonly':['|',('satha','=',False),('check_trip_money','=',True)]}"/>
+                            <field name="display_capacity"
+                                   help="This field is just for display purpose actual field behind this is total_capacity "
+                                   string="Available Space"/>
+                            <field name="fuel_expense_type" invisible="1"/>
+                            <field name="display_expense_mthod_id"
+                                   options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                            <field name="truck_load" invisible="1"/>
+                            <field name="display_truck_load"/>
+                            <field name="trailer_category_id" invisible="1"/>
+                            <field name="fuel_exp_method_id" invisible="1"/>
+                            <field name="display_expense_type"/>
+                            <field name="total_cars"/>
+                            <field name="actual_start_datetime"/>
+                            <field name="start_branch" options='{"no_open": True,"no_create": True}'/>
+                            <field name="actual_end_datetime"/>
+                            <field name="end_branch" options='{"no_open": True,"no_create": True}'/>
+                        </group>
+                        <group>
+                            <separator string="Scheduled" colspan="2"/>
+                            <field name="expected_start_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="expected_end_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <label for="est_trip_time" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <div>
+                                <field name="est_trip_time" class="oe_inline" readonly="1"/>
+                                hours
+                            </div>
+                            <field name="total_fuel_amount"/>
+                            <field name="total_reward_amount" invisible="1"/>
+                            <field name="additional_fuel_exp" invisible="1"/>
+                            <field name="tot_reward_amt_frontend"/>
+                            <field name="add_reward_amt_frontend"/>
+                            <field name="fuel_trip_amt" invisible="1"/>
+                            <field name="trip_distance"/>
+                            <field name="next_branch_id"
+                                   string="Next Branch "
+                                   attrs="{'invisible':[('state','=','draft')],'readonly':[('state','!=','draft')]}"
+                                   options='{"no_open": True,"no_create": True}'
+                            />
+                            <field name="next_loc_id"
+                                   string="Next Destination"
+                                   attrs="{'invisible':[('state','=','draft')],'readonly':[('state','!=','draft')]}"
+                                   options='{"no_open": True,"no_create": True}'
+                            />
+                            <field name="current_loc_id"
+                                   string="Current Location"
+                                   attrs="{'invisible':[('state','=','draft')]}"
+                                   options='{"no_open": True,"no_create": True}'
+                                   readonly="1"
+                            />
+
+                            <field name="extra_distance"
+                                   attrs="{'invisible':[('fuel_expense_type','not in',['km','hybrid'])],'readonly':[('check_trip_money','=',True)]}"/>
+
+                            <field name="extra_distance_amount" invisible="1"/>
+                            <field name="capacity_threshold_limit" invisible="0"/>
+                            <field name="capacity_threshold_percent" invisible="0"/>
+                            <field name="reason" attrs="{'readonly':[('check_trip_money','=',True)]}"/>
+                            <field name="trailer_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                            <!--                   <field name="cargo_sale_line_ids" widget="many2many_tags"/>
+                            <button name="action_add_to_trip" string="Add To Trip" type="object" /> -->
+                        </group>
+                        <separator string="Description"/>
+                        <field name="description"/>
+                        <notebook>
+
+                            <page name="stock_picking_ids" string="Stock Pickings">
+                                <field name="stock_picking_id">
+                                    <tree create="false" edit="false" delete="true">
+                                        <field name="picking_name" readonly="1"/>
+                                        <field name="car_maker_id" readonly="1"/>
+                                        <field name="car_model_id" readonly="1"/>
+                                        <field name="car_size_id" readonly="1"/>
+                                        <field name="chassis_no" readonly="1"/>
+                                        <field name="plate_no" readonly="1"/>
+                                        <field name="loc_from" readonly="1"/>
+                                        <field name="pickup_loc" readonly="1"/>
+                                        <field name="loc_to" readonly="1"/>
+                                        <field name="drop_loc" readonly="1"/>
+                                        <field name="picking_date" readonly="1"/>
+                                        <field name="scheduled_date" readonly="1"/>
+                                        <field name="group_name" readonly="1"/>
+                                        <field name="state" readonly="1"/>
+                                        <field name="bsg_fleet_trip_id" invisible="1"/>
+                                        <field name="is_package"/>
+                                        <!--                       <button name="action_assign" string="Confirm picking" type="object" icon="fa-check text-success" attrs="{'invisible': [('state', 'in', ('done', 'cancel', 'confirmed', 'assigned'))]}"/>
+                                        <button name="force_assign" string="Force availability" type="object" icon="fa-arrow-right text-success" attrs="{'invisible': [('state', 'in', ('done', 'cancel', 'draft', 'assigned'))]}" groups="stock.group_stock_manager"/>
+                                        <button name="action_cancel" string="Cancel picking" type="object" icon="fa-times-circle text-danger" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/> -->
+                                    </tree>
+                                    <form create="false" edit="false" delete="false">
+                                        <group>
+                                            <group>
+                                                <field name="picking_name" readonly="1"/>
+                                                <field name="loc_from" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                                <field name="pickup_loc" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                                <field name="loc_to" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                                <field name="drop_loc" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                            </group>
+                                            <group>
+                                                <field name="picking_date" readonly="1"/>
+                                                <field name="scheduled_date" readonly="1"/>
+                                                <field name="state" readonly="1"/>
+                                                <field name="bsg_state_id" invisible="1"/>
+                                                <field name="bsg_fleet_trip_id"
+                                                       attrs="{'invisible': [('bsg_state_id', 'in', ('draft', 'cancelled'))]}"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <page string="Trip Waypoints" name="trip_waypoint_ids">
+                                <field name="trip_waypoint_ids">
+                                    <tree string="Trip Waypoints" nolabel="1" create="false" edit="false"
+                                          delete="false">
+                                        <field name="waypoint"/>
+                                        <field name="picked_items" widget="many2many_tags"/>
+                                        <field name="delivered_items" widget="many2many_tags"/>
+                                        <field name="picked_items_count"/>
+                                        <field name="delivered_items_count"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="waypoint" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                                <field name="picked_items" widget="many2many_tags" readonly="1"/>
+                                                <field name="picked_items_count" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="delivered_items" widget="many2many_tags" readonly="1"/>
+                                                <field name="delivered_items_count" readonly="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <page string="Arrival Screen" name="arrival_screen">
+                                <field name="bsg_trip_arrival_ids">
+                                    <tree string="Trip Arrival" nolabel="1" create="false" delete="false">
+                                        <field name="waypoint_from"/>
+                                        <field name="waypoint_to"/>
+                                        <field name="actual_start_time" readonly="1"/>
+                                        <field name="actual_end_time" readonly="1"/>
+                                        <field name="actual_time_duration" readonly="1"/>
+                                        <field name="parking_no"/>
+                                        <field name="drawer_no"/>
+                                        <field name="odoometer"/>
+                                        <field name="is_survey_done" invisible="1"/>
+                                        <field name="reg_skip_check"/>
+                                        <field name="finish_trip"/>
+                                        <field name="register_done" invisible="1"/>
+                                        <button name="action_create_survey" type="object" string="Start Survey"
+                                                class="oe_highlight" invisible="1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="waypoint_from" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                            </group>
+                                            <group>
+                                                <field name="waypoint_to" readonly="1"
+                                                       options='{"no_open": True,"no_create": True}'/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="arrival_screen" string="Trip Revenue"
+                                  groups="bsg_trip_mgmt.group_show_trip_revenue">
+                                <group>
+                                    <field name="standard_revenue"/>
+                                    <field name="actual_revenue"/>
+                                </group>
+                            </page>
+
+
+                            <page name="rented_vehicle" string="Rented Vehicle"
+                                  groups="bsg_trip_mgmt.group_trip_rented_vehicle_tab"
+                                  attrs="{'invisible':[('is_rented','!=',True)]}">
+                                <group>
+                                    <field name="is_rented" invisible="1"/>
+                                    <field name="rented_vehicle_vendor" forec_save="1"
+                                           options='{"no_open": True,"no_create": True}'/>
+                                    <field name="trip_cost" forec_save="1"/>
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of Trip -->
+        <record model="ir.ui.view" id="view_fleet_vehicle_trip_tree">
+            <field name="name">fleet.vehicle.trip.tree</field>
+            <field name="model">fleet.vehicle.trip</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree default_order='expected_end_date desc'>
+                    <field name="name"/>
+                    <field name="route_id"/>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="driver_mobile_phone"/>
+                    <field name="est_trip_time"/>
+                    <field name="expected_start_date"/>
+                    <field name="expected_end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Search View Of Trip -->
+        <record id="search_view_fleet_vehicle_trip_tree" model="ir.ui.view">
+            <field name="name">search_view_fleet_vehicle_trip_tree</field>
+            <field name="model">fleet.vehicle.trip</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="stock_picking_id" string="Cargo Sale Lines"/>
+                    <field name="route_id"/>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="state"/>
+                    <field name="vehicle_sticker_no"/>
+                    <field name="driver_code"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action View of Draft Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','draft')]</field>
+        </record>
+
+
+        <!-- Action View of on Transit Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip_transit">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','on_transit')]</field>
+        </record>
+
+        <!-- Action View of confirmed Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip_confirmed">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','confirmed')]</field>
+        </record>
+
+        <!-- Action View of progress Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip_progress">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','progress')]</field>
+        </record>
+
+        <!-- Action View of Completed Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip_completed">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','finished')]</field>
+        </record>
+
+        <!-- Action View of All Trip -->
+        <record model="ir.actions.act_window" id="action_fleet_vehicle_trip_all">
+            <field name="name">Vehicle Trips</field>
+            <field name="res_model">fleet.vehicle.trip</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="qitaf_copoun_redeem_form">
+        <field name="name">qitaf.copoun.redeem.form</field>
+        <field name="model">qitaf.copoun.redeem</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+              <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="discount_type"/>
+                        <field name="discount_amount"/>
+                    </group>
+                    <group>
+                        <field name="sale_order_id"/>
+                        <field name="sale_total_amount"/>
+                        <field name="sale_discounted_amount"/>
+                        <field name="total_after_discount"/>
+                    </group>
+               </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+        <record model="ir.ui.view" id="qitaf_copoun_redeem_tree">
+        <field name="name">qitaf.copoun.redeem.tree</field>
+        <field name="model">qitaf.copoun.redeem</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="discount_type"/>
+                <field name="discount_amount"/>
+                <field name="sale_order_id"/>
+                <field name="sale_total_amount"/>
+                <field name="sale_discounted_amount"/>
+                <field name="total_after_discount"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_qitaf_copoun_redeem">
+        <field name="name">Copoun Redemption</field>
+        <field name="res_model">qitaf.copoun.redeem</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Copoun Redemption Log" 
+      id="qitaf_copoun_redeem_meun" 
+      parent="cargo_sale_root_meun"
+      action="action_qitaf_copoun_redeem"
+      sequence="4"
+      />
+      <!-- groups="bsg_cargo_sale.group_qitaf_copoun_redeem" -->
+  </data>
+</odoo>

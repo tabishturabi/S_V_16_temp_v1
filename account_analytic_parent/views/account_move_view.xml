@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="ext_account_move" model="ir.ui.view">
+		<field name="name">ext_account_move</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<!-- <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
+				<attribute name="string">Department</attribute>
+				<attribute name = "domain">[('ext_parent', '!=', True),('parent_id','=',ext_department)]</attribute>
+			</xpath> -->
+
+			<xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_distribution']" position="before">
+				<field name="ext_department" string="Branch" domain="[('ext_parent', '=', True)]"/>
+			</xpath>
+			
+		</field>
+	</record>
+
+</odoo>

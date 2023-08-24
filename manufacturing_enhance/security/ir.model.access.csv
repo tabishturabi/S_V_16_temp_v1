@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bsg_mrp_production,bsg.mrp.production user,manufacturing_enhance.model_bsg_mrp_production,,1,1,1,1
+access_bsg_mrp_rojects,bsg.mrp.projects,manufacturing_enhance.model_bsg_mrp_project,,1,1,1,1
+access_bsg_mrp_project_type,bsg.mrp.project.type,manufacturing_enhance.model_bsg_mrp_project_type,,1,1,1,1
+access_bsg_mrp_production_line,bsg.mrp.production.line,manufacturing_enhance.model_bsg_mrp_production_line,,1,1,1,1
+access_bsg_quality_check,bsg.quality.check,manufacturing_enhance.model_bsg_quality_check,,1,1,1,1
+access_bsg_quality_alert_team,bsg.quality.alert.team,manufacturing_enhance.model_bsg_quality_alert_team,,1,1,1,1
+access_bsg_mrp_technician_line,bsg.mrp.technician.line,manufacturing_enhance.model_bsg_mrp_technician_line,,1,1,1,1

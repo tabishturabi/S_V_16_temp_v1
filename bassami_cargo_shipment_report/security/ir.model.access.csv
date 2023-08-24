@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cargo_shipment_report,access_cargo_shipment_report,model_cargo_shipment_report,,1,1,1,1
+access_cargo_sale_line_state,access_cargo_sale_line_state,model_cargo_sale_line_state,,1,1,1,1
+access_sale_revenue_by_partner_type_report,access_cargo_sale_revenue_by_partner_type,model_sale_revenue_by_partner_type,,1,1,1,1
+

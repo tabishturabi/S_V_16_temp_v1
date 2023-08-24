@@ -1,0 +1,173 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_bsg_fleet_renewal_vehicle_document">
+            <field name="name">view_bsg_fleet_renewal_vehicle_document</field>
+            <field name="model">renewal.vehicle.document</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_fleet_operations.bsg_renewal_vehicle_document_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+                    <form>
+                        <header>
+                            <field name="state" widget="statusbar"/>
+                            <field name="expense_id" invisible="1"/>
+                            <widget name="attach_document" string="ATTACH DOCUMENT" action="message_post"
+                                    highlight="1"/>
+                            <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"
+                                    attrs="{'invisible':[('state','!=','draft')]}"/>
+                            <button name="action_submit" type="object" string="Submit" class="oe_highlight"
+                                    attrs="{'invisible': [('state', '!=','confirm')]}"/>
+                            <button name="action_manager_approval" type="object" string="Manager Approval"
+                                    class="oe_highlight" attrs="{'invisible': [('state', '!=','submit')]}"/>
+                            <button name="action_manager_reject" type="object" string="Manager Reject"
+                                    class="oe_highlight"
+                                    attrs="{'invisible': [('state', '!=','submit')]}"/>
+                            <!--                        <button name="action_expense_insurance" type="object" string="Expense Insurance"-->
+                            <!--                                class="oe_highlight" attrs="{'invisible': [('state', '!=','manager_approval')]}"/>-->
+                            <button name="action_petty_cash" type="object" string="Petty Cash" class="oe_highlight"
+                                    attrs="{'invisible': [('state', '!=','manager_approval')]}"/>
+                            <button name="action_done" type="object" string="Done" class="oe_highlight"
+                                    attrs="{'invisible': [('state', '!=','petty_cash')]}"/>
+                            <button name="action_draft" type="object" string="Set to Draft" class="oe_link"
+                                    attrs="{'invisible': ['|',('state', 'in',['draft','done']),('expense_id', '!=',False)]}"/>
+                            <button name="action_cancel" type="object" string="Cancel" class="oe_link"
+                                    attrs="{'invisible': ['|',('state', 'in',['draft','cancel','done']),('expense_id', '!=',False)]}"/>
+                        </header>
+                        <sheet string="Renewal Vehicle Document">
+                            <div class="oe_button_box">
+                                <button name="action_get_attachment_view"
+                                        class="oe_stat_button"
+                                        icon="fa-book"
+                                        type="object">
+                                    <field name="attachment_number" widget="statinfo" string="Documents"
+                                           options="{'reload_on_button': true}"/>
+                                </button>
+                            </div>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                </h1>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="vehicle_id" required="1"
+                                           attrs="{'readonly':[('state','!=','draft')]}"/>
+                                    <field name="document_type" required="1"
+                                           attrs="{'readonly':[('state','!=','draft')]}"/>
+                                    <field name="model_id_x" readonly="1" options="{'no_open': True}" force_save="1"/>
+                                    <field name="vehicle_type_id_x" readonly="1" options="{'no_open': True}"
+                                           force_save="1"/>
+                                    <field name="chassis_no_x" readonly="1" options="{'no_open': True}" force_save="1"/>
+                                    <field name="estmaira_serial_no_x" readonly="1" options="{'no_open': True}"
+                                           force_save="1"/>
+                                    <field name="analytic_account_id" readonly="1" force_save="1"/>
+
+                                    <field name="user_id"
+                                           attrs="{'invisible':[('state','in',['draft','confirm','submit'])],'readonly':[('state','in',['petty_cash','done'])]}"/>
+                                </group>
+                                <group>
+                                    <field name="request_date" readonly="1"/>
+                                    <!--                                <field name="sign_to" attrs="{'readonly':[('state','!=','draft')]}"/>-->
+                                    <field name="driver_name_x" readonly="1" options="{'no_open': True}"
+                                           force_save="1"/>
+                                    <field name="driver_code_x" readonly="1" options="{'no_open': True}"
+                                           force_save="1"/>
+                                    <field name="plate_no_x" readonly="1" options="{'no_open': True}" force_save="1"/>
+                                    <field name="vehicle_status_x" readonly="1" options="{'no_open': True}"
+                                           force_save="1"/>
+                                    <field name="model_year_x" readonly="1" options="{'no_open': True}" force_save="1"/>
+                                </group>
+                            </group>
+
+                            <notebook>
+                                <page name="document" string='Document Information'>
+                                    <group>
+                                        <group>
+                                            <field name="exp_date" class="with_hijri"
+                                                   attrs="{'readonly':[('exp_date','!=',False)]}" force_save="1"/>
+                                            <field name="issue_date" class="with_hijri" force_save="1"
+                                                   attrs="{'readonly':[('state','in',['petty_cash','done'])]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="renewal_exp_date" class="with_hijri" required="1"
+                                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                                            <field name="comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                        </group>
+                                    </group>
+                                </page>
+
+                                <page name="manager" string='Manager Rejects'
+                                      attrs="{'invisible': [('state', '!=','reject')]}">
+                                    <group>
+                                        <group>
+                                            <field name="manager_comment"
+                                                   attrs="{'required': [('state', '=','reject')]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="manager_date" attrs="{'required': [('state', '=','reject')]}"/>
+                                        </group>
+                                    </group>
+                                </page>
+                                <page name="expense" string='Expense Line'
+                                      attrs="{'invisible': [('state', '!=','expense_insurance')]}">
+                                    <field name="renew_expense_line" mode="tree">
+                                        <tree editable="bottom">
+                                            <field name="product_id" required="1"/>
+                                            <field name="description" required="1"/>
+                                            <field name="inv_ref"/>
+                                            <field name="account_id"/>
+                                            <field name="analytic_account_id"/>
+                                            <field name="branch_id"/>
+                                            <field name="department_id"/>
+                                            <field name="truck_id"/>
+                                            <field name="account_tag_ids" widget="many2many_tags"/>
+                                            <field name="quantity"/>
+                                            <field name="uom_id"/>
+                                            <field name="unit_price"/>
+                                            <field name="discount"/>
+                                            <field name="tax_ids" widget="many2many_tags"/>
+                                            <field name="sub_total"/>
+                                            <field name="attachment" widget="many2many_binary"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="other" string="Other Info">
+                                    <group>
+                                        <group>
+                                            <field name="document_info"/>
+                                            <field name="expense_id" readonly="1"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </form>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bsg_fleet_operations.bsg_renewal_vehicle_document_view_tree">
+            <field name="name">bsg_renewal_vehicle_document_view_tree</field>
+            <field name="model">renewal.vehicle.document</field>
+            <field name="arch" type="xml">
+                <tree string="Renewal Vehicle Document" default_order='request_date desc,name desc'>
+                    <field name="name"/>
+                    <field name="document_type"/>
+                    <field name="vehicle_id"/>
+                    <field name="model_id_x"/>
+                    <field name="driver_code_x"/>
+                    <field name="driver_name_x"/>
+                    <field name="request_date"/>
+                    <field name="issue_date"/>
+                    <field name="exp_date"/>
+                    <field name="renewal_exp_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

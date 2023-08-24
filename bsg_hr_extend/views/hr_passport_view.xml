@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_passport_form_extendes" model="ir.ui.view">
+            <field name="name">Hr Passport</field>
+            <field name="model">hr.passport</field>
+            <field name="inherit_id" ref="bsg_hr.view_hr_passport_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bsg_passport_status']" position="after">
+                    <field name="bsg_emp_code" invisible="1"/>
+                    <field name="bsg_emp_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        <!--     Search View -->
+        <record id="view_hr_passport_serach" model="ir.ui.view">
+            <field name="name">hr.passport.search</field>
+            <field name="model">hr.passport</field>
+            <field name="arch" type="xml">
+                <search string="Search HR Passport">
+                    <field name="bsg_employee_id" />
+                    <field name="bsg_emp_code" />
+                    <field name="bsg_emp_id" />
+                    <field name="bsg_passport_name" />
+                    <field name="bsg_passport_number" />
+                    <field name="bsg_passport_issue_country" />
+                    <field name="bsg_passport_status" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<odoo>
+  <data>
+    <record id="release_trailer_wizard_form" model="ir.ui.view">
+        <field name="name">release_trailer_wizard_form</field>
+        <field name="model">release.trailer.wizard</field>
+        <field name="arch" type="xml">
+          <form>
+            <sheet>
+              <group>
+                <group>
+                  <field name="trailer_associated_id" invisible="1" />
+                  <field name="safety_certificate_delivered" widget="radio" options="{'horizontal':true}" />
+                  <field name="safety_certificate_delivered_reason" attrs="{'required':[('safety_certificate_delivered','=','no')],'invisible':[('safety_certificate_delivered','!=','no')]}"/>
+                </group>
+                <group>
+                </group>
+              </group>
+            </sheet>
+            <footer>
+               <button name="release_trailer" string="Release Trailer" type="object" class="btn-primary"/>
+               <button string="Cancel" special="cancel" class="btn-seconday"/>
+           </footer>
+          </form>
+        </field>
+    </record>
+    <record id="release_trailer_wizard_action" model="ir.actions.act_window">
+        <field name="name">Release Trailer</field>
+        <field name="res_model">release.trailer.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="release_trailer_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+  </data>
+</odoo>

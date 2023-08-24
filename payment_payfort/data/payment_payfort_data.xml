@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="payment_acquirer_payfort" model="payment.provider">
+            <field name="name">Payfort</field>
+            <field name="image_128" type="base64" file="payment_payfort/static/src/img/icon.png"/>
+            <field name="code">payfort</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="redirect_form_view_id" ref="payfort_acquirer_button"/>
+            <field name="state">test</field>
+            <field name="pre_msg"><![CDATA[
+              <p>You will be redirected to the Payfort website after clicking on the payment button.</p>]]></field>
+              <field name="access_code">dummy</field>
+              <field name="merchant_identifier">dummy</field>
+              <field name="request_phrase">dummy</field>
+              <field name="response_phrase">dummy</field>
+              <field name="sha_type">sha_256</field>
+              
+        </record>
+
+    </data>
+</odoo>

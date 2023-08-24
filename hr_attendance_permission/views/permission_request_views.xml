@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="hr_permission_req_view_tree" model="ir.ui.view">
+        <field name="name">hr.permission.request.view.tree</field>
+        <field name="model">hr.permission.request</field>
+        <field name="arch" type="xml">
+            <tree string="Permission Request">
+                <field name="name" />
+                <field name="employee_id"/>
+                <field name="request_date"/>
+            </tree>
+        </field>
+     </record>
+
+    <record id="hr_permission_req_view_form" model="ir.ui.view">
+        <field name="name">hr.permission.request.view.form</field>
+        <field name="model">hr.permission.request</field>
+        <field name="arch" type="xml">
+            <form string="Permission Request">
+                <header>
+                    <field name="can_approve" invisible="1" />
+                    <field name="can_reset" invisible="1" />
+                    <button string="Confirm" name="action_confirm" states="draft" type="object" class="oe_highlight"/>
+                    <button string="Direct Manager Approve" name="action_direct_approve" states="confirm" type="object" class="oe_highlight"
+                    groups="hr_attendance_permission.group_attendance_permission_direct_manag"/>
+<!--                    <button string="HR Approval" name="action_hr_approve" states="direct_approve" type="object"-->
+<!--                            groups="hr_attendance_permission.group_attendance_permission_manager"-->
+<!--                            class="oe_highlight"/>-->
+                    <button string="HR Approve" name="action_approve" type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', '!=', 'direct_approve')]}"
+                            groups="hr_attendance_permission.group_attendance_permission_manager"/>
+                    <button string="Validate" name="action_validate" states="validate1" type="object"
+                            groups="hr_attendance_permission.group_attendance_permission_second_approve"
+                            class="oe_highlight"/>
+                    <button string="Refuse" name="action_refuse"  type="object"
+                            groups="hr_attendance_permission.group_attendance_permission_direct_manag,hr_attendance_permission.group_attendance_permission_manager"
+                            attrs="{'invisible': ['|', ('can_approve', '=', False), ('state', 'not in', ('confirm','validate','validate1', 'direct_approve'))]}"/>
+                    <button string="Cancel" name="action_cancel" type="object"
+                            groups="hr_attendance_permission.group_attendance_permission_cancel"
+                            attrs="{'invisible': [('state', 'in', ['draft', 'cancel'])]}"/>
+                    <button string="Reset to Draft" name="action_draft" type="object"
+                            attrs="{'invisible': ['|', ('can_reset', '=', False), ('state', 'not in', ['confirm', 'refuse'])]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,direct_approve,validate"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                            <field name="permission_type_id" options="{'no_create': True, 'no_open': True}"
+                                   context="{'employee_id':employee_id, 'date': request_date}"/>
+                            <label for="duration" string="Duration"/>
+                            <div>
+                                <field name="duration" invisible="1" class="oe_inline"/>
+                                <field name="duration_display" nolabel="1" class="oe_inline"/>
+                                <span class="ml8">Min</span>
+                            </div>
+
+                            <label for="hour_from" string="From"/>
+                            <div>
+                                <field name="hour_from" invisible="1"/>
+                                <field name="hour_to" invisible="1"/>
+                                <div class="o_row o_row_readonly o_hr_holidays_dates">
+                                    <field name="hour_from" class="oe_inline"
+                                           attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                                    <span class="oe_inline"> To </span>
+                                    <field name="hour_to" class="oe_inline"
+                                           attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                                </div>
+                                <field name="request_date" />
+                            </div>
+                            <field name="date_from" invisible="1"/>
+                            <field name="date_to" invisible="1"/>
+
+                            <field name="name" attrs="{'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                        </group>
+                        <group name="col_right">
+                            <field name="can_change_mode" invisible="1" />
+                            <field name="permission_type" string="Mode"/>
+                            <field name="employee_id"
+                                   attrs="{'required': [('permission_type', '=', 'employee')]}"/>
+                            <field name="mode_company_id" attrs="{
+                        'required': [('permission_type', '=', 'company')],
+                        'invisible': [('permission_type', '!=', 'company')]
+                        }"/>
+                            <field name="category_id" attrs="{
+                        'required': [('permission_type', '=', 'category')],
+                        'invisible': [('permission_type', '!=','category')]
+                        }"/>
+                            <field name="department_id"  attrs="{
+                        'required': [('permission_type', '=', 'department')],
+                        'invisible': [('permission_type', 'not in', ('employee', 'department'))]
+                        }"/>
+                            <field name="permission_period" />
+                        </group>
+                        <separator string="Comment by Manager" attrs="{'invisible':[('state','=','draft')]}"/>
+                        <field name="manager_comment"
+                               attrs="{'invisible':[('state','=','draft')],
+                               'readonly': [('state', 'not in', ('draft', 'confirm'))]}"/>
+                    </group>
+                    <field name="notes" nolabel="1" placeholder="Add a reason..."/>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="permission_request_action" model="ir.actions.act_window">
+        <field name="name">Permission Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.permission.request</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="hr_attendance_permission_request"
+            action="permission_request_action"
+            name="Permission Requests"
+            parent="menu_permissions"
+            sequence="1"/>
+
+
+
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- giving security access -->
+        <record model="ir.ui.menu" id="maintenance.menu_maintenance_title">
+            <field name="name">Maintenance</field>
+            <field name="groups_id" eval="[(6,0,[ref('maintenance_security.group_maintenance_user')])]"/>
+        </record>
+    </data>
+</odoo>

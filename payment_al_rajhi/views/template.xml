@@ -1,0 +1,17 @@
+<odoo>
+    <template id="alrajhi_acquirer_button">
+        <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+        <input type='hidden' name='access_code' t-att-value='access_code'/>
+        <input type='hidden' name='amount' t-att-value='amount'/>
+        <input type='hidden' name='command' t-att-value="command"/>
+        <input type='hidden' name='currency' t-att-value='currency'/>
+        <input type='hidden' name='customer_email' t-att-value="customer_email"/>
+        <input type="hidden" name="customer_name" t-att-value="customer_name"/>
+        <input type="hidden" name="eci" t-att-value="eci"/>
+        <input type="hidden" name='language' t-att-value="language"/>
+        <input type='hidden' name='merchant_identifier' t-att-value='merchant_identifier'/>
+        <input type='hidden' name='merchant_reference' t-att-value='reference'/>
+        <input type="hidden" name='return_url' t-att-value="return_url"/>
+        <input type='hidden' name='signature' id="signature" t-att-value='signature'/>
+    </template>
+</odoo>

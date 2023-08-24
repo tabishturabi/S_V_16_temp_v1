@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+
+    <!-- add new filed for international products -->     
+<!--    <record id="view_product_international_product" model="ir.ui.view">-->
+<!--        <field name="name">product.template.landed.cost.form</field>-->
+<!--        <field name="model">product.template</field>-->
+<!--        <field name="inherit_id" ref="product.product_template_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <div name="options" position="inside">-->
+<!--                <div>-->
+<!--                    <field name="is_international"/>-->
+<!--                    <label for="is_international"/><br/>-->
+<!--                    <field name="is_demurrage"/>-->
+<!--                    <label for="is_demurrage"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </field>-->
+<!--    </record>-->
+    <!-- Act for service product-->
+    <record id="action_service_product_product" model="ir.actions.act_window">
+        <field name="name">Service Product</field>
+          <field name="res_model">product.product</field>
+<!--          <field name="view_type">form</field>-->
+          <field name="view_mode">tree,form</field>
+          <field name="context">{'default_type': 'service','default_is_international' : True}</field>
+          <field name="domain">[('type', '=', 'service'),('is_international','=',True)]</field>
+          <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Service Product
+              </p>
+        </field>
+    </record>
+
+    <menuitem 
+      id="menu_service_product_product" 
+      parent="menu_service_products"
+      action="action_service_product_product" 
+      sequence="1" 
+      />
+
+  </data>
+</odoo>

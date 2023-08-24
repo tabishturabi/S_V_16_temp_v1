@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.menu" id="bsg_branch_config.bsg_branches_menu_1">
+            <field name="name">Branches</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_cargo_sale.group_branch_and_region_config'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_branch_config.menu_branch_classification">
+            <field name="name">Branch Classifcation</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_cargo_sale.group_branch_and_region_config'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_branch_config.menu_region_config">
+            <field name="name">Region Configuration</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_cargo_sale.group_branch_and_region_config'),
+                                                ])]"/>
+        </record>
+        
+        <record model="ir.ui.menu" id="bsg_branch_config.bsg_sales_target_menu">
+            <field name="name">Branch Sales Target</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_cargo_sale.group_create_branch_sales_target'),
+                                                ])]"/>
+        </record>
+        <record model="ir.ui.menu" id="sale.menu_product_pricelist_main">
+            <field name="name">Pricelists</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_shipment_price_list'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+        <record model="ir.ui.menu" id="sale.product_menu_catalog">
+            <field name="name">Products</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_product_managemtn'),
+                                                ref('bsg_cargo_sale.group_shipment_price_list'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="sale.menu_product_template_action">
+            <field name="name">Products</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_product_managemtn'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="sale.menu_products">
+            <field name="name">Product Variants</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_product_managemtn'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+
+
+        <record model="ir.ui.menu" id="sale.res_partner_menu">
+            <field name="name">Customers</field>
+            <field name="groups_id" eval="[(6,0,[ref('base_customer.group_create_client'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="sale.sale_order_menu">
+            <field name="name">Orders</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_main_sale_order'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+        <record model="ir.ui.menu" id="sale.menu_sale_invoicing">
+            <field name="name">To Invoice</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_main_to_invoice'),
+                                                ref('base.group_erp_manager'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_cargo_sale.cargo_sale_root_meun_for_local">
+            <field name="name">Local Cargo Sale</field>
+            <field name="groups_id" eval="[(6,0,[
+                    ref('bsg_cargo_sale.group_view_my_agreement'),
+                    ref('bsg_cargo_sale.group_local_cargo_sale'),                    
+                    ref('base.group_erp_manager')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_cargo_sale.cargo_sale_root_meun_for_local_for_all">
+            <field name="name">Local Cargo Sale</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_view_all_agreements'),
+                ref('bsg_cargo_sale.group_show_all_branch_agreements'),
+                ref('bsg_cargo_sale.group_view_my_agreement'),
+                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_cargo_sale.cargo_sale_root_meun_for_international">
+            <field name="name">International Cargo Sale</field>
+            <field name="groups_id" eval="[(6,0,[ref('bsg_cargo_sale.group_view_all_agreements'),
+                    ref('bsg_cargo_sale.group_view_my_agreement'),
+                    ref('bsg_cargo_sale.group_international_cargo_sale'),
+                    ref('base.group_erp_manager')])]"/>
+        </record>
+    </data>
+</odoo>

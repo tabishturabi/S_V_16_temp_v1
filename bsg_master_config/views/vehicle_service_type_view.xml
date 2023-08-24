@@ -1,0 +1,67 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    
+    <record model="ir.ui.view" id="bsg_vehicle_service_type_view_form">
+      <field name="name">bsg_vehicle_service_type_view_form</field>
+      <field name="model">bsg_vehicle_service_type</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Service Config">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                  <field name="v_service_type_name" required="1" placeholder="Service Type"/>
+              </h1>
+            </div>
+            <notebook>
+              <page name="accounting" string="Accounting">
+                <group name="top">
+                  <group name="left">
+<!--                    <field name="bsg_ser_income_acc" required="1" domain="[('internal_type','=','other'),('user_type_id.name','=','Income')]"/>-->
+<!--                    Migration Note-->
+                    <field name="bsg_ser_income_acc" required="1"/>
+                  </group>
+                  <group name="right">
+<!--                    <field name="bsg_ser_expense_acc" required="1" domain="[('internal_type','=','other'),('user_type_id.name','=','Expenses')]"/>-->
+<!--                    Migration Note-->
+                    <field name="bsg_ser_expense_acc" required="1"/>
+                  </group>
+                  
+                </group>
+              </page>
+            </notebook>            
+            
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>            
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view -->
+    <record model="ir.ui.view" id="bsg_vehicle_service_type_view_tree">
+      <field name="name">bsg_vehicle_service_type_view_tree</field>
+      <field name="model">bsg_vehicle_service_type</field>
+      <field name="arch" type="xml">
+        <tree string="Service Config">
+          <field name="v_service_type_name" modifiers="{}"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="bsg_vehicle_service_type_action">
+      <field name="name">Service Config</field>
+      <field name="res_model">bsg_vehicle_service_type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

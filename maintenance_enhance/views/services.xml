@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="service_name_form_view" model="ir.ui.view">
+            <field name="name">service_name_form_view</field>
+            <field name="model">service.name</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Service">
+                    <sheet>
+                        <group name="group_top">
+                            <group>
+                                <field name="name"/>
+                                <field name="workshop"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="service_name_tree_view" model="ir.ui.view">
+            <field name="name">service_name_tree_view</field>
+            <field name="model">service.name</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="workshop"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="service_name_action" model="ir.actions.act_window">
+            <field name="name">Workshops Services</field>
+            <field name="res_model">service.name</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="service_name_main_menu" name="Workshop Services" action="service_name_action"
+                  parent="maintenance_enhance.menu_fleet_maintenance_child2"/>
+
+    </data>
+</odoo>

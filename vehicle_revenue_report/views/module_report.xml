@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+         <template id="internal_layout_vr">
+            <!-- <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t> -->
+
+<!--            <div class="header">-->
+
+                <!-- <img style="margin-left:75px;" src="/bsg_corporate_invoice_contract/static/src/img/collection.png" /> -->
+
+<!--            </div>-->
+
+
+            <div class="article">
+                <t t-raw="0"/>
+            </div>
+<!--             <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+<!--                 t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+<!--                <t t-raw="0"/>-->
+<!--            </div>-->
+
+<!--            <div class="footer">-->
+<!--                <div style="text-align:right">-->
+<!--                    <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                        Page:-->
+<!--                        <span class="page"/>-->
+<!--                        /-->
+<!--                        <span class="topage"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        </template>
+
+
+        <template id="vehicle_revenue_temp_id">
+
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+<!--                    <span><t t-esc="o._name" /></span>-->
+
+
+                    <t t-call="vehicle_revenue_report.internal_layout_vr">
+
+                        <div class="page">
+
+                            <style type="text/css">
+                                .clearfloat {
+                                    clear: both;
+                                    float: none;
+                                    width: 100%;
+                                    height: 1px;
+                                    display: block;
+                                }
+                                .report-wrapper {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 13px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid #CCC;
+                                }
+                                table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 5px 0px 0px 5px;
+                                    border-right: 2px solid #CCC;
+                                    border-bottom: 1px solid #eee;
+                                }
+                                table tr td:last-child,
+                                table tr th:last-child {
+                                    border-right: none
+                                }
+                                table tr:last-child td {
+                                    border-bottom: none
+                                }
+                                table tr th {
+                                    text-align: center;
+                                }
+
+                                .report-header {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                }
+
+                                .report-header p {
+                                    width: 50%;
+                                    float: left;
+                                    margin: 0px 0px 20px;
+                                }
+                                .report-header p .solid {
+                                    font-weight: bold;
+                                }
+                                h2 {
+                                    text-align: center;
+                                    font-size: 35px;
+                                    text-decoration: underline;
+                                }
+                                .tile {
+                                    display: inline-block;
+                                    width: 100px;
+                                    text-align: center;
+                                    background: #a64f8e;
+                                    color: #fff;
+                                    padding: 2px 5px;
+                                }
+
+                                .header {
+                                    display : none !importnat;
+                                }
+                                .footer {
+                                    display : none !importnat;
+                                }
+
+                                .header{display:none;}
+                                .footer{display:none;}
+
+                            </style>
+
+                            <div class="report-wrapper">
+
+
+
+                                <div class="report-header">
+                                     <div style="width:30%;float:left">
+                                        <img src="/vehicle_revenue_report/static/src/img/logod.png" width="200" height="100" style="margin-left: 25px;float:left"/>
+                                    </div>
+
+                                   <div style="width:38%;float:left">
+                                        <t t-if="o.report_type == 'detail'">
+                                            <h2 style="margin-top:50px">Vehicle Revenue Report(Details)</h2>
+                                            <h2 style="margin-top:50px">تقرير انتاجية الشاحنات (تفصيلي)</h2>
+                                        </t>
+                                        <t t-if="o.report_type == 'summary'">
+                                            <h2 style="margin-top:50px">Vehicle Revenue Report(Summary)</h2>
+                                            <h2 style="margin-top:50px">تقرير انتاجية الشاحنات (اجمالي)</h2>
+                                        </t>
+                                    </div>
+
+                                    <div style="width:30%;float:right;margin-bottom : 35px;">
+                                        <img src="/vehicle_revenue_report/static/src/img/rightHeader.png" width="230" height="110" style="float:right;margin_right:25px;background: rgba(0,0,0,0.1);"/>
+                                    </div>
+
+    <!--                                <h3>-->
+    <!--                                    <img src="/vehicle_revenue_report/static/src/img/logod.png" width="134" style="margin-left: 10px;" alt=""/>-->
+
+    <!--                                    <span class="solid" style="text-align:  center; margin-left: 140px;margin-right: 140px;" t-esc="head"></span>-->
+
+    <!--                                    <img style="width:200px;background: rgba(0,0,0,0.1);" src="/vehicle_revenue_report/static/src/img/rightHeader.png"/>-->
+    <!--                                </h3>-->
+
+    <!--                                <h5>-->
+    <!--                                    <span t-esc="report_type_name"></span>-->
+    <!--                                </h5>-->
+
+                                </div>
+
+
+
+                                <br class="clearfloat" />
+
+
+                                <div style="float:left; width: 50%;text-align: right;margin-bottom:10px">
+
+
+                                    <table>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                            <td style="text-align:left">
+                                               <span>From : </span>
+                                               <span t-esc="form"></span>
+                                               <span>To : </span>
+                                               <span t-esc="to"></span>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <t t-if="vehicle_id">
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Vehicle</td>
+                                                <td style="text-align:left">
+                                                    <t t-foreach="vehicle_id" t-as="v">
+                                                        <span t-esc="v.taq_number"></span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                        <t t-if="driver_id">
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Driver</td>
+                                                <td style="text-align:left">
+                                                    <t t-foreach="driver_id" t-as="d">
+                                                        <span t-esc="d.name"></span>
+                                                    </t>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                        <t t-if="trip_type">
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Trip Type</td>
+                                                <td style="text-align:left">
+                                                   <span t-esc="trip_type"></span>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                        <t t-if="all_fill == 1">
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Filters</td>
+                                                <td style="text-align:left">
+                                                   <span>All</span>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+
+
+
+                                    </table>
+
+                                </div>
+
+                                <br class="clearfloat" />
+
+
+                                <t t-if="report_type_num == 1">
+
+                                    <div style="float:left; width: 100%;margin-bottom:10px">
+
+                                        <table>
+
+                                            <tr>
+                                                <th rowspan="2">Sr No</th>
+                                                <t t-if="veh_head != 1">
+                                                    <th>Vehicle Code</th>
+                                                    <th>Vehicle Brand</th>
+                                                </t>
+                                                <t t-if="driver_head != 1">
+                                                    <th>Driver Name</th>
+                                                    <th>Driver Code</th>
+                                                </t>
+                                                <th>The Number Of Empty Trips</th>
+                                                <th>Number of Trips</th>
+                                                <th>Number of Shipped Cars</th>
+                                                <th>Vehicle Fuel Expenses</th>
+                                                <th>Actual Trip Distance</th>
+                                                <th>Vehicle Revenue</th>
+                                                <th>Fuel Expense Method</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <t t-if="veh_head != 1">
+                                                    <th>رقم الشاحنه</th>
+                                                    <th>ماركة الشاحنه</th>
+                                                </t>
+                                                <t t-if="driver_head != 1">
+                                                    <th>اسم السائق</th>
+                                                    <th>رمز السائق</th>
+                                                </t>
+                                                <th> عدد الرحلات الفارغة</th>
+                                                <th>عدد الرحلات</th>
+                                                <th>عدد السيارات المحمله</th>
+                                                <th>مصروفات الطريق</th>
+                                                <th>المسافه المقطوعه للشاحنه</th>
+                                                <th>ايرادات الشاحنه</th>
+                                                <th>قسيمة الوقود</th>
+                                            </tr>
+
+
+                                            <t t-set="sr" t-value="0" />
+                                            <t t-set="tot_trip" t-value="0" />
+                                            <t t-set="tot_sale" t-value="0" />
+                                            <t t-set="tot_exp" t-value="0" />
+                                            <t t-set="tot_rev" t-value="0" />
+                                            <t t-set="tot_dis" t-value="0" />
+                                            <t t-set="sr" t-value="0" />
+                                             <t t-foreach="main_data" t-as="o">
+                                                <t t-set="sr" t-value="sr+1" />
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="sr"></span>
+                                                    </td>
+                                                    <t t-if="veh_head != 1">
+                                                        <td>
+                                                            <span t-esc="o['v_code']"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="o['v_brand']"></span>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="driver_head != 1">
+                                                        <td>
+                                                            <span t-esc="o['driver']"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="o['driver_code']"></span>
+                                                        </td>
+                                                    </t>
+                                                    <td>
+                                                        <span t-esc="o['empty_trip_count']"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o['tr_num']"></span>
+                                                        <t t-set="tot_trip" t-value="tot_trip+o['tr_num']" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{:0,}'.format(int(float(o['tr_sale_lines'])))"></span>
+                                                        <t t-set="tot_sale" t-value="tot_sale+o['tr_sale_lines']" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(o['fuel_exp']))"></span>
+                                                        <t t-set="tot_exp" t-value="tot_exp+o['fuel_exp']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(o['dis']))"></span>
+                                                        <t t-set="tot_dis" t-value="tot_dis+o['dis']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(o['v_revenue']))"></span>
+                                                        <t t-set="tot_rev" t-value="tot_rev+o['v_revenue']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o['expense_method']"></span>
+                                                    </td>
+                                                </tr>
+
+                                            </t>
+
+                                                <tr>
+                                                    <t t-if="report_num == 0">
+                                                        <th colspan="5">
+                                                            Total
+                                                        </th>
+                                                    </t>
+
+                                                    <t t-if="report_num == 1">
+                                                        <th colspan="2">
+                                                            Total
+                                                        </th>
+                                                    </t>
+
+                                                    <t t-if="report_num == 2">
+                                                        <th colspan="4">
+                                                            Total
+                                                        </th>
+                                                    </t>
+
+                                                    <t t-if="report_num == 3">
+                                                        <th>
+                                                            Total
+                                                        </th>
+                                                    </t>
+
+                                                    <th>
+                                                        <span t-esc="'{:0,}'.format(int(float(tot_trip)))"></span>
+                                                    </th>
+                                                    <th>
+                                                        <span t-esc="'{:0,}'.format(int(float(tot_sale)))"></span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_exp))"></span>
+
+                                                    </th>
+                                                    <th>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_dis))"></span>
+
+                                                    </th>
+                                                    <th>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_rev))"></span>
+
+                                                    </th>
+                                                </tr>
+
+                                        </table>
+
+                                    </div>
+
+                                </t>
+
+                                <t t-if="report_type_num == 2">
+                                    <div style="float:left; width: 100%;margin-bottom:10px">
+                                        <table>
+                                           <tr>
+                                               <th>Vehicle Code</th>
+                                               <th>Vehicle brand</th>
+                                               <th>Driver Name</th>
+                                               <th>Driver Code</th>
+                                               <th>Trip Number</th>
+                                               <th>Trip Date</th>
+                                               <th>Fuel Expense Method</th>
+                                               <th>Trip Type</th>
+                                               <th>Trip State</th>
+                                               <th>Route</th>
+                                               <th>Number of Shipped Cars</th>
+                                               <th>Vehicle Fuel Expenses</th>
+                                               <th>Actual Trip Distance</th>
+                                               <th>Vehicle Revenue</th>
+                                            </tr>
+                                            <tr>
+                                                <th>رقم الشاحنه</th>
+                                                <th>ماركة الشاحنه</th>
+                                                <th>اسم السائق</th>
+                                                <th>رمز السائق</th>
+                                                <th>رقم الرحلة</th>
+                                                <th>تاريخ الرحلة</th>
+                                                <th>قسيمة الوقود</th>
+                                                <th>نوع الرحلة</th>
+                                                <th>حالة الرحلة</th>
+                                                <th>الطريق</th>
+                                                <th>عدد السيارات المحمله</th>
+                                                <th>مصروفات الطريق</th>
+                                                <th>المسافه المقطوعه للشاحنه</th>
+                                                <th>ايرادات الشاحنه</th>
+                                            </tr>
+                                            <t t-set="sr" t-value="0" />
+
+                                            <t t-set="sr" t-value="0" />
+                                            <t t-foreach="main_data" t-as="o">
+                                                <t t-set="sr" t-value="sr+1" />
+                                                <tr>
+                                                    <td style="font-weight:bold;font-size:16px">
+                                                        <span t-esc="o['v_code']"></span>
+                                                    </td>
+                                                    <td style="font-weight:bold;font-size:16px">
+                                                        <span t-esc="o['v_brand']"></span>
+                                                    </td>
+                                                    <td style="font-weight:bold;font-size:16px">
+                                                        <span t-esc="o['driver']"></span>
+                                                    </td>
+                                                    <td colspan="7" style="text-align:left;font-weight:bold;font-size:16px">
+                                                        <span t-esc="o['driver_code']"></span>
+                                                    </td>
+                                                </tr>
+                                                <t t-set="tot_trip" t-value="0" />
+                                                <t t-set="tot_sale" t-value="0" />
+                                                <t t-set="tot_exp" t-value="0" />
+                                                <t t-set="tot_rev" t-value="0" />
+                                                <t t-set="tot_dis" t-value="0" />
+
+                                                <t t-foreach="o['trip_data']" t-as="tr">
+
+                                                    <tr>
+
+                                                        <td colspan="4"></td>
+
+
+                                                        <td>
+                                                            <span t-esc="tr['trip_num']"></span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="tr['expected_start_date']"></span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="tr['fuel_expense_method']"></span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="tr['trip_type']"></span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="tr['trip_state']"></span>
+
+                                                        </td>
+
+
+                                                        <td>
+                                                            <span t-esc="tr['route']"></span>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <span t-esc="'{:0,}'.format(int(float(tr['tr_sale_lines'])))"></span>
+                                                            <t t-set="tot_sale" t-value="tot_sale+tr['tr_sale_lines']" />
+                                                        </td>
+
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(tr['fuel_exp']))"></span>
+                                                            <t t-set="tot_exp" t-value="tot_exp+tr['fuel_exp']"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(tr['dis']))"></span>
+                                                            <t t-set="tot_dis" t-value="tot_dis+tr['dis']"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="'{0:,.2f}'.format(float(tr['v_revenue']))"></span>
+                                                            <t t-set="tot_rev" t-value="tot_rev+tr['v_revenue']"/>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </t>
+
+                                                <tr>
+
+
+
+                                                    <th colspan="10">
+                                                        Total
+                                                    </th>
+
+
+                                                    <th>
+                                                        <span t-esc="'{:0,}'.format(int(float(tot_sale)))"></span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_exp))"></span>
+
+                                                    </th>
+                                                    <th>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_dis))"></span>
+
+                                                    </th>
+                                                    <th>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tot_rev))"></span>
+
+                                                    </th>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </table>
+
+                                    </div>
+
+                                </t>
+
+
+                            </div><!--end of report wrapper-->
+
+                        </div><!--end of page -->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+        <template id="vehicle_truck_revenue_temp_id">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style type="text/css">
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                            }
+                            .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                font-size: 13px;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 1px;
+                                border: 2px solid #BBBBBB;
+                            }
+                            table tr td, table tr th {
+                                text-align: center;
+                                padding: 5px 0px 0px 5px;
+                                border-right: 2px solid #BBBBBB;
+                                border-bottom: 1px solid #BBBBBB;
+                            }
+                            table tr th {
+                                text-align: center;
+                            }
+                            .report-header {
+                                width: 100%;
+                                margin: 0px auto;
+                                text-align: center;
+                            }
+
+                            .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                            }
+                            .report-header p .solid {
+                                font-weight: bold;
+                            }
+                            h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline; 
+                            }
+                            .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                            }
+
+                            .header {
+                                display : none !importnat;
+                            }
+                            .footer {
+                                display : none !importnat;
+                            }
+
+                            .header{display:none;}
+                            .footer{display:none;}
+
+                        </style>
+
+                        <div class="report-wrapper">
+                            
+
+
+                            <div class="report-header">
+
+                                <h3>
+                                    <img src="/vehicle_revenue_report/static/src/img/logod.png" width="134" style="margin-left: 10px;" alt=""/>
+
+                                    <span class="solid" style="text-align:  center; margin-left: 140px;margin-right: 140px;" t-esc="head"></span>
+
+                                    <img style="width:200px;background: rgba(0,0,0,0.1);" src="/vehicle_revenue_report/static/src/img/rightHeader.png"/>
+                                </h3>
+
+                                <h5>
+                                    <span t-esc="report_type_name"></span>
+                                </h5>
+                                
+                            </div>
+
+                            
+
+                            <br class="clearfloat" />
+
+
+                            <div style="float:left; width: 50%;text-align: right;margin-bottom:10px">
+
+
+                                <table>
+                                    
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                        <td style="text-align:left">
+                                           <span>From : </span>
+                                           <span t-esc="form"></span>
+                                           <span>To : </span> 
+                                           <span t-esc="to"></span>
+                                        </td>
+                                       
+                                        
+                                    </tr>
+
+                                    <t t-if="vehicle_id">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Vehicle</td>
+                                            <td style="text-align:left">
+                                                <t t-foreach="vehicle_id" t-as="v">
+                                                    <span t-esc="v.taq_number"></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                    <t t-if="driver_id">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Driver</td>
+                                            <td style="text-align:left">
+                                                <t t-foreach="driver_id" t-as="d">
+                                                    <span t-esc="d.name"></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                    <t t-if="trip_type">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Trip Type</td>
+                                            <td style="text-align:left">
+                                               <span t-esc="trip_type"></span>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                    <t t-if="all_fill == 1">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Filters</td>
+                                            <td style="text-align:left">
+                                               <span>All</span>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                   
+
+                                    
+                                </table>
+
+                            </div>
+                                
+                            <br class="clearfloat" />
+
+
+                            <t t-if="report_type_num == 1">
+
+                                <div style="float:left; width: 100%;margin-bottom:10px">
+
+                                    <table>
+
+                                        <tr>
+                                            <th rowspan="2">Sr No</th>
+                                            <t t-if="veh_head != 1">
+                                                <th>Vehicle Code</th>
+                                            </t>
+                                            <t t-if="driver_head != 1">
+                                                <th>Driver Name</th>
+                                                <th>Driver Code</th>
+                                            </t>
+                                            <!-- ................ -->
+                                            <th>Number of Local Trips</th>
+                                            <th>Local Trips Revenue</th>
+                                            <th>Number of Manual Trips</th>
+                                            <th>Manual Trips Revenue</th>
+                                            <!-- ................ -->
+                                            <th>Number of Trips</th>
+                                            <th>Number of Shipped Cars</th>
+                                            <th>Vehicle Fuel Expenses</th>
+                                            <th>Actual Trip Distance</th>
+                                            <th>Vehicle Revenue</th>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <t t-if="veh_head != 1">
+                                                <th>رقم الشاحنه</th>
+                                            </t>
+                                            <t t-if="driver_head != 1">
+                                                <th>اسم السائق</th>
+                                                <th>رمز السائق</th>
+                                            </t>
+                                             <!-- ................ -->
+                                            <th>عدد الرحلات الخدمي</th>
+                                            <th>ايراد الخدمي</th>
+                                            <th>عدد الرحلات اليدوي</th>
+                                            <th>ايراد اليدوي</th>
+                                            <!-- ................ -->
+                                            <th>عدد الرحلات</th>
+                                            <th>عدد السيارات المحمله</th>
+                                            <th>مصروفات الطريق</th>
+                                            <th>المسافه المقطوعه للشاحنه</th>
+                                            <th>ايرادات الشاحنه</th>
+                                            
+                                        </tr> 
+
+
+                                        <t t-set="sr" t-value="0" />
+                                        <t t-set="tot_trip" t-value="0" />
+                                         <!-- .......................... -->
+                                        <t t-set="tot_local_trips_count" t-value="0" />
+                                        <t t-set="tot_local_trips_revenue" t-value="0" />
+                                        <t t-set="tot_manual_trips_count" t-value="0" />
+                                        <t t-set="tot_manual_trips_revenue" t-value="0" />
+                                        <!-- .............................. -->
+                                        <t t-set="tot_sale" t-value="0" />
+                                        <t t-set="tot_exp" t-value="0" />
+                                        <t t-set="tot_rev" t-value="0" />
+                                        <t t-set="tot_dis" t-value="0" />
+                                        <t t-set="sr" t-value="0" />
+                                        <t t-foreach="main_data" t-as="o">
+                                            <t t-set="sr" t-value="sr+1" />
+
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="sr"></span>
+                                                </td>
+                                                <t t-if="veh_head != 1">
+                                                    <td>
+                                                        <span t-esc="o['v_code']"></span>
+                                                    </td>
+                                                </t>
+                                                <t t-if="driver_head != 1">
+                                                    <td>
+                                                        <span t-esc="o['driver']"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o['driver_code']"></span>
+                                                    </td>
+                                                </t>
+                                                <!--.................... -->
+                                                <td>
+                                                    <span t-esc="o['local_trips_count']"></span>
+                                                    <t t-set="tot_local_trips_count" t-value="tot_local_trips_count+o['local_trips_count']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="o['local_trips_revenue']"></span>
+                                                    <t t-set="tot_local_trips_revenue" t-value="tot_local_trips_revenue+o['local_trips_revenue']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="o['manual_trips_count']"></span>
+                                                    <t t-set="tot_manual_trips_count" t-value="tot_manual_trips_count+o['manual_trips_count']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="o['manual_trips_revenue']"></span>
+                                                    <t t-set="tot_manual_trips_revenue" t-value="tot_manual_trips_revenue+o['manual_trips_revenue']" />
+                                                </td>
+                                                <!-- ................... -->
+                                                <td>
+                                                    <span t-esc="o['tr_num']"></span>
+                                                    <t t-set="tot_trip" t-value="tot_trip+o['tr_num']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{:0,}'.format(int(float(o['tr_sale_lines'])))"></span>
+                                                    <t t-set="tot_sale" t-value="tot_sale+o['tr_sale_lines']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(o['fuel_exp']))"></span>
+                                                    <t t-set="tot_exp" t-value="tot_exp+o['fuel_exp']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(o['dis']))"></span>
+                                                    <t t-set="tot_dis" t-value="tot_dis+o['dis']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(o['v_revenue']))"></span>
+                                                    <t t-set="tot_rev" t-value="tot_rev+o['v_revenue']"/>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                            <tr>
+                                                <t t-if="report_num == 0">
+                                                    <th colspan="4">
+                                                        Total
+                                                    </th>
+                                                </t>
+
+                                                <t t-if="report_num == 1">
+                                                    <th colspan="2">
+                                                        Total
+                                                    </th>
+                                                </t>
+
+                                                <t t-if="report_num == 2">
+                                                    <th colspan="3">
+                                                        Total
+                                                    </th>
+                                                </t>
+
+                                                <t t-if="report_num == 3">
+                                                    <th>
+                                                        Total
+                                                    </th>
+                                                </t>
+                                                <!-- ......................... -->
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_local_trips_count)))"></span>
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_local_trips_revenue)))"></span>
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_manual_trips_count)))"></span>
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_manual_trips_revenue)))"></span>
+                                                </th>
+                                                <!-- ................................. -->
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_trip)))"></span>
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_sale)))"></span>
+                                                </th>
+                                                <th>
+                                                    
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_exp))"></span>
+
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_dis))"></span>
+
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_rev))"></span>
+                                                                                                   
+                                                </th>
+                                            </tr>
+
+                                    </table>
+
+                                </div>
+
+                            </t>
+
+                            <t t-if="report_type_num == 2">
+
+                                <div style="float:left; width: 100%;margin-bottom:10px">
+
+                                    <table>
+
+                                        <tr>
+                                            
+                                            <th>Vehicle Code</th>
+                                            <th>Driver Name</th>
+                                            <th>Driver Code</th>
+                                            <th>Trip Number</th>
+                                            <th>Trip Type</th>
+                                            <th>Truck Type</th>
+                                            <th>Status</th>
+                                            <th>Route</th>
+                                            <th>Number of Shipped Cars</th>
+                                            <th>Vehicle Fuel Expenses</th>
+                                            <th>Actual Trip Distance</th>
+                                            <th>Vehicle Revenue</th>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <th>رقم الشاحنه</th>
+                                            <th>اسم السائق</th>
+                                            <th>رمز السائق</th>
+                                            <th>رقم الرحلة</th>
+                                            <th>نوع الرحلة</th>
+                                            <th>نوع السطحة</th>
+                                            <th>الحالة</th>
+                                            <th>طريق</th>
+                                            <th>عدد السيارات المحمله</th>
+                                            <th>مصروفات الطريق</th>
+                                            <th>المسافه المقطوعه للشاحنه</th>
+                                            <th>ايرادات الشاحنه</th>
+                                            
+                                        </tr> 
+
+
+                                        <t t-set="sr" t-value="0" />
+                                        
+                                        <t t-set="sr" t-value="0" />
+                                        <t t-foreach="main_data" t-as="o">
+                                            <t t-set="sr" t-value="sr+1" />
+
+                                            <tr>
+
+                                                <td style="font-weight:bold;font-size:16px">
+                                                    <span t-esc="o['v_code']"></span>
+                                                </td>
+                                                <td style="font-weight:bold;font-size:16px">
+                                                    <span t-esc="o['driver']"></span>
+                                                </td>
+                                                <td colspan="7" style="text-align:left;font-weight:bold;font-size:16px">
+                                                    <span t-esc="o['driver_code']"></span>
+                                                </td>
+
+                                            </tr>
+
+                                            <t t-set="tot_trip" t-value="0" />
+                                            <t t-set="tot_sale" t-value="0" />
+                                            <t t-set="tot_exp" t-value="0" />
+                                            <t t-set="tot_rev" t-value="0" />
+                                            <t t-set="tot_dis" t-value="0" />
+
+                                            <t t-foreach="o['trip_data']" t-as="tr">
+
+                                                <tr>
+
+                                                    <td colspan="3"></td>
+                                                    
+
+                                                    <td>
+                                                        <span t-esc="tr['trip_num']"></span>
+                                                       
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="tr['trip_type']"></span>
+                                                       
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="tr['vehicle_type']"></span>
+                                                       
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="tr['state']"></span>
+                                                       
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="tr['route']"></span>
+                                                       
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="'{:0,}'.format(int(float(tr['tr_sale_lines'])))"></span>
+                                                        <t t-set="tot_sale" t-value="tot_sale+tr['tr_sale_lines']" />
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tr['fuel_exp']))"></span>
+                                                        <t t-set="tot_exp" t-value="tot_exp+tr['fuel_exp']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tr['dis']))"></span>
+                                                        <t t-set="tot_dis" t-value="tot_dis+tr['dis']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(tr['v_revenue']))"></span>
+                                                        <t t-set="tot_rev" t-value="tot_rev+tr['v_revenue']"/>
+                                                    </td>
+
+                                                </tr>
+
+                                            </t>
+
+                                            <tr>
+                                                
+
+                                                
+                                                <th colspan="8">
+                                                    Total
+                                                </th>
+
+                                               
+                                                <th>
+                                                    <span t-esc="'{:0,}'.format(int(float(tot_sale)))"></span>
+                                                </th>
+                                                <th>
+                                                    
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_exp))"></span>
+
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_dis))"></span>
+
+                                                </th>
+                                                <th>
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_rev))"></span>
+                                                                                                   
+                                                </th>
+                                                
+                                            </tr>
+
+                                        </t>
+
+                                    </table>
+
+                                </div>
+
+                            </t>
+
+                           
+                        </div><!--end of report wrapper-->
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+    </data>
+
+</odoo>

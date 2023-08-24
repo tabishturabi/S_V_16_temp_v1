@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record id="ticket_request_comp_rule" model="ir.rule">
+            <field name="name">Ticket Request multi-company</field>
+            <field name="model_id" ref="model_hr_ticket_request"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="user_see_only_own_tickets" model="ir.rule">
+			<field name="name">User See Own Tickets Only</field>
+			<field name="model_id" ref="model_hr_ticket_request"/>
+			<field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('bsg_hr_ksa_ticket.group_ticket_request'))]"/>
+<!--			<field name="perm_unlink" eval="True"/>-->
+<!--			<field name="perm_write" eval="True"/>-->
+<!--			<field name="perm_read" eval="True"/>-->
+<!--			<field name="perm_create" eval="True"/>-->
+		</record>
+
+        <record id="bsg_tickets_request_manager_rules" model="ir.rule">
+              <field name="name">my ticket requests rule</field>
+              <field name="model_id" ref="model_hr_ticket_request" />
+              <field name="domain_force">[('employee_id.parent_id','=',user.id)]</field>
+              <field name="groups" eval="[(4,ref('bsg_hr.group_department_manager'))]" />
+          </record>
+
+          <record id="bsg_all_tickets_date_rule" model="ir.rule">
+              <field name="name">All Tickets Date Rule</field>
+              <field name="model_id" ref="model_hr_ticket_request" />
+              <field name="domain_force">[(1,'=',1)]</field>
+              <field name="groups" eval="[(4,ref('bsg_hr.group_hr_specialist')),(4,ref('bsg_hr.group_hr_manager')),(4,ref('hr.group_hr_manager')),(4,ref('bsg_hr.group_internal_audit_manager')),(4,ref('bsg_hr.group_finance_manager'))]" />
+          </record>
+    </data>
+</odoo>

@@ -1,0 +1,660 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="emp_decision_search">
+            <field name="name">employee.decisions.search</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sequence_number"/>
+                    <field name="employee_name"/>
+                    <field name="employee_id"/>
+                    <field name="old_manager"/>
+                    <field name="old_company"/>
+                    <field name="old_branch_name"/>
+                    <field name="old_emp_department"/>
+                    <field name="old_job_position"/>
+                    <field name="old_analytic_account"/>
+                    <field name="old_salary_structure"/>
+                    <field name="decision_type"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="employee_name" string="Employee Name" context="{'group_by':'employee_name'}"/>
+                        <filter name="employee_id" string="Employee ID" context="{'group_by':'employee_id'}"/>
+                        <filter name="old_branch_name" string="Branch" context="{'group_by':'old_branch_name'}"/>
+                        <filter name="old_emp_department" string="Department"
+                                context="{'group_by':'old_emp_department'}"/>
+                        <filter name="old_company" string="Company" context="{'group_by':'old_company'}"/>
+                        <filter name="old_job_position" string="Job Position"
+                                context="{'group_by':'old_job_position'}"/>
+                        <filter name="old_manager" string="Manager" context="{'group_by':'old_manager'}"/>
+                        <filter name="state" string="State" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="employee_appointment_tree_view_button">
+            <field name="name">employee.appointment.tree.button</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <tree create="false" decoration-danger="state in ['refused']" decoration-info="state=='submitted'" decoration-success="state=='approved'">
+                    <field name="state" invisible="1"/>
+                    <field name="sequence_number"/>
+                    <field name="employee_name"/>
+                    <field name="employee_id"/>
+                    <field name="old_manager"/>
+                    <field name="old_company"/>
+                    <field name="old_branch_name"/>
+                    <field name="old_emp_department"/>
+                    <field name="old_job_position"/>
+                    <field name="old_analytic_account"/>
+                    <field name="old_salary_structure"/>
+                    <field name="decision_type"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="employee_appointment_tree_view">
+            <field name="name">employee.appointment.tree</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="state in ['refused']" decoration-info="state=='submitted'" decoration-success="state=='approved'">
+                    <field name="state" invisible="1"/>
+                    <field name="sequence_number"/>
+                    <field name="employee_name"/>
+                    <field name="employee_id"/>
+                    <field name="old_manager"/>
+                    <field name="old_company"/>
+                    <field name="old_branch_name"/>
+                    <field name="old_emp_department"/>
+                    <field name="old_job_position"/>
+                    <field name="old_analytic_account"/>
+                    <field name="old_salary_structure"/>
+                    <field name="decision_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="approve_employee_appointment_form_view">
+            <field name="name">employee.appointment.form</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <widget name="attach_document" string="Attach Document" action="message_post" highlight="1"/>
+                        <button name="action_submit_manager" string="SUBMIT TO MANAGER" type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"
+                                class="oe_highlight oe_structure"/>
+                        <button name="action_approve" string="APPROVE" type="object"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_reset_draft" string="RESET TO DRAFT" type="object"
+                                attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_send_mail" string="Send Email" type="object"
+                                attrs="{'invisible': [('state', '!=', 'approved')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="%(bsg_hr_employees_decisions.employee_decisions_refusal_wizard)d" string="REFUSE"
+                                type="action"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <!--            <button name="action_print_report" string="Print" type="object"-->
+                        <!--                    attrs="{'invisible': [('state', '!=', 'approved')]}"-->
+                        <!--                    class="oe_highlight oe_structure"-->
+                        <!--            />-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                            <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object" context="{'doc_type':'not report'}">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check"
+                                    groups="bsg_hr_employees_decisions.report_employees_active_decision_group">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="sequence_number" style="color:#0e620a;"/>
+                                <br/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_name" options="{'no_create_edit': True,'no_open': True}"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_id"/>
+                                <field name="old_manager" options="{'no_create_edit': True,'no_open': True}"  force_save="1"/>
+                                <field name="old_company" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_bonus_cls_ids" force_save="1" widget="many2many_tags"></field>
+                            </group>
+                            <group>
+                                <field name="old_branch_name" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_emp_department" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_job_position" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_analytic_account" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                            </group>
+                        </group>
+                        <separator string="Salary Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="old_salary_structure" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <label for="old_wage"/>
+                                <div class="o_row" name="old_wage">
+                                    <field name="old_wage" nolabel="1" force_save="1" />
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_work_nature"/>
+                                <div class="o_row" name="old_work_nature">
+                                    <field name="old_work_nature" force_save="1" />
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_additional"/>
+                                <div class="o_row" name="old_fixed_additional">
+                                    <field name="old_fixed_additional" nolabel="1" force_save="1" />
+                                    <span>/ month</span>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="old_food"/>
+                                <div class="o_row" name="old_food">
+                                    <field name="old_food" nolabel="1" force_save="1" />
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_deduction"/>
+                                <div class="o_row" name="old_fixed_deduction">
+                                    <field name="old_fixed_deduction" nolabel="1" force_save="1" />
+                                    <span>/ month</span>
+                                </div>
+                                <field name="currency_id" invisible="True"/>
+                            </group>
+                        </group>
+                        <separator string="Employee Decision Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="decision_type" invisible="0"/>
+
+                                <field name="decision_date" class="row"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_company" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_branch_name" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_emp_department" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <label for="from_date" string="From"
+                                       attrs="{'invisible':[('decision_type','!=','assign_employee')]}"/>
+                                <div class="o_row o_row_readonly"
+                                     attrs="{'invisible':[('decision_type','!=','assign_employee')]}">
+                                    <field name="from_date" class="oe_inline"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                                    <span class="oe_inline">To</span>
+                                    <field name="to_date" class="oe_inline"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="print_date" invisible="1"/>
+                                <field name="current_job_position" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_manager" options="{'no_create_edit': True,'no_open': True}"/>
+                                <field name="current_analytic_account"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True,'no_open': True}"/>
+                                <field name="current_bonus_cls_ids" widget="many2many_tags" force_save="1"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                            <field name="decision_report_comments" options="{'no_create_edit': True,'no_open': True}" domain="[('decision_type','=',decision_type)]"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                        </group>
+                        <notebook attrs="{'invisible': [('state', '!=','refused')]}">
+                            <page string="Reason To Refuse">
+                                <field name="refusal_reason"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"></field>
+                        <field name="message_ids" widget="mail_thread"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="employee_appointment_form_view">
+            <field name="name">employee.appointment.form</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <widget name="attach_document" string="Attach Document" action="message_post" highlight="1"/>
+                        <button name="action_submit_manager" string="SUBMIT TO MANAGER" type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"
+                                class="oe_highlight oe_structure" groups="bsg_hr.group_hr_specialist"/>
+                        <button name="action_approve" string="APPROVE" type="object"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_reset_draft" string="RESET TO DRAFT" type="object"
+                                attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_send_mail" string="Send Email" type="object"
+                                attrs="{'invisible': [('state', '!=', 'approved')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="%(bsg_hr_employees_decisions.employee_decisions_refusal_wizard)d" string="REFUSE"
+                                type="action"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <!--            <button name="action_print_report" string="Print" type="object"-->
+                        <!--                    attrs="{'invisible': [('state', '!=', 'approved')]}"-->
+                        <!--                    class="oe_highlight oe_structure"-->
+                        <!--            />-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                            <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object" context="{'doc_type':'not report'}">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="action_get_effective_request_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object" attrs="{'invisible': [('effective_request_number', '=', 0)]}">
+                                <field name="effective_request_number" widget="statinfo" string="Effective Request"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="action_get_clearance_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object" attrs="{'invisible': [('clearance_number', '=', 0)]}">
+                                <field name="clearance_number" widget="statinfo" string="Clearance"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check"
+                                    groups="bsg_hr_employees_decisions.report_employees_active_decision_group">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="sequence_number" style="color:#0e620a;"/>
+                                <br/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="decision_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_name" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_id"/>
+                                <field name="old_manager" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_company" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_bonus_cls_ids" force_save="1" widget="many2many_tags"></field>
+                            </group>
+                            <group>
+                                <field name="decision_date" class="row"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="old_branch_name" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_emp_department" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_job_position" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="old_analytic_account" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                            </group>
+                        </group>
+                        <separator string="Salary Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="old_salary_structure" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <label for="old_wage"/>
+                                <div class="o_row" name="old_wage">
+                                    <field name="old_wage" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_work_nature"/>
+                                <div class="o_row" name="old_work_nature">
+                                    <field name="old_work_nature" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_additional"/>
+                                <div class="o_row" name="old_fixed_additional">
+                                    <field name="old_fixed_additional" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="old_food"/>
+                                <div class="o_row" name="old_food">
+                                    <field name="old_food" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_deduction"/>
+                                <div class="o_row" name="old_fixed_deduction">
+                                    <field name="old_fixed_deduction" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <field name="currency_id" invisible="True"/>
+                            </group>
+                        </group>
+                        <separator string="Employee Decision Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="current_company" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="current_manager" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <field name="current_job_position" options="{'no_create_edit': True,'no_open': True}" domain="[('department_id','=',current_emp_department)]" attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')],'required': [('decision_type', 'in', ['transfer_employee','assign_employee','extend','change'])]}" force_save="1"/>
+                                <label for="from_date" string="From"
+                                       attrs="{'invisible':[('decision_type','!=','assign_employee')]}"/>
+                                <div class="o_row o_row_readonly"
+                                     attrs="{'invisible':[('decision_type','!=','assign_employee')]}">
+                                    <field name="from_date" class="oe_inline"
+                                           attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')]}"></field>
+                                    <span class="oe_inline">To</span>
+                                    <field name="to_date" class="oe_inline"
+                                           attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')]}"></field>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="print_date" invisible="1"/>
+                                <field name="current_emp_department" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')],'required': [('decision_type', 'in', ['transfer_employee','assign_employee','extend','change'])]}" force_save="1"/>
+                                <field name="current_branch_name" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')],'required': [('decision_type', 'in', ['transfer_employee','assign_employee','extend','change'])]}" force_save="1"/>
+                                <field name="current_analytic_account" options="{'no_create_edit': True,'no_open': True}"
+                                       attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')],'required': [('decision_type', 'in', ['transfer_employee','extend','change'])]}" force_save="1"/>
+                                <field name="current_bonus_cls_ids" widget="many2many_tags" force_save="1"
+                                       attrs="{'readonly': ['|',('state', '!=', 'draft'),('decision_type', '=', 'appoint_employee')],'invisible': [('decision_type', '=', 'appoint_employee')]}"></field>
+                            </group>
+                        </group>
+                        <separator string="Salary Information" style="color:#0e620a;" colspan="4" attrs="{'invisible': [('decision_type', 'not in', ['transfer_employee','change'])]}"/>
+                        <group attrs="{'invisible': [('decision_type', 'not in', ['transfer_employee','change'])]}">
+                            <group>
+                                <field name="current_salary_structure" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" options="{'no_create_edit': True,'no_open': True}" force_save="1"/>
+                                <label for="current_wage"/>
+                                <div class="o_row" name="current_wage">
+                                    <field name="current_wage" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="current_work_nature"/>
+                                <div class="o_row" name="current_work_nature">
+                                    <field name="current_work_nature" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="current_fixed_additional"/>
+                                <div class="o_row" name="current_fixed_additional">
+                                    <field name="current_fixed_additional" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="current_food"/>
+                                <div class="o_row" name="current_food">
+                                    <field name="current_food" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="current_fixed_deduction"/>
+                                <div class="o_row" name="current_fixed_deduction">
+                                    <field name="current_fixed_deduction" attrs="{'readonly': [('state', '!=', 'draft')],'required':[('decision_type','in',['transfer_employee','change'])]}" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="decision_report_comments" options="{'no_create_edit': True,'no_open': True}" domain="[('decision_type','=',decision_type)]"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                        </group>
+                        <notebook attrs="{'invisible': [('state', '!=','refused')]}">
+                            <page string="Reason To Refuse">
+                                <field name="refusal_reason"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"></field>
+                        <field name="message_ids" widget="mail_thread"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="employee_appointment_form_view_button">
+            <field name="name">employee.appointment.form</field>
+            <field name="model">employees.appointment</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+                        <widget name="attach_document" string="Attach Document" action="message_post" highlight="1"/>
+                        <button name="action_submit_manager" string="SUBMIT TO MANAGER" type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"
+                                class="oe_highlight oe_structure"/>
+                        <button name="action_approve" string="APPROVE" type="object"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_reset_draft" string="RESET TO DRAFT" type="object"
+                                attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="action_send_mail" string="Send Email" type="object"
+                                attrs="{'invisible': [('state', '!=', 'approved')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <button name="%(bsg_hr_employees_decisions.employee_decisions_refusal_wizard)d" string="REFUSE"
+                                type="action"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"
+                        />
+                        <!--            <button name="action_print_report" string="Print" type="object"-->
+                        <!--                    attrs="{'invisible': [('state', '!=', 'approved')]}"-->
+                        <!--                    class="oe_highlight oe_structure"-->
+                        <!--            />-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                            <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="sequence_number" style="color:#0e620a;"/>
+                                <br/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_id"/>
+                                <field name="old_manager" force_save="1"/>
+                                <field name="old_company" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="old_branch_name" force_save="1"/>
+                                <field name="old_emp_department" force_save="1"/>
+                                <field name="old_job_position" force_save="1"/>
+                                <field name="old_analytic_account" force_save="1"/>
+                            </group>
+                        </group>
+                        <separator string="Salary Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="old_salary_structure" force_save="1"/>
+                                <label for="old_wage"/>
+                                <div class="o_row" name="old_wage">
+                                    <field name="old_wage" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_work_nature"/>
+                                <div class="o_row" name="old_work_nature">
+                                    <field name="old_work_nature" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_additional"/>
+                                <div class="o_row" name="old_fixed_additional">
+                                    <field name="old_fixed_additional" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="old_food"/>
+                                <div class="o_row" name="old_food">
+                                    <field name="old_food" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <label for="old_fixed_deduction"/>
+                                <div class="o_row" name="old_fixed_deduction">
+                                    <field name="old_fixed_deduction" nolabel="1" force_save="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <field name="currency_id" invisible="True"/>
+                            </group>
+                        </group>
+                        <separator string="Employee Decision Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="decision_date" class="row"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_company" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_branch_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_emp_department" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <label for="from_date" string="From"
+                                       attrs="{'invisible':[('decision_type','!=','assign_employee')]}"/>
+                                <div class="o_row o_row_readonly"
+                                     attrs="{'invisible':[('decision_type','!=','assign_employee')]}">
+                                    <field name="from_date" class="oe_inline"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                                    <span class="oe_inline">To</span>
+                                    <field name="to_date" class="oe_inline"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="decision_type" invisible="1"/>
+                                <field name="print_date" invisible="1"/>
+                                <field name="current_job_position" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="current_manager"/>
+                                <field name="current_analytic_account"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                            <field name="decision_report_comments" domain="[('decision_type','=',decision_type)]"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                        </group>
+                        <notebook attrs="{'invisible': [('state', '!=','refused')]}">
+                            <page string="Reason To Refuse">
+                                <field name="refusal_reason"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"></field>
+                        <field name="message_ids" widget="mail_thread"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_appointment_action">
+            <field name="name">Decision to appoint an Employee</field>
+            <field name="res_model">employees.appointment</field>
+            <field name="domain">[('decision_type','=','appoint_employee')]</field>
+            <field name="context">{'default_decision_type':'appoint_employee'}</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_decision_action">
+            <field name="name">Employee Decision</field>
+            <field name="res_model">employees.appointment</field>
+            <field name="domain">[]</field>
+            <field name="context">{'default_decision_action_type':'employee_action'}</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_transfer_action">
+            <field name="name">Decision to transfer an Employee</field>
+            <field name="res_model">employees.appointment</field>
+            <field name="domain">[('decision_type','=','transfer_employee')]</field>
+            <field name="context">{'default_decision_type':'transfer_employee'}</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_assign_action">
+            <field name="name">Decision to assign an Employee</field>
+            <field name="res_model">employees.appointment</field>
+            <field name="domain">[('decision_type','=','assign_employee')]</field>
+            <field name="context">{'default_decision_type':'assign_employee'}</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="manager_approve_action">
+            <field name="name">Decision to approve</field>
+            <field name="res_model">employees.appointment</field>
+            <field name="domain">[('state','=','submitted')]</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('employee_appointment_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('approve_employee_appointment_form_view')})]"/>
+
+        </record>
+
+        <!--    approve_employee_appointment_form_view-->
+
+
+        <menuitem name="Decision to appoint an Employee"
+                  id="menu_employee_appointment_decision"
+                  parent="bsg_hr_employees_decisions.menu_decisions_root"
+                  sequence="1"
+                  action="employee_appointment_action"
+                  groups="bsg_hr_employees_decisions.employees_decisions_appoint_group"/>
+        <menuitem name="Employee Decision"
+                  id="menu_employee_decision"
+                  parent="bsg_hr_employees_decisions.menu_employee_root"
+                  sequence="1"
+                  action="employee_decision_action"
+                  groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager"
+        />
+        <menuitem name="Decision to transfer an Employee"
+                  id="menu_employee_transfer_decision"
+                  parent="bsg_hr_employees_decisions.menu_decisions_root"
+                  sequence="2"
+                  action="employee_transfer_action"
+                  groups="bsg_hr_employees_decisions.employees_decisions_transfer_group"/>
+        <menuitem name="Decision to assign an Employee"
+                  id="menu_employee_assign_decision"
+                  parent="bsg_hr_employees_decisions.menu_decisions_root"
+                  sequence="3"
+                  action="employee_assign_action" groups="bsg_hr_employees_decisions.employees_decisions_assign_group"/>
+        <menuitem name="To Approve Decisions"
+                  id="menu_manager_approve_decision"
+                  parent="bsg_hr_employees_decisions.menu_decisions_reporting_root"
+                  sequence="1"
+                  action="manager_approve_action"
+                  groups="bsg_hr_employees_decisions.group_employees_decisions_by_manager"/>
+    </data>
+</odoo>

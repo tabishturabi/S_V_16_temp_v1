@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <template id="assets_backend_inherit_ninebox" inherit_id="web.assets_backend" name="Employees Asset">-->
+<!--        <xpath expr="script[last()]" position="after">-->
+<!--            <script type="text/javascript" src="/sales_dashboard/static/src/js/sale_dashboard.js"></script>-->
+<!--            <link href="/sales_dashboard/static/src/css/sale_dashboard.css" rel="stylesheet" type="text/css"/>-->
+<!--            <script type="text/javascript" src="/sales_dashboard/static/src/js/map_operation.js"></script>-->
+
+<!--            <script type="text/javascript" src="x-special/nautilus-clipboard-->
+<!--copy-->
+<!--file:///home/jazzi/Downloads/saudi-arabia.svg-->
+<!--"/>-->
+<!--            <script type="text/javascript" src="/sales_dashboard/static/src/lib/plotly/plotly-latest.min.js"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>

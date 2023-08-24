@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <record id="survey_form_driver_custom_field" model="ir.ui.view">
+      <field name="name">survey.survey.form</field>
+      <field name="model">survey.survey</field>
+      <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='session_speed_rating']" position="after">
+            <field name="is_driver" />
+            <field name="driver_ids" attrs="{'invisible': [('is_driver','=',False)]}" widget="many2many_tags"/>
+            <field name="arrival_id" invisible="1"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="survey_user_input_form_custom_inherit" model="ir.ui.view">
+      <field name="name">survey_user_input_form.form</field>
+      <field name="model">survey.user_input</field>
+      <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet/group/group/field[@name='survey_id']" position="after">
+            <field name="waypoint_from"/>
+            <field name="waypoint_to"/>
+        </xpath>
+        <xpath expr="//sheet/group/group/field[@name='deadline']" position="after">
+            <field name="trip_id"/>
+            <field name="driver_id"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="survey_user_input_tree_custom_inherit">
+        <field name="name">survey.user_input.inherited</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="survey_id" position='after'>
+                <field name="waypoint_from"/>
+                <field name="waypoint_to"/>
+                <field name="trip_id"/>
+                <field name="driver_id"/>
+            </field>
+        </field>
+    </record>
+
+<!--      Migration Note-->
+<!--    <template id="survey.back" name="Back">-->
+<!--        <div groups="website.group_website_publisher" t-ignore="true" class="float-right">-->
+<!--            <a t-if="survey.arrival_id and survey.arrival_id.trip_id" role="button" t-attf-href="/web#view_type=form&amp;model=fleet.vehicle.trip&amp;id=#{survey.arrival_id.trip_id.id}&amp;action=bsg_trip_mgmt.action_fleet_vehicle_trip " class="btn btn-secondary">Back to Survey</a>-->
+<!--            <a t-else="" role="button" t-attf-href="/web#view_type=form&amp;model=survey.survey&amp;id=#{survey.id}&amp;action=survey.action_survey_form" class="btn btn-secondary">Back to Survey</a>-->
+<!--        </div>-->
+<!--    </template>-->
+  </data>
+</odoo>

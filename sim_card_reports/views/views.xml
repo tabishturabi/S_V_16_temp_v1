@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <menuitem name="Reporting"
+                  id="menu_sim_report_root"
+                  parent="sim_card.sim_card_request_menu_root"
+                  sequence="4"
+                  />
+    </data>
+</odoo>

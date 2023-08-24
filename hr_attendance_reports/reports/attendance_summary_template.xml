@@ -1,0 +1,95 @@
+<odoo>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="hr_attendance_reports/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>
+                    <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> - <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="attendance_summary_report">
+        <t t-call="web.html_container">
+            <t t-call="hr_attendance_reports.external_layout_standard">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div>
+                            <div class="oe_structure"/>
+                            <h1 align="left"> General Attendance Report </h1>
+                            <div align="right">
+                                <h3> From   <span t-esc="dates[0]"/> To  <span t-esc="dates[1]"/></h3>
+                            </div>
+                            <div>
+                            </div>
+
+                            <table style="border:1px solid black;" class="table table-condensed" dir="rtl">
+                                <thead>
+                                    <tr width="100%">
+                                        <t t-foreach="table_headers" t-as="header_item">
+                                            <th style="border:1px solid black;" class="text-center">
+                                                <t t-esc="header_item['name']" /> </th>
+                                        </t>
+                                    </tr>
+                                    <tr width="100%">
+                                        <t t-foreach="table_headers" t-as="header_item">
+                                            <th style="border:1px solid black;" class="text-center">
+                                                <t t-esc="header_item['unit']" /> </th>
+                                        </t>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    <t t-foreach="attendances" t-as="attendance_list">
+                                        <t t-if="has_grouping">
+                                            <tr style="border:1px solid black;">
+                                                <td> <t t-esc="attendance_list[0]"/> </td>
+                                            </tr>
+                                        </t>
+                                        <t t-set="summary_lines" t-value="get_summary_line(table_headers,attendance_list[1], dates[0], dates[1])"/>
+                                        <tr width="100%">
+                                            <t t-foreach="summary_lines" t-as="summary_line">
+                                                <tr style="border:1px solid black;">
+                                                    <t t-foreach="summary_line" t-as="summary_value">
+                                                        <td width="10%" style="border:1px solid black;" class="text-center">
+                                                            <span t-esc="summary_value"/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <!--                                <tbody>-->
+                                <!--                                    <tr width="100%">-->
+                                <!--                                        <t t-foreach="attendances" t-as="attendance">-->
+                                <!--                                            <td width="10%" style="border:1px solid black;" class="text-center">-->
+                                <!--                                                <span t-esc="attendance['value']"/>-->
+                                <!--                                            </td>-->
+                                <!--                                        </t>-->
+                                <!--                                    </tr>-->
+                                <!--                                </tbody>-->
+                            </table>
+                            <div class="oe_structure"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

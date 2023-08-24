@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="vehicle_performance_report_wizard_view" model="ir.ui.view">
+            <field name="name">vehicle.performance.report.wizard.view</field>
+            <field name="model">vehicle.performance.report.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="vehicle Performance Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="date_from"/>
+                        </group>
+
+                        <group name="group_right">
+                             <field name="date_to"/>
+                        </group>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_performance_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">vehicle Performance Report</field>
+            <field name="res_model">vehicle.performance.report.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vehicle_performance_report_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem 
+            id="vehicle_performance_report_menu" 
+            parent="bsg_trip_mgmt.root_trip_reports"
+            action="vehicle_performance_report_wizard_action"
+            sequence="10" 
+        />
+    </data>
+</odoo>

@@ -1,0 +1,113 @@
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="fleet_truck_violation_form_view">
+            <field name="name">fleet_truck_violation_form</field>
+            <field name="model">fleet.truck.violation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="action_settle" type="object" string="Settle" class="oe_highlight"
+                                attrs="{'invisible': [('state', '!=','confirm')]}"/>
+                        <button name="action_set_to_draft" type="object" string="Set to Draft" class="oe_link"
+                                attrs="{'invisible': [('state', 'in',['draft','done'])]}"/>
+                        <button name="action_cancel" type="object" string="Cancel" class="oe_link"
+                                attrs="{'invisible': [('state', 'in',['draft','cancel','done'])]}"/>
+                        <field name="state" widget="statusbar"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group name="top">
+                            <group name="left">
+                                <field name="violation_name"/>
+                                <field name="fleet_vehicle_id"/>
+                                <field name="driver_id"/>
+                                <field name="driver_phone"/>
+                                <field name="location_id"/>
+                                <field name="trip_id"/>
+                                <field name="settle_on" attrs="{'invisible': [('state', '!=','settled')]}"/>
+                                <field name="violation_date" class="with_hijri"/>
+                            </group>
+                            <group name="right">
+                                <field name="record_date"/>
+                                 <field name="zone"/>
+                                <field name="location_link" widget="url"/>
+                                <field name="google_link" widget="url"/>
+                                <field name="trip_id"/>
+                                <field name="Violation_desc"/>
+                                <field name="violation_type_id"/>
+                                <field name="action_taken_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view  -->
+        <record model="ir.ui.view" id="fleet_truck_violation_tree_view">
+            <field name="name">fleet_truck_violation_tree</field>
+            <field name="model">fleet.truck.violation</field>
+            <field name="arch" type="xml">
+                <tree string="Fleet Truck Violation" decoration-danger="state=='confirm'"
+                      decoration-success="state=='settled'" decoration-muted="state == 'cancelled'">
+                    <field name="name"/>
+                    <field name="violation_date" class="with_hijri"/>
+                    <field name="fleet_vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="location_id"/>
+                    <field name="trip_id"/>
+                    <field name="settle_on"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search view  -->
+        <record id="bsg_vehicle_document_licence_view_search" model="ir.ui.view">
+            <field name="name">fleet_truck_violation_search</field>
+            <field name="model">fleet.truck.violation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="violation_date" class="with_hijri"/>
+                    <field name="fleet_vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="location_id"/>
+                    <field name="trip_id"/>
+                    <field name="settle_on"/>
+                    <field name="state"/>
+                    <separator/>
+                    <filter string="Violation" name="violation_name" domain="[('violation_name','=',True)]"/>
+                    <filter string="Driver" name="driver_id" domain="[('driver_id','=',True)]"/>
+                    <filter string="Location" name="location_id" domain="[('location_id','=',True)]"/>
+                    <filter string="Trip" name="trip_id" domain="[('trip_id','=',True)]"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter name="groupby_status" context="{'group_by' : 'state'}" string="State"/>
+                        <filter name="groupby_model" context="{'group_by' : 'fleet_vehicle_id'}" string="Vehicle"/>
+                        <filter name="groupby_make" context="{'group_by' : 'location_id'}" string="Location"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="fleet_truck_violation_action">
+            <field name="name">Fleet Truck Violation</field>
+            <field name="res_model">fleet.truck.violation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="truck_violation_parent" name="Truck Violations"
+                  parent="bsg_trip_mgmt.root_fleet_operations" action="fleet_truck_violation_action"
+                  groups="bsg_fleet_truck_violation.group_truck_violation"/>
+    </data>
+</odoo>

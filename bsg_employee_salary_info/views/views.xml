@@ -1,0 +1,49 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_salary_info_form_view">
+        <field name="name">employee.salary.info.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//notebook/page[@name='hr_settings']" position="after">
+              <page string="Salary Information" groups="bsg_employee_salary_info.group_employee_salary_info">
+                <group>
+                  <group>
+                    <field name="salary_structure"></field>
+                  </group>
+                </group>
+                <field name="line_ids" widget="one2many_list">
+                  <tree>
+                      <field name="name"/>
+                      <field name="quantity" invisible="1"/>
+                      <field name="rate" invisible="1"/>
+                      <field name="amount" invisible="1"/>
+                      <field name="total"/>
+                  </tree>
+                </field>
+              </page>
+            </xpath>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="employee_salary_details_form">
+        <field name="name">employee.salary.details.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//notebook/page[@name='information']" position="after">
+              <page string="Salary Details" groups="bsg_employee_salary_info.group_contract_salary_details">
+                <field name="line_ids" widget="one2many_list">
+                  <tree>
+                      <field name="name"/>
+                      <field name="quantity" invisible="1"/>
+                      <field name="rate" invisible="1"/>
+                      <field name="amount" invisible="1"/>
+                      <field name="total"/>
+                  </tree>
+                </field>
+              </page>
+            </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

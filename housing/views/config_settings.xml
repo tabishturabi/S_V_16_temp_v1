@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="permission_settings_form">
+        <field name="name">permission_settings.form</field>
+        <field name="model">permission_settings</field>
+        <field name="arch" type="xml">
+            <form string=" Permission Settings" class="oe_form_configuration">
+                <header>
+                    <button string="Save" type="object" name="execute_settings" class="oe_highlight" />
+                    <button string="Discard" type="object" name="cancel" special="cancel" />
+                </header>
+                <div class="app_settings_block" data-string="Permission Settings" string="Permission Settings" data-key="housing">
+                    <div style="background-color:#e9ecef;">
+                        <h2>Permission To Entry Housing Notification Report</h2>
+                    </div>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="days_schedule" class="col-lg-3 o_light_label" string="After of Permission To Entry Housing"/>
+                                        <field name="days_schedule" class="oe_inline"/>
+                                        <field name="interval_type" style="margin-left: 50px;" class="oe_inline"/>
+                                    </div>
+                                </div>
+
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string=" Send To" for="employee_to"/>
+                                        <field name="employee_to"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Send Cc" for="employee_cc"/>
+                                        <field name="employee_cc"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Sending From" for="employee_sending"/>
+                                        <field name="employee_sending"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+        <record model="ir.actions.act_window" id="permission_settings_action">
+        <field name="name">Permission To Entry Housing Notification Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">permission_settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+    <menuitem id="permission_settings_id"
+              name="Settings"
+              parent="config_permission_main_menu"
+              action="permission_settings_action" groups="housing.permission_settings_group" sequence="1"/>
+    </data>
+</openerp>

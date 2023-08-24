@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_cert">
+
+                <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
+            <t t-foreach="docs" t-as="o">
+
+                <div class="page">
+                  <style>
+                     @font-face {
+                    font-family: 'Tajawal';
+                    font-weight: 400;
+                    src: url(/bassami_print_journal_entries/static/src/fonts/Tajawal-Bold.ttf) format('truetype');
+                    }
+                    body, html {
+                    font-family: 'Tajawal' !important;
+                    }
+
+                    .centered {
+                    position: absolute;
+                    top: 450px;
+                    transform: translate(-50%, -50%);
+                    font-size: 30px;
+                    font-family: Tajawal;
+                    width:1500px;
+                    }
+                    </style>
+                    <div class="report-container">
+                      
+                      <img src="/bsg_training/static/src/img/certificateTemplate.jpg" style="width:1500px; height: 1050px;"/>
+
+                      <div class="centered"> <center  t-esc="o.cert_ar_name"></center>  </div>
+                      </div>
+                </div>
+            </t>
+        </t>
+      </t>
+
+
+
+        </template>
+        <report
+        id="res_partner_cert"
+        model="res.partner"
+        string="Send Certificate"
+        report_type="qweb-pdf"
+        name="bsg_training.report_cert"
+        file="bsg_training.report_cert"
+        attachment_use="True"
+        attachment="object.cert_en_name+'.pdf'"/>
+    </data>
+</odoo>

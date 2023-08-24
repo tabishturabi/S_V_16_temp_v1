@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record id="groups_employee_payslips_report" model="res.groups">
+              <field name="name">Employee Payslips Report</field>
+              <field name="comment">The user will have access to employee payslips report menu.</field>
+              <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+          </record>
+    </data>
+</odoo>

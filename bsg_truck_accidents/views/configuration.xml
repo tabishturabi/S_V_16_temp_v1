@@ -1,0 +1,6 @@
+<odoo>
+    <data>
+        <menuitem id="menu_truck_accident_config"
+                  parent="bsg_truck_accidents.bsg_truck_accidents" name="Configuration" groups="bsg_truck_accidents.group_truck_accident_configuration"/>
+    </data>
+</odoo>

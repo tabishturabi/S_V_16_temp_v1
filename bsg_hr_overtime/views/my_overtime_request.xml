@@ -1,0 +1,623 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="emp_overtime_request_search_view">
+          <field name="name">Employee Overtime Request</field>
+          <field name="model">hr.overtime</field>
+          <field name="arch" type="xml">
+          <search>
+                <field name="employee_name" />
+                <field name="employee_id" />
+                <field name="branch_name"/>
+                <field name="emp_department" />
+                <field name="job_position" />
+                <field name="manager"></field>
+                <field name="company"></field>
+                <field name="state" />
+              <newline/>
+              <group expand="0" string="Group By...">
+                  <filter name="employee_name" string="Employee Name" context="{'group_by':'employee_name'}" />
+                  <filter name="employee_id" string="Employee ID" context="{'group_by':'employee_id'}" />
+                  <filter name="branch_name" string="Branch" context="{'group_by':'branch_name'}" />
+                  <filter name="emp_department" string="Department" context="{'group_by':'emp_department'}" />
+                  <filter name="company" string="Company" context="{'group_by':'company'}" />
+                  <filter name="job_position" string="Job Position" context="{'group_by':'job_position'}" />
+                  <filter name="manager" string="Manager" context="{'group_by':'manager'}" />
+                  <filter name="state" string="State" context="{'group_by':'state'}" />
+              </group>
+          </search>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="emp_overtime_request_list_view">
+      <field name="name">Employee Overtime Request</field>
+      <field name="model">hr.overtime</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="sequence_number" />
+            <field name="employee_name"/>
+            <field name="manager" />
+            <field name="company" />
+            <field name="branch_name"/>
+            <field name="emp_department" />
+            <field name="job_position" />
+            <field name="date_from" />
+            <field name="date_to" />
+            <field name="state" />
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="emp_overtime_request_form_view">
+      <field name="name">employee overtime request</field>
+      <field name="model">hr.overtime</field>
+      <field name="arch" type="xml">
+        <form>
+                        <header>
+                  <widget name="attach_document" string="Attach Document" action="message_post" highlight="1"/>
+                  <button name="action_submit" string="SUBMIT TO MANAGER" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}" class="oe_highlight oe_structure"/>
+
+                 <button name="action_approve" string="APPROVE" type="object" attrs="{'invisible': [('state', '!=', 'submitted')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_manager_approver"/>
+                <button name="action_reject" string="REJECT" type="object" attrs="{'invisible': [('state', '!=', 'submitted')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_manager_approver"/>
+                <button name="action_hr_sallary_approve" string="HR SALLARY APPROVE" type="object" attrs="{'invisible': [('state', '!=', 'approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_hr_sallary_team"/>
+                <button name="action_hr_sallary_reject" string="HR SALLARY REJECT" type="object" attrs="{'invisible': [('state', '!=', 'approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_hr_sallary_team"/>
+                <button name="action_hr_manager_approve" string="HR MANAGER APPROVE" type="object" attrs="{'invisible': [('state', '!=', 'hr_salary_approve')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver"/>
+                <button name="action_hr_manager_reject" string="HR MANAGER REJECT" type="object" attrs="{'invisible': [('state', '!=', 'hr_salary_approve')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver"/>
+                <button name="action_account_approve" string="ACCOUNT APPROVE" type="object" invisible="1" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_accounting_approver"/>
+                <button name="action_account_reject" string="ACCOUNT REJECT" type="object" invisible="1" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_accounting_approver"/>
+                <button name="action_audit_approve" string="AUDIT APPROVE" type="object" attrs="{'invisible': [('state', '!=', 'hr_manager_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_audit_approver"/>
+                <button name="action_audit_reject" string="AUDIT REJECT" type="object" attrs="{'invisible': [('state', '!=', 'hr_manager_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_audit_approver"/>
+                <button name="action_fin_approve" string="FIN APPROVE" type="object" attrs="{'invisible': [('state', '!=', 'audit_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_financial_management_approver"/>
+                <button name="action_fin_reject" string="FIN REJECT" type="object" attrs="{'invisible': [('state', '!=', 'audit_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_financial_management_approver"/>
+
+                <button string="Post To Payslip" name="payroll_approve" type="object" attrs="{'invisible':['|',('report_nextslip','!=',True),('state','!=','fin_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                 <button string="Reject" name="payroll_reject" type="object" attrs="{'invisible':['|',('report_nextslip','!=',True),('state','!=','fin_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                  <button string="POST" name="%(hr_overtime_move_post_wizard_action)d" type="action" attrs="{'invisible':['|',('report_nextslip','=',True),('state','!=','fin_approved')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                <button string="Pay" name="%(hr_overtime_register_payment_wizard_action)d" type="action" attrs="{'invisible': ['|',('report_nextslip','=',True),('state', '!=', 'posted')]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                <button string="Refuse" name="%(hr_overtime_refuse_wizard_action)d" type="action" attrs="{'invisible': [('state', 'in', ('draft','posted','paid','cancel','in_payroll'))]}" class="oe_highlight oe_structure" groups="bsg_hr_overtime.group_overtime_manager_approver,bsg_hr_overtime.group_hr_sallary_team,                     bsg_hr_overtime.group_overtime_hr_manager_approver,bsg_hr_overtime.group_overtime_accounting_approver,                     bsg_hr_overtime.group_overtime_audit_approver,bsg_hr_overtime.group_overtime_financial_management_approver,                     bsg_hr_overtime.group_overtime_payroll_approve"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,posted,paid"/>
+            </header>
+          <sheet>
+                <div class="oe_button_box" name="button_box" groups="base.group_user">
+                              <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                                  <field string="Documents" name="doc_count" widget="statinfo"/>
+                              </button>
+                </div>
+               <div class="oe_title">
+                        <h1>
+                            <field name="sequence_number" /><br />
+                            <field name="name" placeholder="e.g. Overtime of Employee"
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </h1>
+                    </div>
+              <group class="ums_form_style">
+                  <group>
+                       <field name="employee_readonly"  invisible="True"/>
+                       <field name="employee_name" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' attrs="{'readonly': ['|',('state', '!=', 'draft'),('employee_readonly','=',True)]}"/>
+                       <field name="manager" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                       <field name="company" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                       <field name="resource_calendar_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                       <label for="date_from" string="From"/>
+                      <div  class="o_row o_row_readonly">
+                          <field name="date_from" class="oe_inline"  attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <span class="oe_inline">To</span>
+                          <field name="date_to" class="oe_inline"  attrs="{'readonly': [('state', '!=','draft')]}"></field>
+                      </div>
+                      <field name="priority" widget="priority"  attrs="{'readonly': [('state', '!=', ('draft','submitted','approved'))]}"/>
+                  </group>
+                  <group>
+                      <field name="branch_name" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                      <field name="emp_department" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                      <field name="job_position" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="True" force_save="1"/>
+                      <field name="employee_tag_ids" widget="many2many_tags" readonly="True" force_save="1"/>
+                      <!--label for="wage_sallary" string="Wage Sallary"
+                      attrs="{'invisible': [('state', 'in', ('draft','submitted'))]}"
+                      groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" />
+                      <div  class="o_row o_row_readonly"
+                      groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver">
+                          <field name="wage_sallary" readonly="True" force_save="1" class="oe_inline" attrs="{'invisible': [('state', 'in', ('draft','submitted'))]}" >
+                          </field>
+                          <span class="oe_inline" attrs="{'invisible': [('state', 'in', ('draft','submitted'))]}"><b>Per Hour</b></span>
+                          <field name="per_hour"  attrs="{'invisible': [('state', 'in', ('draft','submitted'))]}" readonly="True" force_save="1" class="oe_inline">
+                          </field>
+                      </div-->
+                      <field name="per_hour"  attrs="{'invisible': [('state', 'in', ('draft','submitted'))]}" readonly="True" force_save="1"/>
+                      <field name="overtime_coefficient" invisible="1"
+                       groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                      <field name="payslip_reimburse" invisible="True"></field>
+                      <field name="report_nextslip" attrs="{'invisible': ['|',('payslip_reimburse','!=',True),('state', 'in', ('draft','submitted'))],'readonly': [('state', '!=', 'approved')]}"
+                       groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"/>
+                      <field name="allow_overtime_per_employee" readonly="1"/>
+                  </group>
+                  <group col="2" colspan="2">
+                      <field name="description"
+                      attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                  </group>
+                   <separator string="Comment by Manager"
+                   attrs="{'invisible':[('state','=','draft')]}"/>
+                   <field name="manager_comment"
+                   attrs="{'invisible':[('state','=','draft')],
+                      'readonly': [('state', '!=', 'submitted')]}"/>
+                   <newline />
+                   <separator string="Reason To Refuse" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                   <field name="refusal_reason" readonly="1"  attrs="{'invisible':[('state','!=','cancel')]}"/>
+              </group>
+              <notebook>
+                  <page string="Overtime">
+                         <field name="generate_from_attendance"  invisible="1"/>
+                         <button name="generate_ovt_from_attendance" string="Pull From Attendance" type="object" class="oe_highlight oe_structure"
+                         attrs="{'invisible': ['|',('generate_from_attendance','!=',True),'|',('state', '!=', 'approved'),('allow_overtime_per_employee','=',True)]}"
+                        groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" />
+
+                      <field name="overtime_line" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" context="{'default_overtime_coefficient':overtime_coefficient,
+                      'default_per_hour_sallary':per_hour}"
+                      attrs="{'readonly': [('state', 'not in', ('draft','submitted','approved'))]}">
+                          <tree editable="bottom">
+                              <field name="overtime_rel" invisible="1"></field>
+                              <field name="from_date" attrs="{'required':[('parent.allow_overtime_per_employee','!=',True)],
+                                                              'column_invisible':[('parent.allow_overtime_per_employee','=',True)]}"></field>
+                              <field name="to_date"   attrs="{'required':[('parent.allow_overtime_per_employee','!=',True)],
+                                                              'column_invisible':[('parent.allow_overtime_per_employee','=',True)]}"></field>
+                              <field name="description" required="True"></field>
+                              <!--field name="overtime_duration" force_save="1" readonly="1" attrs="{'column_invisible':[('parent.allow_overtime_per_employee','=',True)]}"/-->
+                              <field name="overtime" widget="float_time" attrs="{'required':[('parent.allow_overtime_per_employee','!=',True)],
+                                                              'column_invisible':[('parent.allow_overtime_per_employee','=',True)]}"></field>
+                              <field name="ovt_hours" widget="float_time" attrs="{'required':[('parent.allow_overtime_per_employee','=',True)],
+                                                              'column_invisible':[('parent.allow_overtime_per_employee','!=',True)]}"></field>
+                              <field name="approved_hours" widget="float_time" force_save="1" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))],'readonly': [('parent.state', '!=', 'approved')]}"
+                               groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" />
+                              <field name="overtime_coefficient" force_save="1" invisible="1"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"></field>
+                              <field name="total_overtime" widget="float_time" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))]}"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"></field>
+                              <field name="per_hour_sallary" readonly="1" force_save="1" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))]}"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"></field>
+                              <field name="total_overtime_amount" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))]}"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver"></field>
+                               <!--field name="overtime" sum="Hours" />
+                               <field name="approved_hours" sum="Approved Hours" />
+                               <field name="total_overtime" sum="Total Overtimes" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))]}"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" />
+                               <field name="total_overtime_amount" sum="Total Overtime Amount" attrs="{'column_invisible': [('parent.state', 'in', ('draft','submitted'))]}"
+                              groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" /-->
+                          </tree>
+                      </field>
+                      <!--label for="subtotal" string="SubTotal" />
+                  <div>
+                      <field name="subtotal" style="width: 45%;text-align:right;" />
+                      <field name="total_overtime" style="width: 26%;text-align:right;"
+                      groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver"/>
+                      <field name="total_overtime_amount" style="width: 29%;text-align:right;"
+                      groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver"/>
+                  </div-->
+                  </page>
+                  <page string="Other Info">
+                      <group>
+                          <field name="emp_overtime_batch"></field>
+                          <field name="emp_overtime_batch_by_hours" />
+                          <field name="payslip_input_ids" invisible="1"/>
+                          <field name="payslip_ids" groups="bsg_hr_overtime.group_overtime_hr_manager_approver,
+                              bsg_hr_overtime.group_overtime_accounting_approver,
+                               bsg_hr_overtime.group_overtime_audit_approver,
+                               bsg_hr_overtime.group_overtime_financial_management_approver,
+                               bsg_hr_overtime.group_hr_sallary_team,
+                               bsg_hr_overtime.group_overtime_all_approver" attrs="{'invisible':['|',('report_nextslip','!=',True),('state','not in',('in_payroll','posted','paid'))]}"/>
+                      </group>
+                  </page>
+                  <page string="Accounting Information" attrs="{'invisible': [('state', 'not in', ('posted','paid'))]}">
+                      <group>
+
+                          <field name="journal_id" readonly="True"/>
+                          <field name="posted_date" readonly="True"/>
+                          <field name="move_id" readonly="True"/>
+                          <field name="paid_date" readonly="True" attrs="{'invisible': [('state', '!=', 'paid')]}"/>
+                          <field name="payment_move_id" readonly="True" attrs="{'invisible': [('state', '!=', 'paid')]}" />
+                      </group>
+                  </page>
+              </notebook>
+              <group class="oe_subtotal_footer oe_right">
+                                    <field name="approved_hours" />
+                                    <field name="total_overtime"/>
+                                    <field name="total_overtime_amount" class="oe_subtotal_footer_separator"/>
+              </group>
+          </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"></field>
+                <field name="message_ids" widget="mail_thread"></field>
+            </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_my_overtime_act_action_window_readonly_per_period">
+          <field name="name">My Overtime Per Periods</field>
+<!--          <field name="domain">[('state','in',['draft','submitted','approved'])]</field>-->
+          <field name="res_model">hr.overtime</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="context">{'default_employee_readonly':True,'default_allow_overtime_per_employee':False}</field>
+          <field name="domain">[('employee_readonly','=',True),('allow_overtime_per_employee','=',False)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_my_overtime_act_action_window_readonly_per_hours">
+          <field name="name">My Overtime Per Total Hours</field>
+<!--          <field name="domain">[('state','in',['draft','submitted','approved'])]</field>-->
+          <field name="res_model">hr.overtime</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="context">{'default_employee_readonly':True,'default_allow_overtime_per_employee':True}</field>
+          <field name="domain">[('employee_readonly','=',True),('allow_overtime_per_employee','=',True)]</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="employee_my_overtime_act_action_window_editable_per_periods">
+          <field name="name">Overtime Per Periods</field>
+<!--          <field name="domain">[('state','in',['draft','submitted','approved'])]</field>-->
+          <field name="res_model">hr.overtime</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="context">{'default_employee_readonly':False,'default_allow_overtime_per_employee':False}</field>
+          <field name="domain">[('employee_readonly','=',False),('allow_overtime_per_employee','=',False)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_my_overtime_act_action_window_editable_per_hours">
+          <field name="name">Overtime Per Total Hours</field>
+<!--          <field name="domain">[('state','in',['draft','submitted','approved'])]</field>-->
+          <field name="res_model">hr.overtime</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="context">{'default_employee_readonly':False,'default_allow_overtime_per_employee':True}</field>
+          <field name="domain">[('employee_readonly','=',False),('allow_overtime_per_employee','=',True)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_overtime_manager_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','submitted')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_sallary_team_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_hr_manager_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','hr_salary_approve')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_account_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','hr_manager_approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_audit_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','account_approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_fin_approve_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','audit_approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_fin_post_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','fin_approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_fin_paid_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','posted')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_all_approve_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','in',['submitted','approved','hr_salary_approve','hr_manager_approved',
+            'account_approved','audit_approved'])]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+      <record model="ir.actions.act_window" id="employee_overtime_all_posted_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','fin_approved')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+       <record model="ir.actions.act_window" id="employee_overtime_all_paid_act_action_window">
+        <field name="name">Overtime Request</field>
+        <field name="domain">[('state','=','posted')]</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+   <menuitem name="Overtime Requests"
+             id="overtime_request_root"
+             sequence="5"
+             web_icon="bsg_hr_overtime,static/description/icon.png"
+   />
+      <menuitem name="Overtime Requests"
+                id="overtime_request_menu"
+                sequence="1"
+                parent="overtime_request_root"
+                groups="group_overtime_request_root"
+   />
+    <menuitem name="My Overtime Requests"
+                id="menu_my_overtime_request_readonly"
+                sequence="1"
+                parent="overtime_request_menu"
+                groups="group_my_overtime_request"
+   />
+
+    <menuitem name="My Overtime Per Periods"
+                    parent="menu_my_overtime_request_readonly"
+                    id="employee_my_overtime_menu_readonly_per_period"
+                    sequence="1"
+                    action="employee_my_overtime_act_action_window_readonly_per_period"
+      />
+    <menuitem name="My Overtime Per Total Hours"
+                        parent="menu_my_overtime_request_readonly"
+                        id="employee_my_overtime_menu_readonly_per_hours"
+                        sequence="2"
+                        action="employee_my_overtime_act_action_window_readonly_per_hours"
+          />
+
+
+
+   <menuitem name="Overtime Requests"
+                id="menu_my_overtime_request_editable"
+                sequence="2"
+                parent="overtime_request_menu"
+   />
+
+    <menuitem name="Overtime Per Periods"
+                    parent="menu_my_overtime_request_editable"
+                    id="employee_my_overtime_menu_editable_per_period"
+                    sequence="1"
+                    action="employee_my_overtime_act_action_window_editable_per_periods"
+      />
+    <menuitem name="Overtime Per Total Hours"
+                        parent="menu_my_overtime_request_editable"
+                        id="employee_my_overtime_menu_editable_per_hours"
+                        sequence="2"
+                        action="employee_my_overtime_act_action_window_editable_per_hours"
+          />
+
+       <menuitem name="Overtime Reports"
+                id="overtime_reports_main_menu"
+                sequence="2"
+                parent="overtime_request_root"
+   />
+       <menuitem name="Manager"
+                id="overtime_reports_manager"
+                sequence="1"
+                parent="overtime_reports_main_menu"
+                 groups="bsg_hr_overtime.group_overtime_manager_approver"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_manager_to_approve"
+                sequence="1"
+                parent="overtime_reports_manager"
+                action="employee_overtime_manager_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_manager_approver"
+   />
+      <menuitem name="HR Sallary Team"
+                id="overtime_reports_hr_sallary"
+                sequence="2"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_hr_sallary_team"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_hr_sallary_to_approve"
+                sequence="1"
+                parent="overtime_reports_hr_sallary"
+                action="employee_overtime_sallary_team_act_action_window"
+                groups="bsg_hr_overtime.group_hr_sallary_team"
+   />
+      <menuitem name="HR Manager"
+                id="overtime_reports_hr_manager"
+                sequence="3"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_overtime_hr_manager_approver"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_hr_manager_to_approve"
+                sequence="1"
+                parent="overtime_reports_hr_manager"
+                action="employee_overtime_hr_manager_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_hr_manager_approver"
+   />
+      <menuitem name="HR Accounting Team"
+                id="overtime_reports_accouting_team"
+                sequence="4"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_overtime_accounting_approver"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_accounting_team_to_approve"
+                sequence="1"
+                parent="overtime_reports_accouting_team"
+                action="employee_overtime_account_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_accounting_approver"
+   />
+      <menuitem name="Audit Team"
+                id="overtime_reports_audit_team"
+                sequence="5"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_overtime_audit_approver"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_audit_team_to_approve"
+                sequence="1"
+                parent="overtime_reports_audit_team"
+                action="employee_overtime_audit_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_audit_approver"
+   />
+      <menuitem name="Financial Management"
+                id="overtime_reports_financial_management"
+                sequence="6"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_overtime_financial_management_approver"
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_financial_management_to_approve"
+                sequence="1"
+                parent="overtime_reports_financial_management"
+                action="employee_overtime_fin_approve_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_financial_management_approver"
+   />
+      <menuitem name="To post"
+                id="overtime_reports_financial_management_to_post"
+                sequence="2"
+                parent="overtime_reports_financial_management"
+                action="employee_overtime_fin_post_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_financial_management_approver"
+   />
+      <menuitem name="To Paid"
+                id="overtime_reports_financial_management_to_paid"
+                sequence="3"
+                parent="overtime_reports_financial_management"
+                action="employee_overtime_fin_paid_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_financial_management_approver"
+   />
+      <menuitem name="All"
+                id="overtime_reports_all"
+                sequence="7"
+                parent="overtime_reports_main_menu"
+                groups="bsg_hr_overtime.group_overtime_all_approver"
+
+   />
+      <menuitem name="To Approve"
+                id="overtime_reports_all_to_approve"
+                sequence="1"
+                parent="overtime_reports_all"
+                action="employee_overtime_all_approve_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_all_approver"
+   />
+      <menuitem name="To post"
+                id="overtime_reports_all_to_post"
+                sequence="2"
+                parent="overtime_reports_all"
+                action="employee_overtime_all_posted_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_all_approver"
+   />
+      <menuitem name="To Paid"
+                id="overtime_reports_all_to_paid"
+                sequence="3"
+                parent="overtime_reports_all"
+                action="employee_overtime_all_paid_act_action_window"
+                groups="bsg_hr_overtime.group_overtime_all_approver"
+   />
+       <menuitem name="Configuration"
+             id="menu_overtime_request_configuration"
+             sequence="4"
+             parent="overtime_request_root" groups="bsg_hr_overtime.group_overtime_admin"
+
+   />
+
+  <!--record id="hr_overtime_post_action_server" model="ir.actions.server">
+            <field name="name">Post To Move</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_hr_overtime"/>
+            <field name="binding_model_id" ref="model_hr_overtime"/>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    action = records.action_post_overtime()
+            </field>
+        </record-->
+
+  </data>
+</odoo>

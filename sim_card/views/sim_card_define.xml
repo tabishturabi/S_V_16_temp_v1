@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="sim_card_define_form_view" model="ir.ui.view">
+            <field name="name">sim_card_define_form_view</field>
+            <field name="model">sim.card.define</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card define">
+                    <header>
+                        <field name="state"  widget="statusbar" options="{'clickable': '1'}"/>
+                        <widget name="attach_document" string="ATTACH DOCUMENT" action="" highlight="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="compute_receipt_count_view" type="object" class="oe_stat_button" icon="fa-mobile">
+                                <field name="receipt_count" widget="statinfo" string="Receipt"/>
+                            </button>
+                            <button name="compute_delivered_count_view" type="object" class="oe_stat_button" icon="fa-mobile">
+                                <field name="delivered_count" widget="statinfo" string="Delivered"/>
+                            </button>
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book" type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <group name="group_top" style="color:#0e620a;">
+                            <group name="group_left">
+                                <field name="mble_no"/>
+                                <field name="service_id"/>
+                                <field name="pkg_id" domain="[('service_id','=', service_id)]"/>
+                                <field name="branch_id" widget='many2many_tags'/>
+                                <field name="department_id" widget='many2many_tags'/>
+                                <field name="job_id" widget='many2many_tags'/>
+                                <field name="company_id"/>
+                                <field name="owner_id"/>
+                                <field name="date"/>
+                                <field name="is_cost" widget="radio"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="sim_type"/>
+                                <field name="contract_no" force_save="1"/>
+                                <field name="imis_no"/>
+                                <field name="msisdn"/>
+                                <field name="id_no"/>
+                                <field name="check" invisible="1"/>
+                            </group>
+                        </group>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="employee"/>
+                                <field name="last_delivery_seq_id"/>
+                                <field name="last_receipt_seq_id"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="delivered_id" invisible="1"/>
+                                <field name="receipt_id" invisible="1"/>
+                                <field name="delivery_seq_id"/>
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                        </group>
+                        <notebook>
+                            <page name="accounting" string="Accounting">
+                                <group>
+                                    <!-- Migration Note  domain remove from following fields   -->
+
+                                    <group string="Receivable">
+                                        <field name="property_account_income_id"
+                                               groups="account.group_account_user"/>
+                                    </group>
+                                    <group string="Payable">
+                                        <field name="property_account_expense_id"
+                                               groups="account.group_account_user"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_define_kanban_view" model="ir.ui.view">
+            <field name="name">sim_card_define_kanban_view</field>
+            <field name="model">sim.card.define</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column o_kanban_project_tasks">
+                    <field name="state" options="{&quot;group_by_tooltip&quot;: {&quot;description&quot;: &quot;Stage Description&quot;, &quot;legend_priority&quot;: &quot;Use of stars&quot;}}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click" style="color:#FF5733;">
+                                <lable>Sim Type = </lable>
+                                <field name="sim_type"/>
+                                <br/>
+                                <lable>Package Type = </lable>
+                                <field name="pkg_id"/>
+                                <br/>
+                                <lable>Service Provider = </lable>
+                                <field name="service_id"/>
+                                <br/>
+                                <lable>Owner Name = </lable>
+                                <field name="owner_id"/>
+                                <br/>
+                                <lable>Mobile NO = </lable>
+                                <field name="mble_no"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="sim_card_define_tree_view" model="ir.ui.view">
+            <field name="name">sim_card_define_tree_view</field>
+            <field name="model">sim.card.define</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="mble_no"/>
+                    <field name="service_id"/>
+                    <field name="owner_id"/>
+                    <field name="pkg_id"/>
+                    <field name="sim_type"/>
+                    <field name="employee"/>
+                    <field name="is_cost"/>
+                    <field name="delivery_seq_id"/>
+                    <field name="last_delivery_seq_id"/>
+                    <field name="last_receipt_seq_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_define_tree_vieww1" model="ir.ui.view">
+            <field name="name">sim_card_define_tree_view</field>
+            <field name="model">sim.card.define</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree create="false" import="false">
+                    <field name="mble_no"/>
+                    <field name="service_id"/>
+                    <field name="owner_id"/>
+                    <field name="pkg_id"/>
+                    <field name="sim_type"/>
+                    <field name="employee"/>
+                    <field name="is_cost"/>
+                    <field name="delivery_seq_id"/>
+                    <field name="last_delivery_seq_id"/>
+                    <field name="last_receipt_seq_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_define_view_search" model="ir.ui.view">
+            <field name="name">sim.card.define</field>
+            <field name="model">sim.card.define</field>
+            <field name="arch" type="xml">
+                <search string="Sim Card">
+                    <group expand="1" string="Group By">
+                        <filter name="groupby_status" context="{'group_by' : 'state'}" string="Status"/>
+                        <field name="mble_no"/>
+                        <field name="service_id"/>
+                        <field name="owner_id"/>
+                        <field name="pkg_id"/>
+                        <field name="sim_type"/>
+                        <field name="employee"/>
+                        <field name="is_cost"/>
+                        <field name="delivery_seq_id"/>
+                        <field name="last_delivery_seq_id"/>
+                        <field name="last_receipt_seq_id"/>
+                        <field name="state"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="sim_card_define_action" model="ir.actions.act_window">
+            <field name="name">Sim Card Define</field>
+            <field name="res_model">sim.card.define</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="context">{'search_default_groupby_status': 1}</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem id="sim_card_define_main_menu1" name="Sim Card Define" action="sim_card_define_action"
+                  parent="sim_card_request_main_menu_config" groups="sim_card.sim_card_user" sequence="5"/>
+    </data>
+</openerp>

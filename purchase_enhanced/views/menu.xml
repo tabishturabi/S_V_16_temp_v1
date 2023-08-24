@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Purchase Request"
+        id="root_purchase_request_menu"
+        web_icon="purchase_enhanced,static/description/purchaseRequest_Icon.png"
+        groups="purchase_enhanced.mangement"
+        sequence="1"/>
+        
+    <menuitem name="Purchase Request"
+        id="root_purchase_origin"
+        parent="root_purchase_request_menu"
+        groups="purchase_enhanced.mangement"
+        sequence="1"/>
+        
+</odoo>

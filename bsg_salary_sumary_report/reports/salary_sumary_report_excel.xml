@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="salary_sumary_report_xlsx_id"
+             model="salary.sumary.report.wizard"
+             string="Employee Salary Summary Report"
+             report_type="xlsx"
+             name="bsg_salary_sumary_report.sumary_report_xlsx"
+             file="bsg_salary_sumary_report.sumary_report_xlsx"
+     />
+</odoo>

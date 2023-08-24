@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="bx_agreement_report_temp">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    font-size: 14px;
+                                }
+
+                                .contaner {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+
+                                page[size="A4"] {
+                                    width: 23cm;
+                                    height: 27.7cm;
+                                    text-align: center;
+                                }
+
+                                h1 {
+
+                                    margin: 0px auto;
+                                    width: 80%;
+                                    float: left;
+                                    text-align: center;
+                                    margin-bottom: 40px;
+
+                                }
+
+                                .org {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                    text-decoration: underline;
+                                }
+
+                                .dup {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .line {
+                                    width: 100%;
+                                    margin-top: 30px;
+
+
+                                }
+
+                                .ser {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .ser .solid {
+                                    width: 27%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .ser .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .date {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+
+                                .date .solid {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .date .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .time {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .time .solid {
+                                    width: 35%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .time .liquid {
+                                    width: 64%;
+                                    float: left;
+                                
+                                }
+
+                                .big {
+                                    width: 100%;
+                                    font-size: 14px;
+
+                                }
+
+
+                                .box {
+                                    width: 49%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+                                    
+                                }
+
+                                .box1 {
+                                    width: 50%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+
+                                }
+
+                                .supp {
+
+                                    width: 98%;
+                                    float: left;
+                                    margin: 5px;
+                                    border-bottom: 1px solid;
+                                }
+
+                                .solidsupp1 {
+                                    width: 30%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .liquidsupp {
+                                    width: 70%;
+                                    float: left;
+                                    text-align: right;
+                                
+                                }
+
+                                .solidsupp2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                    text-align: right;
+                                
+                                }
+
+                                .add {
+                                    width: 98%;
+                                    float: left;
+                                    margin: 5px;
+                                    border-bottom: 1px solid;
+                                }
+
+                                .solidadd1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+
+                                }
+
+                                .solidadd2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                    text-align: right;
+                                }
+
+                                .liquidadd {
+                                    width: 70%;
+                                    float: left;
+                                    text-align: right;
+                                
+                                }
+
+                                .tele {
+                                    width: 98%;
+                                    float: left;
+                                    margin: 5px;
+                                    border-bottom: 1px solid;
+                                }
+
+                                .solidtele1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidtele2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                    text-align: right;
+                                }
+
+                                .liquidtele {
+                                    width: 70%;
+                                    float: left;
+                                    text-align: right;
+                                
+                                }
+
+                                .ntn {
+                                    width: 98%;
+                                    float: left;
+                                    margin: 5px;
+                                    border-bottom: 1px solid;
+                                }
+
+                                .solidntn1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidntn2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                    text-align: right;
+
+                                }
+
+                                .liquidntn {
+                                    width: 70%;
+                                    float: left;
+                                    text-align: right;
+                                
+                                }
+
+                                .term {
+                                    width: 100;
+                                    float: left;
+                                    margin-top: 30px;
+                                }
+
+                                .term .solid {
+                                    width: 15%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .term .liquid {
+                                    width: 85%;
+                                    float: left;
+                                }
+
+
+                                table {
+                                    border: 1px solid #000;
+                                    margin: 10px 0px 0px;
+                                    width: 100%;
+                                    float: left;
+                                    border-spacing: 0px;
+                                    font-size : 17px;
+                                }
+
+                                table tr th,
+                                table tr td {
+                                    border-right: 1px solid #000;
+                                    text-align: left;
+                                }
+
+                                table tr th {
+                                    padding: 2px 0px;
+                                                                    
+                                }
+
+                                table tr td {
+                                    border-top: 1px solid #000;
+                                    padding: 2px 0px;
+                                }
+                                
+                                    
+                            </style>
+
+                            <div class="report-container">
+
+                                <div class="contaner">
+
+                                    <img src="/bx_agreement_report/static/src/img/bassami.png" style="width:990px;height:100px"/>
+
+                                    <h3>
+                                        <span>اتفاقية شحن بضائع</span>
+                                    </h3>
+
+                                </div>
+
+                               
+                                <div class="big">
+                                    
+
+                                    <div class="box" style="height: 93px;border:hidden">
+
+
+                                        <div class="supp" style="border-bottom:hidden">
+
+                                            <div class="liquidsupp" style="width:63%">
+                                                <span t-esc="o.transportation_no"></span>
+                                            </div>
+                                            <div class="solidsupp2" style="width:35%">‫‪رقم بوليصة الشحن</div>
+                                        </div>
+
+                                        <div class="ntn" style="border-bottom:hidden">
+
+                                            <div class="liquidntn" style="width:63%">
+                                                <span t-esc="o.order_date"></span>
+                                            </div>
+                                            <div class="solidntn2" style="width:35%">تاريخ الشحن</div>
+                                        </div>
+
+                                        <div class="add" style="border-bottom:hidden">
+
+                                            <div class="liquidadd" style="width:63%">
+                                                <span t-esc="o.to_transport.route_waypoint_name"></span>
+                                            </div>
+                                            <div class="solidadd2" style="width:35%">فرع الوصول</div>
+                                        </div>                                    
+
+                                    </div>
+
+                                    <div class="box1" style="height: 93px;border:hidden">
+                                       
+
+
+                                        <div class="supp" style="border-bottom:hidden">
+                                            <div class="liquidsupp" style="width:63%">
+                                                <span t-esc="o.agreement_type"></span>
+                                            </div>
+                                            <div class="solidsupp2" style="width:35%">‫‪اتفاقية شحن رقم</div>
+                                        </div>
+
+                                        <div class="ntn" style="border-bottom:hidden">
+                                            <div class="liquidntn" style="width:63%">
+                                                <span t-esc="o.arrival_date"></span>
+                                            </div>
+                                            <div class="solidntn2" style="width:35%">‫‪تاريخ الوصول المتوقع</div>
+                                        </div>
+
+                                        <div class="add" style="border-bottom:hidden">
+                                            <div class="liquidntn" style="width:63%">
+                                                <span t-esc="o.form_transport.route_waypoint_name"></span>
+                                            </div>
+                                            <div class="solidadd2" style="width:35%">فرع الشحن</div>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <div class="big">
+                                    
+
+                                    <div class="box" style="height: 220px">
+
+                                        <div class="supp" style="background: lightgray">
+                                            <div style="width: 98%;float: left;font-weight: bold;text-align: center;">‫‪المرسل اليه</div>
+                                           
+                                        </div>
+
+                                        <div class="supp">
+                                            <div class="liquidsupp">
+                                                <span t-esc="o.receiver_name"></span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪اسم العميل</div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="liquidntn">
+                                                <span t-esc="o.rec_company"></span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الشركة</div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="liquidadd">
+                                                <span t-esc="o.rec_street"></span>
+                                            </div>
+                                            <div class="solidadd2">العنوان</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="liquidtele">
+                                                <span t-esc="o.rec_city"></span>
+                                            </div>
+                                            <div class="solidtele2">‫‪المدينة</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="liquidtele">
+                                                <span t-esc="o.rec_mobile"></span>
+                                            </div>
+                                            <div class="solidtele2">رقم التليفون</div>
+                                        </div>                                       
+
+                                    </div>
+
+                                    <div class="box1" style="height: 220px">
+                                        <div class="supp" style="background: lightgray">
+                                            <div style="width: 98%;float: left;font-weight: bold;text-align: center;">المرسل</div>
+                                           
+                                        </div>
+
+
+                                        <div class="supp">
+                                            <div class="liquidsupp">
+                                                <span t-esc="o.customer_number"></span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪رقم الحساب</div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="liquidntn">
+                                                <span t-esc="o.customer.vat"></span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الرقم الضريبي</div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="liquidntn">
+                                                <span t-esc="o.sender_name"></span>
+                                            </div>
+                                            <div class="solidadd2">اسم العميل</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="liquidtele">
+                                                <span t-esc="o.mobile"></span>
+                                            </div>
+                                            <div class="solidtele2">‫‪رقم التليفون</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="liquidtele">
+                                                <span t-esc="o.street"></span>
+                                            </div>
+                                            <div class="solidtele2">‫‪العنوان</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="liquidtele">
+                                                <span t-esc="o.city"></span>
+                                            </div>
+                                            <div class="solidtele2">المدينة</div>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <div style="width:100%;float:left;height:830px">
+
+                                    <div style="width:100%;float:left">
+
+                                        <div style="width:31%;float:left;margin-top:8px">
+
+                                            <div style="width:100%;border:1px solid;background:lightgray;float:left;text-align:center;font-weight:bold">
+                                                <span>المقاس</span>
+                                            </div>
+
+                                            <div style="width:25%;border:1px solid;background:lightgray;float:left;text-align:center;font-weight:bold">
+                                                <span>الإجمالي</span>
+                                            </div>
+
+                                            <div style="width:25%;border:1px solid;background:lightgray;float:left;text-align:center;font-weight:bold">
+                                                <span>الارتفاع</span>
+                                            </div>
+
+                                            <div style="width:25%;border:1px solid;background:lightgray;float:left;text-align:center;font-weight:bold">
+                                                <span>العرض</span>
+                                            </div>
+
+                                            <div style="width:25%;border:1px solid;background:lightgray;float:left;text-align:center;font-weight:bold">
+                                                <span>الطول</span>
+                                            </div>
+
+                                        </div>
+
+                                        <div style="width:8%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>عدد الطرود</span>
+                                        </div>
+
+                                        <div style="width:28%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>وصف الشحنة</span>
+                                        </div>
+
+                                        <div style="width:8%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>الإجمالي</span>
+                                        </div>
+
+                                        <div style="width:8%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>الضريبة</span>
+                                        </div>
+
+                                        <div style="width:8%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>السعر</span>
+                                        </div>
+
+                                        <div style="width:8%;border:1px solid;background:lightgray;float:left;margin-top:8px;height:46px;text-align:center;font-weight:bold">
+                                            <span>الكمية</span>
+                                        </div>  
+
+                                    </div>
+
+                                    <t t-foreach="o.transport_management_line" t-as="line">
+
+                                        <div style="width:100%;float:left">
+
+                                            <div style="width:31%;float:left">
+
+                                                <div style="width:25%;border:1px solid;float:left;text-align:center">
+                                                    <span t-esc="'{0:,.2f}'.format(float(line.weight))"></span>
+                                                </div>
+
+                                                <div style="width:25%;border:1px solid;float:left;text-align:center">
+                                                    <span t-esc="'{0:,.2f}'.format(float(line.height))"></span>
+                                                </div>
+
+                                                <div style="width:25%;border:1px solid;float:left;text-align:center">
+                                                    <span t-esc="'{0:,.2f}'.format(float(line.width))"></span>
+                                                </div>
+
+                                                <div style="width:25%;border:1px solid;float:left;text-align:center">
+                                                    <span t-esc="'{0:,.2f}'.format(float(line.length))"></span>
+                                                </div>
+
+                                            </div>
+
+                                            <div style="width:8%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="'{0:,.2f}'.format(float(line.total_pieces))"></span>
+                                            </div>
+
+                                            <div style="width:28%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="line.description"></span>
+                                            </div>
+
+                                            <div style="width:8%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="'{0:,.2f}'.format(float(line.total_amount))"></span>
+                                            </div>
+
+                                            <div style="width:8%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="'{0:,.2f}'.format(float(line.tax_amount))"></span>
+                                            </div>
+
+                                            <div style="width:8%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="'{0:,.2f}'.format(float(line.price))"></span>
+                                            </div>
+
+                                            <div style="width:8%;border:1px solid;float:left;text-align:center">
+                                                <span t-esc="'{0:,.2f}'.format(float(line.product_uom_qty))"></span>
+                                            </div>
+
+                                        </div>
+
+                                    </t>
+
+                                    <div class="big">
+                                        
+
+                                        <div class="box" style="height: 188px">
+
+                                            <div class="supp">
+                                                <div class="liquidsupp">
+                                                    <span t-esc="o.service_type"></span>
+                                                </div>
+                                                <div class="solidsupp2">‫‪نوع الخدمة</div>
+                                            </div>
+
+                                            <div class="ntn">
+                                                <div class="liquidntn">
+                                                    <span t-esc="o.delivery_way"></span>
+                                                </div>
+                                                <div class="solidntn2">طريقة التسليم</div>
+                                            </div>
+
+                                            <div class="add">
+                                                <div class="liquidadd">
+                                                    <span t-esc="o.payment_method.payment_method_name"></span>
+                                                </div>
+                                                <div class="solidadd2">طريقة السداد</div>
+                                            </div>
+
+                                            <div class="tele">
+                                                <div class="liquidtele">
+                                                    <span t-esc="'{0:,.2f}'.format(float(voucher_amt))"></span>
+                                                </div>
+                                                <div class="solidtele2">المبلغ المدفوع</div>
+                                            </div>
+
+                                            <div class="tele">
+                                                <div class="liquidtele">
+                                                    <span t-esc="voucher_num"></span>
+                                                </div>
+                                                <div class="solidtele2">سند القبض</div>
+                                            </div> 
+
+                                            <div class="tele">
+                                                <div class="liquidtele">
+                                                    <span t-esc="o.invoice_id.number"></span>
+                                                </div>
+                                                <div class="solidtele2">فاتورة رقم</div>
+                                            </div>                                       
+
+                                        </div>
+
+                                        <div class="box1" style="height: 188px">
+
+                                            <div class="supp">
+                                                <div class="liquidsupp">
+                                                    <span t-esc="'{0:,.2f}'.format(float(o.total_before_taxes))"></span>
+                                                </div>
+                                                <div class="solidsupp2">‫‪المجموع الفرعي</div>
+                                            </div>
+
+                                            <div class="ntn">
+                                                <div class="liquidntn">
+                                                    <span t-esc="'{0:,.2f}'.format(float(o.tax_amount))"></span>
+                                                </div>
+                                                <div class="solidntn2">‫‪الضريبة</div>
+                                            </div>
+
+                                            <div class="add">
+                                                <div class="liquidntn">
+                                                    <span t-esc="'{0:,.2f}'.format(float(o.total_amount))"></span>
+                                                </div>
+                                                <div class="solidadd2">المجموع الكلي</div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+
+                                    <div class="big">
+                                        
+
+                                        <div class="box" style="height: 80px;border:hidden">
+
+
+                                            <div class="supp">
+
+                                                <div class="liquidsupp" style="width:63%">
+                                                    <span t-esc="o.create_uid.name"></span>
+                                                </div>
+                                                <div class="solidsupp2" style="width:35%">‫‪اسم المستخدم</div>
+                                            </div>
+
+                                            <div class="ntn">
+
+                                                <div class="liquidntn" style="width:63%">
+                                                    <span t-esc="user_code"></span>
+                                                </div>
+                                                <div class="solidntn2" style="width:35%">كود المستخدم</div>
+                                            </div>                                  
+
+                                        </div>
+
+                                        <div class="box1" style="height: 80px;border:hidden">
+                                           
+
+
+                                            <div class="supp">
+                                                <div class="liquidsupp" style="width:63%">
+                                                    <span></span>
+                                                </div>
+                                                <div class="solidsupp2" style="width:35%">‫‪توقيع المرسل</div>
+                                            </div>
+
+                                            <div class="ntn">
+                                                <div class="liquidntn" style="width:63%">
+                                                    <span></span>
+                                                </div>
+                                                <div class="solidntn2" style="width:35%">‫‪ملاحظات</div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+
+                                    <div style="width:100%;float:left">
+
+                                        <div style="width:12.5%;float:left;text-align:center">
+                                            <t t-if="o.transportation_vehicle.taq_number">
+                                                <span t-esc="o.transportation_vehicle.taq_number"></span>
+                                            </t>
+                                            <t t-else="">
+                                              <span>-</span>
+                                            </t>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center;font-weight:bold">
+                                            <span>استيكر الشاحنة</span>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center">
+                                            <t t-if="o.transportation_vehicle.license_plate">
+                                                <span t-esc="o.transportation_vehicle.license_plate"></span>
+                                            </t>
+                                            <t t-else="">
+                                              <span>-</span>
+                                            </t>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center;font-weight:bold">
+                                            <span>رقم اللوحة</span>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center">
+                                            <t t-if="o.driver_number">
+                                                <span t-esc="o.driver_number"></span>
+                                            </t>
+                                            <t t-else="">
+                                              <span>-</span>
+                                            </t>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center;font-weight:bold">
+                                            <span>كود السائق</span>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center">
+                                            <t t-if="o.transportation_driver.name">
+                                                <span t-esc="o.transportation_driver.name"></span>
+                                            </t>
+                                            <t t-else="">
+                                              <span>-</span>
+                                            </t>
+                                        </div>
+
+                                        <div style="width:12.5%;float:left;text-align:center;font-weight:bold">
+                                            <span>اسم السائق</span>
+                                        </div>  
+
+                                    </div>
+
+                                </div>
+
+                                <div style="width:100%;float:left;margin-top:5px">
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold">
+                                        <span>جوال المستلم</span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold">
+                                        <span>توقيع المستلم</span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold">
+                                        <span>اسم المستلم</span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold">
+                                        <span>إقامة المستلم</span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold">
+                                        <span>تاريخ التسليم</span>
+                                    </div>
+
+                                    
+                                </div>
+
+                                <div style="width:100%;float:left">
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold;height:50px">
+                                        <span></span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold;height:50px">
+                                        <span></span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold;height:50px">
+                                        <span></span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold;height:50px">
+                                        <span></span>
+                                    </div>
+
+                                    <div style="width:20%;float:left;text-align:center;border:1px solid;font-weight:bold;height:50px">
+                                        <span></span>
+                                    </div>
+
+                                    
+                                </div>
+
+                                <div class="big">
+                                    
+
+                                    <div class="box" style="height: 30px;border:hidden">
+
+
+                                        <div class="supp" style="border-bottom:hidden">
+
+                                            <div class="liquidsupp" style="width:63%">
+                                                <span t-esc="actual_time"></span>
+                                            </div>
+                                            <div class="solidsupp2" style="width:35%">‫‪طبع في</div>
+                                        </div>
+                               
+
+                                    </div>
+
+                                    <div class="box1" style="height: 30px;border:hidden">
+
+                                        <div class="supp" style="border-bottom:hidden">
+                                            <div class="liquidsupp" style="width:63%">
+                                                <span t-esc="user.name"></span>
+                                            </div>
+                                            <div class="solidsupp2" style="width:35%">‫‪طبع بواسطة</div>
+                                        </div>
+
+                                        
+                                    </div>
+
+                                </div>
+                        
+                            </div>
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

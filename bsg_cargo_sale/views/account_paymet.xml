@@ -1,0 +1,102 @@
+<odoo>
+  <data>
+
+    <record id="view_bsg_inherit_view_account_payment_invoice_form" model="ir.ui.view">
+      <field name="name">view_bsg_inherit_view_account_payment_invoice_form</field>
+      <field name="model">account.payment.register</field>
+      <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="cargo_sale_order_id" invisible="1"/>
+<!--                    <field name="show_invoice_amount" invisible="1"/>-->
+                    <field name="allow_edit_in_wiz" invisible="1"/>
+                    <field name="is_for_refund" invisible="1"/>
+                </field>
+                <xpath expr="//field[@name='currency_id']" position="before">
+                     <field name="is_cancel" invisible="1"/>
+                     <field name="is_for_old_order" invisible="1"/>
+                     <field name="cancel_amt" attrs="{'invisible':[('is_cancel','=',False)],'readonly':[('is_cancel','=',True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="attributes">
+                     <attribute name="attrs">{'readonly':[('cargo_sale_order_id','!=',False),('is_for_old_order','!=',True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_date']" position="attributes">
+                     <attribute name="attrs">{'readonly':[('allow_edit_in_wiz','=',False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='communication']" position="replace">
+                    <field name="communication" readonly="False" attrs="{'readonly':[('cargo_sale_order_id','!=',False)]}"/>
+                </xpath>
+<!--                <xpath expr="//field[@name='currency_id']" position="attributes">-->
+<!--                     <attribute name="attrs">{'readonly':['|',('show_invoice_amount','!=',False), ('cargo_sale_order_id','!=',False)]}</attribute>-->
+<!--                </xpath>  -->
+            </field>
+    </record>
+
+
+    <record id="view_account_invoice_filter_custom_inherit" model="ir.ui.view">
+          <field name="name">account.move.filter</field>
+          <field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+              <separator/>
+                <filter string="From Location" name="loc_from" domain="[]" context="{'group_by':'loc_from'}"/>
+                <filter string="To Location" name="loc_to" domain="[]" context="{'group_by':'loc_to'}"/>
+                <filter string="Payment Method" name="payment_method" domain="[]" context="{'group_by':'payment_method'}"/>
+                <filter string="Other Service Invoice" name="is_other_service_invoice" domain="[]" context="{'group_by':'is_other_service_invoice'}"/>
+                <filter string="Demurrage Invoice" name="is_demurrage_invoice" domain="[]" context="{'group_by':'is_demurrage_invoice'}"/>
+                <filter string="International SO Invoice" name="is_international_so_invoice" domain="[]" context="{'group_by':'is_international_so_invoice'}"/>
+            </xpath>
+          </field>
+    </record>
+
+    <record id="account_invoice_form_custom_inherits" model="ir.ui.view">
+      <field name="name">view_bsg_inherit_view_account_invoice_form</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="sale.account_invoice_form"/>
+          <field name="arch" type="xml">
+            <field name="team_id" position="replace">
+              <field name="team_id" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])]}"/>
+            </field>
+          </field>
+    </record>
+
+    <record id="view_bsg_inherit_view_account_invoice_form" model="ir.ui.view">
+      <field name="name">view_bsg_inherit_view_account_invoice_form</field>
+      <field name="model">account.move</field>
+<!--      <field name="inherit_id" ref="account.invoice_form"/>-->
+<!--        Migration Note-->
+      <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+                <field name="fiscal_position_id" position="after">
+                  <field name="loc_from" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                  <field name="loc_from_branch_id" invisible="1"/>
+                  <field name="loc_to" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                  <field name="payment_method" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                  <field name="shipment_type"/>
+                  <field name="single_trip_reason" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])]}"/>
+                  <field name="round_trip_reason" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])]}" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                  <field name="payment_method_name" invisible="1"/>
+                </field>
+
+            <field name="invoice_incoterm_id" position="replace">
+              <field name="invoice_incoterm_id" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])]}"/>
+            </field>
+               <xpath expr="//group[@id='header_left_group']/label" position="before">
+                    <field name="parent_customer_id" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])],'invisible': [('move_type', '=', 'entry')]}" domain="[('is_parents', '=', True)]"/>
+
+    </xpath>
+
+<!--                <field name="partner_id" position="before">-->
+<!--                    <field name="parent_customer_id" attrs="{'readonly': [('state', 'in', ['open', 'in_payment', 'paid'])]}" domain="[('is_parents', '=', True)]" />-->
+<!--                </field>   -->
+
+<!--                <field name="partner_id" position="replace">-->
+<!--                    <field string="Customer" name="partner_id" widget="res_partner_many2one" context="{'search_default_customer':1, 'show_address': 1, 'default_is_company': True, 'show_vat': True}" options="{'create': True, 'create_edit': True}" domain="[('customer_rank','>',0)]" required="1" />-->
+<!--                    &lt;!&ndash;options="{&quot;always_reload&quot;: True, &quot;no_quick_create&quot;: True,'no_create_edit': True}"&ndash;&gt;-->
+<!--                </field>    -->
+            </field>
+    </record>
+
+  </data>
+</odoo>

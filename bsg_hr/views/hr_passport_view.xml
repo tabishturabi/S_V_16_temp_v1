@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- passport form view-->
+        <record model="ir.ui.view" id="view_hr_passport_form">
+            <field name="name">hr.passport.form</field>
+            <field name="model">hr.passport</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Iqama">
+                    <sheet>
+                        <group>
+                            <field name="bsg_employee_id" />
+                            <field name="is_employee" />
+                            <field name="bsg_passport_name" />
+                            <field name="bsg_passport_number" />
+                            <field name="bsg_issuedate" class="with_hijri"/>
+                            <field name="bsg_expirydate" class="with_hijri"/>
+                            <field name="bsg_dateofbirth" class="with_hijri"/>
+                            <field name="bsg_passport_issue_country" />
+                            <field name="bsg_passport_issue_place" />
+                            <field name="bsg_passport_status" />
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_hr__passport_tree">
+            <field name="name">hr.passport.tree</field>
+            <field name="model">hr.passport</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="bsg_employee_id" />
+                    <field name="is_employee" invisible="1" />
+                    <field name="bsg_passport_name" />
+                    <field name="bsg_passport_number" />
+                    <field name="bsg_passport_issue_country" />
+                    <field name="bsg_passport_status" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bsg_hr__passport_action">
+            <field name="name">Employee Passport</field>
+            <field name="res_model">hr.passport</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Employee Passport" id="hr_emp__passport_menu" parent="bsg_hr.hr_iqama_menu" action="bsg_hr__passport_action" sequence="13" />
+    </data>
+</odoo>

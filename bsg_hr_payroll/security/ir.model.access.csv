@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payslip_branch_accountant,access.hr.payslip.branch.accountant,hr_payroll.model_hr_payslip,bsg_hr_payroll.group_payslip_branch_accountant,1,1,1,0
+access_hr_payslip_register_payment_wizard,payslip_register_payment_wizard,model_hr_payslip_register_payment_wizard,,1,1,1,0

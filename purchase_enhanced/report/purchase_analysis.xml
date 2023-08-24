@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_order_pivot_inherit" model="ir.ui.view">
+        <field name="name">product.month.pivot.inherit</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_id']" position="after">
+                <field name="qty_received" type="measure"/>
+                <field name="qty_invoiced" type="measure"/>
+            </xpath>
+            <xpath expr="//pivot" position="inside">
+                <field name="qty_received_price" type="measure"/>
+                <field name="qty_invoiced_price" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="action_purchase_order_report_all_enhance" model="ir.actions.act_window">
+        <field name="name">Purchase Analysis</field>
+        <field name="res_model">purchase.report</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'search_default_orders': 1}</field>
+        <field name="domain">[('is_copy','=',False)]</field>
+        <field name="view_id"></field>  <!-- force empty -->
+        <field name="help">Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc.</field>
+    </record>
+
+    <record id="purchase.purchase_report" model="ir.ui.menu">
+        <field name="action" ref="purchase_enhanced.action_purchase_order_report_all_enhance"/>
+    </record>
+
+</odoo>

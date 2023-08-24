@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="change_so_locations_form">
+            <field name="name">change_so_locations.form</field>
+            <field name="model">change_so_locations</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Change So Locations">
+                  <field name="msg" readonly="1" />
+                    <group>
+                      <group>
+                          <field name="new_ret_loc_to" string="Update To"
+                            attrs="{'invisible':[('return_loc_to','=',False)],'required':[('return_loc_to','!=',False)]}" 
+                            options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                      </group>
+                      <group>
+                          <field name="loc_to_id" invisible="1"/>
+                          <field name="return_loc_to" string="Change To Loc" invisible="1"/>
+                      </group>
+                      <group>
+                        <field name="sale_line_ids" required="True" domain="[('bsg_cargo_sale_id', '=', context.get('active_id')), ('state', '=', 'done'), ('return_intiated', '=', False),('is_return_canceled','=',False)]" widget="many2many_tags"/>
+                      </group>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="update_locations" string="Validate" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="change_so_locations_action" model="ir.actions.act_window">
+            <field name="name">Change So Locations</field>
+            <field name="res_model">change_so_locations</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="change_so_locations_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,292 @@
+<odoo>
+	<data>
+
+		<record id="paperformat_fleet_status_report" model="report.paperformat">
+				<field name="name">European A4 low margin</field>
+				<field name="default" eval="True" />
+				<field name="format">A4</field>
+				<field name="orientation">Portrait</field>
+				<field name="margin_top">5</field>
+				<field name="margin_bottom">5</field>
+				<field name="margin_left">5</field>
+				<field name="margin_right">5</field>
+				<field name="header_line" eval="False" />
+				<field name="header_spacing">5</field>
+				<field name="dpi">90</field>
+
+		</record>
+
+
+		<report 
+					id="fleet_status_report_id"
+					string="Fleet Status Report"
+					model="fleet.status.model" 
+					report_type="qweb-html"
+					file="fleet_status_report.fleet_status_template_id" 
+					name="fleet_status_report.fleet_status_template_id"
+					paperformat="paperformat_fleet_status_report"
+
+			/>
+
+		<template id="fleet_status_template_id">
+			<t t-call="web.html_container">
+				<t t-call="web.internal_layout">
+					<t t-foreach="docs" t-as="o">
+
+						<div class="page">
+
+								<style>
+										.report-container {
+												width: 1000px;
+												margin: 0px auto;
+												font-size: 12px;
+										}
+
+										.report_head {
+												width: 100%;
+												margin: 0px auto;
+												text-align: center;
+
+										}
+
+										.report_footer {
+												width: 100%;
+												margin: 0px auto;
+												text-align: center;
+										}
+
+										.middle_rep {
+												width: 100%;
+												height: 200px;
+										}
+
+										.bank_det {
+												width : 45%;
+												float: left;
+										}
+
+										.bank_det_1 {
+												width : 50%;
+												float: right;
+										}
+
+										.bank{
+												width : 100%;
+												float: left;
+										}
+
+										h1 {
+												margin: 0px auto;
+												width: 60%;
+
+										}
+
+										table {
+												width: 100%;
+												border-spacing: 0px;
+												border: 2px solid #CCC;
+										}
+										table tr td, table tr th {
+												text-align: center;
+												padding: 1px 1px 1px 1px;
+												font-size: 12px;
+												border-right: 2px solid #CCC;
+												border-bottom: 1px solid #eee;
+										}
+										table tr td:last-child, 
+										table tr th:last-child {
+												border-right: none
+										}
+
+
+										table tr th {
+												text-align: center;
+										}
+
+										.space {
+												width : 50px;
+												min-width : 50px;
+												max-width : 50px;
+										}
+
+										.space1 {
+												width : 75px;
+												min-width : 75px;
+												max-width : 75px;
+										}
+
+										.space2 {
+												width : 130px;
+												min-width : 130px;
+												max-width : 130px;
+										}
+
+										.space3 {
+												width : 100px;
+												min-width : 100px;
+												max-width : 100px;
+										}
+
+										.space4 {
+												width : 300px;
+												min-width : 300px;
+												max-width : 300px;
+										}
+
+										.space5 {
+												width : 300px;
+												min-width : 300px;
+												max-width : 300px;
+										}
+
+
+								</style>
+
+								<div class="report-container">
+
+
+										<div class="report_head">
+											 
+												<div style="width:30%;float:left">
+													<img src="/fleet_status_report/static/img/albassami_transport_logoWP.png" width="200" height="100" style="margin-left: 25px;float:left"/>
+												</div>
+
+												<div style="width:38%;float:left">
+													<h2 style="margin-top:50px">Fleet Status Report</h2>
+												</div>
+
+												<div style="width:30%;float:right;margin-bottom : 35px;">
+													<img src="/fleet_status_report/static/img/rightHeader.png" width="230" height="110" style="float:right;margin_right:25px"/>
+												</div>
+										</div>
+
+										<t t-if="o.fleet_line_ids">
+
+											<table>
+
+													<tr>
+															
+														 
+														<th >
+																<span>Branch #</span>
+																<!-- <br></br> -->
+																<!-- <span>الوصف</span> -->
+														</th>
+
+														<th>
+																<span>Branch Name</span>
+																<!-- <br></br> -->
+																<!-- <span>العدد / الوحدة</span> -->
+														</th>
+
+														<th>
+																<span>Trucks Available</span>
+																<!-- <br></br> -->
+																<!-- <span>السعر</span> -->
+														</th>
+
+														<th>
+																<span>Trucks Coming</span>
+																<!-- <br></br> -->
+																<!-- <span>لإجمالي</span> -->
+														</th>
+
+														<th>
+																<span>Cars To Ship</span>
+																<!-- <br></br> -->
+																<!-- <span>الخصم</span> -->
+														</th>
+
+														<th>
+																<span>Arrived Cars</span>
+																<!-- <br></br> -->
+																<!-- <span>ضريبة القيمة المضافة</span> -->
+														</th>
+
+															
+													</tr>
+
+													<!-- <t t-set="sr" t-value="0"/> -->
+													<!-- <t t-set="dis" t-value="0"/> -->
+													<t t-foreach="lines" t-as="rec">
+
+														<tr>
+																
+															<td>
+																<span t-esc="rec.branch_id.branch_no"></span>
+															</td>
+
+															<td>
+																<span t-esc="rec.branch_id.branch_ar_name"></span>
+															</td>
+
+															<td>
+																<span t-esc="rec.trucks_available"></span>
+															</td>
+
+															<td>
+																<span t-esc="rec.trucks_comming"></span>
+															</td>
+
+															<td>
+																<span t-esc="rec.shiping_cars"></span>
+															</td>
+
+															<td>
+																<span t-esc="rec.arrived_cars"></span>
+															</td>
+																
+														</tr>
+
+													</t>
+
+													<t t-foreach="lines_1" t-as="new">
+
+														<tr>
+																
+															<td>
+																<span t-esc="new.branch_id.branch_no"></span>
+															</td>
+
+															<td>
+																<span t-esc="new.branch_id.branch_ar_name"></span>
+															</td>
+
+															<td>
+																<span t-esc="new.trucks_available"></span>
+															</td>
+
+															<td>
+																<span t-esc="new.trucks_comming"></span>
+															</td>
+
+															<td>
+																<span t-esc="new.shiping_cars"></span>
+															</td>
+
+															<td>
+																<span t-esc="new.arrived_cars"></span>
+															</td>
+																
+														</tr>
+
+													</t>
+
+											</table>
+
+										</t>
+
+
+								</div>
+
+											 
+						</div><!--end of page-->    
+						
+					</t>
+				</t>
+			</t>
+
+		</template>
+	
+	</data>
+</odoo>

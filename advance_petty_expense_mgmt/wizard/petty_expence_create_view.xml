@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="petty_expence_create_wizard_view_form" model="ir.ui.view">
+        <field name="name">petty.expence.create.wizard.view.form</field>
+        <field name="model">petty.expence.create.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Petty Expence">
+                <sheet>
+                    <group>
+                        <field name="user_id" required="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="petty_cash_user_rule_id" options="{'no_create_edit': True, 'no_open': True}" domain="[('user_id','=',user_id)]"  required="1" />
+                        <field name="template_id" required="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="partner_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="analytic_account_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="branch_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="department_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="truck_id" readonly="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="label" readonly="1"/>
+                        <field name="attach_files_ids" widget="many2many_binary" readonly="1"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                   <button name="create_expence" string="Create" type="object" class="btn-primary"/>
+                   <button string="Cancel" special="cancel" class="btn-seconday"/>
+               </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="petty_expence_create_wizard_action" model="ir.actions.act_window">
+        <field name="name">Petty Expence</field>
+        <field name="res_model">petty.expence.create.wizard</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

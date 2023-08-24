@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+<!--        <record id="quality_check_view_form" model="ir.ui.view">-->
+<!--            <field name="name">quality.check.view.form</field>-->
+<!--            <field name="model">bsg.quality.check</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <header>-->
+<!--                        <button name="do_pass" type="object" class="btn-primary"-->
+<!--                                attrs="{'invisible': [('quality_state', '=', 'pass')]}" context="{'no_redirect': True}"-->
+<!--                                string="Pass"/>-->
+<!--                        <button name="do_fail" type="object" attrs="{'invisible': [('quality_state', '=', 'fail')]}"-->
+<!--                                context="{'no_redirect': True}" string="Fail"/>-->
+
+<!--                        <field name="quality_state" widget="statusbar"/>-->
+<!--                    </header>-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="name"/>-->
+<!--                                <field name="title"/>-->
+<!--&lt;!&ndash;                                <field name="product_id"/>&ndash;&gt;-->
+<!--                                <field name="company_id"/>-->
+<!--                                <field name="project_id"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="control_date"/>-->
+<!--                                <field name="user_id" string="Control Team" attrs="{'readonly': [('quality_state', '=', 'none')]}"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                        <notebook>-->
+<!--                            <page string="Notes">-->
+<!--                                <field name="note" attrs="{'readonly': [('quality_state', '=', 'none')]}"/>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+<!--                    </sheet>-->
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="quality_check_view_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">quality.check.view.tree.view</field>-->
+<!--            <field name="model">bsg.quality.check</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Quality Check">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="title"/>-->
+<!--&lt;!&ndash;                    <field name="product_id"/>&ndash;&gt;-->
+<!--                    <field name="company_id"/>-->
+<!--                    <field name="project_id"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="quality_check_manufacture_order" model="ir.actions.act_window">-->
+<!--            <field name="name">Quality Checks</field>-->
+<!--            <field name="res_model">bsg.quality.check</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create a new quality check-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Note that the easiest way to create a quality check is to do it directly from a logistic operation,-->
+<!--                    thanks to the use of quality control points.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <menuitem action="quality_check_manufacture_order"-->
+<!--                  name="Quality Check"-->
+<!--                  id="menu_bsg_quality_check"-->
+<!--                  parent="manufacturing_enhance.menu_bsg_quality_control_menu"-->
+<!--                  sequence="3"/>-->
+    </data>
+</odoo>

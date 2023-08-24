@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="form_inherit_view_view_employee_formform1" model="ir.ui.view">
+            <field name="name">hr.employee.form.effective.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="employee_effective" type="object" class="oe_stat_button">
+                        <field name="effective_count" widget="statinfo" string="Effective Date Request"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+        <record id="form_inherit_view_last_move_date" model="ir.ui.view">
+            <field name="name">hr.employee.last.move.date</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="bsg_hr.view_view_employee_custom_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='hr_settings']/group/group/field[@name='employee_type']" position="after">
+                    <field name="last_move_date"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="form_inherit_view_view_employee_formform2" model="ir.ui.view">
+            <field name="name">hr.employee.form.return.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="employee_return_vaction" type="object" class="oe_stat_button">
+                        <field name="return_count" widget="statinfo" string="Return From Vacation"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

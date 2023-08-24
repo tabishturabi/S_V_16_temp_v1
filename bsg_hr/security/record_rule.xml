@@ -1,0 +1,81 @@
+<odoo>
+    <data>
+        <record model="ir.rule" id="hr_leave_see_all">
+            <field name="name">HR Leave See All</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('account.group_account_user')),(4, ref('bsg_hr.group_hr_specialist')),(4, ref('bsg_hr.group_hr_manager')),(4, ref('bsg_hr.group_finance_manager')),(4, ref('bsg_hr.group_internal_audit_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_leave_manager_see_his_employees">
+            <field name="name">HR Leave Manager see his employees only</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">['|',('employee_id.parent_id.user_id','=',user.id),('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_department_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_leave_branch_supervisor_see_his_branch_leaves">
+            <field name="name">HR Branch Supervisor see his branch leaves only</field>
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="domain_force">[('employee_id.branch_id.supervisor_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_branch_supervisor'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record id="hr_holidays.hr_leave_rule_employee" model="ir.rule">
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+        </record>
+
+
+        <record id="hr_holidays.resource_leaves_holidays_user" model="ir.rule">
+            <field name="groups" eval="[(4,ref('hr_holidays.group_hr_holidays_user')),(4, ref('bsg_hr.group_hr_specialist')),(4, ref('bsg_hr.group_hr_manager')),(4, ref('bsg_hr.group_internal_audit_manager')),(4, ref('account.group_account_user')),(4, ref('bsg_hr.group_department_manager')),(4, ref('bsg_hr.group_branch_supervisor'))]"/>
+        </record>
+
+        <record id="hr_holidays.hr_leave_allocation_rule_manager" model="ir.rule">
+            <field name="groups" eval="[(4,ref('hr_holidays.group_hr_holidays_manager')),(4, ref('bsg_hr.group_hr_specialist')),(4, ref('bsg_hr.group_hr_manager')),(4, ref('bsg_hr.group_department_manager')),(4, ref('bsg_hr.group_branch_supervisor'))]"/>
+        </record>
+<!--         <record model="ir.rule" id="hr_employee_see_own_employees">-->
+<!--            <field name="name">HR Employee See Own Employees</field>-->
+<!--            <field name="model_id" ref="model_hr_employee"/>-->
+<!--            <field name="domain_force">['|',('parent_id.user_id','=',user.id),('user_id','=',user.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('bsg_hr.group_department_manager'))]"/>-->
+<!--            <field name="perm_create" eval="1"/>-->
+<!--            <field name="perm_write" eval="1"/>-->
+<!--            <field name="perm_unlink" eval="1"/>-->
+<!--            <field name="perm_read" eval="1"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.rule" id="hr_employee_own_employee_data">-->
+<!--            <field name="name">HR Employee See Own Employee Data</field>-->
+<!--            <field name="model_id" ref="model_hr_employee"/>-->
+<!--            <field name="domain_force">[('user_id','=',user.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--            <field name="perm_create" eval="1"/>-->
+<!--            <field name="perm_write" eval="1"/>-->
+<!--            <field name="perm_unlink" eval="1"/>-->
+<!--            <field name="perm_read" eval="1"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.rule" id="hr_employee_see_all_employees">-->
+<!--            <field name="name">HR Employee See All Employees</field>-->
+<!--            <field name="model_id" ref="model_hr_employee"/>-->
+<!--            <field name="domain_force">[(1,'=',1)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('bsg_hr.group_hr_specialist')),(4, ref('bsg_hr.group_hr_manager'))]"/>-->
+<!--            <field name="perm_create" eval="1"/>-->
+<!--            <field name="perm_write" eval="1"/>-->
+<!--            <field name="perm_unlink" eval="1"/>-->
+<!--            <field name="perm_read" eval="1"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <report -->
+<!--        id="action_report_collection" -->
+<!--        model="account.collection" -->
+<!--        string="Customer Collection"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="payments_enhanced.report_collection" -->
+<!--        file="payments_enhanced.report_collection"-->
+<!--     />-->
+<!-- -->
+<!-- <template id="report_collection">-->
+<!--    <t t-call="web.html_container">-->
+<!--        <t t-call="web.external_layout">-->
+<!--            <div class="page">-->
+<!--              -->
+<!--                <t t-foreach="docs" t-as="o">-->
+<!--                        <h2>-->
+<!--                            <th class="text-center"><span t-esc="o.name"/></th>-->
+<!--                        -->
+<!--                        </h2>-->
+<!--                        -->
+<!--                        <br></br>-->
+<!--                        -->
+<!--                            <tr>-->
+<!--                                <th>Customer:</th>-->
+<!--                                <th class="text-center"><span t-esc="o.partner_id.name"/></th>-->
+<!--                            </tr>-->
+<!--                        -->
+<!--                     <div class="row"> -->
+<!--                        <table class="table table-bordered">-->
+<!--                            <thead style="background-color: lightgrey;">-->
+<!--                                <tr>-->
+<!--                                    <th><span>Sr#</span></th>-->
+<!--                                    <th width="15%"  class="text-center"><span>Invoice Number</span></th>              -->
+<!--                                    <th><span>Invoice Date</span></th>-->
+<!--                                    <th><span> Due Date</span></th>-->
+<!--                                    <th><span>Description</span></th>-->
+<!--                                    <th><span>Invoice Value</span></th>-->
+<!--                                </tr>-->
+<!--                                -->
+<!--                -->
+<!--                            </thead>-->
+<!--                             -->
+<!--                            <tbody class="invoice_tbody">-->
+<!--                                <t t-set="sr" t-value="1"/>-->
+<!--                               -->
+<!--                                    <t t-foreach="o.account_invoice" t-as="acc">-->
+<!--                                        <tr>-->
+<!--                                            <th class="text-center" ><t t-esc="sr"/></th>-->
+<!--                                            <td class="text-center"><span style="font-size: 16px;" t-esc="acc.number"/></td>-->
+<!--                                            <th class="text-center"><span t-esc="acc.date_invoice"/></th>-->
+<!--                                            <th class="text-center"><span t-esc="acc.date_due"/></th>-->
+<!--                                            <th class="text-center"><span t-esc="acc._description"/></th>-->
+<!--                                            <th class="text-center"><span t-esc="acc.amount_total"/></th>-->
+<!--                                        </tr>-->
+<!--                                        <t t-set="sr" t-value="sr+1"/>-->
+<!--                                    </t>-->
+<!--                                -->
+<!--                                    -->
+<!--                                -->
+<!--                            -->
+<!--                            -->
+<!--                            </tbody>-->
+<!--                                -->
+<!--                             -->
+<!--                        </table>   -->
+<!--                    </div>         -->
+<!--                </t>-->
+<!--             -->
+<!--                -->
+<!--            -->
+<!--            -->
+<!--              -->
+<!--            </div>  -->
+<!--        </t> -->
+<!--    </t>     -->
+<!--                         -->
+<!--                            -->
+
+<!-- -->
+<!-- </template>-->
+ </odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+    <!-- form view -->
+	    <record model="ir.ui.view" id="bsg_branch_distance_view_form">
+	      <field name="name">Branch Distance</field>
+	      <field name="model">branch.distance</field>
+	      <field name="arch" type="xml">
+	        <form>
+	          <sheet string="Branch Distance">
+		          <div class="oe_button_box" name="button_box">
+	                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+	                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+	               	 </button>
+	            	</div>
+				<group>
+					<group>
+						<field name="branch_from" required="1"/>
+						<field name="distance"/>
+					</group>
+					<group>
+						<field name="branch_to" required="1"/>
+					</group>
+				</group>
+	          </sheet>
+	          <div class="oe_chatter">
+	            <field name="message_follower_ids" widget="mail_followers"/>
+	            <field name="message_ids" widget="mail_thread"/>
+	          </div>
+	        </form>
+	      </field>
+	    </record>
+    
+	    <!-- Tree view -->
+	    <record model="ir.ui.view" id="bsg_branch_distance_tree">
+	      <field name="name">branch_distance_tree</field>
+	      <field name="model">branch.distance</field>
+	      <field name="arch" type="xml">
+	        <tree string="Branch Distance">
+	          <field name="branch_from"/>
+	          <field name="branch_to"/>
+	          <field name="distance"/>
+	        </tree>
+	      </field>
+	    </record>
+	    
+	    <!-- search View -->
+	   <record id="bsg_price_line_view_search" model="ir.ui.view">
+	     <field name="name">branch_distance_search View</field>
+	     <field name="model">branch.distance</field>
+	     <field name="arch" type="xml">
+	       <search string="Search Branch Distance">
+	           <field name="branch_from"/>
+	           <field name="branch_to"/>
+	       </search>
+	     </field>
+	   </record>
+	    
+	    <!-- actions opening views on models -->
+	    <record model="ir.actions.act_window" id="bsg_branch_distance_action">
+	      <field name="name">Branch Distance</field>
+	      <field name="res_model">branch.distance</field>
+	      <field name="view_mode">tree,form</field>
+	      <field name="view_id" ref="bsg_branch_distance_tree" />
+	    </record>
+	    
+	    <menuitem  id="menu_branch_distance_config" name="Branch Distance" parent="bsg_master_config.root_route_master" groups="base.group_erp_manager" action="bsg_branch_distance_action" sequence="3"/>
+	</data>
+</odoo>

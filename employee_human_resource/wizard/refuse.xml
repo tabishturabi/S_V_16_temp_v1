@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_exit_return_form" model="ir.ui.view">
+        <field name="name">hr_exit_return_form</field>
+        <field name="model">hr.exit.return.refuse</field>
+        <field name="arch" type="xml">
+            <form string="Exit Return Refuse Reason">
+                <separator string="Exit Return Refuse Reason"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="exit_entry_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+
+    <record id="exit_entry_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">Refuse Exit Entry Reason</field>
+        <field name="res_model">hr.exit.return.refuse</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_exit_return_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

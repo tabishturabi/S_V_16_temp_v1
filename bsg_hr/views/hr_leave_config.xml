@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="hr_leave_config_action">
+            <field name="name">Leave Configuration</field>
+            <field name="res_model">hr.leave.config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="limit">1</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Leave Configuration" id="hr_leave_config" parent="hr_holidays.menu_hr_holidays_configuration"
+                  action="hr_leave_config_action" groups="base.group_system"/>
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_configuration"
+                name="Configuration"
+                groups="base.group_system"
+                parent="hr_holidays.menu_hr_holidays_root"
+                sequence="100"/>
+        <record id="view_hr_leave_config_form" model="ir.ui.view">
+            <field name="name">hr.leave.config</field>
+            <field name="model">hr.leave.config</field>
+            <field name="arch" type="xml">
+                <form string="Hr Leave Settings" class="oe_form_configuration" create="false">
+                    <div class="app_settings_block" data-string="leave_request Settings" string="Leave Request Settings"
+                         data-key="hr_leave_config_settings">
+                        <div style="background-color:#e9ecef;">
+                            <h2>Hr Leave Request Settings</h2>
+                        </div>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="days_to_clearance" class="col-lg-3 o_light_label"
+                                                   string="Days to Clearance"/>
+                                            <field name="days_to_clearance" class="oe_inline"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_leave_config_tree" model="ir.ui.view">
+            <field name="name">hr.leave.config</field>
+            <field name="model">hr.leave.config</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="days_to_clearance"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

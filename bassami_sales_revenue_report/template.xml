@@ -1,0 +1,89 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_sales_revenue_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_sales_revenue_id" 
+            model="sales.revenue.report"
+            name="bassami_sales_revenue_report.sales_revenue_id"
+            file="bassami_sales_revenue_report.sales_revenue_id"
+            report_type="qweb-html"
+            string="Sales Revenue Report"
+            paperformat="paperformat_sales_revenue_template"
+            menu="False"/>
+
+        <record id="sales_revenue_records_wizard" model="ir.ui.view">
+            <field name="name">sales_revenue_records_wizard</field>
+            <field name="model">sales.revenue.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="to"/>
+                            <field name="partner_types" options="{'no_create':True,'no_edit':True,'no_open':True}" />
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="service_filter"/>
+                            <field name="service_type" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags" attrs="{'invisible':[('service_filter','!=','specific')],'required':[('service_filter','=','specific')]}" />
+
+                            <field name="branch_filter"/>
+                            <field name="branch_from" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags" attrs="{'invisible':[('branch_filter','!=','specific')],'required':[('branch_filter','=','specific')]}" />
+
+                            <field name="user_filter"/>
+                            <field name="user_branch" options="{'no_create':True,'no_edit':True,'no_open':True}"  attrs="{'invisible':[('user_filter','!=','specific')],'required':[('user_filter','=','specific')]}" />
+                            <!-- <field name="user_id" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('user_type','!=','specific')],'required':[('user_type','=','specific')]}" widget="many2many_tags"/> -->
+
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_revenue_menu_action" model="ir.actions.act_window">
+            <field name="name">Sales Revenue Report</field>
+            <field name="res_model">sales.revenue.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sales_revenue_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <!-- <menuitem id="branches_reporting_menu_item" name="Branch Reporting" parent="account.menu_finance"/> -->
+
+        <!-- account.menu_finance -->
+        <!-- account_accountant.menu_accounting -->
+
+        <menuitem id="sales_revenue_menu_item" name="Sales Revenue Report" action="sales_revenue_menu_action" parent="bsg_cargo_sale.cargo_sale_root_meun" sequence="5"/>
+        
+    </data>
+</odoo>

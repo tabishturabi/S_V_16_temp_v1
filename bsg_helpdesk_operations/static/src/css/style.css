@@ -1,0 +1,47 @@
+#wrapwrap.o_portal{
+	background-color: #fff !important;
+}
+a.leave-common {
+	color: green !important;
+	text-decoration: none;
+}
+.web-portl-form{
+	margin: 5px;
+	padding: 10px;
+	background: #e6e6e6e0;
+	border-radius: 5px;
+	padding-left: 10px !important;
+	margin-left: 0px !important;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+.e-form-process{
+	display: flex;
+}
+.form-row-right{
+	margin-top: 126px;
+}
+.h3-title{
+	background: #f2f7f3;
+	padding: 10px;
+	margin-right: 10px;
+	text-align: center !important;
+	border-radius: 4px;
+}
+.o_portal_pager{
+	float:right;
+	margin-top: 10px;
+}
+
+.input_nones{
+	border:none;
+	background: #e6e6e6e0;
+	color : green !important;
+}
+
+.button_div{
+    background: #f2f7f3;
+    padding: 10px;
+    margin : 15px -1px 0px -11px;
+    text-align: center !important;
+    border-radius: 4px;
+}

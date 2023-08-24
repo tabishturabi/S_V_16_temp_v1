@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_account_view_account_form_coalevel" model="ir.ui.view">
+        <field name="name">account.account.form1</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <field name="deprecated" position="after">
+                <field name="levels"  />
+            </field>
+        </field>
+    </record>
+    
+    
+</data>
+</odoo>

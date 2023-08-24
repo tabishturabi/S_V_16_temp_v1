@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+        <!-- assettype form view-->
+        <record model="ir.ui.view" id="view_extend_trial_period_form">
+            <field name="name">extend.trial.period.form</field>
+            <field name="model">extend.trial.period</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Document Type">
+                    <header>
+                        <button name="action_submit_manager" string="SUBMIT TO MANAGER" type="object"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"
+                                class="oe_highlight oe_structure" groups="bsg_hr.group_extend_trial_period"/>
+                        <button name="action_approve" string="APPROVE" type="object"
+                                attrs="{'invisible':[('state','!=','submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_hr_manager"
+                        />
+                        <button name="action_reset_draft" string="RESET TO DRAFT" type="object"
+                                attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_hr_manager"
+                        />
+                        <button name="action_cancel" string="Cancel" type="object"
+                                attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                                class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_hr_manager"
+                        />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group string="Employee Information">
+                            <group>
+                                <field name="employee_id" options="{'no_create_edit': True,'no_open': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_no"/>
+                                <field name="branch_id" options="{'no_create_edit': True,'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="department_id" options="{'no_create_edit': True,'no_open': True}"/>
+                                <field name="job_id" options="{'no_create_edit': True,'no_open': True}"/>
+                                <field name="manager_id" options="{'no_create_edit': True,'no_open': True}"/>
+                            </group>
+                        </group>
+                        <group string="Contract Information">
+                            <group>
+                                <field name="date_start" force_save="1"/>
+                                <field name="trail_date_end" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="new_trail_date_end" force_save="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_extend_trial_period_tree">
+            <field name="name">hr.extend.trial.period.tree</field>
+            <field name="model">extend.trial.period</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="employee_no"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="manager_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="bsg_extend_trial_period_action">
+            <field name="name">Extend Trial Period</field>
+            <field name="res_model">extend.trial.period</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Extend Trial Period"
+                  id="extend_trial_period_menu"
+                  parent="bsg_hr.menu_hr_employees"
+                  action="bsg_extend_trial_period_action"
+                  sequence="4"
+                  groups="bsg_hr.group_extend_trial_period"
+
+        />
+
+    </data>
+</odoo>

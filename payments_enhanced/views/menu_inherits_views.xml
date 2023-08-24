@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.menu" id="account.menu_finance">
+        <field name="name">Accounting</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('account.group_account_invoice'),
+                                                ref('payments_enhanced.group_confirming_voucher'),
+                                                ref('payments_enhanced.group_posting_voucher'),
+                                                ref('payments_enhanced.group_cancel_voucher'),
+                                                ref('payments_enhanced.group_master_voucher'),
+                                                ref('payments_enhanced.group_create_receipt_voucher'),
+                                                ref('payments_enhanced.group_create_payment_voucher'),
+                                                ref('payments_enhanced.group_view_my_voucher'),
+                                                ref('payments_enhanced.group_view_all_voucher'),
+                                                ref('payments_enhanced.group_update_voucher_voucher'),
+                                                ref('payments_enhanced.group_create_internal_voucher'),
+                                                ref('payments_enhanced.group_group_branch_voucher'),
+                                                ref('payments_enhanced.group_all_accounting_voucher'),
+                                                ref('payments_enhanced.group_report_accounting_voucher')
+                                                ])]"/>
+    </record>
+    <!--   <record model="ir.ui.menu" id="account_accountant.menu_accounting">
+          <field name="name">Accounting</field>
+          <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                              ref('account.group_account_manager'),
+                                              ref('account.group_account_invoice'),
+                                              ref('payments_enhanced.group_confirming_voucher'),
+                                              ref('payments_enhanced.group_posting_voucher'),
+                                              ref('payments_enhanced.group_cancel_voucher'),
+                                              ref('payments_enhanced.group_master_voucher'),
+                                              ref('payments_enhanced.group_create_voucher'),
+                                              ref('payments_enhanced.group_view_my_voucher'),
+                                              ref('payments_enhanced.group_view_all_voucher'),
+                                              ref('payments_enhanced.group_update_voucher_voucher'),
+                                              ref('payments_enhanced.group_create_internal_voucher'),
+                                              ref('payments_enhanced.group_group_branch_voucher'),
+                                              ref('payments_enhanced.group_all_accounting_voucher'),
+                                              ref('payments_enhanced.group_report_accounting_voucher')
+                                              ])]"/>
+      </record> -->
+    <record model="ir.ui.menu" id="account_followup.customer_statements_menu">
+        <field name="name">Follow-up Reports</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.product_product_menu_sellable">
+        <field name="name">Products</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.product_product_menu_purchasable">
+        <field name="name">Products</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_receivables">
+        <field name="name">Customers</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('account.group_account_invoice'),
+                                                ref('payments_enhanced.group_all_voucher'),
+                                                ])]"/>
+        <!-- Commented for Migration Testing           ref('bsg_corporate_invoice_contract.group_create_cc'),-->
+
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_payables">
+        <field name="name">Vendors</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('payments_enhanced.group_payment_voucher_read_only'),
+                                                ref('account.group_account_invoice')                                              ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_account_payments_receivable">
+        <field name="name">Receipt Vouchers</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('account.group_account_invoice'),
+                                                ref('payments_enhanced.group_confirming_voucher'),
+                                                ref('payments_enhanced.group_posting_voucher'),
+                                                ref('payments_enhanced.group_cancel_voucher'),
+                                                ref('payments_enhanced.group_master_voucher'),
+                                                ref('payments_enhanced.group_create_receipt_voucher'),
+                                                ref('payments_enhanced.group_view_my_voucher'),
+                                                ref('payments_enhanced.group_view_all_voucher'),
+                                                ref('payments_enhanced.group_update_voucher_voucher'),
+                                                ref('payments_enhanced.group_create_internal_voucher'),
+                                                ref('payments_enhanced.group_group_branch_voucher'),
+                                                ref('payments_enhanced.group_all_accounting_voucher'),
+                                                ref('payments_enhanced.group_report_accounting_voucher'),
+                                                 ref('payments_enhanced.group_all_voucher'),
+                                                ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_account_payments_payable">
+        <field name="name">Payment Vouchers</field>
+        <field name="groups_id" eval="[(6,0,[
+                                                ref('payments_enhanced.group_create_payment_voucher'),
+                                                ref('payments_enhanced.group_payment_voucher_read_only')
+                                                ])]"/>
+    </record>
+
+
+    <!--  <record model="ir.ui.menu" id="account.menu_action_invoice_tree1">
+         <field name="name">Invoices</field>
+         <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                             ref('account.group_account_manager'),
+                                             ])]"/>
+     </record> -->
+
+    <!--        <record model="ir.ui.menu" id="account.menu_action_invoice_tree1">-->
+    <!--            <field name="name">Invoices</field>-->
+    <!--            <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),-->
+    <!--                                                ref('account.group_account_manager'),-->
+    <!--                                                ref('payments_enhanced.group_create_customer_invoice'),-->
+    <!--                                                ])]"/>-->
+    <!--        </record>-->
+
+    <!--        <record model="ir.ui.menu" id="account.menu_action_invoice_tree2">-->
+    <!--            <field name="name">Bills</field>-->
+    <!--            <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),-->
+    <!--                                                ref('account.group_account_manager'),-->
+    <!--                                                ref('payments_enhanced.group_create_vendor_invoices'),-->
+    <!--                                                ])]"/>-->
+    <!--                                                 &lt;!&ndash; ref('sales_team.group_sale_salesman') &ndash;&gt;-->
+
+    <!--        </record>-->
+
+    <record model="ir.ui.menu" id="account.menu_action_move_out_refund_type">
+        <field name="name">Credit Notes</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_move_in_refund_type">
+        <field name="name">Refund</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="payments_enhanced.account_ccollection_root_menu">
+        <field name="name">Customer Collection</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('payments_enhanced.group_create_customer_collection'),
+                                                ref('payments_enhanced.group_confirm_send_collection'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_account_customer">
+        <field name="name">Customers</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_account_supplier">
+        <field name="name">Vendors</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_entries">
+        <field name="name">Accounting</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ref('payments_enhanced.group_create_internal_voucher')
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_action_analytic_lines_tree">
+        <field name="name">Analytic Items</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account_accountant.menu_action_manual_reconciliation">
+        <field name="name">Reconciliation</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account_parent.menu_action_account_chart">
+        <field name="name">Chart of Accounts Heirarchy</field>
+        <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'),
+                                                ref('account.group_account_manager'),
+                                                ])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_configuration">
+        <field name="name">Configuration</field>
+        <field name="groups_id" eval="[(6,0,[ref('payments_enhanced.group_all_accounting_voucher'),
+            ref('account.group_account_manager')])]"/>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_reports">
+        <field name="name">Reporting</field>
+        <field name="groups_id"
+               eval="[(6,0,[ref('payments_enhanced.group_report_accounting_voucher'),ref('payments_enhanced.group_statement_of_invoices_report')])]"/>
+    </record>
+</odoo>

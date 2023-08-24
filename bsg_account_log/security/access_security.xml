@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_account_journal_items">
+            <field name="name">Journal Items</field>
+            <field name="description">Journal Items Management</field>
+            <field name="sequence">21</field>
+        </record>
+        
+       	<record model="res.groups" id="group_account_journal_items_create">
+            <field name="name">Create &amp; Import</field>
+            <field name="category_id" ref="bsg_account_log.module_category_account_journal_items"/>
+        </record>
+        
+        <record model="res.groups" id="group_account_journal_items_edit">
+            <field name="name">Edit</field>
+            <field name="category_id" ref="bsg_account_log.module_category_account_journal_items"/>
+        </record>
+    </data>
+</odoo>

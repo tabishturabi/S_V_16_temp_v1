@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_order_portal,access.purchase.order.portal,purchase.model_purchase_order,group_can_access_portal_tickets,1,0,0,0
+access_helpdesk_ticket_portal,helpdesk.ticket.portal,helpdesk.model_helpdesk_ticket,group_can_access_portal_tickets,1,1,1,1
+access_helpdesk_stage_portal,helpdesk.stage.portal,helpdesk.model_helpdesk_stage,group_can_access_portal_tickets,1,0,0,0
+access_sale_order_portal,access.sale.order.portal,sale.model_sale_order,group_can_access_portal_tickets,1,0,0,0
+access_account_invoice_portal,access.account.invoice.portal,account.model_account_move,group_can_access_portal_tickets,1,0,0,0
+access_root_causes,access_root_causes,model_root_causes,,1,1,1,1

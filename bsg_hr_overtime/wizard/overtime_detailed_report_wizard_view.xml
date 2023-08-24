@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="overtime_detailed_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">overtime.detailed.report.wizard.view.form</field>
+        <field name="model">overtime.detailed.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Details Report">
+                <sheet>
+                    <group class="ums_form_style">
+                        <group>
+                            <field name="report_type" required="True"/>
+                            <field name="mode"/>
+                            <field name="department_ids" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_department')],'required':[('mode','=','by_department')]}"/>
+                            <field name="branch_ids" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_branch')],'required':[('mode','=','by_branch')]}"/>
+                            <field name="company_ids" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_company')],'required':[('mode','=','by_company')]}"/>
+                            <field name="employee_tag_ids" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_employee_tag')],'required':[('mode','=','by_employee_tag')]}"/>
+                            <field name="employee_ids" widget="many2many_tags" attrs="{'invisible':[('mode','!=','by_employee')],'required':[('mode','=','by_employee')]}"/>
+                            <field name="group_by_mode" required="True"/>
+                            <field name="create_by" widget="many2many_tags" />
+                            <field name="state" widget="many2many_tags"/>
+
+                        </group>
+                        <group>
+                            <field name="date_condition" />
+                            <field name="date_from" attrs="{'required':[('date_condition','!=','set')],'invisible':[('date_condition','=','set')]}"/>
+                            <field name="date_to" attrs="{'required':[('date_condition','!=','set')],'invisible':[('date_condition','=','set')]}"/>
+                            <field name="emp_overtime_batch_ids" widget="many2many_tags"/>
+                            <field name="emp_overtime_batch_by_hours_ids" widget="many2many_tags"/>
+                            <field name="emp_overtime" widget="many2many_tags"/>
+                        </group>    
+                    </group>
+                    
+                </sheet>
+                <footer>
+                        <button string='PRINT PDF' name="print_report_pdf" type="object" class="btn-primary"/>
+                        <button string="PRINT EXCEL" name="print_report_excel" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="overtime_detailed_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Overtime details Reports</field>
+        <field name="res_model">overtime.detailed.report.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="overtime_detailed_report_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+     <menuitem
+         id="overtime_report_wizard_main_menu"
+         name="Reports"
+         parent="overtime_request_root"
+         sequence="3" groups="bsg_hr_overtime.group_overtime_detail_report"/>
+    <menuitem
+        id="overtime_detailed_report_wizard_menu"
+        name="Overtime Details Report"
+        action="overtime_detailed_report_wizard_action"
+        parent="overtime_report_wizard_main_menu"
+        sequence="1"/>   
+    
+
+</odoo>

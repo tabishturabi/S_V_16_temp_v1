@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record id="bsg_effective_request_my_rules" model="ir.rule">
+              <field name="name">my employees effective requests rule</field>
+              <field name="model_id" ref="model_effect_request" />
+              <field name="domain_force">[('employee_id.parent_id.user_id','=',user.id)]</field>
+              <field name="groups" eval="[(4,ref('bsg_hr.group_department_manager'))]" />
+          </record>
+
+           <record id="bsg_effective_request_manager_rules" model="ir.rule">
+              <field name="name">manager effective requests rule</field>
+              <field name="model_id" ref="model_effect_request" />
+              <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+              <field name="groups" eval="[(4,ref('effective_date_notes.effective_date_group'))]" />
+          </record>
+
+          <record id="bsg_effective_request_branch_supervisor" model="ir.rule">
+              <field name="name">Branch Supervisor Effective Requests Rule</field>
+              <field name="model_id" ref="model_effect_request" />
+              <field name="domain_force">[('employee_id.branch_id.supervisor_id.user_id', '=', user.id)]</field>
+              <field name="groups" eval="[(4,ref('bsg_hr.group_branch_supervisor'))]" />
+          </record>
+
+          <record id="bsg_all_effective_date_rule" model="ir.rule">
+              <field name="name">All Effective Date Rule</field>
+              <field name="model_id" ref="model_effect_request" />
+              <field name="domain_force">[(1,'=',1)]</field>
+              <field name="groups" eval="[(4,ref('bsg_hr.group_hr_specialist')),(4,ref('bsg_hr.group_hr_manager')),(4,ref('hr.group_hr_manager')),(4,ref('bsg_hr.group_internal_audit_manager')),(4,ref('bsg_hr.group_finance_manager'))]" />
+          </record>
+    </data>
+</odoo>

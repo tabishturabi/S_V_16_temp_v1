@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="inherit_crm_lead_form_opportunity" model="ir.ui.view">
+        <field name="name">crm.lead.form.opportunity.inherit</field>
+        <field name="model">crm.lead</field>
+<!--        Migration Note-->
+<!--        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>-->
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="car_count"/>
+                <field name="loc_from"/>
+                <field name="loc_to"/>
+                <field name="car_make"/>
+                <field name="car_model"/>
+                <field name="car_size"/>
+                <field name="contract_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="attachment_ids" widget="many2many_binary"/>
+
+            </field>
+
+        </field>
+    </record>
+
+<!--    Migration Note-->
+
+<!--    <record id="inherit_crm_case_form_view_leads" model="ir.ui.view">-->
+<!--        <field name="name">crm.case.form.view.leads.inherit</field>-->
+<!--        <field name="model">crm.lead</field>-->
+<!--        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="team_id" position="after">-->
+<!--                <field name="car_count"/>-->
+<!--                <field name="loc_from"/>-->
+<!--                <field name="loc_to"/>-->
+<!--                <field name="car_make"/>-->
+<!--                <field name="car_model"/>-->
+<!--                <field name="car_size"/>-->
+<!--                <field name="contract_id" options="{'no_create': True, 'no_open': True}"/>-->
+<!--                <field name="attachment_ids" widget="many2many_binary"/>-->
+<!--            </field>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="view_partner_type_form_portal_inherit" model="ir.ui.view">
+        <field name="name">view.partner.type.form.portal.inherit</field>
+        <field name="model">partner.type</field>
+        <field name="inherit_id" ref="base_customer.view_partner_type_form"/>
+        <field name="arch" type="xml">
+            <field name="pricing_type" position="after">
+                <field name="is_default_in_portal"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_payment_transaction_cargo_portal_inherit" model="ir.ui.view">
+        <field name="name">view.payment.transaction.cargo.portal.inherit</field>
+        <field name="model">payment.transaction</field>
+<!--        Migration Note-->
+<!--        <field name="inherit_id" ref="payment.transaction_form"/>-->
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_cargo" type="object"
+                        class="oe_stat_button" icon="fa-money"
+                        attrs="{'invisible': [('cargo_ids_nbr', '=', 0)]}">
+                    <field name="cargo_ids_nbr" widget="statinfo" string="Cargo(s)"/>
+                </button>
+
+                <button name="action_view_cargo_sale_line" type="object"
+                        class="oe_stat_button" icon="fa-money"
+                        attrs="{'invisible': [('cargo_line_ids_nbr', '=', 0)]}">
+                    <field name="cargo_line_ids_nbr" widget="statinfo" string="Cargo Lines(s)"/>
+                </button>
+
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_bsg_car_shipment_type_form_portal_inherit" model="ir.ui.view">
+        <field name="name">view.bsg.car.shipment.type.form.portal.inherit</field>
+        <field name="model">bsg.car.shipment.type</field>
+        <field name="inherit_id" ref="bsg_master_config.view_bsg_car_shipment_type_form"/>
+        <field name="arch" type="xml">
+            <field name="is_satha" position="after">
+                <field name="is_public"/>
+                <field name="available_in_upgrade"/>
+            </field>
+            <field name="car_size" position="after">
+                <field name="website_description_ids" attrs="{'invisible':[('available_in_upgrade','!=',True)]}">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                    </tree>
+                </field>
+            </field>
+
+        </field>
+    </record>
+
+
+    <record id="view_vehicle_cargo_sale_form_portal_inherit" model="ir.ui.view">
+        <field name="name">view.vehicle.cargo.sale.form.portal.inherit</field>
+        <field name="model">bsg_vehicle_cargo_sale</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+        <field name="arch" type="xml">
+            <page name="returning_order" position="after">
+                <page string="Online Transactions" >
+
+                    <field name="payment_transaction_ids" widget="many2many">
+                        <tree>
+                            <field name="is_refunded" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                            <field name="app_fortid" string="Payfort Transaction ID"/>
+<!--                            Migration Note-->
+<!--                            <field name="date"/>-->
+                            <field name="amount"/>
+                            <field name="state"/>
+                            <field name="is_refunded"/>
+                            <button type="object" name="refund_transaction" string="Refund" icon="fa-retweet" invisible="1"
+                                    attrs="{'invisible':['|',('state','!=', 'done'), ('is_refunded', '=', True)]}"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+
+            <field name="deliver_date" position="replace">
+                <field name="shipment_date"/>
+            </field>
+            <field name="max_line_sequence" position="after">
+                <field name="cancel_reason" attrs="{'invisible':[('cancel_reason','=',False)]}" readonly="1"/>
+                <field name="online_pay_error" attrs="{'invisible':[('online_pay_error','=',False)]}" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_pricelist_view_form" model="ir.ui.view">
+        <field name="name">portal.sale.product.pricelist.form.inherit</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="before">
+                <field name="default_in_portal"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Action for Portal And Mobile All Cargo -->
+    <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_for_portal_mobile">
+        <field name="name">Portal And Mobile Cargo Sale</field>
+        <field name="res_model">bsg_vehicle_cargo_sale</field>
+        <field name="context">{'default_cargo_sale_type': 'local'}</field>
+        <field name="domain">[('cargo_sale_type', '=', 'local'),('payment_method', 'in', [5,6,7])
+            ,'|',('is_from_portal', '=',True),('is_from_app', '=', True)]
+        </field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,kanban,pivot,graph,form</field>
+    </record>
+
+    <!-- Action for Portal And Mobile All Cargo -->
+    <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_for_refund">
+        <field name="name">Portal And Mobile Cargo Sale For Refund</field>
+        <field name="res_model">bsg_vehicle_cargo_sale</field>
+        <field name="context">{'default_cargo_sale_type': 'local'}</field>
+        <field name="domain">[('cargo_sale_type', '=', 'local'),('payment_method', 'in',
+            [5,6,7]),('state','=','cancel_request')]
+        </field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,kanban,pivot,graph,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_for_process">
+        <field name="name">Portal And Mobile Cargo Sale For Process</field>
+        <field name="res_model">bsg_vehicle_cargo_sale</field>
+        <field name="context">{'default_cargo_sale_type': 'local'}</field>
+        <field name="domain">[('cargo_sale_type', '=', 'local'),('payment_method', 'in',
+            [5,6,7]),('to_confirm','=',True)]
+        </field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,kanban,pivot,graph,form</field>
+    </record>
+
+    <menuitem name="Portal And Mobile Cargo Sale"
+              id="cargo_sale_root_meun_for_portal_and_mobile"
+              parent="sale.sale_menu_root"
+              groups="bsg_cargo_sale.group_view_all_agreements,bsg_cargo_sale.group_show_all_branch_agreements,bsg_cargo_sale.group_view_my_agreement"
+              sequence="0"
+    />
+
+    <menuitem name="Portal And Mobile Cargo Sale"
+              id="cargo_sale_main_meun_for_portal_and_mobile"
+              parent="cargo_sale_root_meun_for_portal_and_mobile"
+              action="action_bsg_vehicle_cargo_sale_for_portal_mobile"
+              groups="bsg_cargo_sale.group_view_all_agreements,bsg_cargo_sale.group_show_all_branch_agreements,bsg_cargo_sale.group_view_my_agreement"
+              sequence="0"
+    />
+    <menuitem name="Portal And Mobile To Refund"
+              id="cargo_sale_refund_meun_for_portal_and_mobile"
+              parent="cargo_sale_root_meun_for_portal_and_mobile"
+              action="action_bsg_vehicle_cargo_sale_for_refund"
+              groups="bsg_cargo_sale.group_view_all_agreements,bsg_cargo_sale.group_show_all_branch_agreements,bsg_cargo_sale.group_view_my_agreement"
+              sequence="1"
+    />
+
+    <menuitem name="Portal And Mobile To Proceed"
+              id="cargo_sale_to_process_meun_for_portal_and_mobile"
+              parent="cargo_sale_root_meun_for_portal_and_mobile"
+              action="action_bsg_vehicle_cargo_sale_for_process"
+              groups="bsg_cargo_sale.group_view_all_agreements,bsg_cargo_sale.group_show_all_branch_agreements,bsg_cargo_sale.group_view_my_agreement"
+              sequence="2"
+    />
+
+</odoo>

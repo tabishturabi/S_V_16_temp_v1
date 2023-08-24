@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <!--  -->
+          <record id="bassami_dashboard_form_ids" model="bassami.dash">
+            <field name="name">Branch DashBoard</field>
+            <field name="time_filter">curr_week</field>
+          </record>
+        <!--  -->
+    </data>
+</odoo>

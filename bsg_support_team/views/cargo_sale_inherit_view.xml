@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+    <record id="view_vehicle_cargo_sale_form_support_user" model="ir.ui.view">
+          <field name="name">bsg_vehicle_cargo_sale.from</field>
+          <field name="model">bsg_vehicle_cargo_sale</field>
+          <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+          <field name="arch" type="xml">
+            <button name="initiate_return_btn" position="after">
+              <button style="color:green;" name="remove_initail_return_shipment" type="object" class="btn-primary" groups="bsg_support_team.group_cahnge_so_line_state"  confirm="Are you sure you want to Cancel Initiated Return..?" string="Cancel Initiated Return" attrs="{'invisible':[('return_so_id','=',False)]}"/>
+            </button> 
+            <field name="payment_method" position="replace">
+                <field name="is_support_team" invisible="1"/>
+                <field name="payment_method" string="Payment Method" widget="selection" attrs="{'readonly': ['|', '&amp;', ('is_support_team', '=', False),('state', '!=', 'draft'),('is_return_so', '=', True)]}" required="1"/>
+            </field>
+            <button name="invoice_create" position="after">
+              <button name="invoice_support_create_validate" type="object" string="Create Invoice" class="btn-primary" attrs="{'invisible':['|',('state','in',['draft']),('invoice_count', '!=', 0)]}" groups="bsg_support_team.group_create_invoice_for_so"/>
+               <button style="color:green;" name="change_customer" type="object" class="btn-primary" groups="bsg_support_team.group_update_customer_on_so"  confirm="Are you sure you to Change Customer..?" attrs="{'invisible':[('payment_method_code','!=','credit')]}" string="Change Customer"/>
+            </button>   
+            <button>
+              <button name="register_payment" groups="bsg_cargo_sale.group_register_payment_on_agreement,base.group_erp_manager" string="Register Payment" type="object" class="o_sale_confirm" attrs="{'invisible':['|',('state','not in',['confirm','unplanned','pod','Delivered']),                       ('payment_method_code','not in',['cash','pod'])]}"/>
+            </button>                                   
+          </field>
+    </record>
+  </data>
+</odoo>

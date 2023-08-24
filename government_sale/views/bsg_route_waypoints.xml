@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="bsg_route_waypoints_government_sale" model="ir.ui.view">
+            <field name="name">bsg.route.waypoints.government.sale</field>
+            <field name="model">bsg_route_waypoints</field>
+            <field name="inherit_id" ref="bsg_master_config.bsg_route_waypoints_view_form"/>
+            <field name="arch" type="xml">
+                <field name="allowed_return_waypoint_ids" position="after">
+                    <field name="user_allowed_locations" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

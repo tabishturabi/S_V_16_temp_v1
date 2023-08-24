@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="HrManagementDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+<!--                <div class="timeline_selection">-->
+<!--                    <div class="row main-section pt-3">-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4 "></div>-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4"></div>-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4">-->
+<!--&lt;!&ndash;                            <label for="filters">Choose a Timeline:</label>&ndash;&gt;-->
+<!--                            <select name="filters" id="filters" style="padding: 10px; background-color:paleturquoise; border:none;">>-->
+<!--                                <option value="month">This Month</option>-->
+<!--                                <option value="year">This Year</option>-->
+<!--                                <option value="week">This Week</option>-->
+<!--                                <option value="today">Today</option>-->
+<!--                                <option value="default">All</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4">-->
+<!--&lt;!&ndash;                            <select name="checks" id="checks" style="padding: 10px; background-color:paleturquoise; border:none;">>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="">State</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="trips">Trips</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="Vehicles">Vehicles</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="Purchases">Purchase Requests</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </select>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4"></div>-->
+<!--                        <div class="col-md-2 col-sm-2 mb-4"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="hr_management_dashboard">
+
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="HrDashboardDetails">
+        <div class="row main-section pt-3">
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="on_job_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['on_job_employees_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Job</div>
+                   <div class="more_info border-b14 get_on_job_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="on_leave_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['on_leave_employees_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Leave</div>
+                   <div class="more_info border-b15 get_on_leave_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+             <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+                 <div class="on_trial_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['employees_on_trial_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Trial</div>
+                   <div class="more_info border-b15 get_on_trial_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="approved_decisions">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.decisions['confirmed_decisions_amount']"/>
+                    </div>
+                   <div class="label_text">Decisions Confirmed</div>
+                   <div class="more_info border-b16 get_confirmed_decisions">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="saudization_percentage">
+                    <div class="amount-text">
+                        <span>Saudization Percentage</span>
+<!--                        <t t-esc="widget.decisions['confirmed_decisions_amount']"/>-->
+                    </div>
+                   <div class="label_text">
+                       <t t-esc="widget.employees['saudization_percentage']"/>
+                       <span>%</span>
+                   </div>
+                   <div class="more_info border-b17">
+<!--                        <span>More Info</span>-->
+<!--                        <i class='fa fa-arrow-circle-right' />-->
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="leave_requests">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.leaves['all_leaves_amount']"/>
+                    </div>
+                   <div class="label_text">Leave Requests</div>
+                   <div class="more_info border-b18 get_leaves_request">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="effective_requests">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.eff_requests['all_eff_requests_amount']"/>
+                    </div>
+                   <div class="label_text">Effective Requests</div>
+                   <div class="more_info border-b19 get_effective_request">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+             <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="employee_clearance">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.clearances['all_clearances_amount']"/>
+                    </div>
+                   <div class="label_text">Clearances</div>
+                   <div class="more_info border-b20 get_clearances">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="HrManagementDashboardWarning">
+        <div>
+            <p>Error : Could not find any data</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record model="res.groups" id="group_view_vehicle_document_licence">-->
+<!--            <field name="name">Vehicles Documents License</field>-->
+<!--            <field name="category_id" ref="bsg_fleet_operations.module_trailer_management_cat"/>-->
+<!--        </record>-->
+
+        <record id="group_fleet_attachment_view" model="res.groups">
+            <field name="name">Fleet View Attachment</field>
+            <field name="comment">The user will have access to view fleet documents tab.</field>
+            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>
+        </record>
+
+        <record id="group_fleet_attachment_add" model="res.groups">
+            <field name="name">Fleet Add Attachment</field>
+            <field name="comment">The user will have access to add documents for fleet</field>
+            <field name="implied_ids" eval="[(4, ref('bsg_vehicle_enhancement.group_fleet_attachment_view'))]"/>
+            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>
+        </record>
+
+        <record id="group_fleet_attachment_delete" model="res.groups">
+            <field name="name">Fleet Delete Attachment</field>
+            <field name="comment">The user will have access to delete documents for fleet</field>
+            <field name="implied_ids"
+                   eval="[(4, ref('bsg_vehicle_enhancement.group_fleet_attachment_add')), (4, ref('bsg_vehicle_enhancement.group_fleet_attachment_view'))]"/>
+            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>
+        </record>
+
+    </data>
+</odoo>

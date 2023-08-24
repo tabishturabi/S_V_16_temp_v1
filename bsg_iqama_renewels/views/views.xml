@@ -1,0 +1,175 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="iqama_renewels_list_view">
+      <field name="name">Iqama Renewels</field>
+      <field name="model">iqama.renewels</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="iqama_no" />
+          <field name="employee_name" />
+          <field name="emp_department" />
+            <field name="sequence_number" />
+            <field name="request_date" />
+            <field name="state"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="iqama_renewels_form_view">
+      <field name="name">Iqama Renewels</field>
+      <field name="model">iqama.renewels</field>
+      <field name="arch" type="xml">
+        <form>
+            <header>
+                <widget name="attach_document" string="ATTACH DOCUMENT" action="message_post" highlight="1"/>
+                <button name="click_submit" string="SUBMIT TO MANAGER" type="object"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_access"
+              />
+                <button name="confirm_manager" string="APPROVE" type="object"
+                        attrs="{'invisible': [('state', '!=', 'submitted_to_manager')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_department_manager"
+                />
+                <button name="reject_manager" string="REJECT" type="object"
+                        attrs="{'invisible':[('state','!=','submitted_to_manager')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_department_manager"
+                />
+                <button name="confirm_hrmanager" string="HR MANAGER APPROVE" type="object"
+                        attrs="{'invisible': [('state', '!=', 'confirmed_by_manager')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_hr_manager"
+                />
+                <button name="reject_hrmanager" string="HR MANAGER REJECT" type="object"
+                        attrs="{'invisible':[('state','!=','confirmed_by_manager')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_hr_manager"
+                />
+                <button name="expenses_issue" string="Petty Cash Expense" type="object"
+                        attrs="{'invisible':[('state','!=','confirmed_by_hrmanager')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_create_petty_cash"
+                />
+                <button name="click_done" string="Done" type="object"
+                        attrs="{'invisible':[('state','!=','petty_cash_done')]}"
+                        class="oe_highlight oe_structure" groups="bsg_iqama_renewels.group_iqama_access"
+                />
+                <button name="%(bsg_iqama_renewels.iqama_renewel_refusal_wizard)d" string="REFUSE" type="action"
+                        class="oe_highlight oe_structure" attrs="{'invisible':[('state', 'in',['refused','draft','done','petty_cash_done'])]}"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,submitted" />
+            </header>
+          <sheet>
+              <div class="oe_button_box">
+                  <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object">
+                            <field name="attachment_number" widget="statinfo" string="Documents" options="{'reload_on_button': true}"/>
+                        </button>
+              </div>
+              <group class="ums_form_style">
+                  <group>
+                       <field name="sequence_number"  />
+                       <field name="employee_name" domain="[('country_code','!=','SA')]" options="{'no_open': True}" required="True" attrs="{'readonly':[('state','!=','draft')]}" />
+                       <field name="employee_id" />
+                      <field name="nationality" force_save="1" options="{'no_open': True}" />
+                      <field name="analytic_account" options="{'no_open': True}" force_save="1"></field>
+                      <field name="label" invisible="1"/>
+                       <field name="truck" invisible="1"/>
+                       <field name="partner_id" options="{'no_open': True}" force_save="1"/>
+                  </group>
+                  <group>
+                      <field name="request_date" required="True" attrs="{'readonly':[('state','!=','draft')]}" class="with_hijri"/>
+                      <field name="emp_department" force_save="1" options="{'no_open': True}"/>
+                      <field name="branch_name" force_save="1" options="{'no_open': True}" />
+                      <field name="manager" options="{'no_open': True}" force_save="1"/>
+                  </group>
+                  <group string="Iqama Information">
+                      <field name="iqama_no"/>
+                      <field name="expiration_date" class="with_hijri"/>
+                      <field name="user_id" options="{'no_open': True}" attrs="{'invisible':[('state','not in',['confirmed_by_manager','rejected_by_hrmanager',
+                      'confirmed_by_hrmanager','expenses_issue','submitted_for_petty_cash_process','done'])],'readonly':[('state','!=','confirmed_by_manager')]}" />
+                  </group>
+                  <group>
+                      <field name="iqama_job_position" force_save="1"/>
+                      <field name="renewel_duration" attrs="{'invisible':[('state','not in',['confirmed_by_manager','rejected_by_hrmanager',
+                      'confirmed_by_hrmanager','petty_cash_done','done'])],'readonly':[('state','!=','confirmed_by_manager')]}"/>
+                  </group>
+              </group>
+              <notebook>
+                  <page string="Employee Reject Comment" name="reject"
+                  attrs="{'invisible':[('state','not in',['draft','rejected_by_employee'])]}">
+                      <group>
+                        <field name="emp_reject_comment" attrs="{'readonly':[('state','!=','draft')]}"></field>
+                      </group>
+                  </page>
+                  <page string="Manager Reject Comment"
+                  attrs="{'invisible':[('state','not in',['submitted','rejected_by_manager'])]}">
+                      <group>
+                        <field name="manager_reject_comment" attrs="{'readonly':[('state','!=','submitted')]}"></field>
+                      </group>
+                  </page>
+                  <page string="Hr Manager Reject Comment"
+                  attrs="{'invisible':[('state','not in',['confirmed_by_manager','rejected_by_hrmanager'])]}">
+                      <group>
+                        <field name="hr_manager_reject_comment" attrs="{'readonly':[('state','!=','confirmed_by_manager')]}"></field>
+                      </group>
+                  </page>
+                  <page string="Other Info"
+                   attrs="{'invisible':[('state','not in',['petty_cash_done','done'])]}">
+                      <group>
+                          <field name="expense_id" readonly="1"></field>
+                      </group>
+                  </page>
+                  <page string="Reason To Refuse" attrs="{'invisible':[('state', '!=','refused')]}">
+                      <field name="refusal_reason" ></field>
+                  </page>
+              </notebook>
+          </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"></field>
+                <field name="message_ids" widget="mail_thread"></field>
+            </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="iqama_renewel_act_action_window">
+      <field name="name">Employee Iqama Renewel Requests</field>
+      <field name="res_model">iqama.renewels</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+   <menuitem name="Iqama Renewels" id="bsg_iqama_renewels" parent="bsg_hr.hr_iqama_menu"
+             sequence="6" action="iqama_renewel_act_action_window"
+             groups="bsg_iqama_renewels.group_iqama_access"
+   />
+      <!--record model="ir.ui.view" id="expense_accounting_petty_inhert_form">
+        <field name="name">expense.accounting.petty.inherit.form</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="inherit_id" ref="advance_petty_expense_mgmt.expenses_bcube_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='len_move_id']" position="after">
+                <group name="iqama related">
+                    <field name="line_ref" invisible="1"/>
+                    <field name="partner_id" invisible="1" />
+                    <field name="analytic_account" invisible="1" />
+                    <field name="branch" invisible="1" />
+                    <field name="department" invisible="1" />
+                    <field name="truck"  invisible="1"/>
+                    <field name="label" invisible="1" />
+                </group>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[1]/field[@name='expense_treeview']" position="attributes">
+                <attribute name="context">
+                    {
+                    'petty_cash_user_rule_id' : petty_cash_user_rule_id,
+                    'default_is_with_product' : is_with_product,
+                    'default_is_without_product' : is_without_product,
+                    'default_invoice_ref_no':line_ref,
+                    'default_analytical_id':analytic_account,'default_branches_id':branch,
+                    'default_department_id':department,'default_fleet_vehicle_id':truck,
+                    'default_description':label
+                    }
+                </attribute>
+            </xpath>
+        </field>
+      </record-->
+      
+  </data>
+</odoo>

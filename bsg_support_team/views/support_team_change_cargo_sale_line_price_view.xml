@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_support_team_cahange_so_line_price_form">
+        <field name="name">support_team_cahange_so_line_price.form</field>
+        <field name="model">support_team_cahange_so_line_price</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form delete="false">
+                <header>
+                  <button name="update_price" string="Update Price" type="object" class="btn-primary" states="draft"/>
+                  <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="cargo_sale_line_id" required="1"  options="{'no_open': True}"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>
+                    <group>
+                       <field name="charges" />
+                       <field name="updated_charges" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>                    
+                  </group>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>                
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_support_team_cahange_so_line_price_tree">
+        <field name="name">support_team_cahange_so_line_price.tree</field>
+        <field name="model">support_team_cahange_so_line_price</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="cargo_sale_line_id"/>
+              <field name="charges"/>
+              <field name="updated_charges"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_support_team_cahange_so_line_price">
+        <field name="name">Cargo Sale Line ChangePrice</field>
+        <field name="res_model">support_team_cahange_so_line_price</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+   
+    <menuitem name="Cargo Sale Line ChangePrice" 
+      id="root_menu_support_team_cahange_so_line_price" 
+      parent="root_menu_support_team" 
+      action="action_support_team_cahange_so_line_price"
+      groups="bsg_support_team.group_cargo_line_change_price"
+      sequence="3"
+      />
+
+  </data>
+</odoo>

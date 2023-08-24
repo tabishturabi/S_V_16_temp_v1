@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- form view bsg_route -->
+        <record model="ir.ui.view" id="bsg_route_view_form">
+            <field name="name">bsg_route_view_form</field>
+            <field name="model">bsg_route</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Route">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="route_name" required="1" placeholder="Route Name" />
+                            </h1>
+                        </div>
+                        <group name="top">
+                            <group>
+                                <field name="waypoint_from" required="1" />
+                                <field name="route_type" required="1" />
+                                <field name="waypoint_hide" invisible="1" />
+                            </group>
+                            <group>
+                                <field name="route_id" />
+                                <field name="distance_adj" />
+                                <field name="reason" />
+                            </group>
+                        </group>
+                        <field name="waypoint_to_ids" nolabel="1">
+                            <tree string="Car Lines" editable="bottom" default_order="sequence asc">
+                                <field name="sequence" />
+                                <field name="waypoint" required="1" />
+                                <field name="distance" required="1" />
+                                <field name="avg_speed" required="1" />
+                                <field name="estimated_time" />
+                                <field name="check_vals" invisible="1" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="waypoint" required="1" />
+                                        <field name="distance" />
+                                    </group>
+                                    <group>
+                                        <field name="avg_speed" />
+                                        <field name="estimated_time" />
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <label for="estimated_time" />
+                            <div class="oe_subtotal_footer">
+                                <field name="estimated_time" nolabel="1" class="oe_subtotal_footer" />
+                            </div>
+                            <label for="total_distance" />
+                            <div class="oe_subtotal_footer">
+                                <field name="total_distance" nolabel="1" class="oe_subtotal_footer" />
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="Info" string="Info" />
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree view car config  -->
+        <record model="ir.ui.view" id="bsg_bsg_route_view_tree">
+            <field name="name">bsg_bsg_route_view_tree</field>
+            <field name="model">bsg_route</field>
+            <field name="arch" type="xml">
+                <tree string="Route">
+                    <field name="route_name" modifiers="{}" />
+                    <field name="waypoint_from" />
+                    <field name="waypoint_to" />
+                    <field name="route_name" />
+                    <field name="estimated_time" />
+                    <field name="total_distance" />
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views on car config -->
+        <record model="ir.actions.act_window" id="bsg_bsg_route_action">
+            <field name="name">Route</field>
+            <field name="res_model">bsg_route</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

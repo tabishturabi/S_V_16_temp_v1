@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_for_purchase_requset_manager" model="mail.template">
+            <field name="name">Purchase Request: Send To Approve</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>
+            <field name="subject">Purchase Request (Ref ${object.name or 'n/a' })</field>
+<!--            Migration Note-->
+<!--            <field name="partner_to">${object.manager_format}</field>-->
+            <field name="partner_to">{{ object.manager_format or '' }}</field>
+            <field name="body_html" type="html">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            % set message_note = object.compute_message_note(object.message_managger_text)
+                            Dear Manger
+                            <br/><br/>
+                            You Have Purchase Request To Approve :  <strong> ${object.name} </strong> <br/>
+                            Requsted By: <strong> ${object.partner_id.name}</strong><br/>
+                            Date Of Request: <strong> ${object.date_pr}</strong><br/>
+                            Requsted Department:  <strong>${object.department_id.name}</strong><br/>
+                            Requsted Branch:  <strong> ${object.branches.name} </strong><br/>
+                            <br/><br/>
+                            % if message_note:
+                                <div style="color: #3d466e; line-height: 23px;">${message_note | safe}</div>
+                            % endif
+                            <br/><br/>
+                            <p style="margin-top: 24px; margin-bottom: 16px;">
+                                <a href="${object.get_base_url()}/web#id=${object.id}&amp;view_type=form&amp;model=purchase.req&amp;action=purchase_enhanced.action_purchase_approve"
+                                style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                        View Purchase Request
+                                </a>
+                            </p>
+
+                            Best regards,
+                        </p>
+                    </div>
+            </field>
+            <field name="lang">${object.partner_id.lang}</field>
+<!--            Migration Note-->
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <record id="email_template_for_purchase_requset_stock" model="mail.template">
+            <field name="name">Purchase Request For Stock: Send To Proceed</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_transfer"/>
+            <field name="subject">Purchase Request (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        % set message_note = object.sudo().purchase_transfer.compute_message_note(object.sudo().purchase_transfer.message_reciepts_text)
+                        Dear Manger
+                        <br/><br/>
+                        You Have Purchase Request To Approve :  <strong> ${object.name} </strong> <br/>
+                        Requsted By: <strong> ${object.partner_id.name}</strong><br/>
+                        Date Of Request: <strong> ${object.date_pr}</strong><br/>
+                        Requsted Department:  <strong>${object.department_id.name}</strong><br/>
+                        Requsted Branch:  <strong> ${object.branches.name} </strong><br/>
+                        <br/><br/>
+                        % if message_note:
+                            <div style="color: #3d466e; line-height: 23px;">${message_note | safe}</div>
+                        % endif
+                        <br/><br/>
+                        <p style="margin-top: 24px; margin-bottom: 16px;">
+                            <a href="${object.get_base_url()}/web#id=${object.id}&amp;view_type=form&amp;model=purchase.transfer&amp;action=purchase_enhanced.action_purchase_transfer"
+                            style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                    View Purchase Request
+                            </a>
+                        </p>
+
+                        Best regards,
+                    </p>
+                </div>
+            </field>
+
+            <field name="lang">${object.partner_id.lang}</field>
+<!--            Migration Note-->
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+              
+</data>
+</odoo>

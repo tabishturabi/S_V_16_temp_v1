@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="sim_card_owner_form_view" model="ir.ui.view">
+            <field name="name">sim_card_owner_form_view</field>
+            <field name="model">sim.owner</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card Owner">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <group style="color:#0e620a;">
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_owner_tree_view" model="ir.ui.view">
+            <field name="name">sim_card_owner_tree_view</field>
+            <field name="model">sim.owner</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_owner_view_search" model="ir.ui.view">
+            <field name="name">sim_card_owner_view_search</field>
+            <field name="model">sim.owner</field>
+            <field name="arch" type="xml">
+                <search string="Sim Card Owner">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record id="sim_card_owner_action" model="ir.actions.act_window">
+            <field name="name">Sim Card Owner</field>
+            <field name="res_model">sim.owner</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem id="sim_card_owner_main_menu" name="Sim Card Owner" action="sim_card_owner_action"
+                  parent="sim_card_request_main_menu_config" groups="sim_card.service_sim_card_owner" sequence="3"/>
+
+    </data>
+</openerp>

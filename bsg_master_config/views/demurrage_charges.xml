@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+    <!-- form view bsg_price_config -->
+    
+    <record model="ir.ui.view" id="demurrage_charges_config_form">
+      <field name="name">demurrage_charges_config_form</field>
+      <field name="model">demurrage_charges_config</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Price Config">          
+              <group name="top">
+                <group name="left">
+                  <field name="car_size_ids" widget="many2many_tags"/>
+                  <field name="starting_day_no" required="1"/>
+                  <field name="ending_day_no" required="1"/>
+                </group>
+                <group name="right">
+                  <field name="currency_id" invisible="1"/>
+                  <field name="chares" required="1" options="{'currency_field': 'currency_id'}"/>
+                  <field name="total_day" invisible="1"/>
+                </group>
+              </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>            
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view price config  -->
+    <record model="ir.ui.view" id="bsg_price_config_view_tree">
+      <field name="name">demurrage_charges_config_tree</field>
+      <field name="model">demurrage_charges_config</field>
+      <field name="arch" type="xml">
+        <tree string="Price Config">
+          <field name="starting_day_no"/>
+          <field name="ending_day_no"/>
+          <field name="chares" widget="monetary"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on price config -->
+    
+    <record model="ir.actions.act_window" id="demurrage_charges_config_action">
+      <field name="name">Demurrage Charges Config</field>
+      <field name="res_model">demurrage_charges_config</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

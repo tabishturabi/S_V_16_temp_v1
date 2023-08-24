@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_iqama_form_extendes" model="ir.ui.view">
+            <field name="name">Hr Iqama</field>
+            <field name="model">hr.iqama</field>
+            <field name="inherit_id" ref="bsg_hr.view_hr_iqama_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bsg_bloodgroup']" position="after">
+                    <field name="bsg_emp_code" invisible="1"/>
+                    <field name="bsg_emp_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        <!--     Search View -->
+        <record id="view_hr_iqama_serach" model="ir.ui.view">
+            <field name="name">hr.iqama.search</field>
+            <field name="model">hr.iqama</field>
+            <field name="arch" type="xml">
+                <search string="Search HR Iqama">
+                    <field name="bsg_iqama_name" />
+                    <field name="bsg_employee" />
+                    <field name="bsg_emp_code" />
+                    <field name="bsg_emp_id" />
+                    <field name="bsg_department" />
+                    <field name="bsg_issuedate" />
+                    <field name="bsg_expirydate" />
+                    <field name="bsg_job_pos" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

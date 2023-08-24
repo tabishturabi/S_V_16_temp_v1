@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="account.action_account_invoice_refund" model="ir.actions.act_window">
+            <field name="name">Credit Note</field>
+            <field name="res_model">account.invoice.refund</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="account.view_account_invoice_refund"/>
+            <field name="target">new</field>
+            <field name="context">{'default_account_invoice_id':active_id}</field>
+        </record>
+    </data>
+</odoo>

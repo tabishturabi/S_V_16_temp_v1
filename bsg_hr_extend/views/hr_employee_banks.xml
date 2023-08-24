@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_banks_form_extendes" model="ir.ui.view">
+            <field name="name">Hr Banks</field>
+            <field name="model">hr.banks</field>
+            <field name="inherit_id" ref="bsg_hr.view_banks_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bsg_title']" position="after">
+                    <field name="bsg_emp_code" invisible="1" />
+                    <field name="bsg_emp_id" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+        <!--     Search View -->
+        <record id="view_hr_bank_serach" model="ir.ui.view">
+            <field name="name">hr.banks.search</field>
+            <field name="model">hr.banks</field>
+            <field name="arch" type="xml">
+                <search string="Search HR Bank">
+                    <field name="bsg_employee_id" />
+                    <field name="bsg_emp_code" />
+                    <field name="bsg_emp_id" />
+                    <field name="bsg_acc_number" />
+                    <field name="bsg_swift_code_id" />
+                    <field name="bsg_bank_name" />
+                    <field name="bsg_title" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

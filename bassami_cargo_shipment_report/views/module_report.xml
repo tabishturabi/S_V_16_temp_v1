@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="cargo_shipment_report">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style>
+                            .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 12px;
+                            }
+
+                            .report_head {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                    float : left;
+
+                            }
+
+                            .report_table {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                    float : left;
+                            }
+
+                            .report_footer {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                            }
+
+                            .middle_rep {
+                                    width: 100%;
+                                    height: 200px;
+                            }
+
+                            .bank_det {
+                                    width : 45%;
+                                    float: left;
+                            }
+
+                            .bank_det_1 {
+                                    width : 50%;
+                                    float: right;
+                            }
+
+                            .bank{
+                                    width : 100%;
+                                    float: left;
+                            }
+
+                            h1 {
+                                    margin: 0px auto;
+                                    width: 60%;
+
+                            }
+
+                            table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid black;
+                            }
+                            table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 1px 1px 1px 1px;
+                                    font-size: 14px;
+                                    border-right: 2px solid black;
+                                    border-bottom: 1px solid black;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                    border-right: none
+                            }
+
+
+                            table tr th {
+                                    text-align: center;
+                            }
+
+                            .space {
+                                    width : 50px;
+                                    min-width : 50px;
+                                    max-width : 50px;
+                            }
+
+                            .space1 {
+                                    width : 75px;
+                                    min-width : 75px;
+                                    max-width : 75px;
+                            }
+
+                            .space2 {
+                                    width : 130px;
+                                    min-width : 130px;
+                                    max-width : 130px;
+                            }
+
+                            .space3 {
+                                    width : 100px;
+                                    min-width : 100px;
+                                    max-width : 100px;
+                            }
+
+                            .space4 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+
+                            .space5 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+
+
+                        </style>
+
+                        <div class="report-container">
+
+
+                                <div class="report_head">
+                                     
+                                    <div style="width:30%;float:left">
+                                        <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png" width="200" height="100" style="margin-left: 25px;float:left"/>
+                                    </div>
+                                    <t t-if="report_num != 3">
+                                    <div style="width:38%;float:left">
+                                        <h2 style="margin-top:50px">Cargo Shipment Report</h2>
+                                    </div>
+                                    </t>
+                                    <t t-if="report_num == 3">
+                                    <div style="width:38%;float:left">
+                                        <h2 style="margin-top:50px">
+                                        تقرير ايرادات المبيعات
+                                        </h2>
+                                    </div>
+                                    </t>
+
+
+
+                                    <div style="width:30%;float:right;margin-bottom : 35px;">
+                                        <img src="/bassami_cargo_shipment_report/static/img/rightHeader.png" width="230" height="110" style="float:right;margin_right:25px"/>
+                                    </div>
+
+                                </div>
+
+                                <div class="report_table">
+
+                                    <table style="width:40%;margin-bottom:20px" class="pull-left">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:right">من تاريخ</td>
+                                            <td>
+                                                <span t-esc="form"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:right">الى تاريخ</td>
+                                        <td>
+                                                <span t-esc="to"></span>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr t-if="loc_from">
+                                            <td style="font-weight:bold;text-align:right">من  موقع</td>
+                                        <td>
+                                                <span t-esc="loc_from.loc_branch_id.branch_ar_name"></span>
+                                            </td>
+                                            
+                                        </tr>
+
+                                        <tr t-if="loc_to"> 
+                                            <td style="font-weight:bold;text-align:right">الى موقع</td>
+                                        <td>
+                                                <span t-esc="loc_to.loc_branch_id.branch_ar_name"></span>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr  t-if="state">
+                                            <td style="font-weight:bold;text-align:right">الحاله</td>
+                                        <td>
+                                                <span t-esc="state"></span>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr t-if="payment_methods">
+                                            <td style="font-weight:bold;text-align:right">طريقة الدفع</td>
+                                         <td>
+                                                <span t-esc="payment_methods"></span>
+                                                
+                                            </td>
+                                           
+                                        </tr>
+                                        <tr t-if="cargo_sale_type">
+                                            <td style="font-weight:bold;text-align:right">نوع الشحن</td>
+                                         <td>
+                                                    <span t-esc="cargo_sale_type"></span>
+                                                
+                                            </td>
+                                           
+                                        </tr>
+
+                                        <t t-if="report_num == 1">
+
+                                            <tr t-if="customer_id">
+                                                <td style="font-weight:bold;text-align:right">العميل</td>
+                                             <td>
+                                                    <span t-esc="customer_id.name"></span>
+                                                </td>
+                                               
+                                            </tr>
+
+                                        </t>
+                                         <t t-if="report_num == 1">
+
+                                            <tr t-if="invoice_status">
+                                                <td style="font-weight:bold;text-align:right">حاله السداد</td>
+                                             <td>
+                                                    <span t-esc="invoice_status"></span>
+                                                </td>
+                                               
+                                            </tr>
+
+                                        </t>
+
+                                    </table>
+
+                                    <t t-if="report_num == 2">
+
+                                        <table>
+                                              <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="font-weight:bold;text-align:centre">Total Without Tax</td>
+                                                <td style="font-weight:bold;text-align:centre">Total With Tax</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Cash</td>
+                                                <td>
+                                                    <span t-esc="cash_rec"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(cash_amt_without_tax))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(cash_amt_with_tax))"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Credit</td>
+                                                <td>
+                                                    <span t-esc="credit_rec"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(credit_amt_without_tax))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(credit_amt_with_tax))"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Payment On Delivery</td>
+                                                <td>
+                                                    <span t-esc="on_delivery_rec"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(on_delivery_amt_without_tax))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(on_delivery_amt_with_tax))"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="font-weight:bold;text-align:left">Total</td>
+                                                <td>
+                                                    <span t-esc="on_delivery_rec + credit_rec + cash_rec"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(on_delivery_amt_without_tax + credit_amt_without_tax + cash_amt_without_tax))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(on_delivery_amt_with_tax + credit_amt_with_tax + cash_amt_with_tax))"></span>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+
+                                    </t>
+
+                                    <t t-if="report_num == 1">
+
+                                        <table class="table-sm table-bordered" dir="ltr" >
+                                            <tr>
+                                                <th> حاله السداد</th>
+                                                <th> اجمالي شامل الضريبة ‫</th>
+                                                <th>اجمالي غير شامل الضريبة   ‫</th>
+                                                <th>‫رقم‬ اللوحة ‫</th>
+                                                <th>‫رقم‬ الشاسيه ‫</th>
+                                                <th>‫رقم‬ الرحلة‬ ‫</th>
+                                                <th> الى ‫</th>
+                                                <th> من ‫</th>
+                                                <th>‫التاريخ‬</th>
+                                                <th t-if="not customer_id">‬
+                                                 اسم العميل‫ 
+                                                 </th>
+                                                <th>‫رقم‬ الملف</th>
+                                            </tr>
+
+                                            <t t-foreach="trans" t-as="rec">
+
+                                                <tr>
+                                                    <td>
+                                                        <t t-if="rec.invoie_state == 'paid'">
+                                                            <span t-esc="rec.invoie_state"></span>
+                                                        </t>
+                                                        <t t-if="rec.invoie_state != 'paid'">
+                                                            <span>Not Paid</span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(rec.charges))"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(rec.total_without_tax))"></span>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="rec.plate_no">
+                                                          <span t-esc="'%s %s %s %s' % (rec.palte_third, rec.palte_second, rec.palte_one, rec.plate_no)"></span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="rec.chassis_no"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="rec.fleet_trip_id.name"></span>
+                                                    </td>
+                                                    <td>
+                                                         <t t-if="rec.loc_to">
+                                                        <span t-esc="rec.loc_to.route_waypoint_name"></span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="rec.loc_from">
+                                                            <span t-esc="rec.loc_from.route_waypoint_name"></span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="rec.order_date.date()"></span>
+                                                    </td>
+                                                    <td t-if="not customer_id">
+                                                        <span t-esc="rec.customer_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="rec.sale_line_rec_name"/>
+                                                    </td>
+                                                </tr>
+
+                                            </t>
+                                            <tr>
+                                                <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(lines_total_with_tax))"></span>
+                                                </td>
+                                                <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(lines_total_without_tax))"></span>
+                                                </td>
+                                                <td><strong>اجمالي</strong></td>
+                                                <td cospan="4">
+                                                </td>
+
+                                            </tr>
+
+                                        </table>
+                                         <div style="align:center">
+                                            <strong>
+                                           اجمالي عدد السيارات =
+                                           <span t-esc="total_number_of_cars"/>
+                                           </strong>
+                                        </div>
+                                    
+
+                                    </t>
+
+
+
+
+
+
+
+                                    <t t-if="report_num == 3">
+
+                                        <table>
+                                            <tr>
+                                                <th>  اجمالي الايراد ‫</th>
+                                                <th>  اجمالي عدد السيارات ‫</th>
+                                                <th> الايراد المرحل ‫</th>
+                                                <th> عدد السيارات المرحله ‫</th>
+                                                <th> الايراد غير المرحل ‫</th>
+                                                <th> عدد السيارات غير المرحله ‫</th>
+                                                <th>‫التاريخ‬</th>
+                                            </tr>
+
+                                            <t t-foreach="grouped_by_date" t-as="so_line">
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(so_line_value['total_day_revenue']))"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="so_line_value['total_day_no_cars']"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(so_line_value['posted_day_renenue']))"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="so_line_value['posted_no_cars']"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="'{0:,.2f}'.format(float(so_line_value['unposted_day_renenue']))"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="so_line_value['unposted_no_cars']"></span>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <span t-esc="so_line"></span>
+                                                    </td>
+                                                </tr>
+
+                                            </t>
+                                            <tr>
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(revenue_total_amount))"></span> </strong>
+                                                </td>
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(revenue_total_cars))"></span></strong>
+                                                </td>
+                                                
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(posted_total_revenue))"></span> </strong>
+                                                </td>
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(posted_total_cars))"></span></strong>
+                                                </td>
+
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(unposted_total_revenue))"></span> </strong>
+                                                </td>
+                                                <td>
+                                                        <strong> <span t-esc="'{0:,.2f}'.format(float(unposted_total_cars))"></span></strong>
+                                                </td>
+                                                <td><strong>اجمالي</strong></td>
+                                                
+
+                                            </tr>
+
+                                        </table>
+                                    </t>
+
+
+
+
+                                </div>
+
+
+
+                        </div>
+
+                                         
+                    </div><!--end of page-->  
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

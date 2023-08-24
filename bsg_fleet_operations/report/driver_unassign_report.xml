@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Action Dispatcher Voucher Report -->
+        <record id="driver_unassign_custom_report" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+        <report id="report_truck_driver_unassign_template_report" string="Truck Custody Report" model="driver.unassign" report_type="qweb-html" file="bsg_fleet_operations.report_truck_driver_unassign_template" name="bsg_fleet_operations.report_truck_driver_unassign_template" paperformat="bsg_fleet_operations.driver_unassign_custom_report" />
+        <template id="report_truck_driver_unassign_template" name="Truck Custody Report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="res">
+                        <div class="page">
+                            <style>.report-container {
+                      width: 1000px;
+                      margin: 0px auto;
+                      font-size: 12px;
+                      }
+                      .td {
+                      	text-align: right !important;
+                      }</style>
+                            <div class="report-container">
+                            <h4>
+                              		<img src="/bsg_fleet_operations/static/description/src/img/bsg_logo.png" style="margin-left: 10px; width: 1000px !important; line-height: 0.0 !important;" alt=""/>
+                            </h4>
+                                <h4 class="text-center" style="line-height: 0.0 !important;">نموذج أستلام شاحنة Unassignment Truck Form</h4>
+                                <br />
+                                <table width="100%" style="line-height: 1.0 !important;">
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style=" background-color: yellow;">
+                                                <t t-esc="res.unassign_date" />
+                                                : Unassign Date :
+                                                تاريخ التسليم
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style=" background-color: yellow;">
+                                                <t t-esc="res.unassignment_no" />
+                                                : Unassign No. :
+                                                رقم حركة التسليم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.manufactr_year" />
+                                                : Manufacturing Year :
+                                                الموديل
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.fleet_vehicle_id.taq_number" />
+                                                : Truck Name :
+                                                كود الشاحنة
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.serial_no" />
+                                                 : رقم الهيكل
+                                                 : Serial No :
+                                                <span style="margin-left:30px !important;">
+                                                <t t-esc="res.plat_no" />
+                                                : Plate No :
+                                                رقم اللوحة
+                                                </span>
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.vehicle_type_id.vehicle_type_name" />
+                                                : Truck Type Name :
+                                                رقم حركة التسليمأسم نوع الشاحنة
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.trailer_names" />
+                                                : Trailer Name :
+                                                أسم التيدر
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.trailer_id.trailer_taq_no" />
+                                                : Trailer No :
+                                                كود التيدر
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                    	<th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.assign_driver_id.name" />
+                                                : Assign Driver Name :
+                                                السائق المستلم
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.unassign_driver_id.name" />
+                                                : Unassign Driver Name :
+                                                السائق المسلم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                    <th class="text-right" width="50%">
+                                    </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.maintenence_work" />
+                                                : Assign To Maintenance Workshop :
+                                                تعيين إلى ورشة الصيانة
+                                            </p>
+                                        </th>
+                                    </thead>
+                                </table>
+                                <br />
+                                <table class="table" style="line-height: 0.0 !important;">
+                                    <thead>
+                                        <th />
+                                        <th class="text-center">Custody Type En Description</th>
+                                        <th class="text-center">الكميةQty</th>
+                                        <th class="text-center">وصف نوع العهده عربي</th>
+                                        <th />
+                                        <th class="text-center">Custody Type En Description</th>
+                                        <th class="text-center">الكميةQty</th>
+                                        <th class="text-center">وصف نوع العهده عربي</th>
+                                    </thead>
+                                    <tbody>
+                                        <td>1</td>
+                                        <td>Odometer Value</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.kilometrage" />
+                                        </td>
+                                        <td class="text-right">رقم العداد</td>
+                                        <td class="text-right">1.1</td>
+                                        <td>Fuel Quantity</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.fuel_qty" />
+                                        </td>
+                                        <td class="text-right">كمية الوقود</td>
+                                    </tbody>
+                                    </table>
+	                                   <h6 class="text-center">وثائق الشاحنة Truck Documents</h6>
+	                                   <table class="table" style="line-height: 0.0 !important;">
+                                    <tbody>
+                                        <td>2</td>
+                                        <td>Truck License</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.truck_license" />
+                                        </td>
+                                        <td class="text-right">الإستمارة (أصل + صورة )</td>
+                                        <td class="text-right">6</td>
+                                        <td>Oil Card</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.oil_card" />
+                                        </td>
+                                        <td class="text-right">كرت الزيت</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>3</td>
+                                        <td>Insurance Card</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.insurance_card" />
+                                        </td>
+                                        <td class="text-right">كارت التامين (أصل + صورة )</td>
+                                        <td class="text-right">7</td>
+                                        <td>Truck head Tire Card</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.truck_head" />
+                                        </td>
+                                        <td class="text-right">كرت كفرات الراس</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>4</td>
+                                        <td>Weight Card</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.weight_card" />
+                                        </td>
+                                        <td class="text-right">كارت ميزان (أصل + صورة )</td>
+                                        <td class="text-right">8</td>
+                                        <td>Trailer Tire Card</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.trailer_tire" />
+                                        </td>
+                                        <td class="text-right">كرت كفرات المقطورة</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>5</td>
+                                        <td>Plate</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.plate" />
+                                        </td>
+                                        <td class="text-right">لوحة مرورية</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    </table>
+                                    <h6 class="text-center">كفرات اسبير Spare Tires</h6>
+                                    <table class="table" style="line-height: 0.0 !important;">
+                                    <tbody>
+                                        <td>9</td>
+                                        <td>Spare Tire for truck head</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.spare_tire_truck" />
+                                        </td>
+                                        <td class="text-right">إسبير كفرات الراس</td>
+                                        <td class="text-right">10</td>
+                                        <td>Spare Tire for trailer</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.spare_tire_trailer" />
+                                        </td>
+                                        <td class="text-right">إسبير كفرات المقطوره</td>
+                                    </tbody>
+                                    </table>
+                                    <h6 class="text-center">عهد الشاحنة Truck Tools</h6>
+                                    <table class="table" style="line-height: 0.0 !important;">
+                                    <tbody>
+                                        <td>11</td>
+                                        <td>Tire Unfix Lieber</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.tire_unfix_lieber" />
+                                        </td>
+                                        <td class="text-right">ليبر فك كفرات</td>
+                                        <td class="text-right">22</td>
+                                        <td>Recorder</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.recoder" />
+                                        </td>
+                                        <td class="text-right">مسجل</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>12</td>
+                                        <td>Hands lifted trailer footer</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.hands_lifted_trailer" />
+                                        </td>
+                                        <td class="text-right">يد رفع رجل المقطورة</td>
+                                        <td class="text-right">23</td>
+                                        <td>Cooler</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.cooler" />
+                                        </td>
+                                        <td class="text-right">ثلاجة</td>
+                                    </tbody>
+                                    <tbody>
+                                       <td>13</td>
+                                        <td>Lift Tool of Truck Head</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.lift_tool_truck_head" />
+                                        </td>
+                                        <td class="text-right">يد رفع الكابينة</td>
+                                        <td class="text-right">24</td>
+                                        <td>Cover of Battery</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.cover_battery" />
+                                        </td>
+                                        <td class="text-right">غطاء البطاريات</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>14</td>
+                                        <td>Unfix Tool of Spare Tire</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.unfix_tool_spare_tire" />
+                                        </td>
+                                        <td class="text-right">يد تنزيل الإسبير</td>
+                                        <td class="text-right">25</td>
+                                        <td>Cover of Diesel Tank</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.cover_of_diesel_tank" />
+                                        </td>
+                                        <td class="text-right">غطاء تنك الديزل</td>
+                                    </tbody>
+                                    <tbody>
+                                       <td>15</td>
+                                        <td>Ladders</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.ladders" />
+                                        </td>
+                                        <td class="text-right">سلم تحميل</td>
+                                        <td class="text-right">26</td>
+                                        <td>Emergency Rotaing Light</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.emergency_rotaing_light" />
+                                        </td>
+                                        <td class="text-right">السيفتي/كشاف الطوارئ</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td class="text-right">16</td>
+                                        <td>Air Condition</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.air_condition" />
+                                        </td>
+                                        <td class="text-right">غير موجود</td>
+                                        <td class="text-right">27</td>
+                                        <td>Curtains</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.curtains" />
+                                        </td>
+                                        <td class="text-right">ستائر</td>
+                                    </tbody>
+                                   
+                                    <tbody>
+                                        <td class="text-right">17</td>
+                                        <td>Air Pipe</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.air_pipe" />
+                                        </td>
+                                        <td class="text-right">لي الهواء</td>
+                                        <td class="text-right">28</td>
+                                        <td>Bed</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.bed" />
+                                        </td>
+                                        <td class="text-right">السيفتي/كشاف الطوارئ</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>18</td>
+                                        <td>Pliers</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.pliers" />
+                                        </td>
+                                        <td class="text-right">زرادية خفاش</td>
+                                        <td class="text-right">29</td>
+                                        <td>Trailer Plate (Sticker)</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.trailer_plate" />
+                                        </td>
+                                        <td class="text-right">لوحة المقطوره (استيكر)</td>
+                                        
+                                    </tbody>
+                                    <tbody>
+                                        <td>19</td>
+                                        <td>Spanner(Musharshar)</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.spanner_musharshar" />
+                                        </td>
+                                        <td class="text-right">مفتاح مشرشر</td>
+                                        <td class="text-right">30</td>
+                                        <td>Spanner</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.spanner" />
+                                        </td>
+                                        <td class="text-right">مفتاح إنجليزي</td>
+                                        
+                                    </tbody>
+                                    <tbody>
+                                        <td>20</td>
+                                        <td>Spanner(Baladi)</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.spanner_baladi" />
+                                        </td>
+                                        <td class="text-right">مفتاح بلدي</td>
+                                        <td class="text-right">31</td>
+                                        <td>Screw Drivers</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.screw_drivers" />
+                                        </td>
+                                        <td class="text-right">مفكات</td>
+                                        
+                                    </tbody>
+                                    <tbody>
+                                        <td>21</td>
+                                        <td>Hammer</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.hammer" />
+                                        </td>
+                                        <td class="text-right">شاكوش</td>
+                                        <td class="text-right">32</td>
+                                        <td>Sixfold Key</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.sixfold_key" />
+                                        </td>
+                                        <td class="text-right">مفتاح اللنكية</td>
+                                    </tbody>
+                                    </table>
+                                    <h6 class="text-center">البودي والمحتوي الخارجي للشاحنة Body &amp; content of external truck</h6>
+                                    <table class="table" style="line-height: 0.0 !important;">
+                                    <tbody>
+                                        <td>33</td>
+                                        <td>Front Glass</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.front_glass" />
+                                        </td>
+                                        <td class="text-right">الزجاج الأمامي</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>34</td>
+                                        <td>Side Glass</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.side_glass" />
+                                        </td>
+                                        <td class="text-right">الزجاج الجانبي</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>35</td>
+                                        <td>Lights</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.lights" />
+                                        </td>
+                                        <td class="text-right">الأنوار</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>36</td>
+                                        <td>Front Flashing Lights</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.front_light" />
+                                        </td>
+                                        <td class="text-right">الفوانيس الأمامية</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>37</td>
+                                        <td>Back Flashing Lights</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.back_light" />
+                                        </td>
+                                        <td class="text-right">الفوانيس الخلفية</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>38</td>
+                                        <td>Tractor Side Flashing Lights</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.side_flashing_tractor" />
+                                        </td>
+                                        <td class="text-right">الفوانيس الجانبية للرأس</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>39</td>
+                                        <td>Trailer Side Flashing Lights</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.side_flashing_trailer" />
+                                        </td>
+                                        <td class="text-right">الفوانيس الجانبية للتيدر</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>40</td>
+                                        <td>Shocks &amp; scratches</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.shocks_scratches" />
+                                        </td>
+                                        <td class="text-right">أحذية الخدوش</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>41</td>
+                                        <td>Big Side Mirrors</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.big_side_mirror" />
+                                        </td>
+                                        <td class="text-right">المرايا الجانبية الكبيرة</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>42</td>
+                                        <td>Small Side Mirrors</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.small_side_mirror" />
+                                        </td>
+                                        <td class="text-right">المرايا الجانبية الصغيرة</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    <tbody>
+                                        <td>43</td>
+                                        <td>Cabin Cleaner</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.cabin_cleaner" />
+                                        </td>
+                                        <td class="text-right">منظف ​​المقصورة</td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                    </table>
+                                    <h6 class="text-center">ملاحظات Comments</h6>
+                                    <table class="table" style="line-height: 1.0 !important;">
+	                                    <tbody>
+	                                        <td colspan="4" />
+	                                        <td>
+	                                            <t t-esc="res.comment" />
+	                                        </td>
+	                                        <td colspan="4" />
+	                                    </tbody>
+                                	</table>
+                                <hr style="border:1px solid black;" />
+                                <h5 class="text-right">
+                                    أقر أنا الموقع أدناة/<span t-esc="res.assign_driver_id.name" style="decoration: underline important;"/>هوية رقم (<span t-esc="res.assign_driver_id.bsg_empiqama.bsg_iqama_name"/>) بأنني قد تسلمت الشاحنة
+                                    <t t-esc="res.fleet_vehicle_id.taq_number" />
+                                    . هيكل رقم
+                                    <t t-esc="res.serial_no" />
+                                    . 
+	              	والتيدر وجميع الأصناف الموضحة عالية وتعتبر عهدة لدي بحالتها وأتعهد بالمحافظة عليها وفي حال تلفها او فقدها يتم خصمها من راتبي وهذا إقرار مني بذلك.
+                                </h5>
+                                <hr style="border:1px solid black;" />
+                                <br />
+                                <table width="100%" style="line-height: 1.0 !important;">
+                                    <thead>
+                                        <th class="text-right" style="text-decoratione:underline;">أسم المستخدم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">لجنة التسليم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">السائق المستلم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">السائق المسلم</th>
+                                    </thead>
+                                    <tbody>
+                                        <td class="text-right"> <span t-esc="res.user_id.name"/> الاسم :</td>
+                                        <td class="text-right">الاسم :</td>
+                                        <td class="text-right"> <span t-esc="res.assign_driver_id.name"/> الاسم :</td>
+                                        <td class="text-right"> <span t-esc="res.unassign_driver_id.name"/> الاسم :</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right"> التوقيع :</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        
+        <report id="report_driver_unassign_template_report" string="Driver Unassign Report" model="driver.unassign" report_type="qweb-html" file="bsg_fleet_operations.report_driver_unassign_template" name="bsg_fleet_operations.report_driver_unassign_template" paperformat="bsg_fleet_operations.driver_unassign_custom_report" />
+        <template id="report_driver_unassign_template" name="Driver Unassign Report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="res">
+                        <div class="page">
+                            <style>.report-container {
+                      width: 1000px;
+                      margin: 0px auto;
+                      font-size: 12px;
+                      }
+                      .td {
+                      	text-align: right !important;
+                      }</style>
+                            <div class="report-container">
+                            <h4>
+                              		<img src="/bsg_fleet_operations/static/description/src/img/bsg_logo.png" style="margin-left: 10px; width: 1000px !important;" alt=""/>
+                            </h4>
+                                <h4 class="text-center">Driver Custody Form نموذج عهد السائق</h4>
+                                <br />
+                                <table width="100%" style="line-height: 1.0 !important;">
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style=" background-color: yellow;">
+                                                <t t-esc="res.unassign_date" />
+                                                : Unassign Date :
+                                                تاريخ التسليم
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style=" background-color: yellow;">
+                                                <t t-esc="res.unassignment_no" />
+                                                : Unassign No. :
+                                                رقم حركة التسليم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.manufactr_year" />
+                                                : Manufacturing Year :
+                                                الموديل
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.fleet_vehicle_id.taq_number" />
+                                                : Truck No/Name :
+                                                كود الشاحنة/الاسم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.plat_no" />
+                                                : Plate No :
+                                                رقم اللوحة
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.vehicle_type_id.vehicle_type_name" />
+                                                : Truck Type Name :
+                                                رقم حركة التسليمأسم نوع الشاحنة
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.serial_no" />
+                                                : Serial No :
+                                                رقم الهيكل
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.trailer_id.trailer_taq_no" />
+                                                : Trailer No :
+                                                كود التيدر
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.trailer_names" />
+                                                : Trailer Name :
+                                                أسم التيدر
+                                            </p>
+                                        </th>
+                                        <th class="text-right">
+                                            <p style="">
+                                                <t t-esc="res.unassign_driver_id.name" />
+                                                : Unassign Driver Name :
+                                                السائق المسلم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <th class="text-right" width="50%">
+                                            <p style="">
+                                                <t t-esc="res.assign_driver_id.name" />
+                                                : Assign driver Name :
+                                                <br />
+                                                السائق المستلم
+                                            </p>
+                                        </th>
+                                    </thead>
+                                </table>
+                                <br />
+                                <table class="table" style="line-height: 0.0 !important;">
+                                    <thead>
+                                        <th />
+                                        <th class="text-center">Custody Type En Description</th>
+                                        <th class="text-center">الكميةQty</th>
+                                        <th class="text-center">وصف نوع العهده عربي</th>
+                                        <th />
+                                        <th class="text-center">Custody Type En Description</th>
+                                        <th class="text-center">الكميةQty</th>
+                                        <th class="text-center">وصف نوع العهده عربي</th>
+                                    </thead>
+                                    <h6 class="text-center">عهد الشاحنة Truck Tools</h6>
+                                    <tbody>
+                                        <td>1</td>
+                                        <td>Jack</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.jack" />
+                                        </td>
+                                        <td class="text-right">عفريتة</td>
+                                        <td class="text-right">7</td>
+                                        <td>Fixing Tools</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.fixing_tools" />
+                                        </td>
+                                        <td class="text-right">قلصات</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>2</td>
+                                        <td>Fire Extinguisher</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.fire_extinguisher" />
+                                        </td>
+                                        <td class="text-right">طفاية حريق</td>
+                                        <td class="text-right">8</td>
+                                        <td>Belt</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.belt" />
+                                        </td>
+                                        <td class="text-right">حبل</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>3</td>
+                                        <td>Triangle</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.triangel" />
+                                        </td>
+                                        <td class="text-right">مثلث عاكس</td>
+                                        <td class="text-right">9</td>
+                                        <td>Lock</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.lock" />
+                                        </td>
+                                        <td class="text-right">قفل</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>4</td>
+                                        <td>Tire Wrench Tractor</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.tire_wrench_tractor" />
+                                        </td>
+                                        <td class="text-right">مفتاح عجل للرأس</td>
+                                        <td class="text-right">10</td>
+                                        <td>Cover</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.cover" />
+                                        </td>
+                                        <td class="text-right">طربال</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>5</td>
+                                        <td>Tire Wrench Trailer</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.tire_wrench_trailer" />
+                                        </td>
+                                        <td class="text-right">مفتاح عجل للتيدر</td>
+                                        <td class="text-right">11</td>
+                                        <td>Chain</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.chain" />
+                                        </td>
+                                        <td class="text-right">جنزير</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td>6</td>
+                                        <td>Battery</td>
+                                        <td class="text-right">
+                                            <t t-esc="res.battery" />
+                                        </td>
+                                        <td class="text-right">بطاريات</td>
+                                        
+                                    </tbody>
+                                    </table>
+                                    <h6 class="text-center">ملاحظات Comments</h6>
+                                    <table class="table" style="line-height: 0.0 !important;">
+                                    <tbody>
+                                        <td>
+                                            <t t-esc="res.comment" />
+                                        </td>
+                                        <td colspan="4" />
+                                    </tbody>
+                                </table>
+                                <hr style="border:1px solid black;" />
+                                <h5 class="text-right">
+                                    أقر أنا الموقع أدناة/<span t-esc="res.assign_driver_id.name" style="decoration: underline important;"/>هوية رقم (<span t-esc="res.assign_driver_id.bsg_empiqama.bsg_iqama_name"/>) بأنني قد تسلمت الشاحنة
+                                    <t t-esc="res.fleet_vehicle_id.taq_number" />
+                                    . هيكل رقم
+                                    <t t-esc="res.serial_no" />
+                                    . 
+	              	والتيدر وجميع الأصناف الموضحة عالية وتعتبر عهدة لدي بحالتها وأتعهد بالمحافظة عليها وفي حال تلفها او فقدها يتم خصمها من راتبي وهذا إقرار مني بذلك.
+                                </h5>
+                                <hr style="border:1px solid black;" />
+                                <br />
+                                <h5 class="text-right">
+                                    <span>
+                                                                     اتعهد بتجديد الرخصه قبل شهرين من الانتهاء
+                                    </span>
+
+                                </h5>
+                                <h5 class="text-right">
+                                    <span>
+                                        میں لائسنس کی میعاد ختم هوني سي دو ماه قبل تجدید کرنيکا وعده کرتا هوں
+                                    </span>
+                                </h5>
+                                <h5 class="text-left">
+                                    <span>
+                                        I promise to renew the Driver license before two months from expiration
+                                    </span>
+                                </h5>
+                                <hr style="border:1px solid black;" />
+                                <br />
+                                <table width="100%" style="line-height: 1.0 !important;">
+                                    <thead>
+                                        <th class="text-right" style="text-decoratione:underline;">أسم المستخدم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">لجنة التسليم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">السائق المستلم</th>
+                                        <th class="text-right" style="text-decoratione:underline;">السائق المسلم</th>
+                                    </thead>
+                                    <tbody>
+                                        <td class="text-right"> <span t-esc="res.user_id.name"/> الاسم :</td>
+                                        <td class="text-right">الاسم :</td>
+                                        <td class="text-right"> <span t-esc="res.assign_driver_id.name"/> الاسم :</td>
+                                        <td class="text-right"> <span t-esc="res.unassign_driver_id.name"/> الاسم :</td>
+                                    </tbody>
+                                    <tbody>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right">التوقيع :</td>
+                                        <td class="text-right"> التوقيع :</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

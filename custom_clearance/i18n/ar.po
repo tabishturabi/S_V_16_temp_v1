@@ -1,0 +1,1163 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* custom_clearance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-16 05:22+0000\n"
+"PO-Revision-Date: 2019-09-16 05:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_clearance
+#: selection:export.tree,types:0
+#: selection:freight.tree,cont_size:0
+#: selection:import.tree,types:0
+msgid "20ft"
+msgstr "20FT"
+
+#. module: custom_clearance
+#: selection:export.tree,types:0
+#: selection:freight.tree,cont_size:0
+#: selection:import.tree,types:0
+msgid "40ft"
+msgstr "40FT"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "<b>Car Carrier</b>"
+msgstr "حامل السيارة"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+msgid "<b>Container Info.</b>"
+msgstr "معلومات الحاوية."
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "<b>Container Info</b>"
+msgstr "معلومات الحاوية"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__address
+msgid "Address"
+msgstr "العنوان"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__gov_charges
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__charges
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__gov_charges
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__charges
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__field_office
+msgid "Assign To"
+msgstr "يسند إلى"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__bill_no
+msgid "B/L Number"
+msgstr "رقم B/L"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bill_no
+msgid "BL / AWB Number"
+msgstr "رقم BL/AWB"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__bayan
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bayan_attach
+msgid "Bayan Attach"
+msgstr "بيان إرفاق"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bayan_date
+msgid "Bayan Date"
+msgstr "بيان التاريخ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__bayan_no
+msgid "Bayan No"
+msgstr "بيان رقم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bayan_no
+msgid "Bayan No."
+msgstr "بيان رقم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bill
+msgid "Bill No Attach"
+msgstr "بيل لا نعلق"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__bill_types
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__bill_types
+msgid "Billing Type"
+msgstr "نوع الفواتير"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__book_date
+msgid "Booking Date"
+msgstr "تاريخ الحجز"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+msgid "Broker Invoice"
+msgstr "فاتورة الوسيط"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__shipper_date
+msgid "By Email DOC Received Date"
+msgstr "عن طريق البريد الإلكتروني DOC تاريخ الاستلام"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__cro
+msgid "CRO"
+msgstr "CRO"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__cro_date
+msgid "CRO Date"
+msgstr "تاريخ CRO"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__car_info
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__car_info
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Car Carrier"
+msgstr "حامل السيارة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__car_import
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__car_import
+msgid "Car Import"
+msgstr "استيراد السيارات"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__car_line
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__car_line
+msgid "Car Line"
+msgstr "خط السيارة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__car_maker
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__car_maker
+msgid "Car Maker"
+msgstr "صانع السيارات"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__car_size
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__car_size
+msgid "Car Size"
+msgstr "حجم السيارة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__chassis
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__chassis
+msgid "Chassis No#"
+msgstr "رقم الشاسيه#"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__city
+msgid "City"
+msgstr "المدينة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__color
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__color
+msgid "Color"
+msgstr "اللون"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__contact_info
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__contact_info
+msgid "Contact Info"
+msgstr "معلومات الاتصال"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__contact
+msgid "Contact No"
+msgstr "رقم الاتصال"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Container Info"
+msgstr "معلومات الحاوية"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__contain_info
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__contain_info
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_freight_forward_form
+msgid "Container Info."
+msgstr "معلومات الحاوية."
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__cont_no
+msgid "Container No"
+msgstr "رقم الحاوية"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__crt_no
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__crt_no
+msgid "Container No."
+msgstr "رقم الحاوية."
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__cont_size
+msgid "Container Size"
+msgstr "حجم الحاويات"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__form
+msgid "Country of Origin"
+msgstr "بلد المنشأ"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Create Invoice"
+msgstr "إنشاء فاتورة"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_freight_forward_form
+msgid "Create Transport Order"
+msgstr "إنشاء أمر النقل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__create_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__create_date
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__custm
+#: model:ir.ui.menu,name:custom_clearance.custome_clearance_menu
+msgid "Custom Clearance"
+msgstr "التخليص الجمركي"
+
+#. module: custom_clearance
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu
+msgid "Custom Clearance Config"
+msgstr "التخليص الجمركي التكوين"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+msgid "Custom Examination"
+msgstr "فحص مخصص"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_freight_forward
+msgid "Custom Freight Forward"
+msgstr "الشحن مخصص إلى الأمام"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__customer
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__customer
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__customer
+msgid "Customer"
+msgstr "العميل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__custom_chrg
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__custom_chrg
+msgid "Customer Charges"
+msgstr "رسوم العملاء"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__customer_ref
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__customer_ref
+msgid "Customer Ref"
+msgstr "رقم إشارة العميل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__customer_ref_inv
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__customer_ref_inv
+msgid "Customer Ref Inv No"
+msgstr "الرقم المرجعي للعميل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__shipper_date
+msgid "DOC Received Date"
+msgstr "تاريخ استلام DOC"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__des
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__des
+msgid "Description"
+msgstr "الوصف"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__to
+msgid "Destination"
+msgstr "المكان المقصود"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__des_Port
+msgid "Discharging Port"
+msgstr "ميناء التفريغ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__display_name
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__do_attach
+msgid "Do Attach"
+msgstr "هل نعلق"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__do_no
+msgid "Do no."
+msgstr "لا لا"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+#: selection:freight.forward,state:0
+#: selection:import.custom,stages:0
+msgid "Done"
+msgstr "منجز"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+#: selection:freight.forward,state:0
+#: selection:import.custom,stages:0
+msgid "Draft"
+msgstr "مشروع"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__duty
+msgid "Duty Date"
+msgstr "تاريخ الواجب"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__eta
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__eta
+msgid "ETA"
+msgstr "ETA"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__etd
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__etd
+msgid "ETD"
+msgstr "ETD"
+
+#. module: custom_clearance
+#: selection:freight.forward,s_no:0
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_custom_export
+msgid "Export"
+msgstr "تصدير"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_by_customer
+msgid "Export By Customer"
+msgstr "تصدير من العملاء"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_export_car_carrier
+msgid "Export Car Carrier"
+msgstr "تصدير سيارة الناقل"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_export_custom
+msgid "Export Custom Clearance"
+msgstr "تصدير التخليص الجمركي"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_field_officer
+msgid "Export Field Officer"
+msgstr "موظف مجال التصدير"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_fleet
+msgid "Export Fleet"
+msgstr "اسطول التصدير"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_from_quote
+msgid "Export From Quote"
+msgstr "تصدير من اقتباس"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__export_gov_charges
+msgid "Export Gov Charge"
+msgstr "حاكم تصدير المسؤول"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_export_gov_charges
+msgid "Export Gov Charges "
+msgstr "تصدير رسوم الحكومة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__export_gov_line
+msgid "Export Gov Line"
+msgstr "تصدير خط الحكومة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__export_line
+msgid "Export Lines"
+msgstr "خطوط التصدير"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__export_other_charges
+msgid "Export Other Charge"
+msgstr "تصدير رسوم أخرى"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__export_other_line
+msgid "Export Other Line"
+msgstr "تصدير خط آخر"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__export_id
+msgid "Export Reference"
+msgstr "مرجع التصدير"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_to_quote
+msgid "Export To Quote"
+msgstr "تصدير إلى اقتباس"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_export_tree
+msgid "Export Tree"
+msgstr "شجرة التصدير"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_custom_export
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_export
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+msgid "Exports"
+msgstr "صادرات"
+
+#. module: custom_clearance
+#: selection:export.custom,shipment_type:0
+#: selection:import.custom,shipment_type:0
+msgid "FCL"
+msgstr "FCL"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_field_officer
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_field_officer
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_field_officer
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_field_officer_form
+msgid "Field Officer"
+msgstr "ضابط ميداني"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__name
+msgid "Field Officer Name"
+msgstr "اسم الموظف الميداني"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+#: selection:import.custom,stages:0
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__final_attach
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__final_bayan_attch
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Final Bayan"
+msgstr "بيان النهائي"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__fin_bayan_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__final_bayan_date
+msgid "Final Bayan Date"
+msgstr "تاريخ البيان النهائي"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__fleet_type
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__fleet_type
+msgid "Fleet Type"
+msgstr "نوع الأسطول"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__form
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__form
+msgid "Form"
+msgstr "شكل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__freight_chrg
+msgid "Freight Charges"
+msgstr "رسوم الشحن"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_custom_freight_forward
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_freight_forward
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_custom_freight_forward
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_freight_forward_form
+msgid "Freight Forward"
+msgstr "الشحن إلى الأمام"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_freight_status
+msgid "Freight Forward Status"
+msgstr "حالة الشحن إلى الأمام"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__freight
+msgid "Freight Forwarding"
+msgstr "شحن البضائع"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__freight_line
+msgid "Freight Line"
+msgstr "خط الشحن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__fri_id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__fri_id
+msgid "Freight Link"
+msgstr "وصلة الشحن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__freight_id
+msgid "Fright id"
+msgstr "معرف الخوف"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__name
+msgid "From Name"
+msgstr "من الاسم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__gate_pass
+msgid "Gate Pass Date"
+msgstr "تاريخ مرور البوابة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__other_charge
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__other_charge
+msgid "Gov Charges Description"
+msgstr "الرسوم الحكومية الوصف"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__id
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__id
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__id
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__id
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__id
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__id
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__id
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__id
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__id
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__id
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__id
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__id
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__id
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__id
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: custom_clearance
+#: selection:freight.forward,s_no:0
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_custom_import
+msgid "Import"
+msgstr "استيراد"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_car_carrier
+msgid "Import Car Carrier"
+msgstr "استيراد سيارة الناقل"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_charges_des
+msgid "Import Charges Des"
+msgstr "رسوم الاستيراد"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_custom
+msgid "Import Custom Clearance"
+msgstr "استيراد التخليص الجمركي"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_site
+msgid "Import Custom Site"
+msgstr "استيراد موقع مخصص"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_tree
+msgid "Import Custom Tree"
+msgstr "استيراد شجرة مخصصة"
+
+#. module: custom_clearance
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_import_status
+msgid "Import Export status"
+msgstr "استيراد حالة التصدير"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_freight_tree
+msgid "Import Freight Tree"
+msgstr "استيراد شجرة الشحن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__import_gov_charges
+msgid "Import Gov Charge"
+msgstr "استيراد حاكم تهمة"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_gov_charges
+msgid "Import Gov Charges"
+msgstr "استيراد رسوم الحكومة"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_gov_charges
+msgid "Import Gov Charges "
+msgstr "استيراد رسوم الحكومة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__import_gov_line
+msgid "Import Gov Line"
+msgstr "استيراد خط الحكومة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__import_line
+msgid "Import Lines"
+msgstr "خطوط الاستيراد"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_import_other_charges
+msgid "Import Other Charges"
+msgstr "استيراد رسوم أخرى"
+
+#. module: custom_clearance
+#: model:ir.model,name:custom_clearance.model_export_other_charges
+msgid "Import Other Charges Des"
+msgstr "استيراد رسوم أخرى"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__import_other_line
+msgid "Import Other Line"
+msgstr "استيراد خط آخر"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__import_id
+msgid "Import Reference"
+msgstr "مرجع الاستيراد"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_custom_import_site
+msgid "Import Site"
+msgstr "استيراد الموقع"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_custom_import_status
+#: model:ir.model,name:custom_clearance.model_import_status
+msgid "Import Status"
+msgstr "حالة الاستيراد"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_custom_import_status
+msgid "Import status"
+msgstr "حالة الاستيراد"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_custom_import_site
+msgid "ImportSite"
+msgstr "استيراد الموقع"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_custom_import
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_import
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Imports"
+msgstr "واردات"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+#: selection:import.custom,stages:0
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Initial Bayan"
+msgstr "بيان الأولي"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__bayan_date
+msgid "Initial Bayan Date"
+msgstr "بيان الأولي التاريخ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__inspection
+msgid "Inspection Date"
+msgstr "تاريخ التفتيش"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__acc_link
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__acct_link
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__acc_link
+msgid "Invoice"
+msgstr "فاتورة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__job_no
+msgid "Job No"
+msgstr "وظيفة رقم"
+
+#. module: custom_clearance
+#: selection:export.custom,shipment_type:0
+#: selection:import.custom,shipment_type:0
+msgid "LCL"
+msgstr "LCL"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__len_Port
+msgid "Landing Port"
+msgstr "ميناء الهبوط"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree____last_update
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__write_uid
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_by_customer__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_gov_charges__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_field_officer__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_fleet__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_from_quote__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_gov_charges__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__write_date
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__mani_date
+msgid "Manifest Received Date"
+msgstr "تاريخ استلام البيان"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__model
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__model
+msgid "Model"
+msgstr "الكائن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__name
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: custom_clearance
+#: code:addons/custom_clearance/models/export_custom.py:80
+#: code:addons/custom_clearance/models/freight_forward.py:37
+#: code:addons/custom_clearance/models/import_custom.py:80
+#, python-format
+msgid "New"
+msgstr "جديد"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__custom_exam
+msgid "Open Custom Examination"
+msgstr "افتح الفحص المخصص"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__org_date
+msgid "Original DOC Received Date"
+msgstr "تاريخ استلام المستند الأصلي"
+
+#. module: custom_clearance
+#: model:ir.actions.act_window,name:custom_clearance.action_other_charges
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_other_charges
+#: model_terms:ir.ui.view,arch_db:custom_clearance.tree_other_charges
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_other_charges_form
+msgid "Other Charges"
+msgstr "رسوم أخرى"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_charges_des__name
+#: model:ir.model.fields,field_description:custom_clearance.field_export_other_charges__other_charge
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__other_charge
+msgid "Other Charges Description"
+msgstr "رسوم أخرى الوصف"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__our_job_no
+msgid "Our Job No"
+msgstr "لدينا وظيفة رقم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__plat_no
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__plat_no
+msgid "Plate No#"
+msgstr "لوحة لا#"
+
+#. module: custom_clearance
+#: selection:export.custom,state:0
+#: selection:import.custom,stages:0
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "Pre Bayan"
+msgstr "قبل بيان"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__pre_bayan
+msgid "Pre Bayan Date"
+msgstr "قبل بيان التاريخ"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__plate_registration
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__plate_registration
+msgid "Registration Type"
+msgstr "نوع التسجيل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__remark
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__remark
+msgid "Remarks"
+msgstr "ملاحظات"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__rot
+msgid "Rotation No Attach"
+msgstr "دوران لا نعلق"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__rot_number
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__rot_no
+msgid "Rotation Number/Sequence Number"
+msgstr "رقم الدوران / رقم التسلسل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__number
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__s_no
+msgid "SR No"
+msgstr "الأب رقم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__s_no
+msgid "SR No Type"
+msgstr "ريال لا اكتب"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__saddad
+msgid "Saddad"
+msgstr "Saddad"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__seq
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__seq
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__seq
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__seq
+msgid "Seq#"
+msgstr "Seq #
+"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_freight_forward_form
+msgid "Services"
+msgstr "الخدمات"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__shipment_type
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__shipment_type
+msgid "Shipment Type"
+msgstr "نوع الشحن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__s_supplier
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__s_supplier
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__s_supplier
+msgid "Shipping Line"
+msgstr "خط الشحن"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__shutl_start_date
+msgid "Shuttling Start Date"
+msgstr "تاريخ بدء المكوك"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__site
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__customer_site
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__site
+#: model:ir.ui.menu,name:custom_clearance.custom_clearance_submenu_import_site
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_import_site_form
+msgid "Site"
+msgstr "موقع"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__site_id
+msgid "Site Line"
+msgstr "من الخط"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_site__name
+msgid "Site Name"
+msgstr "من الاسم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__types
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__types
+msgid "Size"
+msgstr "الحجم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__stages
+msgid "Stages"
+msgstr "مراحل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__state
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__status
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__status_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__status
+#: model_terms:ir.ui.view,arch_db:custom_clearance.view_import_status_form
+msgid "Status"
+msgstr "الحالة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_status__name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_status__name
+msgid "Status Name"
+msgstr "اسم الحالة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__store
+msgid "Storage"
+msgstr "تخزين"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__store_charge
+msgid "Storage Charges"
+msgstr "رسوم التخزين"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_tree__stor_supp
+msgid "Storage Supplier"
+msgstr "مزود التخزين"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__tasdeer
+msgid "Tasdeer"
+msgstr "TASDEER"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__to
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__to
+msgid "To"
+msgstr "إلى"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_to_quote__name
+msgid "To Name"
+msgstr "إلى الاسم"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_freight_forward__trans
+msgid "Transportation"
+msgstr "نقل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__transporter
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__transporter
+msgid "Transporter"
+msgstr "الناقل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_tree__trans_chrg
+#: model:ir.model.fields,field_description:custom_clearance.field_import_tree__trans_chrg
+msgid "Transporter Charges"
+msgstr "رسوم النقل"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__vessel_date
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__vessel_date
+msgid "Vessel Arrival Date"
+msgstr "تاريخ وصول السفينة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_custom__vessel_name
+#: model:ir.model.fields,field_description:custom_clearance.field_import_custom__vessel_name
+msgid "Vessel Name"
+msgstr "اسم السفينة"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_export_car_carrier__year
+#: model:ir.model.fields,field_description:custom_clearance.field_import_car_carrier__year
+msgid "Year"
+msgstr "عام"
+
+#. module: custom_clearance
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_export_form_extend
+#: model_terms:ir.ui.view,arch_db:custom_clearance.custom_import_form_extend
+msgid "done"
+msgstr "القيام به"
+
+#. module: custom_clearance
+#: model:ir.model.fields,field_description:custom_clearance.field_import_other_charges__import_other_charges
+msgid "import Other Charge"
+msgstr "استيراد رسوم أخرى"
+
+#. module: custom_clearance
+#: selection:export.car.carrier,plate_registration:0
+#: selection:import.car.carrier,plate_registration:0
+msgid "بدون لوحة"
+msgstr ""
+
+#. module: custom_clearance
+#: selection:export.car.carrier,plate_registration:0
+#: selection:import.car.carrier,plate_registration:0
+msgid "لوحة أخرى "
+msgstr ""
+
+#. module: custom_clearance
+#: selection:export.car.carrier,plate_registration:0
+#: selection:import.car.carrier,plate_registration:0
+msgid "لوحة سعودية"
+msgstr ""
+

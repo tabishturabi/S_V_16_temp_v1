@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="helpdesk_stage_view_form_inherit_help_op" model="ir.ui.view">
+            <field name="name">helpdesk.stage.view.form.inherit</field>
+            <field name="model">helpdesk.stage</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_stage_view_form"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                    <field name="is_re_open" />
+                    <field name="is_closed" />
+                </field>
+                
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_bsg_helpdesk_form_inherit">
+            <field name="name">view_bsg_helpdesk_ticket_form_inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="user" string="User Name" readonly="1" />
+                    <field name="branch" string="Branch" readonly="1" />
+                    <field name="emp_id" readonly="1" />
+                    <field name="department_id" readonly="1" />
+                    <field name="trip" />
+                    <field name="so" />
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="app_name_id" attrs="{'required':[('team_id','=',4)]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                    <field name="type_id" attrs="{'required':[('team_id','=',4)]}" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                    <field name="importance" />
+                    <field name="root_cause_id" />
+                    <field name="attachment_id" widget="many2many_binary" invisible="1"/>
+                     <field name="customer_mobile" />
+                    <field name="user_last_response" />
+                </xpath>
+            </field>
+        </record>
+_
+        <record id="action_helpdesk_redirect_to_support_page" model="ir.actions.act_url">
+            <field name="name">IT SUpport</field>
+            <field name="target">new</field>
+            <field name="url">/my/tickets</field>
+        </record>
+
+        <!-- <menuitem id="menue_root_helpdesk_redirect_to_support_page"
+            name="IT Support"
+            web_icon="bsg_helpdesk_operations,static/description/it_support.png"
+            action="action_helpdesk_redirect_to_support_page"
+            groups="bsg_helpdesk_operations.group_can_access_portal_tickets"
+            sequence="30"/> -->
+    </data>
+</odoo>
+<!-- domain = "[('department_id','=',user_id.id.employee_id.department_id)]" -->

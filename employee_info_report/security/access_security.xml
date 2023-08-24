@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       	<record model="res.groups" id="group_view_employee_reports">
+            <field name="name">Employee Reports</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+    </data>
+</odoo>

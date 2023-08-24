@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_hr_custom_management">
+            <field name="name">HR Management</field>
+            <field name="description">HR Management</field>
+            <field name="sequence">23</field>
+        </record>
+                <record model="res.groups" id="group_government_relation">
+            <field name="name">Government Relation</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_view_all_employees">
+            <field name="name">View All Employees</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_view_all_payroll">
+            <field name="name">View All Payroll</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_archive_employee">
+            <field name="name">Archive Employee</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_iqama_read">
+            <field name="name">Iqama View Only</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+         <record model="res.groups" id="group_iqama_update">
+            <field name="name">Iqama Edit</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+         <record model="res.groups" id="group_bank_read">
+            <field name="name">Bank View Only</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_bank_update">
+            <field name="name">Bank Edit</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_nid_read">
+            <field name="name">NID View Only</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_nid_update">
+            <field name="name">NID Edit</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_passport_read">
+            <field name="name">Passport Viw Only</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_passport_update">
+            <field name="name">Passport Edit</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_hr_specialist">
+            <field name="name">Hr Specialist</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_hr_manager">
+            <field name="name">Hr Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_branch_supervisor">
+            <field name="name">Branch Supervisor</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_department_supervisor">
+            <field name="name">Department Supervisor</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_area_manager">
+            <field name="name">Area Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_branches_department_manager">
+            <field name="name">Branches Department Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_department_manager">
+            <field name="name">Department Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_vice_execution_manager">
+            <field name="name">vice Execution Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_finance_manager">
+            <field name="name">Finance Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_internal_audit_manager">
+            <field name="name">Internal Audit Manager</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_extend_trial_period">
+            <field name="name">Extend Trial Period</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+        <record model="res.groups" id="group_top_management_secretary">
+            <field name="name">Top Management Secretary</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_change_emp_state">
+            <field name="name">Change Employee State</field>
+            <field name="category_id" ref="module_hr_custom_management"/>
+        </record>
+
+        <record model="res.groups" id="group_incentive_reports">
+            <field name="name">Incentive Reports Group</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_holidays.menu_hr_holidays_approvals">
+            <field name="groups_id" eval="[(6,0,[ref('hr_holidays.group_hr_holidays_manager'),ref('bsg_hr.group_department_manager'),
+                                                ref('hr_holidays.group_hr_holidays_user')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="hr_holidays.menu_open_department_leave_approve">
+            <field name="groups_id" eval="[(6,0,[ref('hr_holidays.group_hr_holidays_manager'),ref('bsg_hr.group_department_manager'),
+                                                ref('hr_holidays.group_hr_holidays_user')])]"/>
+        </record>
+                <record model="ir.ui.menu" id="hr_holidays.menu_hr_holidays_my_leaves">
+            <field name="groups_id" eval="[(6,0,[ref('hr_holidays.group_hr_holidays_manager'),ref('bsg_hr.group_department_manager'),
+                                                ref('hr_holidays.group_hr_holidays_user')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="hr_holidays.hr_holidays_menu_manager_approve_allocations">
+            <field name="groups_id" eval="[(6,0,[ref('hr_holidays.group_hr_holidays_manager'),ref('bsg_hr.group_department_manager'),
+                                                ref('hr_holidays.group_hr_holidays_user')])]"/>
+        </record>
+    </data>
+</odoo>

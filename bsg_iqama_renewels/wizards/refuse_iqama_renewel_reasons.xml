@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+       <record model="ir.ui.view" id="refuse_iqama_renewel_form">
+       <field name="name">wizard.iqama.renewel.form</field>
+       <field name="model">wizard.iqama.renewel</field>
+       <field name="arch" type="xml">
+          <form>
+              <field name="iqama_renewel_id" invisible="1"></field>
+              <label for="refusal_reason" string="Reason To Refuse Employee Mandate Request"></label>
+              <field name="refusal_reason"></field>
+               <footer>
+                   <button name="click_refuse" string="Refuse" type="object"
+                                confirm="Are You sure you want to refuse?" class="btn-primary"/>
+                   <button string="Cancel" special="cancel" class="btn-seconday"/>
+               </footer>
+          </form>
+      </field>
+       </record>
+        <record id="iqama_renewel_refusal_wizard" model="ir.actions.act_window">
+            <field name="name">Reason To Refuse</field>
+            <field name="type">ir.actions.act_window</field>
+<!--            <field name="src_model">employee.mandate.request</field>-->
+            <field name="res_model">wizard.iqama.renewel</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="refuse_iqama_renewel_form"></field>
+            <field name="context">{'default_iqama_renewel_id':active_id}</field>
+            <field name="target">new</field>
+        </record>
+  </data>
+</odoo>

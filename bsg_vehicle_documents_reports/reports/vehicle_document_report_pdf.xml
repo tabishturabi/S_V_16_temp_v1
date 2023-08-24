@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="vehicle_document_report_pdf_id"
+                model="vehicle.documents.report.wizard"
+                string="Vehicle Documents Report"
+                report_type="qweb-pdf"
+                name="bsg_vehicle_documents_reports.vehicle_doc_report_pdf"
+                file="bsg_vehicle_documents_reports.vehicle_doc_report_pdf"/>
+    <template id="external_layout_standard">
+          <div class="header">
+              <div class="row">
+                  <div class="col-3 mb4">
+                          <img src="bsg_vehicle_documents_reports/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                  </div>
+              </div>
+          </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+              <div class="text-center" style="border-top: 1px solid black;">
+                  <ul class="list-inline mb4">
+                      <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>
+                      <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                  </ul>
+                  <div t-if="report_type == 'pdf'" class="text-muted">
+                      Page: <span class="page"/> - <span class="topage"/>
+                  </div>
+              </div>
+          </div>
+      </template>
+      <template id="vehicle_doc_report_pdf">
+        <t t-call="web.html_container">
+             <t t-call="bsg_vehicle_documents_reports.external_layout_standard">
+                    <h2>Vehicle Documents Report</h2>
+             </t>
+        </t>
+    </template>
+</odoo>

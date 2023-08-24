@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+<record id="extends_view_vehicle_cargo_sale_form" model="ir.ui.view">
+            <field name="name">extends_view_vehicle_cargo_sale_form</field>
+            <field name="model">bsg_vehicle_cargo_sale</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+            <field name="arch" type="xml">
+                <field name="loc_from" position="after">
+                    <field name="gps_location_from"/>
+                    <field name="gps_time"/>
+                </field>
+                <field name="loc_to" position="after">
+                    <field name="gps_location_to"/>
+                    <field name="gps_distance"/>
+                </field>
+                <xpath expr="//field[@name='other_service_line_ids']/form" position="inside">
+                    <group>
+                        <field name="home_location"/>
+                        <field name="pickup_location"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="branch_satha_online_service_contacts">
+        <field name="name">branch.stha.oline.service.contacts</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='branch_team']" position="after">
+                <page name="branch_owner" string="Satha online service contatcs">
+                    <group>
+                   <group>
+                       <field name="contact_numbers"></field>
+                   </group>
+                </group>
+                </page>
+            </xpath>
+        </field>
+      </record>
+        
+    </data>
+    </odoo>

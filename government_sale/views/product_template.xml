@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="product_template_sale_government" model="ir.ui.view">
+            <field name="name">product.template.sale.government</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="is_government"/>
+                        <label for="is_government"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+
+</odoo>

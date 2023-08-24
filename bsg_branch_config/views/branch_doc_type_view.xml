@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+    <!-- form view -->
+	    <record model="ir.ui.view" id="bsg_branch_doc_type_view_form">
+	      <field name="name">Branch Document Type</field>
+	      <field name="model">bsg.branch.doc.type</field>
+	      <field name="arch" type="xml">
+	        <form>
+	          <sheet string="Branch Document Type">
+				<group>
+					<field name="branch_doc_type" required="1"/>
+				</group>
+	          </sheet>
+	        </form>
+	      </field>
+	    </record>
+
+	    <!-- Tree view -->
+	    <record model="ir.ui.view" id="bsg_branch_doc_type_tree">
+	      <field name="name">Branch Document Type</field>
+	      <field name="model">bsg.branch.doc.type</field>
+	      <field name="arch" type="xml">
+	        <tree string="Branch Document Type">
+	          <field name="branch_doc_type"/>
+	        </tree>
+	      </field>
+	    </record>
+
+	    <!-- actions opening views on models -->
+	    <record model="ir.actions.act_window" id="bsg_branch_doc_type_action">
+	      <field name="name">Branch Document Type</field>
+	      <field name="res_model">bsg.branch.doc.type</field>
+	      <field name="view_mode">tree,form</field>
+	      <field name="view_id" ref="bsg_branch_doc_type_tree" />
+	    </record>
+
+	    <menuitem id="menu_branch_doc_type_config" name="Branch Document Type" parent="bsg_branch_config.bsg_branches_menu_1" action="bsg_branch_doc_type_action" sequence="4"/>
+	</data>
+</odoo>

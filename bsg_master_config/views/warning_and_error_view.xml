@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_view_error_and_view" model="ir.ui.view">
+            <field name="name">bsg.warning.error.form</field>
+            <field name="model">bsg.warning.error</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Warning And Error">
+<!--                     	<button name="checkerror" type="object"  string="Error"></button> -->
+                        <div class="oe_title">
+                            <label for="message_id" class="oe_edit_only" />
+                            <h1>
+                                <field name="message_id" class="oe_inline" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="message_code" />
+                                <field name="message_arabic" />
+                            </group>
+                            <group>
+                                <field name="message_english" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_view_error_and_warning" model="ir.ui.view">
+            <field name="name">Warning And Error</field>
+            <field name="model">bsg.warning.error</field>
+            <field name="arch" type="xml">
+                <tree string="Warning And Error">
+                    <field name="message_id" />
+                    <field name="message_code" />
+                </tree>
+            </field>
+        </record>
+        
+     <record id="bsg_warning_error_search" model="ir.ui.view">
+     <field name="name">bsg_warning_error_view_search	</field>
+     <field name="model">bsg.warning.error</field>
+     <field name="arch" type="xml">
+      <search string="Search Price Line">
+           <field name="message_id" string="Message ID"/>
+           <field name="message_code" string="Message Code"/>
+       </search>
+     </field>
+   </record>
+        
+        <record id="action_error_and_warning" model="ir.actions.act_window">
+            <field name="name">Warning And Error</field>
+            <field name="res_model">bsg.warning.error</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_view_error_and_warning" />
+        </record>
+        <menuitem action="action_error_and_warning" id="menu_warning_and_error" parent="bsg_master_config.root_configuration_menu" name="Warning and Errors" sequence="4" />
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="employee_payslip_report_xlsx_id"
+                model="employee.payslip.report.wizard"
+                string="Employee Payslip Report"
+                report_type="xlsx"
+                name="bsg_employee_payslip_report.employee_payslip_report_xlsx"
+                file="bsg_employee_payslip_report.employee_payslip_report_xlsx"/>
+</odoo>

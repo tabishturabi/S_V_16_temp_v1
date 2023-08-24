@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="employee_eos_vacation_rule" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="sequence" eval="200"/>
+            <field name="amount_fix" eval="0.0"/>
+            <field name="code">EOSV</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">End of Service Vacation</field>
+<!--            <field name="struct_id" ref="hr_payroll.structure_002"/>-->
+
+        </record>
+        <record id="employee_eos_rule" model="hr.salary.rule">
+            <field name="amount_select">fix</field>
+            <field name="sequence" eval="200"/>
+            <field name="amount_fix" eval="0.0"/>
+            <field name="code">EOS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">End of Service</field>
+<!--            <field name="struct_id" ref="hr_payroll.structure_002"/>-->
+
+
+        </record>
+    </data>
+</odoo>

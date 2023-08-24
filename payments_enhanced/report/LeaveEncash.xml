@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report 
+        id="action_encash_report" 
+        model="employee.encash" 
+        string="Leave Encash Report"
+        report_type="qweb-pdf"
+        name="out_leave_form.report_encash" 
+        file="out_leave_form.report_encash"
+     />
+ 
+ <template id="report_encash">
+     <t t-call="report.html_container">
+            <div class="page">
+               <div class="col-xs-12"> 
+            
+                <table style="border:1px solid black;" class="table table-condensed">
+                 <thead>
+                     <th width="5%" style="border:1px solid black;" class="text-center"><strong>Dept:</strong></th>              
+                     <th width="15%" style="border:1px solid black;" class="text-center"><strong>EMP ID</strong></th>
+                     <th width="30%" style="border:1px solid black;" class="text-center"><strong>Employee name</strong></th>
+                     <th width="30%" style="border:1px solid black;" class="text-center"><strong>Designation</strong></th>
+                     <th width="10%" style="border:1px solid black;" class="text-center"><strong>Gross Salary</strong></th>
+                     <th width="10%" style="border:1px solid black;" class="text-center"><strong>Cashable Leaves</strong></th>
+                     <th width="5%" style="border:1px solid black;" class="text-center"><strong>Amount</strong></th>
+ 
+                 </thead>
+                 
+             <tbody>
+             
+        <!-- 
+                 <t t-set="count" t-value="0"/> -->
+                <t t-set="serial" t-value="0"/>
+                    <t t-set="total" t-value="0" />
+                        <t t-set="amt" t-value="0" />
+                        <t t-set="amt1" t-value="0" />
+                        
+                <t t-foreach="encash_ids" t-as="encash">
+                         <t t-set="count" t-value="0"/>
+                         <t t-set="serial" t-value="0"/>
+                       <t t-set="sum1" t-value="0" />
+                        <t t-set="amt2" t-value="0" />
+                         
+                         <t t-if="len(encash.dep) &lt;= 1">
+                             <t t-foreach="emp_id" t-as="emp">
+                                     
+                                                                      
+                                 <t t-if="encash.dep == emp.department_id">
+                               
+                                    <t t-if="count == 0">
+                                        <tr>
+                                      
+                                       <td width="8%" style="border:1px solid black;" class="text-center">
+                                            
+                                            <th><t t-esc= "emp.department_id.name"/></th>
+                                       </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                        
+                                    </t>
+                                  <t t-set="count" t-value="1"/>
+                                <t t-set="serial" t-value="serial+1"/>
+                                
+                                <tr>
+                                  <td width="5%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-esc="serial"/>
+                                        
+                                    </td> 
+                           
+                                    <td width="10%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-field="emp.employe_code"/>
+                                        
+                                    </td> 
+                                    
+                                    
+                                    <td width="30%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-field="emp.name"/>
+                                        
+                                    </td>
+                                    
+                                    
+                                    <td width="30%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-field="emp.job_id"/>
+                                        
+                                    </td>
+                                    
+                                    
+                                    <td width="10%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-field="emp.contract_id.wage"/>
+                                            
+                                            <t t-set="sum1" t-value="sum1+emp.contract_id.wage" />
+                                            <t t-set="total" t-value="total+emp.contract_id.wage" />
+                         
+                                        
+                                    </td>
+                                    
+                                    <t t-foreach="encash.encash_line" t-as="eline">
+                                        <t t-if="eline.emp_name == emp.name">
+                                       
+                                            <td width="10%" style="border:1px solid black;" class="text-center">
+                        
+                                                  <span t-field="eline.cash"/> 
+                                                 
+                                                
+                                            </td>
+                                            <td width="10%" style="border:1px solid black;" class="text-center">
+                        
+                                                  <span t-esc="round(emp.contract_id.wage/30.42*eline.cash)"/>                                                    
+                                                <t t-set="amt1" t-value="amt1+round(emp.contract_id.wage/30.42*eline.cash)" />
+                                                <t t-set="amt2" t-value="amt2+round(emp.contract_id.wage/30.42*eline.cash)" />
+                                            </td>
+                                            
+                                        </t>
+                                    </t>
+                                
+                                </tr>
+                                
+                           
+                                
+                                
+                                
+                                 </t>  
+                                 </t> 
+                                 
+                                <tr  style="border:1px solid black;" >
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center">
+                                         <b>Dept Total:</b>
+                                   </td>
+                                    <td></td>
+                                    
+                                    <td width="10%"  class="text-center">
+                        
+                                                  <b><span t-esc="'{:,.2f}'.format(sum1)"/></b>                                                    
+                                                
+                                            </td>
+                                    <td></td>
+                                   <td width="10%"  class="text-center">
+                        
+                                                  <b><span t-esc="'{:,.2f}'.format(amt2)"/></b>                                                    
+                                                
+                                            </td>
+                                </tr> 
+                                <t t-set="sum1" t-value="0" />
+                                <t t-set="amt2" t-value="0" />
+                               
+                            </t>
+                            
+                            
+                            
+                            
+                            
+                             <t t-if="not len(encash.dep) &lt;= 1"> 
+                           
+                                <t t-foreach="encash.dep" t-as="encashdep">
+                                <t t-set="count" t-value="0"/>
+                                 <t t-set="serial" t-value="0"/>
+                               
+                                    <t t-foreach="emp_id" t-as="emp">
+                                   
+                                 
+                                 
+                                     <t t-if="encashdep == emp.department_id">
+                                        <t t-if="count == 0">
+                                            <tr>
+                                           <td width="8%" style="border:1px solid black;" class="text-center">
+                                                
+                                                <th><t t-esc= "emp.department_id.name"/></th>
+                                                
+                                           </td>
+                                           </tr>
+                                            
+                                        </t>
+                                        <t t-set="count" t-value="1"/>
+                                        <t t-set="serial" t-value="serial+1"/>
+                                    
+                                        <tr>
+                                          <td width="5%" style="border:1px solid black;" class="text-center">
+                        
+                                                    <span t-esc="serial"/>
+                                                
+                                            </td> 
+                                            
+                                   
+                                            <td width="10%" style="border:1px solid black;" class="text-center">
+                        
+                                                    <span t-field="emp.employe_code"/>
+                                                
+                                            </td> 
+                                            
+                                            
+                                            <td width="30%" style="border:1px solid black;" class="text-center">
+                        
+                                                    <span t-field="emp.name"/>
+                                                
+                                            </td>
+                                            
+                                            
+                                            <td width="30%" style="border:1px solid black;" class="text-center">
+                        
+                                                    <span t-field="emp.job_id"/>
+                                                
+                                            </td>
+                                            
+                                            
+                                            <td width="10%" style="border:1px solid black;" class="text-center">
+                        
+                                                    <span t-field="emp.contract_id.wage"/>
+                                                     <t t-set="sum1" t-value="sum1+emp.contract_id.wage" />
+                                                    <t t-set="total" t-value="total+emp.contract_id.wage" />
+                                            </td>
+                                            
+                                            <t t-foreach="encash.encash_line" t-as="eline">
+                                                <t t-if="eline.emp_name == emp.name">
+                                                    <td width="10%" style="border:1px solid black;" class="text-center">
+                                
+                                                          <span t-field="eline.cash"/> 
+                                                          <field name="encash.encash_line.cash"
+                                                          
+                                                          />    
+                                                        
+                                                    </td>
+                                                    
+                                                    <td width="10%" style="border:1px solid black;" class="text-center">
+                                
+                                                          <span t-esc="round(emp.contract_id.wage/30.42*eline.cash)"/>    
+                                                        <t t-set="amt1" t-value="amt1+round(emp.contract_id.wage/30.42*eline.cash)" />
+                                                          <t t-set="amt2" t-value="amt2+round(emp.contract_id.wage/30.42*eline.cash)" />
+                                                       <!-- <t t-set="test_sum" t-value="0"/>
+                                                    <t t-foreach='emp_id' t-as="i"> 
+                                                   <t t-set="test_sum" t-value="test_sum+i"/> 
+ 
+                                                    <h1>RESULT=<t t-esc="test_sum"/></h1> -->
+                                                        
+                                            <!-- --> 
+                                                    </td>
+                                                    
+                                                  
+                                                </t>
+                                            </t>
+                                        
+                                        </tr>
+                                        
+                                    
+                                     </t> 
+                                </t>
+                                <tr>
+                                   <td></td>
+                                   <td></td>
+                                   <td class="text-center">
+                                         <b>Dept Total:</b>
+                                   </td>
+                                 <td></td>
+                                  
+                                    
+                                    <td width="10%"  class="text-center">
+                                
+                                        <b><span t-esc="'{:,.2f}'.format(sum1)"/></b>  
+                                    </td>
+                                    
+                                    
+                                    <td></td>
+                                    <td width="10%"  class="text-center">
+                                
+                                      <b><span t-esc="'{:,.2f}'.format(amt2)"/></b>
+                                    </td>
+                                </tr>
+                                <t t-set="sum1" t-value="0" />
+                                <t t-set="amt2" t-value="0" />
+                             </t> 
+                        </t>
+                        <!-- end of 2nd check -->
+                             
+                                 
+                           
+                        </t>
+                    <tr  style="border:1px solid black;" >
+                        <td></td>
+                        <td></td>
+                       <td class="text-center">
+                                         <b>Grand Total:</b>
+                                   </td>
+                        <td></td>
+                         <td width="10%"  class="text-center">
+                                
+                                        <b><span t-esc="'{:,.2f}'.format(total)"/></b>  
+                                    </td>
+                        <td></td>
+                        <td width="10%"  class="text-center">
+                                
+                                        <b><span t-esc="'{:,.2f}'.format(amt1)"/></b>  
+                                    </td>
+                    </tr>
+  
+             </tbody>
+                 
+                 
+         </table>            
+             
+             
+             </div>
+         
+   
+              
+             </div>  
+             
+             
+             
+             
+             
+             
+              <!-- Summary -->
+             
+             
+             
+             
+            <div style="page-break-inside: auto"></div>
+                       
+            <div class="page">
+                <table style="border:1px solid black;" class="table table-condensed">
+                         <div class="col-xs-12" align="center">
+                        <h2> Summary of Yearly Encash Leaves </h2>
+                         </div>
+                 <thead>
+       <!--               <th width="10%" style="border:1px solid black;" class="text-center"><strong>Sr #:</strong></th>   -->            
+                     <th width="30%" style="border:1px solid black;" class="text-center"><strong>Department:</strong></th><!-- <span t-esc="sdep"/></th>               -->
+                     <th width="20%" style="border:1px solid black;" class="text-center"><strong>Employees</strong></th>
+                     <th width="15%" style="border:1px solid black;" class="text-center"><strong>Gross Salary</strong></th>
+                     <th width="15%" style="border:1px solid black;" class="text-center"><strong>Total Amount</strong></th>
+                     <th width="20%" style="border:1px solid black;" class="text-center"><strong>Percentage</strong></th>
+ 
+                 </thead>
+                   
+             
+             <tbody>  
+                             <t t-foreach="dept" t-as="de">
+              
+                              <tr>
+                                  <td width="30%" style="border:1px solid black;" class="text-center">
+                
+                                            <span t-esc="de['Department']"/>
+                                        
+                                    </td> 
+                                    
+                                     <td width="20%" style="border:1px solid black;" class="text-center">
+                        
+                                                   <span t-esc="de['Empcount']"/>
+                                        </td>
+                                
+                                
+                                
+                                        <td width="15%" style="border:1px solid black;" class="text-center">
+                        
+                                                   <span t-esc="'{:,.2f}'.format(de['Salary'])"  />
+                                        </td>
+                                        
+                                       
+                                        <td width="15%" style="border:1px solid black;" class="text-center">
+                        
+                                                   <span t-esc="'{:,.2f}'.format(de['Amount'])"/>
+                                        </td>
+                                        <td width="20%" style="border:1px solid black;" class="text-center">
+                        
+                                                        <span t-esc="de['Percentage']"/>
+                                        </td>
+                                    
+                            </tr>
+                                    
+                     </t>
+             </tbody>
+          
+             
+             
+</table>             
+                            
+                       
+</div>
+ </t>
+ 
+ </template>
+ </odoo>

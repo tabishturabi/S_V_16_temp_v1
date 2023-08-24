@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+         <record id="groups_payslip_monthly_variable_reports" model="res.groups">
+              <field name="name">Payslip Monthly Variables Reports</field>
+              <field name="comment">The user will have access to Payslip Monthly Variables Reports menu.</field>
+              <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+          </record>
+    </data>
+</odoo>

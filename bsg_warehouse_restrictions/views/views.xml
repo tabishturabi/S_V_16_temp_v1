@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_warehouse_restruction_res_users_form_inherit">
+            <field name="name">view.warehouse.restruction.res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[2]" position="after">
+                    <page name="warehouse_details" string="Warehouse Restrictions">
+                        <group>
+                            <field name="stock_warehouse_ids" widget="many2many_tags"/>
+                            <field name="stock_warehouse_id" domain="[('id','in',stock_warehouse_ids)]"/>
+
+                            <field name="picking_type_ids" widget="many2many_tags"
+                                   domain="[('warehouse_id','in',stock_warehouse_ids)]"/>
+                            <field name="default_picking_type_ids" invisible="1"/>
+
+                            <field name="stock_location_ids" widget="many2many_tags"
+                                   context="{'stock_warehouse_ids':stock_warehouse_ids,'is_user_search':True}"/>
+                            <field name="partner_location_ids" widget="many2many_tags"/>
+                            <field name="default_location_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="current_location_ids" widget="many2many_tags" invisible="1"/>
+
+                            <!--field name="default_product_ids" invisible="1"/-->
+                            <!--field name="default_product_template_ids" invisible="1"/-->
+                        </group>
+                    </page>
+                    <page name="product_categ_details" string="Product Category">
+                        <field name="product_category_ids"/>
+                    </page>
+                    <page name="product_details" string="Allowed Products">
+                        <field name="product_ids" domain="[('categ_id','child_of',product_category_ids)]"/>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="stock_view_location_form_inherit_restruction" model="ir.ui.view">
+            <field name="name">stock.view.location.form.inherit.restruction</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <field name="location_id" position="replace">
+                    <field name="location_id" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+
+        <!-- ################Add User Warhouse  For All View#######################-->
+        <!-- ##############P.R###################-->
+        <record id="view_purchase_req_form_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.form.restruction.inherit</field>
+            <field name="model">purchase.req</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='preq_line']/form" position="inside">
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/form/group/group/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/tree/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_purchase_req_form_approved_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.form.restruction.inherit</field>
+            <field name="model">purchase.req</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_form_approved"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='preq_line']/form" position="inside">
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/form/group/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/tree/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_purchase_req_advisor_form_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.form.restruction.inherit</field>
+            <field name="model">purchase.req</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_advisor_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='preq_line']/form" position="inside">
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/form/group/group/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='preq_line']/tree/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_purchase_req_form_line_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.form.line.restruction.inherit</field>
+            <field name="model">purchase.req.line</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_form_line"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="part_number"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ########################P.R##########################-->
+        <!--#########################Inventory#########################-->
+        <record id="view_purchase_transfer_form_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.transfer.form.restruction.inherit</field>
+            <field name="model">purchase.transfer</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_transfer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_line']/tree" position="inside">
+                    <field name="request_type" readonly="1" force_save="1"/>
+
+                    <field name="allow_picking_type_id" widget="many2many_tags" invisible="1"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="trans_picking_type_id"
+                           domain="[('id','in',allow_picking_type_id),('not_in_pr','!=',True)]"
+                           attrs="{'readonly':[('state','in',['close','done'])]}"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='purchase_line']/tree/field[@name='product_id']" position="after">
+                    <field name="part_number" attrs="{'column_invisible':[('parent.request_type','!=','workshop')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_purchase_req_transfer_form_line_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.transfer.form.line.restruction.inherit</field>
+            <field name="model">purchase.transfer.line</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_transfer_form_line"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="part_number"/>
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+        <!--#########################Inventory#########################-->
+
+        <!--#########################Purchase#########################-->
+        <record id="view_purchase_req_rec_form_line_restruction_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.req.rec.form.line.restruction.inherit</field>
+            <field name="model">purchase.req.rec.line</field>
+            <field name="inherit_id" ref="purchase_enhanced.view_purchase_req_rec_form_line"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="user_warehouse_id" attrs="{'readonly':[('state','in',['close','done'])]}"
+                           groups="purchase_enhanced.purchase_req_tech_support"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+        <!--#########################Purchase#########################-->
+
+
+        <!-- ################End Of Add User Warhouse  For All View#######################-->
+
+
+        <!-- add new filed for products -->
+        <record id="product_template_only_form_view_restruction" model="ir.ui.view">
+            <field name="name">product.template.only.form.view.restruction</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="is_out_of_restruction"/>
+                        <label for="is_out_of_restruction"/>
+                        <br/>
+                        <field name="without_approve"/>
+                        <label for="without_approve"/>
+                        <br/>
+                        <field name="is_for_branch"/>
+                        <label for="is_for_branch"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="product_template_only_form_view_add_field" model="ir.ui.view">
+            <field name="name">product.template.only.form.view.add.field</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_code']" position="after">
+                    <field name="part_number"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_product_category_form_view_restruction" model="ir.ui.view">
+            <field name="name">inherit.product.category.form.view.restruction</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="not_use_in_pr"/>
+                </field>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

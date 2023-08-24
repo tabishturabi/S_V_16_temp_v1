@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="vehicle_driver_assign_report_xlsx_id"
+                model="driver.assign.report"
+                string="Vehicle Driver Assignment Report"
+                report_type="xlsx"
+                name="bsg_vehicle_driver_assign_reports.driver_assign_xlsx"
+                file="Vehicle Driver Assignment Report"/>
+</odoo>

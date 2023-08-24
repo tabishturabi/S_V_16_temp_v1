@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+
+        <!-- Form View  -->
+        <record model="ir.ui.view" id="view_cargo_payment_method_form">
+            <field name="name">cargo_payment_method.form</field>
+            <field name="model">cargo_payment_method</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="payment_method_name"/>
+                            </h1>
+                        </div>
+                        <group name="top">
+                            <group name="left">
+                                <field name="partner_type_id"
+                                       attrs="{'required':[('payment_type','in',['cash', 'pod'])],'invisible':[('payment_type','=','credit')]}"/>
+                                <field name="extra_charges"/>
+                                <field name="code" force_save="1"/>
+                            </group>
+                            <group name="right">
+                                <field name="payment_type" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record model="ir.ui.view" id="view_cargo_payment_method_tree">
+            <field name="name">cargo_payment_method.tree</field>
+            <field name="model">cargo_payment_method</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="false">
+                    <field name="payment_method_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action  -->
+        <record model="ir.actions.act_window" id="action_cargo_payment_method">
+            <field name="name">Cargo Payment Method</field>
+            <field name="res_model">cargo_payment_method</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Cargo Payment Config"
+                  id="cargo_payment_method_meunu"
+                  parent="sale.sale_menu_root"
+                  action="action_cargo_payment_method"
+                  sequence="100"
+                  groups="base.group_erp_manager,bsg_cargo_sale.group_branch_and_region_config"
+        />
+    </data>
+</odoo>

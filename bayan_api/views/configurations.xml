@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_bayan_plate_type_config" model="ir.ui.view">
+            <field name="name">bayan.plate.type.config.form</field>
+            <field name="model">bayan.plate.type.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Bayan Data">
+                        <group>
+                            <group>
+                                <field name="bayan_id"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_bayan_plate_type_config" model="ir.ui.view">
+            <field name="name">bayan.plate.type.config.tree</field>
+            <field name="model">bayan.plate.type.config</field>
+            <field name="arch" type="xml">
+                <tree string="Bayan">
+                    <field name="bayan_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_bayan_plate_type_config" model="ir.ui.view">
+            <field name="name">search.bayan.plate.ype.config</field>
+            <field name="model">bayan.plate.type.config</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="bayan_id"/>
+                    <field name="name"/>
+                </search>
+
+            </field>
+        </record>
+
+        <record id="form_goods_type_config" model="ir.ui.view">
+            <field name="name">form.goods.type.config</field>
+            <field name="model">bayan.good.type.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Bayan Good Type">
+                        <group>
+                            <group>
+                                <field name="good_id"/>
+                                <field name="good_name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_bayan_goods_type_config" model="ir.ui.view">
+            <field name="name">tree.bayan.goods.type.config</field>
+            <field name="model">bayan.good.type.config</field>
+            <field name="arch" type="xml">
+                <tree string="Bayan">
+                    <field name="good_id"/>
+                    <field name="good_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_bayan_goods_type_config" model="ir.ui.view">
+            <field name="name">search.bayan.goods.type.config</field>
+            <field name="model">bayan.good.type.config</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="good_id"/>
+                    <field name="good_name"/>
+                </search>
+
+            </field>
+        </record>
+
+        <record id="action_bayan_plate_type_config" model="ir.actions.act_window">
+            <field name="name">Bayan Plate Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bayan.plate.type.config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="search_bayan_plate_type_config"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_bayan_plate_type_config')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_bayan_plate_type_config')})]"/>
+        </record>
+        <record id="action_bayan_goods_type_config" model="ir.actions.act_window">
+            <field name="name">Bayan Goods Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bayan.good.type.config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="search_bayan_goods_type_config"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_bayan_goods_type_config')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_goods_type_config')})]"/>
+        </record>
+
+        <menuitem id="menu_action_bayan_plate_type_config_root"
+                  parent="bsg_master_config.root_configuration_menu" name="Bayan Configuration"/>
+        <menuitem action="action_bayan_plate_type_config" id="menu_action_bayan_plate_type_config"
+                  parent="bayan_api.menu_action_bayan_plate_type_config_root" name="Bayan Plate Type"/>
+        <menuitem action="action_bayan_goods_type_config" id="menu_action_bayan_goods_type_config"
+                  parent="bayan_api.menu_action_bayan_plate_type_config_root" name="Bayan Goods Type"/>
+
+    </data>
+</odoo>

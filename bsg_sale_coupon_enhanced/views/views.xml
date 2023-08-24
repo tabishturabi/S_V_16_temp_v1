@@ -1,0 +1,167 @@
+<odoo>
+  <data>
+
+
+    <record id="sale_coupon_program_view_form_common_cargo_inherit" model="ir.ui.view">
+      <field name="name">sale.coupon.program.common.form.cargo.inherit</field>
+      <field name="model">loyalty.program</field>
+      <field name="inherit_id" ref="loyalty.loyalty_program_view_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='button_box']" position="inside">
+              <button class="oe_stat_button" type="object" icon="fa-usd" name="action_view_cargo_sales_orders">
+                <field name="cargo_order_count" string="Cargo's" widget="statinfo"/>
+              </button>
+        </xpath>
+        <field name="company_id" position="after">
+          <field name="is_with_order_taxes" />
+        </field>
+<!--        Migration Note-->
+<!--        <field name="discount_specific_product_id" position="replace">-->
+<!--          <field name="discount_specific_product_id" widget="many2many_tags" attrs="{'invisible': ['|', '|', ('discount_apply_on', '!=', 'specific_product'),('discount_type', '!=', 'percentage'), ('reward_type', 'in', ('product', 'free_shipping'))], 'required': [('reward_type', '=', 'discount'),('discount_apply_on', '=', 'specific_product'),('discount_type', '=', 'percentage')]}" placeholder="Select product"/>-->
+<!--        </field>-->
+        <xpath expr="//sheet" position="inside">
+          <notebook>
+            <page name="cargo_condition" string="Cargo Conditions">
+              <group>
+                <field name="payment_method_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_open': True}"/>
+                <field name="agreement_type" options="{'no_create_edit': True, 'no_open': True}"/>
+                <field name="partner_types" widget="many2many_tags" options="{'no_create_edit': True, 'no_open': True}"/>
+                <field name="shipment_type" options="{'no_create_edit': True, 'no_open': True}"/>
+                <field name="location_domain"/>
+                <field name="loc_from_ids" attrs="{'invisible':[('location_domain','!=',True)]}" options="{'no_create_edit': True, 'no_open': True}">
+                  <tree editable="bottom">
+                    <field name="route_waypoint_seq"/>
+                    <field name="route_waypoint_name"/>
+                    <field name="location_type"/>
+                    <field name="loc_branch_id"/>
+                    <field name="loc_customer_ids"/>
+                    <field name="region"/>
+                    </tree>
+                    </field>
+                <field name="loc_to_ids" attrs="{'invisible':[('location_domain','!=',True)]}" options="{'no_create_edit': True, 'no_open': True}">
+                                 <tree editable="bottom">
+                    <field name="route_waypoint_seq"/>
+                    <field name="route_waypoint_name"/>
+                    <field name="location_type"/>
+                    <field name="loc_branch_id"/>
+                    <field name="loc_customer_ids"/>
+                    <field name="region"/>
+                    </tree>
+                    </field>
+              </group>
+            </page>
+          </notebook>
+          
+        </xpath>
+      </field>
+    </record>
+
+
+    <record id="sale_coupon_view_form_cargo_inherit" model="ir.ui.view">
+      <field name="name">sale.coupon.form.cargo.inherit</field>
+      <field name="model">loyalty.reward</field>
+      <field name="inherit_id" ref="loyalty.loyalty_reward_view_form" />
+      <field name="arch" type="xml">
+        <field name="reward_product_id" position="after">
+            <field name="cargo_sale_id" />
+          </field>
+      </field>
+    </record>
+
+
+
+    <record id="view_vehicle_cargo_sale_form_view_form" model="ir.ui.view">
+      <field name="name">view.vehicle.cargo.sale.form.inherit.coupon</field>
+      <field name="model">bsg_vehicle_cargo_sale</field>
+      <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form" />
+      <field name="arch" type="xml">
+         <xpath expr="//header/button[@name='confirm_btn']" position="before">
+             <button name="%(loyalty.loyalty_generate_wizard_action)d" string="Apply Coupon/Promotions" type="action" states="draft"/>
+             <button name="cargo_recompute_coupon_line" type="object" string="Update Coupon/Promotions"  states="draft"/>
+             <button name="remove_cargo_coupon" type="object" string="Remove Coupon/Promotions"  states="draft"/>
+         </xpath>
+
+
+         <page name="returning_order" position="after">
+          <page string="Coupons/Promotions">
+              <field name="cargo_sale_coupon_ids" widget="many2many">
+                <tree create="0" edit="0" delete="0">
+                  <field name="name" />
+                  <field name="vehicle_cargo_sale_line_id" />
+                  <field name="product_id" />
+                  <field name="price_subtotal" />
+                  <field name="price_tax" />
+                  <field name="tax_ids" widget="many2many_tags"/>
+                  <field name="price_total" />
+                </tree>
+                <form>
+                    <group>
+                      <field name="name" readonly="1"/>
+                      <field name="vehicle_cargo_sale_line_id" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="promo_program_id" readonly="1"/>
+                      <field name="product_id" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="price_subtotal" readonly="1"/>
+                      <field name="price_tax" readonly="1"/>
+                      <field name="tax_ids" readonly="1" widget="many2many_tags" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                      <field name="price_total" readonly="1"/>
+                    </group>
+                </form>
+              </field>
+              <group>
+                <group>
+                  <field name="applied_coupon_ids" widget="many2many_tags" readonly="1"/>
+                  <field name="generated_coupon_ids" widget="many2many_tags" readonly="1"/>
+                  <field name="no_code_promo_program_ids" readonly="1"/>
+                  <field name="code_promo_program_id" readonly="1"/>
+                  <field name="reward_amount" readonly="1"/>
+                </group>
+              </group>              
+          </page>
+      </page> 
+
+      </field>
+    </record>
+
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_bsg_vehicle_cargo_sale_line_form_coupon">
+      <field name="name">bsg_vehicle_cargo_sale_line.form.coupon</field>
+      <field name="model">bsg_vehicle_cargo_sale_line</field>
+      <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//notebook" position="inside">
+          <page name="coupons" string="Coupons/Promotions">
+            <field name="cargo_sale_coupon_ids" widget="many2many">
+              <tree create="0" edit="0" delete="0">
+                <field name="name" />
+                <field name="product_id" />
+                <field name="price_subtotal" />
+                <field name="price_tax" />
+                <field name="tax_ids" widget="many2many_tags"/>
+                <field name="price_total" />
+              </tree>
+              <form>
+                <group>
+                  <field name="name" readonly="1"/>
+                  <field name="vehicle_cargo_sale_line_id" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                  <field name="promo_program_id" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                  <field name="product_id" readonly="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                  <field name="price_subtotal" readonly="1"/>
+                  <field name="price_tax" readonly="1"/>
+                  <field name="tax_ids" readonly="1" widget="many2many_tags" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                  <field name="price_total" readonly="1"/>
+                </group>
+              </form>
+            </field>
+            <group>
+              <group>
+                <field name="subtotal_coupon_amount" readonly="1"/>
+                <field name="tax_coupon_amount" readonly="1"/>
+                <field name="total_coupon_amount" readonly="1"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

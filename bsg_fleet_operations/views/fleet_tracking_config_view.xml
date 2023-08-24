@@ -1,0 +1,49 @@
+<odoo>
+  <data>
+    <record id="fleet_tracking_config_form_view" model="ir.ui.view">
+        <field name="name">fleet.tracking.config.form.view</field>
+        <field name="model">fleet.tracking.config</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Services Logs">
+                <sheet>
+                    <group>
+                        <field name="fleet_vehicle_id"/>
+                        <field name="remote_imei"/>
+                    </group>
+                    <notebook>
+                        <page name="remote_custom_fields" string="Remote custom Fields">
+                            <field name="custom_field_ids" nolabel="1">
+                                <tree>
+                                    <field name="remote_field_id"/>
+                                    <field name="remote_label"/>
+                                    <field name="remote_field_value"/>
+                                </tree>
+
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>                
+            </form>
+        </field>
+    </record>
+
+    <record id="fleet_tracking_config_tree_view" model="ir.ui.view">
+        <field name="name">fleet.tracking.config.tree.view</field>
+        <field name="model">fleet.tracking.config</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="fleet_vehicle_id"/>
+                <field name="remote_imei"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="fleet_tracking_config_action" model="ir.actions.act_window">
+      <field name="name">Fleet Tracking Config</field>
+      <field name="res_model">fleet.tracking.config</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+</data>
+</odoo>

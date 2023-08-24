@@ -1,0 +1,88 @@
+
+$bassami-prime: #00ac3b;
+$bassami-darkprime: #004518;
+$bassami-lightprime: #007829;
+
+.o_main_navbar{
+	border-bottom: 1px solid $bassami-lightprime;
+	background-color: $bassami-lightprime;
+}
+.o_main_navbar > ul > li.o_extra_menu_items.show > ul > li > a{
+	background-color: $bassami-lightprime;
+}
+.o_searchview .o_searchview_facet .o_searchview_facet_label{
+	background-color:$bassami-lightprime;
+}
+.o_base_settings .o_setting_container .settings_tab{
+	background: $bassami-darkprime;
+}
+.btn-primary,
+.tooltip .tooltip-inner .oe_tooltip_string,
+.o_loading{
+	background-color: $bassami-prime;
+	border-color: $bassami-prime;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before,
+.custom-control-input:checked ~ .custom-control-label::before,
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before,
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+	background-color:$bassami-lightprime;
+}
+.btn-secondary{
+	color:$bassami-prime;
+}
+.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle{
+	background-color: $bassami-darkprime;
+	border-color: $bassami-darkprime;
+}
+.btn-primary:focus, .btn-primary.focus{
+	box-shadow: none;
+}
+a,
+.btn-link,
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled,
+.o_form_view .o_form_uri:first-line,
+.o_form_view .oe_button_box .btn.oe_stat_button > .o_stat_info .o_stat_value, 
+.o_form_view .oe_button_box .btn.oe_stat_button > span .o_stat_value,
+.o_form_view .o_notebook > .nav.nav-tabs > .nav-item > .nav-link:hover, 
+.o_form_view .o_notebook > .nav.nav-tabs > .nav-item > .nav-link:focus, 
+.o_form_view .o_notebook > .nav.nav-tabs > .nav-item > .nav-link:active{
+	color:$bassami-prime;
+}
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover{
+	background-color: $bassami-darkprime;
+}
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus{
+	background-color: $bassami-darkprime;
+}
+.o_mail_systray_item .o_notification_counter{
+	background:$bassami-prime;	
+}
+.badge {
+	border: 1px solid $bassami-lightprime;
+}
+.o_mail_discuss .o_mail_discuss_sidebar{
+	background-color:$bassami-lightprime;
+}
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_sidebar_title h4{
+	color: #ffffff;
+}
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_sidebar_title .o_add{
+	color: #ffffff;
+}
+.o_onboarding.o_onboarding_violet .o_onboarding_wrap,
+.o_onboarding.o_onboarding_orange .o_onboarding_wrap{
+	background-image:linear-gradient(to bottom, #2a8b57, rgba(14, 118, 62, 0.25));
+	background-color: rgba(0, 160, 74, 0.25);
+}
+.o_onboarding.o_onboarding_violet .o_onboarding_step.o_onboarding_current .o_onboarding_dot,
+.o_onboarding.o_onboarding_orange .o_onboarding_step.o_onboarding_current .o_onboarding_dot{
+	background:$bassami-darkprime;
+}
+.o_main_navbar .show .dropdown-toggle{
+	background-color:$bassami-darkprime;
+}
+.o_base_settings .o_setting_container .settings_tab .selected{
+	box-shadow: inset 3px 0 0 $bassami-lightprime;
+}

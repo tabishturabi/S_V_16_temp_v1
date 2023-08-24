@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_view_bsg_customer_contract_government_sale">
+            <field name="name">view.bsg.customer.contract.government.sale</field>
+            <field name="model">bsg_customer_contract</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_customer_contract.view_bsg_customer_contract_form"/>
+            <field name="arch" type="xml">
+                <field name="remark" position="after">
+                    <field name="overnight_percentage" attrs="{'readonly': [('state', '=', 'draft')]}"/>
+                </field>
+            </field>
+        </record>
+        <record id="bsg_customer_contract_line_form_government_sale" model="ir.ui.view">
+            <field name="name">bsg.customer.contract.line.form.government_sale</field>
+            <field name="model">bsg_customer_contract_line</field>
+            <field name="inherit_id" ref="bsg_customer_contract.view_bsg_customer_contract_line_form"/>
+            <field name="arch" type="xml">
+                <field name="service_type" position="after">
+                    <field name="distance_km"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

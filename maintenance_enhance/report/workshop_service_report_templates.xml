@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="external_layout_standard">
+            <div class="header">
+                <div class="row">
+                    <div class="col-3 mb4">
+                        <img src="maintenance_enhance/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                    </div>
+                </div>
+            </div>
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer o_standard_footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <li class="list-inline-item">Print Date: <t t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"/></li>
+                        <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                    </ul>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> - <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_workshop_service">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="o" t-value="doc"/>
+                        <div class="page">
+                            <t t-call="maintenance_enhance.external_layout_standard">
+
+                                <div class="oe_structure"/>
+                                <style type="text/css">
+                                    <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/bsg_vehicle_inspection_report//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             tr,td {
+                                font-family: 'Arial';
+                                    }
+                             .flex-item {
+                                flex-grow: 1;
+                                font-family: Tahoma, Verdana, Segoe, sans-serif;
+                                padding: 10px;
+                                    }
+
+					            ]]>
+                                </style>
+                                <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" cellspacing="0" width="1200px">
+                                    <tbody>
+                                        <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                            <td align="center" t-attf-style="font-size:40px;font-weight:bold;color:black;" width="50%">
+                                                <h2>Work Order</h2>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" t-attf-style="border-collapse:separate;border-spacing:5px;" cellspacing="0" width="1200px">
+                                    <tbody>
+                                        <tr  width="100%" t-attf-style="page-break-inside: avoid !important;font-weight:bold;background-color:white; color:black;};">
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;" width="30%">
+                                                <span>Maintenance Card No:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;" width="70%">
+                                                <span t-esc="doc.name"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <!-- header table-->
+                                <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" t-attf-style="border-collapse:separate;border-spacing:5px;" cellspacing="0" width="1200px">
+                                    <tbody>
+                                        <tr t-attf-style="page-break-inside: avoid !important;border:1px solid black; font-weight:bold;background-color:white; color:black;};">
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="20%">
+                                                <span>Truck Code:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="30%">
+                                                <t>
+                                                    <span t-esc="doc.vehicle_id.taq_number"/>
+                                                </t>
+                                            </td>
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="20%">
+                                                <span>Model:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="30%">
+                                                <span t-esc="doc.vehicle_name.name"/>
+                                            </td>
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="20%">
+                                                <span>Vehicle Name:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="30%">
+                                                <span t-esc="doc.driver_id.name"></span>
+                                            </td>
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="20%">
+                                                <span>كود السائق:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="60%">
+                                                <span t-esc="doc.driver_code"></span>
+                                            </td>
+                                            <td align="center" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="20%">
+                                                <span>Last Odometer:</span>
+                                            </td>
+                                            <td align="left" t-attf-style="font-size:22px;font-weight:bold;color:black;border:0px solid black;" width="30%">
+                                                <span t-esc="doc.odometer"/>  <span t-field="doc.odometer_unit" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" t-attf-style="border-collapse:separate;border-spacing:5px;" cellspacing="0" width="1200px">
+                                    <thead>
+                                        <tr>
+                                            <th t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong align="center">Workshop Service</strong></th>
+                                            <th t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong align="center">Workshop Name</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong align="center">Product</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>Pieces</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>Notes</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>Technical Name</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>Start Time</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>Close time</strong></th>
+                                            <th align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;"><strong>State</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<!--                                        <t t-set="lines" t-value="get_workshop_lines(doc, workshop)"/>-->
+                                        <t t-foreach="doc.wo_child_ids" t-as="line">
+                                            <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.workshop_service.name" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.workshop_name.name" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.product_id.name" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.pieces" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.notes" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.employee_id.name" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.actual_start_time" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.actual_close_time" />
+                                                </td>
+                                                <td align="center" t-attf-style="font-size:20px;font-weight:bold;color:black;border:1px solid black;" width="12%">
+                                                    <span t-esc="line.state" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+
+                                <div class="oe_structure"/>
+                            </t>
+                        </div>
+                </t>
+            </t>
+        </template>
+
+        <!--  -->
+        <report
+                string="Workshop Service Report"
+                id="action_workshop_service_report"
+                model="maintenance.request.enhance"
+                name="maintenance_enhance.report_workshop_service"
+                file="maintenance_enhance.report_workshop_service"
+                report_type="qweb-pdf"
+                print_report_name="('Workshop Service Report - %s' % (object.name))"
+        />
+    </data>
+</odoo>

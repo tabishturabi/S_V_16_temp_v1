@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_payslip_pdf_wizard_from" model="ir.ui.view">
+            <field name="name">hr.payslip.pdf.wizard.form</field>
+            <field name="model">hr.payslip.pdf.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Payslip Report">
+                    <group name="group_left">
+                        <field  name="payslip_run_id"/>
+                        <field name="branch_id"/>
+                        <field name="salary_payment_method"/>
+                        <field name="category_ids" widget="many2many_tags"/>
+                    </group>
+                     <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+            
+        </record>
+
+        <record id="hr_payslip_pdf_wizard_action" model="ir.actions.act_window">
+            <field name="name">Payslip Report</field>
+            <field name="res_model">hr.payslip.pdf.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_payslip_pdf_wizard_from"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="hr_payroll_reports_menu" name="Payroll Reports" parent="hr_payroll.menu_hr_payroll_root" sequence="12" groups="hr_payroll.group_hr_payroll_manager"/>
+        <menuitem id="hr_payslip_xls_wizard_menu" name="Payslip PDF report" action="hr_payslip_pdf_wizard_action" parent="hr_payroll_reports_menu" sequence="2"/>
+        
+    </data>
+</odoo>

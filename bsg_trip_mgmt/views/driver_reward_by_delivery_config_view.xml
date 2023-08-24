@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+
+    <!-- Form View Of Driver Reward Delivery -->
+    <record model="ir.ui.view" id="view_driver_reward_per_delivery_form">
+        <field name="name">driver_reward_per_delivery.form</field>
+        <field name="model">driver_reward_per_delivery</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form string="Surver Question Category">
+            <sheet>
+              <group string="Distance (KM)">
+                <group string="From">
+                  <field name="from_km" string="From"/>
+                </group>
+                <group string="To">
+                  <field name="to_km" string="To"/>
+                </group>
+              </group>
+             <group string="Load Rewards">
+                <group string="Amount per Car">
+                  <field name="amount_per_car"/>
+                </group>
+              </group>              
+             <group string="Empty BackLoad Rewards">
+                <group string="Amount per Car">
+                  <field name="empty_amount_per_car"/>
+                </group>
+              </group>                          
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+    <!-- Tree View Of Driver Reward Delivery -->
+    <record model="ir.ui.view" id="view_driver_reward_per_delivery_tree">
+        <field name="name">driver_reward_per_delivery.tree</field>
+        <field name="model">driver_reward_per_delivery</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree editable="bottom">
+          <field name="from_km" string="From"/>
+          <field name="to_km" string="To"/>
+          <field name="amount_per_car" string="Type A"/>
+          <field name="amount_per_car_b" string="Type B"/>
+          <field name="empty_amount_per_car" string="Empty BackLoad Rewards"/>
+        </tree>
+        </field>
+    </record>
+
+    <!-- Action View of Driver Reward Delivery -->
+    <record model="ir.actions.act_window" id="action_driver_reward_per_delivery">
+        <field name="name">Driver Reward Delivery</field>
+        <field name="res_model">driver_reward_per_delivery</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+    </record>
+  </data>
+</odoo>

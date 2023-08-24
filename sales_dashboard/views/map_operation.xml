@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <menuitem
+                id="menu_map_operation"
+                name="Operation Map"
+                parent="sales_dashboard.menu_project_dashboard"
+                action="action_map_operation"
+                sequence="0"/>
+        <record model="ir.ui.view" id="bsg_branches_view_form_sales_dashboard">
+            <field name="name">bsg_branches_view_form_sales_dashboard</field>
+            <field name="model">bsg_branches.bsg_branches</field>
+            <field name="arch" type="xml">
+                <form string="Branches" create="false" edit="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <field name="logo" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="branch_name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="branch_name" class="oe_inline" placeholder="Branch Name" required="1"/>
+                            </h1>
+                            <label for="rml_header1" class="oe_edit_only"/>
+                            <h3>
+                                <field name="rml_header1" placeholder="e.g. Global Business Solutions"/>
+                            </h3>
+                        </div>
+                        <group name="top">
+                            <group name="left">
+                                <field name="activation_date"/>
+                                <field name="deactivation_date"/>
+                            </group>
+                            <group name="right">
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page name="branch_team" string="Branch Team">
+                                <field name="member_ids" widget="many2many" options="{'not_delete': True}">
+                                    <kanban quick_create="false" create="true" delete="true">
+                                        <field name="name"/>
+                                        <field name="id"/>
+                                        <field name="job_id"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click" style="position: relative">
+                                                    <a t-if="! read_only_mode" type="delete"
+                                                       style="position: absolute; right: 0; padding: 4px; diplay: inline-block">
+                                                        X
+                                                    </a>
+                                                    <div class="oe_module_vignette">
+                                                        <img t-att-src="kanban_image('hr.employee', 'image_small', record.id.value)"
+                                                             class="oe_avatar oe_kanban_avatar_smallbox"/>
+                                                        <div class="oe_module_desc">
+                                                            <field name="name"/>
+                                                        </div>
+                                                    </div>
+                                                    <field name="job_id"/>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fleet_vehicle_trip_tree_list_inherit_truck_in">
+            <field name="name">fleet_vehicle_trip_tree_list_inherit_truck_in</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="false" create="false">
+                    <field name="license_plate" string="Truck Number"/>
+                    <field name="model_id" string="Truck Name"/>
+                    <field name="taq_number" string="Truck Sticker No"/>
+                    <field name="vehicle_type" string="Truck Type"/>
+                    <field name="bsg_driver" string="Driver Name"/>
+                    <field name="mobile_phone" string="Driver Phone"/>
+                    <field name="trip_id" string='Last Trip Id'/>
+                    <field name="no_of_cars"/>
+                    <field name="expected_end_date" string='Last Arrival Date And Time'/>
+                    <field name="time_diff" string="Number of Hours Since Last Stop"/>
+                    <button name="open_rec" string="Open" type="object" icon="fa-arrow-circle-o-right"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

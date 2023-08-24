@@ -1,0 +1,74 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_report_template_budget" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_budget_reconciliation"
+            model="account.payment"
+            name="budget_reconciliation_report.budget_recon_temp_id"
+            file="budget_reconciliation_report.budget_recon_temp_id"
+            report_type="qweb-html"
+            string="Budget Reconciliation Report"
+            paperformat="paperformat_report_template_budget"
+            menu="False"/>
+
+        <record id="reconciliation_report_wizard" model="ir.ui.view">
+            <field name="name">reconciliation_report_wizard</field>
+            <field name="model">budget.reconciliation.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="form"/>
+                            <field name="with_budget"/>
+                            <field name="report_type"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="without_budget"/>
+                            <field name="branch_ids"  widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('report_type','!=','specific')],'required':[('report_type','=','specific')]}"/>
+                        </group>
+
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="reconciliation_report_menu_action" model="ir.actions.act_window">
+            <field name="name">Branches Voucher Report</field>
+            <field name="res_model">budget.reconciliation.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="reconciliation_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="reconciliation_report_menu_item" name="Budget Reconciliation Report" action="reconciliation_report_menu_action" parent="account.menu_finance_reports"/>
+
+        
+
+    
+        
+    </data>
+</odoo>

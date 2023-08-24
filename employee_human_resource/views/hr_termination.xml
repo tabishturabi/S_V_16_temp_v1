@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_termination_form" model="ir.ui.view">
+            <field name="name">hr.termination.form</field>
+            <field name="model">hr.termination</field>
+            <field name="arch" type="xml">
+                <form string="MODEL">
+                    <header>
+                        <button name="action_terminate_employee" attrs="{'invisible':[('state','in',['1','2'])]}" string="Terminate Employee" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_hr_specialist"/>
+                        <button name="action_direct_manager" states="1" string="Confirm" class="oe_highlight"
+                                type="object" groups="base.group_user"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','1')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="base.group_user,employee_service.group_cancel_eos"/>
+
+                        <button name="action_hr_salary_accountant" states="2" string="Approve" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_department_manager"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['2'])]}" class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_department_manager"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','2')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="bsg_hr.group_department_manager,employee_service.group_cancel_eos"/>
+
+                        <button name="action_legal_department_manager" states="3" string="Approve" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_hr_specialist"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['3'])]}" class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_hr_specialist"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','3')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="bsg_hr.group_hr_specialist,employee_service.group_cancel_eos"/>
+
+                        <button name="action_hr_manager" states="4" string="Approve" class="oe_highlight" type="object"
+                                groups="employee_service.group_legal_department_manager"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['4'])]}" class="oe_highlight oe_structure"
+                                groups="employee_service.group_legal_department_manager"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','4')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="employee_service.group_legal_department_manager,employee_service.group_cancel_eos"/>
+
+                        <button name="action_accountant_before_audit" states="5" string="Approve" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_hr_manager"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['5'])]}" class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_hr_manager"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','5')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="bsg_hr.group_hr_manager,employee_service.group_cancel_eos"/>
+
+
+                        <button name="action_internal_audit" states="6" string="Approve" class="oe_highlight"
+                                type="object" groups="account.group_account_user"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['6'])]}" class="oe_highlight oe_structure"
+                                groups="account.group_account_user"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','6')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="account.group_account_user,employee_service.group_cancel_eos"/>
+
+
+                        <button name="action_finance_manager" states="7" string="Approve" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_internal_audit_manager"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['7'])]}" class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_internal_audit_manager"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','7')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="bsg_hr.group_internal_audit_manager,employee_service.group_cancel_eos"/>
+
+
+                        <button name="action_accountant_before_done" states="8" string="Approve" class="oe_highlight"
+                                type="object" groups="bsg_hr.group_finance_manager"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['8'])]}" class="oe_highlight oe_structure"
+                                groups="bsg_hr.group_finance_manager"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','8')]}" string="Cancel"
+                                class="oe_highlight" type="object"
+                                groups="bsg_hr.group_finance_manager,employee_service.group_cancel_eos"/>
+
+                        <button name="action_done" states="9" string="Done" class="oe_highlight" type="object"
+                                groups="base.group_system"/>
+                        <button string="Refuse" name="%(eos_refuse_wizard_action)d" type="action"
+                                attrs="{'invisible': [('state', 'not in', ['9'])]}" class="oe_highlight oe_structure"
+                                groups="base.group_system"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','9')]}" string="Cancel"
+                                class="oe_highlight" type="object" groups="base.group_system"/>
+
+
+                        <button name="action_cancel" attrs="{'invisible':[('state','!=','10')]}" string="Cancel"
+                                class="oe_highlight" type="object" groups="base.group_system"/>
+                        <button name="action_reset" attrs="{'invisible':[('state','!=','10')]}" string="Reset To Draft"
+                                class="oe_highlight" type="object" groups="base.group_system"/>
+
+                        <button string="Create Ticket" name="action_create_ticket" class="oe_highlight" attrs="{'invisible':['|','|',('eos_options','!=','final_exit'),('state','!=','3'),('is_ticket_created','!=',False)]}"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="1,10,11"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" required="True"  attrs="{'readonly':[('state','!=','1')]}"
+                                       domain="[('state','=','on_job'),('employee_state','=','on_job')]"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="request_date" required="True" attrs="{'readonly':[('state','!=','1')]}"/>
+                                <field name="termination_date" required="True" attrs="{'readonly':[('state','!=','1')]}"/>
+                                <field name="final_work_date" required="True" attrs="{'readonly':[('state','!=','1')]}"/>
+                                <field name="turnover_reason" options="{'no_create':True,'no_edit':True,'no_open':True}" attrs="{'readonly':[('state','!=','1')]}"/>
+
+<!--                                <field name="hr_termination_duration_id"-->
+<!--                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"-->
+<!--                                       readonly="1"/>-->
+                            </group>
+                            <group>
+                                <field name="department_id" readonly="True" attrs="{'readonly':[('state','!=','1')]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="job_id" readonly="True"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" attrs="{'readonly':[('state','!=','1')]}"
+                                       domain="[('department_id','=',department_id)]"/>
+                                <!--                                <field name="approve_date" readonly="True"/>-->
+                                <field name="employee_start_date" attrs="{'readonly':[('state','!=','1')]}"/>
+                                <field name="employee_type" invisible="1"/>
+                                <field name="is_ticket_created" invisible="1"/>
+                                <field name="eos_options" force_save="1" attrs="{'readonly':[('state','!=','1')],'invisible':[('employee_type','=','citizen')],'required':[('employee_type','!=','citizen')]}"/>
+                                <!--field name="is_incentive_calc" invisible="True"/-->
+                                <!--field name="end_incentive" readonly="True"
+                                       attrs="{'invisible':[('is_incentive_calc','=',True)]}"/-->
+                                <!--field name="end_incentive_month" readonly="True"
+                                       attrs="{'invisible':[('is_incentive_calc','=',False)]}"/-->
+                            </group>
+                            <h4>
+
+                                <div>
+
+                                    <div>
+                                        <label for="service_years" string="Service Duration"/>
+                                        (<field name="service_years" class="oe_inline"/>) year
+                                        (<field name="service_months" class="oe_inline"/>) month
+                                        (<field name="service_days" class="oe_inline"/>) day
+
+                                    </div>
+                                </div>
+                            </h4>
+                            <group>
+                                <field name="vacation_balance" readonly="1" force_save="1"/>
+                                <field name="notice_period_vacation_balance" readonly="1" force_save="1"/>
+                                <field name="total_vacation_balance" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <notebook name="detail">
+
+                            <page name="salary" string="EOS &amp; Leave Allowances &amp; Deduction"
+                                  attrs="{'invisible':[('state','in',['1','2'])]}">
+                                <separator/>
+                                <button name="salary_compute" attrs="{'invisible':[('state','!=','3')]}" type="object"
+                                        string="Compute Salary"/>
+                                <separator string="Month Salary"/>
+                                <group col="4">
+                                    <!-- <field name="salary_payslip_id"/> -->
+                                    <field name="salary_start_date"/>
+                                    <field name="salary_end_date"/>
+                                    <field name="salary_payslip_id" readonly="1"/>
+
+
+                                </group>
+                                <field name="salary_payslip_line_id">
+                                    <tree string="Salary Structure" editable="bottom" decoration-info="total == 0">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="category_id"/>
+                                        <field name="salary_rule_id"/>
+                                        <field name="amount"/>
+                                        <field name="total"/>
+                                    </tree>
+
+                                </field>
+                                <field name="salary_move" attrs="{'invisible':[('salary_move','=',False)]}"/>
+
+                                <separator/>
+                                <separator string="Allowance Salary"/>
+                                <button name="compute_sheet_allowance"
+                                        type="object" attrs="{'invisible':[('state','!=','3')]}"
+                                        string="Compute Leave &amp; EOS"/>
+
+                                <group col="4">
+                                    <!-- <field name="allowance_payslip_id"/> -->
+                                    <field name="eos_start_date" force_save="1"/>
+                                    <field name="eos_end_date" force_save="1"/>
+                                    <field name="eos_payslip_id" readonly="1" force_save="1"/>
+
+                                </group>
+                                <field name="eos_payslip_line_id">
+                                    <tree string="Salary Structure" editable="bottom" decoration-info="total == 0">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="category_id"/>
+                                        <field name="salary_rule_id"/>
+                                        <field name="amount"/>
+                                        <field name="total"/>
+                                    </tree>
+                                </field>
+                                <field name="eos_move" attrs="{'invisible':[('eos_move','=',False)]}"/>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="salary_total">
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="total_salary_net" widget="monetary" force_save="1"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_eos_amount" widget="monetary" force_save="1"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_eos_net" widget="monetary" force_save="1"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_hr_termination_tree" model="ir.ui.view">
+            <field name="name">hr.termination.tree</field>
+            <field name="model">hr.termination</field>
+            <field name="arch" type="xml">
+                <tree string="MODEL">
+                    <field name="employee_id"/>
+                    <field name="request_date"/>
+                    <field name="termination_date"/>
+                    <field name="reason"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_termination_action" model="ir.actions.act_window">
+            <field name="name">Termination</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.termination</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <!--            <field name="search_view_id" ref="search_bayan_goods_type_config"/>-->
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_hr_termination_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_hr_termination_form')})]"/>
+        </record>
+
+
+        <menuitem id="menu_employee_termination"
+                  parent="hr.menu_hr_root" name="Termination"
+                  groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager,bsg_hr.group_department_manager,base.group_user"/>
+        <menuitem action="view_hr_termination_action" id="menu_exit_and_return"
+                  parent="menu_employee_termination" name="Termination, Resignation EOS"/>
+
+    </data>
+</odoo>

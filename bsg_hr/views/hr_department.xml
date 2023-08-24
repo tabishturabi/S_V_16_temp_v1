@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+
+        <!-- Hr Department View -->
+        <record id="view_bsg_inherit_view_department_form" model="ir.ui.view">
+            <field name="name">view.bsg.inherit.view.department.form</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="is_branch" />
+                    <field name="bsg_branch_id" attrs="{'invisible' : [('is_branch','=',False)]}"/>
+                    <field name="branch_type" attrs="{'invisible' : [('is_branch','=',False)]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

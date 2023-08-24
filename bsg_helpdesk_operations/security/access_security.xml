@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_portal_ticket">
+            <field name="name">Portal Request</field>
+            <field name="description">Helps you handle your Portal Requeset</field>
+            <field name="sequence">1</field>
+        </record>
+
+       <record id="group_can_access_portal_tickets" model="res.groups">
+            <field name="name">Portal Access</field>
+            <field name="category_id" ref="module_portal_ticket"/>
+<!--             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> -->
+        </record>
+
+    </data>
+</odoo>

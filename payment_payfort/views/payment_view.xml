@@ -1,0 +1,54 @@
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <record id="acquirer_form_payfort" model="ir.ui.view">
+        <field name="name">acquirer.form.payfort</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group attrs="{'invisible': [('code', '!=', 'payfort')]}">
+                    <field name="access_code"/>
+                    <field name="merchant_identifier"/>
+                    <field name="sha_type"/>
+                    <field name="request_phrase"/>
+                    <field name="response_phrase"/>
+                </group>
+            </group>
+        </field>
+    </record>
+    
+    <record id="transaction_form_inherit" model="ir.ui.view">
+        <field name="name">payment.transaction.form.inherit</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+           <!--button name="action_capture" position="after">
+                
+               <button type="object" name="refund_transaction" string="Refund Transaction" class="oe_highlight" attrs="{'invisible':['|',('state','!=', 'done'), ('is_refunded', '=', True)]}" groups="payment_payfort.group_refund_payment_transaction"/>
+            </button-->
+            <field name="partner_id" position="after">
+                <group>
+                <field name="is_refunded"/>
+                    <field name="refunded_amount" attrs="{'invisible': [('is_refunded', '!=', True)]}"/>
+                    <field name="refund_trans_reference" attrs="{'invisible': [('is_refunded', '!=', True)]}"/>
+                </group>
+            </field> 
+        </field>
+    </record>
+
+    <record id="invoice_form_add_new_group" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice_sent" position="after">
+                     <field name="show_trans_refund_button" invisible="1"/>
+                     <button type="object" name="refund_transaction" string="Payfort Refund" class="oe_highlight" attrs="{'invisible':[('show_trans_refund_button','=', False)]}" groups="payment_payfort.group_refund_payment_transaction"/>
+                </button>
+              
+            </field>
+        </record>
+
+</odoo>

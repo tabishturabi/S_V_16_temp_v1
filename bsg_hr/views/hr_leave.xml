@@ -1,0 +1,231 @@
+<odoo>
+    <data>
+        <record id="hr_leave_form_manager_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.form.manager.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                    <attribute name="attrs">{'required': [('holiday_type', '=', 'employee')],'invisible':
+                        [('holiday_type', '!=', 'employee')]}
+                    </attribute>
+                    <attribute name="groups">bsg_hr.group_department_manager,bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager,bsg_hr.group_branch_supervisor</attribute>
+                    <attribute name="domain">['|',('employee_state','=','on_job'),('state','=','on_job')]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                    <attribute name="attrs">{'required': [('holiday_type', '=', 'department')],'invisible':
+                        [('holiday_type', 'not in', ('employee', 'department'))],'readonly': [('holiday_type', '=',
+                        'employee')]}
+                    </attribute>
+                </xpath>
+<!--                <xpath expr="//field[@name='last_employee_contract']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('holiday_type', '!=', 'employee')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='employee_type']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('holiday_type', '!=', 'employee')]}</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="leave_req_action" invisible="1"/>
+                    <field name="holiday_type" invisible="1"/>
+                    <field name="leave_type_type" invisible="1"/>
+                    <field name="is_remaining_leaves" invisible="1"/>
+                    <field name="request_more_than_balance" invisible="1"/>
+<!--                    <field name="last_return_date" readonly="1"/>-->
+                    <!--                    <field name="remaining_leaves" force_save="1" readonly="1"-->
+                    <!--                           attrs="{'invisible': [('leave_type_type', '!=', 'paid')]}"/>-->
+                    <!--                    <field name="request_more_than_balance" force_save="1"-->
+                    <!--                           attrs="{'invisible': [('leave_type_type','!=','paid')]}"/>-->
+                    <!--                    <field name="leave_date_to" force_save="1"-->
+                    <!--                           attrs="{'invisible': [('is_remaining_leaves','=',False)],'readonly': [('request_more_than_balance','=',False)],'required': [('request_more_than_balance','!=',False)]}"/>-->
+                </xpath>
+<!--                <field name="request_date_to" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': ['|',('state', 'not in', ('draft',-->
+<!--                        'confirm')),('request_more_than_balance', '!=', False)],'invisible': ['|', ('request_unit_half',-->
+<!--                        '=', True), ('request_unit_hours', '=', True)]}-->
+<!--                    </attribute>-->
+<!--                </field>-->
+
+            </field>
+        </record>
+
+        <record id="hr_leave_form_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="is_create_user" invisible="1" />
+                    <field name="holiday_type" invisible="1"/>
+                    <field name="employee_id" invisible="1"/>
+                    <field name="vacation_balance" force_save="1" readonly="1" attrs="{'invisible': [('leave_type_type', '!=', 'paid')]}"/>
+                    <field name="remaining_leaves" force_save="1" readonly="1"
+                           attrs="{'invisible': [('leave_type_type', '!=', 'paid')]}"/>
+                    <field name="attach_chick" invisible="1" force_save="1"/>
+                    <field name="unpaid_leave_id" invisible="1" force_save="1"/>
+                    <field name="is_has_ticket" invisible="1" force_save="1"/>
+                    <field name="is_remaining_leaves" invisible="1" force_save="1"/>
+                    <field name="alternative_chick" invisible="1" force_save="1"/>
+                    <field name="last_employee_contract" readonly="1" force_save="1" attrs="{'invisible': [('holiday_type', '!=', 'employee')]}"
+                           options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="hr_destination_id" force_save="1" options="{'no_create':True,'no_edit':True, 'no_open': True}"
+                           attrs="{'readonly': [('state','not in',['draft'])],'required': [('is_external_leave','!=', False)],'invisible': [('is_external_leave','=', False)] }"/>
+                    <field name="replace_by" domain="['&amp;',('id','!=',employee_id),'|',('employee_state','=','on_job'),('state','=','on_job')]" force_save="1" options="{'no_create':True,'no_edit':True, 'no_open': True}"
+                           attrs="{'readonly': [('state','not in',['draft'])],'required': [('alternative_chick','!=', False)],'invisible': [('alternative_chick','=', False)] }"/>
+                    <field name="employee_type" force_save="1" attrs="{'invisible': [('holiday_type', '!=', 'employee')]}"/>
+                    <field name="last_ticket_date" force_save="1" attrs="{'invisible': [('is_has_ticket','=',False)]}"/>
+                    <field name="is_external_leave" force_save="1"/>
+                    <field name="request_for" force_save="1" attrs="{'invisible': [('employee_type', '!=', 'foreign')]}" />
+                    <field name="birth_delivery_expected_date"
+                           attrs="{'invisible': [('leave_type_type','!=','birthdelivery')],'required': [('leave_type_type','=','birthdelivery')]}"/>
+                    <field name="request_more_than_balance" force_save="1"
+                           attrs="{'readonly': [('state','!=','draft')],'invisible': ['|',('leave_type_type','!=','paid'),('is_remaining_leaves','=',False)]}"/>
+                    <field name="unpaid_duration" force_save="1" attrs="{'invisible': [('request_more_than_balance','=',False)]}" />
+                    <field name="leave_date_to" force_save="1"
+                           attrs="{'invisible': [('request_more_than_balance','=',False)],'readonly': [('state','!=','draft')],'required': [('request_more_than_balance','!=',False)]}"/>
+                    <field name="total_duration" force_save="1" attrs="{'invisible': [('request_more_than_balance','=',False)]}" />
+
+                    <field name="issue_ticket_by_company" force_save="1"
+                           attrs="{'readonly': [('state','in',['draft','department_manager'])],'invisible': [('is_has_ticket','=',False)]}"/>
+<!--                    <field name="delegate_acc" force_save="1" attrs="{'readonly': [('state','not in',['draft'])]}"/>-->
+<!--                    <field name="successful_completion" force_save="1"-->
+<!--                           attrs="{'readonly': [('state','not in',['draft'])]}"/>-->
+                    <field name="leave_type_type" force_save="1" invisible="1"/>
+                    <field name="need_clearance_check" invisible="1"/>
+                    <field name="is_ticket_created" invisible="1"/>
+                    <field name="is_send_confirmation" invisible="1"/>
+                    <field name="is_approved_by_hr_manager" invisible="1"/>
+                    <field name="need_clearance" force_save="1"
+                           attrs="{'readonly': [('state','not in',['draft','hr_manager','hr_specialist'])],'invisible': ['|',('leave_type_type','!=', 'paid'),('need_clearance_check','=', True)]}"/>
+                    <field name="cancel_reason" force_save="1" attrs="{'invisible': [('state','!=', 'cancel')] }"/>
+                    <field name="refuse_reason" force_save="1" attrs="{'invisible': [('state','!=', 'refuse')] }"/>
+                </xpath>
+                <field name="request_date_to" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|',('state', 'not in', ('draft',
+                        'confirm')),('request_more_than_balance', '!=', False)],'invisible': ['|', ('request_unit_half',
+                        '=', True), ('request_unit_hours', '=', True)]}
+                    </attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,validate"/>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="replace">
+                    <button string="Confirm" name="action_confirm"  type="object" class="oe_highlight" attrs="{'invisible': ['|',('state','!=', 'draft'),('is_create_user','!=',True)] }" />
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button string="Confirm" name="action_confirm" states="hr_specialist" type="object"
+                            class="oe_highlight" groups="bsg_hr.group_hr_specialist"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight" states="hr_specialist" groups="bsg_hr.group_hr_specialist"/>
+                    <button string="Confirm" name="action_confirm" states="hr_manager" type="object"
+                            class="oe_highlight" groups="bsg_hr.group_hr_manager"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight" states="hr_manager" groups="bsg_hr.group_hr_manager"/>
+                    <field name="is_direct_manager" invisible="1"></field>
+                    <button string="Create Ticket" name="action_create_ticket" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|','|',('is_has_ticket','=',False),('state','!=', 'hr_specialist'),('is_ticket_created','=',True)]}"
+                            groups="bsg_hr.group_hr_specialist"/>
+                    <button string="Confirm" name="action_confirm" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('state','!=', 'department_manager'),('is_direct_manager','!=',True)] }"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('state','!=', 'department_manager'),('is_direct_manager','!=',True)] }"/>
+                    <button string="Confirm" name="action_confirm" states="vice_em" type="object" class="oe_highlight"
+                            groups="bsg_hr.group_vice_execution_manager"/>
+                    <button string="Confirm" name="action_confirm" states="internal_audit_manager" type="object"
+                            class="oe_highlight" groups="bsg_hr.group_internal_audit_manager"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight" states="internal_audit_manager"
+                            groups="bsg_hr.group_internal_audit_manager"/>
+                    <button string="Confirm" name="action_confirm" states="finance_manager" type="object"
+                            class="oe_highlight" groups="bsg_hr.group_finance_manager"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight" states="finance_manager" groups="bsg_hr.group_finance_manager"/>
+                    <button string="Confirm" name="action_confirm" states="accountant" type="object"
+                            class="oe_highlight" groups="account.group_account_user"/>
+                    <button string="Reject" name="%(bsg_hr.leave_rejection_reason_wizard)d" type="action"
+                            class="oe_highlight" states="accountant" attrs="{'invisible': [('is_send_confirmation', '=', True)]}"
+                            groups="account.group_account_user"/>
+                    <button string="Update Employee State" name="action_update_employee_state" states="validate,accountant,finance_manager,hr_specialist,hr_manager,internal_audit_manager" type="object"
+                            class="oe_highlight" groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager"/>
+
+
+                </xpath>
+<!--                <xpath expr="//field[@name='leave_type_request_unit']" position="before">-->
+                <xpath expr="//widget[@name='web_ribbon']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_payslips" class="oe_stat_button" icon="fa-money" type="object">
+                            <field name="payslip_count" widget="statinfo" string="Payslip"
+                                   help="Payslip Computation Details"/>
+                        </button>
+                        <button name="action_hr_exit_return_view" type="object" class="oe_stat_button" groups="bsg_hr.group_hr_manager,bsg_hr.group_hr_specialist,bsg_hr.group_government_relation"
+                                icon="fa-pencil-square-o" attrs="{'invisible': [('hr_exit_return_count', '=', 0)]}">
+                            <field name="hr_exit_return_count" widget="statinfo" string="Exit Entry"/>
+                        </button>
+                        <button name="action_hr_effect_request" type="object" class="oe_stat_button"
+                                icon="fa-pencil-square-o" attrs="{'invisible': [('hr_effect_request_count', '=', 0)]}">
+                            <field name="hr_effect_request_count" widget="statinfo" string="Effective Request"/>
+                        </button>
+                        <button name="action_hr_ticket" type="object" class="oe_stat_button" groups="bsg_hr.group_hr_manager,bsg_hr.group_hr_specialist,bsg_hr.group_internal_audit_manager"
+                                icon="fa-pencil-square-o" attrs="{'invisible': [('hr_ticket_count', '=', 0)]}">
+                            <field name="hr_ticket_count" widget="statinfo" string="HR Tickets"/>
+                        </button>
+                        <button name="action_unpaid_leave" type="object" string="Unpaid Leaves" class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                        </button>
+<!--                          <button name="action_hr_clearance" type="object" class="oe_stat_button"-->
+<!--                        icon="fa-pencil-square-o" attrs="{'invisible': [('hr_clearance_count', '=', 0)]}">-->
+<!--                    <field name="hr_clearance_count" widget="statinfo" string="HR Clearance"/>-->
+<!--                </button>-->
+                    </div>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page name="leave_clearance" string="Leave Clearance"
+                              attrs="{'invisible': ['|',('need_clearance','=', False),('state','in', ['draft','department_manager'])]}">
+                            <button name="compute_sheet" type="object" string="Compute" groups="bsg_hr.group_hr_specialist"
+                                    attrs="{'invisible': ['|',('state','!=', 'hr_specialist'),('payslip_status','=', 'done')] }"/>
+                            <separator/>
+                            <separator string="Month Salary"/>
+                            <group col="4">
+                                <!-- <field name="salary_payslip_id"/> -->
+                                <field name="salary_start_date" readonly="1"/>
+                                <field name="salary_end_date" readonly="1"/>
+                                <field name="salary_payslip_id" readonly="1"/>
+                                <field name="payslip_status" invisible="1"/>
+
+                            </group>
+                            <field name="salary_payslip_line_ids" readonly="1" force_save="1"/>
+                            <separator/>
+                            <separator string="Leave Salary"/>
+                            <button name="salary_compute" type="object" string="Leave Compute" groups="bsg_hr.group_hr_specialist"
+                                    attrs="{'invisible': ['|',('state','!=', 'hr_specialist'),('payslip_status','=', 'done')]}"/>
+                            <group col="4">
+                                <!-- <field name="salary_payslip_id"/> -->
+                                <field name="holiday_salary_start_date" readonly="1" force_save="1"/>
+                                <field name="holiday_salary_end_date" readonly="1" force_save="1"/>
+                                <field name="holiday_salary_payslip_id" force_save="1"/>
+
+                            </group>
+                            <field name="holiday_salary_payslip_line_ids" readonly="1" force_save="1"/>
+                            <!--                            <separator/>-->
+                            <!--                            <separator string="Allowance and Deduction"/>-->
+                            <!--                            <field name="allowance_deduction_payslip_line_id" readonly="1" force_save="1"/>-->
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="salary_total">
+                                <field name="currency_id" invisible="1"/>
+                                <field name="total_clearance_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

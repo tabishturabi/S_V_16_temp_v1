@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="cange_so_customer_form">
+            <field name="name">cange_so_customer.form</field>
+            <field name="model">cange_so_customer</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                      <group>
+                          <field name="cargo_sale_id" readonly="1"/>
+                          <field name="partner_types" invisible="1"/>
+                      </group>
+                      <group>
+                          <field name="cargo_sale_customer_id"/>
+                          <field name="new_customer_id" domain="[('partner_types', '=', partner_types)]"/>
+                      </group>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="update_customer" string="Change Customer" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!-- Action -->
+        <record id="cange_so_line_state_action" model="ir.actions.act_window">
+            <field name="name">Change Cargo Sake Line State</field>
+            <field name="res_model">cange_so_line_state</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cange_so_line_state_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

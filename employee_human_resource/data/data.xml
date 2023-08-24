@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hr_exit_account_data" model="hr.exit.account">
+            <field name="account_id"></field>
+            <field name="journal_id"></field>
+        </record>
+        <record model="ir.sequence" id="hr_exit_return_seq">
+            <field name="name">Hr Exit Return</field>
+            <field name="code">hr.exit.return.seq</field>
+            <field name="prefix">ER/%(range_year)s/</field>
+            <field name="padding">4</field>
+        </record>
+        <record model="ir.sequence" id="employee_job_transfer">
+            <field name="name">employee.job.transfer</field>
+            <field name="code">employee.job.transfer.seq</field>
+            <field name="prefix">JT/%(range_year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

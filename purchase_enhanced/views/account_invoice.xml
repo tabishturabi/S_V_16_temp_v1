@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--inherit supplier form -->
+    <record id="view_invoice_supplier_purchase_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.view.invoice.supplier.purchase.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_send_to_emp_audit" type="object" string="Send To Audit" attrs="{'invisible':['|',('purchase_count','=',0),('state','!=','draft')]}" class="oe_highlight" groups="purchase_enhanced.invoice_send_to_employee_audit"/>
+                <button name="action_send_to_manager_audit" type="object" string="Employee Approve" attrs="{'invisible':['|',('purchase_count','=',0),('state','!=','emp_audit')]}" class="oe_highlight" groups="purchase_enhanced.invoice_employee_audit"/>
+                <button name="action_audit_manger_approve" type="object" string="Manager Approve" attrs="{'invisible':['|',('purchase_count','=',0),('state','!=','manager_audit')]}" class="oe_highlight" groups="purchase_enhanced.invoice_manager_audit"/>
+                <button name="action_audit_manger_approve_cancel" type="object" string="Cancel Manager Approve" attrs="{'invisible':[('state','!=','manager_approve')]}" class="oe_highlight" groups="purchase_enhanced.invoice_manager_audit"/>
+                <button name="action_send_to_manager_return" type="object" string="Employee Reject" attrs="{'invisible':['|',('purchase_count','=',0),('state','!=','emp_audit')]}"  groups="purchase_enhanced.invoice_employee_audit"/>
+                <button name="action_audit_manger_return" type="object" string="Manager Reject" attrs="{'invisible':['|',('purchase_count','=',0),('state','!=','manager_audit')]}"  groups="purchase_enhanced.invoice_manager_audit"/>
+            </xpath>
+<!--            Migration Note not found in base-->
+<!--            <xpath expr="//header/button[@name='action_invoice_open']" position="attributes">-->
+<!--                <attribute name="states"></attribute>-->
+<!--                <attribute name="attrs">{'invisible':['|','&amp;',('purchase_count','!=',0),('state','!=','manager_approve'),'&amp;',('purchase_count','=',0),('state','!=','draft')]}</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='invoice_line_ids']" position="before">-->
+            <xpath expr="//field[@name='purchase_line_id']" position="before">
+                <field name="purchase_count" invisible="1"/>
+                <field name="is_fleet_operation" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="purchase_count" invisible="1"/>
+                <field name="is_fleet_operation" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':['|','|',('state','!=','draft'),('purchase_count','&gt;',0),('is_fleet_operation','=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':['|',('purchase_count','>',0),('is_fleet_operation','=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_origin']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':['|',('purchase_count','>',0),('is_fleet_operation','=', True)]}</attribute>
+            </xpath>
+
+<!--            Migration Note tax_line_ids not found in account.move-->
+<!--            <xpath expr="//field[@name='tax_line_ids']" position="attributes">-->
+<!--                <attribute name="force_save">1</attribute>-->
+<!--                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>-->
+<!--            </xpath>-->
+
+            <xpath expr="//field[@name='invoice_vendor_bill_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'invisible': ['|', ('move_type', '=', 'in_invoice'), ('state', 'not in', ['draft'])],'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='purchase_vendor_bill_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'invisible': ['|', '|', ('state','not in',['draft']), ('state', '=', 'purchase'), ('move_type', '=', 'in_refund')],
+                    'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='purchase_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='purchase_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_payment_term_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+
+<!--             <xpath expr="//field[@name='company_id']" position="before">-->
+<!--               <field name="purchase_count" />-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//page[@name='other_tab']//field[@name='account_id']" position="attributes">-->
+            <xpath expr="//field[@name='account_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+<!--            <xpath expr="//page[@name='other_tab']//field[@name='company_id']" position="attributes">-->
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_count','>',0)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="account_invoice_line_form_inherit_purchase_enhance" model="ir.ui.view">
+        <field name="name">account.invoice.line.form.inherit.purchase.enhance</field>
+        <field name="model">account.move.line</field>
+<!--        Migration Note-->
+<!--        <field name="inherit_id" ref="purchase.view_invoice_line_form_inherit_purchase"/>-->
+        <field name="inherit_id" ref="account.view_move_line_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='product_id']" position="after">
+
+                <field name="is_fleet_operation" invisible="1"/>
+                <field name="uom_id" invisible="1"/>
+                <field name="price_unit" invisible="1"/>
+                <field name="discount" invisible="1"/>
+                <field name="purchase_id" invisible="1"/>
+<!--                <field name="analytic_tag_ids" invisible="1"/>-->
+<!--                <field name="invoice_line_tax_ids" invisible="1"/>-->
+<!--                <field name="account_analytic_id" invisible="1"/>-->
+
+            </xpath>
+
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='quantity']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='uom_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='price_unit']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='discount']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+<!--            Migration Note-->
+<!--            <xpath expr="//field[@name='analytic_tag_ids']" position="attributes">-->
+<!--                <attribute name="force_save">1</attribute>-->
+<!--                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>-->
+<!--            </xpath>-->
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='account_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='tax_ids']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+
+<!--            Migration NOte-->
+<!--            <xpath expr="//field[@name='account_analytic_id']" position="attributes">-->
+<!--                <attribute name="force_save">1</attribute>-->
+<!--                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="view_account_invoice_asset_form_inherit_purchase_enhance" model="ir.ui.view">
+        <field name="name">view.account.invoice.asset.form.inherit.purchase.enhance</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_asset.view_move_line_form_asset_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='asset_ids']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+        <!--inherit supplier form
+        <record id="view_invoice_supplier_purchase_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.view.invoice.supplier.purchase.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="purchase.view_invoice_supplier_purchase_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="attributes">
+                       <attribute name="attrs">{'readonly':[('purchase_id','!=',False)]}</attribute>
+                       <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='uom_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+    
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('purchase_id','!=',False)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+            </field>
+        </record>-->
+
+</odoo>

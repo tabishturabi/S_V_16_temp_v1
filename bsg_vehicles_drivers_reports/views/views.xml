@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="vehicle_drivers_report_wizard_form">
+      <field name="name">vehicle.drivers.report.wizard.form</field>
+      <field name="model">vehicle.drivers.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+                <field name="expiry_date_on"></field>
+                <field name="expire_date_condition"></field>
+              </group>
+              <group>
+                <field name="period_grouping_by" attrs="{'invisible':[('grouping_by','not in',['by_iqama_expiry','by_nid_expiry','by_passport_expiry','by_licence_expiry'])]}"/>
+                <field name="date_from" class="with_hijri" attrs="{'invisible':[('expire_date_condition','!=','is_between')],'required':[('expire_date_condition','=','is_between')]}" />
+                <field name="date_to" class="with_hijri" attrs="{'invisible':[('expire_date_condition','!=','is_between')],'required':[('expire_date_condition','=','is_between')]}" />
+                <field name="expiry_date" class="with_hijri" attrs="{'invisible':[('expire_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('expire_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="vehicle_make" widget="many2many_tags"/>
+                <field name="vehicle_group" widget="many2many_tags" />
+                <field name="vehicle_sticker_no" widget="many2many_tags" />
+                <field name="driver_link" />
+                <field name="driver_name" widget="many2many_tags" domain="[('is_driver','=',True)]" attrs="{'invisible':[('driver_link','!=','linked')]}" />
+                <field name="model_year" widget="many2many_tags"/>
+              </group>
+              <group>
+                <field name="vehicle_state" widget="many2many_tags"/>
+                <field name="vehicle_type" widget="many2many_tags" />
+                <field name="domain_name"  options="{'no_quick_create': True, 'no_create_edit' : True}" widget="many2many_tags"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="vehicle_drivers_report_action">
+      <field name="name">Vehicle drivers Reports</field>
+      <field name="res_model">vehicle.drivers.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="vehicle_drivers_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Vehicles drivers Reports"
+             id="menu_vehicle_drivers_reports"
+             parent="fleet.menu_fleet_reporting"
+             sequence="4"
+             groups="bsg_vehicles_drivers_reports.groups_vehicle_drivers_reports"
+             action="vehicle_drivers_report_action"/>
+  </data>
+</odoo>

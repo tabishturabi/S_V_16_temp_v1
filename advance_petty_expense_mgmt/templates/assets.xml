@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="assets_backend" name="advance_petty_expense_mgmt assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/advance_petty_expense_mgmt/static/src/js/disable_action_view.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+</odoo>

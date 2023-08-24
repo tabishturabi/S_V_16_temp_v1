@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="bsg_route_waypoints_bayan" model="ir.ui.view">
+            <field name="name">bsg.route.waypoints.bayan</field>
+            <field name="model">bsg_route_waypoints</field>
+            <field name="inherit_id" ref="bsg_master_config.bsg_route_waypoints_view_form"/>
+            <field name="arch" type="xml">
+                <field name="branch_no" position="after">
+                    <field name="bayan_city_id" force_save="1"/>
+                    <field name="bayan_region_id" force_save="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

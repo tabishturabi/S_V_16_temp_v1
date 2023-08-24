@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.rule" id="entry_permission_current_branch_user">
+            <field name="name">Entry Permission Current Branch User</field>
+            <field name="model_id" ref="maintenance_enhance.model_entry_permission"/>
+            <field name="domain_force">[('current_branch_user_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('maintenance_enhance.group_wo_user_branch'))]"/>
+
+        </record>
+
+        <record model="ir.rule" id="maintenance_request_enhance_current_branch_user">
+            <field name="name">Maintenance Request Enhance Current Branch User</field>
+            <field name="model_id" ref="maintenance_enhance.model_maintenance_request_enhance"/>
+            <field name="domain_force">[('current_branch_user_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('maintenance_enhance.group_wo_user_branch'))]"/>
+
+        </record>
+    </data>
+</odoo>

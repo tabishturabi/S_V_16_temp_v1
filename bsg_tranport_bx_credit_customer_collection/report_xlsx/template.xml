@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <report
+            id="bxcollection_report_xlsx_id"
+            string="Bx Invoice Report Excel"
+            model="bx.credit.customer.collection"
+            report_type="xlsx"
+            file="Bx Invoice Report Excel"
+            name="bsg_tranport_bx_credit_customer_collection.bx_coll"
+        />
+
+
+      
+    </data>
+</openerp>

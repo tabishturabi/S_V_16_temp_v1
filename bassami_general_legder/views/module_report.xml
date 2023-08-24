@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <template id="general_basami_report">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <style type="text/css">
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                            }
+                            .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                font-size: 13px;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                            }
+                            table tr td, table tr th {
+                                text-align: center;
+                                padding: 5px 0px 0px 5px;
+                                border-right: 2px solid #CCC;
+                                border-bottom: 1px solid #eee;
+                            }
+                            table tr td:last-child,
+                            table tr th:last-child {
+                                border-right: none
+                            }
+                            table tr:last-child td {
+                                border-bottom: none
+                            }
+                            table tr th {
+                                text-align: center;
+                            }
+                            .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                            }
+                            .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                            }
+                            .report-header p .solid {
+                                font-weight: bold;
+                            }
+                            h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline;
+                            }
+                            .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                            }
+
+                            .header {
+                                display : none !importnat;
+                            }
+                            .footer {
+                                display : none !importnat;
+                            }
+                        </style>
+
+                        <div class="report-wrapper">
+
+                            <div class="report-header">
+
+                                <h3>
+                                    <img style="width:200px;background: rgba(0,0,0,0.1);" src="/bassami_general_legder/static/src/img/logod.png"/>
+
+                                    <span class="solid" style="text-align:  center; margin-left: 180px;font-size:45px" t-esc="head"></span>
+
+
+                                </h3>
+
+                            </div>
+
+                            <br class="clearfloat" />
+
+
+                            <div style="float:left; width: 50%;text-align: right;margin-bottom:10px">
+
+                                <h4 style="text-align:left">
+                                   <span t-esc="account_id.code"></span>
+                                   <span t-esc="account_id.name"></span>
+                                </h4>
+
+                                <table>
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                        <td style="text-align:left">
+                                           <span>From : </span>
+                                           <span t-esc="form"></span>
+                                           <span>To : </span>
+                                           <span t-esc="to"></span>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Fiscal Year</td>
+                                        <td style="text-align:left">
+                                            <span t-esc="year"></span>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Initial Balance</td>
+                                        <td style="text-align:left">
+                                            <span t-esc="'{:0,}'.format(int(float(opening)))"></span>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Target Moves</td>
+                                        <td style="text-align:left">
+                                            <span t-esc="state"></span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                            <td style="font-weight:bold;text-align:left">With FC</td>
+                                            <td style="text-align:left">
+                                                <span t-esc="with_fc"></span>
+                                            </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <br class="clearfloat" />
+
+                            <div style="float:left; width: 100%;margin-bottom:10px">
+
+                                <table>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Journal Entry</th>
+                                        <th>User</th>
+                                        <th>Partner</th>
+                                        <th>Reference</th>
+                                        <th>Label</th>
+                                        <th>Currency</th>
+                                        <t t-if="with_fc">
+                                                <th>Amount With FC</th>
+                                        </t>
+                                        <th>Debit(<t t-esc="company_currency"/>)</th>
+                                        <th>Credit(<t t-esc="company_currency"/>)</th>
+                                        <th>Cumul. Bal(<t t-esc="company_currency"/>)</th>
+                                        <t t-if="with_fc">
+                                                <th>Cumul. Bal FC</th>
+                                        </t>
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <!--th></th-->
+                                        <th>Initial Balance</th>
+                                        <th></th>
+                                        <t t-if="with_fc">
+                                                <th><span t-esc="'{:0,}'.format(int(float(currency_opening)))" /></th>
+                                        </t>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(deb)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(cre)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(opening)))"></span>
+                                        </th>
+                                        <t t-if="with_fc">
+                                                <th><span t-esc="'{:0,}'.format(int(float(currency_opening)))" /></th>
+                                        </t>
+                                    </tr>
+
+                                    <t t-set="tot_d" t-value="0" />
+                                    <t t-set="tot_c" t-value="0" />
+                                    <t t-set="balance" t-value="opening" />
+                                    <t t-set="tot_fc" t-value="0" />
+                                    <t t-set="curr_balance" t-value="currency_opening" />
+                                    <t t-foreach="trans" t-as="rec">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="rec.move_id.date"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.move_id.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.move_id.create_uid.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.partner_id.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.move_id.ref"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.name"></span>
+                                            </td>
+                                            <td>
+                                                <t t-if="rec.currency_id">
+                                                    <span  t-esc="rec.currency_id.name"></span>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="company_currency"></span>
+                                                </t>
+                                            </td>
+                                            <t t-if="with_fc">
+                                                <t t-set="tot_fc" t-value="tot_fc+rec.amount_currency" />
+                                                <td><span t-esc="'{0:,.2f}'.format(float(rec.amount_currency))"/></td>
+                                            </t>
+
+                                            <td>
+                                                <t t-set="tot_d" t-value="tot_d+rec.debit" />
+                                                <span t-esc="rec.debit"></span>
+                                            </td>
+
+                                            <td>
+                                                <t t-set="tot_c" t-value="tot_c+rec.credit" />
+                                                <span t-esc="rec.credit"></span>
+                                            </td>
+
+                                            <td>
+                                                <t t-set="balance" t-value="(balance + rec.debit) - rec.credit" />
+                                                <span t-esc="'{:0,}'.format(int(float(balance)))"></span>
+                                            </td>
+
+                                            <t t-if="with_fc">
+                                                    <td>
+                                                        <t t-set="curr_balance" t-value="(curr_balance + rec.amount_currency)" />
+                                                        <!-- <span t-esc="'{:0,}'.format(int(float(balance)))"></span> -->
+                                                        <span t-esc="'{0:,.2f}'.format(float(curr_balance))"></span>
+                                                    </td>
+                                            </t>
+                                        </tr>
+
+                                    </t>
+
+                                    <tr>
+                                        <th colspan="5">Total</th>
+                                        <th></th>
+                                        <t t-if="with_fc">
+                                                <th>
+                                                    <!-- <span t-esc="'{:0,}'.format(int(float(tot_d)))"></span> -->
+                                                    <span t-esc="'{0:,.2f}'.format(float(tot_fc))"></span>
+                                                </th>
+                                        </t>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(tot_d)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(tot_c)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(balance)))"></span>
+                                        </th>
+                                        <t t-if="with_fc">
+                                                <th>
+                                                    <!-- <span t-esc="'{:0,}'.format(int(float(balance)))"></span> -->
+                                                    <span t-esc="'{0:,.2f}'.format(float(curr_balance))"></span>
+                                                </th>
+                                        </t>
+                                    </tr>
+
+                                </table>
+
+                            <t t-if="not with_fc">
+                                <table>
+                                        <tr>
+                                            <th>Currency</th>
+                                            <th>Initial Balance</th>
+                                            <th>Move Balance</th>
+                                            <th>Cumul. Bal</th>
+                                        </tr>
+                                        <t t-foreach="currency_tot" t-as="curr_tot">
+                                        <tr>
+                                            <td><span t-esc="curr_tot['name']"></span></td>
+                                            <td>
+                                                <span t-esc="'{:0,}'.format(int(float(curr_tot['initial'])))"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,}'.format(int(float(curr_tot['move'])))"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,}'.format(int(float(curr_tot['final'])))"></span>
+                                            </td>
+                                        </tr>
+                                        </t>
+                                </table>
+                            </t>
+
+
+                            </div>
+
+                            <table style="border:hidden">
+                                <tr style="border:hidden">
+                                    <th style="border:hidden;text-align:right">Name</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px;"></th>
+                                    <th style="border:hidden;text-align:right">Name</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px;"></th>
+                                    <th style="border:hidden;text-align:right">Name</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px;"></th>
+
+                                </tr>
+                                <tr style="border:hidden">
+                                    <th style="border:hidden;text-align:right">Siganture</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px"></th>
+                                    <th style="border:hidden;text-align:right">Siganture</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px"></th>
+                                    <th style="border:hidden;text-align:right">Siganture</th>
+                                    <th style="border:hidden;text-align:right;min-width:120px"></th>
+
+                                </tr>
+
+                            </table>
+
+
+
+                        </div><!--end of report wrapper-->
+
+                    </div><!--end of page -->
+
+                </t>
+
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

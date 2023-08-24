@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-extend="HomeMenu.Content">
+	<t t-jquery="div.o_home_menu_footer" t-operation="replace">
+		<div class="o_home_menu_footer">
+			<img src="/bassami_theme/static/src/img/albassami_logo_horizontal_small.png" alt="Albassami"/>
+		</div>
+	</t>
+</t>
+</templates>

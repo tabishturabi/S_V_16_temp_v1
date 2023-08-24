@@ -1,0 +1,98 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="items_gatepass_tree">
+      <field name="name">item.gatepass.tree</field>
+      <field name="model">item.gatepass</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name = "company_id"/>
+            <field name = "driver_name"></field>
+            <field name = "project_name"></field>
+            <field name = "work_order"></field>
+            <field name = "delivery_note_no"></field>
+            <field name = "delivery_name"></field>
+            <field name = "date"></field>
+            <field name = "pass_from"></field>
+            <field name = "pass_to"></field>
+            <field name = "status"></field>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="items_gatepass_form">
+      <field name="name">item.gatepass.form</field>
+      <field name="model">item.gatepass</field>
+      <field name="arch" type="xml">
+          <form>
+              <header>
+
+                  <button name="action_confirm" attrs="{'invisible': [('state', '!=', 'draft')]}" string="Submit" type="object" class="oe_highlight"/>
+
+                  <button name="action_finance_approve" attrs="{'invisible': [('state', '!=', 'finanace_approval')]}" string="Approve" type="object" class="oe_highlight"/>
+                  <button name="%(bsg_items_gatepass.gatepass_refusal_reason_action)d" string="Refuse" class="oe_highlight" type="action" attrs="{'invisible': [('state', '!=', 'finanace_approval')]}" />
+
+                  <button name="action_op_manager_approve" attrs="{'invisible': [('state', '!=', 'op_manager_approval')]}" string="Approve" type="object" class="oe_highlight" groups="bsg_items_gatepass.groups_gatepass_op_manager"/>
+                  <button name="%(bsg_items_gatepass.gatepass_refusal_reason_action)d" string="Refuse" class="oe_highlight" type="action" attrs="{'invisible': [('state', '!=', 'op_manager_approval')]}" groups="bsg_items_gatepass.groups_gatepass_op_manager"/>
+
+                  <button string="Print Report" name="%(bsg_items_gatepass.items_gatepass_report_id)d" class="oe_highlight"
+                                type="action"
+                                states="done"
+                        />
+                  <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+              </header>
+              <sheet>
+                  <div class="oe_title">
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                  </div>
+                  <group>
+                      <group>
+                          <field name="company_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "driver_name" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "project_name" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "work_order" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "delivery_note_no" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "delivery_name" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                      </group>
+                      <group>
+                          <field name = "date" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "pass_from" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "pass_to" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                          <field name = "status" attrs="{'readonly': [('state', '!=', 'draft')]}"></field>
+                      </group>
+                  </group>
+                  <group>
+                      <field name="notes" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                  </group>
+                  <field name="line_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                      <tree editable="bottom">
+                          <field name="gatepass_id" invisible="1" />
+                          <field name="item_description" />
+                          <field name="item_qty" />
+                          <field name="item_weight" />
+                          <field name="remarks" />
+                      </tree>
+                  </field>
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="activity_ids" widget="mail_activity"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+          </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="items_gatepass_action">
+      <field name="name">Items GatePass</field>
+      <field name="res_model">item.gatepass</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+    <menuitem name="Items GatePass"
+             id="items_gatepass_menu"
+             sequence="5"
+             groups="bsg_items_gatepass.groups_items_gatepass"
+             parent="stock.menu_stock_root"
+             action="items_gatepass_action"
+   />
+  </data>
+</odoo>

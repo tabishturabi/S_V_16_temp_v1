@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="account_move_report_wizard_form">
+      <field name="name">account.move.report.wizard.form</field>
+      <field name="model">account.move.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="date_from" />
+                <field name="account_ids" widget="many2many_tags"></field>
+              </group>
+              <group>
+                <field name="date_to" />
+                <field name="is_partner"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="account_move_report_action">
+      <field name="name">Account Move Report</field>
+      <field name="res_model">account.move.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="account_move_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Account Move Report"
+             id="menu_account_move_report"
+             parent="account_reports.account_reports_audit_reports_menu"
+             sequence="30"
+             action="account_move_report_action"/>
+  </data>
+</odoo>

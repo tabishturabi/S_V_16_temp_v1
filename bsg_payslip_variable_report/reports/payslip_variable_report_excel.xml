@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="payslip_variable_report_xlsx_id"
+             model="monthly.variable.report.wizard"
+             string="Employee Payslip Variable Report"
+             report_type="xlsx"
+             name="bsg_payslip_variable_report.pv_report_xlsx"
+             file="bsg_payslip_variable_report.pv_report_xlsx"
+     />
+</odoo>

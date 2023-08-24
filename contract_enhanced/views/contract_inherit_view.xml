@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--inherit contact form -->
+    <record id="contract_contract_customer_form_view_inherit" model="ir.ui.view">
+        <field name="name">contract.contract.form</field>
+        <field name="model">contract.line</field>
+        <field name="inherit_id" ref="contract.contract_line_form_view"/>
+        <field name="arch" type="xml">
+            <group name="analytic" position="after">
+                <group name="other_info">
+                    <group>
+                        <field name="branch_id"/>
+                        <field name="department_id"/>
+                        <field name="analytic_tag_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <label for="before_end_of_contract"/>
+                        <div>
+                            <field name="before_end_of_contract"/>
+                            <field name="next_action_list"/>
+                        </div>
+                        <label for="paied_every"/>
+                        <div>
+                            <field name="paied_every"/>
+                            <field name="next_paied_list"/>
+                        </div>
+                        <field name="send_to_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

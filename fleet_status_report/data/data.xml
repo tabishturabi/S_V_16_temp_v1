@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+
+        <record id="fleet_status_0" model="fleet.status.model">
+            <field name="name">Fleet Status</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report id="sim_card_report_id"
+                model="sim.card.report"
+                string="SIM Card Movement Report"
+                report_type="xlsx"
+                name="sim_card.sim_card_report_temp_xlsx"
+                file="sim_card.sim_card_report_temp_xlsx" />
+
+
+        <record id="sim_card_report_wizard" model="ir.ui.view">
+            <field name="name">sim_card_report_wizard</field>
+            <field name="model">sim.card.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="report_mode"/>
+                            <field name="day_condition"/>
+                            <field name="mble_no" widget='many2many_tags'/>
+                            <field name="branch_id" widget='many2many_tags'/>
+                            <field name="department_id" widget='many2many_tags'/>
+                            <field name="job_id" widget='many2many_tags'/>
+
+                        </group>
+                        <group name="group_right">
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+
+                            <field name="date_from" attrs="{'invisible': [('day_condition', 'not in', ['is between','is equal to','is not equal to','is after',
+                        'is before','is after or equal to','is before or equal to'])]}"/>
+                            <field name="date_to" attrs="{'invisible':[('day_condition','!=','is between')]}"/>
+                            <field name="service_id" widget='many2many_tags'/>
+                            <field name="pkg_id" widget='many2many_tags'/>
+                            <field name="sim_type"/>
+                            <field name="is_cost"/>
+
+                        </group>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print Xlsx" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_package_report_action" model="ir.actions.act_window">
+            <field name="name">SIM Card Movement Report</field>
+            <field name="res_model">sim.card.report</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sim_card_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="sim_card_request_main_menu_report" name="Reports" parent="sim_card_request_menu_root" sequence="4"/>
+
+        <menuitem id="sim_card_package_report_menu_item" name="SIM Card Movement Report" action="sim_card_package_report_action"
+                  parent="sim_card_request_main_menu_report" groups="sim_card.sim_card_movement_report"/>/>
+
+    </data>
+</openerp>

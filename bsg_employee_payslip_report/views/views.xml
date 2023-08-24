@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_payslip_report_wizard">
+      <field name="name">Employee Payslip Report</field>
+      <field name="model">employee.payslip.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="employee_id" widget="many2many_tags" required="True"/>
+                <label for="from_month" string="From"/>
+                <div  class="o_row o_row_readonly">
+                  <field name="from_month" class="oe_inline"></field>
+                  <field name="from_year" widget="selection" class="oe_inline"></field>
+                  <span class="oe_inline">To</span>
+                  <field name="end_month" class="oe_inline"></field>
+                  <field name="end_year" widget="selection" class="oe_inline"></field>
+                </div>
+              </group>
+              <field name="from_date" invisible="1" class="oe_inline"></field>
+              <field name="to_date" invisible="1" class="oe_inline"></field>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="employee_payslip_report_act_action_window">
+      <field name="name">Employee Payslip Report Wizard</field>
+      <field name="res_model">employee.payslip.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="employee_payslip_report_wizard"></field>
+      <field name="target">new</field>
+    </record>
+    <menuitem name="Employee Payslips Report"
+              id="menu_employee_payslip_report"
+              parent="employee_info_report.employee_info_report_main_menu_item"
+              sequence="2"
+              action="employee_payslip_report_act_action_window"/>
+  </data>
+</odoo>

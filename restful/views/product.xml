@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+<record id="view_product_other_service" model="ir.ui.view">
+            <field name="name">product.template.other.service.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                    <div name="options" position="inside">
+                        <div>
+                            <field name="is_home_pickup"/>
+                            <label for="is_home_pickup"/>
+                        </div>
+                        <div>
+                            <field name="is_home_delivery"/>
+                            <label for="is_home_delivery"/>
+                        </div>
+                        <div>
+                            <field name="is_large_box"/>
+                            <label for="is_large_box"/>
+                        </div>
+                        <div>
+                            <field name="is_medium_box"/>
+                            <label for="is_medium_box"/>
+                        </div>
+                        <div>
+                            <field name="is_small_box"/>
+                            <label for="is_small_box"/>
+                        </div>
+                </div>
+            </field>
+        </record>
+    </data>
+    </odoo>

@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+<!-- assettype form view-->
+      <record model="ir.ui.view" id="view_education_type_form">
+        <field name="name">hr.education.type.form</field>
+        <field name="model">hr.education.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Document Type" >
+                <sheet>
+                    <group>
+                        <field name="bsg_type"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_education_type_tree">
+        <field name="name">hr.education.type.tree</field>
+        <field name="model">hr.education.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsg_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsg_emp_education_type_action">
+        <field name="name">Education Type</field>
+        <field name="res_model">hr.education.type</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Education Type"
+      id="hr_emp_education_menu"
+      parent="hr.menu_human_resources_configuration"
+      action="bsg_emp_education_type_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

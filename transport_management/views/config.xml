@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transport_management_config" model="ir.ui.view">
+        <field name="name">Transport Management Config</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Transport Management Configuration" string="Bx Transport Management" data-key="transport_management">
+                	
+                    <h2>Bx Transport Management</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Default Fuel Product" for="fuel_product_id"/>
+                                        <field name="fuel_product_id" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Fuel Analytic Account" for="fuel_analytic_account_id"/>
+                                        <field name="fuel_analytic_account_id" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Default Fuel Supplier" for="fuel_supplier_id"/>
+                                        <field name="fuel_supplier_id" domain="[('supplier_rank', '>', 0)]"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                	<div class="row mt16">
+                                	<br/>
+                                	<br/>
+                                	</div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Fuel Analytic Tags" for="fuel_analytic_tag_ids"/>
+                                        <field name="fuel_analytic_tag_ids"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Invoice Analytic Account" for="invoice_analytic_account_id"/>
+                                        <field name="invoice_analytic_account_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Invoice Analytic Tags" for="invoice_analytic_tag_ids"/>
+                                        <field name="invoice_analytic_tag_ids" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Default Reward For Load" for="reward_for_load_id"/>
+                                        <field name="reward_for_load_id" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Reward For Load Analytic Account" for="reward_for_analytic_account_id"/>
+                                        <field name="reward_for_analytic_account_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                    	<br/>
+                                    	<br/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Reward For Load Analytic Tags" for="reward_for_analytic_tag_ids"/>
+                                        <field name="reward_for_analytic_tag_ids" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Domain Name"  for="vehicle_type_domain_ids"/>
+                                        <field name="vehicle_type_domain_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Fleet Size" for="bsg_car_size_ids"/>
+                                        <field name="bsg_car_size_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Customer</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                            <p><b>Default Bx Customer Invoice Journal</b></p>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Customer Invoice Journal" for="bx_customer_journal_id"/>
+                                        <field name="bx_customer_journal_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Vendor</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                            <p><b>Default Bx Vendor Invoice Journal</b></p>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Vendor Invoice Journal" for="bx_vendor_journal_id"/>
+                                        <field name="bx_vendor_journal_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                            <p><b>Default Vendor Bill Cash Rounding Method</b></p>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Cash Rounding Method" for="cash_rounding_id"/>
+                                        <field name="cash_rounding_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2>Inventory</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Default Product Categories" for="product_category_ids"/>
+                                        <field name="product_category_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="transport_management_settings_action" model="ir.actions.act_window">
+        <field name="name">Trip Management Configuration</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="transport_management_config"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'transport_management'}</field>
+    </record>
+
+	
+</odoo>

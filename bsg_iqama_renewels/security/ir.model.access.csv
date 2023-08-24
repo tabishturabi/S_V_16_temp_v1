@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iqama_renewels,access_iqama_renewels,model_iqama_renewels,base.group_system,1,1,1,1
+access_iqama_renewels_employee,access_iqama_renewels_employee,model_iqama_renewels,bsg_iqama_renewels.group_iqama_access,1,1,1,1
+access_iqama_renewels_manager,access_iqama_renewels_manager,model_iqama_renewels,bsg_iqama_renewels.group_iqama_department_manager,1,1,0,0
+access_iqama_renewels_hr_manager,access_iqama_renewels_hr_manager,model_iqama_renewels,bsg_iqama_renewels.group_iqama_hr_manager,1,1,0,0
+
+
+
+

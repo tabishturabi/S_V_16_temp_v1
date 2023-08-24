@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.overtime</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="15"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Overtime Requests" string="Overtime" data-key="bsg_hr_overtime">
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="incomming_emails"/>
+                                <field name="default_multi_payslip_reimburse" invisible="True" />
+                                <field name="default_total_hours_payslip_reimburse" invisible="True" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="incomming_emails"/>
+                                <div class="text-muted">
+                                    Create Overtime from incomming emails
+                                </div>
+                            </div>
+                            <div class="o_setting_left_pane">
+                                <field name="default_generate_from_attendance"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_generate_from_attendance"/>
+                                <div class="text-muted">
+                                    Pull Overtime From Employee Attendance automatically 
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="default_payslip_reimburse"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_payslip_reimburse"/>
+                                <div class="text-muted">
+                                    Overtime can be reimbursed in payslips
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16" attrs="{'invisible':[('default_payslip_reimburse','=',False)]}">
+                                        <label string="Overtime sallary rule" for="overtime_sallary_rule_id" class="col-lg-5 o_bold_label"/>
+                                        <field name="overtime_sallary_rule_id"/>
+                                        <div class="text-muted">
+                                            Choose the default for overtime sallary rule
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="default_allow_overtime_per_employee"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_allow_overtime_per_employee"/>
+                                <div class="text-muted">
+                                    Allow To Enter Total Overtime Per Employee
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">  
+                            </div>
+
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Overtime Accounting</span>
+                                <div class="text-muted">
+                                    Overtime can be post Journal Entries
+                                </div>
+                                <div class="content-group">
+                                    <div class="row">
+                                        <label string="Debit Account" for="overtime_debit_account_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_debit_account_id"></field>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Credit Account" for="overtime_credit_account_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_credit_account_id"></field>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Analytic Account" for="overtime_analytic_account_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_analytic_account_id"></field>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Tax" for="overtime_tax_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_tax_id"></field>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Overtime Journal" for="overtime_journal_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_journal_id"></field>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Payment Journal" for="overtime_payment_method_id" class="col-lg-4 o_bold_label"/>
+                                        <field name="overtime_payment_method_id"></field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Overtime Computation</span>
+                                        <div class="text-muted">
+                                            Rule Contian Way To Compute Overtime Amount Per Hour 
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="row">
+                                                <label string="Compute Rule" for="overtime_compute_salary_rule_id" class="col-lg-4 o_bold_label"/>
+                                                <field name="overtime_compute_salary_rule_id"></field>
+                                            </div>
+                                        </div>    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'bsg_hr_overtime'}</field>
+    </record>
+    <menuitem id="menu_overtime_general_settings"
+        name="Settings"
+        parent="bsg_hr_overtime.menu_overtime_request_configuration"
+        sequence="1"
+        action="action_config_settings"
+        groups="bsg_hr_overtime.group_overtime_admin"/>
+</odoo>

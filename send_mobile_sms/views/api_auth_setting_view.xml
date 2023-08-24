@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="send_mobile_sms_settings" model="ir.ui.view">
+        <field name="name">SMS Configuration</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="SMS Configuration" string="SMS Configuration" data-key="send_mobile_sms">
+                    <h2>Mobily Account Details</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="API URL" for="api_url"/>
+                                        <field name="api_url" required="True"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Username" for="sms_username"/>
+                                        <field name="sms_username" required="True"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label class="col-lg-3 o_light_label" string="Password" for="sms_password"/>
+                                        <field name="sms_password" password="True" required="True"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="send_mobile_sms_settings_action" model="ir.actions.act_window">
+        <field name="name">SMS Configuration</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="send_mobile_sms_settings"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'send_mobile_sms'}</field>
+    </record>
+
+
+
+</odoo>

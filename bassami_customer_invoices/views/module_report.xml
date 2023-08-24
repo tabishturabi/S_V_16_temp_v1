@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="customer_invoice_report_temp">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 13px;
+                                }
+
+                                .contaner {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+
+                                page[size="A4"] {
+                                    width: 23cm;
+                                    height: 27.7cm;
+                                    text-align: center;
+                                }
+
+                                h1 {
+
+                                    margin: 0px auto;
+                                    width: 80%;
+                                    float: left;
+                                    text-align: center;
+                                    margin-bottom: 40px;
+
+                                }
+
+                                .org {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                    text-decoration: underline;
+                                }
+
+                                .dup {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .line {
+                                    width: 100%;
+                                    margin-top: 30px;
+
+
+                                }
+
+                                .ser {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .ser .solid {
+                                    width: 27%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .ser .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .date {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+
+                                .date .solid {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .date .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .time {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .time .solid {
+                                    width: 35%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .time .liquid {
+                                    width: 64%;
+                                    float: left;
+                                
+                                }
+
+                                .big {
+                                    width: 100%;
+                                    font-size: 14px;
+
+                                }
+
+
+                                .box {
+                                    width: 49%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+                                    
+                                }
+
+                                .box1 {
+                                    width: 50%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+
+                                }
+
+                                .supp {
+
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidsupp1 {
+                                    width: 30%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .liquidsupp {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .solidsupp2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                
+                                }
+
+                                .add {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidadd1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidadd2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidadd {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .tele {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidtele1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidtele2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidtele {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .ntn {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidntn1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidntn2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidntn {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .term {
+                                    width: 100;
+                                    float: left;
+                                    margin-top: 30px;
+                                }
+
+                                .term .solid {
+                                    width: 15%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .term .liquid {
+                                    width: 85%;
+                                    float: left;
+                                }
+
+
+                                table {
+                                    border: 1px solid #000;
+                                    margin: 10px 0px 0px;
+                                    width: 100%;
+                                    float: left;
+                                    border-spacing: 0px;
+                                    font-size : 17px;
+                                }
+
+                                table tr th,
+                                table tr td {
+                                    border-right: 1px solid #000;
+                                    text-align: left;
+                                }
+
+                                table tr th {
+                                    padding: 2px 0px;
+                                                                    
+                                }
+
+                                table tr td {
+                                    border-top: 1px solid #000;
+                                    padding: 2px 0px;
+                                }
+                                
+                                    
+                            </style>
+
+                            <div class="report-container">
+
+                                <div class="contaner">
+
+                                    <img src="/bassami_customer_invoices/static/src/img/collection.png" />
+
+                                </div>
+
+                               
+                                <div class="big">
+                                    
+
+                                    <div class="box" style="height: 200px">
+
+                                        <div class="supp">
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪Customer Information</div>
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫بيانات‬ العميل‬ ‫:</div>
+                                        </div>
+
+                                        <div class="supp">
+                                            <div class="solidsupp1">Customer Name</div>
+                                            <div class="liquidsupp">
+                                                <span t-esc="o.partner_id.name"></span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪اسم‬ العميل‬ ‫</div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="solidntn1">Tax Account No</div>
+                                            <div class="liquidntn">
+                                                <span t-esc="o.partner_id.vat"></span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الرقم‬ الضريبي‬ ‫</div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="solidadd1">Address</div>
+                                            <div class="liquidadd">
+                                                <span t-esc="o.partner_id.street"></span>
+                                            </div>
+                                            <div class="solidadd2">‫‪العنوان‬</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="solidtele1">Commercial No</div>
+                                            <div class="liquidtele">
+                                                <span t-esc="o.partner_id.commmercial_number"></span>
+                                            </div>
+                                            <div class="solidtele2">‫‪الرقم التجاري </div>
+                                        </div>                                       
+
+                                    </div>
+
+                                    <div class="box1" style="height: 200px">
+                                        <div class="supp">
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">Company Information</div>
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪بيانات‬ الشركه‬</div>
+                                        </div>
+
+
+                                        <div class="supp">
+                                            <div class="solidsupp1">Company Name</div>
+                                            <div class="liquidsupp">
+                                                <span>
+                                                    ‫مجموعة أعمال البسامي الدولية
+                                                </span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪اسم‬ الشركه‬ </div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="solidntn1">Tax Account No</div>
+                                            <div class="liquidntn">
+                                                <span>‫‪300043273800003‬‬</span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الرقم‬ الضريبي‬ </div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="solidadd1">Address</div>
+                                            <div class="liquidntn">
+                                                <span>‫Between Exit 10 and Exit 11, Al Bassami Building,Al Quds,Riyadh</span>
+                                            </div>
+                                            <div class="solidadd2">‫‪العنوان‬</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="solidtele1">Telephone No</div>
+                                            <div class="liquidtele">
+                                                <span>‫‪920005353‬‬</span>
+                                            </div>
+                                            <div class="solidtele2">‫‪رقم‬ الھاتف‬</div>
+                                        </div>
+                                        
+                                    </div>
+
+
+                                </div>
+
+                                <t t-if="lang_id == 0">
+
+                                    <div style="width:100%;float:left" id="invoice_number1">
+                                        <span style="font-weight:bold;font-size:22px">Invoice</span>
+                                        <span style="font-weight:bold;font-size:22px">
+                                            <span t-esc="o.name"></span>
+                                        </span>
+
+                                    </div>
+
+                                    <table style="width:80%;border:hidden">
+
+                                        <tr>
+                                            
+                                            <th style="border:hidden">Invoice Date :</th>
+                                            <th style="border:hidden">Due Date :</th>
+                                            <th style="border:hidden">Source :</th>
+                                            <th style="border:hidden">Customer Code :</th>
+                                            <th style="border:hidden">Reference :</th>
+                                           
+                                        </tr>
+                                              
+                                        <tr>
+                                            
+                                          
+                                            <td style="border:hidden">
+                                                <span t-esc="o.invoice_date" t-options="{'widget': 'date'}"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.invoice_date_due" t-options="{'widget': 'date'}"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.invoice_origin" ></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.partner_id.ref"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.name"></span>
+                                            </td>
+                                                
+                                        </tr>
+
+
+                                    </table>
+
+                                    <table>
+
+                                        <tr>
+                                            
+                                            <th style="border-right:hidden;border-left:hidden">Description</th>
+                                            <th style="border-right:hidden;border-left:hidden">Quantity</th>
+                                            <th style="border-right:hidden;border-left:hidden">Unit Price </th>
+                                            <th style="border-right:hidden;border-left:hidden">Taxes</th>
+                                            <th style="border-right:hidden;border-left:hidden">Amount</th>
+                                           
+                                        </tr>
+
+                                        <t t-foreach="o.invoice_line_ids" t-as="i">
+                                              
+                                            <tr>
+                                                
+                                              
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span t-esc="i.name"></span>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.quantity))"></span>
+                                                    
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.price_unit))"></span>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+<!--                                                    <t t-foreach="i.invoice_line_tax_ids" t-as="j">-->
+                                                    <t t-foreach="i.tax_ids" t-as="j">
+                                                        <span style="margin-left:0px" t-esc="j.amount"></span>
+                                                        <span style="margin-left:0px">%</span>
+                                                    </t>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.price_subtotal))"></span>
+                                                </td>
+                                                    
+                                            </tr>
+
+                                        </t>
+
+                                            <tr>
+                                                <td colspan="5" style="border-right:hidden;border-left:hidden;border-top:hidden;padding-top:20px"></td>
+                                            </tr>
+
+                                            <tr style="margin-top:20px">
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    Subtotal
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_untaxed))"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    Tax
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_tax))"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden;border-bottom:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    Total
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_total))"></span>
+                                                </td>
+                                            </tr>
+
+
+                                    </table>
+
+
+                                    <div style="width:100%;float:left;margin-top:20px">
+                                        <span style="font-size:15px">Please use the following communication for your payment :</span>
+                                        <span style="font-weight:bold;font-size:16px">
+                                            <span t-esc="o.name"></span>
+                                        </span>
+                                    </div>
+
+                                </t>
+
+                                <t t-if="lang_id == 1">
+
+                                    <div style="width:100%;float:left" id="invoice_number2">
+                                        <span style="font-weight:bold;font-size:22px">
+                                            <span t-esc="o.name"></span>
+                                        </span>
+                                        <span style="font-weight:bold;font-size:22px">: رقم الفاتورة </span>
+
+                                    </div>
+
+                                    <table style="width:80%;border:hidden">
+
+                                        <tr>
+                                            
+                                            <th style="border:hidden">تاريخ الفاتورة</th>
+                                            <th style="border:hidden">تاريخ الإستحقاق</th>
+                                            <th style="border:hidden">المصدر</th>
+                                            <t t-if="type_id == 0">
+                                                <th style="border:hidden">رقم العميل</th>
+                                            </t>
+                                            <t t-if="type_id == 1">
+                                                <th style="border:hidden">رقم المورد</th>
+                                            </t>
+                                            <th style="border:hidden">المرجع الداخلي</th>
+                                           
+                                        </tr>
+                                              
+                                        <tr>
+                                            
+                                          
+                                            <td style="border:hidden">
+                                                <span t-esc="o.invoice_date" t-options="{'widget': 'date'}"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.invoice_date_due" t-options="{'widget': 'date'}"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.invoice_origin" ></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.partner_id.ref"></span>
+                                            </td>
+                                            <td style="border:hidden">
+                                                <span style="margin-left:0px" t-esc="o.name"></span>
+                                            </td>
+                                                
+                                        </tr>
+
+
+                                    </table>
+
+                                    <table>
+
+                                        <tr>
+                                            
+                                            <th style="border-right:hidden;border-left:hidden">الوصف</th>
+                                            <th style="border-right:hidden;border-left:hidden">الكمية</th>
+                                            <th style="border-right:hidden;border-left:hidden">سعر الوحدة </th>
+                                            <th style="border-right:hidden;border-left:hidden">الضريبه</th>
+                                            <th style="border-right:hidden;border-left:hidden">الكميه</th>
+                                           
+                                        </tr>
+
+                                        <t t-foreach="o.invoice_line_ids" t-as="i">
+                                              
+                                            <tr>
+                                                
+                                              
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span t-esc="i.name"></span>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.quantity))"></span>
+                                                    
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.price_unit))"></span>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+<!--                                                    <t t-foreach="i.invoice_line_tax_ids" t-as="j">-->
+                                                    <t t-foreach="i.tax_ids" t-as="j">
+                                                        <span style="margin-left:0px" t-esc="j.amount"></span>
+                                                        <span style="margin-left:0px">%</span>
+                                                    </t>
+                                                </td>
+
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(i.price_subtotal))"></span>
+                                                </td>
+                                                    
+                                            </tr>
+
+                                        </t>
+
+                                            <tr>
+                                                <td colspan="5" style="border-right:hidden;border-left:hidden;border-top:hidden;padding-top:20px"></td>
+                                            </tr>
+
+                                            <tr style="margin-top:20px">
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    المجموع الفرعي
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_untaxed))"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    الضريبه
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_tax))"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="3" style="border-right:hidden;border-left:hidden;border-top:hidden;border-bottom:hidden"></td>
+                                                <td style="border-right:hidden;border-left:hidden;font-weight:bold">
+                                                    المجموع الكلي
+                                                </td>
+                                                <td style="border-right:hidden;border-left:hidden">
+                                                    <span style="margin-left:0px" t-esc="'{0:,.2f}'.format(float(o.amount_total))"></span>
+                                                </td>
+                                            </tr>
+
+
+                                    </table>
+
+
+                                    <div style="width:100%;float:left;margin-top:20px">
+                                        <span style="font-weight:bold;font-size:16px">
+                                            <span t-esc="o.number"></span>
+                                        </span>
+                                        <span style="font-size:15px">: برجاء استخدام هذا المرجع عند السداد</span>
+                                    </div>
+
+                                </t>
+                        
+                            </div>
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

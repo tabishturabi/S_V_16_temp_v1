@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bsg_mrp_project_type_tree_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.project.type.tree</field>
+            <field name="model">bsg.mrp.project.type</field>
+            <field name="arch" type="xml">
+                <tree string="Project">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="bsg_mrp_project_type_form_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.project.type.form</field>
+            <field name="model">bsg.mrp.project.type</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="bsg_mrp_project_type_action" model="ir.actions.act_window">
+            <field name="name">Project Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bsg.mrp.project.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new manufacturing order
+                </p>
+            </field>
+        </record>
+        <menuitem action="bsg_mrp_project_type_action"
+                  id="bsg_menu_mrp_project_type_action"
+                  parent="manufacturing_enhance.menu_bsg_mrp_config"
+                  sequence="5"/>
+    </data>
+</odoo>

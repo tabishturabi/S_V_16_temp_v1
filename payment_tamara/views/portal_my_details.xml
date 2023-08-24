@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   
+    <template id="portal_my_details_inherited" inherit_id="portal.portal_my_details">
+        <xpath expr="//input[@name='street']" position="attributes">
+            <field name="required">1</field>
+        </xpath>
+        <xpath expr="//input[@name='zipcode']" position="attributes">
+            <field name="required">1</field>
+        </xpath>
+        <xpath expr="//input[@name='city']" position="attributes">
+            <field name="required">1</field>
+        </xpath>
+        <xpath expr="//select[@name='country_id']" position="attributes">
+            <field name="required">1</field>
+        </xpath>
+    </template>
+</odoo>

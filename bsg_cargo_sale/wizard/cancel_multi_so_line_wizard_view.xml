@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="cancel_multi_so_line_record_form">
+            <field name="name">cancel.multi.so.line.record.form</field>
+            <field name="model">cancel.multi.so.line.record</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cancel Multi So Line">
+                      <group>
+                          <field name="cargo_sale_id" invisible="1"/>
+
+<!--                          Migration Note start fleet_trip_id field is in bst_trip_mgmt and this module is not in migration repo now once this module-->
+<!--                          will be added in repo cargo_sale_line_ids field will be uncommented-->
+
+<!--                          add_to_cc field is in bsg_corporate_invoice_contract after migration of this module this field will be added in domain-->
+
+<!--                          <field name="cargo_sale_line_ids"  widget="many2many_tags"-->
+<!--                          domain="[('bsg_cargo_sale_id', '=', cargo_sale_id),-->
+<!--                              ('state', '=', 'draft'),('fleet_trip_id','=',False),('add_to_cc','!=',True)]"/>-->
+
+                           <field name="cargo_sale_line_ids"  widget="many2many_tags"
+                          domain="[('bsg_cargo_sale_id', '=', cargo_sale_id),('state', '=', 'draft')]"/>
+
+<!--                          Migration Note End-->
+                      </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="cancel_so_line" string="Validate" confirm="Are You Sure You Want To Delete This Lines..?"/>
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="cancel_multi_so_line_record_action" model="ir.actions.act_window">
+            <field name="name">Cancel Multi So Line</field>
+            <field name="res_model">cancel.multi.so.line.record</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cancel_multi_so_line_record_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

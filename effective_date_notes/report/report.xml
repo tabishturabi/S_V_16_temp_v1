@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report id="house_movement_report_id"
+                model="house.movement"
+                string="House Movement Report"
+                report_type="xlsx"
+                name="housing.house_movement_report_temp_xlsx"
+                file="housing.house_movement_report_temp_xlsx" />
+
+
+        <record id="housing_report_wizard" model="ir.ui.view">
+            <field name="name">housing_report_wizard</field>
+            <field name="model">house.movement</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="report_mode"/>
+                            <field name="day_condition"/>
+                            <field name="house_location" widget='many2many_tags'/>
+                            <field name="branch_id" widget='many2many_tags'/>
+                            <field name="department_id" widget='many2many_tags'/>
+                            <field name="job_id" widget='many2many_tags'/>
+                            <field name="created_id" widget='many2many_tags'/>
+                            <field name="active"/>
+                            <field name="is_still_house"/>
+                            <field name="interval_type"/>
+                            <field name="date1" invisible="1"/>
+                        </group>
+
+                        <group name="group_right">
+                            <field name="period_group" attrs="{'invisible': [('report_mode', 'not in', 'house_movement_period')]}"/>
+                            <field name="date_from" attrs="{'invisible': [('day_condition', 'not in', ['is between','is equal to','is not equal to','is after',
+                        'is before','is after or equal to','is before or equal to'])]}"/>
+                            <field name="date_to" attrs="{'invisible':[('day_condition','!=','is between')]}"/>
+                            <field name="company_id" widget='many2many_tags'/>
+                            <field name="transaction_type" attrs="{'invisible': [('report_mode', 'not in', 'house_movement_transaction_type')]}"/>
+                            <field name="vehicle_type_id" widget='many2many_tags'/>
+                            <field name="vehicle_id" widget='many2many_tags'/>
+                        </group>
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print Xlsx" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="housing_report_action" model="ir.actions.act_window">
+            <field name="name">Housing Movement Report</field>
+            <field name="res_model">house.movement</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="housing_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="housing_menu_report" name="Reports" parent="housing_permission_menu_root" sequence="2"/>
+
+        <menuitem id="housing_menu_report_menu_item" name="Housing Movement Report" action="housing_report_action"
+                  parent="housing_menu_report" groups="housing.housing_movement_report_group"/>
+
+    </data>
+</openerp>

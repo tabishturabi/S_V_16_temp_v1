@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+
+
+        <record model="res.groups" id="group_collection_manager">
+            <field name="name">Collection Manager</field>
+            <field name="category_id" ref="module_category_accounting_voucher"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('bassami_statement_of_accounts.group_soa_report')])]"/>
+        </record>
+        <record model="res.groups" id="group_statement_of_invoices_report">
+            <field name="name">Statement Of Invoices Report</field>
+            <field name="category_id" ref="payments_enhanced.module_category_accounting_voucher"/>
+            <field name="menu_access" eval="[(6, 0, [ref('account_accountant.menu_accounting'),ref('account.menu_finance_reports'),ref('bassami_statement_of_invoices.invoice_ledger_menu_item'),   ref('account_reports.account_reports_partners_reports_menu')])]"/>
+        </record>
+        <record model="ir.rule" id="res_partner_collection_manager">
+            <field name="name">Res Partner Collection Manager</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('customer','=',True)]</field>
+            <field name="groups" eval="[(6,0, [ref('payments_enhanced.group_collection_manager')])]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+        <record model="res.groups" id="group_report_accounting_voucher">
+            <field name="name">Reporting</field>
+            <field name="category_id" ref="module_category_accounting_voucher"/>
+            <field name="menu_access"
+                   eval="[(6, 0, [ref('account_reports.menu_action_account_report_aged_payable'),ref('account_reports.menu_action_account_report_aged_receivable'),ref('vouchers_history_report.vouchers_history_report_menu_item'),ref('account_reports.account_reports_partners_reports_menu'),ref('account_reports.account_reports_audit_reports_menu'),ref('bassami_vouchers_report.voucher_records_menu_item'),ref('account.account_reports_management_menu'),ref('bassami_branches_vouchers_report.bassamibranches_voucher_menu_item'),ref('budget_reconciliation_report.reconciliation_report_menu_item')])]"/>
+        </record>
+    </data>
+</odoo>

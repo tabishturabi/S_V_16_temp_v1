@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <record id="inherits_view_hr_job_form" model="ir.ui.view">
+            <field name="name">inheits.hr.job.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object" name="archive_hr_job" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <xpath expr="//field[@name='no_of_recruitment']" position="after">
+                        <field name="is_driver" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

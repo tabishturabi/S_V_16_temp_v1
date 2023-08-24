@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+        <record id="permission_settings_data" model="permission_settings">
+
+
+        </record>
+
+       <record id="ir_cron_get_email_notification_house" model="ir.cron">
+            <field name="name">Permission To Entry Housing Notification</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="housing.model_house_movement_report"/>
+            <field name="code">model.get_house_notification()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="house_report_notification_details_email_template" model="mail.template">
+            <field name="name">Permission To Entry Housing Notification</field>
+            <field name="model_id" ref="housing.model_house_movement_report"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="email_from"/>
+            <field name="email_to"/>
+            <field name="subject">Permission To Entry Housing Notification</field>
+            <field name="body_html">
+                <![CDATA[
+                            Hello
+                            <br/>
+                            This is reminder that Expiry Date Permission To Entry Housing Notification.<br/>
+                            ...<br/>]]>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+
+
+

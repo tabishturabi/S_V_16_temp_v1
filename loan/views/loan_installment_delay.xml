@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record model="ir.ui.view" id="hr_loan_delay_form_view">
+            <field name="name">hr.loan.delay.form</field>
+            <field name="model">hr.loan.delay</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Loans Delay">
+                    <header>
+                        <button string="Request" name="action_request" states="draft" class="oe_highlight" type='object'/>
+                        <button string="Approve" name="action_approve" states="requested" class="oe_highlight" type="object"/>
+                        <button string="Reject" name="action_reject" states="requested" type="object"/>
+                        <button string="Set to Draft" name="action_draft" states="rejected" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,requested,approved" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id" />
+                                <field name="loan_app_id" domain="[('employee_id','=',employee_id),('state','=','paid')]"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Installments">
+                                <field name="payment_ids" domain="[('loan_app_id','=',loan_app_id),('state','=','draft'),('due_date','&gt;=',start_date),('due_date','&lt;=',end_date)]"/>
+                            </page>
+                            <page string="Description">
+                               <field name="note"/>
+                            </page>
+                        </notebook>
+                   </sheet> 
+                   <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_loan_delay_tree_view">
+            <field name="name">hr.loan.delay.form</field>
+            <field name="model">hr.loan.delay</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Loans Delay" decoration-info="state == 'draft'" decoration-muted="state == 'approved'">
+                    <field name="name"/>
+                    <field name="loan_app_id"/>
+                    <field name="state" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_loan_delay_search_view" model="ir.ui.view">
+            <field name="name">hr.loan.delay.search</field>
+            <field name="model">hr.loan.delay</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                </search>
+            </field>
+        </record>
+ 
+        <record id="hr_loan_delay_action" model="ir.actions.act_window">
+            <field name="name">Loans Delay</field>
+            <field name="res_model">hr.loan.delay</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="hr_loan_delay_tree_view"/>
+        </record>             
+            
+        <menuitem
+            id="hr_loan_delay_menu"
+            action="hr_loan_delay_action"
+            parent="main_menu_general"
+            sequence="3"/>  
+            
+
+
+</odoo>

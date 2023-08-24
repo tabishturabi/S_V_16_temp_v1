@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="employee_info_report_wizard" model="ir.ui.view">
+            <field name="name">employee_info_report_wizard</field>
+            <field name="model">employee.info.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="mode"/>
+                            <field name="employee_ids" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('mode','!=','specific')],'required':[('mode','=','specific')]}" widget="many2many_tags"/>
+                            <field name="branch_ids" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('mode','!=','branch')],'required':[('mode','=','branch')]}" widget="many2many_tags"/>
+                            <field name="dept_ids" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('mode','!=','dept')],'required':[('mode','=','dept')]}" widget="many2many_tags"/>
+                            <field name="company_ids" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('mode','!=','company')],'required':[('mode','=','company')]}" widget="many2many_tags"/>
+                            <field name="tag_ids" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('mode','!=','emp_tag')],'required':[('mode','=','emp_tag')]}" widget="many2many_tags"/>
+                            
+                        </group>
+
+                        <group name="group_right">
+                            <field name="salary_payment_method"/>
+                            <field name="employee_state"/>
+                            
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="employee_info_report_action" model="ir.actions.act_window">
+            <field name="name">Employee Information Report</field>
+            <field name="res_model">employee.info.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="employee_info_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="employee_info_report_main_menu_item" name="Reports" parent="hr.menu_hr_root" groups="employee_info_report.group_view_employee_reports" sequence="95"/>
+
+        <menuitem id="employee_info_report_action_menu_item" name="Employee Information Report" action="employee_info_report_action" parent="employee_info_report_main_menu_item"/>
+
+        <report
+            id="action_employee_info_report"
+            string="Employee Information Report"
+            model="hr.employee"
+            report_type="xlsx"
+            file="Employee Information Report"
+            name="employee_info_report.employee_info_report_xlsx"
+            menu="False"
+        />
+
+        
+    </data>
+</openerp>

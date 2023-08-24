@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="salary_info_report_xlsx_id"
+             model="salary.info.report.wizard"
+             string="Employee Salary Info Report"
+             report_type="xlsx"
+             name="bsg_employee_salary_report.salary_report_xlsx"
+             file="bsg_employee_salary_report.salary_report_xlsx"
+     />
+</odoo>

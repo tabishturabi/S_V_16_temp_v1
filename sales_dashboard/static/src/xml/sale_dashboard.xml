@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+<!--$$$$$$$$$$$$$$$$$	Use     transform: translate3d(-70px, 30px, 0); to move $$$$$$$$$$$$$$$$$$$$$$$$-->
+    <t t-name="OperationPage2">
+				<!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+			<style type="text/css">
+				.stt0{fill:#FFFFFF;}
+				.stt2{fill:#ED2224;}
+				.stt79{opacity:0.5;fill:url(#SVGID_53_);enable-background:new    ;}
+				.stt80{fill:url(#SVGID_54_);stroke:#CCCCCC;stroke-miterlimit:10;}
+				.stt81{fill:#010101;}
+				.stt82{font-family:'Tahoma';}
+				.stt83{font-size:16px;}
+				.stt84{clip-path:url(#SVGID_56_);}
+				.stt85{clip-path:url(#SVGID_58_);}
+				.stt86{clip-path:url(#SVGID_60_);}
+				.stt87{fill:#2E9A47;}
+				.stt88{font-size:14px;}
+				.stt89{fill:none;stroke:#2E9A47;stroke-miterlimit:10;}
+				.stt90{fill:none;stroke:#ED2224;stroke-miterlimit:10;}
+				.stt91{fill:none;stroke:#010101;stroke-miterlimit:10;}
+				.stt92{fill:#ED1C24;}
+			</style>
+			<g id="Side_map">
+				<linearGradient id="SVGID_53_" gradientUnits="userSpaceOnUse" x1="208.3101" y1="-428.35" x2="208.3101" y2="-584.35" gradientTransform="matrix(1 0 0 1 0 1454)">
+					<stop  offset="0" style="stop-color:#010101;stop-opacity:0.8"/>
+					<stop  offset="0.7871" style="stop-color:#010101;stop-opacity:0"/>
+				</linearGradient>
+				<path class="stt79" d="M216.6,1025.6c-10.2,0-116.7,0-116.7,0l91.2-156h125.7l-84.9,145.2C231.9,1014.8,226.8,1025.6,216.6,1025.6z"
+					/>
+
+					<linearGradient id="SVGID_54_" gradientUnits="userSpaceOnUse" x1="145.261" y1="-427.45" x2="145.261" y2="-623.05" gradientTransform="matrix(1 0 0 1 0 1454)">
+					<stop  offset="0" style="stop-color:#CCCCCC"/>
+					<stop  offset="0.3784" style="stop-color:#E4E3E3"/>
+					<stop  offset="0.7378" style="stop-color:#F6F5F5"/>
+					<stop  offset="1" style="stop-color:#FFFFFF"/>
+				</linearGradient>
+				<path class="stt80" d="M215.5,1026.6H75.2c-5.5,0-10-4.5-10-10V841c0-5.5,4.5-10,10-10h140.2c5.5,0,10,4.5,10,10v175.6
+					C225.5,1022,221,1026.6,215.5,1026.6z"/>
+				<text transform="matrix(1 0 0 1 90.4796 849.9933)" class="st81 st82 st83">Car of Shipping</text>
+				<g>
+					<g>
+						<g>
+							<g>
+								<defs>
+									<rect id="SVGID_55_" x="90.1" y="888.1" width="110.5" height="100.6"/>
+								</defs>
+								<clipPath id="SVGID_56_">
+									<use href="#SVGID_55_"  style="overflow:visible;"/>
+								</clipPath>
+								<g class="stt84">
+									<g>
+										<g>
+											<g>
+												<defs>
+													<rect id="SVGID_57_" x="90.1" y="888.5" width="110.6" height="100.5"/>
+												</defs>
+												<clipPath id="SVGID_58_">
+													<use href="#SVGID_57_"  style="overflow:visible;"/>
+												</clipPath>
+												<g class="stt85">
+													<g>
+														<g>
+															<defs>
+																<rect id="SVGID_59_" x="90.1" y="889" width="110.6" height="100.5"/>
+															</defs>
+															<clipPath id="SVGID_60_">
+																<use href="#SVGID_59_"  style="overflow:visible;"/>
+															</clipPath>
+															<g class="stt86">
+																<g>
+																	<defs>
+																		<rect id="SVGID_61_" x="90" y="889.2" width="110.6" height="100.5"/>
+																	</defs>
+																	<clipPath id="SVGID_62_">
+																		<use href="#SVGID_61_"  style="overflow:visible;"/>
+																	</clipPath>
+																	<g style="clip-path:url(#SVGID_62_);">
+
+																			<use href="#location"  width="110.6" height="100.5" x="-55.3" y="-50.3" transform="matrix(1 0 0 -1 145.3108 939.7554)" style="overflow:visible;"/>
+																	</g>
+																</g>
+															</g>
+														</g>
+													</g>
+												</g>
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+				<text transform="matrix(1 0 0 1 79.2113 996.8352)" class="stt87 stt82 stt88">Outgoing</text>
+				<text transform="matrix(1 0 0 1 88.2113 1011.2352)" class="stt87 stt82 stt88">Trucks</text>
+				<text transform="matrix(1 0 0 1 158.087 996.8352)" class="stt2 stt82 stt88">Incoming</text>
+				<text transform="matrix(1 0 0 1 165.087 1011.2352)" class="stt2 stt82 stt88">Trucks</text>
+				<text transform="matrix(1 0 0 1 113.3067 871.3267)" class="stt81 stt82 stt88">Branch No.</text>
+				<g>
+					<g>
+						<line class="stt89" x1="105.9" y1="962" x2="105.9" y2="976.8"/>
+						<g>
+							<polygon class="stt87" points="102.2,974 105.9,975.5 109.6,974 105.9,982.8 				"/>
+						</g>
+					</g>
+				</g>
+				<g>
+					<g>
+						<line class="stt90" x1="184.8" y1="962" x2="184.8" y2="976.8"/>
+						<g>
+							<polygon class="stt2" points="181.1,974 184.8,975.5 188.5,974 184.8,982.8 				"/>
+						</g>
+					</g>
+				</g>
+				<g>
+					<g>
+						<line class="stt91" x1="145.1" y1="933.6" x2="145.1" y2="881.8"/>
+						<g>
+							<polygon class="stt81" points="148.8,884.6 145.1,883 141.4,884.6 145.1,875.8 				"/>
+						</g>
+					</g>
+				</g>
+				<text transform="matrix(1 0 0 1 108.6435 916.9365)" class="stt87 stt82 stt88">00</text>
+				<text transform="matrix(1 0 0 1 100.187 944.6227)" class="stt0 stt82 stt88">00</text>
+				<text transform="matrix(1 0 0 1 176.0714 944.6227)" class="stt0 stt82 stt88">00</text>
+				<text transform="matrix(1 0 0 1 169.5121 916.9365)" class="stt92 stt82 stt88">00</text>
+				<text id="_x36_3_6_" transform="matrix(1 0 0 1 134.0555 952.7505)" class="stt24 stt26">63</text>
+			</g>
+		</svg>
+	</t>
+</templates>

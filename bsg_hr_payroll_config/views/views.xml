@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="hr_payslip_run_inherit_form">
+        <field name="name">hr.payslip.run.inherit.form</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_import_inputs" type="object" states="draft" string="Import Inputs" class="oe_highlight"  groups="bsg_hr_payroll_config.groups_import_inputs"/>
+            </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

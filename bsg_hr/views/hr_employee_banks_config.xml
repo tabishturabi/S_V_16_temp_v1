@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- banks details form view-->
+        <record model="ir.ui.view" id="view_banks_details_form">
+            <field name="name">hr.banks.details.form</field>
+            <field name="model">hr.banks.details</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Employee Banks">
+                    <sheet>
+                        <group>
+                            <field name="swift_code" />
+                            <field name="bank_name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_banks_details_tree">
+            <field name="name">hr.banks.details.tree</field>
+            <field name="model">hr.banks.details</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="swift_code" />
+                    <field name="bank_name" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bsg_emp_banks_details_action">
+            <field name="name">Employee Banks details</field>
+            <field name="res_model">hr.banks.details</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Bank Details" id="hr_bank_details_submenu" parent="hr.menu_human_resources_configuration" action="bsg_emp_banks_details_action" sequence="16" />
+    </data>
+</odoo>

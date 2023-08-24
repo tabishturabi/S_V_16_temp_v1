@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="sim_card_request_form_view" model="ir.ui.view">
+            <field name="name">sim_card_request_form_view</field>
+            <field name="model">sim.card.request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card Request">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <widget name="attach_document" string="ATTACH DOCUMENT" action="" highlight="1"/>
+                        <button name="action_submit" type="object" string="SUBMIT TO MANAGER" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="approve_mng" type="object" string="APPROVE MANAGER" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','submitted')]}" groups="sim_card.sim_card_employee_manger_user,sim_card.sim_card_Administrator_manger_user"/>
+                        <button name="reject_mng" type="object" string="MANAGER REJECT" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','submitted')]}" groups="sim_card.sim_card_employee_manger_user,sim_card.sim_card_Administrator_manger_user"/>
+                        <button name="action_return" string="Return" type="object" class="oe_highlight"
+                                attrs="{'invisible':[('state','in',['draft','returned'])]}" groups="hr.group_hr_manager"/>
+                        <button name="finance_approve" type="object" string="FINANCE APPROVE" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','approve')]}" groups="sim_card.sim_card_finance_manger_user"/>
+                        <button name="finance_reject" type="object" string="FINANCE REJECT" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','approve')]}" groups="sim_card.sim_card_finance_manger_user"/>
+                        <button string="Refuse" name="%(sim_card.sim_card_refuse_wizard_action)d" class="oe_highlight" type="action"
+                        attrs="{'invisible':[('state', 'in', ['reject','delivered'])]}"
+                                groups="sim_card.sim_card_employee_manger_user,sim_card.sim_card_finance_manger_user"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="compute_delivery_count_view" type="object" class="oe_stat_button" icon="fa-truck">
+                                <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group style="color:#0e620a;">
+                            <group>
+                                <field name="employee_readonly" invisible="1"/>
+                                <field name="employee_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"
+                                       attrs="{'readonly':['|',('employee_readonly', '=', True),('state','not in','draft')]}" />
+                                <field name="manager_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="company_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="sim_type" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="is_cost" widget="radio" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="clearance_in_leave" />
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="branch_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="department_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="job_id" force_save="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <field name="employee_code" force_save="1"/>
+                                <field name="bsg_empiqama" force_save="1" attrs="{'invisible':[('bsg_national_id','!=',False)]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="bsg_national_id" force_save="1" attrs="{'invisible':[('bsg_empiqama','!=',False)]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="delivery_id" invisible="1" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="generation" attrs="{'required':[('sim_type','=','data')],'invisible':[('sim_type','!=','data')]}"/>
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_request_tree_vieww" model="ir.ui.view">
+            <field name="name">sim_card_request_tree_view</field>
+            <field name="model">sim.card.request</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state=='draft'" decoration-muted="state == 'submitted'" decoration-danger="state == 'delivered'">
+                    <field name="name"/>
+                    <field name="employee_id" />
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="sim_type"/>
+                    <field name="is_cost"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_request_view_search" model="ir.ui.view">
+            <field name="name">sim.card.define</field>
+            <field name="model">sim.card.request</field>
+            <field name="arch" type="xml">
+                <search string="Sim Card Request">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="sim_type"/>
+                    <field name="is_cost"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="sim_card_request_action10" model="ir.actions.act_window">
+            <field name="name">Sim Card Request</field>
+            <field name="res_model">sim.card.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--         <record id="my_sim_requestt_action1" model="ir.actions.act_window">-->
+<!--            <field name="name">My Sim Card Request</field>-->
+<!--            <field name="res_model">sim.card.request</field>-->
+<!--            &lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="context">{'default_employee_readonly':True'}</field>-->
+<!--            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid )]</field>-->
+<!--        </record>-->
+
+
+        <menuitem id="sim_card_request_menu_root"
+                  name="SIM CARD"
+                  web_icon="sim_card,static/sim-card.pngg"/>
+        <menuitem id="sim_card_request_main_menu_request" name="SIM Requests" parent="sim_card_request_menu_root" sequence="1"/>
+        <menuitem id="sim_card_request_main_menu10" name="Sim Card Request" action="sim_card_request_action10"
+                  parent="sim_card_request_main_menu_request" groups="sim_card.sim_card_request_user" sequence="2"/>
+
+        <record id="my_sim_requestt_action" model="ir.actions.act_window">
+            <field name="name">My Sim Card Request</field>
+            <field name="res_model">sim.card.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True}</field>
+            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid )]</field>
+        </record>
+
+        <menuitem id="my_sim_card_request_main_menu11" name="My Sim Card Request" action="my_sim_requestt_action"
+                  parent="sim_card_request_main_menu_request" sequence="1"/>
+    </data>
+</openerp>

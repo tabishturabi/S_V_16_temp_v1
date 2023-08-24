@@ -1,0 +1,126 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="branches_zones_list">
+            <field name="name">branches.zones.tree</field>
+            <field name="model">branches.zones</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"></field>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="branches_zones_form">
+            <field name="name">branches.zones.form</field>
+            <field name="model">branches.zones</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"></field>
+                            <field name="location_ids" widget="many2many_tags"></field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="branches_zones_action">
+            <field name="name">Branches Zones</field>
+            <field name="res_model">branches.zones</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <menuitem name="Branches Zone"
+                  id="branches_zone_menu"
+                  sequence="3"
+                  groups="bsg_branches_zone_and_region_and_branch_config.groups_branches_zones"
+                  parent="bsg_branch_config.bsg_branches_menu_1"
+                  action="branches_zones_action"
+        />
+        <!--      <menuitem name="Region Configuration"-->
+        <!--                id="bsg_branch_config.menu_region_config"-->
+        <!--                parent="bsg_branch_config.bsg_branches_menu_1"-->
+        <!--                groups="bsg_branches_zone_and region_and_branch_config.groups_region_config"-->
+        <!--                action="bsg_branch_config.action_window_ioud_region"-->
+        <!--                sequence="4"-->
+        <!--      />-->
+<!--        <record model="ir.ui.menu" id="bsg_branch_config.menu_region_config">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(6,0,[ref('bsg_branches_zone_and_region_and_branch_config.groups_region_config')])]"/>-->
+<!--            <field name="parent_id" ref="bsg_branch_config.bsg_branches_menu_1"></field>-->
+<!--            <field name="sequence">4</field>-->
+<!--        </record>-->
+<!--        <record model="ir.ui.view" id="region_config_inherit_form">-->
+<!--            <field name="name">region.config.inherit.form</field>-->
+<!--            <field name="model">region.config</field>-->
+<!--            <field name="inherit_id" ref="bsg_branch_config.ioud_region_config_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//group[@name='right']" position="inside">-->
+<!--                    <field name="region_arabic_name"></field>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//group[@name='top']" position="after">-->
+<!--                    <field name="region_line">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="region_id" invisible="1"></field>-->
+<!--                            <field name="city_name"></field>-->
+<!--                            <field name="city_code"></field>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record model="ir.ui.view" id="region_config_inherit_form">-->
+<!--            <field name="name">region.config.inherit.form</field>-->
+<!--            <field name="model">region.config</field>-->
+<!--            <field name="inherit_id" ref="bsg_branch_config.ioud_region_config_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//group[@name='right']" position="inside">-->
+<!--                    <field name="region_arabic_name"></field>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//group[@name='top']" position="after">-->
+<!--                    <field name="region_line">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="region_id" invisible="1"></field>-->
+<!--                            <field name="city_name"></field>-->
+<!--                            <field name="city_code"></field>-->
+<!--                            <field name="bayan_city_id"></field>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record model="ir.ui.view" id="region_branches_config_inherit_form">-->
+<!--            <field name="name">region.branches.config.inherit.form</field>-->
+<!--            <field name="model">bsg_branches.bsg_branches</field>-->
+<!--            <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//sheet/notebook" position="inside">-->
+<!--                    <page name="address" string="Address">-->
+<!--                        <group name="top">-->
+<!--                            <group name="left">-->
+<!--                                <field name="region"></field>-->
+<!--                                <field name="region_city"></field>-->
+<!--                                <field name="check" invisible="1"></field>-->
+<!--                            </group>-->
+<!--                            <group name="left">-->
+<!--                                <field name="zone_id"></field>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </page>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='region']" position="replace">-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='branch_phone']" position="after">-->
+<!--                    <field name="weekly_working_hours"></field>-->
+<!--                    <field name="friday_working_hours"></field>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//sheet/notebook/page[1]/group[1]" position="after">-->
+<!--                    <label for="description" string="Description"/>-->
+<!--                    <field name="description"></field>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

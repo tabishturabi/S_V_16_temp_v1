@@ -1,0 +1,259 @@
+<odoo>
+  <data>
+    <template id="report_cs_delivery_template_call">
+      <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang': lang})"/>
+        <div class="page">
+          <style>
+
+              .header {
+                  display: none !important;
+              }
+                  body {
+                        display: block;
+                        font-size: 12px;
+                        margin: 0 auto;
+                        margin-bottom: 0.5cm;
+              }
+              .footer {
+                  display: none !important;
+              }
+              .centered {
+                  width: 1000px;
+                  margin: auto;
+              }
+              .address {
+                  width: 45%;
+                  float: right;
+                  margin: 15px 0px 15px 0px;
+              }
+              .address p {
+                  text-align: right;
+              }
+              table, td, th {
+                  padding: 6px;
+                  margin: 10px 0px 10px 0px;
+              }
+              .span_left {
+                  float: left;
+              }
+              .span_right {
+                float: right;
+                  font-weight:bold;
+              }
+              .p_text_bold {
+                font-weight:bold;
+              }
+              .span_center {
+                float: center;
+                  font-weight:bold;
+              }
+          </style>
+          <div style="align-content: center">
+            <table width="80%" height="87" border="0">
+              <tr>
+              <td></td>
+              <!-- src="/bsg_cargo_sale/static/src/img/albassami_transport_logoWP.png" -->
+                  <td><t t-if="o.company_id.logo"><img t-att-src="image_data_uri(o.company_id.logo)" width="134" height="50" style="margin-left: 430px;" alt=""/></t></td>
+                  <td class="width33"><t t-if="o.company_id.custom_right_header"><img t-att-src="image_data_uri(o.company_id.custom_right_header)" width="190" height="90" style="margin-left: 125px;" alt=""/></t></td>
+              </tr>
+            </table>
+          </div>
+           <hr class="width80%Solid" />
+          <div class="main-data">
+            <div class="centered">
+              <div align="center" style="padding: 10px;">
+                <table class="table-1" width="80%" border="0" margin="50px" >
+                  <tr>
+                     <p>
+                      <span class="span_center"> <h2> إذن خروج سيارة </h2></span>
+                     </p>
+                  </tr>
+                  <tr>
+                      <td>
+                          <span t-if="o.release_date" t-esc="context_timestamp(o.release_date).strftime('%d-%m-%Y %H:%M')" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> :تاريخ </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                          <span t-esc="o.delivery_note_no" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> :رقم إذن الخروج </span>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td>
+                          <span t-esc="o.act_receiver_id_card_no" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> :الهوية </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                          <span t-esc="o.act_receiver_name" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> :اسم المستلم </span>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td> <span t-esc="o.sale_line_rec_name" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> : رقم الأتفاقية </span></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <span t-field="o.car_make.car_maker.car_make_name" class="span_left" style="font-size:medium;"></span>
+                        <span t-field="o.car_model.car_model_name" class="span_left" style="font-size:medium;"> </span>
+                        <span class="span_right" style="font-size:large;"> :نوع السيارة </span>
+                      </td>
+                  </tr>
+                    <tr>
+                      <td>
+                          <span t-esc="o.chassis_no" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right" style="font-size:large;"> :الهيكل </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                      </td>
+                      <td>
+                          <span t-esc="o.plate_no" class="span_left" style="font-size:medium;"></span>
+                          <span t-esc="o.palte_third" class="span_left" style="font-size:medium;"></span>
+                          <span t-esc="o.palte_second" class="span_left" style="font-size:medium;"></span>
+                          <span t-esc="o.palte_one" class="span_left" style="font-size:medium;"></span>                          
+                          <span class="span_right" style="font-size:large;"> :رقم اللوحة </span>
+                        </td>
+                  </tr>
+
+                  <tr>
+                      <td>
+                        <t t-set="pay_value" t-value="0"/>
+                        <t t-foreach="o.bsg_cargo_sale_id.invoice_ids" t-as="p">
+                          <t t-foreach="p.payment_ids" t-as="v">
+                            <t t-set="pay_value" t-value="pay_value+v.amount"/>
+                          </t>
+                        </t>
+
+                        <span t-esc="'{0:,.2f}'.format(float(pay_value))" class="span_left" style="font-size:medium;"></span>
+                        <span class="span_right" style="font-size:large;"> :سند القبض </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <t t-foreach="o.bsg_cargo_sale_id.invoice_ids" t-as="p">
+                          <t t-foreach="p.payment_ids" t-as="v">
+                            <span t-esc="v.name" class="span_left" style="font-size:medium;"></span><span>&#009;</span>
+                          </t>
+                        </t>
+
+                        <span class="span_right" style="font-size:large;"> :سداد القيمة مبلغ </span>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                     <td></td>
+                      <td></td>
+                  </tr>
+
+                  <tr style="font-size:large;">
+                      <td> <span class="span_right"> :المستلم </span> </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <span t-esc="o._get_current_user()" class="span_left" style="font-size:medium;"></span>
+                        <span class="span_right"> :الموظف </span>
+                       </td>
+                  </tr>
+
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+
+                  <tr style="font-size:large;">
+                      <td>
+                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')" class="span_left" style="font-size:medium;"></span>
+                          <span class="span_right"> :تاريخ الطباعة </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+
+                    <td>
+                         <span t-esc="o.get_seq_no()"></span>
+
+                          <span class="span_right"> :الطباعة رقم </span>
+                      </td>
+
+                  </tr>
+
+                  <tr style="font-size:large;">
+                      <td>
+                         <span t-esc="o.parking_no"></span>
+                          <span class="span_right">: رقم الموقف</span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+
+                      <td>
+                        <span t-esc="o.drawer_no"></span>
+                        <span class="span_right">: رقم الدرج</span>
+                      </td>
+
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </t>
+    </template>
+
+
+        <template id="report_cs_delivery_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.customer_id.lang"/>
+                    <t t-call="bsg_cargo_sale.report_cs_delivery_template_call" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+
+      <record id="paperformat_shipment_template" model="report.paperformat">
+          <field name="name">European A4 low margin</field>
+          <field name="default" eval="True" />
+          <field name="format">A4</field>
+          <field name="orientation">Portrait</field>
+          <field name="margin_top">20</field>
+          <field name="margin_bottom">20</field>
+          <field name="margin_left">0</field>
+          <field name="margin_right">0</field>
+          <field name="header_line" eval="False" />
+          <field name="header_spacing">10</field>
+          <field name="dpi">90</field>
+
+
+
+      </record>
+
+
+      <report
+            id="report_cs_delivery_report"
+            string="Delivery Report"
+            model="bsg_vehicle_cargo_sale_line"
+            report_type="qweb-html"
+            file="bsg_cargo_sale.report_cs_delivery_template"
+            name="bsg_cargo_sale.report_cs_delivery_template"
+            paperformat="paperformat_shipment_template"
+        />
+
+  </data>
+</odoo>

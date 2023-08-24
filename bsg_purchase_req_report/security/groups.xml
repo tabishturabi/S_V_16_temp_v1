@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+         <record id="groups_purchase_req_reports" model="res.groups">
+              <field name="name">Purchase Request Report</field>
+              <field name="comment">The user will have access to Purchase Req Report menu.</field>
+          </record>
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="payslip_config_form_view">
+        <field name="name">hr.payslip.config.form.view</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[1]" position="inside">
+              <button name="action_overtime" type="object"
+                      class="oe_stat_button" icon="fa-clock-o" >
+                  <field name="overtime_requests" string="Overtime" widget="statinfo"></field>
+              </button>
+            </xpath>
+
+            <xpath expr="//field[@name='input_line_ids']//tree//field[@name='sequence']" position="after">
+                <field name="overtime_ids" invisible="1"/>
+            </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

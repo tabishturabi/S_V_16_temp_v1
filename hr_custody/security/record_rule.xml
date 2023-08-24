@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record model="ir.rule" id="hr_custody_own">
+            <field name="name">HR custody See Own custody</field>
+            <field name="model_id" ref="model_custody_request"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('hr_custody.group_custody_request')),(4, ref('base.group_user'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_custody_branch_supervisor">
+            <field name="name">HR custody See Branch Supervisro custody</field>
+            <field name="model_id" ref="model_custody_request"/>
+            <field name="domain_force">[('delivered_by.branch_id.supervisor_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_branch_supervisor'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+         <record model="ir.rule" id="hr_custody_dept_manager">
+            <field name="name">HR custody See Department Manager custody</field>
+            <field name="model_id" ref="model_custody_request"/>
+            <field name="domain_force">[('delivered_by.parent_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_department_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_custody_see_all">
+            <field name="name">HR Custody See All Custody</field>
+            <field name="model_id" ref="model_custody_request"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user')),(4, ref('bsg_hr.group_hr_manager')),(4, ref('hr.group_hr_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+    </data>
+</odoo>

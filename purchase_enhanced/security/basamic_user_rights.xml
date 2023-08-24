@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_bassa_group">
+            <field name="name">Purchase Request</field>
+            <field name="sequence">20</field>
+        </record>
+
+
+        <!--###############Stock#######################################-->
+
+        <record id="custom_group_stock_user_overview" model="res.groups">
+            <field name="name">Overview</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_batch_picking" model="res.groups">
+            <field name="name">Batch Picking</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_inventory_adjustment" model="res.groups">
+            <field name="name">Inventory Adjustment</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_inventory_scrap" model="res.groups">
+            <field name="name">Inventory Scrap</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_land_costs" model="res.groups">
+            <field name="name">Land Costs</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_run_scheduler" model="res.groups">
+            <field name="name">Run Scheduler</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_reordering_rules" model="res.groups">
+            <field name="name">Reordering Rules</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_serial_number" model="res.groups">
+            <field name="name">Lots/Serial Number</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_user_packages" model="res.groups">
+            <field name="name">Packages</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_create_product" model="res.groups">
+            <field name="name">Create Product</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_stock_view_product" model="res.groups">
+            <field name="name">View Product</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_configuration" model="res.groups">
+            <field name="name">Configuration</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_stock_dashboard" model="res.groups">
+            <field name="name">Warehouse Dashboard</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_inventory_report" model="res.groups">
+            <field name="name">Inventory Reports</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_inventory_valuation" model="res.groups">
+            <field name="name">Inventory Valuation</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_moves" model="res.groups">
+            <field name="name">Stock Moves</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_product_moves" model="res.groups">
+            <field name="name">Product Moves</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_stock_change_location" model="res.groups">
+            <field name="name">Change Location</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_stock_transfer_return" model="res.groups">
+            <field name="name">Transfer Return</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_stock_transfer_scrap" model="res.groups">
+            <field name="name">Transfer Scrap</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_stock_transfer_unlock" model="res.groups">
+            <field name="name">Transfer Unlock</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_internal" model="res.groups">
+            <field name="name">Internal Transfer</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_receipts" model="res.groups">
+            <field name="name">Receipts Transfer</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="group_stock_user_receipts_lines" model="res.groups">
+            <field name="name">Receipts Transfer Lines</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_delivery" model="res.groups">
+            <field name="name">Delivery Transfer</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="group_stock_user_delivery_lines" model="res.groups">
+            <field name="name">Delivery Transfer Lines</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_all" model="res.groups">
+            <field name="name">All Transfer</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="recieve_inventory_purchase_request" model="res.groups">
+            <field name="name">Recieve Purchase Request</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="all_inventory_purchase_request" model="res.groups">
+            <field name="name">All Purchase Request</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="group_stock_user_move_create" model="res.groups">
+            <field name="name">Account Move Create</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_move_accounting_date" model="res.groups">
+            <field name="name">Accounting Date In Transfer</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_adjustment_without_accounting_move" model="res.groups">
+            <field name="name">Adjustment Without Move</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="group_inventory_user_internal_transfer_on_pr" model="res.groups">
+            <field name="name">Internal Transfer Button On P.R</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_inventory_user_pr_set_to_open" model="res.groups">
+            <field name="name">Set P.R To Open</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_inventory_user_pr_set_to_close" model="res.groups">
+            <field name="name">Set P.R To Close</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="group_stock_user_action_confirm" model="res.groups">
+            <field name="name">Picking Mark as Todo</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_action_assign" model="res.groups">
+            <field name="name">Picking Check Availability</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_button_validate" model="res.groups">
+            <field name="name">Picking Validate</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_action_cancel" model="res.groups">
+            <field name="name">Picking Cancel</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_stock_user_do_unreserve" model="res.groups">
+            <field name="name">Picking Unreserve</field>
+            <field name="category_id" ref="base.module_category_inventory"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <!--###############Stock End###################################-->
+
+        <!--###############Purchase#######################################-->
+        <record model="ir.module.category" id="module_category_purchase_management">
+            <field name="name">Purchases</field>
+            <field name="description">Helps you manage your purchase-related processes such as requests for quotations, supplier bills, etc...</field>
+            <field name="sequence">8</field>
+        </record>
+        
+        <record id="custom_group_purchase_rfq" model="res.groups">
+            <field name="name">Requset For Qutation</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_purchase_order" model="res.groups">
+            <field name="name">Purchase Order</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_vendors" model="res.groups">
+            <field name="name">Vendors</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_purchase_vendor_price_list" model="res.groups">
+            <field name="name">Vendor Price List</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_product" model="res.groups">
+            <field name="name">Products</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="custom_group_purchase_product_variants" model="res.groups">
+            <field name="name">Product Variants</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_agreement" model="res.groups">
+            <field name="name">Purchase Agreement</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_incoming_products" model="res.groups">
+            <field name="name">Incoming Products</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_vendor_bills" model="res.groups">
+            <field name="name">Vendor Bills</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_reporting" model="res.groups">
+            <field name="name">Reporting</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_confirm_order" model="res.groups">
+            <field name="name">Confirm Order</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_create_bill" model="res.groups">
+            <field name="name">Create Bill</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_configuration" model="res.groups">
+            <field name="name">Configuration</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="purchase_vendor_specify" model="res.groups">
+            <field name="name">Purchase Vender</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="purchase_request_recieve" model="res.groups">
+            <field name="name">Purchase Request Recieve</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_button_cancel" model="res.groups">
+            <field name="name">Cancel Po</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_button_approve" model="res.groups">
+            <field name="name">Po Approve</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_button_draft" model="res.groups">
+            <field name="name">Po Set To Draft</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_button_done" model="res.groups">
+            <field name="name">Po Lock</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_button_unlock" model="res.groups">
+            <field name="name">Po Unlock</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_receive_products" model="res.groups">
+            <field name="name">Receive Products</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="custom_group_purchase_cancel_pr" model="res.groups">
+            <field name="name">P.R Reject</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="invoice_send_to_employee_audit" model="res.groups">
+            <field name="name">Invoice Send To Audit</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="invoice_employee_audit" model="res.groups">
+            <field name="name">Invoice Employee Audit</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="invoice_manager_audit" model="res.groups">
+            <field name="name">Invoice Manager Audit</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="purchase_committee_setting" model="res.groups">
+            <field name="name">Purchase Committee Setting</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="purchase_committee_manager" model="res.groups">
+            <field name="name">Purchase Committee Manager</field>
+            <field name="category_id" ref="purchase_enhanced.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!--###############Purchase End###################################-->
+
+
+        <record model="ir.module.category" id="module_purchase_request">
+            <field name="name">Purchase Request</field>
+            <field name="description">Helps you handle your Purchase Requeset</field>
+            <field name="sequence">1</field>
+        </record>
+                <record id="purchase_req_own_user" model="res.groups">
+            <field name="name">Purchase Request Own User</field>
+            <field name="category_id" ref="purchase_enhanced.module_purchase_request"/>
+        </record>
+        <record id="purchase_req_own_branch" model="res.groups">
+            <field name="name">Purchase Request Own Branch</field>
+            <field name="category_id" ref="purchase_enhanced.module_purchase_request"/>
+        </record>
+
+        <record id="mangement" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <record id="approve" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="all_access" model="res.groups">
+            <field name="name">Advisor</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('approve'))]"/>
+        </record>
+
+        <record id="pr_for_stock" model="res.groups">
+            <field name="name">P.R For Stock</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="pr_for_workshop" model="res.groups">
+            <field name="name">P.R For Workshop</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="pr_for_branch" model="res.groups">
+            <field name="name">P.R For Branch</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="pr_cancel" model="res.groups">
+            <field name="name">Cancel P.R</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="all_purchase_req" model="res.groups">
+            <field name="name">All Purchase Request Menu</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="purchase_req_deliver_address" model="res.groups">
+            <field name="name">Edit Deliver Address</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+        <record id="purchase_req_analytic_account" model="res.groups">
+            <field name="name">Edit Analytic Account</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+        <record id="purchase_req_tech_support" model="res.groups">
+            <field name="name">Technical Support</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('mangement'))]"/>
+        </record>
+
+
+        <!--##########################Access Rule#######################################################-->
+
+
+        <!--record id="purchase_req_rules" model="ir.rule">
+             <field name="name">Purchase Request Rules</field>
+             <field name="model_id" ref="model_purchase_req"/>
+             <field name="domain_force">[('requester_id','=',user.id)]</field>
+             <field name="groups" eval="[(4, ref('purchase_enhanced.mangement'))]"/>
+         </record-->
+
+        <!--record id="purchase_req_rules_for approve" model="ir.rule">
+            <field name="name">Purchase Request Approve</field>
+            <field name="model_id" ref="model_purchase_req"/>
+            <field name="domain_force">[('assign_user_ids','in',[user.id])]</field>
+            <field name="groups" eval="[(4,ref('purchase_enhanced.approve'))]" />
+        </record-->
+
+        <record id="purchase_req_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request All Record</field>
+            <field name="model_id" ref="model_purchase_req"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="purchase_req_line_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request Line All Record</field>
+            <field name="model_id" ref="model_purchase_req_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+        <!--record id="purchase_req_inventory_rules_for_reciever" model="ir.rule">
+            <field name="name">Purchase Request Transfer Inventory</field>
+            <field name="model_id" ref="model_purchase_transfer"/>
+            <field name="domain_force">[('reciepts_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4,ref('purchase_enhanced.recieve_inventory_purchase_request'))]" />
+        </record>
+
+        <record id="purchase_req_line_inventory_rules_for_reciever" model="ir.rule">
+            <field name="name">Purchase Request Transfer Line Inventory</field>
+            <field name="model_id" ref="model_purchase_transfer_line"/>
+            <field name="domain_force">[('reciepts_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4,ref('purchase_enhanced.recieve_inventory_purchase_request'))]" />
+        </record-->
+
+
+        <!--record id="purchase_req_transfer_rules_for_reciever" model="ir.rule">
+            <field name="name">Purchase Request Transfer Purchase</field>
+            <field name="model_id" ref="model_purchase_transfer"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('purchase_enhanced.purchase_request_recieve'))]" />
+        </record-->
+
+        <!--record id="purchase_req_transfer_line_rules_for_reciever" model="ir.rule">
+            <field name="name">Purchase Request Transfer Line Purchase</field>
+            <field name="model_id" ref="model_purchase_transfer_line"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('purchase_enhanced.purchase_request_recieve'))]" />
+        </record-->
+
+
+        <record id="purchase_req_inventory_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request Transfer All Record</field>
+            <field name="model_id" ref="model_purchase_transfer"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="purchase_req_line_inventory_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request Transfer Line All Record</field>
+            <field name="model_id" ref="model_purchase_transfer_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+
+        <record id="purchase_req_purchase_rec_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request Recieve All Record</field>
+            <field name="model_id" ref="model_purchase_req_rec"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="purchase_req_line_purchase_rec_rules_for_all" model="ir.rule">
+            <field name="name">Purchase Request Recieve Line All Record</field>
+            <field name="model_id" ref="model_purchase_req_rec_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="purchase_req_comp_rule" model="ir.rule">
+            <field name="name">Purchase Req multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="purchase_req_line_comp_rule" model="ir.rule">
+            <field name="name">Purchase Req Line multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="purchase_req_rec_comp_rule" model="ir.rule">
+            <field name="name">Purchase Req Rec multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_rec"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="purchase_req_rec_line_comp_rule" model="ir.rule">
+            <field name="name">Purchase Req Rec Line multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req_rec_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="purchase_transfer_comp_rule" model="ir.rule">
+            <field name="name">Purchase Transfer multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_transfer"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="purchase_transfer_line_comp_rule" model="ir.rule">
+            <field name="name">Purchase Transfer Line multi-company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_transfer_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+<!--        <record id="purchase_req_own_user_rule" model="ir.rule">-->
+<!--            <field name="name">Purchase Request Own User</field>-->
+<!--            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>-->
+<!--            <field name="groups" eval="[(4,ref('purchase_enhanced.purchase_req_own_user'))]"/>-->
+<!--            <field name="domain_force">[('requester_id','=',user.id)]-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="purchase_req_own_branch_rule" model="ir.rule">-->
+<!--            <field name="name">Purchase Request Own Branch</field>-->
+<!--            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>-->
+<!--            <field name="groups" eval="[(4,ref('purchase_enhanced.purchase_req_own_branch'))]"/>-->
+<!--            <field name="domain_force">[('branches','=',user.user_branch_id.id)]-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="purchase_req_multi_comp_rule" model="ir.rule">
+            <field name="name">Purchase Req Multi Company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_req"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="purchase_committee_multi_comp_rule" model="ir.rule">
+            <field name="name">Purchase Comittee Multi Company</field>
+            <field name="model_id" ref="purchase_enhanced.model_purchase_committee"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>

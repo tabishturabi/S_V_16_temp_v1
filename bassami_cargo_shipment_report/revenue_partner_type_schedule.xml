@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo >
+    <data noupdate="1">
+
+
+        <record id="ir_cron_get_email_notification_details" model="ir.cron">
+            <field name="name">Sale Revenue By Partner Type Schedules</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="bassami_cargo_shipment_report.model_sale_revenue_by_partner_schedule"/>
+            <field name="code">model.get_schedule_notification()</field>
+            <field name="state">code</field>
+        </record>
+
+        <record id="sale_revenue_notification_details_email_template" model="mail.template">
+            <field name="name">Sending Notification Sale Revenue By Partner Type Schedules</field>
+            <field name="model_id" ref="bassami_cargo_shipment_report.model_sale_revenue_by_partner_schedule"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="email_from"/>
+            <field name="email_to"/>
+            <field name="subject">Sale Revenue By Partner Type Schedules</field>
+            <field name="body_html">
+                <![CDATA[
+                           <div id=":24x" class="a3s aiL "><p style="font-family:&quot;Lucida Grande&quot;,Helvetica,Verdana,Arial,sans-serif;text-align:right"><font style="color:rgb(8,82,148);font-size:18px"><i>سعادة نائب الرئيس التنفيذي    المحترم</i></font></p><p style="font-family:&quot;Lucida Grande&quot;,Helvetica,Verdana,Arial,sans-serif;text-align:right"><font style="color:rgb(8,82,148);font-size:18px"><i>
+ تحية طيبة
+</i></font></p><p style="font-family:&quot;Lucida Grande&quot;,Helvetica,Verdana,Arial,sans-serif;text-align:right"><font style="color:rgb(8,82,148);font-size:18px"><i> مرفق لسعادتكم تقرير مبيعات نقل السيارات</i></font><i style="font-variant-ligatures:initial;font-variant-caps:initial;font-weight:initial;color:rgb(8,82,148);font-size:18px"> المرحله وغير المرحلة.</i></p><p style="font-family:&quot;Lucida Grande&quot;,Helvetica,Verdana,Arial,sans-serif;text-align:right"><font style="color:rgb(8,82,148);font-size:18px"><i>
+تحياتي</i></font></p></div><p>
+            </p>]]>
+            </field>
+        </record>
+    </data>
+</odoo>

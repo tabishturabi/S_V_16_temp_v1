@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_hr_iqama_form_bayan" model="ir.ui.view">
+            <field name="name">view.hr.iqama.form.bayan</field>
+            <field name="model">hr.iqama</field>
+            <field name="inherit_id" ref="bsg_hr.view_hr_iqama_form"/>
+            <field name="arch" type="xml">
+                <field name="bsg_iqama_name" position="after">
+                    <field name="bayan_issue_number"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

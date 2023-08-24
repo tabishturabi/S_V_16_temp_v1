@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <template id="assets_backend" name="custom assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside"> -->
+<!--            <link rel="stylesheet" href="/bassami_dashboard/static/src/css/style.css"/> -->
+<!--        </xpath> -->
+<!--    </template>-->
+
+    <data>
+
+        <record id="bassami_dashboard_form" model="ir.ui.view">
+            <field name="name">Branch DashBoard</field>
+            <field name="model">bassami.dash</field>
+            <field name="arch" type="xml">
+
+                <form string="Branch DashBoard" create="false" delete="false" attachments="false">
+
+                    <!-- <label for="time_filter" string="Dashboard Filters" style="font-size:20px"/> -->
+                    <div style="width:19%;margin-top:-15px">
+                        <field name="time_filter" string="Time Filter" invisible="0"/>
+                        <field name="branches" string="Branches" invisible="1" style="width:240px;" options="{'no_create':True,'no_edit':True,'no_open':True}" />
+                    </div>
+
+                    <div class="all_sections" style="margin-top:-5px">
+
+                        <field name="name" invisible="1"/>
+
+                        <div style="width:1220px;text-align:center">
+                            <img style="width:100%;margin-left:13px;height:83px" src="/bassami_dashboard/static/src/img/head1.png"/>
+                        </div>
+
+                        <div class="section green" style="margin-bottom:0px;margin-top:0px">
+
+                            <!-- <h1>Shipped Vehicles</h1> -->
+
+                            <div style="width:230px;float:left;margin-left:22px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Total Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_total_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_total_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_total_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_total_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Non-Shipped Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_nonshipped_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_nonshipped_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_nonshipped_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_nonshipped_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Shipped Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_shipped_cars" type="object" class="oe_stat_button trans" style="color:red">
+                                        <field name="from_shipped_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_shipped_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_shipped_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">On-Transit Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_ontransit_cars" type="object" class="oe_stat_button trans" style="color:red">
+                                        <field name="from_ontransit_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_ontransit_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_ontransit_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Delivered Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_delivered_cars" type="object" class="oe_stat_button trans" style="color:red">
+                                        <field name="from_delivered_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_delivered_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_delivered_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+
+                        <div style="width:1220px;text-align:center">
+                            <img style="width:100%;margin-left:13px;height:50px" src="/bassami_dashboard/static/src/img/head2.png"/>
+                        </div>
+
+                        <div class="section green" style="margin-top:0px;margin-bottom:0px">
+
+                            <!-- <h1>Arrived Vehicles</h1> -->
+
+                            <div style="width:230px;float:left;margin-left:22px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Released Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_released_cars" type="object" class="oe_stat_button trans" style="color:red">
+                                        <field name="from_released_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_released_cars" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="to_released_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Delivered Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_delivered_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_delivered_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_delivered_cars" type="object" class="oe_stat_button trans"  style="color:green">
+                                        <field name="to_delivered_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Cash Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_cash_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_cash_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_cash_cars" type="object" class="oe_stat_button trans"  style="color:green">
+                                        <field name="to_cash_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">POD Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_pod_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_pod_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_pod_cars" type="object" class="oe_stat_button trans"  style="color:green">
+                                        <field name="to_pod_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="width:230px;float:left;margin-left:10px;border:1px solid;margin-bottom:10px;height:90px;background:white;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Credit Cars</h5>
+
+                                <div style="width:50%;border-right:1px solid;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="from_credit_cars" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="from_credit_cars_num" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                                <div style="width:50%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="to_credit_cars" type="object" class="oe_stat_button trans"  style="color:green">
+                                        <field name="to_credit_cars_num" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="width:1220px;text-align:center">
+                            <img style="width:100%;margin-left:13px;height:50px" src="/bassami_dashboard/static/src/img/head3.png"/>
+                        </div>
+
+                        <div class="section green" style="margin-top:0px;margin-bottom:0px">
+
+                            <!-- <h1>Arrived Vehicles</h1> -->
+
+                            <div style="width:180px;float:left;margin-left:40px;border:1px solid;margin-bottom:10px;height:90px;background:white;border-radius:33px;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Trucks Final Stop</h5>
+
+                                <div style="width:100%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+
+                                    <button name="trucks_last_stop_detail" type="object" class="oe_stat_button trans"  style="color:green">
+                                        <field name="trucks_last_stop" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div> 
+
+                            </div>
+
+                            <div style="width:180px;float:left;margin-left:40px;border:1px solid;margin-bottom:10px;height:90px;background:white;border-radius:33px;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Trucks Leaving</h5>
+
+
+                                <div style="width:100%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="trucks_first_stop_detail" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="trucks_first_stop" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div> 
+                            </div>
+
+                            <div style="width:280px;float:left;margin-left:30px;margin-bottom:10px;height:100px;margin-right:30px;text-align:center;">
+                                
+                                <img style="width:80%;margin-top:5px" src="/bassami_dashboard/static/src/img/icon_truck.png"/>
+                               
+                            </div>
+
+                            <div style="width:180px;float:left;border:1px solid;margin-bottom:10px;height:90px;background:white;border-radius:33px;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Trucks Coming </h5>
+
+                                <div style="width:100%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_green.png"/>
+                                    </div>
+                                    <button name="trucks_coming_details" type="object" class="oe_stat_button trans" style="color:green">
+                                        <field name="trucks_coming" widget="statinfo" string=" " style="color:green"/>
+                                    </button>
+                                </div>
+
+                               
+
+                            </div>
+
+                            <div style="width:180px;float:left;margin-left:40px;border:1px solid;margin-bottom:10px;height:90px;background:white;border-radius:33px;margin-top:5px">
+                                <h5 style="text-align:center;font-weight:bold">Trucks Available</h5>
+
+                                <div style="width:100%;float:left;border-top:1px solid;height:66px">
+                                    <div style="width:100%;text-align:center;margin-bottom:10px">
+                                        <img style="width:30px;" src="/bassami_dashboard/static/src/img/arrow_red.png"/>
+                                    </div>
+                                    <button name="trucks_available_details" type="object" class="oe_stat_button trans"  style="color:red">
+                                        <field name="trucks_available" widget="statinfo" string=" " style="color:red"/>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <span class="clearfloat"></span>
+
+                    </div>
+
+                </form>
+
+            </field>
+
+        </record>
+
+        <record id="bassami_dashboard_tree" model="ir.ui.view">
+            <field name="name">Branch DashBoard Tree</field>
+            <field name="model">bassami.dash</field>
+            <field name="arch" type="xml">
+                <tree string="Branch DashBoard" create="false" delete="false" edit="false">
+                    <field name="name"/>
+                </tree>
+            </field>
+
+        </record>
+
+        <record id="bassami_dashboard_action_new" model="ir.actions.act_window">
+            <field name="name">Branch DashBoard</field>
+            <field name="res_model">bassami.dash</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+
+        </record>
+    
+        <menuitem name="Branch DashBoard" 
+          id="bassami_dashboard_menu_id_new" 
+          parent="sale.sale_menu_root" 
+          sequence="1"
+          action="bassami_dashboard_action_new"
+          />
+
+        <record model="ir.ui.view" id="view_cargo_sale_line_dash_custom_inherit">
+            <field name="name">view_cargo_sale_line_dash_custom_inherit</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='loc_to']" position="after">
+                    <field name="loc_to_branch_id" invisible="1" string="Branch To"/>
+                </xpath>
+          </field>
+
+        </record>
+
+
+    </data>
+</odoo>

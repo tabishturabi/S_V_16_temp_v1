@@ -1,0 +1,47 @@
+/***************************
+* Google Fonts
+****************************/
+@font-face {
+	font-family: 'Scheherazade-Bold';
+	font-style: bold;
+	font-weight: 700;
+	src:url(/bassami_theme/static/src/fonts/Scheherazade-Bold.ttf) format('truetype');
+}
+
+@font-face {	
+	font-family: 'Scheherazade';
+	font-style: normal;
+	font-weight: 400;
+	src:url(/bassami_theme/static/src/fonts/Scheherazade-Regular.ttf) format('truetype');
+}
+
+
+.o_web_client{
+	font-family: Scheherazade;
+}
+.o_home_menu{
+	font-size: 20px;
+}
+.o_main_navbar{
+	font-size: 18px;
+}
+.dropdown-item,
+.o_view_controller,
+.o_form_label,
+.btn-primary,
+.btn-secondary,
+.o_facet_values,
+.o_stat_text,
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button,
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled,{
+	font-size: 16px !important;
+}
+.o_control_panel > .breadcrumb {
+	font-size: 24px;
+}
+.o_form_view .o_form_label{
+	line-height: 0.5 !important;
+}
+.o_mail_systray_item > a > i {
+	font-size: medium !important;
+}

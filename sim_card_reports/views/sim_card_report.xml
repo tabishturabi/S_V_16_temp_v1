@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <report id="sim_card_report"
+                model="sim.card.report.wizard"
+                string="Sim Card Report"
+                report_type="xlsx"
+                name="sim_card_reports.sim_card_report_xlsx"
+                file="sim_card_reports.sim_card_report_xlsx"/>
+
+        <record model="ir.ui.view" id="sim_card_report_wizard_form">
+            <field name="name">sim.card.report.wizard.form</field>
+            <field name="model">sim.card.report.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="grouping_by"/>
+                            <field name="branch_id" widget="many2many_tags"/>
+                            <field name="service_provider" widget="many2many_tags"/>
+                            <field name="job_id" widget="many2many_tags"/>
+                            <field name="package_type" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="period_grouping_by"
+                                   attrs="{'invisible':[('grouping_by','=','sim_card_report')]}"/>
+                            <field name="department_id" widget="many2many_tags"/>
+                            <field name="sim_type"/>
+                            <field name="bear_cost"/>
+                            <field name="sim_card_link"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="activation_date_condition"/>
+                            <field name="last_delivery_date_condition"/>
+                            <field name="last_receipt_date_condition"/>
+                        </group>
+                        <group>
+                            <field name="activation_date_from" class="with_hijri"
+                                   attrs="{'invisible':[('activation_date_condition','!=','is_between')],'required':[('activation_date_condition','=','is_between')]}"/>
+                            <field name="activation_date_to" class="with_hijri"
+                                   attrs="{'invisible':[('activation_date_condition','!=','is_between')],'required':[('activation_date_condition','=','is_between')]}"/>
+                            <field name="activation_date" class="with_hijri"
+                                   attrs="{'invisible':[('activation_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('activation_date_condition','not in',['all','is_set','is_not_set','is_between'])]}"/>
+                            <field name="last_delivery_date_from" class="with_hijri"
+                                   attrs="{'invisible':[('last_delivery_date_condition','!=','is_between')],'required':[('last_delivery_date_condition','=','is_between')]}"/>
+                            <field name="last_delivery_date_to" class="with_hijri"
+                                   attrs="{'invisible':[('last_delivery_date_condition','!=','is_between')],'required':[('last_delivery_date_condition','=','is_between')]}"/>
+                            <field name="last_delivery_date" class="with_hijri"
+                                   attrs="{'invisible':[('last_delivery_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('last_delivery_date_condition','not in',['all','is_set','is_not_set','is_between'])]}"/>
+                            <field name="last_receipt_date_from" class="with_hijri"
+                                   attrs="{'invisible':[('last_receipt_date_condition','!=','is_between')],'required':[('last_receipt_date_condition','=','is_between')]}"/>
+                            <field name="last_receipt_date_to" class="with_hijri"
+                                   attrs="{'invisible':[('last_receipt_date_condition','!=','is_between')],'required':[('last_receipt_date_condition','=','is_between')]}"/>
+                            <field name="last_receipt_date" class="with_hijri"
+                                   attrs="{'invisible':[('last_receipt_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('last_receipt_date_condition','not in',['all','is_set','is_not_set','is_between'])]}"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+                        <!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="sim_card_report_wizard_action">
+            <field name="name">SIM Card Report</field>
+            <field name="res_model">sim.card.report.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sim_card_report_wizard_form"></field>
+            <field name="target">new</field>
+        </record>
+        <menuitem name="SIM Card Report"
+                  id="menu_sim_card_report"
+                  parent="sim_card_reports.menu_sim_report_root"
+                  action="sim_card_report_wizard_action"
+                  groups="sim_card_reports.groups_sim_card_report"/>
+    </data>
+</odoo>

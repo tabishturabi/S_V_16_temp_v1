@@ -1,0 +1,177 @@
+<odoo>
+  <data>
+    <!-- form view bsg_price_config -->
+    
+    <record model="ir.ui.view" id="bsg_price_config_view_form">
+      <field name="name">bsg_price_config_view_form</field>
+      <field name="model">bsg_price_config</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Price Config">
+            <div class="oe_button_box" name="button_box">
+                      <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                          <field name="active" widget="boolean_button"
+                          options='{"terminology": "archive"}'/>
+                      </button>
+                  </div>           
+                    <group name="top">
+                      <group name="left">
+                        <field name="waypoint_from" required="1"/>
+                      </group>
+                      <group name="right">
+                        <field name="waypoint_to" required="1"/>
+                        <field name="customer_type" required="1"/>
+                      </group>
+                    </group>
+                    <field name="price_line_ids" nolabel="1" widget="section_and_note_one2many"
+                                mode="form,tree" >
+                      <form>
+                        <group>
+                            <group>
+                              <field name="car_size" />
+                              <field name="service_type" />
+                              <field name="car_classfication" />
+                            </group>
+                            <group>
+                              <field name="price" />
+                              <field name="min_price" />
+                              <field name="addtional_price"/>
+                            </group>
+                        </group>
+                      </form>
+                      <tree string="Car Lines" editable="bottom">
+                        <field name="car_size"/>
+                        <field name="service_type"/>
+                        <field name="car_classfication"/>
+                        <field name="price"/>
+                        <field name="min_price"/>
+                        <field name="addtional_price"/>
+                      </tree>
+                    </field>
+                    <notebook>
+                      <page name="Info" string="Info">
+                      </page>
+                    </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>            
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view price config  -->
+    <record model="ir.ui.view" id="bsg_price_config_view_tree">
+      <field name="name">bsg_price_config_view_tree</field>
+      <field name="model">bsg_price_config</field>
+      <field name="arch" type="xml">
+        <tree string="Price Config">
+          <field name="price_config_name" modifiers="{}"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on price config -->
+    
+    <record model="ir.actions.act_window" id="bsg_price_config_action">
+      <field name="name">Price Config</field>
+      <field name="res_model">bsg_price_config</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+ 
+
+
+    <!--  Price Line Config view -->    
+    <record model="ir.ui.view" id="bsg_price_line_view_form">
+      <field name="name">bsg_price_line_view_form</field>
+      <field name="model">bsg_price_line</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Price Line">
+            <div class="oe_button_box" name="button_box">
+                      <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                          <field name="active" widget="boolean_button"
+                          options='{"terminology": "archive"}'/>
+                      </button>
+                  </div>
+            <group>
+              <group>
+                <field name="id" string="Line No." readonly="1"/>
+                <field name="price_config_id" string="Price Config ID" attrs="{'readonly': [('id', '!=', False)]}"/>
+                <field name="car_size" attrs="{'readonly': [('id', '!=', False)]}"/>
+                <field name="service_type" attrs="{'readonly': [('id', '!=', False)]}"/>
+                <field name="car_classfication" attrs="{'readonly': [('id', '!=', False)]}"/>
+                <field name="customer_type" radonly="1"/>
+              </group>
+              <group>
+                <field name="waypoint_from" radonly="1"/>
+                <field name="waypoint_to" radonly="1"/>
+                <field name="price" />
+                <field name="min_price" />
+                <field name="addtional_price"/>
+              </group>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view price config line  -->
+    <record model="ir.ui.view" id="bsg_price_line_view_tree">
+      <field name="name">bsg_price_line_view_tree</field>
+      <field name="model">bsg_price_line</field>
+      <field name="arch" type="xml">
+        <tree string="Price Config Line">
+          <field name="price_config_id"/>
+          <field name="waypoint_from"/>
+          <field name="waypoint_to"/>
+          <field name="customer_type"/>
+          <field name="id" string="Line No."/>
+          <field name="car_size"/>
+          <field name="service_type"/>
+          <field name="price"/>
+          <field name="min_price"/>
+          <field name="addtional_price"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- search & Filter  -->
+   <record id="bsg_price_line_filter" model="ir.ui.view">
+     <field name="name">bsg_price_line_view Filter</field>
+     <field name="model">bsg_price_line</field>
+     <field name="arch" type="xml">
+      <search string="Search Price Line">
+           <field name="waypoint_from" string="waypoint_from"/>
+           <field name="waypoint_to" string="waypoint_to"/>
+           <field name="price_config_id"/>
+           <field name="car_size"/>
+           <field name="service_type"/>
+           <field name="customer_type"/>
+           <field name="id" string="Line No."/>
+            <group expand="0" string="Group By">
+        <filter name="waypoint_from" string="waypoint From" domain="[]"/>
+        <filter name="waypoint_to" string="waypoint To" domain="[]"/>
+        <filter name="price_config_id"/>
+        <filter name="customer_type" string="Customer Type" domain="[]" context="{'group_by':'customer_type'}"/>
+        <filter name="id" string="Line No." domain="[]"/>
+      </group>
+       </search>
+     </field>
+   </record>
+
+
+    <!-- actions opening views on price config -->
+    <record model="ir.actions.act_window" id="bsg_price_line_action">
+      <field name="name">Price Line Config</field>
+      <field name="res_model">bsg_price_line</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

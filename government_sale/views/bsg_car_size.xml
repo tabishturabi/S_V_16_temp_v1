@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="bsg_car_size_view_form_government_sale" model="ir.ui.view">
+            <field name="name">bsg.car.size.view.form.government.sale</field>
+            <field name="model">bsg_car_size</field>
+            <field name="inherit_id" ref="bsg_master_config.bsg_car_size_view_form"/>
+            <field name="arch" type="xml">
+                <field name="capacity_per_load" position="after">
+                    <field name="is_government"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+transport_management_access,transport.management,model_transport_management,group_transport_management,1,1,1,1
+transport_management_access_line,transport.management.line,model_transport_management_line,group_transport_management,1,1,1,1
+transporter_information_access,transporter.information,model_transporter_information,group_transport_management,1,1,1,1
+sale_status_access,sale.status,model_sale_status,group_transport_management,1,1,1,1

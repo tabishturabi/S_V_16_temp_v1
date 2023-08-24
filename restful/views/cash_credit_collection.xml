@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="cargo_sale_line_for_driver_cash_credit_collection">
+            <field name="name">cargo.sale.line.for.driver.cash.credit.collection</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook" position="inside">
+                    <page name="cash_credit_collection" string="Cash Credit Collection">
+                        <field name="drive_cash_credit_collection_ids" readonly="1">
+                            <tree editable="bottom">
+                                <field name="collection_reference"/>
+                                <field name="driver_id"/>
+                                <field name="customer_id"/>
+                                <field name="cargo_sale_line_id"/>
+                                <field name="collection_method"/>
+                                <field name="collected_amount"/>
+                                <field name="so_total_amount"/>
+                                <field name="so_paid_amount"/>
+                                <field name="so_due_amount"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="driver_cash_credit_collection_tree" model="ir.ui.view">
+            <field name="name">driver.cash.credit.collection.tree</field>
+            <field name="model">driver.cash.credit.collection</field>
+            <field name="arch" type="xml">
+                <tree string="Cash/Credit Collection">
+                    <field name="collection_reference"/>
+                    <field name="driver_id"/>
+                    <field name="customer_id"/>
+                    <field name="cargo_sale_line_id"/>
+                    <field name="collection_method"/>
+                    <field name="collected_amount"/>
+                    <field name="so_total_amount"/>
+                    <field name="so_paid_amount"/>
+                    <field name="so_due_amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="driver_cash_credit_collection_search" model="ir.ui.view">
+            <field name="name">driver.cash.credit.collection.search</field>
+            <field name="model">driver.cash.credit.collection</field>
+            <field name="arch" type="xml">
+                <search string="Cash/Credit Collection">
+                    <field name="collection_reference"/>
+                    <field name="driver_id"/>
+                    <field name="customer_id"/>
+                    <field name="collection_method"/>
+                    <field name="collected_amount"/>
+                    <field name="so_total_amount"/>
+                    <field name="so_paid_amount"/>
+                    <field name="so_due_amount"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="driver_cash_credit_collection_form" model="ir.ui.view">
+            <field name="name">driver.cash.credit.collection.form</field>
+            <field name="model">driver.cash.credit.collection</field>
+            <field name="arch" type="xml">
+                <form string="Cash/Credit Collection">
+                    <header>
+                        <!-- <button name="confirm" states="draft" type="object" string="Confirm" class="oe_highlight"/> -->
+                        <button name="decline" states="processed" type="object" string="Decline" class="oe_highlight"/>
+                        <button name="reset_to_draft" states="processed,declined" type="object" string="Reset to Draft" class="oe_highlight"/>
+                        <button name="register_payment" string="Register Payment" type="object" states="draft" class="o_sale_confirm"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="collection_reference" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="collection_reference" readonly="1"/>
+                            <field name="driver_id" readonly="1"/>
+                            <field name="customer_id" readonly="1"/>
+                            <field name="cargo_sale_line_id" readonly="1"/>
+                            <field name="payment_id"/>
+                        </group>
+                        <group>
+                            <field name="collection_method" readonly="1"/>
+                            <field name="collected_amount" readonly="1"/>
+                            <field name="so_total_amount" readonly="1"/>
+                            <field name="so_paid_amount" readonly="1"/>
+                            <field name="so_due_amount" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_driver_cash_credit_collection" model="ir.actions.act_window">
+            <field name="name">Cash/Credit Collection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">driver.cash.credit.collection</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="driver_cash_credit_collection_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Credit/Cash Collection for the Company
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_driver_cash_credit_collection" name="Credit/Cash Collection"
+                  id="menu_driver_cash_credit_collection" parent="bsg_cargo_sale.cargo_sale_root_meun"
+                  sequence="13"/>
+         <record id="app_version_form" model="ir.ui.view">
+            <field name="name">andriod.app.version.tree</field>
+            <field name="model">andriod.app.version</field>
+            <field name="arch" type="xml">
+                <form string="Andriod App Versions">
+                <group>
+                    <field name="name"/>
+                    <field name="release_notes"/>
+                </group>                   
+                </form>
+            </field>
+        </record>
+        
+        <record id="app_version_tree" model="ir.ui.view">
+            <field name="name">andriod.app.version.tree</field>
+            <field name="model">andriod.app.version</field>
+            <field name="arch" type="xml">
+                <tree string="Andriod App Versions">
+                    <field name="name"/>
+                    <field name="release_notes"/>
+                   
+                </tree>
+            </field>
+        </record>
+
+         <record id="app_version_action" model="ir.actions.act_window">
+            <field name="name">Andriod App Versions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">andriod.app.version</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="app_version_action" name="Android App Versions"
+                  id="app_version_menue" parent="bsg_cargo_sale.cargo_sale_root_meun"
+                  sequence="14"/>
+         <record id="api_log_form" model="ir.ui.view">
+            <field name="name">api.log.form</field>
+            <field name="model">api.log</field>
+            <field name="arch" type="xml">
+                <form string="API Log">
+                <group>
+                    <field name="create_date"/>
+                    <field name="endpoint"/>
+                    <field name="request_payload"/>
+                     <field name="exception_message"/>
+                </group>                   
+                </form>
+            </field>
+        </record>
+        
+        <record id="api_log_tree" model="ir.ui.view">
+            <field name="name">api.log.tree</field>
+            <field name="model">api.log</field>
+            <field name="arch" type="xml">
+                <tree string="API Log">
+                     <field name="create_date"/>
+                    <field name="endpoint"/>
+                    <field name="request_payload"/>
+                     <field name="exception_message"/>
+                   
+                </tree>
+            </field>
+        </record>
+
+         <record id="api_log_action" model="ir.actions.act_window">
+            <field name="name">API Log</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">api.log</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="api_log_action" name="API Logging"
+                  id="api_log_menue" parent="base.menu_custom"
+                  sequence="200"/>
+    </data>
+</odoo>

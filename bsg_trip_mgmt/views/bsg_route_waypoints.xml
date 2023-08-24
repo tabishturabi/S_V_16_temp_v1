@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- <record id="bsg_route_waypoints_trip" model="ir.ui.view">
+            <field name="name">bsg.route.waypoints.trip</field>
+            <field name="model">bsg_route_waypoints</field>
+            <field name="inherit_id" ref="bsg_master_config.bsg_route_waypoints_view_form"/>
+            <field name="arch" type="xml">
+                <field name="allowed_return_waypoint_ids" position="after">
+                    <field name="not_local"/>
+                </field>
+            </field>
+        </record>
+ -->
+    </data>
+</odoo>

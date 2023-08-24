@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Trailer Management Menus -->
+	<menuitem name="Trailer Management"
+		id="root_trailer_master"
+		parent="fleet.menu_root"
+		sequence="3"/>
+		
+	<menuitem name="Trailer" 
+		id="menu_bsg_trailer_config" 
+		parent="root_trailer_master"
+		action="bsg_fleet_trailer_config_action" 
+		sequence="1"
+		/>
+
+	<menuitem name="Trailer Type" 
+		id="menu_bsg_trailer_type" 
+		parent="root_trailer_master"
+		action="bsg_fleet_trailer_type_action" 
+		sequence="2" 
+		/>
+
+	<menuitem name="Trailer Categories" 
+		id="menu_bsg_trailer_categories" 
+		parent="root_trailer_master"
+		action="bsg_fleet_trailer_categories_action" 
+		sequence="3" 
+		/>
+	<!-- Fuel Expense Method Menus -->
+	<menuitem name="Fuel Expense"
+		id="root_fuel_expense_master"
+		parent="fleet.menu_root"
+		sequence="3"/>
+		
+	<menuitem name="Fuel Expense Method" 
+		id="menu_bsg_fuel_expense_method" 
+		parent="root_fuel_expense_master"
+		action="bsg_fuel_expense_method_action" 
+		sequence="1" 
+		/>
+
+
+	<!-- Menu item for configuration in fleet  -->
+	<menuitem name="Asset Status Config" 
+		id="menu_bsg_asset_status" 
+		parent="fleet.fleet_configuration"
+		action="bsg_fleet_asset_status_action" 
+		sequence="200" 
+		/>
+
+	<menuitem name="Asset Group Config" 
+		id="menu_bsg_asset_group" 
+		parent="fleet.fleet_configuration"
+		action="bsg_fleet_asset_group_action" 
+		sequence="201" 
+		/>
+
+
+	<menuitem name="International Fuel Amount" 
+		id="menu_bsg_int_fuel_amt" 
+		parent="fleet.fleet_configuration"
+		action="bsg_int_fuel_amt_action" 
+		sequence="202" 
+		/>
+
+	<menuitem name="Port Fuel Amount" 
+		id="menu_bsg_port_fuel_amt" 
+		parent="fleet.fleet_configuration"
+		action="bsg_port_fuel_amt_action" 
+		sequence="203" 
+		/>
+
+	<menuitem name="Vehicle Groups" 
+		id="menu_bsg_vehicle_groups" 
+		parent="fleet.fleet_configuration"
+		action="bsg_vehicle_group_action" 
+		sequence="204" 
+		/>
+
+	<menuitem name="Vehicle Type Table" 
+		id="menu_bsg_type_table" 
+		parent="fleet.fleet_configuration"
+		action="bsg_vehicle_type_table_action" 
+		sequence="205" 
+		/>
+
+	<menuitem name="Vehicle Custom Status" 
+		id="menu_bsg_vehicle_status" 
+		parent="fleet.fleet_configuration"
+		action="bsg_vehicle_status_action" 
+		sequence="206" 
+		/>
+
+	<menuitem name="Fleet Tracking" 
+		id="menu_bsg_fleet_trailer_config" 
+		parent="fleet.fleet_configuration"
+		action="fleet_tracking_config_action" 
+		sequence="207" 
+		groups="base.group_erp_manager"
+		/>
+
+	<menuitem name="Documents Types" 
+		id="menu_documents_type_table" 
+		parent="fleet.fleet_configuration"
+		action="bsg_vehicle_documents_type_action" 
+		sequence="208"
+		/>
+		
+	<menuitem name="Asset Location Config" 
+		id="menu_asset_location_fleet" 
+		parent="fleet.fleet_configuration"
+		action="bsg_fleet_asset_location_action" 
+		sequence="209"
+		/>
+
+</odoo>

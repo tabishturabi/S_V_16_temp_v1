@@ -1,0 +1,585 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="effect_request_form_view" model="ir.ui.view">
+            <field name="name">effect_request_form_view</field>
+            <field name="model">effect.request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Effect Request">
+                    <header>
+                       <field name="on_paid_leave" invisible="1"/>
+                        <field name="mark_done_check" invisible="1" />
+                        <button name="action_submit_branch_supervisor" type="object"
+                                string="Submit To Branch Supervisor"
+                                class="oe_highlight"
+                                icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',True)]}" groups="effective_date_notes.effective_date_group"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',True)]}" groups="effective_date_notes.effective_date_group"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',True)]}" groups="effective_date_notes.effective_date_group"
+                        />
+
+                        <button name="action_submit_branch_supervisor" type="object"
+                                string="Submit To Branch Supervisor"
+                                class="oe_highlight"
+                                icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','2'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action" attrs="{'invisible':['|',('state','!=','2'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group"/>
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                class="oe_highlight" attrs="{'invisible':['|',('state','!=','2'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group"/>
+
+
+                        <button name="action_send_deputy_executive_director" type="object" string="Send To Deputy Executive Director"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group,bsg_hr.group_hr_specialist"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action" attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group,bsg_hr.group_hr_specialist"/>
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                class="oe_highlight" attrs="{'invisible':['|',('state','!=','1'),('on_paid_leave','=',False)]}" groups="effective_date_notes.effective_date_group,bsg_hr.group_hr_specialist"
+                        />
+
+                        <button name="action_submit_dept_supervisor" type="object" string="Submit To Dept Manager"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','3'),('notice_type','!=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action" attrs="{'invisible':['|',('state','!=','3'),('notice_type','!=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"/>
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                class="oe_highlight" attrs="{'invisible':['|',('state','!=','3'),('notice_type','!=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"
+                        />
+
+                        <button name="action_submit_direct_manager" type="object" string="Submit To Direct Manager"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','3'),('notice_type','=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action" attrs="{'invisible':['|',('state','!=','3'),('notice_type','=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"/>
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                class="oe_highlight" attrs="{'invisible':['|',('state','!=','3'),('notice_type','=','start_after_vacation')]}" groups="bsg_hr.group_branch_supervisor"/>
+
+                        <button name="action_submit_hr_salary_accountant" type="object"
+                                string="Submit To Salary Accountant"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':[('state','not in',('4'))]}"
+                                groups="bsg_hr.group_department_manager"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':[('state','not in',('4'))]}"
+                                groups="bsg_hr.group_department_manager"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':[('state','not in',('4'))]}"
+                                 groups="bsg_hr.group_department_manager"
+                         />
+
+                        <button name="action_submit_hr_manager" type="object" string="Submit To HR Manager"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':[('state','!=','5')]}"
+                                groups="bsg_hr.group_hr_specialist"/>
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':[('state','!=','5')]}"
+                                groups="bsg_hr.group_hr_specialist"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':[('state','!=','5')]}"
+                                 groups="bsg_hr.group_hr_specialist"
+                         />
+
+                        <button name="action_submit_finance_manager" type="object" string="Submit To Finance Manager"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','!=',True)]}"
+                                groups="bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','!=',True)]}"
+                                groups="bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','!=',True)]}"
+                                 groups="bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                         <button name="action_submit_accountant" type="object" string="Submit To Accountant"
+                                 class="oe_highlight" icon="fa-check-circle"
+                                 attrs="{'invisible':['|',('state','!=','7'),('notice_type','!=','start_after_vacation')]}"
+                                 groups="bsg_hr.group_finance_manager"
+                        />
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':['|',('state','!=','7'),('notice_type','!=','start_after_vacation')]}"
+                                groups="bsg_hr.group_finance_manager"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('state','!=','7'),('notice_type','!=','start_after_vacation')]}"
+                                 groups="bsg_hr.group_finance_manager"
+                        />
+
+                        <button name="action_mark_done" type="object" string="Mark as Done"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','11'),('notice_type','!=','start_after_vacation')]}"
+                                groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':['|',('state','!=','11'),('notice_type','!=','start_after_vacation')]}"
+                                groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('state','!=','11'),('notice_type','!=','start_after_vacation')]}"
+                                 groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+
+                        <button name="action_mark_done" type="object" string="Mark as Done"
+                                class="oe_highlight" icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','=',True)]}"
+                                groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                        <button string="Refuse" name="%(effective_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','=',True)]}"
+                                groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+                         <button name="%(effective_cancel_wizard_action)d" type="action" string="Cancel"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('state','!=','6'),('mark_done_check','=',True)]}"
+                                 groups="account.group_account_user,bsg_hr.group_hr_manager,hr.group_hr_manager"
+                        />
+
+<!--                        <button name="action_reset_to_draft" type="object" string="Reset to Draft"-->
+<!--                                class="oe_highlight"-->
+<!--                                attrs="{'invisible':[('state','in',['1','8'])]}"-->
+<!--                        />-->
+
+                        <field name="state" widget="statusbar" statusbar_visible="1,8"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check"
+                                    groups="effective_date_notes.effective_date_active">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group name="group_top">
+                            <group name="group_left">
+                                <!--                                <field name="other_employee"/>-->
+                                <field name="from_hr" groups="effective_date_notes.effective_reporting_hr_manager_group,bsg_hr.group_department_manager,bsg_hr.group_hr_specialist"
+                                       attrs="{'readonly':[('state','not in','1')]}"/>
+                                <field name="by_hr" groups="effective_date_notes.effective_reporting_hr_manager_group,bsg_hr.group_hr_specialist"
+                                       attrs="{'readonly':[('state','not in','1')]}"/>
+                                <field name="employee_id" force_save="1" options="{'no_open': True}" groups="effective_date_notes.effective_reporting_hr_manager_group,bsg_hr.group_department_manager,bsg_hr.group_hr_specialist"
+                                       attrs="{'readonly':['|',('from_hr', '=', False),('state','not in','1')]}"/>
+                                <field name="manager_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="company_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="mobile_phone" force_save="1" options="{'no_open': True}"/>
+                                <field name="bsg_empiqama" force_save="1"
+                                       attrs="{'invisible':[('bsg_national_id','!=',False)]}"
+                                       options="{'no_open': True}"/>
+                                <field name="bsg_national_id" force_save="1"
+                                       attrs="{'invisible':[('bsg_empiqama','!=',False)]}"
+                                       options="{'no_open': True}"/>
+                                <field name="working_date"
+                                       attrs="{'invisible':[('notice_type','=','start_after_vacation')],'readonly':[('state','!=','1')]}"/>
+                                <field name="leave_type_id" force_save="1" options="{'no_create':True,'no_edit':True,'no_open': True}" groups="effective_date_notes.effective_reporting_hr_manager_group,bsg_hr.group_hr_specialist"
+                                       attrs="{'invisible':['|',('notice_type','!=','start_after_vacation'),('by_hr','!=',False)], 'readonly':[('state','!=', '1')],'required':[('notice_type','=','start_after_vacation'),('by_hr', '=',False)]}"/>
+                                <field name="sick_leave_type" groups="effective_date_notes.effective_reporting_hr_manager_group,bsg_hr.group_hr_specialist"
+                                               attrs="{'invisible':['|',('notice_type','!=','start_after_vacation'),('by_hr','!=',False)]}"
+                                               force_save="1" options="{'no_create':True,'no_edit':True,'no_open': True}"/>
+                                <field name="is_annual" force_save="1" invisible="1"/>
+
+
+                            </group>
+                            <group name="group_right">
+                                <field name="entry_date"/>
+                                <!--                                <field name="validate_date"/>-->
+                                <field name="employee_code" force_save="1" options="{'no_open': True}"/>
+                                <field name="branch_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="department_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="job_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="notice_type" readonly="1" required="1"/>
+
+                                <field name="effective_count" invisible="1"/>
+                                <field name="return_date"
+                                       attrs="{'readonly':[('state','!=','1')],'invisible':[('notice_type','!=','start_after_vacation')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="reason_active" force_save="1" invisible="1"/>
+                            <field name="reason_approve" force_save="1" invisible="1"/>
+                            <field name="is_driver" invisible="1"/>
+
+                            <field name="is_settlement"
+                                   attrs="{'invisible':[('is_annual','!=',True)], 'readonly':[('state','=', '8')]}"
+                                   groups="effective_date_notes.vacation_reporting_hr_salary_group"/>
+                            <div attrs="{'invisible':[('notice_type','!=','start_after_vacation')]}">
+                                <label for="duration" string="Duration" style="width:27%;margin-top:-15px"/>
+                                <field name="duration" force_save="1" class="oe_inline"/>
+                                <span class="ml8">Days</span>
+                            </div>
+                            <div attrs="{'invisible':[('notice_type','!=','start_after_vacation')]}">
+<!--                                <label for="period" string="Period" style="width:27%;margin-top:-15px"/>-->
+                                <field name="date_from" force_save="1" class="oe_inline"/>
+                                <span class="ml8">T</span>
+                                <label for="date_to" string="o" class="oe_inline"/>
+                                <field name="date_to" force_save="1" class="oe_inline"/>
+                            </div>
+                            <group>
+                                <field name="reason"
+                                       attrs="{'invisible':[('reason_active','=',False)], 'required':[('reason_active','=',True)],'readonly':[('state','!=','1')]}"/>
+                            </group>
+                            <div attrs="{'invisible':[('notice_type','!=','start_after_vacation')]}">
+                                <label for="days_delayed" string="Days Delayed" style="width:27%;margin-top:-15px"/>
+                                <field name="days_delayed" force_save="1" class="oe_inline"/>
+                            </div>
+
+                        </group>
+                        <group>
+                            <field name="description" attrs="{'readonly':[('state','!=','1')]}"/>
+                        </group>
+                        <notebook>
+                            <page string="Employee Dept"
+                                  groups="effective_date_notes.effective_reporting_employee_manager_group">
+                                <group name="group_top">
+                                    <div class="oe_title">
+                                        <h2>
+                                            To: personnel Department
+                                        </h2>
+                                        <h3>
+                                            PLease Be Advised That, The employee
+                                        </h3>
+                                    </div>
+
+                                    <br/>
+                                    <br/>
+                                    <group name="group_left">
+
+                                        <field name="employee_company_housing"
+                                               attrs="{'invisible':[('notice_type','=','start_after_vacation')],'readonly':[('state','!=','1')]}"/>
+
+                                    </group>
+
+                                    <group name="group_right">
+                                        <field name="number" invisible="1"/>
+                                        <field name="decision_number" force_save="1" options="{'no_open': True}"
+                                               attrs="{'invisible':[('notice_type','=','start_after_vacation')],'required':[('state','=', 'submitted')],'readonly':[('state','!=','1')]}"/>
+                                        <field name="decision_date" force_save="1"
+                                               attrs="{'invisible':[('notice_type','=','start_after_vacation')]}"/>
+                                    </group>
+
+                                </group>
+                                <group>
+                                    <field name="emp_description" attrs="{'readonly':[('state','!=','1')]}"
+                                           placeholder="This note is for employee purpose "/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="approve_debt_date"
+                                               attrs="{'invisible':[('state','in',['1','3'])]}"/>
+                                    </group>
+                                    <group>
+
+                                        <field name="emp_manager"
+                                               attrs="{'invisible':[('state','in',['1','3'])]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Human Resource">
+                                <group>
+                                    <group>
+                                        <field name="salary_structure" options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="analytic_account" options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                    </group>
+                                </group>
+                                <div class="oe_title">
+                                    <h2>
+                                        To: personnel Department
+                                    </h2>
+                                    <h3>
+                                        PLease Be Advised That, The employee
+                                    </h3>
+                                </div>
+                                <group name="group_top">
+                                    <group name="group_right">
+                                        <field name="payroll_effect" widget="radio"
+                                               attrs="{'readonly':[('state','!=','1')]}"/>
+                                    </group>
+                                    <group name="group_left">
+                                        <field name="start_payroll_date"
+                                               attrs="{'invisible':[('payroll_effect','!=','start_first_time')],'required':[('payroll_effect','=','start_first_time'),('state','=','approve')],'readonly':[('state','!=','1')]}"/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <field name="working_payroll_date"
+                                               attrs="{'invisible':[('payroll_effect','!=','start_after_transport')],'readonly':[('state','=','8')]}"/>
+                                        <field name="payslip_payroll_date"
+                                               attrs="{'invisible':[('payroll_effect','!=','start_after_transport')], 'required':[('payroll_effect','=','start_after_transport')],'readonly':[('state','=','8')]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="hr_description" attrs="{'readonly':[('state','!=','1')]}"
+                                           placeholder="This note is for employee purpose "/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="hr_approve_date"
+                                               attrs="{'invisible':[('state','in',['1','4','5','6'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="hr_supervisor"
+                                               attrs="{'invisible':[('state','in',['1','4','5','6'])]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="check_days_delayed_by_type" invisible="1"></field>
+                                    <field name="is_foreign" invisible="1"></field>
+<!--                                    <field name="medical_insurance_cost" force_save="1" readonly="1"/>-->
+                                    <field name="iqama_license_cost" force_save="1" readonly="1" attrs="{'invisible':['|','|',('check_days_delayed_by_type','=',False),('is_foreign','=',False),('state','in',['1','2','3','4'])]}"/>
+                                    <field name="social_insurance_cost" force_save="1" readonly="1" attrs="{'invisible':['|',('check_days_delayed_by_type','=',False),('state','in',['1','2','3','4'])]}"/>
+
+                                </group>
+                                <group>
+                                    <field name="gosi_cost" force_save="1" readonly="1" attrs="{'invisible':['|','|',('check_days_delayed_by_type','=',False),('is_foreign','=',True),('state','in',['1','2','3','4'])]}"/>
+                                    <field name="total_cost" force_save="1" readonly="1" attrs="{'invisible':['|',('check_days_delayed_by_type','=',False),('state','in',['1','2','3','4'])]}"/>
+                                </group>
+
+
+                            </page>
+                            <!--                            <page string="Others"-->
+                            <!--                                  groups="effective_date_notes.effective_reporting_hr_manager_group,effective_date_notes.effective_reporting_supervisor_group,effective_date_notes.effective_reporting_hr_salary_group,effective_date_notes.effective_reporting_hr_admin_group">-->
+                            <!--                                <group>-->
+                            <!--                                    <field name="manager_description" placeholder="This note is for HR manager "/>-->
+                            <!--                                </group>-->
+
+                            <!--                                <group name="group_top">-->
+                            <!--                                    <group name="group_left">-->
+                            <!--                                        <field name="hr_manager_approve_date"-->
+                            <!--                                               attrs="{'invisible':[('state','in',['draft','submitted','approve','fin_approve'])]}"/>-->
+                            <!--                                        <field name="hr_manager"-->
+                            <!--                                               attrs="{'invisible':[('state','in',['draft','submitted','approve','fin_approve'])]}"/>-->
+                            <!--                                    </group>-->
+                            <!--                                </group>-->
+
+                            <!--                                <group>-->
+                            <!--                                    <field name="salary_description" placeholder="This note is for HR Salary"/>-->
+                            <!--                                </group>-->
+
+                            <!--                                <group name="group_top">-->
+                            <!--                                    <group name="group_left">-->
+                            <!--                                        <field name="hr_salary_approve_date"-->
+                            <!--                                               attrs="{'invisible':[('state','in',['draft','submitted','approve','fin_approve', 'hr_manager_approve'])]}"/>-->
+                            <!--                                        <field name="hr_salary"-->
+                            <!--                                               attrs="{'invisible':[('state','in',['draft','submitted','approve','fin_approve','hr_manager_approve'])]}"/>-->
+                            <!--                                    </group>-->
+                            <!--                                </group>-->
+
+                            <!--                            </page>-->
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="effect_request_tree_view" model="ir.ui.view">
+            <field name="name">effect_request_tree_view</field>
+            <field name="model">effect.request</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mobile_phone"/>
+                    <field name="working_date"/>
+                    <field name="entry_date"/>
+                    <!--                    <field name="validate_date"/>-->
+                    <field name="employee_code"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="effect_request_view_search" model="ir.ui.view">
+            <field name="name">effect_request.search</field>
+            <field name="model">effect.request</field>
+            <field name="arch" type="xml">
+                <search string="Effect Request">
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mobile_phone"/>
+                    <field name="bsg_empiqama"/>
+                    <field name="bsg_national_id"/>
+                    <field name="working_date"/>
+                    <field name="entry_date"/>
+                    <!--                    <field name="validate_date"/>-->
+                    <field name="employee_code"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+
+
+                </search>
+            </field>
+        </record>
+
+        <record id="effect_date_request_action" model="ir.actions.act_window">
+            <field name="name">Effective Date Notice Request</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_notice_type':'start_after_vacation'}</field>
+        </record>
+
+        <record id="effect_date_request_action_self_service" model="ir.actions.act_window">
+            <field name="name">Effective Date Notice Request</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_notice_type':'start_after_vacation', 'create' : False}</field>
+        </record>
+
+        <record id="my_effect_date_request_action" model="ir.actions.act_window">
+            <field name="name">My Effective Date Notice Request</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_notice_type':'start_after_vacation'}</field>
+            <field name="domain">[('employee_id.user_id', '=',uid )]</field>
+        </record>
+
+        <record id="to_approve_effect_reporting_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_other_employee':True, 'create' : False}</field>
+            <field name="domain">[('state','=','submitted'),('manager_id.user_id','=',uid)]</field>
+        </record>
+        <record id="to_approve_hr_team_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','approve')]</field>
+
+        </record>
+        <record id="to_approve_hr_manager_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','fin_approve')]</field>
+
+        </record>
+        <record id="to_approve_hr_salary_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','hr_manager_approve')]</field>
+
+        </record>
+
+        <record id="to_approve_hr_admin_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">effect.request</field>
+            <!--        <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="effect_request_menu_root"
+                  name="Effective Date Notice Request" web_icon="effective_date_notes,static/effect.png"/>
+
+<!--        <menuitem id="effect_request_main_menu_1" name="Effective Date Notice Request" parent="effect_request_menu_root"-->
+<!--                  sequence="1"/>-->
+
+        <menuitem id="effect_request_main_menu_employee_service" name="Effective Date Notice Request"
+                  action="effect_date_request_action_self_service"
+                  parent="employee_service.employee_service_main_menu" sequence="4" groups="effective_date_notes.effective_date_group"/>
+
+         <menuitem id="effect_request_main_menu1" name="Effective Date Notice Request"
+                  action="effect_date_request_action"
+                  parent="bsg_hr.menu_hr_employees" sequence="7" groups="effective_date_notes.effective_date_group"/>
+
+
+        <menuitem id="effect_reporting_main_menu_1" name="Effective Reporting" parent="effect_request_menu_root"
+                  sequence="2"/>
+
+        <menuitem id="effect_reporting_main_menu_2" name="Effective Date Reporting"
+                  parent="effect_reporting_main_menu_1" sequence="1"/>
+
+
+        <menuitem id="effect_reporting_manager_menu" name="Employee Manager" parent="effect_reporting_main_menu_2"
+                  sequence="1"
+                  groups="effective_date_notes.effective_reporting_employee_manager_group"/>
+
+        <menuitem id="effect_reporting_main_menu" name="To Approve" action="to_approve_effect_reporting_action"
+                  parent="effect_reporting_manager_menu"/>
+
+        <menuitem id="effect_reporting_hr_supervisor_manager_menu" name="HR Supervisor Team"
+                  parent="effect_reporting_main_menu_2" sequence="2"
+                  groups="effective_date_notes.effective_reporting_supervisor_group"/>
+
+        <menuitem id="effect_reporting_hr_manager_menu" name="HR Manager" parent="effect_reporting_main_menu_2"
+                  sequence="3"
+                  groups="effective_date_notes.effective_reporting_hr_manager_group"/>
+
+        <menuitem id="effect_reporting_hr_salary_menu" name="HR Salary Team" parent="effect_reporting_main_menu_2"
+                  sequence="4"
+                  groups="effective_date_notes.effective_reporting_hr_salary_group"/>
+
+        <menuitem id="effect_reporting_admin_menu" name="Administrator Team" parent="effect_reporting_main_menu_2"
+                  sequence="5"
+                  groups="effective_date_notes.effective_reporting_hr_admin_group"/>
+
+
+        <menuitem id="hr_supervisor_manager_to_approve_menu" name="To Approve" action="to_approve_hr_team_action"
+                  parent="effect_reporting_hr_supervisor_manager_menu"/>
+        <menuitem id="hr_manager_to_approve_menu" name="To Approve" action="to_approve_hr_manager_action"
+                  parent="effect_reporting_hr_manager_menu"/>
+        <menuitem id="hr_salary_to_approve_menu" name="To Approve" action="to_approve_hr_salary_action"
+                  parent="effect_reporting_hr_salary_menu"/>
+        <menuitem id="admin_to_approve_menu" name="To Approve" action="to_approve_hr_admin_action"
+                  parent="effect_reporting_admin_menu"/>
+
+
+    </data>
+</odoo>

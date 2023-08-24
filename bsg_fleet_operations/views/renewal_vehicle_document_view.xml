@@ -1,0 +1,144 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    
+    <record model="ir.ui.view" id="bsg_renewal_vehicle_document_view_form">
+      <field name="name">renewal_vehicle_document_view_form</field>
+      <field name="model">renewal.vehicle.document</field>
+      <field name="arch" type="xml">
+        <form>
+        	<header>
+            	<field name="state" widget="statusbar" />
+            	<button name="action_confirm" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible':[('state','!=','draft')]}"/>
+            	<button name="action_submit" type="object" string="Submit" class="oe_highlight" attrs="{'invisible': [('state', '!=','confirm')]}"/>
+            	<button name="action_manager_approval" type="object" string="Manager Approval" class="oe_highlight" attrs="{'invisible': [('state', '!=','submit')]}"/>
+            	<button name="action_manager_reject" type="object" string="Manager Reject" class="oe_highlight" attrs="{'invisible': [('state', '!=','submit')]}"/>
+            	<button name="action_expense_insurance" type="object" string="Expense Insurance" class="oe_highlight" attrs="{'invisible': [('state', '!=','manager_approval')]}"/>
+            	<button name="action_petty_cash" type="object" string="Petty Cash" class="oe_highlight" attrs="{'invisible': [('state', '!=','expense_insurance')]}"/>
+            	<button name="action_done" type="object" string="Done" class="oe_highlight" attrs="{'invisible': [('state', '!=','petty_cash')]}"/>
+            	<button name="action_draft" type="object" string="Set to Draft" class="oe_link" attrs="{'invisible': [('state', 'in',['draft','done'])]}"/>
+            	<button name="action_cancel" type="object" string="Cancel" class="oe_link" attrs="{'invisible': [('state', 'in',['draft','cancel','done'])]}"/>
+       		</header>
+          <sheet string="Renewal Vehicle Document">
+            <div class="oe_title">
+               <h1>
+                   <field name="name" readonly="1"/>
+               </h1>
+           </div>
+            <group>
+            	<group>
+            		<field name="document_type" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+            		<field name="vehicle_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+            		<field name="model_id" readonly="1"/>
+            		<field name="vehicle_type_id" readonly="1"/>
+            		<field name="chassis_no" readonly="1"/>
+            		<field name="estmaira_serial_no" readonly="1"/>
+            	</group>
+            	<group>
+            		<field name="request_date" readonly="1"/>
+            		<field name="sign_to" attrs="{'readonly':[('state','!=','draft')]}"/>
+            		<field name="driver_name" readonly="1"/>
+            		<field name="driver_code" readonly="1"/>
+            		<field name="plate_no" readonly="1"/>
+            		<field name="vehicle_status" readonly="1"/>
+            		<field name="model_year" readonly="1"/>
+            	</group>
+            </group>
+            
+            <notebook>
+            	<page name="document" string='Document Information'>
+            		<group>
+            			<group>
+            				<field name="exp_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+	            			<field name="exp_date_hajri" attrs="{'readonly':[('state','!=','draft')]}"/>
+	            			<field name="comment" attrs="{'readonly':[('state','!=','draft')]}"/>
+	            			<field name="attechment" widget="many2many_binary" attrs="{'readonly':[('state','!=','draft')]}"/>
+            			</group>
+            			<group>
+            				<field name="renewal_exp_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+            				<field name="renewal_exp_date_hajri" attrs="{'readonly':[('state','!=','draft')]}"/>
+            			</group>
+            		</group>
+            	</page>
+            	
+            	<page name="manager" string='Manager Rejects' attrs="{'invisible': [('state', '!=','reject')]}">
+            		<group>
+            			<group>
+            				<field name="manager_comment" attrs="{'required': [('state', '=','reject')]}"/>
+            			</group>
+            			<group>
+            				<field name="manager_date" attrs="{'required': [('state', '=','reject')]}"/>
+            			</group>
+            		</group>
+            	</page>
+            	<page name="expense" string='Expense Line' attrs="{'invisible': [('state', '!=','expense_insurance')]}">
+            		<field name="renew_expense_line" mode="tree">
+            			<tree editable="bottom">
+	            			<field name="product_id" required="1"/>
+	            			<field name="description" required="1"/>
+	            			<field name="inv_ref"/>
+	            			<field name="account_id"/>
+	            			<field name="analytic_account_id"/>
+	            			<field name="branch_id"/>
+	            			<field name="department_id"/>
+	            			<field name="truck_id"/>
+	            			<field name="account_tag_ids" widget="many2many_tags"/>
+	            			<field name="quantity" />
+	            			<field name="uom_id"/>
+	            			<field name="unit_price"/>
+	            			<field name="discount"/>
+	            			<field name="tax_ids" widget="many2many_tags"/>
+	            			<field name="sub_total"/>
+	            			<field name="attachment" widget="many2many_binary"/>
+            			</tree>
+            		</field>
+            	</page>
+            	<page name="other" string="Other Info">
+            		<group>
+            			<group>
+							<field name="document_info"/>            			
+            			</group>
+            		</group>
+            	</page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view  -->
+    <record model="ir.ui.view" id="bsg_renewal_vehicle_document_view_tree">
+      <field name="name">bsg_renewal_vehicle_document_view_tree</field>
+      <field name="model">renewal.vehicle.document</field>
+      <field name="arch" type="xml">
+        <tree string="Renewal Vehicle Document">
+          <field name="name"/>
+          <field name="document_type"/>
+          <field name="vehicle_id"/>
+          <field name="driver_name"/>
+          <field name="driver_code"/>
+        </tree>
+      </field>
+    </record>
+    
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="bsg_renewal_vehicle_document_action">
+      <field name="name">Renewal Vehicle Document</field>
+      <field name="res_model">renewal.vehicle.document</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem 
+    id="menu_bsg_renewal_vehicle_document"
+    name="Renewal Vehicle Document"
+    parent="fleet.fleet_vehicles"
+    action="bsg_renewal_vehicle_document_action"
+    sequence="102"
+    />
+    
+  </data>
+</odoo>

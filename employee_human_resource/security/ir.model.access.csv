@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_exit_return,access_hr_exit_return,model_hr_exit_return,,1,1,1,0
+access_hr_exit_account,access_hr_exit_account,model_hr_exit_account,,1,1,1,0
+access_hr_employee_job_transfer,access_hr_employee_job_transfer,model_hr_employee_job_transfer,,1,1,1,0
+access_hr_termination_hr_specialist,access_hr_termination_hr_specialist,model_hr_termination,bsg_hr.group_hr_specialist,1,1,1,0
+access_hr_termination_hr_manager,access_hr_termination_hr_manager,model_hr_termination,bsg_hr.group_hr_manager,1,1,1,0
+access_hr_termination_internal_user,access_hr_termination_internal_user,model_hr_termination,base.group_user,1,1,1,0
+access_hr_termination_dept_manager,access_hr_termination_dept_manager,model_hr_termination,bsg_hr.group_department_manager,1,1,1,0
+access_hr_termination_type,access_hr_termination_type,model_hr_termination_type,,1,1,1,0
+access_hr_hr_eos_refuse,access_hr_eos_refuse,model_hr_eos_refuse,,1,1,1,0
+access_hr_termination_duration,access_hr_termination_duration,model_hr_termination_duration,,1,1,1,0

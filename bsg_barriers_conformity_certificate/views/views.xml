@@ -1,0 +1,62 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="so_management_barrier_conformity_certificate_form">
+        <field name="name">sale.order.management.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+              <field name="reference_no"/>
+              <field name="date"/>
+              <field name="price" invisible="1"/>
+              <field name="truck_owner"/>
+              <field name="manufacturer"></field>
+            </xpath>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="so_barrier_conformity_certificate__form">
+        <field name="name">sale.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="manufacturer_code"/>
+                <field name="truck_type"/>
+                <field name="chasis_no"/>
+                <field name="plate_location"/>
+                <field name="truck_serial_no"/>
+                <field name="bcc_check" invisible="1"/>
+            </xpath>
+<!--            Migration Note-->
+<!--            <xpath expr="//button[@name='print_quotation']" position="after">-->
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button name="print_bcc_order" attrs="{'invisible':[('bcc_check','=',False)]}" groups="bsg_barriers_conformity_certificate.groups_print_saso_cert" string="Print BCC" type="object" class="btn-primary o_sale_print"/>
+            </xpath>
+             <xpath expr="//form/sheet/notebook" position="before">
+                 <label for="notes" string="Internal Notes"/><br />
+                 <field name="notes" placeholder="This Note Is Only For Internal Purposes"></field>
+            </xpath>
+             <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="attributes">
+                  <attribute name="invisible">1</attribute>
+             </xpath>
+      </field>
+    </record>
+
+<!--      <record id="sale_order_view_form_saso" model="ir.ui.view">-->
+<!--          <field name="name">sale.order.form.saso</field>-->
+<!--          <field name="model">sale.order</field>-->
+<!--          <field name="inherit_id" ref="sale_management.sale_order_view_form"/>-->
+<!--          <field name="arch" type="xml">-->
+<!--              <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="attributes">-->
+<!--                  <attribute name="invisible">1</attribute>-->
+<!--              </xpath>-->
+<!--          </field>-->
+<!--      </record>-->
+
+      <menuitem name="Sale Orders" id="menue_custom_sale_orders"
+                sequence="105" action="sale.action_orders"
+                groups="bsg_barriers_conformity_certificate.groups_saso_users"
+      />
+
+  </data>
+</odoo>

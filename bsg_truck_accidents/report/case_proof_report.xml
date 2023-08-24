@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="case_proof_report_report"
+            model="bsg.truck.accident"
+            string="Case Proof Report"
+            report_type="qweb-pdf"
+            name="bsg_truck_accidents.case_proof_report_pdf"
+            file="bsg_truck_accidents.case_proof_report_pdf"/>
+
+
+    <template id="case_proof_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.so_line_partner_id.lang"/>
+                <t t-call="bsg_truck_accidents.case_proof_report_pdf_template" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+
+
+
+    <template id="case_proof_report_pdf_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang': lang})"/>
+
+                <t t-foreach="docs" t-as="o">
+
+                    <div class="page">
+                        <tbody>
+                            <tr style="border:hidden">
+                                <div style="width:100%;float:left">
+                                    <div style="width:30%;float:left">
+                                        <img t-att-src="image_data_uri(o.company_id.logo)" width="180" height="75" style="margin-right: -63px;" alt=""/>
+                                    </div>
+                                </div>
+                                <div style="text-align:center;margin-top:20px;;font-size:30px;font-weight:bold;">نموذج إثبات الحالة</div>
+
+                            </tr>
+                        </tbody>
+                        <div style="width:100%">
+                            <table style="width:100%;border:1px solid black;">
+                                <tr>
+                                    <td></td>
+                                    <td  class="text-center">عند استلام</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.accident_date"/>
+                                    </td>
+                                    <td class="text-center">:المـــــــوافق</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.accident_date.strftime('%A')"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;"> :إنه في يوم </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        <span t-esc="o.so_line_general_plate_no"/>
+                                    </td>
+                                    <td class="text-center">:لوحة رقم</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.shipment_no_id.sale_line_rec_name"/>
+                                    </td>
+                                    <td class="text-center">:اتفاقيــــــــة رقم </td>
+                                    <td class="text-right">
+                                        <span t-esc="o.so_line_car_make.car_maker.car_make_ar_name"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;">:موظف التشيك  لسيارة نوع </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        <span t-esc="o.shipment_no_id.parking_no"/>
+                                    </td>
+                                    <td class="text-center">:بموقف رقم</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.so_line_loc_to.route_waypoint_name"/>
+                                    </td>
+                                    <td class="text-center">:إلي </td>
+                                    <td class="text-right">
+                                        <span t-esc="o.so_line_loc_from.route_waypoint_name"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;">:والقادمة من </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="text-right">
+                                        <span t-esc="o.so_line_partner_id.name"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;">:والتابعة للعميل </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:100%">
+                            <table style="width:100%;border:1px solid black;">
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <span t-esc="o.fleet_id.taq_number"/>
+                                    </td>
+                                    <td  class="text-center">:رقم التريلا</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.driver_code"/>
+                                    </td>
+                                    <td class="text-center"> :كمبيوتر السائق</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.driver_name.name"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;"> : اسم السائق</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td  class="text-center">Truck NO:</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.fleet_id.taq_number"/>
+                                    </td>
+                                    <td class="text-center">Driver Computer:</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.driver_code"/>
+                                    </td>
+                                    <td class="text-right" style="padding-right:25px;">Driver Name:</td>
+                                    <td class="text-right">
+                                        <span t-esc="o.driver_name.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="main_div"
+                             style="border: solid black 1px;float:left;margin-bottom:10px;width:100%;margin-top:20px">
+                            <table style="width:100%;border:1px solid black;">
+                                <div class="fixed" style="width: 28%; height: 230px;float:left">
+                                </div>
+                                <div class="flex-item" style="width: 65%;height: 230px;float:left">
+                                    <img src="/bsg_cargo_sale/static/src/img/car_image_Form.png" width="490px"
+                                         height="230px" style="margin-left: -3px;margin-top: -17px;" alt=""/>
+                                </div>
+                            </table>
+
+
+                        </div>
+                        <div style="width:100%;float:left;margin-top:10px;border: 1px solid">
+                            <table width="100%;">
+                                <tr>
+                                    <td  class="text-center">How The Damage Happen :</td>
+                                    <td class="text-center" style="padding-right:25px;">:الافادة عن كيفية وقوع الضرر</td>
+                                </tr>
+                            </table>
+                            <div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -1</div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -2</div>
+                                <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:20px;">.................................................................................................... -3</div>
+                            </div>
+                        </div>
+
+                        <div style="width:100%;float:left;margin-top:10px;border: 1px solid">
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:30%;float:right;margin-left:30px;text-align:right;border-left: 1px solid;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold"> : توقيع المتسبب</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">:اسم المتسبب</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">:Signature</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">:Responsible</span>
+
+                            </div>
+                        </div>
+
+                        <div style="width:100%;float:left;margin-top:10px;border: 1px solid">
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:30%;float:right;margin-left:30px;text-align:right;border-left: 1px solid;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">أسم مشرف الفرع</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">اسم موظف</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">التوقيــــــــــــــــع</span>
+                            </div>
+                            <div style="width:30%;float:left;text-align:right;padding:3px">
+                            </div>
+                            <div style="width:18%;float:left;text-align:right;padding:3px">
+                                <span style="font-weight:bold">التوقيــــــــــــــــع</span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

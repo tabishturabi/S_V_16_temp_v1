@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="employee_decisions_report_wizard">
+            <field name="name">Employee Decision Report</field>
+            <field name="model">wizard.employee.decisions.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="decision_type" required="True"/>
+                                <field name="print_date" invisible="1"/>
+                                <field name="employee_decisions"  required="True"
+                                       domain="[('decision_type','=',decision_type),('state','=','approved')]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_print_decision_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-seconday"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="employee_decision_reports_act_action_window">
+          <field name="name">Employee Decision Reports</field>
+          <field name="res_model">wizard.employee.decisions.report</field>
+<!--          <field name="view_type">form</field>-->
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="employee_decisions_report_wizard"></field>
+          <field name="target">new</field>
+        </record>
+        <menuitem name="Decision To Appoint An Employee"
+             id="menu_employee_appointment_reports"
+             parent="bsg_hr_employees_decisions.menu_reports_root"
+             sequence="1"
+             action="employee_decision_reports_act_action_window" groups="bsg_hr_employees_decisions.report_employees_decisions_decision_group"/>
+         <menuitem name="Decision To Assign An Employee"
+             id="menu_employee_assigning_reports"
+             parent="bsg_hr_employees_decisions.menu_reports_root"
+             sequence="2"
+             action="employee_decision_reports_act_action_window" groups="bsg_hr_employees_decisions.report_employees_assign_decision_group"/>
+         <menuitem name="Decision To Transfer An Employee"
+             id="menu_employee_decisions_reports"
+             parent="bsg_hr_employees_decisions.menu_reports_root"
+             sequence="3"
+             action="employee_decision_reports_act_action_window" groups="bsg_hr_employees_decisions.report_employees_transfer_decision_group"/>
+    </data>
+</odoo>

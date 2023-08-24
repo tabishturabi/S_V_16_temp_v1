@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Customer Contract"
+        id="root_customer_contract_menu"
+        web_icon="bsg_customer_contract,static/description/icon.png"
+        groups="bsg_customer_contract.group_create_customer_contracts,bsg_customer_contract.group_view_my_contract,bsg_customer_contract.group_view_all_contract,bsg_customer_contract.group_update_contracts_info,bsg_customer_contract.group_master_contracts,bsg_customer_contract.group_cancel_and_set_to_draft,bsg_customer_contract.group_confirm_contract,bsg_customer_contract.group_upload_contract"
+        sequence="1"/>
+
+</odoo>

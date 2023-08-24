@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="form_car_place_config_view" model="ir.ui.view">
+            <field name="name">form.car.place.config.view</field>
+            <field name="model">car.places.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Places Config">
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_place_config" model="ir.ui.view">
+            <field name="name">tree.car.place.config</field>
+            <field name="model">car.places.config</field>
+            <field name="arch" type="xml">
+                <tree string="Car Places Config">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_car_place_config" model="ir.actions.act_window">
+            <field name="name">Car Places Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">car.places.config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_car_place_config')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_car_place_config_view')})]"/>
+        </record>
+        <menuitem action="action_car_place_config" id="menu_car_place_config"
+                  parent="bsg_truck_accidents.menu_truck_accident_config" name="Car Places" sequence="5"/>
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_nationality_form_extendes" model="ir.ui.view">
+            <field name="name">Hr Nationality</field>
+            <field name="model">hr.nationality</field>
+            <field name="inherit_id" ref="bsg_hr.view_hr_natioinality_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bsg_bloodgroup']" position="after">
+                    <field name="bsg_emp_code" invisible="1"/>
+                    <field name="bsg_emp_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        <!--     Search View -->
+        <record id="view_hr_nationality_serach" model="ir.ui.view">
+            <field name="name">hr.nationality.search</field>
+            <field name="model">hr.nationality</field>
+            <field name="arch" type="xml">
+                <search string="Search HR Nationality">
+                    <field name="bsg_id"/>
+	                <field name="bsg_nationality_name"/>
+	                <field name="bsg_employee"/>
+	                <field name="bsg_emp_code" />
+                    <field name="bsg_emp_id" />
+	                <field name="bsg_department"/>
+	                <field name="bsg_issuedate"/>
+	                <field name="bsg_expirydate"/>
+	                <field name="bsg_placeofissue"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

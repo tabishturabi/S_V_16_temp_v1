@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="employee_directory_report_xlsx_action"
+            model="employee.directory.report.wizard"
+            string="Employee Directory Report"
+            report_type="xlsx"
+            name="bsg_employee_reports.employee_directory_report_xlsx"
+            file="bsg_employee_reports.employee_directory_report_xlsx"
+    />
+</odoo>

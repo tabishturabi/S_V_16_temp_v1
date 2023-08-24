@@ -1,0 +1,168 @@
+<odoo>
+    <data>
+
+        <record id="technician_task_form_view" model="ir.ui.view">
+            <field name="name">technician.task.form.view</field>
+            <field name="model">work.order.lines</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Work Order" delete="false" create="false">
+                    <header>
+                        <button name="action_start" type="object" groups="maintenance_enhance.group_start_task_wo_lines"
+                                string="Start Task" class="oe_highlight" states="assigned"/>
+                        <button name="action_close" type="object"
+                                groups="maintenance_enhance.group_closed_task_wo_lines"
+                                string="Close Task" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','in_progress')]}"/>
+                        <button name="action_reopen" type="object" groups="maintenance_enhance.group_re-open_wo_lines"
+                                string="Reopen Task" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','closed')]}"/>
+                        <button name="action_waiting_availability" type="object"
+                                groups="maintenance_enhance.group_waiting_availability_wo_lines"
+                                string="Waiting Availability" class="oe_highlight"
+                                attrs="{'invisible':[('state','not in',['draft','in_progress','assigned'])]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <!--                        <div class="oe_button_box" name="button_box">-->
+                        <!--                            <button name="action_get_pr_view" class="oe_stat_button" icon="fa-book"-->
+                        <!--                                    type="object">-->
+                        <!--                                <field name="pr_count" widget="statinfo" string="PR"-->
+                        <!--                                       options="{'reload_on_button': true}"/>-->
+                        <!--                            </button>-->
+
+                        <!--                                                </div>-->
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="maintenance_for" invisible="1"/>
+                                <field name="workshop_name" attrs="{'readonly':[('is_pr_create','=',True)]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="workshop_service" attrs="{'readonly':[('is_pr_create','=',True)]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="product_id" attrs="{'readonly':[('is_pr_create','=',True)]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="pieces" attrs="{'readonly':[('is_pr_create','=',True)]}"/>
+                                <field name="requested_from" attrs="{'invisible':[('workshop_service','!=',True)]}"/>
+                                <field name="notes" attrs="{'readonly':[('is_pr_create','=',True)]}"/>
+                                <field name="vehicle_id" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                       attrs="{'invisible':[('maintenance_for','=','trailer')]}" readonly="1"
+                                       force_save="1"/>
+                                <field name="taq_number" options="{'no_create':True,'no_edit':True,'no_open':True}"
+                                       attrs="{'invisible':[('maintenance_for','=','fleet')]}" readonly="1"
+                                       force_save="1"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="employee_id" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="user_id" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="actual_start_time" readonly="1"/>
+                                <field name="actual_close_time" readonly="1"/>
+                                <field name="is_pr_create" readonly="1"/>
+                                <field name="wo_line_parent" invisible="1"/>
+
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="technician_task_tree_view" model="ir.ui.view">
+            <field name="name">technician.task.tree.view</field>
+            <field name="model">work.order.lines</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="false" create="false">
+                    <field name="wo_line_parent"/>
+                    <!--                    <field name="name"/>-->
+                    <field name="workshop_name"/>
+                    <field name="workshop_service"/>
+                    <field name="product_id"/>
+                    <field name="pieces"/>
+                    <field name="notes"/>
+                    <field name="vehicle_id"/>
+                    <field name="taq_number"/>
+                    <field name="employee_id"/>
+                    <field name="actual_start_time"/>
+                    <field name="actual_close_time"/>
+                    <field name="is_pr_create"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="technician_task_view_search" model="ir.ui.view">
+            <field name="name">technician.task.view.search</field>
+            <field name="model">work.order.lines</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="workshop_name"/>
+                    <field name="workshop_service"/>
+                    <field name="product_id"/>
+                    <field name="pieces"/>
+                    <field name="notes"/>
+                    <field name="vehicle_id"/>
+                    <field name="taq_number"/>
+                    <field name="employee_id"/>
+                    <field name="actual_start_time"/>
+                    <field name="actual_close_time"/>
+                    <field name="is_pr_create"/>
+                    <group expand="0" string="Group By">
+                        <filter name="employee_id" string="Technical Name" domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter name="vehicle_id" string="Truck Code" domain="[]" context="{'group_by':'vehicle_id'}"/>
+                        <filter name="taq_number" string="Trailer Taq No" domain="[]"
+                                context="{'group_by':'taq_number'}"/>
+                        <filter name="workshop_name" string="Workshop Name" domain="[]"
+                                context="{'group_by':'workshop_name'}"/>
+                        <filter name="state" string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="action_technician_task_view_pivot">
+            <field name="name">action.technician.task.view.pivot</field>
+            <field name="model">work.order.lines</field>
+            <field name="arch" type="xml">
+                <pivot string="Work Order Lines">
+                    <field name="employee_id" type="row"/>
+                    <field name="vehicle_id" type="row"/>
+                    <field name="taq_number" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="action_technician_task_view_graph">
+            <field name="name">action.technician.task.view.graph</field>
+            <field name="model">work.order.lines</field>
+            <field name="arch" type="xml">
+                <graph string="Work Order Lines">
+                    <field name="employee_id" type="row"/>
+                    <field name="vehicle_id" type="row"/>
+                    <field name="taq_number" type="row"/>
+                </graph>
+            </field>
+        </record>
+        <record id="technician_task_action" model="ir.actions.act_window">
+            <field name="name">Technician Task</field>
+            <field name="res_model">work.order.lines</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,graph,pivot</field>
+        </record>
+
+        <menuitem id="technician_task_menu" name="Technician Task" action="technician_task_action"
+                  parent="maintenance_enhance.menu_fleet_maintenance_child1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="view_bsg_hr_employee_form_inherit">
+        <field name="name">view_bsg_hr_employee_form_inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='work_phone']" position="after">-->
+<!--                <field name="is_driver" />-->
+<!--                <field name="is_technician" />-->
+<!--                <field name="driver_code" />-->
+<!--                <field name="vehicle_sticker_no" />-->
+<!--            </xpath>-->
+
+            <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="string">Iqama No</attribute>
+            </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>

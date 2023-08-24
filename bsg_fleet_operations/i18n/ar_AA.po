@@ -1,0 +1,2936 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* bsg_fleet_operations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-21 06:14+0000\n"
+"PO-Revision-Date: 2019-11-21 06:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__first_surface_hight
+msgid "1 First Surface Height"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__second_surface_hight
+msgid "2 Secong Surface Height"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__access_warning
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__access_warning
+msgid "Access warning"
+msgstr "خطأ بالوصول"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_needaction
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_needaction
+msgid "Action Needed"
+msgstr "الإجراء المطلوب"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__active
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_state
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Additional Details"
+msgstr "تفاصيل إضافية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__air_condition
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__air_condition
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__air_condition
+msgid "Air Condition"
+msgstr "التكييف"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__air_pipe
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__air_pipe
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__air_pipe
+msgid "Air Pipe"
+msgstr "أنابيب الهواء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_driver_assign
+msgid "All About Driver Assignment"
+msgstr "كل شيء عن سائق الاحالة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_driver_unassign
+msgid "All About Driver Unassignment"
+msgstr "كل شيء عن سائق التعيين"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__amount
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__amount
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__amount
+msgid "Amount"
+msgstr "القيمة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Are you sure you want to release?"
+msgstr "هل أنت متأكد أنك تريد الإفراج؟"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__assert_division
+msgid "Asset Division"
+msgstr "قسم الأصول"
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fleet_asset_group_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_fleet_asset_group
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_asset_group
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_fleet_asset_group_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_fleet_asset_group_view_tree
+msgid "Asset Group"
+msgstr "مجموعة الأصول"
+
+#. module: bsg_fleet_operations
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_asset_group
+msgid "Asset Group Config"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__asset_group_name
+msgid "Asset Group Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fleet_asset_status_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_fleet_asset_status
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_asset_status
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__assert_status
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_fleet_asset_status_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_fleet_asset_status_view_tree
+msgid "Asset Status"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_asset_status
+msgid "Asset Status Config"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__asset_status_name
+msgid "Asset Status Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__assign_date
+msgid "Assignment Date"
+msgstr "تاريخ الاحالة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__assign_driver_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__assign_driver_name
+msgid "Assignment Driver No/Name"
+msgstr "تعيين سائق لا / اسم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__assignment_no
+msgid "Assignment No."
+msgstr "رقم المهمة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__associated_ids
+msgid "Associated"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__associated_date
+msgid "Associated Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_associate_history
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "Associated History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__attachment_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__attachment_ids
+msgid "Attachment"
+msgstr "مرفق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__back_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__back_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__back_light
+msgid "Back Flashing Lights"
+msgstr "عودة الأضواء الساطعة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__battery_expiration_date
+msgid "Battery Expire Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_battery_history
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__battery_history_ids
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Battery History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__bateery_serial_no
+msgid "Battery Serial No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__bed
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__bed
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__bed
+msgid "Bed"
+msgstr "السرير"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__belt
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__belt
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__belt
+msgid "Belt"
+msgstr "حزام"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__big_side_mirror
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__big_side_mirror
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__big_side_mirror
+msgid "Big Side Mirrors"
+msgstr "مرايا جانبية كبيرة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Body & content of external Truck"
+msgstr "الجسم ومحتوى الشاحنة الخارجية"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Body & content of external Vehicles"
+msgstr "جسم ومحتوى المركبات الخارجية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__branch_no
+msgid "Branch No"
+msgstr "رقم الفــرع"
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,domain_name:0
+#: selection:bsg.vehicle.type.table,domain_name:0
+#: selection:bsg_fleet_trailer_config,domain_name:0
+#: selection:fleet.vehicle,assert_division:0
+msgid "Bx"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+#: selection:trailer.service.log,state:0
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/configuration.py:98
+#, python-format
+msgid "Cant delete this record as is linked with others."
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_capacity
+msgid "Capacity"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,port_rule_option:0
+#: selection:bsg.port.fuel.amount,rule_option:0
+msgid "Car"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,assert_division:0
+msgid "Car Carrier"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_car_carrier_components
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+msgid "Car Carrier Component"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__car_component_ids
+msgid "Car Component"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__car_wize_ids
+msgid "Car Config IDS"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__car_size_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__car_size
+msgid "Car Size"
+msgstr "حجم السيارة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_port_fuel_amt_form
+msgid "Car Wise Rule"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,domain_name:0
+#: selection:bsg.vehicle.type.table,domain_name:0
+#: selection:bsg_fleet_trailer_config,domain_name:0
+#: selection:fleet.vehicle,assert_division:0
+msgid "Cargo"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,domain_name:0
+#: selection:bsg.vehicle.type.table,domain_name:0
+#: selection:bsg_fleet_trailer_config,domain_name:0
+msgid "Carrier"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__cost_type
+msgid "Category of the cost"
+msgstr "فئة التكلفة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__chain
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__chain
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__chain
+msgid "Chain"
+msgstr "سلسلة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__chassis_number
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__chassis_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__chassis_no
+msgid "Chassis Number"
+msgstr "رقم الشاسيه"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__color
+msgid "Color"
+msgstr "اللون"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__comm
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__comme
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__comm
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__comme
+msgid "Comment"
+msgstr "تعليق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__comment
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__comment
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__comment
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__comments
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__comments
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__comments
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Comments"
+msgstr "التعليقات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__comment_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__comment_date
+msgid "Comments Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__component_id
+msgid "Component"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__config_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__config_id
+msgid "Config"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: bsg_fleet_operations
+#: selection:trailer.service.log,cost_type:0
+msgid "Contract"
+msgstr "العقد"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__cooler
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__cooler
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__cooler
+msgid "Cooler"
+msgstr "المبرد"
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,insurance_card:0
+#: selection:driver.assign,truck_license:0
+#: selection:driver.assign,weight_card:0
+#: selection:driver.unassign,insurance_card:0
+#: selection:driver.unassign,truck_license:0
+#: selection:driver.unassign,weight_card:0
+#: selection:fleet.vehicle,insurance_card:0
+#: selection:fleet.vehicle,truck_license:0
+#: selection:fleet.vehicle,weight_card:0
+msgid "Copy"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__description
+msgid "Cost Description"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__cost_subtype_id
+msgid "Cost type purchased with this cost"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__cover
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__cover
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__cover
+msgid "Cover"
+msgstr "التغطية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__cover_battery
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__cover_battery
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__cover_battery
+msgid "Cover of Battery"
+msgstr "غطاء البطارية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__cover_of_diesel_tank
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__cover_of_diesel_tank
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__cover_of_diesel_tank
+msgid "Cover of Diesel Tank"
+msgstr "غطاء خزان الديزل"
+
+#. module: bsg_fleet_operations
+#: model:res.groups,name:bsg_fleet_operations.group_create_trailer
+msgid "Create Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__create_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__create_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__current_branch_id
+msgid "Current Branch"
+msgstr "الفرع السابق"
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,triler_type_class:0
+msgid "Curtain"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__curtains
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__curtains
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__curtains
+msgid "Curtains"
+msgstr "ستائر"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__access_url
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__access_url
+msgid "Customer Portal URL"
+msgstr "رابط بوابة العملاء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__daily_trip_count
+msgid "Daily Trip Count"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__date
+msgid "Date when the cost has been executed"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,triler_type_class:0
+msgid "Dawrayn"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+msgid "Dawrayn Heights"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__name
+msgid "Description"
+msgstr "الوصف"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__display_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__distance_from
+msgid "Distance From"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__distance_to
+msgid "Distance To"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__document_ids
+msgid "Document"
+msgstr "مستند"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Document Info"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_document_info_fleet
+msgid "Document Info Fleet"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__document_name
+msgid "Document Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__document_no
+msgid "Document No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__document_type_id
+msgid "Document Type ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__domain_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__domain_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__domain_name
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_form
+msgid "Domain Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,route_type:0
+msgid "Domestic"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:trailer.service.log,state:0
+msgid "Done"
+msgstr "تم"
+
+#. module: bsg_fleet_operations
+#: selection:bsg_fleet_trailer_config,state:0
+#: selection:trailer.service.log,state:0
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle_assignation_log__bsg_driver_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.root_driver_master
+msgid "Driver"
+msgstr "السائق"
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_driver_assign_action
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__driver_assign_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.driver_assign_menu
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_tree
+msgid "Driver Assignment"
+msgstr "تعيين سائق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__driver_code
+msgid "Driver Code"
+msgstr "كود السائق"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Driver Custody"
+msgstr "سائق الحراسة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle_assignation_log__driver_id
+msgid "Driver ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__is_driver_linked
+msgid "Driver Linkage"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__driver_name
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Driver Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Driver Phone"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_driver_unassign_action
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__driver_unassign_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.driver_unassign_menu
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_tree
+msgid "Driver Unassignment"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+msgid "Driver With Rewards"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+msgid "Driver Without Rewards"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_fleet_vehicle_assignation_log
+msgid "Drivers history on a vehicle"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__effective_date
+msgid "Effective Date"
+msgstr "تاريخ التسليم الفعلي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__emergency_rotaing_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__emergency_rotaing_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__emergency_rotaing_light
+msgid "Emergency Rotaing Light"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_hr_employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_hr_employee__driver_code
+msgid "Employee ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__empty_load_amt
+msgid "Empty Load Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__amt_empty_without_reward
+msgid "Empty Load Amount Without Rewards"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__end_date
+msgid "End Date"
+msgstr "تاريخ الإنتهاء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__expiration_date
+msgid "Expireation Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Finish"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__fire_extinguisher
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__fire_extinguisher
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__fire_extinguisher
+msgid "Fire Extinguisher"
+msgstr "طفاية حريق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__fixing_tools
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__fixing_tools
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__fixing_tools
+msgid "Fixing Tools"
+msgstr "تحديد الأدوات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__battery_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__document_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__tries_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__tries_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__fleet_id
+msgid "Fleet ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__floor_no
+msgid "Floor No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "المتابعون (القنوات)"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__cost_type
+msgid "For internal purpose only"
+msgstr "للاستخدامات الداخلية فقط"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__loc_from
+msgid "From"
+msgstr "مِن"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__front_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__front_light
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__front_light
+msgid "Front Flashing Lights"
+msgstr "الأضواء الساطعة الأمامية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__front_glass
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__front_glass
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__front_glass
+msgid "Front Glass"
+msgstr "الزجاج الأمامي"
+
+#. module: bsg_fleet_operations
+#: selection:trailer.service.log,cost_type:0
+msgid "Fuel"
+msgstr "الوقود"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__fuel_amount
+msgid "Fuel Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__fuel_trip_config_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__fuel_trip_config_id
+msgid "Fuel Config ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.ui.menu,name:bsg_fleet_operations.root_fuel_expense_master
+msgid "Fuel Expense"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fuel_expense_method_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_fuel_expense_method
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__fuel_expense_type
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_fuel_expense_method
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_tree
+msgid "Fuel Expense Method"
+msgstr "طريقة حساب مصروف الطــريق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__full_load_amt
+msgid "Full Load Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__amt_full_without_reward
+msgid "Full Load Amount Without Rewards"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+msgid "General Info"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Genral Information"
+msgstr "معلومات عامة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__gross_volume
+msgid "Gross Volume"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__gross_weight
+msgid "Gross Weight"
+msgstr "الوزن الإجمالي"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_group_view_form
+msgid "Group Name"
+msgstr "اسم المجموعة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__hammer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__hammer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__hammer
+msgid "Hammer"
+msgstr "شاكوش"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__hands_lifted_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__hands_lifted_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__hands_lifted_trailer
+msgid "Hands Lifted Trailer Footer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__hijri_date
+msgid "Hijri Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_unread
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_unread
+msgid "If checked new messages require your attention."
+msgstr "إذا حددته، سيتم إخطارك بالرسائل الجديدة."
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_needaction
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا حددته، سيتم إخطارك بالرسائل الجديدة."
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_has_error
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ في التسليم."
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__cost_ids
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Included Services"
+msgstr "الخدمات المشمولة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Indicative Cost"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__insurance_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__insurance_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__insurance_card
+msgid "Insurance Card"
+msgstr "بطاقة التأمين"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__insurance_company_name
+msgid "Insurance company"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__int_fuel_amt_id
+msgid "Int Fuel Amount ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__int_route_id
+msgid "Int Route ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_int_fuel_amt_action
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_int_fuel_amt_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_int_fuel_amt_tree
+msgid "Internation Fuel Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,route_type:0
+msgid "International"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_int_fuel_amount
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_int_fuel_amt
+msgid "International Fuel Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+msgid "International Fuel Rule"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__inv_ref
+msgid "Invoice Reference"
+msgstr "رقم إشارة الفاتورة"
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/hr_employee.py:33
+#, python-format
+msgid "Iqama ID no must be start from 2 and must have 10 digits."
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_hr_employee_form_inherit
+msgid "Iqama No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_hr_employee__is_driver
+msgid "Is Driver ?"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_is_follower
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_fleet_vehicle__is_driver_linked
+msgid "It checks if driver is linked or not."
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__jack
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__jack
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__jack
+msgid "Jack"
+msgstr "جاك"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__kilometrage
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__kilometrage
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__kilometrage
+msgid "Kilometrage"
+msgstr "عداد المسافات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__ladders
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__ladders
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__ladders
+msgid "Ladders"
+msgstr "سلالم"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Last Arrival Date And Time"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_last_date
+msgid "Last Associated Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__last_drive
+msgid "Last Associated Driver"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__last_association
+msgid "Last Associated Equipment Id"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__last_association_name
+msgid "Last Associated Equipment Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__last_vehicle
+msgid "Last Associated vehicle"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config____last_update
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Last Trip Id"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__write_uid
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_document_info_fleet__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__write_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__time_diff
+msgid "Late Hours"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__lift_tool_truck_head
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__lift_tool_truck_head
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__lift_tool_truck_head
+msgid "Lift Tool of Truck Head"
+msgstr "أداة الرفع لرأس الشاحنة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__lights
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__lights
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__lights
+msgid "Lights"
+msgstr "أضواء"
+
+#. module: bsg_fleet_operations
+#: selection:bsg_fleet_trailer_config,state:0
+msgid "Linked"
+msgstr "المقترن"
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,route_type:0
+msgid "Local"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__lock
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__lock
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__lock
+msgid "Lock"
+msgstr "قفل"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "المرفق الرئيسي"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "Maintainance History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,assert_status:0
+msgid "Maintains WorkShop"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__maintance_history_ids
+msgid "Maintance History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg_fleet_trailer_config,state:0
+#: selection:trailer.service.log,state:0
+msgid "Maintenance"
+msgstr "صيانة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__maker
+msgid "Maker"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_maintance_history
+msgid "Manintance History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__manufacturing_year
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__manufactr_year
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__manufacturing_year
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__manufactr_year
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__manufacturing_year
+msgid "Manufacturing Year"
+msgstr "تصنيع السنة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__max_trailer_height
+msgid "Max Trailer Height"
+msgstr "ماكس مقطورة الارتفاع"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_has_error
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__method_name
+msgid "Method Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_config_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__net_volume
+msgid "Net Volume"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__net_wright
+msgid "Net Weight"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/driver_assign.py:113
+#: code:addons/bsg_fleet_operations/models/driver_unassign.py:101
+#, python-format
+msgid "New"
+msgstr "الجديد"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_date_deadline
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط القادم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_summary
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط القادم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_type_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__no_of_cars
+msgid "No of Cars"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,veh_regis_type:0
+msgid "Non Saudi"
+msgstr "غير سعودي"
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,air_condition:0
+#: selection:driver.assign,insurance_card:0
+#: selection:driver.assign,truck_license:0
+#: selection:driver.assign,weight_card:0
+#: selection:driver.unassign,air_condition:0
+#: selection:driver.unassign,insurance_card:0
+#: selection:driver.unassign,truck_license:0
+#: selection:driver.unassign,weight_card:0
+#: selection:fleet.vehicle,air_condition:0
+#: selection:fleet.vehicle,insurance_card:0
+#: selection:fleet.vehicle,truck_license:0
+#: selection:fleet.vehicle,weight_card:0
+msgid "None"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,air_condition:0
+#: selection:driver.unassign,air_condition:0
+#: selection:fleet.vehicle,air_condition:0
+msgid "Not Working"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__notes
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Number of Hours Since Last Stop"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_has_error_counter
+msgid "Number of error"
+msgstr "عدد الأخطاء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_needaction_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تتطلب اجراء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_has_error_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل مع خطأ في التسليم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__message_unread_counter
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_services_count
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_services_count
+msgid "Odometer Count"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Odometer value"
+msgstr "قيمة عداد المسافات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__oil_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__oil_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__oil_card
+msgid "Oil Card"
+msgstr "بطاقة زيت"
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,assert_status:0
+msgid "On Road"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,insurance_card:0
+#: selection:driver.assign,truck_license:0
+#: selection:driver.assign,weight_card:0
+#: selection:driver.unassign,insurance_card:0
+#: selection:driver.unassign,truck_license:0
+#: selection:driver.unassign,weight_card:0
+#: selection:fleet.vehicle,insurance_card:0
+#: selection:fleet.vehicle,truck_license:0
+#: selection:fleet.vehicle,weight_card:0
+msgid "Original"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:trailer.service.log,cost_type:0
+msgid "Other"
+msgstr "غير ذلك"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Other Info"
+msgstr "معلومات أخرى"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Others Details"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,activity_state:0
+#: selection:driver.unassign,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__owener_name
+msgid "Owner Name"
+msgstr "اسم المالك"
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,assert_status:0
+msgid "Parking"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,fuel_expense_type:0
+msgid "Per KM"
+msgstr "بالكيلوميتر"
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,activity_state:0
+#: selection:driver.unassign,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__plate
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__plate
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__plate
+msgid "Plate"
+msgstr "طبق"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__plat_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__plat_no
+msgid "Plate No"
+msgstr "رقم اللوحه"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__plate_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__plate_no
+msgid "Plate No."
+msgstr "رقم اللوحه"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__pliers
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__pliers
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__pliers
+msgid "Pliers"
+msgstr "كماشة"
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,fuel_expense_type:0
+#: selection:bsg.fuel.expense.method,route_type:0
+msgid "Port"
+msgstr "الميناء"
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_port_fuel_amount
+msgid "Port & internal Transport"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_port_fuel_amt_action
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__port_fuel_amt_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_port_fuel_amt
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_port_fuel_amt_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_port_fuel_amt_tree
+msgid "Port Fuel Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_port_fuel_car
+msgid "Port Fuel Car Wise"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+msgid "Port Fuel Rule"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__port_rule_option
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__rule_option
+msgid "Port Fuel Rule Per"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_port_fuel_trip
+msgid "Port Fuel Trip Wise"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__access_url
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__access_url
+msgid "Portal Access URL"
+msgstr "رابط الوصول لبوابة العملاء"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Price"
+msgstr "سعر"
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/fuel_expense_method.py:48
+#: code:addons/bsg_fleet_operations/models/int_fuel_amt.py:24
+#: code:addons/bsg_fleet_operations/models/port_fuel_amt.py:34
+#, python-format
+msgid "Price must be non-negative or zero."
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__product_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__product_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__product_id
+msgid "Product Name"
+msgstr "اسم المنتج"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__purchase_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__purchase_veh_date
+msgid "Purchase Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__purchaser_id
+msgid "Purchaser"
+msgstr "المشتري"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_car_carrier_components__qty
+msgid "QTY"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__recoder
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__recoder
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__recoder
+msgid "Recorder"
+msgstr "مسجل"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__region_id
+msgid "Region Id"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__region_restrict
+msgid "Region Restrict"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__veh_regis_type
+msgid "Registration Type"
+msgstr "نوع التسجيل"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Release Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.server,name:bsg_fleet_operations.ir_cron_reset_trip_count_ir_actions_server
+#: model:ir.cron,cron_name:bsg_fleet_operations.ir_cron_reset_trip_count
+#: model:ir.cron,name:bsg_fleet_operations.ir_cron_reset_trip_count
+msgid "Reset Trip Count"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__activity_user_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,fuel_expense_type:0
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__bsg_route
+msgid "Route"
+msgstr "المسار"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_int_fuel_amt_form
+msgid "Route ID"
+msgstr "رقم خط الســـير"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__route_id
+msgid "Route Name"
+msgstr "اسم خط السـير"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__route_type
+msgid "Route Type"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__rule_amount
+msgid "Rule Amount"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__rules_description
+msgid "Rule Description"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/int_fuel_amt.py:17
+#: sql_constraint:bsg.int.fuel.amount:0
+#, python-format
+msgid "Same route can not have different prices! !"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,triler_type_class:0
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__satha
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_form
+msgid "Satha"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,veh_regis_type:0
+msgid "Saudi"
+msgstr "سعودي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__expected_end_date
+msgid "Scheduled Arrival Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__screw_drivers
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__screw_drivers
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__screw_drivers
+msgid "Screw Drivers"
+msgstr "سائقين المسمار"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__access_token
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__access_token
+msgid "Security Token"
+msgstr "رمز الحماية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__rule_seq
+msgid "Seq No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_port_fuel_amt_form
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__serial_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__serial_no
+msgid "Serial No."
+msgstr "الرقم التسلسلي."
+
+#. module: bsg_fleet_operations
+#: selection:bsg.trailer.type,domain_name:0
+#: selection:bsg.vehicle.type.table,domain_name:0
+#: selection:bsg_fleet_trailer_config,domain_name:0
+#: selection:fleet.vehicle,assert_division:0
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Service"
+msgstr "الخدمة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Service Type"
+msgstr "نوع الخدمة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: selection:trailer.service.log,cost_type:0
+msgid "Services"
+msgstr "الخدمات"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Services Details"
+msgstr "تفاصيل الخدمات"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Services Logs"
+msgstr "سجلات الخدمات"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Set to Draft"
+msgstr "تعيين كمسودة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "Set to Link"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "Set to Maintainance"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "Set to Un-Link"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__short_comment_des
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__short_comment_des
+msgid "Short Comments Des."
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__side_flashing_tractor
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__side_flashing_tractor
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__side_flashing_tractor
+msgid "Side Flashing Lights Tractor"
+msgstr "جرار الأضواء الساطعة الجانبية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__side_flashing_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__side_flashing_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__side_flashing_trailer
+msgid "Side Flashing Lights Trailer"
+msgstr "الأضواء الساطعة الجانبية مقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__side_glass
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__side_glass
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__side_glass
+msgid "Side Glass"
+msgstr "زجاج جانبي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__sixfold_key
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__sixfold_key
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__sixfold_key
+msgid "Sixfold Key"
+msgstr "ستة أضعاف مفتاح"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__small_side_mirror
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__small_side_mirror
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__small_side_mirror
+msgid "Small Side Mirrors"
+msgstr "المرايا الجانبية الصغيرة"
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/configuration.py:27
+#: code:addons/bsg_fleet_operations/models/configuration.py:55
+#, python-format
+msgid "Sorry you cant delete this record as it is already in used by some other records"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__spanner
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__spanner
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__spanner
+msgid "Spanner"
+msgstr "مفتاح البراغي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__spanner_baladi
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__spanner_baladi
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__spanner_baladi
+msgid "Spanner(Baladi)"
+msgstr "(مفتاح البراغي(البلدي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__spanner_musharshar
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__spanner_musharshar
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__spanner_musharshar
+msgid "Spanner(Musharshar)"
+msgstr "(Musharshar)مفتاح البراغي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__spare_tire_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__spare_tire_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__spare_tire_trailer
+msgid "Spare Tire For Trailer"
+msgstr "الإطارات الاحتياطية للمقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__spare_tire_truck
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__spare_tire_truck
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__spare_tire_truck
+msgid "Spare Tire For Truck Head"
+msgstr "الإطارات الاحتياطية لرأس الشاحنة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Spare Tires"
+msgstr "الإطارات الاحتياطية
+"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__state
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/fleet.py:292
+#: code:addons/bsg_fleet_operations/models/fleet.py:343
+#, python-format
+msgid "States Not found or you dont have similar states as trailer please create same to proceed!"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__activity_state
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "الحالة على أساس الأنشطة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Sticker No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__taq_number
+msgid "Taq Number/Sticker/Asset ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/port_fuel_amt.py:27
+#: sql_constraint:bsg.port.fuel.amount:0
+#, python-format
+msgid "The Seq must be unique !"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/trailer.py:54
+#: sql_constraint:bsg_fleet_trailer_config:0
+#, python-format
+msgid "The trailer_taq_no must be unique !"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/fleet.py:271
+#, python-format
+msgid "There is already an active trailer first deactivate that to add new!"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: sql_constraint:bsg.fleet.asset.group:0
+#: sql_constraint:bsg.fleet.asset.status:0
+#: sql_constraint:bsg.vehicle.group:0
+#: sql_constraint:bsg.vehicle.status:0
+#: sql_constraint:bsg.vehicle.type.table:0
+msgid "This Record already exists !"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__route_type
+msgid "This is to determine if the route is international/domestic or between ports"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__tires_expiry
+msgid "Tire Expiry Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__tires_serial_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__tires_serial_no
+msgid "Tire Serial No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__tire_unfix_lieber
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__tire_unfix_lieber
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__tire_unfix_lieber
+msgid "Tire Unfix Lieber"
+msgstr "الإطارات unfix ليبر"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__tire_wrench_tractor
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__tire_wrench_tractor
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__tire_wrench_tractor
+msgid "Tire Wrench Tractor"
+msgstr "وجع الإطارات الإطارات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__tire_wrench_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__tire_wrench_trailer
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__tire_wrench_trailer
+msgid "Tire Wrench Trailer"
+msgstr "الاطارات وجع مقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_tires_history
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__tires_history_id
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Tires History"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_tires_history_config
+#: model:ir.model,name:bsg_fleet_operations.model_trailer_comments_config
+msgid "Tires History Config"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__loc_to
+msgid "To"
+msgstr "إلى"
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,activity_state:0
+#: selection:driver.unassign,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__amount
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__trailer_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_trailer_config
+msgid "Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trailer_id
+msgid "Trailer "
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trailer_added
+msgid "Trailer Added Check"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_ar_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_ar_name
+msgid "Trailer Ar Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_trailer_associated
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Trailer Associated"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__trailer_cat_ar_name
+msgid "Trailer Cat Ar Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__trailer_cat_er_name
+msgid "Trailer Cat Er Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_categories_form
+msgid "Trailer Cat ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fleet_trailer_categories_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_trailer_categories
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_categories_id
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_trailer_categories
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_categories_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_categories_tree
+msgid "Trailer Categories"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__trailer_cat_id
+msgid "Trailer Categories ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__trailer_category_id
+msgid "Trailer Category"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_comment_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_comment_ids
+msgid "Trailer Comment"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fleet_trailer_config_action
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_tree
+msgid "Trailer Config"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__triler_config_id
+msgid "Trailer Config ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_fleet_trailer_config
+msgid "Trailer Configuration"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_er_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_er_name
+msgid "Trailer Er Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trailer_ids
+msgid "Trailer IDS"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Trailer Information"
+msgstr "معلومات مقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_length
+msgid "Trailer Length"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.module.category,description:bsg_fleet_operations.module_trailer_management_cat
+#: model:ir.module.category,name:bsg_fleet_operations.module_trailer_management_cat
+#: model:ir.ui.menu,name:bsg_fleet_operations.root_trailer_master
+msgid "Trailer Management"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_names
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_names
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_associated__trailer_name
+msgid "Trailer Name"
+msgstr "اسم المقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_no
+msgid "Trailer No"
+msgstr "مقطورة رقم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_n
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_n
+msgid "Trailer No."
+msgstr "رقم المقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_plate
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_plate
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trailer_plate
+msgid "Trailer Plate (Sticker)"
+msgstr "لوحة مقطورة (ملصق)"
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.trailer_service_log_action
+#: model:ir.model,name:bsg_fleet_operations.model_trailer_service_log
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_tree
+msgid "Trailer Service Log"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_status
+msgid "Trailer Status"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_taq_no
+msgid "Trailer Taq No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_tire
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_tire
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trailer_tire
+msgid "Trailer Tire Card"
+msgstr "بطاقة صور مقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_fleet_trailer_type_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_trailer_type
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_trailer_type
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_tree
+msgid "Trailer Type"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__triler_type_class
+msgid "Trailer Type Class"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_type_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_comments_config__triler_type_id
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_type_form
+msgid "Trailer Type ID"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__trailer_type_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__trailer_type_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__trailer_type_name
+msgid "Trailer Type Name"
+msgstr "اسم نوع المقطورة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__trailer_width
+msgid "Trailer Width"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__triangel
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__triangel
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__triangel
+msgid "Triangle"
+msgstr "مثلث"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__tries_ids
+msgid "Tries"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:bsg.fuel.expense.method,port_rule_option:0
+#: selection:bsg.port.fuel.amount,rule_option:0
+msgid "Trip"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__trip_wise_config_ids
+msgid "Trip Config IDS"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__trip_id
+msgid "Trip Id"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_port_fuel_amt_form
+msgid "Trip Wise Rule"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__fleet_vehicle_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__fleet_vehicle_id
+msgid "Truck"
+msgstr "شاحنة نقل"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Truck Documents"
+msgstr "وثائق شاحنة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Truck Info"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Truck Information"
+msgstr "شاحنة المعلومات"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__truck_license
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__truck_license
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__truck_license
+msgid "Truck License"
+msgstr "رخصة شاحنة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Truck Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__truck_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__truck_no
+msgid "Truck No/Name"
+msgstr "شاحنة لا / اسم"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Truck Number"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__truck_status
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__truck_status
+msgid "Truck Status"
+msgstr "حالة الشاحنة"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Truck Sticker No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Truck Tools"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_coming
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.fleet_vehicle_tree_list_inherit_truck_in
+msgid "Truck Type"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__truck_type_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__truck_type_name
+msgid "Truck Type Name"
+msgstr "اسم الشاحنة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__truck_head
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__truck_head
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__truck_head
+msgid "Truck head Tire Card"
+msgstr "شاحنة رئيس الاطارات بطاقة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__cost_subtype_id
+msgid "Type"
+msgstr "النوع"
+
+#. module: bsg_fleet_operations
+#: selection:bsg_fleet_trailer_config,state:0
+msgid "Un-Linked"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__unassign_date
+msgid "Unassignment Date"
+msgstr "تاريخ التعيين"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__unassign_driver_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__unassign_driver_name
+msgid "Unassignment Driver No/Name"
+msgstr "إلغاء تعيين سائق لا / اسم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__unassignment_no
+msgid "Unassignment No."
+msgstr "رقم الواجب"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__unfix_tool_spare_tire
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__unfix_tool_spare_tire
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__unfix_tool_spare_tire
+msgid "Unfix Tool of Spare Tire"
+msgstr "أداة Unix من الإطارات الاحتياطية"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_unread
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_unread
+msgid "Unread Messages"
+msgstr "الرسائل الجديدة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: bsg_fleet_operations
+#: model:res.groups,name:bsg_fleet_operations.group_update_trailer
+msgid "Update Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_assign_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_driver_unassign_form
+msgid "Values"
+msgstr "قيم"
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_fleet_vehicle
+msgid "Vehicle"
+msgstr "المركبة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_ar_name
+msgid "Vehicle AR Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__vehicle_class
+msgid "Vehicle Class"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_vehicle_status
+msgid "Vehicle Custom Status"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__vehicle_division
+msgid "Vehicle Division"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__bsg_driver
+msgid "Vehicle Driver"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_en_name
+msgid "Vehicle En Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_vehicle_group_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_vehicle_group
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_group
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_group_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_group_view_tree
+msgid "Vehicle Group"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__vehicle_group_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_group_name
+msgid "Vehicle Group Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_vehicle_groups
+msgid "Vehicle Groups"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_associate_history__vehicle_name
+msgid "Vehicle Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_vehicle_status_action
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_vehicle_status
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_status
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_status_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_status_view_tree
+msgid "Vehicle Status"
+msgstr "حالة المركبة"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__vehicle_status_name
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_status_view_form
+msgid "Vehicle Status Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_hr_employee__vehicle_sticker_no
+msgid "Vehicle Sticker No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__vehicle_type
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fuel_expense_method_form
+msgid "Vehicle Type"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__vehicle_type_code
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_form
+msgid "Vehicle Type Code"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__vehicle_type_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__vehicle_type_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__vehicle_type_name
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vehicle_type
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_form
+msgid "Vehicle Type Name"
+msgstr "اسم نوع المركبة"
+
+#. module: bsg_fleet_operations
+#: model:ir.actions.act_window,name:bsg_fleet_operations.bsg_vehicle_type_table_action
+#: model:ir.ui.menu,name:bsg_fleet_operations.menu_bsg_type_table
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.bsg_vehicle_type_table_view_tree
+msgid "Vehicle Type Table"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model,name:bsg_fleet_operations.model_bsg_vehicle_type_table
+msgid "Vehicle Types Talbe"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Vehicles Documents"
+msgstr "وثائق المركبات"
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "Vehicles Tools"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__vendor_id
+msgid "Vendor"
+msgstr "المورّد"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__vendor_id
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__vendor_name
+msgid "Vendor Name"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__vendor_no
+msgid "Vendor No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:res.groups,name:bsg_fleet_operations.group_view_trailer
+msgid "View Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_group__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_asset_status__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fleet_trailer_config__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_fuel_expense_method__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_int_fuel_amount__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_amount__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_car__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_port_fuel_trip__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_categories__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_trailer_type__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_group__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_status__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_bsg_vehicle_type_table__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__website_message_ids
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_trailer_service_log__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_group__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_asset_status__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fleet_trailer_config__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_fuel_expense_method__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_int_fuel_amount__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_amount__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_car__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_port_fuel_trip__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_categories__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_trailer_type__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_group__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_status__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_bsg_vehicle_type_table__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_assign__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_driver_unassign__website_message_ids
+#: model:ir.model.fields,help:bsg_fleet_operations.field_trailer_service_log__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_assign__weight_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_driver_unassign__weight_card
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__weight_card
+msgid "Weight Card"
+msgstr "بطاقة الوزن"
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__workhob
+msgid "WorkJob"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__work_close_date
+msgid "WorkJob Close Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__work_job_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_maintance_history__work_job_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__work_job_date
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__work_job_date
+msgid "WorkJob Date"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_battery_history__work_job_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history__work_job_no
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_tires_history_config__work_job_no
+msgid "WorkJob No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:driver.assign,air_condition:0
+#: selection:driver.unassign,air_condition:0
+#: selection:fleet.vehicle,air_condition:0
+msgid "Working"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_inherit_trailer_log_services_view_form
+msgid "Write here any other information related to the service completed."
+msgstr "أكتب هنا أية معلومات أخرى تتعلق بالخدمة المكتملة."
+
+#. module: bsg_fleet_operations
+#: code:addons/bsg_fleet_operations/models/hr_employee.py:23
+#, python-format
+msgid "Your Entered Employee ID is already taken by another user"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model:ir.model.fields,field_description:bsg_fleet_operations.field_fleet_vehicle__mobile_phone
+msgid "mobile_phone"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_trailer_config_form
+msgid "show the services logs for this vehicle"
+msgstr "اظهار سجلات خدمات هذه المركبة"
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,region_restrict:0
+msgid "لا/No"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: selection:fleet.vehicle,region_restrict:0
+msgid "نعم/Yes"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "⇒ Add Trailer"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "⇒ Link Driver"
+msgstr ""
+
+#. module: bsg_fleet_operations
+#: model_terms:ir.ui.view,arch_db:bsg_fleet_operations.view_bsg_fleet_vehicle_form_inherit
+msgid "⇒ Unlink Driver"
+msgstr ""
+

@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="wizard_bayan_trip_details_wizard_view" model="ir.ui.view">
+            <field name="name">wizard_bayan_trip_details_wizard_view</field>
+            <field name="model">bayan.trip.details.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Trip Details">
+                        <group>
+                            <field name="trip_details" widget="html" nolabel="1" readonly="1"/>
+                        </group>
+                        <footer>
+                            <button class="oe_highlight" special="cancel" name="cancel" string="Cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

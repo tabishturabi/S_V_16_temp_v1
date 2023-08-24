@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- contract form -->
+    <record id="contract_inherit_attendants" model="ir.ui.view">
+        <field name="name">inherit.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='information']" position="after">
+                <page string="Attendance">
+                    <field name="bywork" invisible="1"/>
+                    <field name="is_not_required_attendance"/>
+                    <field name="type_attendance" attrs="{'invisible': [('is_not_required_attendance', '!=', False)]}"/>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

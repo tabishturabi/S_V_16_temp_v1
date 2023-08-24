@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- nationality form view-->
+        <record model="ir.ui.view" id="view_hr_natioinality_form">
+            <field name="name">hr.nationality.form</field>
+            <field name="model">hr.nationality</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="nationality">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="bsg_id" />
+                                <field name="bsg_nationality_name" />
+                                <field name="bsg_employee" />
+                                <field name="bsg_department" />
+                                <field name="bsg_issuedate" class="with_hijri"/>
+                            </group>
+                            <group>
+                                <field name="bsg_expirydate" class="with_hijri"/>
+                                <field name="bsg_dateofbirth" class="with_hijri"/>
+                                <field name="bsg_placeofissue" />
+                                <field name="bsg_bloodgroup" />
+                                <field name="bsg_dependent" invisible="1" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="bsg_family" attrs="{'invisible': [('bsg_dependent' ,'=', False)]}">
+                                <form>
+                                    <group>
+                                        <field name="bsg_name" />
+                                        <field name="bsg_iqamanumber" />
+                                        <field name="bsg_relation" />
+                                        <field name="bsg_iqamaexpiry" />
+                                        <field name="bsg_iqamaissueplace" />
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="bsg_name" />
+                                    <field name="bsg_iqamanumber" />
+                                    <field name="bsg_iqamanumber" />
+                                    <field name="bsg_relation" />
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_hr_national_inherit_search" model="ir.ui.view">
+            <field name="name">hr.employee.search.expand.filter</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="bsg_national_id" string="National Id" filter_domain="[('bsg_national_id','ilike',self)]" />
+                    <field name="driver_code" string="Drive Code" filter_domain="[('driver_code','ilike',self)]" />
+                    <field name="bsg_empiqama" string="Iqama Number" filter_domain="[('bsg_empiqama','ilike',self)]" />
+                </xpath>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_hr_nationality_tree">
+            <field name="name">hr.nationality.tree</field>
+            <field name="model">hr.nationality</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="bsg_id" />
+                    <field name="bsg_nationality_name" />
+                    <field name="bsg_employee" />
+                    <field name="bsg_department" />
+                    <field name="bsg_issuedate" />
+                    <field name="bsg_expirydate" />
+                    <field name="bsg_placeofissue" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bsg_hr_nationality_action">
+            <field name="name">Employee National ID</field>
+            <field name="res_model">hr.nationality</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Human Resource" id="hr_iqama_menu" parent="hr.menu_hr_root" sequence="11" />
+        <menuitem name="Employee National ID" id="hr_emp_nationality_menu" parent="hr_iqama_menu" action="bsg_hr_nationality_action" sequence="12" />
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_truck_violation1,access_bsg_truck_violation1,model_fleet_truck_violation,base.group_system,1,1,1,1
+access_violation_type2,access_bsg_violation_type2,model_violation_type,base.group_system,1,1,1,1
+access_violation_action3,access_bsg_violation_action3,model_violation_action,base.group_system,1,1,1,1
+access_truck_violation4,access_bsg_truck_violation4,model_fleet_truck_violation,bsg_fleet_truck_violation.group_truck_violation,1,1,1,1
+access_violation_type5,access_bsg_violation_type5,model_violation_type,bsg_fleet_truck_violation.group_truck_violation,1,1,1,1
+access_violation_action6,access_bsg_violation_action6,model_violation_action,bsg_fleet_truck_violation.group_truck_violation,1,1,1,1
+
+
+

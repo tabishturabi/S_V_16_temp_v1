@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+        <record id="inherits_view_country_form_api" model="ir.ui.view">
+            <field name="name">inheits.res.country.form</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="code" position="after">
+                        <field name="visible_on_mobile_app"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="inherits_view_country_tree_api" model="ir.ui.view">
+            <field name="name">inheits.res.country.tree</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="code" position="after">
+                        <field name="visible_on_mobile_app"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

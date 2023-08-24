@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <!--  inherit for checking condition -->
+    <record id="view_bsg_vehicle_cargo_sale_line_tree_inherit" model="ir.ui.view">
+            <field name="name">bsg_vehicle_cargo_sale_line.tree</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_tree"/>
+            <field name="arch" type="xml">
+              <field name="charges" position="after">
+                <field name="add_to_cc" />
+                <field name="report_seq" invisible="1"/>
+                </field>
+            </field>
+    </record>
+    
+    <!-- for adding new smart button to view the collection -->
+    <record id="bsg_vehicle_cargo_sale_line_inherit_form" model="ir.ui.view">
+        <field name="name">bsg_vehicle_cargo_sale_line.form</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+        <field name="arch" type="xml">
+                <button name="action_view_invoice" position="after">
+                       <button name="action_view_customer_collection" groups="bsg_corporate_invoice_contract.group_create_cc" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('customer_collection_count', '=', 0)]}">
+                        <field name="customer_collection_count" widget="statinfo" string="Customer Collection"/>
+                        </button>
+                </button>
+        </field>
+    </record>
+
+    <!--add credit_collection_id filed -->
+    <record id="view_bsg_vehicle_cargo_sale_line_search_inherit" model="ir.ui.view">
+            <field name="name">bsg_vehicle_cargo_sale_line.filter</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_search"/>
+            <field name="arch" type="xml">
+              <xpath expr="//search" position="inside">
+                <separator/>
+                    <filter string="Credit Collection ID" context="{'group_by':'credit_collection_id'}" name="credit_collection_id"/>
+              </xpath>
+            </field>
+    </record>
+
+      
+    <!--add another button for register payment  
+    <record id="invoice_sale_smart_button_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="payments_enhanced.invoice_sale_smart_button"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice_validate" position="after">
+                    <field name="credit_collection_id" invisible="1"/>
+                         <button name="action_register_payment" id="account_invoice_payment_for_credit_collection" type="action"
+                            attrs="{'invisible': ['|','|',('state', '!=', 'open'),('is_validate', '=', True)]}"
+                            string="Register Payment" groups="account.group_account_invoice" class="oe_highlight"/>
+                </button>
+            </field>
+    </record>-->
+
+  </data>
+</odoo>

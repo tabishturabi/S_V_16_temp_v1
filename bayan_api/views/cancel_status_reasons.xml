@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_cancel_status_reasons" model="ir.ui.view">
+            <field name="name">cancel.status.reasons.form</field>
+            <field name="model">cancel.status.reasons</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Bayan Data">
+                        <group>
+                            <group>
+                                <field name="reason_id"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_cancel_status_reasons" model="ir.ui.view">
+            <field name="name">cancel.status.reasons.tree</field>
+            <field name="model">cancel.status.reasons</field>
+            <field name="arch" type="xml">
+                <tree string="Bayan">
+                    <field name="reason_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_cancel_status_reasons" model="ir.ui.view">
+            <field name="name">search.cancel.status.reasons</field>
+            <field name="model">cancel.status.reasons</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="reason_id"/>
+                    <field name="name"/>
+                </search>
+
+            </field>
+        </record>
+
+
+        <record id="action_cancel_status_reasons" model="ir.actions.act_window">
+            <field name="name">Cancel Status Reasons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cancel.status.reasons</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="search_cancel_status_reasons"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_cancel_status_reasons')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_cancel_status_reasons')})]"/>
+        </record>
+
+        <menuitem action="action_cancel_status_reasons" id="menu_cancel_status_reasons"
+                  parent="bsg_master_config.menu_action_bayan_plate_type_config_root" name="Cancel Status Reasons"/>
+
+    </data>
+</odoo>

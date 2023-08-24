@@ -1,0 +1,199 @@
+<odoo>
+  <data>
+
+
+  <!-- BSG branches form view definition -->
+    <record model="ir.ui.view" id="bsg_branches_view_form">
+      <field name="name">bsg_branches_view_form</field>
+      <field name="model">bsg_branches.bsg_branches</field>
+      <field name="arch" type="xml">
+        <form string="Branches">
+          <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                        </button>
+                    </div>
+                    <field name="logo" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="branch_name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="branch_name" class="oe_inline" placeholder="Branch Name" required="1"/>
+                        </h1>
+                        <label for="rml_header1" class="oe_edit_only"/>
+                        <h3>
+                            <field name="rml_header1" placeholder="e.g. Global Business Solutions"/>
+                        </h3>
+                    </div>
+                    <group name="top">
+                      <group name="left">
+                        <field name="activation_date" />
+                        <field name="deactivation_date" />
+                      </group>
+                      <group name="right">
+                      </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General Information">
+                            <group>
+                                <group>
+                                    <field name="branch_ar_name" required="1"/>
+                                    <field name="supervisor_id" attrs="{'invisible':[('is_hq_branch', '=', True)],'required':[('is_hq_branch', '=', False)]}"/>
+<!--                                    <field name="region" />-->
+                                    <label for="street" string="Address"/>
+                                    <div class="o_address_format">
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                                        <field name="state_zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                                    </div>
+                                    <field name="branch_long" />
+                                    <field name="branch_lat" />
+                                    <field name="po_box_no" />
+                                    <field name="location_code" />
+                                    <field name="branch_classifcation" />
+                                    <field name="branch_operation" />
+                                </group>
+                                <group>
+                                    <field name="branch_no" required="1"/>
+                                    <field name="branch_type" />
+                                    <field name="branch_cp_name" />
+                                    <field name="is_hq_branch" />
+                                    <field name="branch_div" />
+                                    <field name="branch_phone"/>
+                                    <field name="weekly_working_hours"></field>
++                                    <field name="friday_working_hours"></field>
+                                    <field name="mobile"/>
+                                    <field name="fax"/>
+                                    <field name="email"/>
+                                    <field name="vat"/>
+                                    <field name="company_registry"/>
+                                    <field name="currency_id" options="{'no_create': True}" id="company_currency" attrs="{'invisible': [('branch_operation', '!=', 'international')]}"/>
+                                    <!--field name="account_id" options="{'no_create': True}" /-->
+                                    <field name="account_analytic_id" options="{'no_create': True}"/>
+                                </group>
+                            </group>
+                            <label for="description" string="Description"/>
++                           <field name="description"></field>
+                        </page>
+                        <page name="license" string="License">
+                          <field name="bsg_license_info_ids" context="{'default_branch_id':id}">
+                            <tree>
+                              <field name="doc_type"/>
+                              <field name="document_no"/>
+                              <field name="issue_date"/>
+                              <field name="latest_renewal_date"/>
+                              <field name="expiry_date"/>
+                              <field name="renewal"/>
+                              <field name="attachment_ids" widget="many2many_binary"/>
+                            </tree>
+                            <form>
+                              <sheet>
+                                  <group name="group_top">
+                                      <group name="group_left">
+                                          <field name="branch_id" invisible="1"/>
+                                          <field name="doc_type" />
+                                          <field name="document_no" />
+                                          <field name="issue_date" class="with_hijri"/>
+                                      </group>
+                                      <group name="group_right">
+                                        <field name="latest_renewal_date" class="with_hijri"/>
+                                          <field name="expiry_date" class="with_hijri"/>
+                                          <field name="renewal" class="with_hijri"/>
+                                          <field name="attachment_ids" widget="many2many_binary" />
+                                      </group>
+                                  </group>
+                              </sheet>
+                            </form>
+                          </field>
+                        </page>
+                        <page name="sponsor_id" string="Sponsors">
+                          <field name="bsg_sponsor_info_ids">
+                            <tree>
+                              <field name="name"/>
+                              <field name="partner_id"/>
+                              <field name="cr_no"/>
+                              <field name="email"/>
+                              <field name="mobile"/>
+                            </tree>
+                          </field>
+                        </page>
+                        <page name="branch_team" string="Branch Team">
+                          <field name="member_ids" widget="many2many" options="{'not_delete': True}">
+                              <kanban quick_create="false" create="true" delete="true">
+                                  <field name="name"/>
+                                  <field name="id"/>
+                                  <field name="job_id"/>
+                                  <templates>
+                                      <t t-name="kanban-box">
+                                          <div class="oe_kanban_global_click" style="position: relative">
+                                              <a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+                                              <div class="oe_module_vignette">
+                                                  <img t-att-src="kanban_image('hr.employee', 'image_small', record.id.value)" class="oe_avatar oe_kanban_avatar_smallbox" alt="Employee Image"/>
+                                                  <div class="oe_module_desc">
+                                                      <field name="name"/>
+                                                  </div>
+                                              </div>
+                                              <field name="job_id"/>
+                                          </div>
+                                      </t>
+                                  </templates>
+                              </kanban>
+                          </field>
+                        </page>
+                        <page name="address" string="Address">
++                            <group name="top">
++                                <group name="left">
++                                    <field name="region"></field>
++                                    <field name="region_city"></field>
++                                    <field name="check" invisible="1"></field>
++                                </group>
++                                <group name="left">
++                                    <field name="zone_id"></field>
++                                </group>
++                            </group>
++                       </page>
+                    </notebook>
+                    </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+      </field>
+    </record>
+
+  <!-- BSG branches tree view definition -->
+    <record model="ir.ui.view" id="bsg_branches_view_tree">
+      <field name="name">bsg_branches_view_tree</field>
+      <field name="model">bsg_branches.bsg_branches</field>
+      <field name="arch" type="xml">
+        <tree string="Branches">
+            <field name="branch_name" string="Name"/>
+            <field name="branch_ar_name" string="Arabic Name"/>
+            <field name="branch_phone"/>
+            <field name="email"/>
+        </tree>
+      </field>
+    </record>
+
+  <!-- BSG branches action -->
+    <record model="ir.actions.act_window" id="action_window_bsg_branches">
+      <field name="name">Branches</field>
+      <field name="res_model">bsg_branches.bsg_branches</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  <!-- BSG branches menu item -->
+    <menuitem name="Branches" id="bsg_branches_menu_1"
+      parent="sale.sale_menu_root"
+      sequence="9" />
+
+      <menuitem name="Branches" id="bsg_branches_menu_2"
+      parent="bsg_branch_config.bsg_branches_menu_1"
+      action="action_window_bsg_branches" sequence="1" />
+
+  </data>
+</odoo>

@@ -1,0 +1,79 @@
+<odoo>
+  <data>
+        <record id="account_view_account_journal_form_extend" model="ir.ui.view">
+            <field name="name">account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+            	<field name="bank_id" position="before">
+            		<field name="is_budget_recon"/>
+            	</field>
+            </field>
+         </record>
+
+       <record id="view_account_payment_form_tamara_charges" model="ir.ui.view">
+            <field name="name">account.payment.tamara.charges.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="payments_enhanced.view_account_payment_form_custom_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bank_charges']" position="after">
+                    <field name="tamara_charges" attrs="{'invisible':[('is_internal_transfer', '=',False )], 'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_payment_form_internal_inherit" model="ir.ui.view">
+            <field name="name">account.payment.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+             	<button class="oe_stat_button" name="button_related_voucher"
+                     string="Receipt Vouchers" type="object"
+                     attrs="{'invisible':['|','|',('invoice_line_ids','=',[]),('is_internal_transfer', '!=',True ),('receipt_voucher','=',False)]}"  icon="fa-money"/>
+                </xpath>
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="total_amount" readonly="1" invisible="1" attrs="{'invisible':[('is_internal_transfer', '!=',True )]}"/>
+                <field name="is_internal" invisible="1"/>
+                <field name="receipt_voucher" invisible="1"/>
+                <field name="invoice_line_ids" invisible="1"/>
+             </xpath>
+            </field>
+         </record>
+         
+         <record id="view_account_payment_filter_search_custom_inherits" model="ir.ui.view">
+            <field name="name">account.payment.filter.budget.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+              <xpath expr="//search" position="inside">
+                <separator/>
+                <filter string="IS Budget Created" name="is_budget_recon" domain="[('is_budget_recon','=',True)]"/>
+                <filter string="Budget Not Created" name="is_budget_recon" domain="[('is_budget_recon','=',False)]"/>
+                <separator/>
+              </xpath>
+            </field>
+          </record>
+         
+         <record id="view_account_generic_enhanced_inherit" model="ir.ui.view">
+            <field name="name">account.fuel.trip.configuration.form</field>
+            <field name="model">account.fuel.trip.configuration</field>
+            <field name="inherit_id" ref="account_generic_enhanced.account_fule_trip_configuration"/>
+            <field name="arch" type="xml">
+            	<group  position="after">
+            		<group>
+            			<group string="Budget Reconciliation Config">
+            				<field name="bank_charge_account_id" string="Bank Charges Account"
+                                  options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        	<field name="tax_account_id" string="Tax Account"
+                                  options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <field name="tamara_charges_account_id" string="Tamara Charges Account"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                      	</group>
+            		</group>
+            	</group>
+           
+            </field>
+         </record>
+  </data>
+</odoo>

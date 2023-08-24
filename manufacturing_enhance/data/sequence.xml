@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="manufacturing_enhance_seq" model="ir.sequence">
+            <field name="name">manufacturing_enhance_manufacturing_order</field>
+            <field name="code">bsg.mrp.production.seq</field>
+<!--            <field name="prefix">%(y)s%(month)s</field>-->
+            <field name="padding">3</field>
+        </record>
+                <record id="manufacturing_enhance_qc_seq" model="ir.sequence">
+            <field name="name">qc_manufacturing_order</field>
+            <field name="code">bsg.mrp.production.qc.seq</field>
+<!--            <field name="prefix">%(y)s%(month)s</field>-->
+            <field name="padding">3</field>
+        </record>
+    </data>
+</odoo>

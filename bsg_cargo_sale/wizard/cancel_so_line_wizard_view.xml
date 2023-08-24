@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="cancel_so_line_record_form">
+            <field name="name">cancel_so_line_record.form</field>
+            <field name="model">cancel_so_line_record</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cancel So Line">
+                    <group>
+                      <group>
+                          <field name="cargo_sale_id" invisible="1"/>
+                          <field name="shipment_type" readonly="1"/>
+                      </group>
+                      <group>
+                          <field name="single_trip_reason" 
+                            attrs="{'invisible':[('shipment_type','in',['return'])],
+                            'required':[('shipment_type','in',['oneway'])]}"/>
+                          <field name="round_trip_reason" attrs="{'invisible':[('shipment_type','in',['oneway'])],
+                            'required':[('shipment_type','in',['return'])]}"/>
+                      </group>
+                    </group>
+                    <footer>
+                        <button class="oe_highlight" type="object" name="cancel_so_line" string="Validate" />
+                        <button class="oe_highlight"  special="cancel" name="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="cancel_so_line_record_action" model="ir.actions.act_window">
+            <field name="name">Cancel So Line</field>
+            <field name="res_model">cancel_so_line_record</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cancel_so_line_record_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+  <data>
+      <record id="bsg_vehicle_cargo_sale_inherit_form" model="ir.ui.view">
+        <field name="name">bsg_vehicle_cargo_sale_inherit_form</field>
+        <field name="model">bsg_vehicle_cargo_sale</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='attachment_id']" position="attributes">
+                <attribute name="attrs">{'invisible':[('is_construction','!=',True),('allow_contract','!=',True),('is_for_credit_attch','!=',True), ('is_attachment_required', '!=', True)],'required':[('is_to_other_customer','=',True)]}</attribute>
+                 <attribute name="groups">bsg_cargo_sale.group_can_show_creating_invoice_to_other_customer</attribute>
+            </xpath>
+            <xpath expr="//field[@name='other_customer_id']" position="attributes">
+                <attribute name="domain">[('partner_types.is_credit_customer','=',False)]</attribute>
+                <attribute name="attrs">{'invisible':[('is_to_other_customer','=',False)],'required':[('is_to_other_customer','!=',False)]}</attribute>
+                <attribute name="context">{}</attribute>
+                <attribute name="groups">bsg_cargo_sale.group_can_show_creating_invoice_to_other_customer</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_types']" position="after">
+                <field name="is_credit_customer" invisible="1"></field>
+                <field name="is_customer_contract" force_save="True" invisible="1"></field>
+            </xpath>
+            <xpath expr="//field[@name='is_to_other_customer']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="attrs">{'readonly':[('is_credit_customer','=',True),('is_customer_contract','=',True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

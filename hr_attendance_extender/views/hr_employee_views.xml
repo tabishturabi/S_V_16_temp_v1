@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- employee form -->
+    <record id="hr_employee_inherit_attendants" model="ir.ui.view">
+        <field name="name">inherit.hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="after">
+                <button name="action_attend_log"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        string="Attendance Log"
+                        type="object">
+                </button>
+
+                <button name="action_attendance"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        string="Attendance"
+                        type="object">
+                </button>
+
+                <button name="action_attendance_sheet"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        string="Attendance Sheet"
+                        type="object">
+                </button>
+            </button>
+
+            <field name="user_id" position="after">
+                <field name="emp_code_id"/>
+            </field>
+            <field name="address_home_id" position="after">
+                <field name="contract_id" string="Valid Contract" groups="hr.group_hr_manager" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

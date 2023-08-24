@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_add_inspection_wizard,add.inspection.wizard,model_sale_inspection_line,base.group_user,1,1,1,1
+access_add_inspection,add_inspection_wizard,model_add_inspection_wizard,,1,1,1,1
+access_sale_inspection_line,sale_inspection_line,model_sale_inspection_line,,1,1,1,1

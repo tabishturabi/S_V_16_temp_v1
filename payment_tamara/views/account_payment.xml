@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id ="tamara_account_payment_form" model="ir.ui.view">
+        <field name="name">tamara.account.payment.form.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="ref"]' position="after">
+                  <field name="tamara_reference_id" readonly="1" />
+                  <field name="provider_tag" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id ="tamara_payment_transaction_form" model="ir.ui.view">
+        <field name="name">tamara.payment.transaction.form.view</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="provider_reference"]' position="after">
+                  <field name="tamara_reference_id" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_vehicle_cargo_sale_form_inherit" model="ir.ui.view">
+        <field name="name">view.vehicle.cargo.sale.form.inherit</field>
+        <field name="model">bsg_vehicle_cargo_sale</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+        <field name="arch" type="xml">
+            <page name="returning_order" position="after">
+            <page string="Tamara Transactions" >
+                    <field name="tamara_transaction_ids" widget="many2many">
+                        <tree>
+                            <field name="is_refunded" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                            <field name="tamara_reference_id" string="Tamara Transaction ID"/>
+                            <field name="create_date"/>
+                            <field name="amount"/>
+                            <field name="state"/>
+                            <field name="is_refunded"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+
+
+</odoo>

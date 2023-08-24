@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+    <!-- form view car make -->
+    
+    <record model="ir.ui.view" id="bsg_car_make_view_form">
+      <field name="name">bsg_car_make_view_form</field>
+      <field name="model">bsg_car_make</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="carmake">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                  <field name="car_make_name" required="1" placeholder="Car Maker"/>
+              </h1>
+            </div>
+            <group name="top">
+              <group name="left">
+                <field name="car_make_ar_name"/>
+              </group>
+              <group name="right">
+                <field name="car_make_old_sys_id"/>
+              </group>
+            </group> 
+
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>             
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view car make  -->
+    <record model="ir.ui.view" id="bsg_car_make_tree_form">
+      <field name="name">bsg_car_make_view_list</field>
+      <field name="model">bsg_car_make</field>
+      <field name="arch" type="xml">
+        <tree string="carmake">
+          <field name="car_make_name" modifiers="{}"/>
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="bsg_car_make_action">
+      <field name="name">Car Make</field>
+      <field name="res_model">bsg_car_make</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

@@ -1,0 +1,336 @@
+<odoo>
+  <data>
+
+
+    <record id="purchase_request_rec_view_search" model="ir.ui.view">
+    <field name="name">purchase.req.rec.view.search</field>
+    <field name="model">purchase.req.rec</field>
+    <field name="arch" type="xml">
+        <search string="Purchase Request">
+            <field name="name"/>
+            <field name="partner_id" string="Requester"/>
+            <field name="branches"/>
+            <field name="department_id"/>
+            <filter string="To Submit" name="draft" domain="[('state','=','tsub')]"/>
+            <filter string="To Approve" name="auditing" domain="[('state','=','tapprove')]"/>
+            <filter string="Approved" name="open" domain="[('state','=','approve')]"/>
+            <filter string="Open" name="done" domain="[('state','=','open')]"/>
+            <filter string="Reject" name="open" domain="[('state','=','reject')]"/>
+            <filter string="Done" name="done" domain="[('state','=','done')]"/>
+            <filter string="Has Po" name="po_count" domain="[('po_count','>',0)]"/>
+            <filter string="Has Rfq" name="rfq_count" domain="[('rfq_count','>',0)]"/>
+            <filter string="Not Work On It" name="not_work_on_it" domain="[('po_count','=',0),('rfq_count','=',0)]"/>
+            <separator/>
+            <filter string="Today" name="current_day" domain="[('date_pr', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d')), ('date_pr', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d'))]"/>
+            <filter string="This Week" name="current_week" domain="[('date_pr', '&gt;=', ((context_today()+ relativedelta(weeks=-1, days=1, weekday=0)).strftime('%Y-%m-%d'))),('date_pr', '&lt;=', ((context_today()+ relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d')))]"/>
+            <filter string="This Month" name="current_month" domain="[('date_pr','&lt;=',(context_today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date_pr','&gt;=',(context_today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+            <filter string="This Year" name="current_year" domain="[('date_pr','&lt;=',(context_today()+relativedelta(day=31,month=12)).strftime('%Y-%m-%d')),('date_pr','&gt;=',(context_today()-relativedelta(day=1,month=1)).strftime('%Y-%m-%d'))]"/> 
+            <group expand="0" string="Group By">
+                <filter string="Requester" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+                <filter string="Branche" name="branches" domain="[]" context="{'group_by':'branches'}"/>
+                <filter string="Department" name="department_id" domain="[]" context="{'group_by':'department_id'}"/>
+                <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                <filter string="Type" name="state" domain="[]" context="{'group_by':'request_type'}"/>
+                <filter string="Date" name="date_day_pr" context="{'group_by':'date_pr'}"/>
+            </group>                   
+        </search>
+    </field>
+</record>
+
+
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_purchase_req_rec_form">
+        <field name="name">purchase.req.rec.form</field>
+        <field name="model">purchase.req.rec</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Request Received" create="0" delete="0" edit="1">
+                <header>    
+                    <button name="set_to_cancel" states="open" string="Reject" groups="purchase_enhanced.custom_group_purchase_cancel_pr"  type="object" style="color:white;background-color:red;" icon="fa-close"/>  
+                    <button name="set_to_open" states="cancel" string="Open" groups="purchase_enhanced.custom_group_purchase_cancel_pr"  type="object" icon="fa-open"/> 
+                    <field name="state" widget="statusbar" statusbar_visible="tsub,tapprove,approve,open,close,cancel,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_rfq" type="object" icon="fa-list-alt" class="oe_stat_button" attrs="{'invisible': [('rfq_count', '=', 0)]}">
+                            <field name="rfq_count" widget="statinfo" string="RFQs/Orders"/>
+                        </button>
+                        <button name="action_get_attachment_view" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('attachment_number', '=', 0)]}">
+                                <field name="attachment_number" widget="statinfo" string="Attachments"/>
+                            </button>
+                        <button name="action_view_po" type="object" icon="fa-list-alt" class="oe_stat_button" attrs="{'invisible': [('po_count', '=', 0)]}">
+                            <field name="po_count" widget="statinfo" string="PO/Orders"/>
+                        </button>
+
+                        <button name="action_view_pr" type="object" icon="fa-list-alt" class="oe_stat_button" attrs="{'invisible': [('pr_count', '=', 0)]}">
+                            <field name="pr_count" widget="statinfo" string="PR"/>
+                        </button>
+                        
+                    </div>
+
+                    <field name="request_type" widget="radio" readonly="1" force_save="1" required="True"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="department_id" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="branches" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="to_close" invisible="1"/>
+<!--                            Migration Note-->
+<!--                            <field name="address_to" readonly="1" attrs="{'invisible':[('request_type','!=','branch')],'required':[('request_type','=','branch')]}" domain="[('code','=','outgoing')]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>-->
+                            <field name="address_to" readonly="1" attrs="{'invisible':[('request_type','!=','branch')],'required':[('request_type','=','branch')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        </group>
+                        <group>
+                            <field name="date_pr" readonly="1"/>
+                            <field name="purchase_transfer" invisible="1" string="Origin" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="is_multiple_vendor" invisible="1" groups="purchase_enhanced.purchase_vendor_specify"/>
+                            <field name="vendor_ids" invisible="1"  context="{'default_customer': False,'default_supplier' : True,'company_type' : True}" domain="[('supplier_rank','>',0)]" widget="many2many_tags" groups="purchase_enhanced.purchase_vendor_specify"/>
+                            <field name="vendor_id" invisible="1"  widget="res_partner_many2one"  domain="[('supplier_rank','>',0)]" context="{'default_customer': False,'default_supplier' : True,'company_type' : True}" groups="purchase_enhanced.purchase_vendor_specify"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Transfer">
+                            <field name="preq_rec_line">
+                                 <tree string="Purchase Transfer" editable="bottom" delete="0" create="0" attrs="{'readonly': [('state', 'in', ['close','cancel','done'])]}">
+                                    <field name="sequence" readonly="1"/>
+                                    <field name="purchase_req_id" readonly="1" string="P.R" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="product_id" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="analytic_account_id" readonly="1" force_save="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="work_order_id" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' attrs="{'column_invisible':[('parent.request_type','!=','workshop')],'required':[('parent.request_type','=','workshop')]}"/>
+                                    <field name="fleet_id_ref"  readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' attrs="{'column_invisible':[('parent.request_type','=','stock')],'required':[('parent.request_type','=','workshop')]}"/>
+                                    <field name="deliver_to" domain="[('code','=','incoming')]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="qty" readonly="1"/>
+                                    <field name="onhand" readonly="1"/>
+                                    <field name="iss_qty" attrs="{'column_invisible':[('parent.request_type','=','stock')]}"/>
+                                    <field name="qtmr" invisible="1" />
+                                    <field name="qty_rfq" />
+                                    <field name="qty_po" />
+                                    <field name="qty_net_received" />
+                                    <field name="name" readonly="1"/>
+                                    <field name="state" readonly="1"/>
+                                    <button name="set_to_cancel" attrs="{'invisible':['|',('qty_rfq','>',0),('state','!=','open')]}" string="Reject" groups="purchase_enhanced.custom_group_purchase_cancel_pr"  type="object" style="color:white;background-color:red;" icon="fa-close"/>
+                                    <button name="set_to_open" attrs="{'invisible':[('state','!=','cancel')]}" string="Open" groups="purchase_enhanced.custom_group_purchase_cancel_pr"  type="object"  icon="fa-refresh"/>  
+                                 </tree>
+                            </field>
+                        </page>
+                        <page name="other" string="Other Information">
+                            <group>
+                                <field name="rfq_ref" readonly="True" widget="one2many_list"/>
+                                <field name="agreement_id" readonly="True" widget="one2many_list"/>
+                            </group>
+                        </page>
+                         
+                    </notebook>
+                    <field name="note" readonly="1" placeholder="Terms and conditions" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="view_purchase_transfer_rec_tree">
+        <field name="name">purchase.req.rec._tree</field>
+        <field name="model">purchase.req.rec</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0" edit="0">
+                <field name="name"/>
+                <field name="partner_id" string="Requester"/>
+                <field name="department_id"/>
+                <field name="branches"/>
+                <field name="date_pr"/>
+                <field name="request_type"/>
+                <field name="state" string="Status"/>
+            </tree>
+        </field>
+    </record>
+
+        <!-- Action post_payment for multi -->
+    <record id="action_purchase_order_create" model="ir.actions.server">
+        <field name="name">Request For Quotation</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="model_purchase_req_rec"/>
+        <field name="binding_model_id" ref="model_purchase_req_rec"/>
+        <field name="code">records.purchase_order()</field>
+    </record>
+
+
+        <!-- Action post_payment for multi -->
+    <record id="action_purchase_agreement_create" model="ir.actions.server">
+        <field name="name">Purchase Agreement</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="model_purchase_req_rec"/>
+        <field name="binding_model_id" ref="model_purchase_req_rec"/>
+        <field name="code">records.purchase_requisition_order()</field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_purchase_req_rec">
+        <field name="name">Purchase Request Received</field>
+        <field name="res_model">purchase.req.rec</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+
+
+
+<record id="purchase_request_rec_line_view_search" model="ir.ui.view">
+    <field name="name">purchase.req.rec.line.view.search</field>
+    <field name="model">purchase.req.rec.line</field>
+    <field name="arch" type="xml">
+        <search string="Purchase Request Line">
+            <field name="name"/>
+            <field name="preq_rec" />
+            <field name="partner_id" string="Requester"/>
+            <field name="branches"/>
+            <field name="department_id"/>
+            <field name="product_id"/>
+            <field name="analytic_account_id"/>
+            <field name="work_order_id"/>
+            <field name="fleet_num"/>
+            <filter string="To Submit" name="draft" domain="[('state','=','tsub')]"/>
+            <filter string="To Approve" name="auditing" domain="[('state','=','tapprove')]"/>
+            <filter string="Approved" name="open" domain="[('state','=','approve')]"/>
+            <filter string="Open" name="done" domain="[('state','=','open')]"/>
+            <filter string="Reject" name="open" domain="[('state','=','reject')]"/>
+            <filter string="Done" name="done" domain="[('state','=','done')]"/>
+            <separator/>
+            <filter string="Today" name="current_day" domain="[('date_pr', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d')), ('date_pr', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d'))]"/>
+            <filter string="This Week" name="current_week" domain="[('date_pr', '&gt;=', ((context_today()+ relativedelta(weeks=-1, days=1, weekday=0)).strftime('%Y-%m-%d'))),('date_pr', '&lt;=', ((context_today()+ relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d')))]"/>
+            <filter string="This Month" name="current_month" domain="[('date_pr','&lt;=',(context_today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date_pr','&gt;=',(context_today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+            <filter string="This Year" name="current_year" domain="[('date_pr','&lt;=',(context_today()+relativedelta(day=31,month=12)).strftime('%Y-%m-%d')),('date_pr','&gt;=',(context_today()-relativedelta(day=1,month=1)).strftime('%Y-%m-%d'))]"/>                    
+            <group expand="0" string="Group By">
+                <filter string="Requester" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+                <filter string="Branche" name="branches" domain="[]" context="{'group_by':'branches'}"/>
+                <filter string="Department" name="department_id" domain="[]" context="{'group_by':'department_id'}"/>
+                <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                <filter string="Product" name="product" domain="[]" context="{'group_by':'product_id'}"/>
+                <filter string="Fleet" name="fleet" domain="[]" context="{'group_by':'fleet_num'}"/>
+                <filter string="Date" name="date_day_pr" context="{'group_by':'date_pr:day'}"/>
+            </group>
+       
+        </search>
+    </field>
+</record>
+
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_purchase_req_rec_form_line">
+        <field name="name">purchase.req.rec.line.form</field>
+        <field name="model">purchase.req.rec.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+            <sheet>
+            <group>
+                <group>
+                    <field name="sequence" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="preq_rec" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="department_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="branches" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="analytic_account_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="work_order_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="fleet_id_ref" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="request_type" readonly="1"/>
+                </group>
+                <group>
+                    <field name="product_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' readonly="1"/>
+                    <field name="qty" readonly="1"/>
+                    <field name="onhand" readonly="1" force_save="1"/>
+                    <field name="iss_qty" readonly="1"/>
+                    <field name="qty_rfq" readonly="1"/>
+                    <field name="qty_po" />
+                    <field name="qty_received" />
+                    <field name="qty_returned" />
+                    <field name="qty_net_received" />
+                    <field name="date_pr"/>
+                    <field name="state" string="Status"/>
+                </group>
+            </group> 
+            </sheet>   
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="view_purchase_req_rec_tree_line">
+        <field name="name">purchase.req.rec.line.tree</field>
+        <field name="model">purchase.req.rec.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="preq_rec" />
+                <field name="requester_id" string="Requester"/>
+                <field name="department_id"/>
+                <field name="branches"/>
+                <field name="analytic_account_id"/>
+                <field name="work_order_id"/>
+                <field name="fleet_id_ref"/>
+                <field name="product_id"/>
+                <field name="qty"/>
+                <field name="qty_po" />
+                <field name="iss_qty" />
+                <field name="qty_received" />
+                <field name="date_pr"/>
+                <field name="request_type" />
+                <field name="state" string="Status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_purchase_req_line_rec">
+        <field name="name">Purchase Request Line</field>
+        <field name="res_model">purchase.req.rec.line</field>
+        <field name="domain">[]</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+
+
+
+
+
+
+
+    <menuitem name="Purchase Request Received" 
+      id="purchase_req_rec_main_menu" 
+      parent="purchase.menu_purchase_root"
+      sequence="11"
+      groups="purchase_enhanced.purchase_request_recieve"
+      />
+
+    <menuitem name="Purchase Request" 
+      id="purchase_req_rec_menu" 
+      parent="purchase_req_rec_main_menu"
+      action="action_purchase_req_rec"
+      sequence="1"
+      groups="purchase_enhanced.purchase_request_recieve"
+      />
+
+    <menuitem name="Purchase Request Line" 
+      id="purchase_req_rec_line_menu" 
+      parent="purchase_req_rec_main_menu"
+      action="action_purchase_req_line_rec"
+      sequence="2"
+      groups="purchase_enhanced.purchase_request_recieve"
+      />
+  </data>
+</odoo>

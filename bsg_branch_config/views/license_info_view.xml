@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- bsg license form view definition -->
+        <record model="ir.ui.view" id="bsg_license_tree_form_view">
+            <field name="name">bsg_license_tree_form_view</field>
+            <field name="model">bsg.license.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                            	<field name="branch_id" required="1"/>
+                                <field name="doc_type" options="{&quot;no_open&quot;: True}"/>
+                                <field name="document_no" />
+                                <field name="issue_date" class="with_hijri"/>
+                            </group>
+                            <group name="group_right">
+                            	<field name="latest_renewal_date" class="with_hijri"/>
+                                <field name="expiry_date" class="with_hijri"/>
+                                <field name="renewal" class="with_hijri"/>
+                                <field name="attachment_ids" widget="many2many_binary" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+	                  <field name="message_follower_ids" widget="mail_followers"/>
+	                  <field name="message_ids" widget="mail_thread"/>
+                	</div>
+                </form>
+            </field>
+        </record>
+        <!-- List View -->
+        <record model="ir.ui.view" id="view_bsg_license_tree">
+            <field name="name">bsg.license.info.tree</field>
+            <field name="model">bsg.license.info</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="branch_id" />
+                    <field name="doc_type" />
+                    <field name="document_no" />
+                    <field name="issue_date" />
+                    <field name="latest_renewal_date" />
+                    <field name="expiry_date" />
+                    <field name="renewal" />
+                </tree>
+            </field>
+        </record>
+        <!-- search View -->
+        <record id="license_search_view" model="ir.ui.view">
+            <field name="name">Branch license search View</field>
+            <field name="model">bsg.license.info</field>
+            <field name="arch" type="xml">
+                <search string="Search Branch license">
+                    <field name="branch_id" />
+                    <field name="doc_type" />
+                    <field name="document_no" />
+                    <field name="issue_date" />
+                    <field name="expiry_date" />
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_bsg_license">
+            <field name="name">Branch license</field>
+            <field name="res_model">bsg.license.info</field>
+            <!--field name="view_type">form</field-->
+            <field name="view_mode">tree,form</field>
+        </record>
+         <menuitem name="Branch License" id="menu_bsg_license_main" sequence="1" />
+        <menuitem name="Branch License" id="menu_bsg_license" groups="bsg_branch_config.group_access_branch_license,bsg_branch_config.group_access_branch_license_view" action="action_bsg_license" sequence="1" parent="menu_bsg_license_main" />
+    </data>
+</odoo>

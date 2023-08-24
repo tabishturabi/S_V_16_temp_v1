@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <menuitem id="pety_cash_main_menu"
+              name="Petty Cash"
+              web_icon="advance_petty_expense_mgmt,static/petty-cash.png"
+              sequence="8"/>
+
+    <menuitem id="pety_cash_sub_request_menu"
+              name="Petty Cash Request"
+              action="petty_cash_request_act"
+              parent="pety_cash_main_menu"
+              sequence="1"
+            />
+
+    <menuitem id="expense_accoun_sub_menu_item"
+              name="My Expenses"
+              action="expense_account_form_view_action"
+              parent="pety_cash_main_menu"
+              sequence="3"/>
+
+    <menuitem id="expense_accoun_all_sub_menu_item"
+              name="All Expenses"
+              action="expense_account_all_form_view_action"
+              parent="pety_cash_main_menu"
+              groups="advance_petty_expense_mgmt.petty_accounting_manager,advance_petty_expense_mgmt.petty_cash_manager,advance_petty_expense_mgmt.petty_cash_settings,advance_petty_expense_mgmt.petty_cash_user_rule"
+              sequence="3"/>              
+
+    <menuitem id="expense_auditing_accoun_sub_menu_item"
+              name="Expenses - Auditing"
+              action="expense_auditing_account_form_view_action"
+              parent="pety_cash_main_menu"
+              groups="advance_petty_expense_mgmt.petty_accounting_manager,advance_petty_expense_mgmt.petty_cash_manager,advance_petty_expense_mgmt.petty_cash_settings,advance_petty_expense_mgmt.petty_cash_user_rule,advance_petty_expense_mgmt.petty_cash_internal_editor"
+              sequence="4"/>
+
+    <menuitem id="configuration_sub_menu_item"
+              name="Configuration"
+              groups="advance_petty_expense_mgmt.petty_cash_settings,advance_petty_expense_mgmt.petty_cash_user_rule,advance_petty_expense_mgmt.petty_cash_template"
+              parent="pety_cash_main_menu"
+              sequence="5"/>
+
+    <menuitem id="setting_sub_menu_item"
+              name="Settings"
+              action="petty_cash_settings_action"
+              parent="configuration_sub_menu_item"
+              groups="advance_petty_expense_mgmt.petty_cash_settings"
+              sequence="1"/>
+    
+    <menuitem id="petty_cash_user_rules_menu"
+              name="Petty Cash User Rule"
+              groups="advance_petty_expense_mgmt.petty_cash_user_rule"
+              action="petty_cash_user_rules_act"
+              parent="configuration_sub_menu_item"
+              sequence="2"/>
+
+    <menuitem
+        id="expense_template_menu"
+        name="Petty Cash Template"
+        groups="advance_petty_expense_mgmt.petty_cash_template"
+        action="expense_accounting_template_action"
+        parent="configuration_sub_menu_item"
+        sequence="3"
+        />          
+
+</odoo>

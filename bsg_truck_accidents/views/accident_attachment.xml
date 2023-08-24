@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_accident_attachment_view" model="ir.ui.view">
+            <field name="name">form.accident.attachment.view.form</field>
+            <field name="model">truck.accident.attachment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="is_required"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="tree_accident_attachment" model="ir.ui.view">
+            <field name="name">accident.attachment.tree</field>
+            <field name="model">truck.accident.attachment</field>
+            <field name="arch" type="xml">
+                <tree string="Truck Accidents Attachment">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_truck_accident_attachment" model="ir.actions.act_window">
+            <field name="name">Truck Accidents Attachment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">truck.accident.attachment</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_accident_attachment')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_accident_attachment_view')})]"/>
+        </record>
+        <menuitem action="action_truck_accident_attachment" id="menu_truck_accident_attachment_type"
+                  parent="bsg_truck_accidents.menu_truck_accident_config" name="Truck Accidents Attachment" sequence="1"/>
+    </data>
+</odoo>

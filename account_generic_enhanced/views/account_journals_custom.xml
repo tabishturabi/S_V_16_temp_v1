@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_view_move_form_view_formcc1_formcc1_coalevel" model="ir.ui.view">
+        <field name="name">account.move.formcc1</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="attributes">
+                <attribute name="domain">[('type', 'not in',['bank','cash'])]</attribute>
+            </field>
+
+            <!-- <field name="journal_id" position="after">
+                <field name="branches" />
+            </field> -->
+        </field>
+    </record>
+    
+
+    <record id="view_view_move_form_view_form_form_coalevel1" model="ir.ui.view">
+        <field name="name">account.journal.formcw11</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            
+            
+            <field name="refund_sequence" position="after">
+                <field name="branches" widget="many2many_tags" options="{'no_create_edit': True}" string="Branch" attrs="{'invisible': [('type', 'not in', ['bank','cash'])]}"/>
+                <field name="paym_type" string="Type" invisible="1"/>
+            </field>
+            
+            <!-- <xpath expr="//notebook/page/[2]" position="inside">
+                <field name="collectionre"/>
+                 <field name="track_coll" invisible="1"/>
+            </xpath> -->
+        </field>
+    </record>
+
+    <record id="view_account_payment_customform" model="ir.ui.view">
+            <field name="name">account.paymentcus.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="branch_ids"  attrs="{'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))],'readonly': [('state', 'not in', ('draft'))]}" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+                <!-- 'invisible': [('payment_type', 'not in', ('inbound', 'outbound'))],-->
+            </field>
+    </record>
+
+
+    <record id="view_account_payment_search_custom_inehrit" model="ir.ui.view">
+            <field name="name">account.payment.search</field>
+            <field name="model">account.payment</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search">
+                    <field name="branch_ids" string="Branch"/>
+                    <filter name="branch_ids" string="Branch"  context="{'group_by':'branch_ids'}"/>
+                </xpath>
+            </field>
+    </record>
+
+
+</data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_support_tool_mangement">
+            <field name="name">Support Tools</field>
+            <field name="description">Support Tools Management</field>
+        </record>
+       	<record model="res.groups" id="group_add_so_line_to_a_trip">
+            <field name="name">Add So Line to a Trip</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_cahnge_so_line_state">
+            <field name="name">Change So Line State</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_trip_state">
+            <field name="name">Change Trip State</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_set_next_branch_for_trip">
+            <field name="name">Set Next Branch For Trip</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_update_so_line">
+            <field name="name">Update So Line</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_change_truck_current_branch">
+            <field name="name">Change Truck Current Branch</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_change_so_payment_type">
+            <field name="name">Change So Payment Type</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_create_invoice_for_so">
+            <field name="name">Create Invoice For So</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_support_fleet_link_drivre">
+            <field name="name">Fleet Link Driver</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_update_customer_on_so">
+            <field name="name">Update Customer on SO</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_cargo_line_change_price">
+            <field name="name">Cargo Sale Line Update Price</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_hard_delete">
+            <field name="name">hard delete</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_daily_trip_count">
+            <field name="name">Daily trip count reset</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+        <record model="res.groups" id="group_fleet_vehicle_change_branch">
+            <field name="name">Fleet Vehicle Change Branch</field>
+            <field name="category_id" ref="module_support_tool_mangement"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_attendance_form" model="ir.ui.view">
+            <field name="name">hr.attendance.form</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="priority" eval="100000"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/group[1]" position="after">
+                    <notebook>
+                        <page string="Workhours">
+                            <group>
+                                <field name="late_min"/>
+                                <field name="early_min"/>
+                            </group>
+                            <group>
+                                <field name="ot_before_min" />
+                                <field name="ot_after_min" />
+                            </group>
+                        </page>
+                        <page name="rules" string="Rules">
+                            <group>
+                                <field name="calendar_id"  options="{'no_create': True, 'no_edit': True,'no_open':True}"
+                                       context="{'form_view_ref': 'hr_attendance_zktecho.resource_calendar_form_inherit'}" />
+                                <field name="calendar_line" options="{'no_create': True, 'no_edit': True}"
+                                       context="{'form_view_ref': 'hr_attendance_zktecho.view_resource_calendar_attendance_form_inherit'}"/>
+                            </group>
+                            <group>
+                                <field name="rule_type" />
+                                <field name="attendance_rule_id" options="{'no_create': True, 'no_edit': True}"
+                                       context="{'form_view_ref': 'hr_attendance_zktecho.hr_attendance_rule_form_no_create'}"/>
+                                <field name="emp_attendance_rule_id" options="{'no_create': True, 'no_edit': True}"
+                                       context="{'form_view_ref': 'hr_attendance_zktecho.view_hr_attendance_rule_emp_no_create'}"/>
+
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_attendance_tree" model="ir.ui.view">
+            <field name="name">hr.attendance.tree</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="priority" eval="100000"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                </xpath>
+
+                <field name="check_in" position="before">
+                    <field name="day" />
+                </field>
+                <field name="check_out" position="after">
+                    <field name="late_penalty_min"  sum="Total" string="Late Min"/>
+                    <field name="early_penalty_min" sum="Total" string="Early Min"/>
+                    <field name="expected_work_hours"  widget="float_time" sum="Total" string="Schedule Hours"/>
+                    <field name="worked_hours" widget="float_time" sum="Total" string="Actual Hours"/>
+                    <field name="normal_hours" widget="float_time" sum="Total" string="Normal Hours"/>
+                    <field name="granted_before_ot"  sum="Total" string="OT Before"/>
+                    <field name="granted_after_ot" sum="Total" string="OT After"/>
+                    <field name="is_absent"/>
+                    <field name="is_leave"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="hr_attendance_view_filter_attend_zktecho" model="ir.ui.view">
+            <field name="name">hr_attendance_view_filter_zktecho</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter name="group_employee" string="Employee" context="{'group_by':'employee_id'}"/>
+                    <filter name="create_date" string="Date" context="{'group_by':'create_date'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- employee access to attendance menu -->
+        <record id="hr_attendance.menu_hr_attendance_view_attendances" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance_user'),
+            ref('hr_attendance_zktecho.group_hr_attendance_employee')])]"/>
+        </record>
+
+<!--        Migration Note-->
+
+<!--        <record id="hr_attendance.menu_hr_attendance_manage_attendances" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance_user'),-->
+<!--            ref('hr_attendance_zktecho.group_hr_attendance_employee')])]"/>-->
+<!--        </record>-->
+        <record id="hr_attendance.menu_hr_attendance_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance'),
+            ref('hr_attendance_zktecho.group_hr_attendance_employee')])]"/>
+        </record>
+    </data>
+</odoo>

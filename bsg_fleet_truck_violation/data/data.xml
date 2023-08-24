@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="seq_truck_violation" model="ir.sequence">
+            <field name="name">Truck Violation</field>
+            <field name="code">truck.violation</field>
+            <field name="prefix">VIO</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

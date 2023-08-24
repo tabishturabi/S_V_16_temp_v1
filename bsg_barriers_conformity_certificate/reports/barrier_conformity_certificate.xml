@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record model="report.paperformat" id="paperformat_bcc_pdf">
+            <field name="name">paperformat.bcc.recap.report</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">35</field>
+            <field name="margin_right">2</field>
+            <field name="margin_bottom">44</field>
+            <field name="margin_left">2</field>
+            <field name="header_line" eval="True"/>
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+     </record>
+     <report id="bcc_report_pdf_id"
+             model="sale.order"
+             string="Barriers Conformity Certificate"
+             report_type="qweb-pdf"
+             paperformat="paperformat_bcc_pdf"
+             name="bsg_barriers_conformity_certificate.bcc_report_pdf"
+             file="bsg_barriers_conformity_certificate.bcc_report_pdf"
+             menu="False"
+     />
+    <template id="external_layout_standard">
+      <div class="header">
+          <div class="row">
+              <div style="width:1200px;">
+                  <img style="width:360px;background: rgba(0,0,0,0.1);float:left;" src="/bsg_barriers_conformity_certificate/static/src/img/logoleft.png"/>
+                  <img style="width:280px;background: rgba(0,0,0,0.1);float:right;" src="/bsg_barriers_conformity_certificate/static/src/img/logoright.png"/>
+              </div>
+          </div>
+      </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer;">
+              <div style="border-top: 1px solid black;width:1200px;height:100px;float:left;margin-top:10px;">
+                  <div style="width:200px;height:100px;font-size:14px;color:black; border:0px solid black;float:left;margin-top:10px;">
+                      <span>Industrial city modon phase 1 P.O.Box 3387, Jeddah 21458, KSA</span>
+                  </div>
+                  <div style="width:700px;text-align:center;float:left;margin-top:10px;">
+                      <img style="width:30px;background: rgba(0,0,0,0.1);" src="/bsg_barriers_conformity_certificate/static/src/img/royalcert.png"/>
+                      <img style="width:40px;background: rgba(0,0,0,0.1);" src="/bsg_barriers_conformity_certificate/static/src/img/iaf.png"/>
+                      <img style="width:40px;background: rgba(0,0,0,0.1);" src="/bsg_barriers_conformity_certificate/static/src/img/dakks.png"/>
+                  </div>
+                  <div style="width:300px;height:100px;font-size:14px;color:black; border:0px solid black;float:left;margin-top:10px;">
+                      <span>E-mail: albassami.industries@albassami.com</span><br />
+                      <span>Mobile: +966 56 883 8839 </span><br />
+                      <span>Tel: +966 12 236 5009</span>
+                  </div>
+<!--                  <ul class="list-inline mb4">-->
+<!--                      <li t-if="docs.print_date" class="list-inline-item">-->
+<!--                          Print Date: <span t-field="docs.print_date"/>-->
+<!--                      </li>-->
+<!--                      <li t-if="docs.env.user.id" class="list-inline-item">-->
+<!--                          Print By: <span t-field="docs.env.user.name"/>-->
+<!--                      </li>-->
+<!--                  </ul>-->
+<!--                  <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                      Page: <span class="page"/> - <span class="topage"/>-->
+<!--                  </div>-->
+              </div>
+          </div>
+      </template>
+      <template id="bcc_report_pdf">
+        <t t-call="web.html_container">
+             <t t-call="bsg_barriers_conformity_certificate.external_layout_standard">
+                 <div class="page">
+                     <style type="text/css">
+                            <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/bsg_barriers_conformity_certificate//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             tr,td {
+                                font-family: 'Arial';
+                                    }
+                             .table2 tr,td{
+                                padding:8px;
+                                font-size:14px;
+                                color:black;
+                                border:1px solid black;
+                                border-collapse: collapse;
+                                }
+                               .table3 tr,td{
+                                padding:8px;
+                                font-size:14px;
+                                color:black;
+                                border:1px solid black;
+                                border-collapse: collapse;
+                                }
+
+
+					            ]]>
+                        </style>
+                     <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;font-weight:bold;background-color:white; color:black;};">
+                                 <td align="center" t-attf-style="font-size:18px;font-weight:bold;color:black;border:0px;"
+                                     width="100%">
+                                     <span >Ownere's and Manufacturer's Information</span>
+                                     <br />
+                                     <span >شهادة مطابقة الحواجز</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+<!--                     <br />-->
+                     <br />
+                     <table BORDERCOLOR="#{'#00000'}" class="table2" border="1" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center"
+                                     width="20%">
+                                     <span >المالك</span>
+                                 </td>
+                                 <td align="center"
+                                     width="60%">
+                                     <span>
+                                         <t t-esc="docs.truck_owner" />
+                                     </span>
+                                 </td>
+                                 <td align="center"
+                                     width="20%">
+                                     <span >Truck/trailer’s owner</span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center"
+                                     width="20%">
+                                     <span >الشركة المصنعة</span>
+                                 </td>
+                                 <td align="center"
+                                     width="60%">
+                                     <span >
+                                         <t t-esc="docs.manufacturer" />
+                                     </span>
+                                 </td>
+                                 <td align="center"
+                                     width="20%">
+                                     <span >Organization name (Manufacturer)</span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center"
+                                     width="20%">
+                                     <span >كود الشركة المصنعة</span>
+                                 </td>
+                                 <td align="center"
+                                     width="60%">
+                                     <span >
+                                         <t t-esc="docs.manufacturer_code" />
+                                     </span>
+                                 </td>
+                                 <td align="center"
+                                     width="20%">
+                                     <span >Manufacturer Assigned code</span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center"
+                                     width="20%">
+                                     <span >الدولة</span>
+                                 </td>
+                                 <td align="center"
+                                     width="60%">
+                                     <span >Saudi Arabia</span>
+                                 </td>
+                                 <td align="center"
+                                     width="20%">
+                                     <span >Country of origin</span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center"
+                                     width="20%">
+                                     <span >التاريخ</span>
+                                 </td>
+                                 <td align="center"
+                                     width="60%">
+                                     <span >
+                                         <t t-esc="docs.date" />
+                                     </span>
+                                 </td>
+                                 <td align="center"
+                                     width="20%">
+                                     <span >Date of Manufacturing</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     <br />
+                     <table BORDERCOLOR="#{'#00000'}" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;background-color:white; color:black;};">
+                                 <td align="center" t-attf-style="font-size:18px;font-weight:bold;color:black;border:0px;"
+                                     width="100%">
+                                     <span >Trailer’s/Truck’s Information</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     <br />
+                     <table BORDERCOLOR="#{'#00000'}" border="0" class="table3" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black;background-color:white; color:black;};">
+                                 <td align="center" width="20%">
+                                     <span >نوع المقطورة او الشاحنة</span>
+                                 </td>
+                                 <td align="center" width="60%">
+                                     <span >
+                                         <t t-esc="docs.truck_type" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%">
+                                     <span >Trailer’s/Truck’s type:</span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black;background-color:white; color:black;};">
+                                 <td align="center" width="20%">
+                                     <span >  رقم الشاسيه</span>
+                                 </td>
+                                 <td align="center" width="60%">
+                                     <span >
+                                         <t t-esc="docs.chasis_no" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%">
+                                     <span >CHASSIS NO</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     <table BORDERCOLOR="#{'#00000'}" border="0" class="table3" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black;background-color:white; color:black;};">
+                                 <td align="center" width="20%">
+                                     <span >موقع اللوحة</span>
+                                 </td>
+                                 <td align="center" width="60%">
+                                     <span >
+                                         <t t-esc="docs.plate_location" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%">
+                                     <span >Under-Run Type (Front, Side, back)</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     <table BORDERCOLOR="#{'#00000'}" border="0" class="table3" cellpadding="0" cellspacing="0" width="1200px">
+                         <tbody>
+                             <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black;background-color:white; color:black;};">
+                                 <td align="center" width="20%">
+                                     <span >الرقم التسلسلي</span>
+                                 </td>
+                                 <td align="center" width="60%">
+                                     <span >
+                                         <t t-esc="docs.truck_serial_no" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%">
+                                     <span >Distinguished Under-Run Card</span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </t>
+        </t>
+    </template>
+</odoo>

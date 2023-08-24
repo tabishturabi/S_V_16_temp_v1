@@ -1,0 +1,18 @@
+<odoo>
+    <data noupdate="0">
+        <record forcecreate="True" id="seq_hr_attendance" model="ir.sequence">
+            <field name="name">Attendance Sequence</field>
+            <field name="code">hr.attendance</field>
+            <field name="prefix">ATT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_attendance_sheet" model="ir.sequence">
+            <field name="name">seq.attendance.sheet</field>
+            <field name="code">attendance.sheet</field>
+            <field name="prefix">ATT-SHEET/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

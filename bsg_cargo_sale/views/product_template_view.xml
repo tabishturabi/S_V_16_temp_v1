@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="view_bsg_inherit_product_template_only_form_view">
+        <field name="name">view_bsg_inherit_product_template_only_form_view</field>
+        <field name="model">product.template</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='barcode']" position="after">
+            <field name="is_satah" string="Is Satah ?" />
+          </xpath>
+          <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+            <page name="satah_servie" string="Satah Service" attrs="{'invisible': [['is_satah','=',False]]}">
+              <group>
+                <field name="satah_line_ids" nolabel="1" >
+                  <tree string="Satah Service" editable="bottom">
+                    <field name="from_km" string="From KM" />
+                    <field name="to_km" string="To KM" />
+                    <field name="satah_type" />
+                    <field name="price" string="Price"/>
+                  </tree>
+                </field>
+              </group>
+            </page>
+          </xpath>
+        </field>
+    </record>
+
+
+  </data>
+</odoo>

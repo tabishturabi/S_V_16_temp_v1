@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="custom_export_form_extend" model="ir.ui.view">
+            <field name="name">Exports</field>
+            <field name="model">export.custom</field>
+            <field name="arch" type="xml">
+                <form string="Exports">
+                    <header>
+                        <button name="action_move_pre_bayan" type="object" string="Pre Bayan" class="btn-primary" states="draft" />
+                        <button name="action_move_initial_bayan" type="object" string="Initial Bayan" class="btn-primary" states="pre" />
+                        <button name="action_move_final_bayan" type="object" string="Final Bayan" class="btn-primary" states="initial" />
+                        <button name="action_custom_exam" type="object" string="Check Examination" class="btn-primary" states="final" />
+                        <button name="action_create_export_custom_invoice" type="object" string="Create Invoice" class="btn-primary" states="custom_exam" />
+                        <button name="action_cancelled" type="object" string="Cancel" class="btn-primary" states="draft,pre,initial,final,custom_exam" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pre,initial,final,custom_exam,cancelled,done" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('state', '!=', 'done')]}">
+                                <span>Invoice</span>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="number" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="our_job_no" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="site" options="{'no_create_edit':True}" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1" />
+                                <field name="customer" options="{'no_create_edit':True}" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1" />
+                                <field name="bill_types" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="customer_ref" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="customer_ref_inv" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="shipment_type" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="shipper_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="vessel_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="vessel_name" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="s_supplier" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="fri_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <!-- <field name="acc_link" attrs="{'readonly': [('state', '!=', 'draft')]}"/> -->
+                                <field name="eta" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="etd" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <field name="rot_number" attrs="{'readonly': [('state', '!=', 'draft')] }" />
+                                <field name="rot" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="mani_date" attrs="{'invisible':[('state', 'in', 'draft')],'readonly': [('state', '!=', 'pre')]}" />
+                                <field name="bill_no" attrs="{'invisible':[('state', 'in', 'draft')], 'readonly': [('state', '!=', 'pre')]}" />
+                                <!-- <field name="rot_number" /> -->
+                                <field name="bayan_no" attrs="{'invisible':[('state', 'in', 'draft')],'readonly': [('state', '!=', 'pre')]}" />
+                                <field name="bayan" attrs="{'invisible':[('state', 'in', 'draft')],'readonly': [('state', '!=', 'pre')]}" />
+                                <field name="pre_bayan" attrs="{'invisible':[('state', 'in', 'draft')],'readonly': [('state', '!=', 'pre')]}" />
+                                <field name="bayan_date" attrs="{'invisible':['|', ['state', 'in', 'pre'], ['state', 'in', 'draft']],'readonly': [('state', '!=', 'initial')]}" />
+                                <field name="field_office" attrs="{'invisible':['|', ['state', 'in', 'pre'], ['state', 'in', 'draft']] ,'readonly': [('state', '!=', 'initial')]}" options="{'no_create_edit':True}" />
+                                <field name="shutl_start_date" attrs="{'invisible':['|', ['state', 'in', 'pre'], ['state', 'in', 'draft']],'readonly': [('state', '!=', 'initial')]}" />
+                                <field name="fin_bayan_date" attrs="{'invisible':['|','|', ['state', 'in', 'pre'], ['state', 'in', 'draft'],['state','in','initial']],'readonly': [('state', '!=', 'final')]}" />
+                                <field name="final_attach" attrs="{'invisible':['|','|', ['state', 'in', 'pre'], ['state', 'in', 'draft'],['state','in','initial']],'readonly': [('state', '!=', 'final')]}" />
+                                <field name="custom_exam" checkbox="1" attrs="{'invisible':['|','|','|', ['state', 'in', 'pre'], ['state', 'in', 'draft'],['state','in','initial'],['state','in','final']],'readonly': [('state', '!=', 'custom_exam')]}" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <div class="oe_title ">
+                                    <h2 class="oe_inline text-primary" attrs="{'invisible':[('car_info', '=', True)]}">
+                                        <b>Container Info</b>
+                                    </h2>
+                                </div>
+                                <field name="contain_info" attrs="{'invisible':[('car_info', '=', True)],'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                            <group>
+                                <div class="oe_title">
+                                    <h2 class="oe_inline text-primary" attrs="{'invisible':[('contain_info', '=', True)]}">
+                                        <b>Car Carrier</b>
+                                    </h2>
+                                </div>
+                                <field name="car_info" attrs="{'invisible':[('contain_info', '=', True)],'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                        </group>
+                        <group attrs="{'invisible':[('car_info', '!=', True)]}">
+                            <group>
+                                <h2>Car Carrier</h2>
+                            </group>
+                            <field name="car_line" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="seq" />
+                                    <field name="car_maker" options="{'no_create_edit':True}" required="1" />
+                                    <field name="model" options="{'no_create_edit':True}" />
+                                    <field name="car_size" options="{'no_create_edit':True}" />
+                                    <field name="year" options="{'no_create_edit':True}" />
+                                    <field name="color" options="{'no_create_edit':True}" />
+                                    <field name="plate_registration" required="1" />
+                                    <field name="plat_no" />
+                                    <field name="chassis" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group attrs="{'invisible':[('contain_info', '!=', True)]}">
+                            <group>
+                                <div class="oe_title">
+                                    <h2>Container Info</h2>
+                                </div>
+                            </group>
+                            <field name="export_line" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="seq" />
+                                    <field name="crt_no" required="1" />
+                                    <field name="des" />
+                                    <field name="types" />
+                                    <field name="form" options="{'no_create_edit':True}" required="1" />
+                                    <field name="to" options="{'no_create_edit':True}" required="1" />
+                                    <field name="fleet_type" domain="[('domain_id','=','Bx')]" options="{'no_create_edit':True}" required="1" />
+                                    <field name="transporter" options="{'no_create_edit':True}" />
+                                    <field name="trans_chrg" />
+                                    <field name="custom_chrg" />
+                                    <field name="contact_info" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="export_other_line" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="product_id" options="{'no_create_edit':True}" required="1" />
+                                    <field name="cost" sum="Total Price" required="1" />
+                                    <field name="description" required="1" />
+                                    <field name="tax_ids" widget="many2many_tags" />
+                                    <field name="tax_amount" sum="Total Taxes Amount" readonly="1" />
+                                    <field name="without_tax_amount" sum="Total Amount" readonly="1" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="export_gov_line" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="product_id" options="{'no_create_edit':True}" required="1" />
+                                    <field name="cost" sum="Total Price" required="1" />
+                                    <field name="description" required="1" />
+                                    <field name="tax_ids" widget="many2many_tags" />
+                                    <field name="tax_amount" sum="Total Taxes Amount" readonly="1" />
+                                    <field name="without_tax_amount" sum="Total Amount" readonly="1" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="status" options="{'no_create_edit':True}" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                <field name="remark" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_custom_export" model="ir.ui.view">
+            <field name="name">Exports</field>
+            <field name="model">export.custom</field>
+            <field name="arch" type="xml">
+                <tree string="Export">
+                    <field name="no" />
+                    <field name="name"/>
+                    <field name="customer" />
+                    <field name="customer_ref" />
+                    <field name="our_job_no" />
+                    <field name="site" />
+                    <field name="bill_no" />
+                    <field name="bayan_no" />
+                    <field name="status" />
+                </tree>
+            </field>
+        </record>
+        
+		<record id="search_custom_export" model="ir.ui.view">
+		<field name="name">export custom Filter</field>
+		<field name="model">export.custom</field>
+		<field name="arch" type="xml">
+			<search string="Search Export">
+				<field name="name" string="Export No."/>
+			</search>
+		</field>
+		</record>
+        
+        <record id="action_custom_export" model="ir.actions.act_window">
+            <field name="name">Exports</field>
+            <field name="res_model">export.custom</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_custom_export" />
+        </record>
+        <menuitem action="action_custom_export" id="custom_clearance_submenu_export" name="Exports" parent="custome_clearance_menu" sequence="3" />
+        <record id="view_field_officer_form" model="ir.ui.view">
+            <field name="name">Field Officer</field>
+            <field name="model">field.officer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Field Officer">
+                        <group>
+                            <group>
+                                <field name="name" required="1" />
+                            </group>
+                            <group />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_field_officer" model="ir.ui.view">
+            <field name="name">Field Officer</field>
+            <field name="type">tree</field>
+            <field name="model">field.officer</field>
+            <field name="arch" type="xml">
+                <tree string="Field Officer">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_field_officer" model="ir.actions.act_window">
+            <field name="name">Field Officer</field>
+            <field name="res_model">field.officer</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_field_officer" />
+        </record>
+        <menuitem id="custom_clearance_submenu" parent="sale.menu_sale_config" groups="custom_clearance.group_custom_clearance_as_manager" name="Custom Clearance Config" sequence="1" />
+        <menuitem action="action_field_officer" id="custom_clearance_submenu_field_officer" groups="custom_clearance.group_custom_clearance_as_manager" name="Field Officer" parent="custom_clearance_submenu" sequence="1" />
+    </data>
+</odoo>

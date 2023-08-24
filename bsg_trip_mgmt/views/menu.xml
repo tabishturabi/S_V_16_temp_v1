@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Fleet Operations"
+        id="root_fleet_operations"
+        groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+        web_icon="bsg_trip_mgmt,static/description/fleetOperations_Icon.png"
+        sequence="1"/>
+        
+    <menuitem name="Dashboard"
+        id="root_trip_dashboard"
+        parent="root_fleet_operations"
+        sequence="1"/>
+        
+    <menuitem name="Operations" 
+        id="root_trip_operations" 
+        parent="root_fleet_operations"
+        sequence="2" 
+        />
+
+    <menuitem name="Configuration" 
+        groups="bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+        id="root_trip_configuration" 
+        parent="root_fleet_operations"
+        sequence="3" 
+        />
+
+        <menuitem name="Survey Question" 
+            id="menu_survey_question" 
+            parent="root_trip_configuration"
+            action="action_survey_question" 
+            sequence="1" 
+            />
+
+        <menuitem name="Survey Question Category" 
+            id="menu_survey_question_category" 
+            parent="root_trip_configuration"
+            action="action_survey_question_category" 
+            sequence="2" 
+            />
+
+        <menuitem name="Driver Reward Delivery" 
+            id="menu_driver_reward_per_delivery" 
+            parent="root_trip_configuration"
+            action="action_driver_reward_per_delivery" 
+            sequence="3" 
+            />
+
+        <menuitem name="Driver Rewards By Revenue" 
+            id="menu_action_driver_reward_by_revenue" 
+            parent="root_trip_configuration"
+            action="action_driver_reward_by_revenue" 
+            sequence="4" 
+            />
+
+
+        <menuitem name="Fine For Late Arrival" 
+            id="menu_fine_for_late_arrival" 
+            parent="root_trip_configuration"
+            action="action_fine_for_late_arrival" 
+            sequence="5" 
+            />
+
+        <menuitem name="Safety Of Load" 
+            id="menu_safety_of_load" 
+            parent="root_trip_configuration"
+            action="action_safety_of_load" 
+            sequence="6" 
+            />
+
+
+        <menuitem name="Settings" 
+            id="menu_trip_mgmt_config_settings" 
+            parent="root_trip_configuration"
+            action="bsg_trip_mgmt_settings_action" 
+            sequence="5" 
+            />
+
+
+        <menuitem name="Draft Trips" 
+            id="menu_op_draft" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip" 
+            sequence="1" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            />
+        <menuitem name="Confirmed Trips" 
+            id="menu_op_confirmed" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip_confirmed" 
+            sequence="2" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            /> 
+        <menuitem name="Transit Trips" 
+            id="menu_op_transit" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip_transit" 
+            sequence="3" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            />
+        <menuitem name="In-progress Trips" 
+            id="menu_op_operation" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip_progress" 
+            sequence="4" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            />
+        <menuitem name="Completed Trips" 
+            id="menu_op_done" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip_completed" 
+            sequence="5" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            />
+
+        <menuitem name="All Trips" 
+            id="menu_op_done" 
+            parent="root_trip_operations"
+            action="action_fleet_vehicle_trip_all" 
+            sequence="6" 
+            groups="bsg_trip_mgmt.group_create_trips,bsg_trip_mgmt.group_update_trip_info,bsg_trip_mgmt.group_view_all_trips,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_trips_master,bsg_trip_mgmt.group_fleet_configuration,base.group_erp_manager"
+            />
+<!-- Removed As SO Line functionality is Enabled -->
+<!--         <menuitem name="Unplanned SO" 
+            id="menu_op_so" 
+            parent="root_trip_operations"
+            action="action_bsg_vehicle_cargo_sale_unplanned" 
+            sequence="7" 
+            />
+ -->
+     <menuitem name="Unplanned SO Line" 
+            id="menu_op_so_line" 
+            groups="base.group_erp_manager,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_view_all_trips"
+            parent="root_trip_operations"
+            action="action_bsg_vehicle_cargo_sale_line_unplanned" 
+            sequence="9" 
+            />
+
+     <menuitem name="Delivered SO Line" 
+            id="menu_op_so_line_delivered" 
+            groups="base.group_erp_manager,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_view_all_trips"
+            parent="root_trip_operations"
+            action="action_bsg_vehicle_cargo_sale_line_delivered" 
+            sequence="10" 
+            />
+
+     <menuitem name="Linked SO Line" 
+            id="menu_op_so_line_linked" 
+            groups="base.group_erp_manager,bsg_trip_mgmt.group_view_my_trips,bsg_trip_mgmt.group_view_all_trips"
+            parent="root_trip_operations"
+            action="action_bsg_vehicle_cargo_sale_line_linked" 
+            sequence="11" 
+            />
+
+     <menuitem name="Local Services SO Line" 
+            id="menu_op_local_service_so_line" 
+            parent="root_trip_operations"
+            action="action_cargo_sale_line_local_services" 
+            sequence="12" 
+            />
+
+
+    <menuitem name="Routes" 
+        id="root_trip_routes" 
+        parent="root_fleet_operations"
+        sequence="3" 
+        />
+        
+    <menuitem name="Reports" 
+        id="root_trip_reports" 
+        parent="root_fleet_operations"
+        sequence="4" 
+        />
+    
+    <report 
+            id="bsg_cargo_sale.report_cs_delivery_report"
+            string="Delivery Report"
+            model="bsg_vehicle_cargo_sale_line" 
+            report_type="qweb-html"
+            file="bsg_cargo_sale.report_cs_delivery_template" 
+            name="bsg_cargo_sale.report_cs_delivery_template"
+            paperformat="bsg_cargo_sale.paperformat_shipment_template" 
+            groups="bsg_trip_mgmt.group_delivery_report"
+            menu="False"
+        />
+
+        <record model="ir.ui.menu" id="bsg_trip_mgmt.menu_op_so_line">
+            <field name="name">Unplanned SO Line</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_trip_mgmt.group_add_to_trip'),
+                                                ref('bsg_trip_mgmt.group_add_to_trip')
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_trip_mgmt.menu_op_done">
+            <field name="name">All Trips</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_trip_mgmt.group_create_trips'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_trip_mgmt.menu_op_so_line_delivered">
+            <field name="name">Delivered SO Line</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_trip_mgmt.group_release_car'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_trip_mgmt.menu_op_so_line_linked">
+            <field name="name">Linked SO Line</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_trip_mgmt.group_linked_so_line'),
+                                                ])]"/>
+        </record>
+                                
+        <record model="ir.ui.menu" id="fleet.menu_root">
+            <field name="name">Fleet</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_trip_mgmt.group_fleet_all'),
+                                                ref('bsg_trip_mgmt.group_fleet_menu_access_only'),
+                                                ])]"/>
+        </record>
+
+
+        <record model="ir.ui.menu" id="bsg_master_config.root_configuration_menu">
+            <field name="name">Configuration</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ref('bsg_trip_mgmt.group_price_config'),
+                                                ref('bsg_master_config.group_waypoint_sale_master')
+                                                ])]"/>
+        </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.root_price_master">
+        <field name="name">Price Management</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                             ref('bsg_trip_mgmt.group_price_config'),
+                                            ])]"/>
+    </record>
+
+   <record model="ir.ui.menu" id="bsg_master_config.menu_price_config">
+        <field name="name">Price Config</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                             ref('bsg_trip_mgmt.group_price_config'),
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.menu_demurrage_charges_config">
+        <field name="name">Demurrage Charges Config</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager')
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="sol_import_excel_csv.menu_import_price_config">
+        <field name="name">Import Price Configuration</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager')
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="sol_import_excel_csv.menu_import_car_model">
+        <field name="name">Import Car Model</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager')
+                                            ])]"/>
+    </record>
+
+       <!--  <record model="ir.ui.menu" id="bsg_master_config.root_configuration_menu">
+            <field name="name">Configuration</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ])]"/>
+        </record>
+ -->
+      <!--   <record model="ir.ui.menu" id="bsg_master_config.root_route_master">
+            <field name="name">Route Management</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ])]"/>
+        </record> -->
+
+        <record model="ir.ui.menu" id="bsg_master_config.root_route_master">
+            <field name="name">Route Management</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ref('bsg_master_config.group_waypoint_sale_master')
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_master_config.menu_route">
+            <field name="name">Route</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="bsg_master_config.menu_route_estimated_delivery">
+            <field name="name">Estimated Delivery Day's</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_erp_manager'),
+                                                ref('bsg_master_config.group_master_configuration'),
+                                                ref('bsg_trip_mgmt.group_route_and_estimate_delivery_day'),
+                                                ])]"/>
+        </record>
+
+</odoo>

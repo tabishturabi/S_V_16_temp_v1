@@ -1,0 +1,65 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    
+    <record model="ir.ui.view" id="view_bsg_fleet_trailer_categories_form">
+      <field name="name">view_bsg_fleet_trailer_categories_form</field>
+      <field name="model">bsg.trailer.categories</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+          </header>
+          <sheet string="Trailer Categories">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+                        <h1>
+                            <field name="trailer_cat_id" required="1" placeholder="Trailer Cat ID"/>
+                        </h1>
+                    </div>
+                    <group>
+                      <group>
+                        <field name="trailer_cat_ar_name"/>
+                      </group>
+                      <group>
+                        <field name="trailer_cat_er_name"/>
+                      </group>
+                    </group>
+
+                    <notebook>
+
+                    </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>          
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view   -->
+    <record model="ir.ui.view" id="view_bsg_fleet_trailer_categories_tree">
+      <field name="name">view_bsg_fleet_trailer_categories_tree</field>
+      <field name="model">bsg.trailer.categories</field>
+      <field name="arch" type="xml">
+        <tree string="Trailer Categories">
+          <field name="trailer_cat_id" />
+          <field name="trailer_cat_ar_name" />
+          <field name="trailer_cat_er_name" />
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="bsg_fleet_trailer_categories_action">
+      <field name="name">Trailer Categories</field>
+      <field name="res_model">bsg.trailer.categories</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

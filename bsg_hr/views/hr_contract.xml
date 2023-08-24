@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="inherit_hr_contract_view_form" model="ir.ui.view">
+            <field name="name">inherit.hr.contract.view.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='trial_date_end']" position="attributes">-->
+<!--                    <attribute name="readonly">1</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//group[2]" position="after">
+                    <group>
+                        <field name="contract_period" required="1"/>
+                        <field name="contract_end_date" attrs="{'invisible': [('contract_period', '!=', 'other')], 'required': [('contract_period', '=', 'other')], 'readonly': [('state', '!=', 'draft')]}"/>
+                        <label for="gosi_percentage"/>
+                        <div class="o_row">
+                            <field name="gosi_percentage" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <span>%</span>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="contract_documentation" invisible="1"/>
+                        <field name="last_ticket_date" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="purchase_order_report_report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 13px;
+                                }
+
+                                .contaner {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+
+                                page[size="A4"] {
+                                    width: 23cm;
+                                    height: 27.7cm;
+                                    text-align: center;
+                                }
+
+                                h1 {
+
+                                    margin: 0px auto;
+                                    width: 80%;
+                                    float: left;
+                                    text-align: center;
+                                    margin-bottom: 40px;
+
+                                }
+
+                                .org {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                    text-decoration: underline;
+                                }
+
+                                .dup {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .line {
+                                    width: 100%;
+                                    margin-top: 30px;
+
+
+                                }
+
+                                .ser {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .ser .solid {
+                                    width: 27%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .ser .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .date {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+
+                                .date .solid {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .date .liquid {
+                                    width: 70%;
+                                    float: left;
+                                
+                                }
+
+                                .time {
+                                    width: 33%;
+                                    float: left;
+                                }
+
+                                .time .solid {
+                                    width: 35%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .time .liquid {
+                                    width: 64%;
+                                    float: left;
+                                
+                                }
+
+                                .big {
+                                    width: 100%;
+                                    font-size : 14px;
+
+                                }
+
+
+                                .box {
+                                    width: 49%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+                                    
+                                }
+
+                                .box1 {
+                                    width: 50%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+
+                                }
+
+                                .supp {
+
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidsupp1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .liquidsupp {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .solidsupp2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                
+                                }
+
+                                .add {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidadd1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidadd2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidadd {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .tele {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidtele1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidtele2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidtele {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .ntn {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidntn1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidntn2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidntn {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .term {
+                                    width: 100;
+                                    float: left;
+                                    margin-top: 30px;
+                                }
+
+                                .term .solid {
+                                    width: 15%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .term .liquid {
+                                    width: 85%;
+                                    float: left;
+                                }
+
+
+                                table {
+                                    border: 1px solid #000;
+                                    margin: 10px 0px 0px;
+                                    width: 100%;
+                                    float: left;
+                                    border-spacing: 0px;
+                                    font-size : 15px;
+                                }
+
+                                table tr th,
+                                table tr td {
+                                    border-right: 1px solid #000;
+                                    text-align: center;
+                                }
+
+                                table tr th {
+                                    padding: 10px 0px;
+                                    background: #ccc;
+                                                                    
+                                }
+
+                                table tr td {
+                                    border-top: 1px solid #000;
+                                    padding: 2px 0px;
+                                }
+                                
+                                    
+                            </style>
+
+                            <div class="report-container">
+
+                                <div class="contaner">
+
+                                    <img src="/bassami_collection_report/static/src/img/collection.png" />
+
+                                </div>
+
+                                <table>
+
+                                    <tr>
+                                        <th colspan="2">Invoice Type :</th>
+                                        <th colspan="2">Invoice No :</th>
+                                        <th colspan="2">Invoice Date :</th>
+                                    </tr>
+                                                            
+                                    <tr>
+                                        
+                                        <td><b>فاتورة آجـــل</b></td>
+                                        <td><b>نوع الفاتورة</b></td>
+                                        <td><b>
+                                            <span t-esc="o.name"></span>
+                                        </b></td>
+                                        <td><b>رقم الفاتورة</b></td>
+                                        <td><b>
+                                            <span t-esc="o.payment_date"></span>
+                                        </b></td>
+                                        <td><b>تاريخ الفاتورة</b></td>
+                                            
+                                    </tr>
+
+                                    
+                                </table>
+
+                                <div class="big">
+                                    
+
+                                    <div class="box" style="height: 200px">
+
+                                        <div class="supp">
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪Customer Information</div>
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫بيانات‬ العميل‬ ‫:</div>
+                                        </div>
+
+                                        <div class="supp">
+                                            <div class="solidsupp1">Customer Name:</div>
+                                            <div class="liquidsupp">
+                                                <span t-esc="o.partner_id1.name"></span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪اسم‬ العميل‬ ‫:</div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="solidntn1">Tax Account No:</div>
+                                            <div class="liquidntn">
+                                                <span t-esc="o.partner_id1.vat"></span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الرقم‬ الضريبي‬ ‫:</div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="solidadd1">Address:</div>
+                                            <div class="liquidadd">
+                                                <span t-esc="o.partner_id1.street"></span>
+                                            </div>
+                                            <div class="solidadd2">‫‪: العنوان‬</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="solidtele1">Telephone No:</div>
+                                            <div class="liquidtele">
+                                                <span t-esc="o.partner_id1.phone"></span>
+                                            </div>
+                                            <div class="solidtele2">‫‪رقم‬ الھاتف‬ ‫:</div>
+                                        </div>                                       
+
+                                    </div>
+
+                                    <div class="box1" style="height: 200px">
+                                        <div class="supp">
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">Company Information:</div>
+                                            <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪بيانات‬ الشركه‬ ‫:</div>
+                                        </div>
+
+
+                                        <div class="supp">
+                                            <div class="solidsupp1">Company Name:</div>
+                                            <div class="liquidsupp">
+                                                <span>
+                                                    ‫مجموعة أعمال البسامي الدولية
+                                                </span>
+                                            </div>
+                                            <div class="solidsupp2">‫‪اسم‬ الشركه‬ ‫:</div>
+                                        </div>
+
+                                        <div class="ntn">
+                                            <div class="solidntn1">Tax Account No:</div>
+                                            <div class="liquidntn">
+                                                <span>‫‪300043273800003‬‬</span>
+                                            </div>
+                                            <div class="solidntn2">‫‪الرقم‬ الضريبي‬ ‫:</div>
+                                        </div>
+
+                                        <div class="add">
+                                            <div class="solidadd1">Address:</div>
+                                            <div class="liquidntn">
+                                                <span>‫Between Exit 10 and Exit 11, Al Bassami Building,Al Quds,Riyadh</span>
+                                            </div>
+                                            <div class="solidadd2">‫‪: العنوان‬</div>
+                                        </div>
+
+                                        <div class="tele">
+                                            <div class="solidtele1">Telephone No:</div>
+                                            <div class="liquidtele">
+                                                <span>‫‪920005353‬‬</span>
+                                            </div>
+                                            <div class="solidtele2">‫‪رقم‬ الھاتف‬ ‫:</div>
+                                        </div>
+                                        
+                                    </div>
+
+
+                                </div>
+
+
+                                <t t-if="lang_id == 0">
+
+                                    <table>
+
+                                        <tr>
+                                            
+                                            <th>Total Amount</th>
+                                            <th>Tax Amount</th>
+                                            <th>%Tax</th>
+                                            <th>After Discount</th>
+                                            <th>%Discount</th>
+                                            <th>Amount</th>
+                                            <th>Delivery Branch</th>
+                                            <th>Shipping Branch</th>
+                                            <th>Plate / Chassis</th>
+                                            <th>Service Type</th>
+                                            <th>Shipping Agreement</th>
+
+                                        </tr>
+
+                                        <tr style="border-top: 1px solid">
+                                            
+                                            <th style="border-top: 1px solid">‫اجمالي‬ القيمه‬</th>
+                                            <th style="border-top: 1px solid">‫قيمه‬ الضريبه‬</th>
+                                            <th style="border-top: 1px solid">‫ضريبه‬</th>
+                                            <th style="border-top: 1px solid">‫بعد‬ الخصم‬</th>
+                                            <th style="border-top: 1px solid">‫الخصم‬</th>
+                                            <th style="border-top: 1px solid">‫القيمه‬</th>
+                                            <th style="border-top: 1px solid">‫فرع‬ الوصول‬</th>
+                                            <th style="border-top: 1px solid">‫فرع‬ الشحن‬</th>
+                                            <th style="border-top: 1px solid">‫اللوحه‬ / الھيكل‬</th>
+                                            <th style="border-top: 1px solid">‫نوع‬ الخدمه‬</th>
+                                            <th style="border-top: 1px solid">‫اتفاقيه‬ شحن‬</th>
+
+                                        </tr>
+
+                                        <t t-set = "total" t-value = "0" />
+                                        <t t-set = "tax" t-value = "0" />
+                                        <t t-set = "net" t-value = "0" />
+                                        <t t-set = "sr" t-value = "0" />
+                                        <t t-foreach="o.account_invoice" t-as="i">
+                                            <t t-set = "sr" t-value = "sr+1" />
+
+                                            <tr>
+                                            
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_total_signed))"></span>
+                                                    <t t-set = "net" t-value = "net+i.amount_total_signed" />
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_tax))"></span>
+                                                    <t t-set = "tax" t-value = "tax+i.amount_tax" />
+                                                </td>
+                                                <td>
+                                                     %<span t-esc="sum(i.tax_ids.mapped('amount'))"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_untaxed))"></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <!-- <span t-esc="i.amount_untaxed"></span> -->
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_untaxed))"></span>
+                                                    <t t-set = "total" t-value = "total+i.amount_untaxed" />
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="i.number"></span>
+                                                </td>
+                                                    
+                                            </tr>
+
+                                        </t>
+
+                                    </table>
+
+                                    <table>
+                                                                
+                                        <tr>
+                                            
+                                            <td style="min-width: 100px;max-height: 100px; width: 100px"><b>
+                                                 <span t-esc="'{0:,.2f}'.format(float(total))"></span>
+                                            </b></td>
+                                            <td style="min-width: 150px;max-height: 150px;width: 150px"><b>Shipping Amount</b></td>
+                                            <td style="min-width: 130px;max-height: 130px;width: 130px"><b>‫قيمه‬ الشحن‬</b></td>
+
+                                            <td rowspan="5" style="text-align: left;min-width: 60px;max-height: 60px;width: 60px"><b>
+                                                <img src="/bassami_collection_report/static/src/img/Vat.png" style="width: 120px;height: 120px"/>
+                                            </b></td>
+                                            <td><b></b></td>
+                                            <td style="min-width: 50px;max-height: 50px; width: 50px"><b>
+                                                <span t-esc="sr"></span>
+                                            </b></td>
+                                            <td style="min-width: 200px;max-height: 200px; width: 200px"><b>
+                                                <span>‫ ‫عدد‬ االتفاقيات‬</span>
+                                            </b></td>
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">0</td>
+                                            <td style="font-weight:bold">Discount Amount</td>
+                                            <td style="font-weight:bold">‫الخصومات‬</td>
+                                            <td style="font-weight:bold">‫‪The Bill of <span t-esc="o.payment_date"></span></td>
+                                            <td></td>
+                                            <td style="font-weight:bold">Number of Agreements</td>
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">
+                                                <span t-esc="'{0:,.2f}'.format(float(total))"></span>
+                                            </td>
+                                            <td style="font-weight:bold">‫‪Amount After Discount</td>
+                                            <td style="font-weight:bold">‫
+                                                <span>القيمه‬ بعد‬ الخصم‬</span>
+                                            </td>
+                                            <td style="font-weight:bold">
+                                                <span t-esc="number_to_spell(net)"/>
+                                            </td>
+                                            <td></td>
+                                            <td style="font-weight:bold">
+                                                <span></span>
+                                            </td>
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">
+                                                 <span t-esc="'{0:,.2f}'.format(float(tax))"></span>
+                                            </td>
+                                            <td style="font-weight:bold">‫‪Tax‬‬ ‫‪Amount‬‬</td>
+                                            <td style="font-weight:bold">
+                                                <span>‫ضريبه‬ القيمه‬ المضافه‬</span>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">
+                                                 <span t-esc="'{0:,.2f}'.format(float(net))"></span>
+                                            </td>
+
+                                            <td style="font-weight:bold">‫‪Net‬‬ ‫‪Amount‬‬</td>
+
+                                            <td style="font-weight:bold">‫اجمالي‬ المستحق‬</td>
+
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                                
+                                        </tr>
+
+                                    </table>
+
+                                </t>
+
+                                <t t-if="lang_id == 1">
+
+                                    <table>
+
+                                       
+
+                                        <tr>
+                                            
+                                            <th>Shipping Agreement</th>
+                                            <th>Service Type</th>
+                                            <th>Plate / Chassis</th>
+                                            <th>Shipping Branch</th>
+                                            <th>Delivery Branch</th>
+                                            <th>Amount</th>
+                                            <th>%Discount</th>
+                                            <th>After Discount</th>
+                                            <th>%Tax</th>
+                                            <th>Tax Amount</th>
+                                            <th>Total Amount</th>
+
+                                        </tr>
+
+                                        <tr style="border-top: 1px solid">
+                                            <th style="border-top: 1px solid">‫اتفاقيه‬ شحن‬</th>
+                                            <th style="border-top: 1px solid">‫نوع‬ الخدمه‬</th>
+                                            <th style="border-top: 1px solid">‫اللوحه‬ / الھيكل‬</th>
+                                            <th style="border-top: 1px solid">‫فرع‬ الشحن‬</th>
+                                            <th style="border-top: 1px solid">‫فرع‬ الوصول‬</th>
+                                            <th style="border-top: 1px solid">‫القيمه‬</th>
+                                            <th style="border-top: 1px solid">‫الخصم‬</th>
+                                            <th style="border-top: 1px solid">‫بعد‬ الخصم‬</th>
+                                            <th style="border-top: 1px solid">‫ضريبه‬</th>
+                                            <th style="border-top: 1px solid">‫قيمه‬ الضريبه‬</th>
+                                            
+                                            <th style="border-top: 1px solid">‫اجمالي‬ القيمه‬</th>
+
+                                        </tr>
+
+
+
+                                        <t t-set = "total" t-value = "0" />
+                                        <t t-set = "unittotal" t-value = "0" />
+                                        <t t-set = "tax" t-value = "0" />
+                                        <t t-set = "net" t-value = "0" />
+                                        <t t-set = "sr" t-value = "0" />
+                                        <t t-foreach="o.account_invoice" t-as="i">
+
+                                            <t t-set = "sr" t-value = "sr+1" />
+
+                                            <tr>
+
+                                                <td>
+                                                    <span t-esc="i.number"></span>
+                                                </td>
+
+                                                 <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                </td>
+
+                                                <td>
+                                                    
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_untaxed))"></span>
+                                                    <t t-set = "total" t-value = "total+i.amount_untaxed" />
+                                                </td>
+
+                                                <td>
+                                                    <span></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_untaxed))"></span>
+                                                </td>
+
+                                                <td>
+                                                    %<span t-esc="sum(i.tax_ids.mapped('amount'))"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_tax))"></span>
+                                                    <t t-set = "tax" t-value = "tax+i.amount_tax" />
+                                                </td>
+                                            
+                                                <td>
+                                                    <span t-esc="'{0:,.2f}'.format(float(i.amount_total_signed))"></span>
+                                                    <t t-set = "net" t-value = "net+i.amount_total_signed" />
+                                                </td>
+                                                
+                                               
+                                                
+                                                
+                                                
+                                               
+                                                
+                                                    
+                                            </tr>
+
+                                        </t>
+
+                                    </table>
+
+                                    <table>
+                                                                
+                                        <tr>
+                                            <td style="min-width: 200px;max-height: 200px; width: 200px"><b>
+                                                <span>‫ ‫عدد‬ االتفاقيات‬</span>
+                                            </b></td>
+                                            
+                                            <td style="min-width: 50px;max-height: 50px; width: 50px"><b>
+                                                <span t-esc="sr"></span>
+                                            </b></td>
+
+                                            <td><b></b></td>
+
+
+                                            <td rowspan="5" style="text-align: left;min-width: 60px;max-height: 60px;width: 60px">
+                                                <b>
+                                                    <img src="/bassami_collection_report/static/src/img/Vat.png" style="width: 120px;height: 120px"/>
+                                                </b>
+                                            </td>
+
+                                            <td style="min-width: 130px;max-height: 130px;width: 130px">
+                                                <b>‫قيمه‬ الشحن‬</b>
+                                            </td>
+
+                                            <td style="min-width: 150px;max-height: 150px;width: 150px">
+                                                <b>Shipping Amount</b>
+                                            </td>
+                                            
+                                            <td style="min-width: 100px;max-height: 100px; width: 100px">
+                                                <b>
+                                                    <!-- <span t-esc="total"></span> -->
+                                                    <span t-esc="'{0:,.2f}'.format(float(total))"></span>
+                                                </b>
+                                            </td>
+                                            
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">Number of Agreements</td>
+                                            <td></td>
+                                            <td style="font-weight:bold">‫‪The Bill of <span t-esc="o.payment_date"></span></td>
+                                            <td style="font-weight:bold">‫الخصومات‬</td>
+                                            <td style="font-weight:bold">Discount Amount</td>
+                                            <td style="font-weight:bold">0</td>
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">
+                                                <span></span>
+                                            </td>
+                                            <td></td>
+                                            <td style="font-weight:bold">
+                                                <span t-esc="number_to_spell(net)"/>
+                                            </td>
+                                            <td style="font-weight:bold">‫
+                                                <span>القيمه‬ بعد‬ الخصم‬</span>
+                                            </td>
+                                            <td style="font-weight:bold">‫‪Amount After Discount</td>
+                                            <td style="font-weight:bold">
+                                                <span t-esc="'{0:,.2f}'.format(float(total))"></span>
+                                            </td>
+                                                
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                            <td style="font-weight:bold">
+                                                <span>‫ضريبه‬ القيمه‬ المضافه‬</span>
+                                            </td>
+                                            <td style="font-weight:bold">‫‪Tax‬‬ ‫‪Amount‬‬</td>
+                                            
+                                            <td style="font-weight:bold">
+                                                <!-- <span t-esc="tax"></span> -->
+                                                <span t-esc="'{0:,.2f}'.format(float(tax))"></span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="font-weight:bold">‫اجمالي‬ المستحق‬</td>
+                                            <td style="font-weight:bold">‫‪Net‬‬ ‫‪Amount‬‬</td>
+                                            
+                                            <td style="font-weight:bold">
+                                                <!-- <span t-esc="net"></span> -->
+                                                <span t-esc="'{0:,.2f}'.format(float(net))"></span>
+                                            </td>
+
+
+
+                                            
+                                                
+                                        </tr>
+
+                                    </table>
+
+                                </t>
+
+                                <div class="contaner">
+
+                                    <img src="/bassami_collection_report/static/src/img/bar.png" width="1000px" style="margin-top: 10px"/>
+
+                                </div>
+
+                                <div class="box" style="border:hidden;">
+
+                                    <div class="supp">
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪
+                                            <span>Receipt's Information :</span>
+                                        </div>
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">تفاصيل المستلم</div>
+                                    </div>
+
+                                    <div class="ntn">
+                                        <div class="solidntn1">Receipt's Name :</div>
+                                        <div class="liquidntn"></div>
+                                        <div class="solidntn2">‫اسم‬ المستلم‬</div>
+                                    </div>
+
+                                    <div class="add">
+                                        <div class="solidadd1">Received Date :</div>
+                                        <div class="liquidadd"></div>
+                                        <div class="solidadd2">‫تاريخ الاستلام</div>
+                                    </div>
+
+                                    <div class="tele">
+                                        <div class="solidtele1">Receipt's Signature :</div>
+                                        <div class="liquidtele"></div>
+                                        <div class="solidtele2">‫‪
+                                            <span>توقيع‬ المستلم‬</span>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+
+                                <div class="box1" style="border:hidden;">
+
+                                    <div class="supp">
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">
+                                            <span>Invoice Entered By :</span>
+                                        </div>
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫توقيع‬ معد‬ الفاتوره‬</div>
+                                    </div>
+
+                                    <div class="ntn">
+                                        <div class="solidtele1">User Name : </div>
+                                        <div class="liquidntn">
+                                            <span t-esc="user.name"></span>
+                                        </div>
+                                        <div class="solidntn2">
+                                            ‫‪اسم‬ معد‬ ‫الفاتوره‬ ‫
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="add">
+                                        <div class="solid">Address:</div>
+                                        <div class="liquid">_____________</div>
+                                        <div class="solid">Address:</div>
+                                    </div> -->
+
+                                    <div class="tele">
+                                        <div class="solidtele1">User Signature :</div>
+                                        <!-- <div class="liquidtele">:</div> -->
+                                        <div class="solidtele2">
+                                            ‫‪توقيع‬ معد‬ الفاتوره‬ ‫ ‫
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        
+
+                            </div>
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</openerp>

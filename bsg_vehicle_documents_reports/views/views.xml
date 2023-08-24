@@ -1,0 +1,69 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="vehicle_document_report_wizard">
+      <field name="name">vehicle.documents.report.wizard.form</field>
+      <field name="model">vehicle.documents.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+                <field name="date_filter_by" />
+                <field name="expire_date_condition" attrs="{'invisible':[('date_filter_by','!=','expire_date')]}" />
+                <field name="last_update_date_condition" attrs="{'invisible':[('date_filter_by','!=','last_update_date')]}" />
+                <field name="renewal_license_date_condition" attrs="{'invisible':[('date_filter_by','!=','renewel_license_date')]}" />
+                <field name="vehicle_make" widget="many2many_tags"/>
+                <field name="document_type" widget="many2many_tags" />
+                <field name="vehicle_sticker_no" widget="many2many_tags" />
+                <field name="driver_link"></field>
+                <field name="driver_name" widget="many2many_tags" domain="[('is_driver','=',True)]" attrs="{'invisible':[('driver_link','!=','linked')]}"/>
+                <field name="model_year" widget="many2many_tags"/>
+                <field name="last_update_by" widget="many2many_tags" />
+                <field name="create_by" widget="many2many_tags" />
+              </group>
+              <group>
+                <field name="period_grouping_by" attrs="{'invisible':[('grouping_by','!=','document_expiry_date')]}"/>
+                <field name="date_from" class="with_hijri" attrs="{'invisible':['|',('expire_date_condition','!=','is_between'),('date_filter_by','!=','expire_date')],'required':[('expire_date_condition','=','is_between'),('date_filter_by','=','expire_date')]}" />
+                <field name="date_to" class="with_hijri" attrs="{'invisible':['|',('expire_date_condition','!=','is_between'),('date_filter_by','!=','expire_date')],'required':[('expire_date_condition','=','is_between'),('date_filter_by','=','expire_date')]}" />
+                <field name="date_from_last_update" class="with_hijri" attrs="{'invisible':['|',('last_update_date_condition','!=','is_between'),('date_filter_by','!=','last_update_date')],'required':[('last_update_date_condition','=','is_between'),('date_filter_by','=','last_update_date')]}" />
+                <field name="date_to_last_update" class="with_hijri" attrs="{'invisible':['|',('last_update_date_condition','!=','is_between'),('date_filter_by','!=','last_update_date')],'required':[('last_update_date_condition','=','is_between'),('date_filter_by','=','last_update_date')]}" />
+                <field name="date_from_renewel_license" class="with_hijri" attrs="{'invisible':['|',('renewal_license_date_condition','!=','is_between'),('date_filter_by','!=','renewel_license_date')],'required':[('renewal_license_date_condition','=','is_between'),('date_filter_by','=','renewel_license_date')]}" />
+                <field name="date_to_renewel_license" class="with_hijri" attrs="{'invisible':['|',('renewal_license_date_condition','!=','is_between'),('date_filter_by','!=','renewel_license_date')],'required':[('renewal_license_date_condition','=','is_between'),('date_filter_by','=','renewel_license_date')]}" />
+                <field name="expiry_date" class="with_hijri" attrs="{'invisible':['|',('expire_date_condition','in',['all','is_set','is_not_set','is_between']),('date_filter_by','!=','expire_date')],'required':[('expire_date_condition','not in',['all','is_set','is_not_set','is_between']),('date_filter_by','=','expire_date')]}" />
+                <field name="renewal_license_date" class="with_hijri" attrs="{'invisible':['|',('renewal_license_date_condition','in',['all','is_set','is_not_set','is_between']),('date_filter_by','!=','renewel_license_date')],'required':[('renewal_license_date_condition','not in',['all','is_set','is_not_set','is_between']),('date_filter_by','=','renewel_license_date')]}" />
+                <field name="last_update_date" class="with_hijri" attrs="{'invisible':['|',('last_update_date_condition','in',['all','is_set','is_not_set','is_between']),('date_filter_by','!=','last_update_date')],'required':[('last_update_date_condition','not in',['all','is_set','is_not_set','is_between']),('date_filter_by','=','last_update_date')]}" />
+                <field name="vehicle_state" widget="many2many_tags"/>
+                <field name="vehicle_status" widget="many2many_tags"/>
+                <field name="vehicle_type" widget="many2many_tags" />
+
+                <field name="domain_name"  options="{'no_quick_create': True, 'no_create_edit' : True}" widget="many2many_tags"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+            <!--            <button name="get_notification" type="object" string="Mail" class="oe_highlight"/>-->
+
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="vehicle_documents_report_action">
+      <field name="name">Vehicle Documents Reports</field>
+      <field name="res_model">vehicle.documents.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="vehicle_document_report_wizard"></field>
+      <field name="target">new</field>
+    </record>
+    <menuitem name="Vehicles Documents Report"
+              id="menu_vehicle_document_report"
+              parent="fleet.menu_fleet_reporting"
+              groups="bsg_vehicle_documents_reports.groups_vehicle_documents_reports"
+              sequence="3"
+              action="vehicle_documents_report_action"/>
+  </data>
+</odoo>

@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <record id="quality_team_view_form" model="ir.ui.view">
+            <field name="name">quality.team.view.form</field>
+            <field name="model">bsg.quality.alert.team</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Project Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="group_alias">
+                                <field name="company_id"/>
+                                <field name="sequence"/>
+                                <field name="color"/>
+<!--                                <label for="alias_name" string="Email Alias"/>-->
+<!--                                <div name="alias_def">-->
+<!--                                    <field name="alias_id" class="oe_read_only oe_inline" string="Email Alias"-->
+<!--                                           required="0"/>-->
+<!--                                    <div class="oe_edit_only oe_inline" name="edit_alias" style="display: inline;">-->
+<!--                                        <field name="alias_name" class="oe_inline"/>@-->
+<!--                                        <field name="alias_domain" class="oe_inline" readonly="1"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <field name="alias_contact" class="oe_inline" groups="base.group_no_one"-->
+<!--                                       string="Accept Emails From"/>-->
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+        <record id="quality_team_view_tree_view" model="ir.ui.view">
+            <field name="name">quality.team.view.tree.view</field>
+            <field name="model">bsg.quality.alert.team</field>
+            <field name="arch" type="xml">
+                <tree string="Quality Check">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="quality_team_order" model="ir.actions.act_window">
+            <field name="name">Quality Teams</field>
+            <field name="res_model">bsg.quality.alert.team</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new quality check
+                </p>
+                <p>
+                    Note that the easiest way to create a quality check is to do it directly from a logistic operation,
+                    thanks to the use of quality control points.
+                </p>
+            </field>
+        </record>
+        <menuitem action="quality_team_order"
+                  id="bsg_menu_mrp_qc_action"
+                  parent="manufacturing_enhance.menu_bsg_qc_config"
+                  sequence="3"/>
+    </data>
+</odoo>

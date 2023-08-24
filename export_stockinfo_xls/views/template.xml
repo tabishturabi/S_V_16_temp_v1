@@ -1,0 +1,191 @@
+<odoo>
+    <data>
+        <template id="stock_report_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-if="'warehouse' in data">
+                        <t t-foreach="data.get('warehouse')" t-as="warehouse">
+                            <div class="page">
+                                <div class="oe_structure"/>
+                                <table width="100%" style="font-size:21px;border-style: none;margin-bottom:15px;">
+                                    <tr style="border-style: none;">
+                                        <td style="border-style: none;">
+                                            <center>
+                                                <strong>Current Stock Report</strong>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%" style="font-size:13px;margin-bottom:15px;">
+                                    <tr width="100%"
+                                        style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                                        <td width="50%"
+                                            style="background:#e6e6e6;color:#000000;font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                            <center>
+                                                Report Date
+                                            </center>
+                                        </td>
+                                        <td width="50%"
+                                            style="background:#e6e6e6;color:#000000;font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                            <center>
+                                                Company Name
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr width="100%"
+                                        style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                                        <td width="50%"
+                                            style="font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                            <center>
+                                                <span t-esc="data.get('date_today')"/>
+                                            </center>
+                                        </td>
+                                        <td width="50%"
+                                            style="font-family:verdana;font-weight:bold;min-height:30px;line-height:20px;font-size:13px;border: 1px solid black;">
+                                            <center>
+                                                <span t-esc="data.get('company_name')"/>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%"
+                                       style="font-size:13px;font-family: 'Times New Roman', Times, serif;">
+                                    <tr style="min-height:30px;line-height:20px;font-size:13px;font-family: 'Times New Roman', Times, serif;"
+                                        width="100%">
+                                        <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                            <center>
+                                                SKU
+                                            </center>
+                                        </td>
+                                        <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                            <center>
+                                                Product Name
+                                            </center>
+                                        </td>
+                                        <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                            <center>
+                                                Category
+                                            </center>
+                                        </td>
+                                        <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                            <center>
+                                                Location
+                                            </center>
+                                        </td>
+                                        <t t-if="not data.get('by_quantity')">
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Cost Price
+                                                </center>
+                                            </td>
+
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Available
+                                                </center>
+                                            </td>
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Virtual
+                                                </center>
+                                            </td>
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Incoming
+                                                </center>
+                                            </td>
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Outgoing
+                                                </center>
+                                            </td>
+                                        </t>
+                                        <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                            <center>
+                                                Net on hand
+                                            </center>
+                                        </td>
+                                        <t t-if="not data.get('by_quantity')">
+
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Total Sold
+                                                </center>
+                                            </td>
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Total Purchased
+                                                </center>
+                                            </td>
+                                            <td style="font-family:verdana;background:#e6e6e6;color:#000000;font-weight:bold;padding-left:5px;border: 1px solid black;">
+                                                <center>
+                                                    Valuation
+                                                </center>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <t t-foreach="get_warehouse_details(data, warehouse.id)" t-as="record">
+                                        <tr style="font-size:13px;">
+                                            <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                                <t t-esc="record.get('sku')"/>
+                                            </td>
+                                            <td style="font-family:verdana;padding-left:5px;border: 1px solid black;text-align:left;">
+                                                <t t-esc="record.get('name')"/>
+                                            </td>
+                                            <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                <span t-esc="record.get('category')"/>
+                                            </td>
+                                            <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                <span t-esc="record.get('location')"/>
+                                            </td>
+                                            <t t-if="not data.get('by_quantity')">
+
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('cost_price') or 0.00"/>
+                                                </td>
+
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('available') or 0.00"/>
+                                                </td>
+
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('virtual') or 0.00"/>
+                                                </td>
+
+
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('incoming') or 0.00"/>
+                                                </td>
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('outgoing') or 0.00"/>
+                                                </td>
+                                            </t>
+                                            <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                <span t-esc="'%.2f'% record.get('net_on_hand') or 0.00"/>
+                                            </td>
+                                            <t t-if="not data.get('by_quantity')">
+
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('purchase_value') or 0.00"/>
+                                                </td>
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('sale_value') or 0.00"/>
+                                                </td>
+                                                <td style="font-family:verdana;padding-left:5px;padding-right:5px;border: 1px solid black;text-align:right;">
+                                                    <span t-esc="'%.2f'% record.get('total_value') or 0.00"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div style="page-break-before:always;"/>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

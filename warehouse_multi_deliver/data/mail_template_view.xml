@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="email_template_for_purchase_order_approve" model="mail.template">
+            <field name="name">Purchase Order Approved</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="subject">Purchase Order (Ref ${object.name or 'n/a' })</field>
+<!--            <field name="partner_to">${object.purchase_transfer.partner_id.id}</field>-->
+            <field name="partner_to">{{ object.purchase_transfer.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                    <div style="margin: 0px; padding: 0px;">
+                        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                            Dear ${object.purchase_transfer.partner_id.name}
+                            <br/><br/>
+                            You Have Purchase Request :  <strong> ${object.purchase_transfer.name} </strong> <br/>
+                            Date Of Request: <strong> ${object.purchase_transfer.date_pr}</strong><br/>
+                            Department:  <strong>${object.purchase_transfer.department_id.name}</strong><br/>
+                            Branch:  <strong> ${object.purchase_transfer.branches.name} </strong><br/>
+                            The Purchase Order : <strong> ${object.name} </strong>,  For Your P.R Is Approved . Please Contact Responsible Department To Complete The Procee.
+                            <p style="margin-top: 24px; margin-bottom: 16px;">
+                                <a href="${object.purchase_transfer.get_base_url()}/web#id=${object.purchase_transfer.id}&amp;view_type=form&amp;model=purchase.req&amp;action=purchase_enhanced.action_purchase_req"
+                                style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                        View Purchase Request
+                                </a>
+                            </p>
+
+                            Best regards,
+                        </p>
+                    </div>
+            </field>
+            <field name="lang">${object.purchase_transfer.partner_id.lang}</field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+              
+</data>
+</odoo>

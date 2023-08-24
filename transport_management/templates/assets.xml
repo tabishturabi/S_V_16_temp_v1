@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Migration Note-->
+<!--    <template id="assets_backend" name="Transport assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/transport_management/static/src/js/disable_action_view.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+</odoo>

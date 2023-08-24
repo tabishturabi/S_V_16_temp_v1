@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="purchase_req_report_xlsx_id"
+             model="purchase.req.report.wizard"
+             string="Purchase Request Report"
+             report_type="xlsx"
+             name="bsg_purchase_req_report.pr_report_xlsx"
+             file="bsg_purchase_req_report.pr_report_xlsx"
+     />
+</odoo>

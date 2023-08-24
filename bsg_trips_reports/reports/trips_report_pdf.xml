@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="trips_report_pdf_id"
+                model="trips.report.wizard"
+                string="Trips Report"
+                report_type="qweb-html"
+                name="bsg_trips_reports.trips_report_pdf"
+                file="bsg_trips_reports.trips_report_pdf"/>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="bsg_trips_reports/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+             <div style="margin-left:40%;">
+                 <h2>Trips Report</h2>
+             </div>
+            <table    width="100%" align="left" border="0">
+                <tr>
+                    <td width="10%">Date From</td>
+                    <td width="20%"><t t-esc="from_date" /></td>
+                    <td width="70%"></td>
+                </tr>
+                <tr>
+                    <td width="10%">Date To</td>
+                    <td width="20%"><t t-esc="to_date" /></td>
+                    <td width="70%"></td>
+                </tr>
+                <tr>
+                    <td width="10%">Vehicle Type</td>
+                    <td width="20%"><t t-esc="docs.vehicle_type.display_name" /></td>
+                    <td width="70%"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>
+                    <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> - <span class="topage"/>
+                </div>
+            </div>
+          </div>
+      </template>
+      <template id="trips_report_pdf">
+        <t t-call="web.html_container">
+            <t t-call="bsg_trips_reports.external_layout_standard">
+                <div class="page" >
+                    <style>
+                        table {
+                        border-collapse: collapse;
+                        }
+                        th{
+                        text-align: left;
+                        padding: 6px;
+                        background-color: #04AA6D;
+                        color: white;
+                        font-weight:bold;
+                        }
+                        tr,td{
+                        padding: 8px;
+
+                        }
+                        tr:nth-child(even) {background-color: #f2f2f2;
+                        }
+                    </style>
+                     <table    width="100%" align="left" style="border: 1px;">
+                        <tr>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Trip Status
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Total Cars
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Truck Load
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Actual End Date
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Scheduled End Date
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Actual Start Date
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                End Branch
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Start Branch
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Vehicle Type
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Driver Code
+                            </th>
+                            <th width="9%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Driver
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Vehicle
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Scheduled Start Date
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                Trip Reference
+                            </th>
+                        </tr>
+                         <tr>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                حالة الرحلة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                مجموع السيارات
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                حمولة الشاحنة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                تاريخ الانتهاء الفعلى
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                تاريخ انتهاء المجدولة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                تاريخ الانطلاق الفعلى
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                فرع الوصول
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                فرع الانطلاق
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                نوع الشاحنة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                رقم السائق
+                            </th>
+                            <th width="9%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                اسم السائق
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                رقم الشاحنة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                تاريخ بدء المجدولة
+                            </th>
+                            <th width="7%" align="left"
+                                style="font-family: 'Helvetica';font-size: 13px;border: 0px;">
+                                رقم الرحلة
+                            </th>
+                        </tr>
+                        <t t-set="sr" t-value="1" />
+                        <t t-foreach="trips" t-as="trip">
+                            <tr>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <t t-if="trip.state=='draft'">
+                                        <span>Draft</span>
+                                    </t>
+                                    <t t-if="trip.state=='on_transit'">
+                                        <span>On Transit</span>
+                                    </t>
+                                    <t t-if="trip.state=='confirmed'">
+                                        <span>Confirmed</span>
+                                    </t>
+                                    <t t-if="trip.state=='progress'">
+                                        <span>In Operation</span>
+                                    </t>
+                                    <t t-if="trip.state=='done'">
+                                        <span>Done</span>
+                                    </t>
+                                    <t t-if="trip.state=='finished'">
+                                        <span>Finished</span>
+                                    </t>
+                                    <t t-if="trip.state=='cancelled'">
+                                        <span>Cancelled</span>
+                                    </t>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.total_cars - len(trip.stock_picking_id.filtered(lambda l:l.is_package==True))"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <t t-if="trip.total_cars==0">
+                                        <span>Empty</span>
+                                    </t>
+                                    <t t-if="trip.total_cars!=0">
+                                        <span>Full</span>
+                                    </t>
+                                </td>
+                                <td width="7%" align="center"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.actual_end_datetime"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.expected_end_date"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.actual_start_datetime"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.end_branch.display_name"></span>
+                                </td>
+                                <td width="7%" align="center"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.start_branch.display_name"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.vehicle_id.vehicle_type.display_name"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.driver_id.driver_code"/>
+                                </td>
+                                <td width="9%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.driver_id.display_name"></span>
+                                </td>
+                                <td width="7%" align="center"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.vehicle_id.display_name"/>
+                                </td>
+                                <td width="7%" align="left"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.expected_start_date"/>
+                                </td>
+                                <td width="7%" align="center"
+                                    style="font-family: 'Helvetica';font-size: 13px;border: 1px solid black;;">
+                                    <span t-esc="trip.name"/>
+                                </td>
+                            </tr>
+                            <t t-set="sr" t-value="sr+1" />
+                        </t>
+                     </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

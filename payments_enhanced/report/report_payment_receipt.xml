@@ -1,0 +1,181 @@
+<odoo>
+	<data>
+    <!-- Action Payment Receipt Report -->
+    <report
+      id="report_payment_receipt_report"
+      string="Print Vouchers"
+      model="account.payment"
+      report_type="qweb-html"
+      file="payments_enhanced.report_payment_receipt_template"
+      name="payments_enhanced.report_payment_receipt_template"
+      />
+
+      <!-- Main template -->
+      <template id="report_payment_receipt_template">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+            <t t-set="lang" t-value="o.sudo().partner_id.lang"/>
+            <t t-call="payments_enhanced.report_payment_receipt_template_call" t-lang="lang"/>
+          </t>
+        </t>
+      </template>
+
+      <!-- Translatable template  and internal layout-->
+
+      <template id="report_payment_receipt_template_call">
+        <t t-call="web.internal_layout">
+          <t t-set="o" t-value="o.with_context({'lang': lang})"/>
+          <div class="page">
+            <style>
+
+                .header {
+                    display: none;
+                }
+                 body {
+                  display: block;
+                  font-size: 15px;
+                  margin: 0 auto;
+                  margin-bottom: 0.5cm;
+                }
+                .footer {
+                    display: none !important;
+                }
+                .centered {
+                    width: 1000px;
+                    margin: auto;
+                }
+                .address {
+                    width: 45%;
+                    float: right;
+                    margin: 15px 0px 15px 0px;
+                }
+                .address p {
+                    text-align: right;
+                }
+                .span_left {
+                    margin-left: 80px;
+                    font-size:medium;
+                }
+                .span_right {
+                  float: right;
+                    font-weight:bold;
+                    font-size:large;
+                }
+                .p_text_bold {
+                  font-weight:bold;
+                }
+                .span_center {
+                  float: center;
+                  font-size:medium;
+                }
+            </style>
+            <page size="A4">
+            <div style="align-content: center">
+              <table width="80%" height="87" border="0">
+                <tr>
+                <td></td>
+                <td><img src="/payments_enhanced/static/img/albassami_transport_logoWP.png" width="134" height="50" style="margin-left: 430px;" alt=""/></td>
+                <td class="width33"><img src="/payments_enhanced/static/img/rightHeader.png" width="210" height="110" style="margin-left: 180px;" alt=""/></td>
+                </tr>
+              </table>
+            </div>
+             <hr class="width80%Solid" />
+            <div class="main-data">
+              <div class="centered">
+                <div align="center" style="padding: 10px;">
+                  <h1 t-if="o.sudo().payment_type == 'outbound' and not o.sudo().fleet_trip_id"> سند الدفع </h1>
+                  <h1 t-if="o.sudo().payment_type == 'outbound' and o.sudo().fleet_trip_id">سند صرف الرحله وعهدة استلام السيارات</h1>
+                  <h1 t-if="o.sudo().payment_type == 'inbound'"> سند القبض </h1>
+                  <h1 t-if="o.sudo().is_internal_transfer"> تحــويل داخـــلي </h1>
+                  <table class="table-1" width="80%" border="0" align="center" style="margin-top: 30px;">
+                    <tr>
+                        <td>
+                            <span t-esc="o.sudo().amount" class="span_left"></span>
+                            <span class="span_right"> : المبلغ</span>
+                        </td>
+                        <td width="20%"></td>
+                        <td>
+                            <span t-esc="o.sudo().date" class="span_left"></span>
+                            <span class="span_right"> : تاريخ</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span t-esc="o.sudo().name" class="span_left" ></span>
+                            <span class="span_right"> : المرجع </span>
+                        </td>
+                        <td width="20%"></td>
+                        <td>
+                          <t t-if="o.sudo().is_internal_transfer == False">
+                            <span  t-esc="o.sudo().partner_id.name" class="span_left" ></span>
+                            <span class="span_right"> : الســــادة </span>
+                          </t>
+                          <t t-else="">
+                            <span  t-esc="o.sudo().journal_id.name" class="span_left" ></span>
+                            <span class="span_right"> : من </span></t>
+                        </td>
+                    </tr>
+                    <tr>
+                      <t t-if="o.sudo().is_internal_transfer">
+                            <td></td>
+                            <td></td>
+                            <td>
+                              <span  t-esc="o.sudo().destination_journal_id.name" class="span_left" ></span>
+                              <span class="span_right"> : إلى </span>
+                          </td>
+                          </t>
+                    </tr>
+                    <table class="table-2" width="80%" border="0" style="margin-top: 20px;">
+                      <tr>
+                        <td width="20%"></td>
+                          <td width="60%" style="text-align:right">
+                            <!-- <span t-esc="o.currency_id.amount_to_text(o.amount)" class="span_left"> </span> -->
+                            <span t-esc="o.sudo().get_arabic_total_word(o.sudo().amount)" style="text-align:right;margin-right:30px"> </span>
+                          </td>
+                          <td>
+                            <span class="span_right"> : المبلغ وقدرة </span>
+                          </td>
+                      </tr>
+                       <tr>
+                        <td width="20%"></td>
+                          <td width="60%" style="text-align:right">
+                            <span  t-esc="o.sudo().communication"  style="text-align:right;margin-right:30px"></span>
+                          </td>
+                          <td>
+                            <span class="span_right"> : البيان </span>
+                          </td>
+                      </tr>
+                    </table>
+
+                    <table class="table-3" width="80%" border="0" style="margin-top: 120px;">
+                      <tr>
+                          <td width="25%">
+                          <t t-if="o.sudo().is_internal_transfer == False">
+                             <span t-if = "o.sudo().journal_id.name == 'Bank'" t-field = "o.sudo().journal_id.name"  class="span_left"></span>
+                              <span class="span_right"> :بنك </span>
+                            </t>
+                          </td>
+                          <td width="30%">
+                            <t t-if="o.sudo().is_internal_transfer == False">
+                              <span class="span_right"> :رقم الشيك </span>
+                            </t>
+                          </td>
+                          <td width="25%">
+                             <t t-if="o.sudo().is_internal_transfer == False">
+                             <span t-if = "o.sudo().journal_id.name == 'Cash'" t-field = "o.sudo().journal_id.name" class="span_left"> </span>
+                            <span class="span_right"> : نقدا </span>
+                          </t>
+                          </td>
+                      </tr>
+                    </table>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </page>
+          </div>
+        </t>
+      </template>
+	</data>
+</odoo>

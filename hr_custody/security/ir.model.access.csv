@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custody_request_internal_user,access_custody_request_internal_user,model_custody_request,base.group_user,1,0,0,0
+access_custody_request_user,access_custody_request_user,model_custody_request,hr.group_hr_user,1,1,1,1
+access_custody_request_manager,access_custody_request_manager,model_custody_request,hr.group_hr_manager,1,1,1,1
+access_custody_asset_user,access_custody_asset_user,model_custody_asset,hr.group_hr_user,1,1,1,1
+access_custody_asset_manager,access_custody_asset_manager,model_custody_asset,hr.group_hr_manager,1,1,1,1
+access_custody_custody_request,access_custody_custody_request,model_custody_asset,hr_custody.group_custody_request,1,1,1,0
+access_custody_branch_supervisor,access_custody_branch_supervisor,model_custody_asset,bsg_hr.group_branch_supervisor,1,1,1,0
+access_custody_department_manager,access_custody_department_manager,model_custody_asset,bsg_hr.group_department_manager,1,1,1,0

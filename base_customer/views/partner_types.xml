@@ -1,0 +1,70 @@
+<odoo>
+  <data>
+   
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_partner_type_form">
+        <field name="name">partner.type.form</field>
+        <field name="model">partner.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml" >
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                        <group>
+                            <field name="accont_rec" domain="[('account_type', '=', 'asset_receivable'), ('deprecated', '=', False)]" required="1"/>
+                            <field name="accont_payable" domain="[('account_type', '=', 'liability_payable'), ('deprecated', '=', False)]" required="1"/>
+                            <field name="discount" groups="base_customer.group_construction" attrs="{'invisible': [('is_construction', '=', False)]}"/>
+                            <field name="customer_type"/>
+                        </group>
+                        <group>
+                            <field name="is_custoemer" groups="base_customer.group_customer"/>
+                            <field name="is_vendor" groups="base_customer.group_vendor"/>
+                            <field name="is_staff" groups="base_customer.group_staff"/>
+                            <field name="is_dealer" groups="base_customer.group_dealer_customer"/>
+                            <field name="is_credit_customer" groups="base_customer.group_credit_customer"/>
+                            <field name="is_construction" groups="base_customer.group_construction"/>
+                            <field name="pricing_type" required="1"/>
+                            <field name="restrict_partner_from_cargo"/>
+                        </group>
+                    </group>                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="view_partner_type_tree">
+        <field name="name">partner.type._tree</field>
+        <field name="model">partner.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="accont_rec"/>
+                <field name="accont_payable"/>
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_partnertype">
+        <field name="name">Partner Types</field>
+        <field name="res_model">partner.type</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem name="Partner Types" 
+      id="account_partner_type_menu" 
+      parent="account.account_account_menu" 
+      action="action_partnertype"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

@@ -1,0 +1,153 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_vehicle_revenue_report_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="report_for_vehicle_revenue_report" 
+            model="fleet.vehicle.trip"
+            name="vehicle_revenue_report.vehicle_revenue_temp_id"
+            file="vehicle_revenue_report.vehicle_revenue_temp_id"
+            report_type="qweb-html"
+            string="Vehicle Revenue Report"
+            paperformat="paperformat_vehicle_revenue_report_template"
+            menu="False"/>
+
+         <report
+            id="vehicle_revenue_xlsx_report"
+            model="fleet.vehicle.trip"
+            name="vehicle_revenue_report.vehicle_revenue_xlsx"
+            file="vehicle_revenue_report.vehicle_revenue_xlsx"
+            report_type="xlsx"
+            string="Vehicle Revenue Report"
+            paperformat="paperformat_vehicle_revenue_report_template"
+            menu="False"/>
+
+        <record id="vehicle_revenue_records_wizard" model="ir.ui.view">
+            <field name="name">vehicle_revenue_records_wizard</field>
+            <field name="model">vehicle.revenue.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="vehicle_id" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags"/>
+                            <field name="vehicle_type" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags"/>
+                            <field name="trip_type"/>
+                            <field name="route_type"/>
+
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="to"/>
+                            <field name="driver_id" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="report_type"/>
+<!--                            <field name="fuel_expense_method_ids" widget="many2many_tags"/>-->
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print PDF" class = "oe_highlight" />
+                        <button name="generate_report_xlsx" type="object" string="Print Xlsx" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_revenue_menu_action" model="ir.actions.act_window">
+            <field name="name">Vehicle Revenue Report</field>
+            <field name="res_model">vehicle.revenue.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vehicle_revenue_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+    
+        <menuitem id="vehicle_revenue_menu_item" name="Vehicle Revenue Report" action="vehicle_revenue_menu_action" parent="bsg_trip_mgmt.root_trip_reports" />
+        
+         <report
+
+            id="report_for_vehicle_truck_revenue_report" 
+            model="fleet.vehicle.trip"
+            name="vehicle_revenue_report.vehicle_truck_revenue_temp_id"
+            file="vehicle_revenue_report.vehicle_truck_revenue_temp_id"
+            report_type="qweb-html"
+            string="Vehicle Truck Revenue Report"
+            paperformat="paperformat_vehicle_revenue_report_template"
+            menu="False"/>
+
+      <record id="vehicle_truck_revenue_records_wizard" model="ir.ui.view">
+            <field name="name">vehicle_truck_revenue_records_wizard</field>
+            <field name="model">vehicle.truck.revenue.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="vehicle_id" domain="[('vehicle_type', 'in', [23, 24])]" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags"/>
+                            <!-- <field name="vehicle_type" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags"/> -->
+                            <field name="trip_type"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="to"/>
+                            <field name="driver_id" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="report_type"/>
+
+
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_truk_revenue_menu_action" model="ir.actions.act_window">
+            <field name="name">Vehicle Truck Revenue Report</field>
+            <field name="res_model">vehicle.truck.revenue.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vehicle_truck_revenue_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+    
+        <menuitem id="vehicle_Truck_revenue_menu_item" name="Special Service Revenue Report" action="vehicle_truk_revenue_menu_action" parent="bsg_trip_mgmt.root_trip_reports" />
+    
+    </data>
+</odoo>

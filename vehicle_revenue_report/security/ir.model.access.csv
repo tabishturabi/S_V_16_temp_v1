@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vehicle_revenue_report,access_vehicle_revenue_report,model_vehicle_revenue_report,,1,1,1,1
+access_vehicle_truck_revenue_report,access_vehicle_truck_revenue_report,model_vehicle_truck_revenue_report,,1,1,1,1

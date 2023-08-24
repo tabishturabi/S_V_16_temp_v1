@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="survey.question.category" id="survey_question_category_1">
+            <field name="name">Financial Penalty</field>
+        </record>
+        <record model="survey.question.category" id="survey_question_category_2">
+            <field name="name">Administrative Penalty</field>
+        </record>
+
+        <record model="driver_reward_per_delivery" id="driver_reward_per_delivery_1">
+            <field name="from_km">100</field>
+            <field name="to_km">500</field>
+            <field name="amount_per_car">7</field>
+            <field name="amount_per_car_b">5</field>
+            <field name="empty_amount_per_car">0</field>
+        </record>
+        <record model="driver_reward_per_delivery" id="driver_reward_per_delivery_2">
+            <field name="from_km">501</field>
+            <field name="to_km">1000</field>
+            <field name="amount_per_car">12</field>
+            <field name="amount_per_car_b">10</field>
+            <field name="empty_amount_per_car">0</field>
+        </record>
+        <record model="driver_reward_per_delivery" id="driver_reward_per_delivery_3">
+            <field name="from_km">1001</field>
+            <field name="to_km">1400</field>
+            <field name="amount_per_car">15</field>
+            <field name="amount_per_car_b">12</field>
+            <field name="empty_amount_per_car">0</field>
+        </record>
+        <record model="driver_reward_per_delivery" id="driver_reward_per_delivery_4">
+            <field name="from_km">1401</field>
+            <field name="to_km">1700</field>
+            <field name="amount_per_car">20</field>
+            <field name="amount_per_car_b">15</field>
+            <field name="empty_amount_per_car">0</field>
+        </record>
+        <record model="driver_reward_per_delivery" id="driver_reward_per_delivery_5">
+            <field name="from_km">1701</field>
+            <field name="to_km">99999</field>
+            <field name="amount_per_car">25</field>
+            <field name="amount_per_car_b">20</field>
+            <field name="empty_amount_per_car">0</field>
+        </record>
+
+        <record model="driver_reward_by_revenue" id="driver_reward_by_revenue_1">
+            <field name="from_km">0</field>
+            <field name="to_km">9999</field>
+            <field name="amount_per_car">0</field>
+            <field name="leval_stage">level_1</field>
+        </record>
+        <record model="driver_reward_by_revenue" id="driver_reward_by_revenue_2">
+            <field name="from_km">10000</field>
+            <field name="to_km">15999</field>
+            <field name="amount_per_car">4</field>
+            <field name="leval_stage">level_2</field>
+        </record>
+        <record model="driver_reward_by_revenue" id="driver_reward_by_revenue_3">
+            <field name="from_km">16000</field>
+            <field name="to_km">23499</field>
+            <field name="amount_per_car">5</field>
+            <field name="leval_stage">level_3</field>
+        </record>
+        <record model="driver_reward_by_revenue" id="driver_reward_by_revenue_4">
+            <field name="from_km">23500</field>
+            <field name="to_km">999999</field>
+            <field name="amount_per_car">6</field>
+            <field name="leval_stage">level_4</field>
+        </record>
+
+        <record model="fine_for_late_arrival" id="fine_for_late_arrival_1">
+            <field name="from_km">6</field>
+            <field name="to_km">12</field>
+            <field name="deduction_from_reqard">25</field>
+        </record>
+        <record model="fine_for_late_arrival" id="fine_for_late_arrival_2">
+            <field name="from_km">12</field>
+            <field name="to_km">18</field>
+            <field name="deduction_from_reqard">50</field>
+        </record>
+        <record model="fine_for_late_arrival" id="fine_for_late_arrival_3">
+            <field name="from_km">18</field>
+            <field name="to_km">99999</field>
+            <field name="deduction_from_reqard">100</field>
+        </record>                
+        <record model="safety_of_load" id="safety_of_load_1">
+            <field name="from_km">1</field>
+            <field name="to_km">25</field>
+            <field name="deduction_from_reqard">25</field>
+        </record> 
+        <record model="safety_of_load" id="safety_of_load_2">
+            <field name="from_km">26</field>
+            <field name="to_km">50</field>
+            <field name="deduction_from_reqard">50</field>
+        </record> 
+        <record model="safety_of_load" id="safety_of_load_3">
+            <field name="from_km">51</field>
+            <field name="to_km">75</field>
+            <field name="deduction_from_reqard">100</field>
+        </record>                 
+    </data>
+</odoo>

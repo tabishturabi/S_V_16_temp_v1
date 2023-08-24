@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="tamara_form">
+            <script type="text/javascript">
+                window.open("<t t-esc="tamara_checkout_url"/>", "_self");
+            </script>
+        </template>
+    </data>
+</odoo>

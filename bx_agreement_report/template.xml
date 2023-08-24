@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="paperformat_bx_agreement_report" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="bx_agreement_report_id" 
+            model="transport.management"
+            name="bx_agreement_report.bx_agreement_report_temp"
+            file="bx_agreement_report.bx_agreement_report_temp"
+            report_type="qweb-html"
+            string="Bx Agreement Report"
+            paperformat="paperformat_bx_agreement_report"/> 
+
+
+    </data>
+</odoo>

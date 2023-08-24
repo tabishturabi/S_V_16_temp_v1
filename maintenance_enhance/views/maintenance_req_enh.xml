@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="maintenance_req_enh_form_view" model="ir.ui.view">
+            <field name="name">maintenance_request_enhance_form_view</field>
+            <field name="model">maintenance.request.enhance</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Work Order">
+                    <header>
+                        <button name="btn_confirm" type="object"
+                                attrs="{'invisible':['|',('bool_group_check','=',False),('state','in',['3','4','5'])]}"
+                                string="Confirm" class="oe_highlight" groups="maintenance_enhance.group_confirm_wo"/>
+                        <button name="btn_reject" type="object"
+                                attrs="{'invisible':['|',('bool_group_check','=',False),('state','in',['1','4','5'])]}"
+                                string="Reject" class="oe_highlight"/>
+                        <!--                        <button name="action_mm_approval" type="object"   attrs="{'invisible':['|',('id','=',False),('state','!=','draft')]}" string="MM Approval" class="oe_highlight"  groups="maintenance_enhance.group_wo_mm_approve"/>-->
+                        <!--                        <button name="action_em_approval" type="object" groups="maintenance_enhance.group_wo_em_approve" string="EM Approval" class="oe_highlight" attrs="{'invisible':['|',('is_check_em_create_pr','=',True),('state','in',['done','cancel','draft'])]}"/>-->
+                        <button name="action_create_pr" type="object" groups="maintenance_enhance.group_wo_create_pr"
+                                string="Create PR" class="oe_highlight"
+                                attrs="{'invisible':['|',('state','!=','2'),('is_check_create_pr','=',False)]}"/>
+                        <!--                        <button name="action_it_approval" type="object" groups="maintenance_enhance.group_wo_it_approve" string="IT Approval" class="oe_highlight" states="mm_approval"/>-->
+                        <button name="action_re_open_wo" type="object" string="Re-Open WO" class="oe_highlight"
+                                attrs="{'invisible':['|',('is_check_wo_lines','!=',True),('state','!=','4')]}"
+                                groups="maintenance_enhance.group_work_order_reset"/>
+                        <button name="action_cancel" attrs="{'invisible':[('state','not in',['1','2'])]}" type="object"
+                                groups="maintenance_enhance.group_wo_cancelled" string="Cancel" class="oe_highlight"/>
+                        <button name="action_close_wo" type="object" attrs="{'invisible':[('state','not in',['3'])]}"
+                                groups="maintenance_enhance.group_work_order_closed" string="Close WO"
+                                class="oe_highlight"/>
+                        <button name="action_reset" type="object" groups="maintenance_enhance.group_work_order_reset"
+                                attrs="{'invisible':[('state','not in',['5'])]}" string="Reset To Draft"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_ep_view" class="oe_stat_button" icon="fa-book" type="object">
+                                <field name="ep_count" widget="statinfo" string="Entry Permission"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="action_get_pr_view" class="oe_stat_button" icon="fa-book" type="object">
+                                <field name="pr_count" widget="statinfo" string="PR"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+
+
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="vehicle_type_name" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="vehicle_status" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="vehicle_name" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="vehicle_id"
+                                       attrs="{'required':[('maintenance_for','in',['fleet','both'])],'readonly':['|',('state','=','4'),('entry_permission_id','!=',False)]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="taq_number"
+                                       attrs="{'required':[('maintenance_for','in',['both','trailer'])],'readonly':['|',('state','=','4'),('entry_permission_id','!=',False)]}"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="driver_id" readonly="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1"/>
+                                <field name="driver_code" readonly="1"/>
+                                <field name="driver_mobile" attrs="{'readonly':[('state','!=','draft')]}"
+                                       force_save="1"/>
+                                <field name="origin" force_save="1"
+                                       attrs="{'invisible':[('is_ambulance','=',False)],'readonly':['|',('state','=','4'),('entry_permission_id','!=',False)]}"/>
+                                <field name="maintenance_for" force_save="1" required="1"
+                                       attrs="{'readonly':['|',('state','=','4'),('entry_permission_id','!=',False)]}"/>
+                                <field name="is_check_wo_lines" invisible="1"/>
+                                <!--                                <field name="is_button_create_pr" invisible="1"/>-->
+                                <field name="bool_group_check" invisible="1"/>
+                                <field name="entry_permission_id"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}" readonly="1"
+                                       attrs="{'invisible':[('entry_permission_id','=',False)]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="plate_no" readonly="1" force_save="1"/>
+                                <field name="total_cars" readonly="1" force_save="1"/>
+                                <field name="current_branch_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="current_branch_user_id" readonly="1" force_save="1"
+                                       options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                <field name="odometer" readonly="1" force_save="1"/>
+                                <field name="odometer_unit" readonly="1" force_save="1"/>
+                                <field name="entry_date" readonly="1" force_save="1"/>
+                                <field name="exit_date" force_save="1" attrs="{'readonly':[('state','=','4')]}"/>
+                                <field name="is_check_create_pr" invisible="1" force_save="1"/>
+                                <!--                                <field name="is_check_em_create_pr" invisible="1" force_save="1"/>-->
+                                <field name="truck_load" force_save="1" required="1"/>
+                                <field name="is_ambulance" force_save="1"
+                                       attrs="{'readonly':[('state','=','4')],'invisible':[('entry_permission_id','!=',False)]}"/>
+                                <field name="last_reopen_date" force_save="1" readonly="1"/>
+                                <field name="last_closed_date" force_save="1" readonly="1"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Work Order Lines" attrs="{'readonly':[('state','=','4')]}">
+                                <field name="wo_child_ids" attrs="{'readonly':[('state','=','4')]}"
+                                       context="{'default_fleet': maintenance_for}">
+                                    <tree editable="bottom" create="0" edit="0" delete="0">
+                                        <field name="create_date"/>
+                                        <field name="workshop_name" required="1"
+                                               attrs="{'readonly':[('is_pr_create','=',True)]}" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="workshop_service" required="1"
+                                               attrs="{'readonly':[('is_pr_create','=',True)]}" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="maintenance_for"
+                                               attrs="{'column_invisible':[('parent.maintenance_for','!=','both')],'readonly':[('is_pr_create','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="product_id" attrs="{'readonly':[('is_pr_create','=',True)]}"
+                                               force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="requested_from" attrs="{'required':[('product_id','=',True)]}"/>
+                                        <field name="pieces" attrs="{'readonly':[('is_pr_create','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="notes"
+                                               attrs="{'required':['|',('product_id','!=',False),('requested_from','=','pr')],'readonly':[('is_pr_create','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="employee_id" force_save="1" domain="[('is_technician','=',True)]"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="driver_code" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="actual_start_time" force_save="1"/>
+                                        <field name="actual_close_time" force_save="1"/>
+                                        <field name="is_pr_create" invisible="1" readonly="1" force_save="1"/>
+                                        <field name="state" readonly="1" force_save="1"/>
+                                        <button name="dup_line" type="object"
+                                                icon="/bsg_cargo_sale/static/src/img/copy.png"
+                                                attrs="{'invisible':[('parent.state','!=','1')]}"
+                                                groups="maintenance_enhance.group_dup_line_wo_lines"/>
+
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="External Maintenance">
+                                <field name="em_child_ids">
+                                    <tree editable="bottom">
+                                        <!--                                        <field name="product_id" required="1"-->
+                                        <!--                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>-->
+                                        <field name="external_service" required="1" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="external_workshop" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="description" required="1" force_save="1"/>
+                                        <field name="qty" force_save="1"/>
+                                        <!--                                        <field name="actual_start_time"/>-->
+                                        <!--                                        <field name="actual_close_time"/>-->
+                                        <field name="state" readonly="1" force_save="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="maintenance_req_enh_tree_view" model="ir.ui.view">
+            <field name="name">maintenance_request_enhance_tree_view</field>
+            <field name="model">maintenance.request.enhance</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="driver_mobile"/>
+                    <field name="vehicle_type_name"/>
+                    <field name="vehicle_status"/>
+                    <field name="vehicle_name"/>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="driver_code"/>
+                    <field name="plate_no"/>
+                    <field name="total_cars"/>
+                    <field name="current_branch_id"/>
+                    <field name="current_branch_user_id"/>
+                    <field name="odometer"/>
+                    <field name="odometer_unit"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maintenance_enhance_work_order_view_search" model="ir.ui.view">
+            <field name="name">maintenance_enhance_work_order_view_search</field>
+            <field name="model">maintenance.request.enhance</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="driver_mobile"/>
+                    <field name="vehicle_id"/>
+                    <field name="is_check_create_pr" invisible="1"/>
+                    <filter string="PR not created" name="pr_not_created" domain="[('is_check_create_pr','=',True)]"
+                            help="WO with no PR created"/>
+
+                </search>
+            </field>
+        </record>
+
+
+        <record id="maintenance_req_enh_action" model="ir.actions.act_window">
+            <field name="name">Work Order</field>
+            <field name="res_model">maintenance.request.enhance</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="maintenance_req_enh_main_menu" name="Work Order" action="maintenance_req_enh_action"
+                  parent="maintenance_enhance.menu_fleet_maintenance_child1"
+                  groups="maintenance_enhance.group_wo_maintenance_with_access_only_read,maintenance_enhance.group_re-open_wo_lines,maintenance_enhance.group_closed_task_wo_lines,maintenance_enhance.group_waiting_availability_wo_lines,maintenance_enhance.group_start_task_wo_lines,maintenance_enhance.group_wo_add_service_on_wo,maintenance_enhance.group_wo_mm_approve,maintenance_enhance.group_wo_em_approve,maintenance_enhance.group_wo_create_pr,maintenance_enhance.group_wo_it_approve,maintenance_enhance.group_wo_cancelled,maintenance_enhance.group_work_order_closed,maintenance_enhance.group_work_order_reset"/>
+
+    </data>
+</odoo>

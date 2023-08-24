@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web.datepicker">
+        <t t-set="placeholder" t-value="widget.getParent().node and widget.getParent().node.attrs.placeholder"/>
+        <t t-set="datepickerID" t-value="_.uniqueId('datepicker')"/>
+
+        <div class="o_datepicker" aria-atomic="true" t-att-id="datepickerID" data-target-input="nearest">
+            <input type="text"
+            class="o_datepicker_input o_input datetimepicker-input oe_simple_date oe_datepicker_master"
+            t-att-name="widget.name"
+            t-att-placeholder="placeholder"
+            t-attf-data-target="##{datepickerID}"/>
+            <span class="o_datepicker_button"/>
+            <input t-att-name="widget.name" type="text" t-att-placeholder="placeholder" class="oe_hijri"/>
+        </div>
+    </t>
+</templates>
+
+<!--
+    <div class="o_datepicker" aria-atomic="true" t-att-id="datepickerID" data-target-input="nearest">
+        <input type="text"
+            class="o_datepicker_input o_input datetimepicker-input"
+            t-att-name="widget.name"
+            t-att-placeholder="placeholder"
+            t-attf-data-target="##{datepickerID}"/>
+        <span class="o_datepicker_button"/>
+    </div>
+</t>
+
+<t t-name="web.datepicker">
+    <t t-set="placeholder" t-value="widget.getParent().node and widget.getParent().node.attrs.placeholder"/>
+    <div class="o_datepicker">
+        <input type="text"
+            class="o_datepicker_input o_input"
+            t-att-name="widget.name"
+            t-att-placeholder="placeholder"/>
+        <span class="o_datepicker_button"/>
+    </div>
+</t>
+
+-->

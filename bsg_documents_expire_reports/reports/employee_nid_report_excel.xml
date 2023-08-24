@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="employee_nid_report_xlsx_id"
+                model="employee.nid.report.wizard"
+                string="Employee National ID Report"
+                report_type="xlsx"
+                name="bsg_documents_expire_reports.employee_nid_report_xlsx"
+                file="employee_nid_report"/>
+</odoo>

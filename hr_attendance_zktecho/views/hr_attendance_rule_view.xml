@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_attendance_rule_tree">
+            <field name="name">hr.attendance.rule.tree</field>
+            <field name="model">hr.attendance.rule</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="apply_on"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_attendance_rule_form">
+            <field name="name">hr.attendance.rule.form</field>
+            <field name="model">hr.attendance.rule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" required="True"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="apply_on" required="1" />
+                                <field name="work_schedule_id" options="{'no_create': True, 'no_open': True}" widget="many2many_tags"
+                                       attrs="{'invisible':[('apply_on','!=','work')],'required':[('apply_on','=','work')]}"/>
+                                <field name="branch_id" options="{'no_create': True, 'no_open': True}" widget="many2many_tags"
+                                       attrs="{'invisible':[('apply_on','!=','branch')],'required':[('apply_on','=','branch')]}"/>
+                                <field name="department_id" options="{'no_create': True, 'no_open': True}" widget="many2many_tags"
+                                       attrs="{'invisible':[('apply_on','!=','dep')],'required':[('apply_on','=','dep')]}"/>
+                                <field name="company_id" options="{'no_create': True, 'no_open': True}" widget="many2many_tags"
+                                       attrs="{'invisible':[('apply_on','!=','company')],'required':[('apply_on','=','company')]}"/>
+                                <field name="description"/>
+
+                            </group>
+                        </group>
+                        <group>
+                            <group name="absent" string="General Rules">
+                                <label for="no_checkin_options" string="If no Check-in, Count as"/>
+                                <div>
+                                    <field name="no_checkin_options" nolabel="1" class="oe_inline" required="1"/>
+                                    <field name="no_checkin_late_min" nolabel="1" class="oe_inline"
+                                           attrs="{'invisible':[('no_checkin_options','=','absent')]}"/>
+                                    <span   attrs="{'invisible':[('no_checkin_options','=','absent')]}"
+                                            class="ml8">Mins.</span>
+                                </div>
+
+                                <label for="no_checkout_options" string="If no Check-Out, Count as"/>
+                                <div>
+                                    <field name="no_checkout_options" nolabel="1" class="oe_inline" required="1"/>
+                                    <field name="no_checkout_leave_min" nolabel="1" class="oe_inline"
+                                           attrs="{'invisible':[('no_checkout_options','=','absent')]}"/>
+                                    <span  attrs="{'invisible':[('no_checkin_options','=','absent')]}"
+                                           class="ml8">Mins.</span>
+                                </div>
+
+                            </group>
+                            <group>
+                                <field name="checkin_late_as_abs" />
+                                <field name="checkout_early_as_abs" />
+                            </group>
+                        </group>
+
+                        <group name="Over-Time" string="Overtime Rules">
+                            <label for="max_total_ot" string="Limit Max Total OT As"/>
+                            <div>
+                                <field name="max_total_ot" nolabel="1" class="oe_inline"/>
+                                <span class="ml8">Mins.</span>
+                            </div>
+                            <field name="is_allowed_before_ot" />
+                            <field name="is_allowed_after_ot" />
+                        </group>
+                        <group >
+                            <group attrs="{'invisible': [('is_allowed_before_ot', '=', False)]}"
+                                   string="Overtime Before Workday">
+                                <label for="min_before_ot" string="Minimum Time to Start Before OT"/>
+                                <div>
+                                    <field name="min_before_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+
+                                <label for="min_before_ot_period" string="Calculate Interval as"/>
+                                <div>
+                                    <field name="min_before_ot_period" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="max_before_ot" string="Limit Early Max OT As"/>
+                                <div>
+                                    <field name="max_before_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                            </group>
+                            <group attrs="{'invisible': [('is_allowed_after_ot', '=', False)]}"
+                                   string="Overtime After Workday">
+                                <label for="min_after_ot" string="Minimum Time to Start After OT"/>
+                                <div>
+                                    <field name="min_after_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="min_after_ot_period" string="Calculate Interval as"/>
+                                <div>
+                                    <field name="min_after_ot_period" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="max_after_ot" string="Limit After Max OT As"/>
+                                <div>
+                                    <field name="max_after_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                            </group>
+
+                        </group>
+                        <!--          <group>
+                                      <group>
+                                          <field name="no_clock_in"></field>
+                                      </group>
+                                      <group>
+                                          <label for="no_clock_in_count_as" attrs="{'readonly':[('no_clock_in','!=',True)]}"/>
+                                          <div>
+                                              <field name="no_clock_in_count_as" class="oe_inline"  attrs="{'readonly':[('no_clock_in','!=',True)]}"/>
+                                              <field name="no_clock_in_mins" style="margin-left: 4px;" class="oe_inline" attrs="{'readonly':[('no_clock_in','!=',True)],'invisible':[('no_clock_in_count_as','=','early_leave')]}"/>
+                                              <span style="margin-left: 5px;" attrs="{'invisible':[('no_clock_in_count_as','=','early_leave')]}">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="no_clock_out"></field>
+                                      </group>
+                                      <group>
+                                          <label for="no_clock_out_count_as" attrs="{'readonly':[('no_clock_out','!=',True)]}" />
+                                          <div>
+                                              <field name="no_clock_out_count_as" class="oe_inline" attrs="{'readonly':[('no_clock_out','!=',True)]}"/>
+                                              <field name="no_clock_out_mins" style="margin-left: 4px;" class="readonly" attrs="{'readonly':[('no_clock_out','!=',True)],'invisible':[('no_clock_out_count_as','=','early_leave')]}"/>
+                                              <span style="margin-left: 5px;" attrs="{'invisible':[('no_clock_out_count_as','=','early_leave')]}">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="as_late_exceed"></field>
+                                      </group>
+                                      <group>
+                                          <label for="as_late_exceed_mins" attrs="{'readonly':[('as_late_exceed','!=',True)]}" />
+                                          <div>
+                                              <field name="as_late_exceed_mins" attrs="{'readonly':[('as_late_exceed','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="as_early_leave_exceed"></field>
+                                      </group>
+                                      <group>
+                                          <label for="as_early_leave_exceed_mins" attrs="{'readonly':[('as_early_leave_exceed','!=',True)]}" />
+                                          <div>
+                                              <field name="as_early_leave_exceed_mins" attrs="{'readonly':[('as_early_leave_exceed','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="min_time_to_start_after_ot"></field>
+                                      </group>
+                                      <group>
+                                          <label for="min_time_to_start_after_ot_min" attrs="{'readonly':[('min_time_to_start_after_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="min_time_to_start_after_ot_min" attrs="{'readonly':[('min_time_to_start_after_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                          <label for="calculate_above_interval_as_ot_after_ot" attrs="{'readonly':[('min_time_to_start_after_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="calculate_above_interval_as_ot_after_ot" attrs="{'readonly':[('min_time_to_start_after_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="limit_max_after_ot"></field>
+                                      </group>
+                                      <group>
+                                          <label for="limit_max_after_ot_as_minutes" attrs="{'readonly':[('limit_max_after_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="limit_max_after_ot_as_minutes" attrs="{'readonly':[('limit_max_after_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="min_time_to_start_before_ot"></field>
+                                      </group>
+                                      <group>
+                                          <label for="min_time_to_start_before_ot_min" attrs="{'readonly':[('min_time_to_start_before_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="min_time_to_start_before_ot_min" attrs="{'readonly':[('min_time_to_start_before_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                          <label for="calculate_above_interval_as_ot_before_ot" attrs="{'readonly':[('min_time_to_start_before_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="calculate_above_interval_as_ot_before_ot" attrs="{'readonly':[('min_time_to_start_before_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="limit_max_early_ot"></field>
+                                      </group>
+                                      <group>
+                                          <label for="limit_max_early_ot_as_minutes" attrs="{'readonly':[('limit_max_early_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="limit_max_early_ot_as_minutes" attrs="{'readonly':[('limit_max_early_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>
+                                  <group>
+                                      <group>
+                                          <field name="limit_max_total_ot"></field>
+                                      </group>
+                                      <group>
+                                          <label for="limit_max_total_ot_as_minutes" attrs="{'readonly':[('limit_max_total_ot','!=',True)]}" />
+                                          <div>
+                                              <field name="limit_max_total_ot_as_minutes" attrs="{'readonly':[('limit_max_total_ot','!=',True)]}"></field>
+                                              <span style="margin-left: 5px;">Mins</span>
+                                          </div>
+                                      </group>
+                                  </group>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="hr_attendance_rule_form_no_create"  model="ir.ui.view">
+            <field name="name">hr.attendance.rule.form.inheirt</field>
+            <field name="model">hr.attendance.rule</field>
+            <field name="inherit_id" ref="hr_attendance_rule_form"/>
+            <field name="priority" eval="1000"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="duplicate">false</attribute>
+                    <attribute name="delete">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="attendance_rule_action">
+            <field name="name">Attendance Rule</field>
+            <field name="res_model">hr.attendance.rule</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem name="Attendance Rule"
+                  id="attendance_rule_menu"
+                  sequence="1"
+                  parent="hr_attendance.menu_hr_attendance_settings"
+                  groups="hr_attendance_zktecho.group_attendance_rule_menu"
+                  action="attendance_rule_action"
+        />
+
+        <!-- Emp attendance Rules-->
+        <record model="ir.ui.view" id="hr_attendance_rule_emp_tree">
+            <field name="name">hr.attendance.rule.emp.tree</field>
+            <field name="model">hr.attendance.rule.emp</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_attendance_rule_emp_form">
+            <field name="name">hr.attendance.rule.emp.form</field>
+            <field name="model">hr.attendance.rule.emp</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="employee_id" required="1" readonly="1"/>
+                        <group>
+                            <group name="absent" string="General Rules">
+                                <label for="no_checkin_options" string="If no  Check-in, Count as"/>
+                                <div>
+                                    <field name="no_checkin_options" nolabel="1" class="oe_inline" required="1"/>
+                                    <field name="no_checkin_late_min" nolabel="1" class="oe_inline"
+                                           attrs="{'invisible':[('no_checkin_options','=','absent')]}"/>
+                                    <span   attrs="{'invisible':[('no_checkin_options','=','absent')]}"
+                                            class="ml8">Mins.</span>
+                                </div>
+
+                                <label for="no_checkout_options" string="If no Check-Out, Count as"/>
+                                <div>
+                                    <field name="no_checkout_options" nolabel="1" class="oe_inline" required="1"/>
+                                    <field name="no_checkout_leave_min" nolabel="1" class="oe_inline"
+                                           attrs="{'invisible':[('no_checkout_options','=','absent')]}"/>
+                                    <span  attrs="{'invisible':[('no_checkin_options','=','absent')]}"
+                                           class="ml8">Mins.</span>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="checkin_late_as_abs" />
+                                <field name="checkout_early_as_abs" />
+                            </group>
+                        </group>
+
+                        <group name="Over-Time" string="Overtime Rules">
+                            <label for="max_total_ot" string="Limit Max Total OT As"/>
+                            <div>
+                                <field name="max_total_ot" nolabel="1" class="oe_inline"/>
+                                <span class="ml8">Mins.</span>
+                            </div>
+                            <field name="is_allowed_before_ot" />
+                            <field name="is_allowed_after_ot" />
+                        </group>
+                        <group>
+                            <group string="Overtime Before Workday"
+                                   attrs="{'invisible': [('is_allowed_before_ot', '=', False)]}">
+                                <label for="min_before_ot" string="Minimum Time to Start Before OT"/>
+                                <div>
+                                    <field name="min_before_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+
+                                <label for="min_before_ot_period" string="Calculate Interval as"/>
+                                <div>
+                                    <field name="min_before_ot_period" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="max_before_ot" string="Limit Early Max OT As"/>
+                                <div>
+                                    <field name="max_before_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                            </group>
+                            <group string="Overtime After Workday" attrs="{'invisible': [('is_allowed_after_ot', '=', False)]}">
+                                <label for="min_after_ot" string="Minimum Time to Start After OT"/>
+                                <div>
+                                    <field name="min_after_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="min_after_ot_period" string="Calculate Interval as"/>
+                                <div>
+                                    <field name="min_after_ot_period" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                                <label for="max_after_ot" string="Limit After Max OT As"/>
+                                <div>
+                                    <field name="max_after_ot" nolabel="1" class="oe_inline"/>
+                                    <span class="ml8">Mins.</span>
+                                </div>
+                            </group>
+
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_rule_emp_no_create"  model="ir.ui.view">
+            <field name="name">hr.attendance.rule.emp.form.inheirt</field>
+            <field name="model">hr.attendance.rule.emp</field>
+            <field name="inherit_id" ref="hr_attendance_rule_emp_form"/>
+            <field name="priority" eval="1000"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="duplicate">false</attribute>
+                    <attribute name="delete">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="attendance_rule_emp_action">
+            <field name="name">Attendance Employee Rule</field>
+            <field name="res_model">hr.attendance.rule.emp</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--        <menuitem name="Attendance Employee Rule"-->
+        <!--                  id="attendance_rule_emp_menu"-->
+        <!--                  sequence="2"-->
+        <!--                  parent="hr_attendance.menu_hr_attendance_settings"-->
+        <!--                  groups="hr_attendance_zktecho.group_attendance_rule_menu"-->
+        <!--                  action="attendance_rule_emp_action"-->
+        <!--        />-->
+
+    </data>
+</odoo>

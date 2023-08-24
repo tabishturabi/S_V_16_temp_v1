@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employees_appointment_manager,access_employees_appointment_manager,model_employees_appointment,bsg_hr_employees_decisions.group_employees_decisions_by_manager,1,1,1,1
+access_employees_appointment_other,access_employees_appointment_other,model_employees_appointment,,1,1,1,1
+access_decisions_report_comments,access_decisions_report_comments,model_decisions_report_comments,,1,1,1,1
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+<record id="petty_cash_expense_accounting_view_search" model="ir.ui.view">
+    <field name="name">petty.cash.expense.accounting.view.search</field>
+    <field name="model">petty.cash.expense.accounting</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name" />
+            <field name="user_id" string="Requester"/>
+            <field name="journal" />
+            <filter string="Draft"  name="draft" domain="[('state','=','draft')]"/>
+            <filter string="Submitted" name="to_submit" domain="[('state','=','to_submit')]"/>
+            <filter string="Approved" name="approved" domain="[('state','=','approved')]"/>
+            <filter string="Declined" name="declined" domain="[('state','=','declined')]"/>
+            <filter string="Done" name="done" domain="[('state','=','done')]"/>
+            <separator/>
+            <filter string="Today" name="current_day" domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d')), ('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d'))]"/>
+            <filter string="This Week" name="current_week" domain="[('date', '&gt;=', ((context_today()+ relativedelta(weeks=-1, days=1, weekday=0)).strftime('%Y-%m-%d'))),('date', '&lt;=', ((context_today()+ relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d')))]"/>
+            <filter string="This Month" name="current_month" domain="[('date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+            <filter string="This Year" name="current_year" domain="[('date','&lt;=',(context_today()+relativedelta(day=31,month=12)).strftime('%Y-%m-%d')),('date','&gt;=',(context_today()-relativedelta(day=1,month=1)).strftime('%Y-%m-%d'))]"/>                    
+        </search>
+    </field>
+</record>
+    <!-- Expense Module -->
+
+    <record id="petty_cash_tree_view" model="ir.ui.view">
+        <field name="name">petty.cash.expense.accounting.tree</field>
+        <field name="model">petty.cash.expense.accounting</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="journal"/>
+                <field name="amount_request"/>
+                <field name="amount_approval"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="petty_cash_form_view" model="ir.ui.view">
+        <field name="name">petty.cash.expense.accounting.form</field>
+        <field name="model">petty.cash.expense.accounting</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form duplicate="0">
+                <header>
+                    <button name="to_submit" type="object" 
+                            string="Submit" states='draft' class="oe_highlight"/>
+                    <button name="confirm_petty_cash" type="object" 
+                            string="Register Payment" states='approved' class="oe_highlight" groups="advance_petty_expense_mgmt.petty_accounting_manager"/>
+                    <button name="action_by_manager" type="object" 
+                            string="Approve" states="to_submit" class="oe_highlight" groups="advance_petty_expense_mgmt.petty_cash_manager"/>
+                    <button name="declined" type="object" 
+                            string="Declined" states='draft,to_submit' class="oe_highlight"/> 
+                    <field name="state" widget="statusbar" statusbar_visible="draft,to_submit,approved,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                                  <field string="Documents" name="doc_count" widget="statinfo"/>
+                        </button>
+                        <button string="Voucher" name="action_view_payment" type="object" attrs="{'invisible':[('state','!=','done')]}" class="oe_stat_button" 
+                        	icon="fa-pencil-square-o">
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="EXP/" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" readonly="1" options="{&quot;no_open&quot;: True}"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="petty_cash_user_rule_id" domain="[('user_id','=',user_id)]"  required="1" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_create_edit': True,'no_open': True}"/>
+                            <field name="petty_cash_journal_id" invisible="1"/>
+                            <field name="journal"  readonly="1" force_save="1" domain="[('id','=',petty_cash_journal_id)]" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_open': True}" string="Petty Cash Journal"/>
+                            <field name="account_id" readonly="1" force_save="1" options="{&quot;no_open&quot;: True}" />
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="payment_jounal_id" domain="[('is_payment_journal','=',True)]" 
+                            	attrs="{'readonly':[('state','!=','approved')]}"
+								options="{'no_create': True, 'no_open': True}" groups="advance_petty_expense_mgmt.petty_accounting_manager"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="descripiton" required="1" attrs="{'readonly':[('state','not in',['draft'])]}"/>
+                            <field name="ir_attachment_ids" widget="many2many_binary" attrs="{'readonly':[('state','not in',['draft'])]}"/>    
+                        </group>
+                        <group>
+                            <field name="net_balacne" force_save="1" readonly="1"/>
+                            <field name="amount_request" required="1" attrs="{'readonly':[('state','not in',['draft'])]}"/>
+                            <field name="amount_approval"  attrs="{'readonly':[('state','!=','to_submit')]}"/>
+                            <field name="is_reject" invisible="1"/>
+                            <field name="reject_reason" readonly="1" attrs="{'invisible':[('is_reject','=',False)]}"/>
+                        </group>
+                    </group>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="total_request" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!--record id="view_move_form_csutom_inherit" model="ir.ui.view">
+        <field name="name">expense_bcube_journal_entry_linkage</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="pety_cash_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record-->
+
+    <record id="petty_cash_request_act" model="ir.actions.act_window">
+        <field name="name">Petty Cash Request</field>
+        <field name="res_model">petty.cash.expense.accounting</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

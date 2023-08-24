@@ -1,0 +1,54 @@
+<odoo>
+    <data noupdate="0">
+        <record id="sim_card_delivery_email_template" model="mail.template">
+            <field name="name">Sim Card Delivery: Send By Email</field>
+            <field name="model_id" ref="sim_card.model_sim_card_delivery"/>
+            <field name="subject">Sim Card Delivery Decisions Report</field>
+            <field name="body_html" type="html">
+                <div style="margin:0px;padding:0px;">
+                </div>
+            </field>
+            <field name="report_template" ref="sim_card.sim_card_delivery_report"/>
+            <field name="report_name">Sim Card Delivery</field>
+        </record>
+
+
+        <record id="sim_card_receipt_email_template" model="mail.template">
+            <field name="name">Sim Card Receipt: Send By Email</field>
+            <field name="model_id" ref="sim_card.model_sim_card_receipt"/>
+            <field name="subject">Sim Card Receipt Decisions Report</field>
+            <field name="body_html" type="html">
+                <div style="margin:0px;padding:0px;">
+                </div>
+            </field>
+            <field name="report_template" ref="sim_card.sim_card_receipt_report"/>
+            <field name="report_name">Sim Card Receipt</field>
+        </record>
+
+        <record id="sim_card_upgrade_email_template" model="mail.template">
+            <field name="name">Sim Card Upgrade request: Send By Email</field>
+            <field name="model_id" ref="sim_card.model_upgrade_request"/>
+            <field name="subject">Sim Card Upgrade Request</field>
+            <field name="body_html" type="html">
+                <div style="margin:0px;padding:0px;">
+                </div>
+            </field>
+<!--            <field name="report_template" ref="sim_card_receipt_report"/>-->
+<!--            <field name="report_name">Sim Card Receipt</field>-->
+        </record>
+
+
+        <record id="sim_card_lost_email_template" model="mail.template">
+            <field name="name">Replacement for Lost SIM Request : Send By Email</field>
+            <field name="model_id" ref="sim_card.model_lost_request"/>
+            <field name="subject">Replacement for Lost SIM Request</field>
+            <field name="body_html" type="html">
+                <div style="margin:0px;padding:0px;">
+                </div>
+            </field>
+<!--            <field name="report_template" ref="sim_card_receipt_report"/>-->
+<!--            <field name="report_name">Sim Card Receipt</field>-->
+        </record>
+
+     </data>
+</odoo>

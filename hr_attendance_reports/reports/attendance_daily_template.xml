@@ -1,0 +1,148 @@
+<odoo>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="hr_attendance_reports/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>
+                    <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> - <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="attendance_daily_report">
+        <t t-call="web.html_container">
+            <t t-call="hr_attendance_reports.external_layout_standard">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div>
+                            <div class="oe_structure"/>
+                            <h1> Shift Exception </h1>
+                            <div>
+                                <!--                            <h3 class="text-center mb32">-->
+                                <!--                                <strong>Employees</strong>-->
+
+                                <!--                            </h3>-->
+                            </div>
+
+                            <table style="border:1px solid black;" class="table table-condensed" dir="rtl">
+                                <thead>
+                                    <tr width="100%">
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Employee ID</th>
+                                        <th width="20%" style="border:1px solid black;" class="text-center">Employee Name</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Date</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Check In</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Check Out</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Late</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Early</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Absent</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">OT</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">WorkTime</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Exemptions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-foreach="attendances" t-as="attendance_list">
+                                        <tr style="border:1px solid black;">
+                                            <td> <t t-esc="attendance_list[0]"/> </td>
+                                        </tr>
+                                        <t t-foreach="attendance_list[1]" t-as="attendance_line">
+                                            <tr width="100%">
+                                                <td width="10%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="attendance_line[0].employee_code"/>
+                                                </td>
+                                                <td width="40%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="attendance_line[0].name"/>
+                                                </td>
+
+
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-esc="attendance_line[1]"/>
+                                                </td>
+                                                <!--                                                <t t-set="attendance_line[2]" t-value="attendance"/>-->
+                                                <t t-if="attendance_line[2] != False">
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <t t-if="attendance_line[2].check_in">
+                                                            <span t-field="attendance_line[2].check_in"/>
+                                                        </t>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <t t-if="attendance_line[2].check_out">
+                                                            <span t-field="attendance_line[2].check_out"/>
+                                                        </t>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-field="attendance_line[2].late_penalty_min"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-field="attendance_line[2].early_penalty_min"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <t t-if="attendance_line[2].is_absent">
+                                                            <span>Yes</span>
+                                                        </t>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-field="attendance_line[2].total_ot"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-field="attendance_line[2].normal_hours"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-field="attendance_line[2].permission_type"/>
+                                                    </td>
+                                                </t>
+                                                <t t-if="attendance_line[2] == False">
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="''"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="''"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="'0'"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="'0'"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span>Yes</span>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="'0'"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="'0'"/>
+                                                    </td>
+                                                    <td width="8%" style="border:1px solid black;" class="text-center">
+                                                        <span t-esc="''"/>
+                                                    </td>
+                                                </t>
+                                            </tr>
+
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="oe_structure"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

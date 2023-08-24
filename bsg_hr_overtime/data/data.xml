@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="draft" model="overt.report.wizard.state">
+            <field name="name">Draft</field>
+            <field name="value">draft</field>
+        </record>
+        <record id="submitted" model="overt.report.wizard.state">
+            <field name="name">Submitted</field>
+            <field name="value">submitted</field>
+        </record>
+        <record id="approved" model="overt.report.wizard.state">
+            <field name="name">Approved</field>
+            <field name="value">approved</field>
+        </record>
+
+        <record id="hr_salary_approve" model="overt.report.wizard.state">
+            <field name="name">HR Sallary Approved</field>
+            <field name="value">hr_salary_approve</field>
+        </record>
+        <record id="hr_manager_approved" model="overt.report.wizard.state">
+            <field name="name">HR Manager Approved</field>
+            <field name="value">hr_manager_approved</field>
+        </record>
+        <record id="account_approved" model="overt.report.wizard.state">
+            <field name="name">Account Approved</field>
+            <field name="value">account_approved</field>
+        </record>
+
+
+
+        <record id="audit_approved" model="overt.report.wizard.state">
+            <field name="name">Audit Approved</field>
+            <field name="value">audit_approved</field>
+        </record>
+        <record id="fin_approved" model="overt.report.wizard.state">
+            <field name="name">Fin Approved</field>
+            <field name="value">fin_approved</field>
+        </record>
+        <record id="posted" model="overt.report.wizard.state">
+            <field name="name">Posted</field>
+            <field name="value">posted</field>
+        </record>
+
+        <record id="paid" model="overt.report.wizard.state">
+            <field name="name">Paid</field>
+            <field name="value">paid</field>
+        </record>
+    </data>
+</odoo>        

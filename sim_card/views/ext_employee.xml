@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_view_view_employee_formform" model="ir.ui.view">
+            <field name="name">hr.employee.form.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="compute_employee_delivery_count" type="object" class="oe_stat_button" icon="">
+                        <field name="employee_delivery_count" widget="statinfo" string="SIM Card"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='category_ids']" position="after">
+                    <field name="employee_d_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

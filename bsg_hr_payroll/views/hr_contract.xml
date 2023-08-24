@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>	
+    <record id="inherits_hr_contract_view_tree" model="ir.ui.view">
+            <field name="name">inherits.hr.contract.view.tree</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+            <field name="arch" type="xml">
+            <data>
+                <field name="name" position="before">
+                    <field name="code" readonly="1"/>
+                </field>
+            </data>
+               
+            </field>
+    </record>
+
+    <record id="inherits_hr_contract_view_search" model="ir.ui.view">
+            <field name="name">inherits.hr.contract.view.search</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="arch" type="xml">
+            <data>
+                <field name="name" position="before">
+                    <field name="code" readonly="1"/>
+                </field>
+            </data>
+               
+            </field>
+    </record>
+    
+     <record id="inherits_hr_contract_view_form" model="ir.ui.view">
+            <field name="name">inherits.hr.contract.view.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <div name="title" position="before">
+                           <div class="oe_title" name="code">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1>
+                            <field name="code"/>
+                        </h1>
+                    </div>
+                    </div>
+                    <page name="information" position="inside">
+                    <separator/>
+                    <group name="allowance_info" string="Allowances">
+                        <group>
+                            <field name="work_nature_allowance" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                        <group>
+                            <field name="work_nature_active_date" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                            <field name="work_nature_expiry_date" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                        <separator/>
+                        <separator/>
+                        <group>
+                            <field name="fixed_add_allowance" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                         <group>
+                            <field name="fixed_add_active_date" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                            <field name="fixed_add_expiry_date" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                        <separator/>
+                        <separator/>
+                        <group>
+                            <field name="food_allowance" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                            <field name="house_rent_allowance_metro_nonmetro" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                    </group>
+                    <group name="allowance_info" string="Deductions">
+                        <group>
+                            <field name="fixed_deduct_amount" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        </group>
+                      
+                    </group>
+
+                    <group name="Social_insurance" string="Social Insurance">
+                        <field name="custom_gosi" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        
+                        <field name="employee_gosi" attrs="{'readonly':[('state','not in',['draft', 'pending'])],'invisible':[('custom_gosi','!=', True)], 'required':[('custom_gosi','=', True)]}"/>
+                        <field name="company_gosi" attrs="{'readonly':[('state','not in',['draft', 'pending'])],'invisible':[('custom_gosi','!=', True)], 'required':[('custom_gosi','=', True)]}"/>
+                    </group>
+                    <group name="leaves" string="Leaves">
+                        <field name="annual_legal_leave" attrs="{'readonly':[('state','not in',['draft', 'pending'])]}"/>
+                        
+                    </group>
+                     <group name="eos" string="End of Service">
+                        <field name="transportation_allowance"/>
+                        <field name="housing_allowance"/>
+                    </group>
+                        <group>
+                            <field name="marital"/>
+
+                        </group>
+
+                    </page>
+<!--                    <group name="salary_and_advantages" position="inside">-->
+<!--                    </group>-->
+<!--                    -->
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

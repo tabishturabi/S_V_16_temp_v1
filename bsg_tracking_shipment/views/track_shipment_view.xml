@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- <template inherit_id="website.layout" id="inherit_header">
+        <xpath expr="//header//ul[@id='website.layoutwebsite.layout']/li" position="before">
+            <li t-if="website.id == 1" class="nav-item">
+                <a class="nav-link " href="/track-shipment">Track Shipment</a>
+            </li>
+        </xpath>
+    </template> -->
+
+
+<!-- collect custmer info -->
+     <!--template id="bsg_tracking_shipment.user_signup" inherit_id="auth_signup.fields" name="Sign up - exstra fields">
+            <xpath expr="//div[hasclass('field-name')]" position="after">
+                  <div class="form-group field-phone">
+                    <label for="phone">Your Phone</label>
+                    <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm" placeholder="" required="required"/>
+                </div>
+            
+                <div class="form-group field-customer_id_card_no">
+                    <label for="customer_id_card_no">Your National/Iqama ID</label>
+                    <input type="text" name="customer_id_card_no" t-att-value="customer_id_card_no" id="customer_id_card_no" class="form-control form-control-sm" placeholder="" required="required"/>
+                </div>
+            </xpath>
+    </template-->
+
+    <template id="customer_info_form_en" name="Customer Info Form">
+        <t t-call="website.layout">
+            <br />
+            <br />
+            <div class="container">
+                <form action="/package/payment" method="post">
+                    <div class="row bg_color o_website_form_recaptcha">
+                    <div class="row col-sm-12">
+                        <div class="col-sm-6">
+                            <input type="text" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_name" id="customer_name" t-att-value="name" class="form-control" placeholder="Your Name" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                         <div class="col-sm-6">
+                            <input type="number" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_id_number" id="id_number" t-att-value="id_number" class="form-control" placeholder="ID Card Number" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                        </div>
+                         <br />
+                        <div class="row col-sm-12">
+                            <div class="col-sm-6">
+                                <input type="number" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_phone_number" id="customer_phone_number" t-att-value="phone" class="form-control" placeholder="Phone Number" required="required" />
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="email" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_email" id="customer_email" t-att-value="email" class="form-control" placeholder="Email Address" required="required" />
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row col-sm-12">
+                         <div class="col-sm-6">
+                            <!-- <label for="package_type">Choose Package:</label> -->
+                                <select class="col-sm-12" name="package_type" id="package_type" required="required">
+                                    <option>Choose Package</option>
+                                    <option value="190_pack" t-att-selected="package == '190_pack' or None">190 - Package</option>
+                                    <option value="90_pack" t-att-selected="package == '90_pack' or None">90 - Package</option>
+                                </select>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+                        </div>
+                        
+                        <br />
+                        <br />
+                        <script src="https://www.google.com/recaptcha/api.js" />
+                        <div class="col-sm-3">
+                            <div id="captcha" class="imageContainer">
+                                <div class="form-group">
+<!--                                                                     specify your site  in data-sitekey attribute -->
+                                    <div class="g-recaptcha" t-att-data-sitekey="l" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback" />
+                                    <input class="form-control d-none" data-recaptcha="true" />
+                                    <div class="help-block with-errors" id="err" style="color: red" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--script>$("form").submit(function(event) {
+			
+			            var recaptcha = $("#g-recaptcha-response").val();
+			            if (recaptcha === "") {
+			                event.preventDefault();
+			                document.getElementById('err').innerHTML="Please verify Captcha";
+			            }
+			            else{
+			                return true;
+			            }
+			                });</script-->
+                        <div class="col-sm-3 ">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <br/><br/><br/>
+                            <button type="submit" class="btn btn-primary form-control">Pay Now</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+    <template id="customer_info_form_ar" name="Customer Info Form">
+        <t t-call="website.layout">
+            <br />
+            <br />
+           <div class="container">
+                <form action="/package/payment" method="post">
+                    <div class="row bg_color o_website_form_recaptcha">
+                    <div class="row col-sm-12">
+                        <div class="col-sm-6">
+                            <input type="text" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_name" id="customer_name" t-att-value="name" class="form-control" placeholder="اسم العميل" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                         <div class="col-sm-6">
+                            <input type="number" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_id_number" id="id_number" t-att-value="id_number" class="form-control" placeholder="الرقم الهوية/ الاقامة" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                        </div>
+                         <br />
+                        <div class="row col-sm-12">
+                            <div class="col-sm-6">
+                                <input type="number" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_phone_number" id="customer_phone_number" t-att-value="phone" class="form-control" placeholder="رقم الهاتف" required="required" />
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="email" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="customer_email" id="customer_email" t-att-value="email" class="form-control" placeholder="البريد الالكتروني" required="required" />
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row col-sm-12">
+                         <div class="col-sm-6">
+                            <!-- <label for="package_type">Choose Package:</label> -->
+                                <select class="col-sm-12" name="package_type" id="package_type" required="required">
+                                    <option>Choose Package</option>
+                                    <option value="190_pack" t-att-selected="package == '190_pack' or None"> 90 - الباقة </option>
+                                    <option value="90_pack" t-att-selected="package == '90_pack' or None">الباقة -190</option>
+                                </select>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <t t-if="message">
+                                    <p style="color:red !important;"><t t-esc="message"/></p>
+                                </t>
+                            </div>
+                        </div>
+                        
+                        <br />
+                        <br />
+                        <script src="https://www.google.com/recaptcha/api.js" />
+                        <div class="col-sm-3">
+                            <div id="captcha" class="imageContainer">
+                                <div class="form-group">
+<!--                                                                     specify your site  in data-sitekey attribute -->
+                                    <div class="g-recaptcha" t-att-data-sitekey="l" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback" />
+                                    <input class="form-control d-none" data-recaptcha="true" />
+                                    <div class="help-block with-errors" id="err" style="color: red" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--script>$("form").submit(function(event) {
+			
+			            var recaptcha = $("#g-recaptcha-response").val();
+			            if (recaptcha === "") {
+			                event.preventDefault();
+			                document.getElementById('err').innerHTML="Please verify Captcha";
+			            }
+			            else{
+			                return true;
+			            }
+			                });</script!-->
+                        <div class="col-sm-3 ">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <br/><br/><br/>
+                            <button type="submit" class="btn btn-primary form-control">ادفع الان</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+
+
+
+
+
+
+<!-- end of collect customer info -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <template id="track_shipment_view" name="Track Shipment">
+        <t t-call="website.layout">
+            <br />
+            <br />
+            <div class="container">
+                <form action="/track-shipment/process" method="post">
+                    <div class="row bg_color o_website_form_recaptcha">
+                        <div class="col-sm-3">
+                            <input type="text" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="so_no" id="so_no" class="form-control" placeholder="Enter Agreement #" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-sm-3">
+                            <input type="number" onKeyPress="handleKeyPress(event)" name="rec_mo" id="rec_mo" class="form-control" placeholder="Enter Receiver Mobile #" required="required" />
+                        </div>
+                        <br />
+                        <br />
+                        <script src="https://www.google.com/recaptcha/api.js" />
+                        <div class="col-sm-3">
+                            <div id="captcha" class="imageContainer">
+                                <div class="form-group">
+<!--                                                                     specify your site  in data-sitekey attribute -->
+                                    <div class="g-recaptcha" t-att-data-sitekey="default_captach_site" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback" />
+                                    <input class="form-control d-none" data-recaptcha="true" />
+                                    <div class="help-block with-errors" id="err" style="color: red" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--script>$("form").submit(function(event) {
+			
+			            var recaptcha = $("#g-recaptcha-response").val();
+			            if (recaptcha === "") {
+			                event.preventDefault();
+			                document.getElementById('err').innerHTML="Please verify Captcha";
+			            }
+			            else{
+			                return true;
+			            }
+			                });</script-->
+                        <div class="col-sm-3 ">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <button type="submit" class="btn btn-primary form-control">Track Shipment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+    <template id="track_shipment_ar_view" name="Track Shipment">
+        <t t-call="website.layout">
+            <br />
+            <br />
+            <div class="container">
+                <form action="/track-shipment/process" method="post">
+                    <p>أدخل رقم أمر البيع الخاص بك</p>
+                    <div class="row bg_color o_website_form_recaptcha">
+                        <div class="col-sm-3">
+                            <input type="text" onKeyPress="handleKeyPress(event)" style="font-weight: bold;" name="so_no" id="so_no" class="form-control" placeholder="أدخل رقم الاتفاقية" required="required" />
+                            <br/>
+                            <t t-if="message">
+                            	<p style="color:red !important;"><t t-esc="message"/></p>
+                            </t>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-sm-3">
+                            <input type="number" name="rec_mo" onKeyPress="handleKeyPress(event)" id="rec_mo" class="form-control" placeholder="أدخل رقم جوال المستلم" required="required" />
+                        </div>
+                        <br />
+                        <br />
+                        <script src="https://www.google.com/recaptcha/api.js?hl=ar" />
+                        <div class="col-sm-3">
+                            <div id="captcha" class="imageContainer">
+                                <div class="form-group">
+                                    <!--                                 specify your site  in data-sitekey attribute -->
+                                    <div class="g-recaptcha" t-att-data-sitekey="default_captach_site" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0; margin-right: -66px;" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback" />
+                                    <input class="form-control d-none" data-recaptcha="true" />
+                                    <div class="help-block with-errors" id="err" style="color: red" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--script>$("form").submit(function(event) {
+						var RecaptchaOptions = {
+						   lang : 'ar',
+						};
+			            var recaptcha = $("#g-recaptcha-response").val();
+			            if (recaptcha === "") {
+			                event.preventDefault();
+			                document.getElementById('err').innerHTML="Please verify Captcha";
+			            }
+			            else{
+			                return true;
+			            }
+			                });</script-->
+                        <div class="col-sm-3">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <button type="submit" class="btn btn-primary form-control">تتبع حالة الشحن</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+    <template id="track_shipment_details_view" name="Track Shipment Detail">
+        <t t-call="website.layout">
+            <br />
+            <br />
+            <div class="container con-color">
+                <form action="/track-shipment/process" method="post">
+                    <div class="bg_color">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <lable>SO Line #</lable>
+                                <input type="text" disabled="1" style="font-weight: bold;" name="so_no" id="so_no" class="form-control" t-att-value="values.get('sale_id', '')" placeholder="Enter SO Line" required="required" />
+                            </div>
+                            <div class="col-sm-5">
+                                <lable>Receiver Mobile #</lable>
+                                <input type="number" disabled="1" name="rec_mo" id="rec_mo" class="form-control" t-att-value="values.get('recevier_mo', '')" placeholder="Enter Receiver Mobile" required="required" />
+                            </div>
+                            <!--                             <script type="text/javascript" t-att-src="'https://www.google.com/recaptcha/api.js?render=%s'%(default_captach_site)"></script> -->
+                            <!-- 		                <script> -->
+                            <!-- 		                function recaptchaCallback() { -->
+                            <!-- 		                    $('#submitBtn').removeAttr('disabled'); -->
+                            <!-- 		                    console.log("Checkbox checked..!") -->
+                            <!-- 		                    }; -->
+                            <!-- 		                </script> -->
+                            <!-- 		                <div class="col-sm-4 g-recaptcha" t-att-data-sitekey="default_captach_site" data-callback="recaptchaCallback" /> -->
+                            <!--                             <div class="col-sm-2"> -->
+                            <!--                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" /> -->
+                            <!--                                 <button type="submit" class="btn btn-primary form-control">Track Ship</button> -->
+                            <!--                             </div> -->
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <br />
+                <form>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="btn btn-primary" disabled="disabled" t-esc="values.get('ord_date', '')" />
+                        </div>
+                        <br />
+                        <div class="col-sm">
+                            <h5 class="text-muted ml-treack">Agreement Number</h5>
+                            <h2 class="ml-left">
+                                <solid>
+                                    <span id="sale_id" class="input_white" type="text" name="sale_id" size="15" t-esc="values.get('sale_id', '')" readonly="1" />
+                                </solid>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <t t-if="values.get('state', '') in ['draft','confirm','registered']">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_English-1.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'shipped'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_English-2.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'on_transit'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_English-3.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'Delivered'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_English_04.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'released'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_English_04.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'done'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_English_05.png" />
+                        </t>
+                    </div>
+                    <br />
+                    <br />
+                    <h5>
+                        Agreement Details
+                        <i class="fa fa-arrow-down" />
+                    </h5>
+                    <div class="bg_color">
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Order Date :</label>
+                                    <span class="input_none" t-esc="values.get('order_date', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label">Shipment Date :</label>
+                                    <span class="input_none" t-esc="values.get('shipment_date', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Branch From :</label>
+                                    <span class="input_none" t-esc="values.get('loc_from', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Branch To :</label>
+                                    <span class="input_none" t-esc="values.get('loc_to', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Customer :</label>
+                                    <span class="input_none" t-esc="values.get('customer_id', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="so">Model :</label>
+                                    <span class="input_none" t-esc="values.get('car_model', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Expected Delivery :</label>
+                                    <span class="input_none"> From  <t t-esc="values.get('est_no_delivery_days',0)" style="margin-left: 12px;"/>  To  <t t-att-class="input_none" t-esc="values.get('est_max_no_delivery_days',0)" style="margin-left: 12px;"/> <span style="margin-left: 12px;">days</span></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="so">Year :</label>
+                                    <span class="input_none" t-esc="values.get('year', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">From :</label>
+                                    <span class="input_none" t-esc="values.get('loc_from', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="trip_id">Receiver Name :</label>
+                                    <span class="input_none" t-esc="values.get('rec_name', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">Car Maker :</label>
+                                    <span class="input_none" t-esc="values.get('car_make', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <label class="col-form-label" for="trip_id">Receiver Mo. :</label>
+                                    <span class="input_none" t-esc="values.get('recevier_mo', '')" />
+                                </div>
+                            </div>
+                            <t t-if="values.get('shipment',False)">
+                                <t t-set="so_amount" t-value="values.get('shipment')._getting_portal_so_amount()"></t>
+                                <t t-set="other_service_amount" t-value="values.get('shipment')._getting_portal_other_service_amount()"></t>
+                                <t t-set="dummerage_amount" t-value="values.get('shipment')._getting_portal_demurrage_amount()"></t>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_so_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">Cost :</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_so_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_other_service_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">Other Service Cost:</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_other_service_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_demurrage_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">Dummerage Cost :</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_demurrage_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="so_amount+other_service_amount+dummerage_amount">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">Total So Amount :</label>
+                                        <span class="input_none" t-esc="so_amount+other_service_amount+dummerage_amount" t-options='{"widget": "monetary", "display_currency": values.get("shipment").company_id.currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">Paid Amount :</label>
+                                        <!--input class="input_none" t-att-value="values.get('shipment').paid_amount" t-options='{"widget": "monetary", "display_currency": shipment.currency_id}'/-->
+                                        <span class="input_none" t-esc="values.get('shipment').paid_amount" t-options='{"widget": "monetary", "display_currency": values.get("shipment").company_id.currency_id}'/>
+                                    </div>
+                                </div>
+
+                                
+                            </t>    
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <br />
+                <t t-if="values.get('shipment',False)">
+                    <div id="shipment_track_cargo_payment_main">
+                    <t t-set="shipment" t-value="values.get('shipment',False)"/>
+                    <t t-set="pms" t-value="values.get('pms',False)"/>
+                    <t t-set="acquirers" t-value="values.get('acquirers',False)"/>
+                    <t t-call="bsg_tracking_shipment.tracking_shipment_cargo_payment"/>
+                    </div>
+                </t>
+                
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+    <template id="track_shipment_ar_details_view" name="Track Shipment Detail">
+        <t t-call="website.layout">
+            <br />
+            <br />
+            <div class="container con-color">
+                <form action="/track-shipment/process" method="post">
+                    <div class="bg_color">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <lable>خط SO #</lable>
+                                <input type="text" disabled="1" style="font-weight: bold;" name="so_no" id="so_no" class="form-control" t-att-value="values.get('sale_id', '')" placeholder="أدخل خط SO" required="required" />
+                            </div>
+                            <div class="col-sm-5">
+                                <lable>رقم الموبايل #</lable>
+                                <input type="number" disabled="1" name="rec_mo" id="rec_mo" class="form-control" t-att-value="values.get('recevier_mo', '')" placeholder="أدخل جهاز استقبال الجوال" required="required" />
+                            </div>
+                            <!--                             <script type="text/javascript" t-att-src="'https://www.google.com/recaptcha/api.js?render=%s'%(default_captach_site)"></script> -->
+                            <!-- 		                <script> -->
+                            <!-- 		                function recaptchaCallback() { -->
+                            <!-- 		                    $('#submitBtn').removeAttr('disabled'); -->
+                            <!-- 		                    console.log("Checkbox checked..!") -->
+                            <!-- 		                    }; -->
+                            <!-- 		                </script> -->
+                            <!-- 		                <div class="col-sm-4 g-recaptcha" t-att-data-sitekey="default_captach_site" data-callback="recaptchaCallback" /> -->
+                            <!--                             <div class="col-sm-2"> -->
+                            <!--                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" /> -->
+                            <!--                                 <button type="submit" class="btn btn-primary form-control">Track Shipment</button> -->
+                            <!--                             </div> -->
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <br />
+                <form>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <span type="text" class="btn btn-primary" t-esc="values.get('ord_date', '')" readonly="1" />
+                        </div>
+                        <div class="col-sm">
+                            <h5 class="text-muted ml-treack">رقم الاتفاقية</h5>
+                            <h2 class="ml-left">
+                                <solid>
+                                    <span id="sale_id" class="input_white" type="text" name="sale_id" size="15" t-esc="values.get('sale_id', '')" readonly="1" />
+                                </solid>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <t t-if="values.get('state', '') in ['draft','confirm','registered']">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_Arabic-1.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'shipped'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_Arabic-2.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'on_transit'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/status_Arabic-3.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'Delivered'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_Arabic_04.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'released'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_Arabic_04.png" />
+                        </t>
+                        <t t-elif="values.get('state', '') == 'done'">
+                            <img class="img-fluid img-mar" src="/bsg_tracking_shipment/static/src/img/Status_Arabic_05.png" />
+                        </t>
+                    </div>
+                    <br />
+                    <br />
+                    <h5>
+                        تفاصيل الاتفاقية
+                        <i class="fa fa-arrow-down" />
+                    </h5>
+                    <div class="bg_color">
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">تاريخ الطلب :</label>
+                                    <span class="input_none " t-esc="values.get('order_date', '')" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label">تاريخ الحـجـز :</label>
+                                    <span class="input_none" t-esc="values.get('shipment_date', '')" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">فرع الشحن :</label>
+                                    <span class="input_none " t-esc="values.get('loc_from', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">فرع الوصول :</label>
+                                    <span class="input_none " t-esc="values.get('loc_to', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">العميل :</label>
+                                    <span class="input_none " t-esc="values.get('customer_id', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12 ">
+                                    <label class="col-form-label" for="so">نموذج :</label>
+                                    <span class="input_none " t-esc="values.get('car_model', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="time_period">الوصول المتوقع :</label>
+                                    <span class="input_none"> من  <t t-esc="values.get('est_no_delivery_days',0)" style="margin-left: 12px;"/>  الى  <t t-att-class="input_none" t-esc="values.get('est_max_no_delivery_days',0)" style="margin-left: 12px;"/> <span style="margin-left: 12px;">ايام</span></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12 ">
+                                    <label class="col-form-label" for="so">السنة :</label>
+                                    <span class="input_none " t-esc="values.get('year', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">من عند :</label>
+                                    <span class="input_none " t-esc="values.get('loc_from', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12 ">
+                                    <label class="col-form-label" for="trip_id">اسم المستلم :</label>
+                                    <span class="input_none " t-esc="values.get('rec_name', '')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-12 ">
+                                    <label class="col-form-label" for="time_period">صانع السيارات :</label>
+                                    <span class="input_none " t-esc="values.get('car_make', '')" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt4">
+                                <div class="col-sm-offset-2 col-sm-12 ">
+                                    <label class="col-form-label" for="trip_id">رقم جوال المستلم :</label>
+                                    <span class="input_none " t-esc="values.get('recevier_mo', '')" />
+                                </div>
+                            </div>
+
+                            <t t-if="values.get('shipment',False)">
+                                <t t-set="so_amount" t-value="values.get('shipment')._getting_portal_so_amount()"></t>
+                                <t t-set="other_service_amount" t-value="values.get('shipment')._getting_portal_other_service_amount()"></t>
+                                <t t-set="dummerage_amount" t-value="values.get('shipment')._getting_portal_demurrage_amount()"></t>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_so_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">التكـلفة :</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_so_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_other_service_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">تكـلفة الخـدمات الأخـرى :</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_other_service_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="values.get('shipment')._getting_portal_demurrage_amount()">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">تكـلفة الأرضيـات :</label>
+                                        <span class="input_none" t-esc="values.get('shipment')._getting_portal_demurrage_amount()" t-options='{"widget": "monetary", "display_currency": values.get("shipment").currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4" t-if="so_amount+other_service_amount+dummerage_amount">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">الإجمـالي :</label>
+                                        <span class="input_none" t-esc="so_amount+other_service_amount+dummerage_amount" t-options='{"widget": "monetary", "display_currency": values.get("shipment").company_id.currency_id}'/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mt4">
+                                    <div class="col-sm-offset-2 col-sm-12">
+                                        <label class="col-form-label" for="trip_id">المبـلغ المـدفوع :</label>
+                                        <!--input class="input_none" t-att-value="values.get('shipment').paid_amount" t-options='{"widget": "monetary", "display_currency": shipment.currency_id}'/-->
+                                        <span class="input_none" t-esc="values.get('shipment').paid_amount" t-options='{"widget": "monetary", "display_currency": values.get("shipment").company_id.currency_id}'/>
+                                    </div>
+                                </div>
+
+                                
+                            </t>    
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <br />
+                <t t-if="values.get('shipment',False)">
+                    <div id="shipment_track_cargo_payment_main">
+                    <t t-set="shipment" t-value="values.get('shipment',False)"/>
+                    <t t-set="pms" t-value="values.get('pms',False)"/>
+                    <t t-set="acquirers" t-value="values.get('acquirers',False)"/>
+                    <t t-call="bsg_tracking_shipment.tracking_shipment_cargo_payment"/>
+                    </div>
+                </t>
+            </div>
+            <br />
+            <br />
+        </t>
+    </template>
+
+
+    <template id="tracking_shipment_cargo_payment" name="Track Shipment Line Pay Now">
+            <t t-set="tx_ids" t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))"/>
+            <t t-set="pending_manual_txs" t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider in ('transfer', 'manual'))"/>
+            <t t-set="pending_out_txs" t-value="tx_ids.filtered(lambda tx: tx.state == 'pending' and tx.acquirer_id.provider not in ('transfer', 'manual'))"/>
+                <div id="shipment_track_cargo_payment_content">                    
+                    <div t-attf-class="form-group">
+                        <a href="https://www.albassamitransport.com/terms-and-conditions" t-if="shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()"
+                        class="btn btn-info">
+                        <i class="fa fa-handshake-o"/> Our Terms And Conditions
+                        </a>
+
+                        <a href="https://www.albassamitransport.com/en_US/shipping-agreement" t-if="shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()"
+                        class="btn btn-info">
+                        <i class="fa fa-handshake-o"/> Terms of the Shipping, Delivery and Cancellation
+                        </a>
+                        <br />
+                    </div>    
+
+                    <div class="custom-control custom-checkbox" t-if="shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()">
+                        <input type="checkbox"  id="track_cargo_term_agree"/>
+                        <label for="customCheck1"><b>I have read and agree to the The terms and conditions and the terms of the Shipping, Delivery and Cancellation</b></label>
+                    </div>
+                    <br />
+
+
+                    <a href="#" t-if="shipment.payment_method.payment_type != 'credit' and shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()"
+                        class="btn btn-primary btn-block mb-2" data-toggle="modal" data-target="#track_cargo_pay_with">
+                        <i class="fa fa-fw fa-arrow-circle-right" id="track_cargo_pay_with_btn"/> Pay Now
+                    </a>
+                    <div t-if="tx_ids and pending_out_txs and not pending_manual_txs and shipment.state != 'done'" class="alert alert-info py-1 mb-2" >
+                        <i class="fa fa-fw fa-check-circle"/> Pending
+                    </div>
+                    <div t-if="shipment.state not in ['draft','cancel'] and not shipment.getting_portal_due_amount()" class="alert alert-success py-1 mb-2" >
+                        <i class="fa fa-fw fa-check-circle"/> Paid
+                    </div>
+                </div>
+                <div t-if="shipment.transaction_ids and shipment._getting_portal_so_amount() and not success and not error" class="o_account_payment_tx_status" t-att-data-invoice-id="shipment.id">
+                    <t t-call="payment.payment_confirmation_status">
+                        <t t-set="payment_tx_id" t-value="shipment.get_portal_last_transaction()"/>
+                        <t t-set="reference" t-value="shipment.sale_line_rec_name"/>
+                    </t>
+                </div>
+                <t t-set="tx_ids" t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('authorized', 'done'))"/>
+                <div t-if="shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()" id="track_cago_portal_pay">
+                    <div t-if="pms or acquirers" id="payment_method">
+                        <t t-call="bsg_tracking_shipment.tracking_shipment_portal_cargo_payment"/>
+                    </div>
+                </div>
+                <div class="panel-body" t-if="existing_token">
+                    <div class="offset-lg-3 col-lg-6">
+                        <i class="fa fa-info"></i> You have credits card registered, you can log-in to be able to use them.
+                    </div>
+                </div>
+    </template>
+
+
+
+    <template id="tracking_shipment_portal_cargo_payment" name="Track Shipment Pay Form">
+        <div class="row" t-if="shipment.state not in ['done','cancel'] and shipment.getting_portal_due_amount()" id="track_cago_portal_pay">
+            <div class="modal fade" id="track_cargo_pay_with" role="dialog">
+                <div class="modal-dialog modal-content">
+                    <div class="modal-content" >
+                        <div class="modal-header">
+                            <h3 class="modal-title">Pay with</h3>
+                            <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div t-if="pms or acquirers" id="payment_method" class="text-left col-md-13">
+                                <div id="track_cargo_pay_with_content_dialog">
+                                    <t t-call="payment.payment_tokens_list">
+                                        <t t-set="mode" t-value="'payment'"/>
+                                        <t t-set="partner_id" t-value="shipment.customer_id.id if request.env.user._is_public() else request.env.user.partner_id.id"/>
+                                        <t t-set="success_url" t-value="shipment.get_portal_url()"/>
+                                        <t t-set="error_url" t-value="shipment.get_portal_url()"/>
+                                        <t t-set="access_token" t-value="access_token or ''"/>
+                                        <t t-set="callback_method" t-value="''"/>
+                                        <t t-set="form_action" t-value="'/shipment_line/pay/' + str(shipment.id) + '/s2s_token_tx/'"/>
+                                        <t t-set="prepare_tx_url" t-value="'/shipment_line/pay/' + str(shipment.id) + '/form_tx/'"/>
+                                        <t t-set="submit_txt">Pay Now</t>
+                                        <t t-set="icon_class" t-value="'fa-lock'"/>
+                                    </t>
+                                </div>    
+                            </div>
+
+                            <div class="row mr16"  id="track_cargo_warnning_pay_with_content_dialog">
+                                <div t-attf-class="'col-lg-12 mr16 ml16 alert alert-dismissable alert-danger" role="alert">
+                                        Please Accept Our Term And Condition First
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="portal_line_cargo_success" name="Cargo Line Pay Success Display">
+        <div class="row mr16">
+            <t t-set="tx_ids" t-value="shipment.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))"/>
+            <div class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="status">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <t t-if="success == 'pay_line_cargo'">
+                <t t-set="payment_tx_id" t-value="shipment.get_portal_last_transaction()"/>
+                <span t-if='payment_tx_id.acquirer_id.done_msg' t-raw="payment_tx_id.acquirer_id.done_msg"/>
+                <span t-if='payment_tx_id.acquirer_id.post_msg' t-raw="payment_tx_id.acquirer_id.post_msg"/>
+                <div t-if="payment_tx_id.acquirer_id.post_msg and payment_tx_id.acquirer_id.provider == 'transfer' and shipment.sale_line_rec_name">
+                    <b>Communication: </b><span t-esc='shipment.sale_line_rec_name'/>
+                </div>
+            </t>
+            <t t-if="success == 'pay_line_cargo' and tx_ids and shipment.state not in ['draft','cancel']">
+                Done, your online payment has been successfully processed. Thank you for your order.
+            </t>
+
+            </div>
+        </div>
+    </template>
+
+</odoo>

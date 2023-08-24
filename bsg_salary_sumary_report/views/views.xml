@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_salary_sumary_report_wizard_form">
+      <field name="name">salary.sumary.report.wizard.form</field>
+      <field name="model">salary.sumary.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="employee_ids" widget="many2many_tags"/>
+                <field name="branch_ids" widget="many2many_tags"/>
+                <field name="resource_calendar_ids" widget="many2many_tags" />
+                <field name="country_ids" widget="many2many_tags"/>
+                <field name="religion_ids" widget="many2many_tags"/>
+                <field name="guarantor_ids" widget="many2many_tags"/>
+                <field name="partner_type_ids" widget="many2many_tags"/>
+                <field name="employee_tags_ids" widget="many2many_tags"/>
+              </group>
+              <group>
+                <field name="region_ids" widget="many2many_tags" />
+                <field name="department_ids" widget="many2many_tags"/>
+                <field name="job_position_ids" widget="many2many_tags" />
+                <field name="employee_status"/>
+                <field name="salary_payment_method"></field>
+                <field name="company_ids" widget="many2many_tags"/>
+                <field name="is_driver"></field>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="employee_salary_sumary_report_action">
+      <field name="name">Employee Salary Summary Reports</field>
+      <field name="res_model">salary.sumary.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="employee_salary_sumary_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Employees Salary Summary Reports"
+             id="menu_employee_salary_sumary_reports"
+             parent="employee_info_report.employee_info_report_main_menu_item"
+             sequence="12"
+             groups="bsg_salary_sumary_report.groups_employee_salary_sumary_reports"
+             action="employee_salary_sumary_report_action"/>
+  </data>
+</odoo>

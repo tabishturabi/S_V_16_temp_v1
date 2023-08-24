@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_car_maker_form" model="ir.ui.view">
+            <field name="name">Car Maker</field>
+            <field name="model">bsg_car_make</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Maker">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="car_make_name" placeholder="Car Maker" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group />
+                        <group>
+                            <group>
+                                <field name="car_make_ar_name" />
+                            </group>
+                            <group>
+                                <field name="car_make_old_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_maker" model="ir.ui.view">
+            <field name="name">Car Maker</field>
+            <field name="model">bsg_car_make</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Maker">
+                    <field name="car_make_name" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_maker" model="ir.actions.act_window">
+            <field name="name">Car Maker</field>
+            <field name="res_model">bsg_car_make</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_maker" />
+        </record>
+        <menuitem id="custom_clearance_menu" name="Car Carriar" parent="sale.menu_sale_config" sequence="5" />
+        <menuitem action="action_car_maker" id="custom_clearance_submenu_car_maker" name="Car Maker" parent="custom_clearance_menu" sequence="5" />
+        <record id="view_car_size_form" model="ir.ui.view">
+            <field name="name">Car Size</field>
+            <field name="model">bsg_car_size</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Size">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="car_size_name" placeholder="Car Size" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group />
+                        <h3>Dimensions</h3>
+                        <group>
+                            <group>
+                                <field name="length" />
+                                <field name="width" />
+                                <field name="car_old_id" />
+                            </group>
+                            <group>
+                                <field name="height" />
+                                <field name="trailer_capcity" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_size" model="ir.ui.view">
+            <field name="name">Car Size</field>
+            <field name="model">bsg_car_size</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Size">
+                    <field name="car_size_name" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_size" model="ir.actions.act_window">
+            <field name="name">Car Size</field>
+            <field name="res_model">bsg_car_size</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_size" />
+        </record>
+        <menuitem action="action_car_size" id="custom_clearance_submenu_car_size" name="Car Size" parent="custom_clearance_menu" sequence="7" />
+        <record id="view_car_color" model="ir.ui.view">
+            <field name="name">Car Color</field>
+            <field name="model">bsg_vehicle_color</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Color">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="vehicle_color_name" placeholder="vehicle Color" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_color" model="ir.ui.view">
+            <field name="name">Car Color</field>
+            <field name="model">bsg_vehicle_color</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Color">
+                    <field name="vehicle_color_name" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_color" model="ir.actions.act_window">
+            <field name="name">Car Color</field>
+            <field name="res_model">bsg_vehicle_color</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_color" />
+        </record>
+        <menuitem action="action_car_color" id="custom_clearance_submenu_color" name="Car Color" parent="custom_clearance_menu" sequence="9" />
+        <record id="view_car_year" model="ir.ui.view">
+            <field name="name">Car Year</field>
+            <field name="model">bsg.car.year</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Year">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="car_year" placeholder="Car Year" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_year" model="ir.ui.view">
+            <field name="name">Car Year</field>
+            <field name="model">bsg.car.year</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Year">
+                    <field name="car_year" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_year" model="ir.actions.act_window">
+            <field name="name">Car Year</field>
+            <field name="res_model">bsg.car.year</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_year" />
+        </record>
+        <menuitem action="action_car_year" id="custom_clearance_submenu_year" name="Car Year" parent="custom_clearance_menu" sequence="8" />
+        <record id="view_car_model" model="ir.ui.view">
+            <field name="name">Car Model</field>
+            <field name="model">bsg_car_config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Model">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="car_model" placeholder="Car Model" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="car_maker" options="{'no_create_edit':True}" />
+                            </group>
+                            <group />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_model" model="ir.ui.view">
+            <field name="name">Car Model</field>
+            <field name="model">bsg_car_config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Model">
+                    <field name="car_model" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_model" model="ir.actions.act_window">
+            <field name="name">Car Model</field>
+            <field name="res_model">bsg_car_config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_model" />
+        </record>
+        <menuitem action="action_car_model" id="custom_clearance_submenu_model" name="Car Model" parent="custom_clearance_menu" sequence="6" />
+        <record id="view_car_plate" model="ir.ui.view">
+            <field name="name">Car Plate</field>
+            <field name="model">bsg_plate_config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Car Plate">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}" />
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="plate_config" placeholder="Car Model" />
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group />
+                            <group />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_car_plate" model="ir.ui.view">
+            <field name="name">Car Plate</field>
+            <field name="model">bsg_plate_config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car Plate">
+                    <field name="plate_config" />
+                </tree>
+            </field>
+        </record>
+        <record id="action_car_plate" model="ir.actions.act_window">
+            <field name="name">Car Plate</field>
+            <field name="res_model">bsg_plate_config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_car_plate" />
+        </record>
+        <menuitem action="action_car_plate" id="custom_clearance_submenu_plate" name="Plate Config" parent="custom_clearance_menu" sequence="10" />
+    </data>
+</odoo>

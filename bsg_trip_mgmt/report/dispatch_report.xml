@@ -1,0 +1,1051 @@
+<odoo>
+  <data>
+    <!-- Action Dispatcher Voucher Report -->
+      <record id="paperformat_dispatch_template" model="report.paperformat">
+          <field name="name">European A4 low margin</field>
+          <field name="default" eval="True" />
+          <field name="format">A4</field>
+          <field name="orientation">Portrait</field>
+          <field name="margin_top">0</field>
+          <field name="margin_bottom">0</field>
+          <field name="margin_left">5</field>
+          <field name="margin_right">5</field>
+          <field name="header_line" eval="False" />
+          <field name="header_spacing">10</field>
+          <field name="dpi">90</field>
+      </record>
+
+     <report 
+          id="report_dispatch_template_report"
+          string="Dispatch Report"
+          model="fleet.vehicle.trip" 
+          report_type="qweb-html"
+          file="bsg_trip_mgmt.report_dispatch_template" 
+          name="bsg_trip_mgmt.report_dispatch_template"
+          paperformat="paperformat_dispatch_template"
+          groups="bsg_trip_mgmt.group_dispatch_report"
+          />
+
+
+      <!-- Main template -->
+      <!-- <template id="report_dispatch_template">
+            <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                <t t-call="bsg_trip_mgmt.report_dispatch_template_call" t-lang="lang"/>
+                </t>
+              </t>
+            </template> -->
+
+      <!-- Translatable template  and internal layout-->
+<!-- 
+      <template id="report_dispatch_template_call">
+              <t t-call="web.internal_layout">
+                <t t-set="o" t-value="o.with_context({'lang': lang})"/> -->
+      <template id="report_dispatch_template">
+        <t t-call="web.html_container">
+          <t t-call="web.internal_layout">
+            <t t-if="vir_report == 1">
+              <t t-foreach="vir_docs" t-as="o">
+              <t t-if="message">
+              <div class="page">
+              <page size="A4">
+               <t t-esc="message" />
+              </page>
+              </div>
+            </t>
+            <t t-if="not message">
+                <div class="page" style="page-break-after: always;">
+                  <style>
+
+                      .header {
+                          display: none;
+                      }
+                       body {
+                        display: block;
+                        font-size: 14px;
+                        margin: 0 auto;
+                        margin-bottom: 0.5cm;
+                      }
+                      .footer {
+                          display: none !important;
+                      }
+
+                      table, td, th, tr {
+                        border-color: black;
+                        rules="cols";
+                        bgcolor="#90EE90";
+                      }
+                      .centered {
+                          width: 1000px;
+                          margin: auto;
+                      }
+                      page[size="A4"] {
+                        width: 19cm;
+                        height: 27.7cm;
+                        text-align: center;
+                      }
+
+                      table tr th,
+                      table tr td {
+                          border-right: 1px solid #000;
+                          text-align: center;
+                      }
+
+                      table tr th {
+                          padding: 10px 0px;
+                          background: #ccc;
+                                                          
+                      }
+
+                      table tr td {
+                          border-top: 1px solid #000;
+                          padding: 5px 0px;
+                      }
+
+                      .address {
+                          width: 45%;
+                          float: right;
+                          margin: 15px 0px 15px 0px;
+                      }
+                      .address p {
+                          text-align: right;
+                      }
+                      .span_left {
+                          margin-left: 50px;
+                      }
+                      .span_right {
+                        float: right;
+                        font-weight:bold;
+                      }
+                      span_center {
+                        align: center;
+                        font-size:medium;
+                        
+                      }
+                      .p_text_bold {
+                        font-weight:bold;
+                      }
+
+                      .space {
+                        min-width : 140px;
+                        max-width : 140px;
+                        width : 140px;
+                      }
+
+                  </style> 
+                  <page size="A4">
+                    <!-- <div style="align-content: center">
+                      <table  align="center" width="80%" height="100" style="border:hidden;text-align:center">
+                        <tr style="border:hidden">
+                          <td style="border:hidden" width="25%"><img src="/bsg_trip_mgmt/static/img/albassami_transport_logoWP.png" width="134" height="50" style="margin-left: 56px;"/></td>
+                          <td style="border:hidden" width="30%"> <h1 style="margin-top: 40px;margin-left: 100px;"><font color="green"> بيان ترحيل </font></h1> </td>
+                        <td style="border:hidden" width="25%"><img src="/bsg_trip_mgmt/static/img/rightHeader.png" width="190" height="90" style="margin-left: 172px;"/></td>
+                        </tr>
+                      </table>
+                    </div> -->
+
+                    <div>
+                      <table width="100%" height="100" style="border:hidden;margin:0px auto;">
+                        <tr style="border:hidden">
+
+                            <td width="25%" style="border:hidden;text-align:left"><t t-if="o.company_id.logo"><img t-att-src="image_data_uri(o.company_id.logo)" width="200" height="100" style="margin-left: 56px"/></t></td>
+
+                          <td width="30%" style="border:hidden;text-align:center"> <h1 style="margin-top: 40px;margin-left: 100px;border:hidden"><font color="green"> بيان ترحيل </font></h1> </td>
+
+                            <td width="25%" style="border:hidden;text-align:right"><t t-if="o.company_id.custom_right_header"><img t-att-src="image_data_uri(o.company_id.custom_right_header)" width="230" height="110" style="float:right"/></t></td>
+
+                        </tr>
+                      </table>
+
+
+                    </div>
+
+                     <hr class="width100%Solid" />
+                    <div class="main-data">
+                      <div class="centered">
+                        <div align="center" style="padding: 25px;">
+                          <table class="table-1" width="100%" style="border:hidden" align="center">
+
+                            <tr style="border:hidden">
+                                <td colspan="2" style="border:hidden;text-align:right">
+                                    <t t-set="expected_start_date" t-value="o.get_current_tz_time(o.expected_start_date)" />
+                                    <span t-esc="expected_start_date"></span>
+                                </td>
+                                <td class="space" style="border:hidden;text-align:right;font-weight:bold">
+                                    <span>: تاريخ </span>
+                                </td>
+                                <!-- <td></td> -->
+                                <td class="space" style="border:hidden;text-align:right"></td>
+                                <td style="border:hidden;text-align:right">
+                                    <!-- <t t-set="num" t-value="num+1" /> -->
+                                    <span t-esc="o.name"></span>
+                                    <span> / </span>
+                                    <span>1</span>
+                                </td>
+                                <td class="space" style="border:hidden;text-align:right;font-weight:bold">
+                                    <span> : رقـم الحــاسب </span>
+                                </td>
+                            </tr>
+
+                           <!--  <tr style="border:hidden">
+                                <td style="border:hidden;text-align:right">
+                                   <span t-esc="o.drop_loc.route_waypoint_name"></span>
+                                </td>
+                                <td style="border:hidden;text-align:right">
+                                   <span t-esc="o.drop_loc.loc_branch_id.branch_ar_name"></span>
+                                </td>
+                                <td style="border:hidden;text-align:right;font-weight:bold">
+                                   <span class="span_right"> : إلى </span>
+                                </td>
+                                <td style="border:hidden;text-align:right">
+                                    <span t-esc="o.pickup_loc.route_waypoint_name"></span>
+                                </td>
+                                <td style="border:hidden;text-align:right">
+                                    <span t-esc="o.pickup_loc.loc_branch_id.branch_ar_name"></span>
+                                </td>
+                                <td style="border:hidden;text-align:right;font-weight:bold">
+                                    <span class="span_right"> : منقول من </span>
+                                </td>
+                            </tr> -->
+
+                           <!--  <tr style="border:hidden">
+
+                                <td colspan="5" style="border:hidden;margin-right:20px;text-align:right">
+                                    <span t-esc="o.picking_date"></span>
+                                </td>
+                                <td style="border:hidden">
+                                    <span class="span_right"> :الانــطــلاق </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                              <td colspan="5" style="border:hidden;text-align:right">
+                                <span t-esc="o.picking_name.bsg_cargo_sale_id.deliver_date"></span>
+                              </td>
+                              <td style="border:hidden">
+                                <span class="span_right"> :الـوصـــــول </span>
+                              </td>
+                            </tr> -->
+
+                            <tr>
+
+                                <td colspan="5" style="border:hidden">
+                                  <span class="span_left" ></span>
+                                </td>
+                                <td style="border:hidden">
+                                  <span class="span_right"><b> : بيانات السائق </b></span>
+                                </td>
+                              </tr>
+
+                            <tr style="border:hidden">
+
+                              <td colspan="2" style="border:hidden;text-align:right">
+                                 <span t-esc="o.driver_id.sudo().country_id.name"></span>
+                              </td>
+                              <td colspan="2" style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : الجنســيــة </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.sudo().driver_id.driver_code"></span>
+                                <span>-</span>
+                                <span t-esc="o.sudo().driver_id.name"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : إسم السائق </span>
+                              </td>
+                            </tr>
+
+                            <tr style="border:hidden">
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_empiqama.bsg_placeofissue"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : جـهـتـهـــا </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_empiqama.bsg_issuedate"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : تاريخ صدورها </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_empiqama.bsg_iqama_name"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم رخصة القيادة  </span>
+                              </td>
+                            </tr>
+
+                            <tr style="border:hidden">
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_issue_place"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : جـهـتـهـــا </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_issue_date"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : تاريخ صدورها </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.driver_id.bsg_empiqama.bsg_iqama_name"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم الأقــامـة </span>
+                              </td>
+                            </tr>
+
+                            <tr>
+
+                                <td colspan="5" style="border:hidden"></td>
+                                <td style="border:hidden">
+                                  <span class="span_right"><b> : بيانات السيارة  </b></span>
+                                </td>
+                              </tr>
+
+                            <tr style="border:hidden">
+                              <td style="border:hidden;text-align:right">
+                                 <span t-esc="o.vehicle_id.model_year"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : المـوديــل  </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span style="margin-left:8px" t-esc="o.vehicle_id.license_plate"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : رقم اللوحة والنوع  </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="o.vehicle_id.model_id.brand_id.name"></span>
+                                 /
+                                <span t-esc="o.vehicle_id.model_id.name"></span>
+                                /
+                                <span t-esc="o.vehicle_id.taq_number"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم السيارة </span>
+                              </td>
+                            </tr>
+
+                            <tr style="border:hidden">
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="get_place(o.vehicle_id.id)"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : جـهـتـهـــا </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                 <span t-esc="get_date(o.vehicle_id.id)"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : تاريخ صدورها  </span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <span t-esc="get_istam(o.vehicle_id.id)"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم رخصة استمارا</span>
+                              </td>
+                            </tr>
+
+                            <tr>
+
+                              <td colspan="5" style="border:hidden;text-align:right">
+                                <span style="margin-left:8px" t-esc="o.vehicle_id.trailer_id.trailer_taq_no"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : الـمـقـطــورة </span>
+                              </td>
+                            </tr>
+
+                            <tr>
+
+                              <td colspan="4" style="border:hidden;text-align:right">
+
+                                <span t-esc="o.route_id.route_name"></span>
+                              </td>
+                              <td colspan="1" style="border:hidden;text-align:right">
+                                <span t-esc="o.route_id.route_id"></span>
+
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم الطريق  </span>
+                              </td>
+                            </tr>
+
+                            <table class="table-2" width="100%" rules="cols" style="margin-top: 15px;border:1px solid">
+
+                              <tr bgcolor="#90EE90">
+                                <td style="border-left:1px solid" align="center" width="10%"> <p><b> التوقيع </b></p></td>
+                                <td align="center" width="15%"> <p><b> التحصيل </b></p></td>
+                                <td align="center" width="13%"> <p><b> رقم اللوحة </b></p></td>
+                                <td align="center" width="15%"> <p><b> نوع السيارة </b></p></td>
+                                <td align="center" width="25%"> <p><b> اسم المالك - اسم المستلم </b></p></td>
+                                <td align="center" width="15%"> <p><b> الملف </b></p></td>
+                                <td align="center" width="2%"> <p><b> م </b></p></td>
+                              </tr>
+
+                              <!-- <t t-set="sr_no" t-value="0" />
+                              <span t-esc="get_records(o.picking_name.bsg_cargo_sale_id.customer_type,o.loc_from.id,o.loc_to.id)"></span>
+                              <t t-foreach="active_rec" t-as="line">
+                                <tr style="border-bottom:1px solid">
+                                  <td align="center" width="10%">
+                                    <span></span>
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="15%">
+                                    <span t-esc="line.picking_name.bsg_cargo_sale_id.payment_method.payment_method_name"></span>
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="13%">
+                                    <t t-if="line.plate_no">
+                                      <span t-esc="line.plate_no"></span>
+                                    </t>
+                                    <t t-else="">
+                                      <span t-esc="line.chassis_no"></span>
+                                    </t>
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="15%">
+                                    <span t-esc="line.car_maker_id.car_maker.car_make_name"></span>
+                                    <span t-esc="line.car_model_id.car_model_name"></span>
+
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="25%">
+                                      <span t-esc="line.picking_name.bsg_cargo_sale_id.sender_name"></span> /
+                                      <span t-esc="line.picking_name.bsg_cargo_sale_id.receiver_name"></span>
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="15%">
+                                    <span t-esc="line.picking_name.sale_line_rec_name"></span>
+                                  </td>
+
+                                  <td style="border-bottom:1px solid" align="center" width="2%">
+                                    <t t-set="sr_no" t-value="sr_no + 1" />
+                                    <span t-esc="sr_no"></span>
+                                  </td>
+
+                                </tr>
+                              </t>
+ -->
+
+                             </table>
+                               <table class="table-3" width="100%" style="border:hidden;margin-top:20px">
+                                 <th style="border:hidden">
+                                   <p align="right"><b> : المـرفـقـات </b></p>
+                                 </th>
+                               </table>
+                               <table width="100%" style="margin-top: 15px;border:hidden;margin-bottom:5px">
+                                  <td style="border:hidden;text-align:bold;font-size:18px">
+                                    <p align="right"><b> : إقرار استلام </b></p>
+                                  </td>
+                                <table width="100%" border="1">
+                                  <tr bgcolor="#90EE90">
+                                    <td style="text-align:right;border-bottom:1px solid;border-left:1px solid">
+                                      <p><b> أقر أنا الموقع أدناه السائق(<span t-esc="o.driver_id.name"></span>)بأنني استلمت الناقلة رقم(<span t-esc="o.vehicle_id.taq_number"></span>)وعليها حمولة(<span t-esc="sr_no"></span>) سيارة وفق حالة السيارات المبينة في اتفاقيات النقل المرفقة والتعهد بإيصالها على حالتها المبينة فيها الى جهة المقصد.ا </b></p>
+                                    </td>
+                                  </tr>
+                                  <table width="100%" style="margin-top: 8px;border:hidden">
+                                    <tr style="border:hidden">
+                                      <td style="border:hidden">
+                                        <span></span>
+                                      </td>
+                                      <td style="border:hidden;font-weight:bold">
+                                        <span>إستلام لعميل </span>
+                                      </td>
+                                      <td style="border:hidden">
+                                        <span t-esc="o.driver_id.name"></span>
+                                      </td>
+                                      <td style="border:hidden;font-weight:bold">
+                                        <span>السائق المستلم</span>
+                                      </td>
+                                      <td style="border:hidden">
+                                        <span t-esc="o.sudo().create_uid.name"></span>
+                                      </td>
+                                      <td style="border:hidden;font-weight:bold">
+                                        <span>مأمور جهة الشحن </span>
+                                      </td>
+
+                                    </tr>
+
+                                    <tr style="border:hidden">
+                                      <td colspan="2" style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                      <td colspan="2" style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                      <td style="border:hidden"> <span class="span_right" t-esc="current_user"></span> </td>
+                                      <td style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                    </tr>
+
+                                    <tr style="border:hidden">
+                                      <td colspan="2" style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                      <td colspan="2" style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                      <td style="border:hidden"> <span class="span_right" t-esc="o.sudo().create_uid.name"></span> </td>
+                                      <td style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                    </tr>
+                                    <tr> <td colspan="6" style="padding-top:10px"></td>
+                                    </tr>
+                                    <tr>
+                                      <td colspan="2" style="text-align:left">
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                      </td>
+                                      <td style="border-left:hidden;font-weight:bold">
+                                        <span>Print By : </span>
+                                      </td>
+                                      <td style="border-left:hidden">
+                                        <span t-esc="current_user"></span>
+                                      </td>
+                                      <td colspan="2" style="border-left:hidden">
+                                        <b><span>Page : </span></b>
+                                        <span>1</span>
+                                        <span>/</span>
+                                        <span>1</span>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </table>
+                               </table>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                  </page>
+                </div>
+              </t>
+              </t>
+            </t>
+            <t t-if="not message">
+            <t t-set="num" t-value="0" />
+            <t t-foreach="virtual_data" t-as="o">
+              <div class="page" style="page-break-after: always;">
+                <style>
+
+                    .header {
+                        display: none;
+                    }
+                     body {
+                      display: block;
+                      font-size: 14px;
+                      margin: 0 auto;
+                      margin-bottom: 0.5cm;
+                    }
+                    .footer {
+                        display: none !important;
+                    }
+
+                    table, td, th, tr {
+                      border-color: black;
+                      rules="cols";
+                      bgcolor="#90EE90";
+                    }
+                    .centered {
+                        width: 1000px;
+                        margin: auto;
+                    }
+                    page[size="A4"] {
+                      width: 19cm;
+                      height: 27.7cm;
+                      text-align: center;
+                    }
+
+                    table tr th,
+                    table tr td {
+                        border-right: 1px solid #000;
+                        text-align: center;
+                    }
+
+                    table tr th {
+                        padding: 10px 0px;
+                        background: #ccc;
+
+                    }
+
+                    table tr td {
+                        border-top: 1px solid #000;
+                        padding: 5px 0px;
+                    }
+
+                    .address {
+                        width: 45%;
+                        float: right;
+                        margin: 15px 0px 15px 0px;
+                    }
+                    .address p {
+                        text-align: right;
+                    }
+                    .span_left {
+                        margin-left: 50px;
+                    }
+                    .span_right {
+                      float: right;
+                      font-weight:bold;
+                    }
+                    span_center {
+                      align: center;
+                      font-size:medium;
+
+                    }
+                    .p_text_bold {
+                      font-weight:bold;
+                    }
+
+                    .space {
+                      min-width : 140px;
+                      max-width : 140px;
+                      width : 140px;
+                    }
+
+                </style>
+                <page size="A4">
+                  <!-- <div style="align-content: center">
+                    <table  align="center" width="80%" height="100" style="border:hidden;text-align:center">
+                      <tr style="border:hidden">
+                        <td style="border:hidden" width="25%"><img src="/bsg_trip_mgmt/static/img/albassami_transport_logoWP.png" width="134" height="50" style="margin-left: 56px;"/></td>
+                        <td style="border:hidden" width="30%"> <h1 style="margin-top: 40px;margin-left: 100px;"><font color="green"> بيان ترحيل </font></h1> </td>
+                      <td style="border:hidden" width="25%"><img src="/bsg_trip_mgmt/static/img/rightHeader.png" width="190" height="90" style="margin-left: 172px;"/></td>
+                      </tr>
+                    </table>
+                  </div> -->
+
+                  <div>
+                    <table width="100%" height="100" style="border:hidden;margin:0px auto;">
+                      <tr style="border:hidden">
+
+                        <td width="25%" style="border:hidden;text-align:left"><img t-att-src="image_data_uri(current_company_id.logo)" width="200" height="100" style="margin-left: 56px"/></td>
+
+                        <td width="30%" style="border:hidden;text-align:center">
+                          <h1 style="margin-top: 40px;margin-left: 100px;border:hidden"><font color="green"> بيان ترحيل </font></h1>
+
+
+                          <t t-set="check_drop_loc" t-value="get_records_drop(o.picking_name.sudo().bsg_cargo_sale_id.customer.id,o.loc_from.id,o.loc_to.id,o.picking_name.sudo().bsg_cargo_sale_id.payment_method.id,o.picking_name.sudo().bsg_cargo_sale_id.cooperate_customer.id)" />
+
+                          <t t-if="check_drop_loc == 1">
+                            <br></br>
+                            <h1 style="margin-left: 100px;border:hidden"><font color="red"> ترانزيت </font></h1>
+                          </t>
+
+                        </td>
+
+                          <td width="25%" style="border:hidden;text-align:right"><t t-if="current_company_id.custom_right_header"><img t-att-src="image_data_uri(current_company_id.custom_right_header)" width="230" height="110" style="float:right"/></t></td>
+
+                      </tr>
+                    </table>
+
+
+                  </div>
+
+                   <hr class="width100%Solid" />
+                  <div class="main-data">
+                    <div class="centered">
+                      <div align="center" style="padding: 25px;">
+                        <table class="table-1" width="100%" style="border:hidden" align="center">
+
+                          <tr style="border:hidden">
+                              <td colspan="2" style="border:hidden;text-align:right">
+                                  <t t-set="expected_start_date" t-value="o.bsg_fleet_trip_id.get_current_tz_time(o.bsg_fleet_trip_id.expected_start_date)" />
+                                  <span t-esc="expected_start_date"></span>
+                              </td>
+                              <td class="space" style="border:hidden;text-align:right;font-weight:bold">
+                                  <span>: تاريخ </span>
+                              </td>
+                              <!-- <td></td> -->
+                              <td class="space" style="border:hidden;text-align:right"></td>
+                              <td style="border:hidden;text-align:right">
+                                  <t t-set="num" t-value="num+1" />
+                                  <span t-esc="o.bsg_fleet_trip_id.name"></span>
+                                  <span> / </span>
+                                  <span t-esc="num"></span>
+                              </td>
+                              <td class="space" style="border:hidden;text-align:right;font-weight:bold">
+                                  <span> : رقـم الحــاسب </span>
+                              </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                              <!-- <td></td> -->
+                              <td style="border:hidden;text-align:right">
+                                 <!-- <span t-esc="o.loc_to.loc_branch_id.branch_ar_name"></span> -->
+                                 <span t-esc="o.drop_loc.loc_branch_id.branch_name"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                <t t-if="o.drop_loc.loc_branch_id.branch_ar_name">
+                                  <span t-esc="o.drop_loc.loc_branch_id.branch_ar_name"></span>
+                                </t>
+                                <t t-else="">
+                                  <span t-esc="o.drop_loc.route_waypoint_name"></span>
+                                </t>
+
+                                 <!-- <span t-esc="o.loc_to.route_waypoint_name"></span> -->
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                 <span class="span_right"> / إلى </span>
+                                 <span class="span_right"> : To </span>
+                              </td>
+                              <!-- <td></td> -->
+                              <td style="border:hidden;text-align:right">
+                                  <!-- <span t-esc="o.loc_from.loc_branch_id.branch_ar_name"></span> -->
+                                  <!-- <span t-esc="o.pickup_loc.route_waypoint_name"></span> -->
+                                  <span t-esc="o.pickup_loc.loc_branch_id.branch_name"></span>
+                              </td>
+                              <td style="border:hidden;text-align:right">
+                                  <!-- <span t-esc="o.pickup_loc.loc_branch_id.branch_ar_name"></span> -->
+                                  <t t-if="o.pickup_loc.loc_branch_id.branch_ar_name">
+                                  <span t-esc="o.pickup_loc.loc_branch_id.branch_ar_name"></span>
+                                </t>
+                                <t t-else="">
+                                  <span t-esc="o.pickup_loc.route_waypoint_name"></span>
+                                </t>
+                                  <!-- <span t-esc="o.loc_from.route_waypoint_name"></span> -->
+                              </td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">
+                                  <span class="span_right"> / منقول من </span>
+                                  <span class="span_right"> : From </span>
+                              </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                                <td colspan="5" style="border:hidden;margin-right:20px;text-align:right;font-weight:bold;">
+                                    <t t-set="expected_start_date" t-value="o.bsg_fleet_trip_id.get_current_tz_time(o.bsg_fleet_trip_id.expected_start_date)" />
+                                    <span t-esc="expected_start_date.strftime('%Y-%m-%d %H:%M:%S')"></span>
+                                </td>
+                                <td style="border:hidden;font-weight:bold;">
+                                    <span class="span_right"> :الانــطــلاق </span>
+                                </td>
+                          </tr>
+
+                          <tr>
+                            <td colspan="5" style="border:hidden;text-align:right">
+                                <t t-set="schedule_start_date" t-value="o.bsg_fleet_trip_id.get_schedule_start_date(o)" />
+                                <t t-if="schedule_start_date">
+                                    <span t-esc="schedule_start_date.strftime('%Y-%m-%d %H:%M:%S')"></span>
+                                </t>
+                            </td>
+                            <td style="border:hidden">
+                              <span class="span_right"> :الـوصـــــول </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                              <td colspan="5" style="border:hidden">
+                                <span class="span_left" ></span>
+                              </td>
+                              <td style="border:hidden">
+                                <span class="span_right"><b> : بيانات السائق </b></span>
+                              </td>
+                            </tr>
+
+                          <tr style="border:hidden">
+
+                            <td colspan="2" style="border:hidden;text-align:right">
+                               <span t-esc="o.bsg_fleet_trip_id.driver_id.sudo().country_id.name"></span>
+                            </td>
+                            <td colspan="2" style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : الجنســيــة </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.sudo().driver_id.driver_code"></span>
+                              <span>-</span>
+                              <span t-esc="o.bsg_fleet_trip_id.sudo().driver_id.name"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : إسم السائق </span>
+                            </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_empiqama.bsg_placeofissue"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : جـهـتـهـــا </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_empiqama.bsg_issuedate"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : تاريخ صدورها </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_empiqama.bsg_iqama_name"></span>
+                              <!-- <span>8888888888888</span> -->
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : رقم رخصة القيادة  </span>
+                            </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_issue_place"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : جـهـتـهـــا </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_issue_date"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : تاريخ صدورها </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.driver_id.bsg_empiqama.bsg_iqama_name"></span>
+                              <!-- <span>8888888888888</span> -->
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : رقم الأقــامـة </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                              <!-- <td></td> -->
+                              <!-- <td></td>
+                              <td></td>
+                              <td></td> -->
+                              <td colspan="5" style="border:hidden"></td>
+                              <td style="border:hidden">
+                                <span class="span_right"><b> : بيانات السيارة  </b></span>
+                              </td>
+                            </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden;text-align:right">
+                               <span t-esc="o.bsg_fleet_trip_id.vehicle_id.model_year"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : المـوديــل  </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span style="margin-left:8px" t-esc="o.bsg_fleet_trip_id.vehicle_id.license_plate"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : رقم اللوحة والنوع  </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.vehicle_id.model_id.brand_id.name"></span>
+                               /
+                              <span t-esc="o.bsg_fleet_trip_id.vehicle_id.model_id.name"></span>
+                              /
+                              <span t-esc="o.bsg_fleet_trip_id.vehicle_id.taq_number"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : رقم السيارة </span>
+                            </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="get_place(o.bsg_fleet_trip_id.vehicle_id.id)"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : جـهـتـهـــا </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                               <span t-esc="get_date(o.bsg_fleet_trip_id.vehicle_id.id)"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                                <span> : تاريخ صدورها  </span>
+                            </td>
+                            <td style="border:hidden;text-align:right">
+                              <span t-esc="get_istam(o.bsg_fleet_trip_id.vehicle_id.id)"></span>
+                              <!-- <span>8888888888888</span> -->
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : رقم رخصة استمارا</span>
+                            </td>
+                          </tr>
+
+                          <tr>
+
+                            <td colspan="5" style="border:hidden;text-align:right">
+                              <span style="margin-left:8px" t-esc="o.bsg_fleet_trip_id.vehicle_id.trailer_id.trailer_taq_no"></span>
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : الـمـقـطــورة </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <!-- <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td> -->
+                            <td colspan="4" style="border:hidden;text-align:right">
+                              <!-- <span t-esc="o.bsg_fleet_trip_id.route_id.route_id"></span> -->
+                              <span t-esc="o.bsg_fleet_trip_id.route_id.route_name"></span>
+                            </td>
+                            <td colspan="1" style="border:hidden;text-align:right">
+                              <span t-esc="o.bsg_fleet_trip_id.route_id.route_id"></span>
+                              <!-- <span t-esc="o.bsg_fleet_trip_id.route_id.route_name"></span> -->
+                            </td>
+                            <td style="border:hidden;text-align:right;font-weight:bold">
+                              <span> : رقم الطريق  </span>
+                            </td>
+                          </tr>
+
+                          <table class="table-2" width="100%" rules="cols" style="margin-top: 15px;border:1px solid">
+
+                            <tr bgcolor="#90EE90">
+                              <td>
+                                <span>فرع الترانزيت</span>
+                              </td>
+                              <td style="border-left:1px solid" align="center" width="10%"> <p><b> التوقيع </b></p></td>
+                              <td align="center" width="15%"> <p><b> التحصيل </b></p></td>
+                              <td align="center" width="13%"> <p><b> رقم اللوحة </b></p></td>
+                              <td align="center" width="15%"> <p><b> نوع السيارة </b></p></td>
+                              <td align="center" width="25%"> <p><b> اسم المالك - اسم المستلم </b></p></td>
+                              <td align="center" width="15%"> <p><b> الملف </b></p></td>
+                              <td align="center" width="2%"> <p><b> م </b></p></td>
+                            </tr>
+
+                            <t t-set="sr_no" t-value="0" />
+                            <span t-esc="get_records(o.picking_name.sudo().bsg_cargo_sale_id.customer.id,o.loc_from.id,o.loc_to.id,o.picking_name.sudo().bsg_cargo_sale_id.payment_method.id,o.picking_name.sudo().bsg_cargo_sale_id.cooperate_customer.id)"></span>
+                            <t t-foreach="active_rec" t-as="line">
+                              <tr style="border-bottom:1px solid">
+
+                                <td>
+                                  <t t-if="line.picking_name.sudo().loc_to.id == line.picking_name.sudo().drop_loc.id">
+                                    <span>-</span>
+                                  </t>
+                                  <t t-else="">
+                                    <span t-esc="line.picking_name.sudo().drop_loc.route_waypoint_name" style="color:red"></span>
+                                  </t>
+
+                                  <!-- <span>-</span> -->
+                                  <!-- <span t-esc="line.picking_name.sudo().drop_loc.route_waypoint_name" style="color:red"></span>
+                                  <span>-</span>
+                                  <span t-esc="line.picking_name.sudo().loc_to.route_waypoint_name" style="color:red"></span> -->
+
+                                </td>
+                                <td align="center" width="10%">
+                                  <span></span>
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="15%">
+                                  <span t-esc="line.picking_name.sudo().bsg_cargo_sale_id.payment_method.payment_method_name"></span>
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="13%">
+                                  <t t-if="line.plate_no">
+                                    <span t-esc="line.plate_no"></span>
+                                  </t>
+                                  <t t-else="">
+                                    <span t-esc="line.chassis_no"></span>
+                                  </t>
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="15%">
+                                  <span t-esc="line.car_maker_id.car_maker.car_make_name"></span>
+                                  <span t-esc="line.car_model_id.car_model_name"></span>
+
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="25%">
+                                    <span t-esc="line.picking_name.sudo().bsg_cargo_sale_id.sender_name"></span> /
+                                    <span t-esc="line.picking_name.sudo().bsg_cargo_sale_id.receiver_name"></span>
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="15%">
+                                  <span t-esc="line.sudo().picking_name.sale_line_rec_name"></span>
+                                </td>
+
+                                <td style="border-bottom:1px solid" align="center" width="2%">
+                                  <t t-set="sr_no" t-value="sr_no + 1" />
+                                  <span t-esc="sr_no"></span>
+                                </td>
+
+                              </tr>
+                            </t>
+
+
+                           </table>
+                             <table class="table-3" width="100%" style="border:hidden;margin-top:20px">
+                               <th style="border:hidden">
+                                 <p align="right"><b> : المـرفـقـات </b></p>
+                               </th>
+                             </table>
+                             <table width="100%" style="margin-top: 15px;border:hidden;margin-bottom:5px">
+                                <td style="border:hidden;text-align:bold;font-size:18px">
+                                  <p align="right"><b> : إقرار استلام </b></p>
+                                </td>
+                              <table width="100%" border="1">
+                                <tr bgcolor="#90EE90">
+                                  <td style="text-align:right;border-bottom:1px solid;border-left:1px solid">
+                                    <p><b> أقر أنا الموقع أدناه السائق(<span t-esc="o.bsg_fleet_trip_id.driver_id.name"></span>)بأنني استلمت الناقلة رقم(<span t-esc="o.bsg_fleet_trip_id.vehicle_id.taq_number"></span>)وعليها حمولة(<span t-esc="sr_no"></span>) سيارة وفق حالة السيارات المبينة في اتفاقيات النقل المرفقة والتعهد بإيصالها على حالتها المبينة فيها الى جهة المقصد.ا </b></p>
+                                  </td>
+                                </tr>
+                                <table width="100%" style="margin-top: 8px;border:hidden">
+                                  <tr style="border:hidden">
+                                    <td style="border:hidden">
+                                      <span></span>
+                                    </td>
+                                    <td style="border:hidden;font-weight:bold">
+                                      <span>إستلام العميل </span>
+                                    </td>
+                                    <td style="border:hidden">
+                                      <span t-esc="o.bsg_fleet_trip_id.driver_id.name"></span>
+                                    </td>
+                                    <td style="border:hidden;font-weight:bold">
+                                      <span>السائق المستلم</span>
+                                    </td>
+                                    <td style="border:hidden">
+                                      <span t-esc="o.sudo().create_uid.name"></span>
+                                    </td>
+                                    <td style="border:hidden;font-weight:bold">
+                                      <span>مأمور جهة الشحن </span>
+                                    </td>
+
+                                  </tr>
+
+                                  <tr style="border:hidden">
+                                    <td colspan="2" style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                    <td colspan="2" style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                    <td style="border:hidden"> <span class="span_right" t-esc="current_user"></span> </td>
+                                    <td style="border:hidden"> <span class="span_right"> : الإسم  </span> </td>
+                                  </tr>
+
+                                  <tr style="border:hidden">
+                                    <td colspan="2" style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                    <td colspan="2" style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                    <td style="border:hidden"> <span class="span_right" t-esc="o.sudo().create_uid.name"></span> </td>
+                                    <td style="border:hidden"> <span class="span_right"> : التوقيع  </span> </td>
+                                  </tr>
+                                  <tr> <td colspan="6" style="padding-top:10px"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" style="text-align:left">
+                                      <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/> 
+                                    </td>
+                                    <td style="border-left:hidden;font-weight:bold">
+                                      <span>Print By : </span>
+                                    </td>
+                                    <td style="border-left:hidden">
+                                      <span t-esc="current_user"></span>
+                                    </td>
+                                    <td colspan="2" style="border-left:hidden">
+                                      <b><span>Page : </span></b>
+                                      <span t-esc="tot_page"></span>
+                                      <span>/</span>
+                                      <span t-esc="num"></span>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </table>
+                             </table>
+                        </table>
+                      </div>       
+                    </div>
+                  </div>
+
+                </page>
+              </div>
+            </t>
+            </t>
+          </t>
+        </t>
+      </template>
+  </data>
+</odoo>

@@ -1,0 +1,76 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_salary_info_report_wizard_form">
+      <field name="name">salary.info.report.wizard.form</field>
+      <field name="model">salary.info.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+              </group>
+              <group>
+                <field name="is_parent_dempart" attrs="{'invisible': [('grouping_by', 'not in', ['by_departments','by_sumany'])]}" />
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="employee_ids" widget="many2many_tags"/>
+                <field name="branch_ids" widget="many2many_tags"/>
+                <field name="resource_calendar_ids" widget="many2many_tags" />
+                <field name="country_ids" widget="many2many_tags"/>
+                <field name="religion_ids" widget="many2many_tags"/>
+                <field name="guarantor_ids" widget="many2many_tags"/>
+                <field name="partner_type_ids" widget="many2many_tags"/>
+                <field name="employee_tags_ids" widget="many2many_tags"/>
+              </group>
+              <group>
+                <field name="department_ids" widget="many2many_tags"/>
+                <field name="job_position_ids" widget="many2many_tags" />
+<!--                <field name="employee_status"/>-->
+                <field name="employee_state_id"  options="{'no_create':True,'no_edit':True}"/>
+                <field name="salary_payment_method"></field>
+                <field name="company_ids" widget="many2many_tags"/>
+                <field name="is_driver"></field>
+                <field name="region_ids" widget="many2many_tags" />
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="employee_salary_info_report_action">
+      <field name="name">Employee Salary Info Reports</field>
+      <field name="res_model">salary.info.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="employee_salary_info_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Employees Salary Info Reports"
+             id="menu_employee_salary_info_reports"
+             parent="employee_info_report.employee_info_report_main_menu_item"
+             sequence="11"
+             groups="bsg_employee_salary_report.groups_employee_salary_info_reports"
+             action="employee_salary_info_report_action"/>
+
+    <record model="ir.ui.view" id="view_view_company_form_inherit">
+      <field name="name">view_company_form_inherit</field>
+      <field name="model">res.company</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="base.view_company_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='sequence']" position="after">
+              <field name="company_code" />
+          </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

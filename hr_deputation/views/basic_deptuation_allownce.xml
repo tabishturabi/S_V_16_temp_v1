@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="hr_deputations_allownce_form" model="ir.ui.view">
+            <field name="name">hr_deputations_allownce.form</field>
+            <field name="model">hr.deputations.allownce</field>
+            <field name="arch" type="xml">
+                <form edit="1">
+             
+                    <sheet>
+                        <group>
+
+                            <group>
+
+                              <field name="counter_group" required="1" />
+
+                                <!-- <field name="deputation_type" required="1" /> -->
+                                <field name="job_ids" invisible="1"/>
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Deputatios Allownces">
+                            <field name='line_ids'>
+                                <tree editable="bottom">
+                                    <field name='job_ids' domain="[('id', 'not in', parent.job_ids)]" widget="many2many_tags" required="1" />
+                                    <field name='amount' required="1" />
+                                </tree>
+                            </field>
+                                <group>
+                                 <label for="days_before" string="Additional Days"/>
+                        <div>
+                            <div class="o_row o_row_readonly">
+                                <field name="days_before" class="oe_inline" nolabel="1"/>
+                                <span class="oe_inline" >
+                                    Day Before
+                                </span>
+                                <field name="days_after" class="oe_inline" />
+                                <span class="oe_inline" >
+                                    Day After
+                                </span>
+                            </div>
+                        </div>
+                                </group>
+                        </page>
+
+                        <page string="Other Allownces">
+                            <field name='other_allownce_ids'>
+                                <tree editable="bottom">
+                                <field name="name" />
+                                <field name="amount_type" />
+                                <field name="amount" attrs="{'invisible': [('amount_type', '=', 'percentage')]}"/>
+                                <field name="percentage_type" attrs="{'invisible': [('amount_type', '=', 'amount')]}"/>
+
+                                <field name="percentage" attrs="{'invisible': [('amount_type', '=', 'amount')]}"/>
+
+
+                                </tree>
+                            </field>
+                        </page>
+                        </notebook>
+
+       
+                     
+                    </sheet>
+                         <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                 </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_deputations_allownce_tree" model="ir.ui.view">
+            <field name="name">hr_deputations_allownce.tree</field>
+            <field name="model">hr.deputations.allownce</field>
+            <field name="arch" type="xml">
+                <tree >
+                     <field name="counter_group" />
+
+                    <!-- <field name="deputation_type" /> -->
+
+              
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="act_hr_deputations_allownce_view" model="ir.actions.act_window">
+            <field name="name">Deputations Allownces</field>
+            <field name="res_model">hr.deputations.allownce</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+
+        <menuitem id="menu_hr_deputation_allownce_view"
+                  name="Deputatios Allownces"
+                  action="act_hr_deputations_allownce_view" parent="menu_main_deputation_configuration"
+                  />
+       
+
+    </data>
+</odoo>

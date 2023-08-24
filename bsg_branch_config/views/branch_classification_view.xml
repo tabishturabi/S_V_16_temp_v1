@@ -1,0 +1,75 @@
+<odoo>
+  <data>
+
+
+  <!-- bsg branch classification form view definition -->
+    <record model="ir.ui.view" id="bsg_branch_classification_view_form">
+      <field name="name">bsg_branch_classification_view_form</field>
+      <field name="model">bsg.branch.classification</field>
+      <field name="arch" type="xml">
+        <form string="Branch Classifcation">
+          <sheet>
+              <div class="oe_button_box" name="button_box">
+                  <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                      <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                  </button>
+              </div>
+              <div class="oe_title">
+                  <h1>
+                      <field name="bsg_branch_cls_name" default_focus="1" placeholder="Branch Type" />
+                  </h1>
+              </div>
+              <group name="top">
+                <group name="left">
+<!--                   <field name="sales_target"/>
+                  <field name="sale_target_period"/>
+                  <field name="bsg_br_cl_show" attrs="{'invisible': [['sale_target_period','!=','monthly']]}"/> -->
+                </group>
+
+              </group>
+<!--               <field name="br_cl_line_ids" attrs="{'invisible': [['bsg_br_cl_show','!=',True]]}">
+                <tree string="Branch Classfication Lines" create="false" delete="false" edit="false">
+                  <field name="bsg_br_cl_month"/>
+                  <field name="bsg_br_cl_for_tar"/>
+                  <field name="bsg_br_cl_ac_tar"/>
+                </tree>
+              </field>   -->
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+  <!-- bsg branch classification tree view definition -->
+    <record model="ir.ui.view" id="bsg_branch_classification_view_tree">
+      <field name="name">bsg_branch_classification_view_tree</field>
+      <field name="model">bsg.branch.classification</field>
+      <field name="arch" type="xml">
+        <tree string="Branch Classifcation">
+            <field name="bsg_branch_cls_name" string="Name"/>
+        </tree>
+      </field>
+    </record>
+
+  <!-- bsg branch classification action -->
+
+    <record model="ir.actions.act_window" id="action_window_bsg_branch_classification">
+      <field name="name">Branch Classifcation</field>
+      <field name="res_model">bsg.branch.classification</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+  <!-- bsg branch classification menu item -->
+    <menuitem name="Branch Classifcation"
+      id="menu_branch_classification"
+      parent="bsg_branch_config.bsg_branches_menu_1"
+      action="action_window_bsg_branch_classification"
+      sequence="3"
+      />
+
+  </data>
+</odoo>

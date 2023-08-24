@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+<!-- accesstype form view-->
+      <record model="ir.ui.view" id="view_access_type_form">
+        <field name="name">hr.access.type.form</field>
+        <field name="model">hr.access.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Access Type" >
+                <sheet>
+                    <group>
+                        <field name="bsg_name"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_access_type_tree">
+        <field name="name">hr.access.type.tree</field>
+        <field name="model">hr.access.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsg_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsg_emp_access_type_action">
+        <field name="name">Access Type</field>
+        <field name="res_model">hr.access.type</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Access Type"
+      id="hr_emp_access_menu"
+      parent="hr.menu_human_resources_configuration"
+      action="bsg_emp_access_type_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

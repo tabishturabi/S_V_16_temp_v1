@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record model="res.groups" id="group_truck_violation">
+            <field name="name">Truck Violation</field>
+            <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>
+        </record>
+    </data>
+</odoo>

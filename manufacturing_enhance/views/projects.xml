@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bsg_mrp_project_tree_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.project.tree</field>
+            <field name="model">bsg.mrp.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project">
+                    <field name="name" required="1"/>
+                    <field name="project_type"/>
+                    <field name="project_amount"/>
+                    <field name="analytic_account_id"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="bsg_mrp_project_form_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.production.form</field>
+            <field name="model">bsg.mrp.project</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="project_type" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+
+
+                            </group>
+                            <group>
+                                <field name="project_amount"/>
+                                <field name="analytic_account_id" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="bsg_mrp_project_action" model="ir.actions.act_window">
+            <field name="name">Project</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bsg.mrp.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new manufacturing order
+                </p>
+            </field>
+        </record>
+        <menuitem action="bsg_mrp_project_action"
+                  id="bsg_menu_mrp_project_action"
+                  parent="manufacturing_enhance.menu_bsg_mrp_orders_menu"
+                  sequence="3"/>
+    </data>
+</odoo>

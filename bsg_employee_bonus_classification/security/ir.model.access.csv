@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_bonus_classification,access_employee_bonus_classification,model_employee_bonus_classification,,1,1,1,1
+access_branch_classification_line,access_branch_classification_line,model_branch_classification_line,,1,1,1,1
+access_agreements_rule_line,access_agreements_rule_line,model_agreements_rule_line,,1,1,1,1
+
+

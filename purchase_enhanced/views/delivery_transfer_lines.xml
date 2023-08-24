@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--        <record id="delivery_transfer_line_form_view" model="ir.ui.view">-->
+        <!--            <field name="name">delivery.transfer.line.form</field>-->
+        <!--            <field name="model">stock.move</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <form string="Stock Moves" create="false" edit="false" delete="false">-->
+        <!--                    <header>-->
+        <!--                        <field name="state" widget="statusbar"/>-->
+        <!--                    </header>-->
+        <!--                    <field name="scrapped" invisible="1"/>-->
+        <!--                    <group>-->
+        <!--                        <group string="#Products">-->
+        <!--                            <field name="product_id"/>-->
+        <!--                            <field name="picking_type_id" invisible="1"/>-->
+        <!--                            <field name="group_id" invisible="1"/>-->
+        <!--                            <label for="product_uom_qty"/>-->
+        <!--                            <div>-->
+        <!--                                <field name="product_uom_qty"/>-->
+        <!--                                <field name="product_uom" options="{'no_open': True, 'no_create': True}"-->
+        <!--                                       string="Unit Of Measure" groups="uom.group_uom" class="oe_inline"/>-->
+        <!--                            </div>-->
+        <!--                            <field name="product_tmpl_id" invisible="1" readonly="True"/>-->
+        <!--                        </group>-->
+        <!--                        <group string="Locations" groups="base.group_no_one">-->
+        <!--                            <field name="name"/>-->
+        <!--                            <field name="location_id"/>-->
+        <!--                            <field name="location_dest_id"/>-->
+        <!--                        </group>-->
+        <!--                    </group>-->
+        <!--                    <group>-->
+        <!--                        <group string="Conditions">-->
+        <!--                            <field name="procure_method"-->
+        <!--                                   groups="stock.group_adv_location"/>-->
+        <!--                            <field name="create_date" invisible="1"/>-->
+        <!--                            <field name="date_expected"/>-->
+        <!--                            <field name="move_dest_ids" groups="base.group_no_one" readonly="1"/>-->
+        <!--                        </group>-->
+        <!--                        <group name="quants_grp" string="Reserved">-->
+        <!--                            <field name="string_availability_info"/>-->
+        <!--                        </group>-->
+        <!--                    </group>-->
+        <!--                </form>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <record id="tree_delivery_transfer_line" model="ir.ui.view">
+            <field name="name">delivery.transfer.line.tree</field>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="sequence2"/>
+                    <field name="purchase_req_id"/>
+                    <field name="product_id"/>
+                    <field name="work_order_id"/>
+                    <field name="department_id"/>
+                    <field name="branch_id"/>
+                    <field name="fleet_id_ref"/>
+                    <field name="analytic_account_id"/>
+                    <field name="product_uom_qty"/>
+                    <field name="quantity_done"/>
+                    <field name="product_uom"/>
+                    <field name="price_unit"/>
+<!--                    Migration Note-->
+<!--                    <field name="value"/>-->
+                    <field name="description"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="search_delivery_transfer_line" model="ir.ui.view">
+            <field name="name">delivery.transfer.line.search</field>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sequence2"/>
+                    <field name="purchase_req_id"/>
+                    <field name="product_id"/>
+                    <field name="work_order_id"/>
+                    <field name="department_id"/>
+                    <field name="branch_id"/>
+                    <field name="fleet_id_ref"/>
+                    <field name="analytic_account_id"/>
+                    <field name="product_uom_qty"/>
+                    <field name="quantity_done"/>
+                    <field name="product_uom"/>
+                    <field name="description"/>
+                </search>
+
+            </field>
+        </record>
+
+        <record id="action_delivery_transfer_line" model="ir.actions.act_window">
+            <field name="name">Delivery Transfer Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.move</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="domain">[('picking_type_id.code' , '=', 'outgoing')]</field>
+            <field name="context">{'create': False, 'edit': False, 'delete': False}</field>
+            <field name="search_view_id" ref="search_delivery_transfer_line"/>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),(0, 0, {'view_mode': 'tree', 'view_id': ref('tree_delivery_transfer_line')})]"/>
+        </record>
+        <menuitem action="action_delivery_transfer_line" id="menu_delivery_transfer_line"
+                  parent="purchase_enhanced.menu_stock_warehouse_split_transfer" name="Delivery Transfer Lines"
+                  sequence="5"
+                  groups="purchase_enhanced.group_stock_user_delivery_lines"/>
+    </data>
+</odoo>

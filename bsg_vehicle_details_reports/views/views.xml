@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="vehicle_details_report_wizard_form">
+      <field name="name">vehicle.details.report.wizard.form</field>
+      <field name="model">vehicle.details.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+                <field name="vehicle_make" widget="many2many_tags"/>
+                <field name="vehicle_sticker_no" widget="many2many_tags" />
+                <field name="model_year" widget="many2many_tags"/>
+                <field name="vehicle_state" widget="many2many_tags"/>
+                <field name="driver_link" />
+                <field name="driver_name" widget="many2many_tags" domain="[('is_driver','=',True)]" attrs="{'invisible':[('driver_link','!=','linked')]}" />
+                <field name="trailer_link" />
+                <field name="trailer_sticker_no" widget="many2many_tags" attrs="{'invisible':[('trailer_link','!=','linked')]}"></field>
+              </group>
+              <group>
+                <field name="trailer_group" widget="many2many_tags"/>
+                <field name="current_branches" widget="many2many_tags" />
+                <field name="vehicle_type" widget="many2many_tags" />
+                <field name="domain_name"  options="{'no_quick_create': True, 'no_create_edit' : True}" widget="many2many_tags"/>
+                <field name="vehicle_group" widget="many2many_tags"></field>
+                <field name="vehicle_status" widget="many2many_tags"/>
+                <field name="route_name" widget="many2many_tags"></field>
+                <field name="current_locations" widget="many2many_tags" />
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="vehicle_details_report_action">
+      <field name="name">Vehicle Details Reports</field>
+      <field name="res_model">vehicle.details.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="vehicle_details_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Vehicles Details Reports"
+             id="menu_vehicle_details_reports"
+             parent="fleet.menu_fleet_reporting"
+             sequence="4"
+             groups="bsg_vehicle_details_reports.groups_vehicle_details_reports"
+             action="vehicle_details_report_action"/>
+  </data>
+</odoo>

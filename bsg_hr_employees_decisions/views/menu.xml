@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Trailer Management Menus -->
+    <menuitem name="Employees Decisions"
+              id="menu_employee_root"
+              parent="bsg_hr.menu_hr_employees"
+              sequence="100"
+    />
+    <menuitem name="Employees Decisions"
+              id="menu_root"
+              sequence="100" web_icon="bsg_hr_employees_decisions,static/emp-d.pngg"
+    />
+    <menuitem name="Decisions"
+              id="menu_decisions_root"
+              parent="menu_root"
+              sequence="1"
+    />
+    <menuitem name="Decisions Reporting"
+              id="menu_decisions_reporting_root"
+              parent="menu_root"
+              sequence="2"
+    />
+    <menuitem name="Reports"
+              id="menu_reports_root"
+              parent="menu_root"
+              sequence="3"
+    />
+    <menuitem name="Configuration"
+              id="menu_configuration_root"
+              parent="menu_root"
+              sequence="4"
+    />
+</odoo>

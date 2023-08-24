@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+
+<!--        <record id="group_employee_attachment_view" model="res.groups">-->
+<!--            <field name="name">Employee View Attachment</field>-->
+<!--            <field name="comment">The user will have access to view employee documents tab.</field>-->
+<!--            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>-->
+<!--        </record>-->
+
+<!--        <record id="group_employee_attachment_add" model="res.groups">-->
+<!--            <field name="name">Employee Add Attachment</field>-->
+<!--            <field name="comment">The user will have access to add documents for employee</field>-->
+<!--            <field name="implied_ids" eval="[(4, ref('bsg_employee_attachment.group_employee_attachment_view'))]"/>-->
+<!--            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>-->
+<!--        </record>-->
+
+<!--        <record id="group_employee_attachment_delete" model="res.groups">-->
+<!--            <field name="name">Employee Delete Attachment</field>-->
+<!--            <field name="comment">The user will have access to delete documents for employee</field>-->
+<!--            <field name="implied_ids" eval="[(4, ref('bsg_employee_attachment.group_employee_attachment_add')), (4, ref('bsg_employee_attachment.group_employee_attachment_view'))]"/>-->
+<!--            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

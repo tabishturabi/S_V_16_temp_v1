@@ -1,0 +1,75 @@
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: rgb(255, 255, 255);
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    /*padding: 6px 12px;*/
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .tabcontent {
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+  }
+  
+  /* Go from zero to full opacity */
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+
+  .my_tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .my_tooltip .my_tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    text-align: center;
+    /*background-color: rgb(0, 217, 255);
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 0;*/
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .my_tooltip:hover .my_tooltiptext {
+    visibility: visible;
+  }
+  
+  .my_error{
+    color : red;
+    font-style: italic;
+  }

@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record id="trailer_vehicle_connect_form_view" model="ir.ui.view">
+            <field name="name">trailer.vehicle.connect.form.view</field>
+            <field name="model">trailer.vehicle.connect.view</field>
+            <field name="arch" type="xml">
+            <form string="Trailer/Vehicle">
+                <group>
+                    <field name="res_id" string="ID"/>
+                    <field name="name" />
+                    <field name="taq_number" />
+                    <field name="chassis_number" />
+                    <field name="state" />
+                    <field name="type" />
+                </group>
+            </form>    
+            </field>
+        </record>
+
+        <record id="trailer_vehicle_connect_tree_view" model="ir.ui.view">
+            <field name="name">trailer.vehicle.connect.tree.view</field>
+            <field name="model">trailer.vehicle.connect.view</field>
+            <field name="arch" type="xml">
+            <tree string="Trailer/Vehicle">
+                    <field name="res_id" string="ID"/>
+                    <field name="name" />
+                    <field name="taq_number" />
+                    <field name="chassis_number" />
+                    <field name="state" />
+                    <field name="type" />
+            </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>    

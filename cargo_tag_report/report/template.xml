@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+   <template id="cargo_tag_template">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+          <div class="header" style="display: none;"></div> 
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+               <p style="font-size: 0.9em;line-height: 1 !important;margin: 1px;"> Name: <t t-esc="o.customer_id.name" /> <br/>
+               <t t-esc="o.car_make.car_maker.car_make_name" /> / <t t-esc="o.car_model.car_model_name" />
+               <t t-if="o.plate_no"> <t t-esc="'%s %s %s %s' % (o.palte_third, o.palte_second, o.palte_one, o.plate_no)" /> </t>
+               <t t-else=""><t t-esc="o.chassis_no" /></t>
+               <br/>From: <t t-esc="o.loc_from.route_waypoint_name" /> To: <t t-esc="o.loc_to.route_waypoint_name" /> </p>
+               <center> <img t-if="o.sale_line_rec_name" style="max-height: 32px;margin-top: 1px;" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.sale_line_rec_name, 1200, 400)" /><br style="margin: 0px;"/><span style="font-size: 0.6em;margin:0px;pading:0px;"><t t-esc="o.sale_line_rec_name" /></span></center>
+            </div> <!-- article -->
+            <div class="footer"  style="display: none;" ></div> 
+      </t>
+    </t>
+  </template>
+
+
+
+    <record id="cargo_tag_paperformat" model="report.paperformat">
+         <field name="name">Cargo tag</field>
+         <field name="default" eval="False" />
+         <field name="format">custom</field>
+         <field name="page_height">76</field>
+         <field name="page_width">25</field>
+         <field name="orientation">Landscape</field>
+         <field name="margin_top">1</field>
+         <field name="margin_bottom">0</field>
+         <field name="margin_left">0</field>
+         <field name="margin_right">0</field>
+         <field name="header_line" eval="False" />
+         <field name="header_spacing">0</field>
+         <field name="dpi">90</field>
+    </record>
+
+     <report
+            id="report_cargo_tag"
+            string="Cargo Tag"
+            model="bsg_vehicle_cargo_sale_line"
+            report_type="qweb-html"
+            file="cargo_tag_report.cargo_tag_template"
+            name="cargo_tag_report.cargo_tag_template"
+            paperformat="cargo_tag_paperformat"
+            menu="True"
+    />
+
+
+  </data>
+</odoo>

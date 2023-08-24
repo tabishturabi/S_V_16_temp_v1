@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="asset_report_xlsx_id"
+             model="account.asset.report"
+             string="Account Asset Report"
+             report_type="xlsx"
+             name="bsg_account_assets_report.asset_report_xlsx"
+             file="bsg_account_assets_report.asset_report_xlsx"
+     />
+</odoo>

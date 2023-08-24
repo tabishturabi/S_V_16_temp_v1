@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+                <record id="me_notification_users_data" model="me.notification.user">
+<!--            <field name="employee_ids_iqama">[]</field>-->
+<!--            <field name="employee_ids_passport">[]</field>-->
+<!--            <field name="employee_ids_license">[]</field>-->
+<!--            <field name="employee_ids_document">[]</field>-->
+<!--            <field name="days_iqama">[]</field>-->
+<!--            <field name="days_license">[]</field>-->
+<!--            <field name="days_document">[]</field>-->
+<!--            <field name="interval_type_iqama">[]</field>-->
+<!--            <field name="interval_type_document">[]</field>-->
+<!--            <field name="interval_type_license">[]</field>-->
+<!--            <field name="employee_id_from">[]</field>-->
+<!--            <field name="employee_license_from">[]</field>-->
+<!--            <field name="employee_document_from">[]</field>-->
+        </record>
+    </data>
+</odoo>

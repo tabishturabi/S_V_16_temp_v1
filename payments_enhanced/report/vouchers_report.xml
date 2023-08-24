@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+<!--        Note for Migration testing-->
+
+<!--        <report id="voucher_report_id"-->
+<!--                model="vouchers.reports"-->
+<!--                string="Voucher Report"-->
+<!--                report_type="xlsx"-->
+<!--                name="payments_enhanced.voucher_report_temp_xlsx"-->
+<!--                file="payments_enhanced.voucher_report_temp_xlsx" />-->
+
+
+<!--        <record id="vouchers_reports_wizard" model="ir.ui.view">-->
+<!--            <field name="name">vouchers.reports_wizard</field>-->
+<!--            <field name="model">vouchers.reports</field>-->
+<!--            <field name="type">form</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Report">-->
+<!--                    <group name="group_top">-->
+<!--                        <group name="group_left">-->
+<!--                            <field name="form"/>-->
+<!--                            <field name="payment_type"/>-->
+<!--                        </group>-->
+<!--                        <group name="group_right">-->
+<!--                            <field name="to"/>-->
+
+<!--                            <field name="name" invisible="1" />-->
+<!--                            <field name="file" filename="name" invisible="1" readonly="1" />-->
+
+
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <footer style="height: 30px !important; border: none !important;">-->
+<!--                        <button name="report_for__xls" type="object" string="Print Xlsx" class="oe_highlight"/>-->
+<!--                    </footer>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="vouchers_reports_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Payment Vouchers Report</field>-->
+<!--            <field name="res_model">vouchers.reports</field>-->
+<!--&lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="view_id" ref="vouchers_reports_wizard"/>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="vouchers_reports_menu_item" name="Payment Vouchers Report" action="vouchers_reports_action"-->
+<!--                  parent="account.menu_finance_reports" sequence="1" groups="payments_enhanced.group_report_voucher"/>-->
+
+    </data>
+</odoo>

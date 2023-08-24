@@ -1,0 +1,108 @@
+<odoo>
+  <data>
+
+
+    <!-- Form View Of Survey Question -->
+    <record model="ir.ui.view" id="view_survey_question_form">
+        <field name="name">surver.question.form</field>
+        <field name="model">surver.question.config</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form string="Surver Question">
+            <sheet>
+              <group>
+                <group>
+                  <field name="category_id"/>
+                  <field name="dedcution_way"/>
+                  <field name="pecentage_amount" attrs="{'invisible': [('dedcution_way', '!=', 'percentage')]}"/>
+                  <field name="fixed_amount" attrs="{'invisible': [('dedcution_way', '!=', 'fixed_amt')]}"/>
+                </group>
+                <group>
+                  <field name="name"/>
+                  <field name="deserving"/>
+                </group>
+              </group>
+
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+    <!-- Tree View Of Survey Question -->
+    <record model="ir.ui.view" id="view_survey_question_tree">
+        <field name="name">surver.question.config.tree</field>
+        <field name="model">surver.question.config</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree>
+          <field name="category_id"/>
+          <field name="name"/>
+          <field name="dedcution_way"/>
+          <field name="deserving"/>
+        </tree>
+        </field>
+    </record>
+
+    <!-- Action View of Survey Question-->
+    <record model="ir.actions.act_window" id="action_survey_question">
+        <field name="name">Survey Question</field>
+        <field name="res_model">surver.question.config</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
+
+
+    <!-- Form View Of Survey Question Category -->
+    <record model="ir.ui.view" id="view_survey_question_category_form">
+        <field name="name">survey.question.category.form</field>
+        <field name="model">survey.question.category</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form string="Surver Question Category">
+            <sheet>
+              <group>
+                <group>
+                  <field name="name"/>
+                </group>
+                <group>
+                </group>
+              </group>
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+    <!-- Tree View Of Survey Question Category -->
+    <record model="ir.ui.view" id="view_survey_question_category_tree">
+        <field name="name">survey.question.category.tree</field>
+        <field name="model">survey.question.category</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+        </field>
+    </record>
+
+    <!-- Action View of Survey Question Categoryp -->
+    <record model="ir.actions.act_window" id="action_survey_question_category">
+        <field name="name">Survey Question Category</field>
+        <field name="res_model">survey.question.category</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+    </record>
+
+
+  </data>
+  
+</odoo>

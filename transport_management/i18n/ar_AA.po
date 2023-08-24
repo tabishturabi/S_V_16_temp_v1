@@ -1,0 +1,1040 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* transport_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-04 12:48+0000\n"
+"PO-Revision-Date: 2020-02-04 12:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "<span>Fuel Voucher</span>"
+msgstr "قسيمة الوقود"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "<span>Invoice</span>"
+msgstr "فاتورة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_street
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__street
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Address"
+msgstr "العنوان"
+
+#. module: transport_management
+#: selection:transport.management,delivery_way:0
+msgid "Albassami Branches"
+msgstr "فروع البسامي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__arrival_date
+msgid "Arrival Date"
+msgstr "تاريخ الوصول"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__receive_pod
+msgid "Attachments"
+msgstr "المُرفقات"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__bill_no_export
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__bill_no_import
+msgid "B/L Number"
+msgstr "رقم B/L"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:213
+#, python-format
+msgid "Be Sure You Have Cash Journal With Waypoints"
+msgstr "تأكد من أن لديك مجلة النقدية مع نقاط الطريق"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Bill Issuance"
+msgstr "إصدار الفاتورة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Bx Transport Management"
+msgstr "Bx إدارة النقل"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+#: selection:transport.management,state:0
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__cash_rounding_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Cash Rounding Method"
+msgstr "طريقة تقريب النقدية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__city
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_city
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "City"
+msgstr "المدينة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Clearance Mode"
+msgstr "وضع التخليص"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__company
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_company
+msgid "Company Name"
+msgstr "اسم الشركة"
+
+#. module: transport_management
+#: model:ir.model,name:transport_management.model_res_config_settings
+msgid "Config Settings"
+msgstr "ضبط الإعدادات"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Confirm Order"
+msgstr "تأكيد الطلب"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Confirmed Order"
+msgstr "تأكيد النظام"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__container_number
+msgid "Container No."
+msgstr "رقم الحاوية."
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__country_id
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_country_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Country"
+msgstr "دولة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__create_uid
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__create_uid
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__create_uid
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__create_date
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__create_date
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__create_date
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__customer
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Customer"
+msgstr "العميل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__customer_number
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_customer_number
+msgid "Customer Number"
+msgstr "رقم العميل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__customer_ref
+msgid "Customer Reference"
+msgstr "مرجع العميل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__acc_link_refund_id
+msgid "Customer Refund Invoice"
+msgstr "فاتورة رد العميل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__fuel_product_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Default Fuel Product"
+msgstr "منتج الوقود الافتراضي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__fuel_supplier_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Default Fuel Supplier"
+msgstr "مزود الوقود الافتراضي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__reward_for_load_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Default Reward For Load"
+msgstr "المكافأة الافتراضية للتحميل"
+
+#. module: transport_management
+#: model:ir.model.fields,help:transport_management.field_transport_management_line__tax_ids
+msgid "Default taxes used when selling the product."
+msgstr "الضرائب الافتراضية المطبقة عند بيع المنتج."
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__delivery_date
+msgid "Delivery Date"
+msgstr "تاريخ التوصيل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__delivery_way
+msgid "Delivery Way"
+msgstr "طريقة التسليم"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__demurrage_date
+msgid "Demurrage"
+msgstr "غرامة التأخير"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__detention_date
+msgid "Detention"
+msgstr "احتجاز"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__display_name
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__display_name
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__display_name
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Done"
+msgstr "تم"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Done Slip"
+msgstr "قسيمة مرتب منتهية"
+
+#. module: transport_management
+#: selection:transport.management,delivery_way:0
+msgid "Dr2Dr"
+msgstr "Dr2Dr"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Draft"
+msgstr "مشروع"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__transport_driver
+msgid "Driver Name"
+msgstr "اسم السائق"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__driver_number
+msgid "Driver Number"
+msgstr "رقم السائق"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:912
+#, python-format
+msgid "Employee log"
+msgstr "سجل الموظف"
+
+#. module: transport_management
+#: selection:transport.management,truck_load:0
+msgid "Empty Load"
+msgstr "حمولة فارغة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__expiration_date
+msgid "Expiration Date"
+msgstr "تاريخ الصلاحية"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:428
+#, python-format
+msgid "Expiration Date Should be greater Than Order Date"
+msgstr "يجب أن يكون تاريخ انتهاء الصلاحية أكبر من تاريخ الطلب"
+
+#. module: transport_management
+#: selection:transport.management,clearance_mode:0
+#: selection:transport.management,service_name:0
+msgid "Export"
+msgstr "تصدير"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__custom_export
+msgid "Export No."
+msgstr "رقم التصدير"
+
+#. module: transport_management
+#: selection:transport.management,transportation_mode:0
+msgid "External"
+msgstr "خارجي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__extra_distance
+msgid "Extra Distance"
+msgstr "مسافة أضافية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__extra_distance_amount
+msgid "Extra Distance Amount"
+msgstr "كمية المسافة الإضافية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__fleet_type_transport
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__fleet_type
+msgid "Fleet Type"
+msgstr "نوع الأسطول"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__form_transport
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__form
+msgid "From"
+msgstr "مِن"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__from_route_branch_id
+msgid "From Route Branch"
+msgstr "من فرع الطريق"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__fuel_analytic_account_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Fuel Analytic Account"
+msgstr "حساب تحليل الوقود"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Fuel Analytic Tags"
+msgstr "تحليل الوقود العلامات"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__display_expense_mthod_id
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__fuel_exp_method_id
+msgid "Fuel Expense Method"
+msgstr "طريقة حساب مصروف الطــريق"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__display_expense_type
+msgid "Fuel Expense Type"
+msgstr "نوع مصاريف الوقود"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__fuel_expense_type
+msgid "Fuel ExpenseMethod"
+msgstr "مصاريف الوقود"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Fuel Voucher"
+msgstr "قسيمة الوقود"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:196
+#, python-format
+msgid "Fuel expense rule not found for this vehicle please define one."
+msgstr "لم يتم العثور على قاعدة حساب الوقود لهذه السيارة ، يرجى تحديد واحدة."
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:344
+#, python-format
+msgid "Fuel voucher"
+msgstr "قسيمة الوقود"
+
+#. module: transport_management
+#: selection:transport.management,truck_load:0
+msgid "Full Load"
+msgstr "حمولة كاملة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__height
+msgid "Height"
+msgstr "ارتفاع"
+
+#. module: transport_management
+#: selection:transport.management,priority_type:0
+msgid "High"
+msgstr "عالي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__id
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__id
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__id
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: transport_management
+#: selection:transport.management,clearance_mode:0
+#: selection:transport.management,service_name:0
+msgid "Import"
+msgstr "استيراد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__custom_import
+msgid "Import No."
+msgstr "رقم الاستيراد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__insurance_req
+msgid "Insurance Required"
+msgstr "التأمين مطلوب"
+
+#. module: transport_management
+#: selection:transport.management,transportation_mode:0
+msgid "Internal"
+msgstr "داخلي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__internal_number
+msgid "Internal Number"
+msgstr "الرقم الداخلي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__acc_link
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__acc_link_vendor
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__invoice_id
+msgid "Invoice"
+msgstr "فاتورة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__invoice_analytic_account_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Invoice Analytic Account"
+msgstr "حساب تحليل الفاتورة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__fuel_analytic_tag_ids
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__invoice_analytic_tag_ids
+msgid "Invoice Analytic Tage"
+msgstr "الفاتورة التحليلية Tage"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Invoice Analytic Tags"
+msgstr "فاتورة تحليلية العلامات"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Invoiced"
+msgstr "مفوترة"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Issue Bill"
+msgstr "فاتورة الإصدار"
+
+#. module: transport_management
+#: model:ir.model.fields,help:transport_management.field_transport_management__customer
+msgid "It shows the list of all customers"
+msgstr "انه يظهر قائمة جميع العملاء"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status____last_update
+#: model:ir.model.fields,field_description:transport_management.field_transport_management____last_update
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line____last_update
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__write_uid
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__write_uid
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__write_uid
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__write_date
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__write_date
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__write_date
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__lead_days
+msgid "Lead Days"
+msgstr "أيام الرصاص"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Lead Days Information"
+msgstr "معلومات أيام الرصاص"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__length
+msgid "Length"
+msgstr "الطول"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Line Items"
+msgstr "البنود الخط"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__loading_date
+msgid "Loading Date"
+msgstr "تاريخ التحميل"
+
+#. module: transport_management
+#: selection:transport.management,fuel_expense_type:0
+msgid "Local"
+msgstr "محلي"
+
+#. module: transport_management
+#: selection:transport.management,priority_type:0
+msgid "Low"
+msgstr "منخفض"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Main Information"
+msgstr "المعلومات الرئيسية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__mobile
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_mobile
+msgid "Mobile"
+msgstr "الجوال"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__order_date
+msgid "Order Date"
+msgstr "التاريخ"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "POD Attachment"
+msgstr "مرفق POD"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__pod_date
+msgid "POD Date"
+msgstr "مرفق POD"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Pay Transport Trip"
+msgstr "دفع رحلة النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__payment
+msgid "Payment"
+msgstr "دفع"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__payment_method
+msgid "Payment Method"
+msgstr "طرق السداد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__payment_terms
+msgid "Payment Terms"
+msgstr "شروط السداد"
+
+#. module: transport_management
+#: selection:transport.management,fuel_expense_type:0
+msgid "Per KM"
+msgstr "لكل كيلومتر"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__phone
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_phone
+msgid "Phone"
+msgstr "رقم الهاتف"
+
+#. module: transport_management
+#: selection:transport.management,fuel_expense_type:0
+msgid "Port"
+msgstr "ميناء"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__price
+msgid "Price"
+msgstr "سعر"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__priority_type
+msgid "Priority Type"
+msgstr "نوع الأولوية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__product_uom_qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Receive POD"
+msgstr "تلقي POD"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Received POD"
+msgstr "تلقى POD"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Receiver Details"
+msgstr ""
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__receiver_mobile
+msgid "Receiver Mobile"
+msgstr "استقبال المحمول"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__receiver_name
+msgid "Receiver Name"
+msgstr "اسم المستلم"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__receiver_information
+msgid "Recfeiver Information"
+msgstr "معلومات Recfeiver"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__return_date
+msgid "Return Date"
+msgstr "تاريخ العودة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__reward_for_analytic_account_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Reward For Load Analytic Account"
+msgstr "مكافأة لتحميل الحساب التحليلي"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Reward For Load Analytic Tags"
+msgstr "مكافأة لتحميل العلامات التحليلية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_res_config_settings__reward_for_analytic_tag_ids
+msgid "Reward For Load Invoice Analytic Tage"
+msgstr "مكافأة لتحميل فاتورة التحليلية Tage"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__route_id
+#: selection:transport.management,fuel_expense_type:0
+msgid "Route"
+msgstr "خط ســــير"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__name
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__sale_status
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Sale Status"
+msgstr "حالة البيع"
+
+#. module: transport_management
+#: model:ir.model,name:transport_management.model_sale_status
+msgid "Sale Status Information"
+msgstr "معلومات حالة البيع"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Sale and Transport Date(s)"
+msgstr "تاريخ البيع والنقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__same_as_customer
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Same As Customer"
+msgstr "نفس العملاء"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__same_as_sender
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Same As Sender"
+msgstr "نفس المرسل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__seal_number
+msgid "Seal Number"
+msgstr "عدد الختم"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.search_transport_management
+msgid "Search Transport Management"
+msgstr "بحث إدارة النقل"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Search Transport Order(s)"
+msgstr "بحث طلب (طلبات) النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__sender_name
+msgid "Sender Name"
+msgstr "اسم المرسل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__serial
+msgid "Serial #"
+msgstr "الرقم التسلسلي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_sale_status__s_no
+msgid "Serial No."
+msgstr "الرقم التسلسلي."
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__service_name
+msgid "Service Name"
+msgstr "اسم الخدمة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__clearance_mode
+msgid "Service Type"
+msgstr "نوع الخدمة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Set to Draft"
+msgstr "تعيين كمسودة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Shipper Details"
+msgstr "تفاصيل الشاحن"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Shipper and Receiver"
+msgstr "الشاحن والاستقبال"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__site_export
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__site_import
+msgid "Site"
+msgstr "موقع"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_state_id
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__state
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__state_id
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "State"
+msgstr "الحالة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "States"
+msgstr "الحالات"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Street 2..."
+msgstr "الشارع 2"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Street..."
+msgstr "الشارع..."
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_street2
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__street2
+msgid "Street2"
+msgstr "الشارع 2"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__stuffing_date
+msgid "Stuffing Date"
+msgstr "تاريخ الحشوة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__supplier_name
+msgid "Supplier Name"
+msgstr "اسم المورد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__supplier_freight
+msgid "Supplier freight"
+msgstr "شحن المورد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__tax_amount
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__tax_amount
+msgid "Tax Amount"
+msgstr "قيمة الضريبة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__tax_ids
+msgid "Taxes"
+msgstr "الضرائب"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:199
+#, python-format
+msgid "This Vehicle is without driver you need to set driver first!"
+msgstr "هذه السيارة بدون سائق تحتاج إلى ضبط السائق أولاً!"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__to_transport
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__to
+msgid "To"
+msgstr "إلى"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__total_amount
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__total_amount
+msgid "Total Amount"
+msgstr "إجمالي المبلغ"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__total_before_taxes
+msgid "Total Amt Before Taxes"
+msgstr "إجمالي الضرائب قبل الضرائب"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__total_before_taxes
+msgid "Total Before Taxes"
+msgstr "المجموع قبل الضرائب"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__total_distance
+msgid "Total Distance"
+msgstr "المسافة الكلية"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__total_fuel_amount
+msgid "Total Fuel Expense"
+msgstr "إجمالي نفقات الوقود"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__total_pieces
+msgid "Total Pieces"
+msgstr "مجموع القطع"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__total_reward_amount
+msgid "Total Reward amount Backend"
+msgstr "إجمالي المكافأة الخلفية"
+
+#. module: transport_management
+#: model:ir.ui.menu,name:transport_management.transport_management_menu
+msgid "Transport"
+msgstr "المواصلات"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Transport Information"
+msgstr "معلومات النقل"
+
+#. module: transport_management
+#: model:ir.model,name:transport_management.model_transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_tree_view
+msgid "Transport Management"
+msgstr "إدارة النقل"
+
+#. module: transport_management
+#: model:ir.model,name:transport_management.model_transport_management_line
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__transport_management_line
+msgid "Transport Management Line"
+msgstr "خط إدارة النقل"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.search_transport_management
+msgid "Transport Management No."
+msgstr "رقم إدارة النقل"
+
+#. module: transport_management
+#: model:ir.ui.menu,name:transport_management.transporter_sale_status_view
+#: model_terms:ir.ui.view,arch_db:transport_management.transporter_sale_status_form_view
+#: model_terms:ir.ui.view,arch_db:transport_management.transporter_sale_status_tree_view
+msgid "Transport Sale Status"
+msgstr "حالة بيع النقل"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Transport Vendor"
+msgstr "بائع النقل"
+
+#. module: transport_management
+#: model:ir.ui.menu,name:transport_management.transport_management_view
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Transportation"
+msgstr "وسائل النقل"
+
+#. module: transport_management
+#: model:ir.module.category,name:transport_management.module_transporter
+msgid "Transportation Access"
+msgstr "وصول وسائل النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__transportation_driver
+msgid "Transportation Driver"
+msgstr "سائق النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__transportation_mode
+msgid "Transportation Mode"
+msgstr "وضع النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__transportation_no
+msgid "Transportation No"
+msgstr "رقم النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__transportation_vehicle
+msgid "Transportation Vehicle"
+msgstr "مركبة النقل"
+
+#. module: transport_management
+#: model:ir.actions.act_window,name:transport_management.transport_information_action
+#: model:ir.model,name:transport_management.model_transporter_information
+#: model:ir.ui.menu,name:transport_management.transporter_information_view
+#: model_terms:ir.ui.view,arch_db:transport_management.transporter_information_form_view
+#: model_terms:ir.ui.view,arch_db:transport_management.transporter_information_tree_view
+msgid "Transporter Information"
+msgstr "معلومات الناقل"
+
+#. module: transport_management
+#: model:res.groups,name:transport_management.group_transport_management
+msgid "Transporter Manager"
+msgstr "مدير النقل"
+
+#. module: transport_management
+#: model:ir.actions.act_window,name:transport_management.transport_sale_status_action
+msgid "Transporter Sale Status"
+msgstr "حالة بيع الناقل"
+
+#. module: transport_management
+#: model:ir.actions.act_window,name:transport_management.transport_management_action
+msgid "Trasport Management"
+msgstr "إدارة رياضة النقل"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__trip_distance
+msgid "Trip Distance"
+msgstr "مسـافة الرحــلة"
+
+#. module: transport_management
+#: model:ir.actions.act_window,name:transport_management.transport_management_settings_action
+msgid "Trip Management Configuration"
+msgstr "تكوين إدارة الرحلة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__truck_load
+msgid "Truck Load"
+msgstr "حمولة الشاحنة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__driver
+msgid "Vehicle Driver"
+msgstr "سائق مركبة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transporter_information__transport_vehicle
+msgid "Vehicle Number"
+msgstr "عدد المركبات"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "Vehicle Trip"
+msgstr "رحلة مركبة"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_config
+msgid "Vendor Bill"
+msgstr "فاتورة المورد"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__refund_vendor_id
+msgid "Vendor Refund Invoice"
+msgstr "فاتورة رد البائع"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+#: model_terms:ir.ui.view,arch_db:transport_management.view_transport_management_filter
+msgid "Vendor Trip"
+msgstr "رحلة البائع"
+
+#. module: transport_management
+#: selection:transport.management,state:0
+msgid "Vendor Trip Money"
+msgstr "بائع رحلة المال"
+
+#. module: transport_management
+#: code:addons/transport_management/model/models.py:818
+#, python-format
+msgid "Vendor log"
+msgstr "سجل البائع"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__vessel_name
+msgid "Vessel Name"
+msgstr "اسم السفينة"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__waybill_date
+msgid "WayBill Date"
+msgstr "تاريخ بوليصة الشحن"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__weight
+msgid "Weight"
+msgstr "الوزن"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management_line__width
+msgid "Width"
+msgstr "العرض"
+
+#. module: transport_management
+#: model_terms:ir.ui.view,arch_db:transport_management.transport_management_form_view
+msgid "ZIP"
+msgstr "الرمز البريدي"
+
+#. module: transport_management
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__rec_zip
+#: model:ir.model.fields,field_description:transport_management.field_transport_management__zip
+msgid "Zip"
+msgstr "الرمز البريدي"
+

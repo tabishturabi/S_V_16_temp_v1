@@ -1,0 +1,231 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="employee_bonus_classification_list">
+      <field name="name">employee.bonus.classification.tree</field>
+      <field name="model">employee.bonus.classification</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name = "name"></field>
+              <field name = "activation_date"></field>
+              <field name = "deactivation_date"></field>
+              <field name="bonus_depending_on"></field>
+              <field name="bonus_percentage"></field>
+              <field name = "internal_notes"></field>
+          </tree>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="employee_bonus_classification_form">
+          <field name="name">employee.bonus.classification.form</field>
+          <field name="model">employee.bonus.classification</field>
+          <field name="arch" type="xml">
+              <form>
+                  <sheet>
+                      <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                      </div>
+                     <div class="oe_title">
+                         <label for="name" class="oe_edit_only"/>
+                         <h1>
+                             <field name="name"  required="True"/>
+                         </h1>
+                     </div>
+                      <group>
+                          <group>
+                              <field name="activation_date"></field>
+                              <field name="deactivation_date"></field>
+                              <field name="check" invisible="1"></field>
+                              <field name="bonus_depending_on"></field>
+                              <field name="bonus_percentage" attrs="{'invisible':[('bonus_depending_on','=','branch')]}"></field>
+                          </group>
+                      </group>
+                       <label for="internal_notes" class="oe_edit_only"/>
+                      <field name="internal_notes" placeholder="This Note Is Only For Internal Purposes"></field>
+                      <notebook attrs="{'invisible':[('bonus_depending_on','=','company')]}">
+                          <page name="branch" string="Branch Classification">
+                              <field name="branch_classification_line_id">
+                                  <tree editable="bottom">
+                                      <field name="bonus_classification_id" invisible="1"></field>
+                                      <field name="branch_classification_id"></field>
+                                      <field name="percentage"></field>
+                                  </tree>
+                              </field>
+                          </page>
+                          <page name="branch" string="Team Members">
+                                <field name="employee_ids" mode="kanban">
+                                    <kanban quick_create="true" create="true" delete="true">
+                                        <field name="id"/>
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                        <field name="message_needaction_counter"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                                                <!-- Medium employee's picture -->
+                                                <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image_medium', record.id.raw_value)})" role="img"/>
+                                                <!-- Employee's picture optimized for mobile -->
+                                                <div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image_small', record.id.raw_value)})" role="img"/>
+                                                <div class="oe_kanban_details">
+                                                    <div class="o_kanban_record_top">
+                                                        <div class="o_kanban_record_headings">
+                                                            <strong class="o_kanban_record_title">
+                                                                <field name="name"/>
+                                                            </strong>
+                                                            <span t-if="record.job_id.raw_value" class="o_kanban_record_subtitle"><field name="job_id"/></span>
+                                                        </div>
+                                                    </div>
+                                                    <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                                    <ul>
+                                                        <li id="last_login"/>
+                                                        <li t-if="record.work_location.raw_value"><field name="work_location"/></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                      </notebook>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"></field>
+                      <field name="message_ids" widget="mail_thread"></field>
+                  </div>
+              </form>
+          </field>
+      </record>
+      <record model="ir.actions.act_window" id="employee_bonus_classification_action">
+          <field name="name">Employee Bonus Classification</field>
+          <field name="res_model">employee.bonus.classification</field>
+          <field name="view_mode">tree,form,kanban</field>
+      </record>
+   <menuitem name="Employee Bonus Classification"
+             id="employee_bonus_classification_menu"
+             sequence="2"
+             groups="bsg_employee_bonus_classification.groups_employee_bonus_classification"
+             parent="hr.menu_human_resources_configuration"
+             action="employee_bonus_classification_action"
+   />
+      <record model="ir.ui.view" id="hr_employee_bonus_inherit_form">
+        <field name="name">hr.employee.bonus.inherit.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="inside">
+                <group>
+                    <group string="Bonus Classification" name="bonus_classification">
+<!--                        <field name="activation_current_date" invisible="1"></field>-->
+                        <field name="bonus_classification_ids" widget='many2many_tags'/>
+                    </group>
+                </group>
+            </xpath>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="branch_cls_inherit_form">
+        <field name="name">bsg.branch.classification.inherit.form</field>
+        <field name="model">bsg.branch.classification</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branch_classification_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='left']" position="inside">
+                <field name="condition_rule"></field>
+                 <field name="bonus_percentage"></field>
+            </xpath>
+            <xpath expr="//group[@name='left']" position="after">
+                <group name="right">
+                    <field name="con_rule_amt_1"></field>
+                    <field name="con_rule_amt_2" attrs="{'invisible':[('condition_rule','!=','is_between')]}"></field>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='top']" position="after">
+                <label for="internal_notes" string="Internal Notes"/><br />
+                <field name="internal_notes" placeholder="This Note Is Only For Internal Purposes"></field>
+                  <notebook>
+                    <page name="agreement_rule" string="Agreement Rule">
+                        <field name="agreements_rule_line">
+                            <tree editable="bottom">
+                                <field name="branch_cls_id" invisible="1"></field>
+                                <field name="payment_method_ids" widget="many2many_tags"></field>
+                                <field name="shipment_type_ids" widget="many2many_tags"></field>
+                                <field name="service_type_ids" widget="many2many_tags"></field>
+                                <field name="amount_type"></field>
+                                <field name="value"></field>
+                            </tree>
+                        </field>
+                    </page>
+                      <page name="sales_cls" string="Sales Classification">
+                          <field name="sales_cls_ids" mode="kanban">
+                              <kanban quick_create="true" create="true" delete="true">
+                                  <field name="id"/>
+                                  <field name="branch_ar_name"/>
+                                  <field name="branch_classifcation"></field>
+                                  <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+<!--                                             Medium branch's picture-->
+                                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('bsg_branches.bsg_branches', 'image_medium', record.id.raw_value)})" role="img"/>
+<!--                                             Branch's picture optimized for mobile-->
+                                            <div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('bsg_branches.bsg_branches', 'image_small', record.id.raw_value)})" role="img"/>
+                                            <div class="oe_kanban_details">
+                                                <div class="o_kanban_record_top">
+                                                    <div class="o_kanban_record_headings">
+                                                        <strong class="o_kanban_record_title">
+                                                            <field name="branch_ar_name"/>
+                                                        </strong>
+                                                        <span t-if="record.branch_classifcation.raw_value" class="o_kanban_record_subtitle"><field name="branch_classifcation"/></span>
+                                                    </div>
+                                                </div>
+    <!--                                            <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>-->
+    <!--                                            <ul>-->
+    <!--                                                <li id="last_login"/>-->
+    <!--                                                <li t-if="record.work_location.raw_value"><field name="work_location"/></li>-->
+    <!--                                            </ul>-->
+                                            </div>
+                                        </div>
+                                    </t>
+                                  </templates>
+                              </kanban>
+                          </field>
+                      </page>
+                      <page name="hr_cls" string="HR Classification">
+                      </page>
+                  </notebook>
+            </xpath>
+        </field>
+    </record>
+      <record model="ir.ui.view" id="branch_cls_inherit_tree">
+        <field name="name">bsg.branch.classification.inherit.tree</field>
+        <field name="model">bsg.branch.classification</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branch_classification_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bsg_branch_cls_name']" position="after">
+                <field name="bonus_percentage"></field>
+            </xpath>
+        </field>
+      </record>
+      <record model="ir.ui.view" id="bsg_vehicle_cargo_sale_line_for_bonus_inherit">
+        <field name="name">bsg_vehicle_cargo_sale_line.bonus.inherit.form</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page name="bonus_agreement" groups="bsg_employee_bonus_classification.groups_bonus_agreement_tab" string="Bonus Agreement">
+                    <group name="top">
+                        <group name="left">
+                            <field name="create_uid" options="{&quot;no_open&quot;: True}"></field>
+                            <field name="bonus_state"></field>
+                            <field name="release_car_no"></field>
+                        </group>
+                        <group name="right">
+                            <field name="bonus_agreement_amount"></field>
+                            <field name="bonus_agreement_paid_amount"></field>
+                            <field name="release_car_date"></field>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+      </record>
+  </data>
+</odoo>

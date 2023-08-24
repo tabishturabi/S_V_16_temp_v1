@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="add_inspection_wizard_form" model="ir.ui.view">
+            <field name="name">add.inspection.wizard.form</field>
+            <field name="model">add.inspection.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add Inspection Wizard">
+                    <group>
+                        <group>
+                            <field name="sale_line_id" invisible="1" />
+                            <field name="pickup_loc" invisible="1" />
+                            <field name="drop_loc" invisible="1"  />
+                            <field name="sequence" readonly="1" />
+                            <field name="employee_id" options='{"no_open": True, "no_create": True}' required="1"/>
+<!--                             domain="[('branch_id', 'in', pickup_loc.loc_branch_id)]"-->
+                            <field name="branch_id" readonly="1"/>
+                            <field name="date" readonly="True"/>
+                            <field name="user_id" options="{'no_create':True,'no_edit':True, 'no_open': True}" readonly="True"/>
+                        </group>
+                         <group>
+                            <field name="inspection_type" widget="radio" options="{'horizontal': true}" required="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Add Inspection" name="add_inspection" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="add_inspection_wizard_form_action" model="ir.actions.act_window">
+            <field name="name">add.inspection.wizard.action</field>
+            <field name="res_model">add.inspection.wizard</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

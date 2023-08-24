@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+
+    <!-- Form View Of Safety Of Load -->
+    <record model="ir.ui.view" id="view_safety_of_load_form">
+        <field name="name">safety_of_load.form</field>
+        <field name="model">safety_of_load</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form>
+            <sheet>
+              <group>
+                <group>
+                  <field name="from_km" string="From(%)"/>
+                  <field name="deduction_from_reqard"/>
+                </group>
+                <group>
+                  <field name="to_km" string="To(%)"/>
+                </group>
+              </group>
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+    <!-- Tree View Of Safety Of Load  -->
+    <record model="ir.ui.view" id="view_safety_of_load_tree">
+        <field name="name">safety_of_load.tree</field>
+        <field name="model">safety_of_load</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree editable="bottom">
+          <field name="from_km" string="From(%)"/>
+          <field name="to_km" string="To(%)"/>
+          <field name="deduction_from_reqard"/>
+        </tree>
+        </field>
+    </record>
+
+    <!-- Action View of Safety Of Load  -->
+    <record model="ir.actions.act_window" id="action_safety_of_load">
+        <field name="name">Safety Of Load</field>
+        <field name="res_model">safety_of_load</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+    </record>
+  </data>
+</odoo>

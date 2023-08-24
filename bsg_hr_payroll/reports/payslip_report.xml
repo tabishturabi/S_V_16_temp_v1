@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="payslips_report">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+        <t t-foreach="grouped_by_branch" t-as="branch">
+        <div class="page" style="page-break-after: always;">
+          <t t-foreach="branch_value['branch_dept_list']" t-as="dept">
+                <style>
+                            .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    font-size: 12px;
+                            }
+
+                            .report_head {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                    float : left;
+
+                            }
+
+                            .report_table {
+                                    width: 100%;
+                                    margin: 0px auto 30px auto;
+                                    text-align: center;
+                                    float : left;
+                            }
+
+                            .report_footer {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    text-align: center;
+                            }
+
+                            .middle_rep {
+                                    width: 100%;
+                                    height: 200px;
+                            }
+
+                            .bank_det {
+                                    width : 45%;
+                                    float: left;
+                            }
+
+                            .bank_det_1 {
+                                    width : 50%;
+                                    float: right;
+                            }
+
+                            .bank{
+                                    width : 100%;
+                                    float: left;
+                            }
+
+                            h1 {
+                                    margin: 0px auto;
+                                    width: 60%;
+
+                            }
+
+                            table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid #007829;;
+                            }
+                            table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 1px 1px 1px 1px;
+                                    font-size: 12px;
+                                    border-right: 2px solid #007829;;
+                                    border-bottom: 1px solid #007829;;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                    border-right: none
+                            }
+
+
+                            table tr th {
+                                    text-align: center;
+                            }
+
+                            .space {
+                                    width : 50px;
+                                    min-width : 50px;
+                                    max-width : 50px;
+                            }
+
+                            .space1 {
+                                    width : 75px;
+                                    min-width : 75px;
+                                    max-width : 75px;
+                            }
+
+                            .space2 {
+                                    width : 130px;
+                                    min-width : 130px;
+                                    max-width : 130px;
+                            }
+
+                            .space3 {
+                                    width : 100px;
+                                    min-width : 100px;
+                                    max-width : 100px;
+                            }
+
+                            .space4 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+
+                            .space5 {
+                                    width : 300px;
+                                    min-width : 300px;
+                                    max-width : 300px;
+                            }
+                            .gray-cell {
+                                background-color: #DDD
+                                }
+
+
+                        </style>
+                <div align="center">
+                    <strong>
+                        <span t-esc="batch_name"/>
+                        <t t-if="payment_method == 'cash'">
+                                <span> نقدي - </span>
+                        </t>
+                        <t t-if="payment_method == 'bank'">
+                                <span> بنك - </span>
+                        </t>
+                </strong> <br/>
+                <strong>
+                        <span t-esc="branch.branch_ar_name"/>  - 
+                        <span t-esc="dept.name"/>
+                </strong>
+                </div>
+                <table class="report_table">
+                    <thead>
+                        <tr>
+                            <th><span> كود</span></th>
+                            <th><span>  اسم الموظف</span></th>
+                            <th><span>  الوظيفة </span></th>
+                            <th><span> الراتب الاساسي </span></th>
+                            <th><span> طعام </span></th>
+                            <th><span> نقل </span></th>
+                            <th><span> سكن </span></th>
+                            <th><span> طبيعة عمل </span></th>
+                             <th><span>اضافي ساعات شهرية </span></th>
+                            <th><span> اضافي ثابت </span></th>
+                            <th><span> اجمالي المستحق </span></th>
+                            <th><span> تأمينات </span></th>
+                            <th><span> خصومات </span></th>
+                            <th><span> سلف </span></th>
+                            <th><span> اجمالي الاستقطاعات </span></th>
+                            <th><span> صافي الراتب </span></th>
+                            <th><span>توقيع الموظف</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="dept_value['dept_slip_list']" t-as="slip">
+                            <tr>
+                                <td><span t-esc="slip['code']"/></td>
+                                <td><span t-esc="slip['employee_name']"/></td>
+                                <td><span t-esc="slip['job']"/></td>
+                                <td><span t-esc="slip['basic']"/></td>
+                                <td><span t-esc="slip['food_allow']"/></td>
+                                <td><span t-esc="slip['trans_allow']"/></td>
+                                <td><span t-esc="slip['housing_allow']"/></td>
+                                <td><span t-esc="slip['work_nature_allow']"/></td>
+                                <td><span t-esc="slip['extra_hours_allow']"/></td>
+                                <td><span t-esc="slip['other_allow']"/></td>
+                                <td style="background-color:#D3D3D3;"><span t-esc="slip['gross']"/></td>
+                                <td><span t-esc="slip['gossi']"/></td>
+                                <td><span t-esc="slip['deductions']"/></td>
+                                <td><span t-esc="slip['loan_input']"/></td>
+                                <td style="background-color:#D3D3D3;"><span t-esc="slip['total_deudctions']"/></td>
+                                <td><span t-esc="slip['net']"/></td>
+                                <td><span/></td>
+                        </tr>
+                        </t>
+                        <tr>
+                                <td><span t-esc="dept_value['dept_emp_count']"/></td>
+                                <td colspan="2"><span> ج.</span> <span t-esc="branch.branch_ar_name + ' - '"/><span t-esc="dept.name"/></td>
+                                <td><span t-esc="dept_value['dept_basic']"/></td>
+                                <td><span t-esc="dept_value['dept_food_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_trans_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_housing_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_work_nature_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_extra_hours_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_other_allow']"/></td>
+                                <td><span t-esc="dept_value['dept_gross']"/></td>
+                                <td><span t-esc="dept_value['dept_gossi']"/></td>
+                                <td><span t-esc="dept_value['dept_deductions']"/></td>
+                                <td><span t-esc="dept_value['dept_loan_input']"/></td>
+                                <td><span t-esc="dept_value['dept_total_deudctions']"/></td>
+                                <td><span t-esc="dept_value['dept_net']"/></td>
+                                <td><span/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+
+
+            </t>
+             </div>
+             <table>
+                <tr>
+                        <td><span t-esc="branch_value['branch_emp_count']"/></td>
+                        <td colspan="2"><strong> الاجمالي العام لفرع </strong> <span t-esc="branch"/></td>
+                        <td><strong><span t-esc="branch_value['branch_basic']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_food_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_trans_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_housing_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_work_nature_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_extra_hours_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_other_allow']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_gross']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_gossi']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_deductions']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_loan_input']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_total_deudctions']"/></strong></td>
+                        <td><strong><span t-esc="branch_value['branch_net']"/></strong></td>
+                        <td><span/></td>
+                </tr>
+        </table>
+         <table>
+                        <tr>
+
+                                <th style="border-right:hidden;border-left:hidden">محاسب الرواتب والاجور</th>
+                                <th style="border-right:hidden;border-left:hidden">مدير ادارة الموارد البشرية</th>
+                                <th style="border-right:hidden;border-left:hidden"> مدير المراجعه و التدقيق الداخلي </th>
+                                <th style="border-right:hidden;border-left:hidden">المدير المالي</th>
+
+                        </tr>
+
+                </table>
+            </t>
+
+                <table>
+                        <tr>
+
+                                <th>عدد الموظفين</th>
+                                <th>الاساسي</th>
+                                <th> طعام </th>
+                                <th> نقل</th>
+                                <th>سكن </th>
+                                <th> طبيعة عمل</th>
+                                <th> اضافي ساعات شهرية</th>
+                                <th>اضافي ثابت </th>
+                                <th> اجمالي المستحق</th>
+                                <th>تأمينات</th>
+                                <th> خصومات</th>
+                                <th> سلف</th>
+                                <th> اجمالي الاستقطاعات   </th>
+                                <th> صافي الراتب</th>
+
+                        </tr>
+                        <tr>
+                                <td><strong><span t-esc="all_emp_count"/></strong></td>
+                                <td><strong><span t-esc="all_basic"/></strong></td>
+                                <td><strong><span t-esc="all_food_allow"/></strong></td>
+                                <td><strong><span t-esc="all_trans_allow"/></strong></td>
+                                <td><strong><span t-esc="all_housing_allow"/></strong></td>
+                                <td><strong><span t-esc="all_work_nature_allow"/></strong></td>
+                                <td><strong><span t-esc="all_extra_hours_allow"/></strong></td>
+                                <td><strong><span t-esc="all_other_allow"/></strong></td>
+                                <td><strong><span t-esc="all_gross"/></strong></td>
+                                <td><strong><span t-esc="all_gossi"/></strong></td>
+                                <td><strong><span t-esc="all_loan_input"/></strong></td>
+                                <td><strong><span t-esc="all_deductions"/></strong></td>
+                                <td><strong><span t-esc="all_total_deudctions"/></strong></td>
+                                <td><strong><span t-esc="all_net"/></strong></td>
+                        </tr>
+
+                </table>
+                <table>
+                        <tr>
+                                
+                                <th style="border-right:hidden;border-left:hidden">محاسب الرواتب والاجور</th>
+                                <th style="border-right:hidden;border-left:hidden">مدير ادارة الموارد البشرية</th>
+                                <th style="border-right:hidden;border-left:hidden"> مدير المراجعه و التدقيق الداخلي </th>
+                                <th style="border-right:hidden;border-left:hidden">المدير المالي</th>
+                                
+                        </tr>
+
+                </table>
+                
+        </t>
+        </t>
+    </template>
+
+    <report 
+            id="action_paysip_report_pdf"
+            string="Payslips"
+            model="hr.payslip" 
+            report_type="qweb-pdf"
+            file="bsg_hr_payroll.payslips_report" 
+            name="bsg_hr_payroll.payslips_report"
+        />
+
+    <!-- <template id="report_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang"/>
+                <t t-call="account.report_payment_receipt_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template> -->
+
+
+
+    </data>
+</odoo>

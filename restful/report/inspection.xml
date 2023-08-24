@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="bassami_inspection"
+            model="bassami.inspection"
+            string="Inspection"
+            report_type="qweb-pdf"
+            name="bassami_inspection.report_bassami_inspection"
+            file="accobassami_inspectionunt.report_bassami_inspection"
+            attachment_use="True"
+            attachment="object.inspection_number.pdf"
+            menue="true"
+        />
+        <template id="report_bassami_inspection">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <h2>------------------Inspection Report----------------</h2>
+                            <p>Inspection Reference: <span t-field="o.inspection_ref"/></p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+    </template>
+    </data>
+</odoo>

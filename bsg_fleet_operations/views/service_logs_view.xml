@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="view_inherit_trailer_log_services_view_form">
+        <field name="name">view_inherit_trailer_log_services_view_form</field>
+        <field name="model">trailer.service.log</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Services Logs">
+                <header>
+                    <button name="draft_btn" states="cancel" string="Set to Draft" type="object" />
+                    <button name="maintenance_btn" states="draft" string="Confirm" type="object" />
+                    <button name="done_btn" states="maintenance" string="Finish" type="object" />
+                    <button name="cancel_btn" states="maintenance" string="Cancel" type="object" />
+                    <field name="state" widget="statusbar" states="draft,maintenance,done"/>
+                </header>
+                <sheet>
+                    <group col="2">
+                        <group string="Services Details">
+                            <field name="trailer_id"/>
+                            <field name="cost_subtype_id" string="Service Type" domain="['|',('category','=','service'),('category','=','both')]" required="1"/>
+                            <field name="amount"/>
+                        </group>
+                        <group string="Others Details">
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group string="Additional Details">
+                            <field name="date"/>
+                            <field name="purchaser_id"/>
+                            <field name="vendor_id" context="{'default_supplier': True}"/>
+                            <field name="inv_ref"/>
+                        </group>
+                    </group>
+<!--                    <group string="Included Services">-->
+<!--                        <field name="cost_ids" nolabel="1">-->
+<!--                            <tree string="Included Services" editable="bottom">-->
+<!--                                <field name="cost_subtype_id" string="Service" domain="[('category','=','service')]"/>-->
+<!--                                <field name="amount" sum="Price" string="Indicative Cost"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+                    <group string="Notes">
+                        <field nolabel="1" name="notes" placeholder="Write here any other information related to the service completed."/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div> 
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Tree view   -->
+    <record model="ir.ui.view" id="view_inherit_trailer_log_services_view_tree">
+      <field name="name">view_inherit_trailer_log_services_view_tree</field>
+      <field name="model">trailer.service.log</field>
+      <field name="arch" type="xml">
+        <tree string="Trailer Service Log">
+          <field name="trailer_id" />
+          <field name="cost_subtype_id" />
+          <field name="amount" />
+          <field name="date" />
+          <field name="purchaser_id" />
+          <field name="vendor_id" />
+          <field name="inv_ref" />
+          <field name="notes" />
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="trailer_service_log_action">
+      <field name="name">Trailer Service Log</field>
+      <field name="res_model">trailer.service.log</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+  
+</odoo>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="external_layout_standard_1">
+<!--      <div class="header">-->
+<!--          <div class="row">-->
+<!--              <div class="col-3 mb4">-->
+<!--                      <img src="bsg_tranport_bx_credit_customer_collection/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--      </div>-->
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+<!--        <div class="footer o_standard_footer">-->
+<!--              <div class="text-center" style="border-top: 1px solid black;">-->
+<!--                  <ul class="list-inline mb4">-->
+<!--                      <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>-->
+<!--                      <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>-->
+<!--                  </ul>-->
+<!--                  <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                      Page: <span class="page"/> - <span class="topage"/>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+      </template>
+      <template id="bx_coa_pdf">
+        <t t-call="web.html_container">
+             <t t-call="bsg_tranport_bx_credit_customer_collection.external_layout_standard_1">
+                 <div class="page">
+                     <style type="text/css">
+                            <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/bsg_tranport_bx_credit_customer_collection//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             div {
+                                font-family: 'Arial';
+                                padding:'20px';
+                                    }
+
+					            ]]>
+                        </style>
+                     <t t-set="contract_id" t-value="docs.get_contract(docs)" />
+                     <div style="width:760px;margin-top:10px;direction: rtl;font-size:30px;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <span><t t-esc="contract_id.contract_no" /> </span>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;padding:right:20px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span>رقم العقد:</span>
+                         </div>
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <t t-set="contract_date" t-value="docs.get_contract_date(contract_id)" />
+                                 <t t-if="contract_date">
+                                     <span><t t-esc="contract_date" /> </span>
+                                     <span>هـ</span>
+                                 </t>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:left;">
+                             <span> تاريخ العقد:</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:45px;padding-top:20px;padding-bottom:20px;direction: rtl;width:100%;border:0px solid black;text-align:center;">
+                             <span>شهادة إنجاز</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;direction: rtl;padding-left:40px;font-size:30px;border:0px solid black; background-color:white; color:black;};">
+                         <div style="width:100%;direction: rtl;border:0px solid black;text-align:right;">
+                             <span>تشهد</span>
+                             <span style="font-weight:bold;"><t t-esc="docs.customer_id.name" /></span>
+                             <span style="font-weight:bold;">(<t t-esc="docs.invoice_to.name"></t>)</span>
+                             <span style="font-weight:normal;">بأن المقاول شركة مجموعة أعمال البسامى الدولية قد أدى الخدمات الموضحة بالبطاقات المرفقة .</span>
+
+                         </div>
+                         <div style="width:100%;direction: rtl;border:0px solid black;text-align:right;">
+                             <span style="font-weight:normal;">بمبلغ</span>
+                             <span style="font-weight:bold;">(<t t-esc="docs.amount_total"></t>)</span>
+                              <span style="font-weight:bold;">
+                                  <t t-set="arabic_amount_total" t-value="docs.get_arabic_total_word(docs.amount_total)" />
+                                  <t t-esc="arabic_amount_total"></t>
+                              </span>
+                             <span style="font-weight:normal;">
+                                 فقط وذلك مقابل
+                             </span>
+                              <span style="font-weight:normal;"><t t-esc="docs.internal_note"></t></span>
+                             <br />
+                             <span style="font-weight:normal;">
+                                 لذا نأمل العمل على دفع المبلغ المذكور أعلاه للمقاول وذلك بموجب المستندات الأصلية المقدمة من المقاول مستوفية التوقيع والأختام ومصدقة من الجهات الرسمية.
+                             </span>
+                         </div>
+                     </div>
+                     <div style="width:760px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:15px;padding-bottom:15px;font-size:30px;direction: rtl;width:100%;border:0px solid black;float:left;text-align:center;">
+                             <span>والله الموفق,,,</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;margin-top:10px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                            <span> الاسم :</span>
+                         </div>
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                             <span> الاسم :</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;margin-top:1px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                            <span> الرتبة :</span>
+                         </div>
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                             <span> الرتبة :</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;margin-top:1px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                            <span> الوظيفة :</span>
+                         </div>
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                             <span> الوظيفة :</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;margin-top:1px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                            <span> التوقيع :</span>
+                         </div>
+                         <div style="padding-top:5px;padding-bottom:5px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:right;">
+                             <span> التوقيع :</span>
+                         </div>
+                     </div>
+                     <div style="width:760px;direction: rtl;border:0px solid black; font-weight:normal;background-color:white; color:black;};">
+                         <div style="padding-top:65px;font-size:30px;direction: rtl;width:100%;border:0px solid black;float:left;text-align:center;">
+                            <span> الختم</span>
+                         </div>
+                     </div>
+                 </div>
+             </t>
+        </t>
+    </template>
+</odoo>

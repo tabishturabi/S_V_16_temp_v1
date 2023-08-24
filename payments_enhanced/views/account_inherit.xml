@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action confirm_payments for multi -->
+        <record id="account.action_account_confirm_payments" model="ir.actions.server">
+            <field name="name">Confirm Payments</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="code">records.confirm_post()
+            </field>
+        </record>
+
+        <!-- Action post_payment for multi -->
+        <record id="action_account_post_internal_transfer" model="ir.actions.server">
+            <field name="name">Post Internal Transfer</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="code">records.post_internal_transfer()</field>
+        </record>
+
+        <!-- Action confirm_payments for multi -->
+        <record id="action_account_post_payments" model="ir.actions.server">
+            <field name="name">Post Payments</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="code">records.post_payment()</field>
+        </record>
+
+        <!--replacing filed for custom purpose -->
+        <record id="view_account_analytic_line_form_inherit_account_csutom_inherit" model="ir.ui.view">
+            <field name="name">account.analytic.line.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="account.view_account_analytic_line_form_inherit_account"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="branch_id"/>
+                    <field name="fleet_vehicle_id"/>
+                    <field name="trailer_id"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- add branch filed to tree view -->
+        <record id="view_account_analytic_line_tree_custom_inherit" model="ir.ui.view">
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='account_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--add branch filed -->
+        <record id="view_account_analytic_line_filter_custom_filter" model="ir.ui.view">
+            <field name="name">account.analytic.line.filter</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter string="Branch" context="{'group_by':'branch_id'}" name="group_branch_id"/>
+                    <filter string="Truck" context="{'group_by':'fleet_vehicle_id'}" name="group_fleet_vehicle_id"/>
+                    <filter string="Trailer" context="{'group_by':'trailer_id'}" name="group_trailer_id"/>
+                </xpath>
+            </field>
+        </record>
+        <!--replacing filed for custom purpose -->
+        <record id="view_account_payment_invoice_form_inherit_payment_custom" model="ir.ui.view">
+            <field name="name">account.payment.filter</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="is_show_partial" invisible="1"/>
+                    <field name="payment_token_id" invisible="1"/>
+                    <field name="is_from_cargo_line" invisible="1"/>
+                    <field name="is_patrtially_payment" attrs="{'invisible': [('is_show_partial', '=', False)]}"/>
+                </field>
+                <field name="payment_token_id" position="replace">
+                    <field name="operation_number"
+                           attrs="{'invisible': [('payment_method_code', '!=', 'electronic')],'required': [('payment_method_code', '=', 'electronic')]}"/>
+                </field>
+                <field name="communication" position="after">
+                    <field name="attachment_id" attrs="{'invisible': [('payment_method_code', '!=', 'electronic')]}"/>
+                </field>
+
+                <!--                <xpath expr="//sheet" position="inside">-->
+                <!--                    <field name="cargo_sale_line_order_ids" widget="many2many_tags"-->
+                <!--                           domain="[('bsg_cargo_sale_id','=',cargo_sale_order_id),('is_paid','=',False),('state', '!=', 'cancel')]"-->
+                <!--                           attrs="{'invisible':[('cargo_sale_order_id','=',False)],'readonly':['|',('is_patrtially_payment','!=',True),('is_from_cargo_line','=',True)]}"/>-->
+                <!--                    <field name="bsg_vehicle_cargo_sale_line_ids"-->
+                <!--                           attrs="{'invisible':[('cargo_sale_order_id','=',False)]}">-->
+                <!--                        <tree editable="bottom" create="false">-->
+                <!--                            <field name="cargo_sale_line_id" readonly="1" force_save="1"-->
+                <!--                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>-->
+                <!--                            <field name="account_invoice_line_id" readonly="1" force_save="1"-->
+                <!--                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>-->
+                <!--                            <field name="is_other_service" readonly="1" force_save="1"/>-->
+                <!--                            <field name="total" readonly="1" force_save="1"/>-->
+                <!--                            <field name="residual" readonly="1" force_save="1"/>-->
+                <!--                            <field name="is_patrtially_payment" invisible="1"/>-->
+                <!--                            <field name="amount" attrs="{'readonly':[('is_patrtially_payment','=',False)]}"-->
+                <!--                                   force_save="1"/>-->
+                <!--                            <field name="currency_id" invisible="1"/>-->
+                <!--                            <field name="payment_currency_id" invisible="1"/>-->
+                <!--                            <field name="currency_amount"/>-->
+                <!--                        </tree>-->
+                <!--                    </field>-->
+
+                <!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="view_account_tree_payment_custom" model="ir.ui.view">
+            <field name="name">account.payment.filter</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="operation_number"/>
+                    <field name="budget_number"/>
+                    <field name="is_budget_number" invisible="1"/>
+                    <field name="attachment_id"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="cargo_sale_order_id"/>
+                    <field name="fleet_trip_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_supplier_payment_tree_custom" model="ir.ui.view">
+            <field name="name">account.payment.filter</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="cargo_sale_order_id"/>
+                    <field name="fleet_trip_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_payment_tree_decorator" model="ir.ui.view">
+            <field name="name">account.payment.filter</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="decoration-info"/>
+                </tree>
+                <tree position="attributes">
+                    <attribute name="decoration-muted"/>
+                </tree>
+                <tree position="attributes">
+                    <attribute name="decoration-success">is_budget_number==True</attribute>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_payment_search_custom_inherits" model="ir.ui.view">
+            <field name="name">account.payment.filter</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="name" string="Payment Name"/>
+                    <separator/>
+                    <filter string="Assign Budget Number" name="is_budget_number"
+                            domain="[('is_budget_number','=',True)]"/>
+                    <filter string="Not Assign Number" name="is_budget_number"
+                            domain="[('is_budget_number','=',False)]"/>
+                    <separator/>
+                    <filter string="Today" name="today"
+                            domain="[('date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="This Week" name="thisweek"
+                            domain="[
+                                '&amp;',
+                                ('date', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),
+                            ]"/>
+                    <filter string="This Month" name="thismonth"
+                            domain="[('date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="This Year" name="thisyear"
+                            domain="[('date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account.action_account_payments_transfer" model="ir.actions.act_window">
+            <field name="name">Internal Transfers</field>
+            <field name="res_model">account.payment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="context">{'default_is_internal_transfer': 1,'default_payment_type': 'outbound', 'search_default_transfers_filter': 1}</field>
+            <field name="domain">[('is_internal_transfer', '=', True)]</field>
+            <field name="view_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register a payment
+                </p>
+                <p>
+                    Payments are used to register liquidity movements. You can process those payments by your own means
+                    or by using installed facilities.
+                </p>
+            </field>
+        </record>
+
+        <record id="account.action_account_payments" model="ir.actions.act_window">
+            <field name="name">Receipt Vouchers</field>
+            <field name="res_model">account.payment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer',
+                'search_default_inbound_filter': 1}
+            </field>
+            <!--            <field name="domain">[('payment_type', '=', 'inbound')]</field>-->
+            <field name="view_id" ref="account.view_account_payment_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register a payment
+                </p>
+                <p>
+                    Payments are used to register liquidity movements. You can process those payments by your own means
+                    or by using installed facilities.
+                </p>
+            </field>
+        </record>
+
+        <record id="account.action_account_payments_payable" model="ir.actions.act_window">
+            <field name="name">Payment Vouchers</field>
+            <field name="res_model">account.payment</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="context">{'default_payment_type': 'outbound', 'default_partner_type': 'supplier',
+                'search_default_outbound_filter': 1}
+            </field>
+            <!--            <field name="domain">[('payment_type', '=', 'outbound')]</field>-->
+            <field name="view_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register a payment
+                </p>
+                <p>
+                    Payments are used to register liquidity movements. You can process those payments by your own means
+                    or by using installed facilities.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="account.action_account_payments" name="Receipt Vouchers"
+                  id="account.menu_action_account_payments_receivable" parent="account.menu_finance_receivables"
+                  sequence="15"/>
+        <menuitem action="account.action_account_payments_payable" name="Payment Vouchers"
+                  id="account.menu_action_account_payments_payable" parent="account.menu_finance_payables"
+                  sequence="20"/>
+
+        <!-- need oveerid here -->
+
+        <record id="account.view_account_payment_register_form" model="ir.ui.view">
+            <field name="name">account.register.payments.wizard</field>
+            <!--            Migration Note-->
+            <!--            <field name="model">account.register.payments</field>-->
+            <field name="model">account.payment.register</field>
+            <field name="arch" type="xml">
+                <form string="Register Payment">
+                    <group>
+                        <!--                        <field name="payment_type" invisible="1"/>-->
+                        <field name="available_payment_method_line_ids" invisible="1"/>
+                        <field name="available_journal_ids" invisible="1"/>
+                        <field name="can_edit_wizard" invisible="1"/>
+                        <field name="can_group_payments" invisible="1"/>
+                        <field name="payment_difference" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="partner_type" invisible="1"/>
+                        <field name="line_ids" invisible="1"/>
+                        <field name="partner_id" invisible="1"/>
+                        <!--                        <field name="multi" invisible="1"/>-->
+                        <field name="is_new_order" invisible="1"/>
+                        <field name="is_form_cargo_line" invisible="1"/>
+                        <field name="multi_invoice" invisible="1"/>
+                        <field name="cargo_sale_order_id" invisible="1"/>
+                        <field name="is_allow_pay_with_fc" invisible="1"/>
+                        <field name="allow_edit_in_wiz" invisible="1"/>
+                        <group>
+                            <field name="journal_id" string="Journal" options="{'no_create': True, 'no_open': True}"/>
+                            <label for="amount"/>
+                            <div name="amount_div" class="o_row">
+                                <field name="amount"
+                                       attrs="{'readonly': ['|',('multi_invoice', '=', True),('is_new_order','=',True)]}"
+                                       force_save="1"/>
+                                <field name="currency_id"
+                                       attrs="{'readonly': ['|',('multi_invoice', '=', True),('is_allow_pay_with_fc', '=', False)]}"
+                                       options="{'no_create': True, 'no_open': True}"
+                                       groups="base.group_multi_currency"/>
+                            </div>
+                            <!--                            <field name="journal_id" attrs="{'invisible': [('amount', '=', 0)]}"-->
+                            <!--                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>-->
+                            <!--                            <field name="hide_payment_method" invisible="1"/>-->
+                            <field name="available_partner_bank_ids" widget="radio"
+                                   attrs="{'invisible': [('amount', '=', 0.0)]}"/>
+                            <field name="partner_bank_id"
+                                   attrs="{'invisible': [('show_partner_bank_account', '!=', True)], 'required': [('show_partner_bank_account', '=', True)]}"
+                                   context="{'default_partner_id': partner_id}"/>
+                            <field name="show_partner_bank_account" invisible="1"/>
+                            <field name="payment_method_code" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="payment_date" attrs="{'readonly':[('allow_edit_in_wiz','=',False)]}"/>
+                            <field name="group_payment"/>
+                            <field name="show_communication_field" invisible="1"/>
+                            <field name="communication"
+                                   attrs="{'invisible': [('show_communication_field', '=', False)]}"/>
+                            <p colspan="2" attrs="{'invisible': [('show_communication_field', '=', True)]}">Memo will be
+                                computed from invoices
+                            </p>
+                            <field name="operation_number"
+                                   attrs="{'invisible': [('payment_method_code', '!=', 'electronic')],'required': [('payment_method_code', '=', 'electronic')]}"/>
+                            <field name="attachment_id"
+                                   attrs="{'invisible': [('payment_method_code', '!=', 'electronic')]}"/>
+                        </group>
+                        <field name="payment_method_line_id" required="1"
+                               options="{'no_create': True, 'no_open': True}"/>
+
+                        <group attrs="{'invisible': [('payment_difference', '=', 0.0)]}">
+                            <label for="payment_difference" groups="payments_enhanced.group_payment_different_group"/>
+                            <div groups="payments_enhanced.group_payment_different_group">
+                                <field name="payment_difference"/>
+                                <field name="payment_difference_handling" widget="radio" nolabel="1"/>
+                                <div attrs="{'invisible': [('payment_difference_handling','=','open')]}">
+                                    <label for="writeoff_account_id" class="oe_edit_only" string="Post Difference In"/>
+                                    <field name="writeoff_account_id" string="Post Difference In"
+                                           attrs="{'required': [('payment_difference_handling', '=', 'reconcile')]}"/>
+                                    <label for="journal_id" string="Journal"
+                                           attrs="{'invisible': [('amount', '!=', 0)]}"/>
+                                    <field name="journal_id" string="Journal"
+                                           attrs="{'invisible': [('amount', '!=', 0)]}"/>
+                                    <label for="writeoff_label" class="oe_edit_only" string="Label"/>
+                                    <field name="writeoff_label"
+                                           attrs="{'required': [('payment_difference_handling', '=', 'reconcile')]}"/>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+
+                    <field name="cargo_sale_line_order_ids" widget="many2many_tags"
+                           attrs="{'readonly': ['|',('multi_invoice', '=', True),('is_form_cargo_line','=',True)]}"
+                           domain="[('bsg_cargo_sale_id','=',cargo_sale_order_id),('is_paid','=',False)('state', '!=', 'cancel')]"
+                           force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>
+                    <field name="bsg_vehicle_cargo_sale_line_ids" force_save="1"
+                           attrs="{'invisible': [('is_form_cargo_line','=',False)]}"
+                           options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}">
+                        <tree create="false" delete="false" editable="bottom">
+                            <field name="cargo_sale_line_id" readonly="1" force_save="1"
+                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>
+                            <field name="account_invoice_line_id" readonly="1" force_save="1"
+                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                            <field name="is_other_service" readonly="1" force_save="1"/>
+                            <field name="total" readonly="1" force_save="1"/>
+                            <field name="residual" readonly="1" force_save="1"/>
+                            <field name="multi" invisible="1"/>
+                            <field name="amount" force_save="1"
+                                   attrs="{'readonly': [('parent.multi_invoice', '=', True)]}"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="payment_currency_id" invisible="1"/>
+                            <field name="currency_amount"/>
+                        </tree>
+                        <form create="false" edit="false" delete="false">
+                            <field name="cargo_sale_line_id" readonly="1" force_save="1"
+                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>
+                            <field name="account_invoice_line_id" readonly="1" force_save="1"
+                                   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                            <field name="is_other_service" readonly="1" force_save="1"/>
+                            <field name="total" readonly="1" force_save="1"/>
+                            <field name="residual" readonly="1" force_save="1"/>
+                            <field name="amount" force_save="1" readonly="1"/>
+                        </form>
+                    </field>
+                    <footer>
+                        <button string='Validate' name="action_create_payments"
+                                context="{'dont_redirect_to_payments': True}" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!-- need oveerid here -->
+        <!--Migration Note-->
+        <!--        <record id="account.view_account_payment_invoice_form" model="ir.ui.view">-->
+        <!--        <record id="account.view_account_payment_register_form" model="ir.ui.view">-->
+        <!--            <field name="name">account.payment.register.invoice.form</field>-->
+        <!--            <field name="model">account.payment.register</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <form string="Register Payment">-->
+        <!--                    <sheet>-->
+        <!--                        <group>-->
+        <!--&lt;!&ndash;                            <field name="payment_type" invisible="1"/>&ndash;&gt;-->
+        <!--                            <field name="partner_type" invisible="1"/>-->
+        <!--                            <field name="invoice_ids" invisible="1"/>-->
+        <!--                            <field name="partner_id" invisible="1"/>-->
+        <!--                            <field name="state" invisible="1"/>-->
+        <!--                            <group>-->
+        <!--                                <label for="amount"/>-->
+        <!--                                <div name="amount_div" class="o_row">-->
+        <!--                                    <field name="amount"/>-->
+        <!--                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}"-->
+        <!--                                           groups="base.group_multi_currency"/>-->
+        <!--                                </div>-->
+        <!--                                <field name="journal_id" options="{'no_create': True, 'no_open': True}"-->
+        <!--                                       attrs="{'invisible': [('amount', '=', 0)]}"/>-->
+        <!--&lt;!&ndash;                                <field name="hide_payment_method" invisible="1"/>&ndash;&gt;-->
+        <!--                                <field name="payment_method_id" widget="radio"-->
+        <!--                                       attrs="{'invisible': [('amount', '=', 0.0)]}"/>-->
+        <!--                                <field name="partner_bank_account_id"-->
+        <!--                                       attrs="{'invisible': [('show_partner_bank_account', '!=', True)], 'required': [('show_partner_bank_account', '=', True)], 'readonly': [('state', '!=', 'draft')]}"-->
+        <!--                                       context="{'default_partner_id': partner_id}"/>-->
+        <!--                                <field name="show_partner_bank_account" invisible="1"/>-->
+        <!--                                <field name="payment_method_code" invisible="1"/>-->
+        <!--                            </group>-->
+        <!--                            <group>-->
+        <!--                                <field name="payment_date"/>-->
+
+        <!--                                <field name="communication" readonly="1"/>-->
+        <!--&lt;!&ndash;                                <field name="show_invoice_amount" invisible="1"/>&ndash;&gt;-->
+        <!--                                <field name="total_invoice_amount"/>-->
+        <!--                                <field name="due_invoice_amount"/>-->
+        <!--                            </group>-->
+        <!--                            <group attrs="{'invisible': [('payment_difference', '=', 0.0)]}">-->
+        <!--                                <label for="payment_difference"-->
+        <!--                                       groups="payments_enhanced.group_payment_different_group"/>-->
+        <!--                                <div groups="payments_enhanced.group_payment_different_group">-->
+        <!--                                    <field name="payment_difference"/>-->
+        <!--                                    <field name="payment_difference_handling" widget="radio" nolabel="1"/>-->
+        <!--                                    <div attrs="{'invisible': [('payment_difference_handling','=','open')]}">-->
+        <!--                                        <label for="writeoff_account_id" class="oe_edit_only"-->
+        <!--                                               string="Post Difference In"/>-->
+        <!--                                        <field name="writeoff_account_id" string="Post Difference In"-->
+        <!--                                               attrs="{'required': [('payment_difference_handling', '=', 'reconcile')]}"/>-->
+        <!--                                        <label for="journal_id" string="Journal"-->
+        <!--                                               attrs="{'invisible': [('amount', '!=', 0)]}"/>-->
+        <!--                                        <field name="journal_id" string="Journal"-->
+        <!--                                               options="{'no_create': True, 'no_open': True}"-->
+        <!--                                               attrs="{'invisible': [('amount', '!=', 0)]}"/>-->
+        <!--                                        <label for="writeoff_label" class="oe_edit_only" string="Label"/>-->
+        <!--                                        <field name="writeoff_label"-->
+        <!--                                               attrs="{'required': [('payment_difference_handling', '=', 'reconcile')]}"/>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </group>-->
+        <!--                        </group>-->
+        <!--                    </sheet>-->
+        <!--                    <footer>-->
+        <!--                        <button string='Validate' name="action_validate_invoice_payment" type="object"-->
+        <!--                                class="btn-primary"/>-->
+        <!--                        <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+        <!--                    </footer>-->
+        <!--                </form>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="bsg_vehicle_cargo_sale_custom_voucher_print" model="ir.ui.view">
+            <field name="name">bsg_vehicle_cargo_sale.form</field>
+            <field name="model">bsg_vehicle_cargo_sale</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+            <field name="arch" type="xml">
+                <button name="cancel_agreement" position="after">
+                    <button name="print_voucher" string="Print Vouchers" type="object" class="o_sale_confirm"
+                            states="done"/>
+                    <button name="print_return_voucher" string="Print Return Invoice Vouchers" type="object"
+                            class="o_sale_confirm" states="done"/>
+                </button>
+            </field>
+        </record>
+
+        <record id="view_account_payment_invoice_form_custom_inherits" model="ir.ui.view">
+            <field name="name">account.payment.register.form</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="attrs">{'readonly':['&amp;',('cargo_sale_order_id','!=',False),'|',('is_for_old_order','!=',True),'&amp;',('is_patrtially_payment','!=',True),('is_for_old_order','=',True)]}</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='currency_id']" position="replace">
+                    <field name="is_for_old_order" invisible="1"/>
+                    <field name="is_allow_pay_with_fc" invisible="1"/>
+                    <field name="currency_id" options="{'no_create': True, 'no_open': True}"
+                           attrs="{'readonly': [('is_allow_pay_with_fc', '=', False)]}"
+                           groups="base.group_multi_currency"/>
+                    <field name="is_more_amount" invisible="1"/>
+
+                </xpath>
+
+                <!--                <field name="payment_date" position="after">-->
+                <!--                    <field name="is_more_amount" invisible="1"/>-->
+                <!--                </field>-->
+                <!--    <field name="payment_difference_handling" position="attributes">
+                       <attribute name="invisible">1</attribute>
+                   </field> -->
+                <!--                <xpath expr="//form" position="inside">-->
+                <!--                    <footer>-->
+                <!--                        <button string='Validate' name="action_validate_invoice_payment" type="object"-->
+                <!--                                class="btn-primary" attrs="{'invisible': [('is_more_amount', '=', True)]}"/>-->
+                <!--                        <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+                <!--                    </footer>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+
+        <!--Migration Testing-->
+        <!--        <record id="invoice_form_add_new_group" model="ir.ui.view">-->
+        <!--            <field name="name">account.invoice.form</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <field name="journal_id" position="attributes">-->
+        <!--                    <attribute name="groups">account.group_account_user,payments_enhanced.group_cancel_invoice-->
+        <!--                    </attribute>-->
+        <!--                </field>-->
+        <!--                <field name="account_id" position="attributes">-->
+        <!--                    <attribute name="groups">account.group_account_user,payments_enhanced.group_cancel_invoice,account.group_account_invoice-->
+        <!--                    </attribute>-->
+        <!--                </field>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+
+        <record id="view_account_invoice_filter_custom_inherits" model="ir.ui.view">
+            <field name="name">account.invoice.filter</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter string="Today" name="today"
+                            domain="[('invoice_date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="This Week" name="thisweek"
+                            domain="[
+                                '&amp;',
+                                ('invoice_date', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('invoice_date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),
+                            ]"/>
+                    <filter string="This Month" name="thismonth"
+                            domain="[('invoice_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="This Year" name="thisyear"
+                            domain="[('invoice_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form_custom_inherit" model="ir.ui.view">
+            <field name="name">Patner From Inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="attributes">
+                    <attribute name="groups">base.group_erp_manager,base_customer.group_create_client</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_bill_smart_button" model="ir.ui.view">
+            <field name="name">Ivoice bill Smart Button</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_validate" invisible="1"/>
+                </xpath>
+                <button name="action_register_payment" position="replace">
+                    <button name="action_invoice_validate" type="object" string="Register Payment"
+                            attrs="{'invisible': ['|',('state', '!=', 'posted'),('is_validate', '=', False)]}"
+                            class="oe_highlight"/>
+                    <button name="action_register_payment" id="account_invoice_payment_btn"
+                            type="object"
+                            attrs="{'invisible': ['|', '|','|',('is_validate', '=', True),('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
+                            string="Register Payment" groups="account.group_account_invoice" class="oe_highlight"/>
+                </button>
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <field name="payment" invisible="1"/>
+                    <button name="action_view_payment" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':['|',('payment','=',0),('move_type','not in',['in_invoice'])]}">
+                        <field string="Payment Vouchers" name="payment" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_form_cancel_inherit_security_custom" model="ir.ui.view">
+            <field name="name">Ivoice Sale Smart Button</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <button name="button_cancel" position="replace">
+                    <button name="button_cancel" type="object" states="draft,open,in_payment,paid"
+                            string="Cancel" groups="payments_enhanced.group_cancel_invoice"/>
+                </button>
+                <button name="action_reverse" position="replace">
+                    <button name="action_reverse" type="object" string="Add Credit Note"
+                            groups="payments_enhanced.group_add_credit_note"
+                            attrs="{'invisible': ['|',('move_type', '=', 'out_refund'), ('payment_state', 'not in', ('partial','in_payment','paid'))]}"/>
+
+                </button>
+            </field>
+        </record>
+        <record id="invoice_sale_smart_button" model="ir.ui.view">
+            <field name="name">Ivoice Sale Smart Button</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]" position="inside">
+                    <label for="paid_voucher_amount" string="Paid Voucher Amount :"
+                           attrs="{'invisible': ['|',('paid_voucher_amount', '=', 0),('move_type', '=', 'entry')]}"/>
+                    <field name="paid_voucher_amount" attrs="{'invisible': [('paid_voucher_amount', '=', 0)]}"/>
+                    <br/>
+                    <label for="invoice_discount" string="Invoice Discount :"
+                           attrs="{'invisible': ['|',('invoice_discount', '=', 0),('move_type', '=', 'entry')]}"/>
+                    <field name="invoice_discount"
+                           attrs="{'invisible': ['|',('invoice_discount', '=', 0),('move_type', '=', 'entry')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_validate" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+                </xpath>
+                <xpath expr="//button[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <button name="action_post" position="replace">
+                    <button name="action_post" type="object" states="draft" string="Validate"
+                            class="oe_highlight o_invoice_validate" groups="payments_enhanced.group_validate_invoices"/>
+                </button>
+                <button name="action_register_payment" position="replace">
+                    <field name="payment_method_name" invisible="1"/>
+                    <field name="cargo_sale_id" invisible="1"/>
+                    <field name="is_so_invoice" invisible="1"/>
+                    <button name="action_invoice_validate" type="object" string="Register Payment" class="oe_highlight"
+                            attrs="{'invisible': ['|','|',('state', '!=', 'posted'),('payment_method_name', 'in', ['cash','credit','pod','bank']),('is_validate', '=', False)]}"/>
+                    <button name="action_register_payment" id="account_invoice_payment_btn"
+                            type="object"
+                            attrs="{'invisible': ['|', '|','|',('is_validate', '=', True),('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
+                            string="Register Payment" groups="account.group_account_invoice" class="oe_highlight"/>
+                </button>
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <field name="payment" invisible="1"/>
+
+                    <button name="action_view_payment_voucher" type="object" class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible':['|',('state','=','draft'),('move_type','in',['in_invoice','out_invoice','in_refund','entry'])]}">
+                        <field string="Payment Vouchers" name="patment_return" widget="statinfo"/>
+                    </button>
+                      <button name="action_view_payment" attrs="{'invisible':['|',('state','=','draft'),('move_type','not in',['out_invoice'])]}" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                        <field string="Receipt Vouchers" name="payment" widget="statinfo"/>
+                    </button>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_view_move_form_view_form_form_coalevel1_inherit" model="ir.ui.view">
+            <field name="name">Account Jornal Inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account_generic_enhanced.view_view_move_form_view_form_form_coalevel1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='branches']" position="after">
+                    <field name="transfer_branch_ids" groups="payments_enhanced.group_allowed_transfer_journal"
+                           widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_journal_form_inherit_custom" model="ir.ui.view">
+            <field name="name">Account Jornal Inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="sub_type" attrs="{'invisible': [('type', 'not in', ['cash','bank'])]}"/>
+                </xpath>
+                <!--                 <xpath expr="//field[@name='sequence_id']" position="replace"/>
+                 -->
+                <xpath expr="//field[@name='refund_sequence']" position="before">
+                    <field name="receipt_sequnce_id"
+                           attrs="{'invisible': [('sub_type', 'not in', ['All','Receipt'])]}"/>
+                    <field name="payment_sequnce_id"
+                           attrs="{'invisible': [('sub_type', 'not in', ['Payment','All'])]}"/>
+                    <!--  <field name="internal_sequnce_id" attrs="{'invisible': [('sub_type', 'not in', ['Internal'])]}" /> -->
+                </xpath>
+                <field name="suspense_account_id" position="after">
+                    <field name="is_allow_negative_transaction"/>
+                    <field name="is_not_allowed_past_payment"/>
+                    <field name="is_internal" group="payments_enhanced.group_create_internal_voucher"/>
+                </field>
+            </field>
+        </record>
+
+<!--        <record id="product_template_form_view_inherit_custom" model="ir.ui.view">-->
+<!--            <field name="name">product.template.form.inherit</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='property_account_income_id']" position="replace">-->
+<!--                    &lt;!&ndash;                    Migration Note&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <field name="property_account_income_id"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           domain="[('internal_type','=','other'),('internal_type','!=','view'),('deprecated','=',False)]"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           groups="account.group_account_user"/>&ndash;&gt;-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='property_account_expense_id']" position="replace">-->
+<!--                    &lt;!&ndash;                    Migration Note&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <field name="property_account_expense_id"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           domain="[('internal_type','=','other'),('internal_type','!=','view'),('deprecated','=',False)]"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                           groups="account.group_account_user"/>&ndash;&gt;-->
+
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="product_template_form_view_custom_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase_price_diff.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_account_creditor_price_difference']" position="replace">
+                    <field name="property_account_creditor_price_difference"
+                           domain="[('deprecated','=',False)]"
+                           attrs="{'readonly':[('purchase_ok', '=', 0)]}" groups="account.group_account_user"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        Migration Test-->
+        <!--        <record id="view_tax_form_custom_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">account.tax.inherit</field>-->
+        <!--            <field name="model">account.tax</field>-->
+        <!--            <field name="inherit_id" ref="account.view_tax_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='account_id']" position="replace">-->
+        <!--&lt;!&ndash;                    Migration Note&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="account_id" domain="[('internal_type','!=','view')]"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='refund_account_id']" position="replace">-->
+        <!--&lt;!&ndash;                    Migration Note&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="refund_account_id" domain="[('internal_type','!=','view')]"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--    Migration Note&ndash;&gt;-->
+        <!--        <record id="view_account_asset_category_form_custom_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">account.asset.category.inherit</field>-->
+        <!--            <field name="model">account.asset.category</field>-->
+        <!--            <field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='account_asset_id']" position="replace">-->
+        <!--&lt;!&ndash;                    Migration Note&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="account_asset_id" domain="[('internal_type','!=','view')]" nolabel="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;                           attrs="{'invisible': [('type','=', False)]}"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='account_depreciation_id']" position="replace">-->
+        <!--&lt;!&ndash;                    Migration Note&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="account_depreciation_id" domain="[('internal_type','!=','view')]" nolabel="1"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='account_depreciation_expense_id']" position="replace">-->
+        <!--&lt;!&ndash;                    Migration Note&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="account_depreciation_expense_id" domain="[('internal_type','!=','view')]" nolabel="1"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <record id="account_supplier_payment_tree_readonly" model="ir.ui.view">-->
+        <!--            <field name="name">account.supplier.payment.tree.readonly</field>-->
+        <!--            <field name="model">account.payment</field>-->
+        <!--            <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>-->
+        <!--            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>-->
+        <!--            <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//tree" position="attributes">-->
+        <!--                    <t groups="payments_enhanced.group_payment_voucher_read_only">-->
+        <!--                        <attribute name="create">0</attribute>-->
+        <!--                        <attribute name="edit">0</attribute>-->
+        <!--                    </t>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="view_set_draft_vendor_bill_form_inherit" model="ir.ui.view">
+            <field name="name">view.set.draft.vendor.bill.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="groups">payments_enhanced.group_cancel_vendor_bill_access</attribute>
+                    <attribute name="states">cancel</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_cancel_vendor_bill_form_inherit" model="ir.ui.view">
+            <field name="name">view.cancel.vendor.bill.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    <attribute name="groups">payments_enhanced.group_cancel_vendor_bill_access</attribute>
+                    <attribute name="states">draft,open</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

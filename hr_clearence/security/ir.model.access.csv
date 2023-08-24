@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_clearance_hr_manager,access_clearance_hr_manager,model_hr_clearance,bsg_hr.group_hr_manager,1,1,1,0
+access_clearance_hr_specialist,access_clearance_hr_specialist,model_hr_clearance,bsg_hr.group_hr_specialist,1,1,1,0
+access_clearance_dept_manager,access_clearance_dept_manager,model_hr_clearance,bsg_hr.group_department_manager,1,1,1,0
+access_clearance_internal_user,access_clearance_internal_user,model_hr_clearance,base.group_user,1,1,1,0
+access_clearance_branch_supervisor,access_clearance_branch_supervisor,model_hr_clearance,bsg_hr.group_branch_supervisor,1,1,1,0

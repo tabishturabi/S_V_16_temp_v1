@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record model="ir.rule" id="hr_clearance_see_own">
+            <field name="name">HR Clearance See Own Clearance</field>
+            <field name="model_id" ref="model_hr_clearance"/>
+            <field name="domain_force">['|',('employee_id.parent_id.user_id','=',user.id),('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_department_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_clearance_own_data">
+            <field name="name">HR Clearance See Own Clearance Data</field>
+            <field name="model_id" ref="model_hr_clearance"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_clearance_branch_supervisro_data">
+            <field name="name">HR Clearance See Own Branch Supervisor Data</field>
+            <field name="model_id" ref="model_hr_clearance"/>
+            <field name="domain_force">[('employee_id.branch_id.supervisor_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_branch_supervisor'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="hr_clearance_see_all">
+            <field name="name">HR Clearance See All Clearance</field>
+            <field name="model_id" ref="model_hr_clearance"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr.group_hr_specialist')),(4, ref('bsg_hr.group_hr_manager')),(4, ref('bsg_hr.group_finance_manager')),(4,ref('bsg_hr.group_government_relation'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+    </data>
+</odoo>

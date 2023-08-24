@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Route Location Sequence  -->
+        <record model="ir.sequence" id="bsg_master_config_waypoint_seq_alb">
+      		<field name="name">Albassami Location</field>
+      		<field name="code">bsg_master_config_waypoint_seq_alb_code</field>
+      		<field name="prefix">ALB</field>
+      		<field name="padding">4</field>
+    	</record>
+
+        <record model="ir.sequence" id="bsg_master_config_waypoint_seq_cusl">
+      		<field name="name">Customer Location</field>
+      		<field name="code">bsg_master_config_waypoint_seq_cusl_code</field>
+      		<field name="prefix">CUSL</field>
+      		<field name="padding">4</field>
+    	</record>
+
+        <record model="ir.sequence" id="bsg_master_config_waypoint_seq_gen">
+      		<field name="name">General Location</field>
+      		<field name="code">bsg_master_config_waypoint_seq_gen_code</field>
+      		<field name="prefix">GEN</field>
+      		<field name="padding">4</field>
+    	</record>
+
+
+      <!-- Estimated Delivery Day's Sequence  -->
+        <record model="ir.sequence" id="bsg_master_config_estimated_delivery_day_seq">
+          <field name="name">Estimated Delivery Day</field>
+          <field name="code">bsg_master_config_estimated_delivery_day_code</field>
+          <field name="prefix">EDD</field>
+          <field name="padding">4</field>
+      </record>
+	</data>
+</odoo>

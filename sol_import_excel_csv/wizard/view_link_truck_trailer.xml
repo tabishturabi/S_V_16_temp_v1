@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record id="wizard_link_truck_trailer" model="ir.ui.view">
+			<field name="name">wizard.link.truck.trailer.form</field>
+			<field name="model">link.truck.trailer</field>
+			<field name="arch" type="xml">
+				<form string="Link Truck Trailer" >
+					<group>
+                    <field name="import_option" widget="radio" />
+                </group>
+              
+                <group>
+                    <field name="File_slect" filename="name"/>
+                </group>	
+					<footer>
+	
+						<button string="Update" name="imoport_file"
+							type="object" class="oe_highlight" />
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="sol_act_link_truck_trailer" model="ir.actions.act_window">
+			<field name="name">Link Truck Trailer</field>
+			<field name="res_model">link.truck.trailer</field>
+<!--			<field name="view_type">form</field>-->
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_link_truck_trailer" />
+			<field name="target">new</field>
+		</record>
+
+		<menuitem
+    		id="menu_link_truck_trailer"
+    		action="sol_act_link_truck_trailer"
+    		name="Attachment of Trailers"
+    		parent="fleet.fleet_vehicles"
+    		sequence="101"/>
+
+	</data>
+</odoo>

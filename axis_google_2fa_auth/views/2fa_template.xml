@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login_2fa" name="2FA Login">
+        <t t-call="web.layout">
+            <t t-set="html_data" t-value="{'style': 'height: 100%;'}"/>
+            <t t-set="head">
+                <t t-call-assets="web.assets_common" t-js="true"/>
+                <t t-call-assets="web.assets_frontend" t-js="true"/>
+                <t t-call-assets="web.assets_common" t-css="true"/>
+                <t t-call-assets="web.assets_frontend" t-css="true"/>
+            </t>
+            <t t-set="body_classname" t-value="'bg-100'"/>
+
+            <div class="container mb-5 pb-5">
+                <div t-attf-class="card border-0 mx-auto mt-5 bg-100 {{login_card_classes}} o_database_list" style="max-width: 300px;">
+                    <div class="card-body">
+                        <div t-attf-class="text-center {{'mb-3' if form_small else 'mb-4'}}">
+                            <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}" alt="Logo" style="max-height:120px; max-width: 100%; width:auto"/>
+                        </div>
+                        <t t-raw="0"/>
+                        <div class="text-center small mt-4 pt-3">
+                            <h3>2FA Security code</h3>
+                            <form class="" role="form" t-attf-action="/web/verify_2fa{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
+                                <div class="form-group">
+                                    <label for="code">Security code:</label>
+                                    <input type="text" class="form-control" id="code" placeholder="Enter authentication code" name="code" required="1" />
+                                </div>
+                                <p class="alert alert-danger" t-if="error" role="alert">
+                                    <t t-esc="error"/>
+                                </p>
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                <input type="hidden" name="uid" t-att-value="request.session.uid"/>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button class="btn btn-primary" onclick="location.href='/web/login';">Back</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="portal_my_details_inherited" inherit_id="portal.portal_my_details">
+        <xpath expr="//input[@name='redirect']" position="after">
+            <div class="col-sm-12">
+                <h3>2FA Preferences</h3>
+                <t t-if="is_2fa_enable or user_id.sudo(1).is_2fa_enable">
+                    <div class="form-check col-sm-6">
+                        <label for="is_2fa_enable">2FA authentication
+                            <input type="checkbox" class="checkbox_2fa" name="is_2fa_enable"
+                            checked="checked"/>
+                        </label>
+                    </div>
+                    <div class="form-group qrcode_div col-sm-6">
+                        <label>Scan QR code</label>
+                        <img name="user_image_2fa" t-attf-class="img img-thumbnail" t-att-src="'data:image/png;base64,%s' % to_text(user_id.sudo(1).image_2fa)" alt="Qr code" width="350px"/>
+                    </div>
+                </t>
+                <t t-if="not (is_2fa_enable or user_id.sudo(1).is_2fa_enable)">
+                    <div class="form-check col-sm-12">
+                        <label for="is_2fa_enable">2FA authentication
+                            <input type="checkbox" class="checkbox_2fa" name="is_2fa_enable"/>
+                        </label>
+                    </div>
+                </t>
+                <input type="hidden" name="is_2fa_change" id="is_2fa_change" value="no"/>      
+            </div>
+        </xpath>
+    </template>
+</odoo>

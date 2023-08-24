@@ -1,0 +1,22 @@
+/***************************
+* Cusom Fonts
+****************************/
+@font-face {
+  font-family: 'Tajawal';
+  font-style: bold;
+  font-weight: 400;
+  src:  url(/backend_frontend_font/static/src/fonts/Tajawal-Bold.ttf) format('truetype');
+}
+
+body, html {
+ font-family: 'Tajawal' !important;
+}
+
+.navbar{
+ font-family: 'Tajawal' !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+ font-family: 'Tajawal' !important;
+}
+

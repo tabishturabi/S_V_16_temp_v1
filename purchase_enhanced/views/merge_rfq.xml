@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+        <record model="ir.ui.view" id="view_purchase_req_merge_form">
+            <field name="name">purchase.req.form</field>
+            <field name="model">purchase.req.merge</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Request Merge">
+                    <field name="partner_id" options="{'no_create': True}"  domain="[('supplier_rank','>',0)]" />
+                    <footer>
+                        <button name="merge_rfq" string="Merge RFQ" type="object"  class="btn-primary" context="{'partner_id': partner_id}"/>
+                        
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                
+                </form>
+            </field>
+        </record>
+        
+        
+        <act_window
+            id="action_purchase_rfq"
+            name="Merged RFQ"
+            res_model="purchase.req.merge"
+            src_model="purchase.req.rec"
+            view_mode="form"
+            multi="True"
+            target="new"
+            key2="client_action_multi"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <template id="assets_common_tmd" name="Top Management Dashboard assets" inherit_id="web.assets_common">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <link rel="stylesheet" href="/top_management_dashboard/static/src/css/top_management_dashboard.css"/>-->
+<!--            <script type="text/javascript" src="/top_management_dashboard/static/src/js/top_management_dashboard.js"/>-->
+<!--            <script type="text/javascript" src="/top_management_dashboard/static/src/js/hr_management_dashboard.js"/>-->
+<!--            <script type="text/javascript" src="/top_management_dashboard/static/src/js/operations_dashboard.js"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record model="res.groups" id="group_create_government_so">
+            <field name="name">Create government SO</field>
+            <field name="category_id" ref="bsg_cargo_sale.module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_create_government_so_all_locations">
+            <field name="name">Create GS for all Location</field>
+            <field name="category_id" ref="bsg_cargo_sale.module_nagliyat_sales_maangement"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,77 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="branch_enhance_form_view">
+        <field name="name">branch.enhance.form.view</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='license']/field[@name='bsg_license_info_ids']/tree/field[@name='expiry_date']" position="after">
+                <field name="hijri_expiry_date"></field>
+                <field name="comment"></field>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='license']/field[@name='bsg_license_info_ids']/tree/field[@name='issue_date']" position="after">
+                <field name="hijri_issue_date"></field>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='license']/field[@name='bsg_license_info_ids']/tree/field[@name='renewal']" position="replace">
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='license']/field[@name='bsg_license_info_ids']/tree/field[@name='latest_renewal_date']" position="replace">
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='license']/field[@name='bsg_license_info_ids']/form/sheet/group[@name='group_top']/group[@name='group_right']/field[@name='renewal']" position="after">
+                <field name="comment"></field>
+            </xpath>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="branch_enhance_tree_view">
+        <field name="name">branch.enhance.tree.view</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_tree"/>
+        <field name="arch" type="xml">
+           <xpath expr="//tree/field[@name='branch_name']" position="after">
+                 <field name="branch_no"></field>
+            </xpath>
+        </field>
+      </record>
+      <record model="ir.ui.view" id="branch_enhance_search_view">
+          <field name="name">branch.enhance.search.view</field>
+          <field name="model">bsg_branches.bsg_branches</field>
+          <field name="arch" type="xml">
+              <search>
+                  <field name="branch_name"/>
+                  <field name="branch_no"></field>
+                  <field name="branch_ar_name"/>
+                  <field name="branch_phone"/>
+                  <field name="email"/>
+              </search>
+          </field>
+      </record>
+      <record model="ir.ui.view" id="bsg_license_info_inherit_form_view">
+        <field name="name">bsg.license.info.form.view</field>
+        <field name="model">bsg.license.info</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_license_tree_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[@name='group_top']" position="after">
+                <label for="comment"></label>
+                <field name="comment"></field>
+            </xpath>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="bsg_license_info_inherit_tree_view">
+        <field name="name">bsg.license.info.tree.view</field>
+        <field name="model">bsg.license.info</field>
+        <field name="inherit_id" ref="bsg_branch_config.view_bsg_license_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='issue_date']" position="after">
+                 <field name="hijri_issue_date"></field>
+            </xpath>
+            <xpath expr="//tree/field[@name='expiry_date']" position="after">
+               <field name="hijri_expiry_date"></field>
+                <field name="comment"></field>
+            </xpath>
+            <xpath expr="//tree/field[@name='latest_renewal_date']" position="replace">
+            </xpath>
+             <xpath expr="//tree/field[@name='renewal']" position="replace">
+            </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

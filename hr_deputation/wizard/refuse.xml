@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="deputation_refuse_wizard_view_form" model="ir.ui.view">
+        <field name="name">deputation_wizard_view_form</field>
+        <field name="model">deputation.refuse.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Deputation refuse reason">
+                <separator string="Reason To Refuse"/>
+                <field name="deputation_ids" invisible="1"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="deputation_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="deputation_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">Refuse Reason</field>
+        <field name="res_model">deputation.refuse.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="deputation_refuse_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+<!--    <record id="empservice_cancel_wizard_view_form" model="ir.ui.view">-->
+<!--        <field name="name">empservice.cancel.wizard.view.form</field>-->
+<!--        <field name="model">empservice.cancel.wizard</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Effective Cancel Reason">-->
+<!--                <separator string="Reason To Cancel"/>-->
+<!--                <field name="effective_ids" invisible="1"/>-->
+<!--                <field name="reason"/>-->
+<!--                <footer>-->
+<!--                    <button string='Cancel' name="effective_cancel_reason" type="object" class="oe_highlight"/>-->
+<!--                    <button string="Discard" class="oe_link" special="cancel"/>-->
+<!--                </footer>-->
+<!--           </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="empservice_cancel_wizard_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Cancel Reason</field>-->
+<!--        <field name="res_model">empservice.cancel.wizard</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="view_id" ref="empservice_cancel_wizard_view_form"/>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+
+
+</odoo>

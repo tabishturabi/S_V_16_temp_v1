@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+<!--	<template id="assets_backend_font_inherit" inherit_id="web.assets_backend">-->
+<!--		<xpath expr=".">-->
+<!--                <link  href="/backend_frontend_font/static/src/css/font_backend.css" rel="stylesheet"/>-->
+<!--		</xpath>-->
+<!--	</template>-->
+
+<!--   	<template id="assets_font_frontend" inherit_id="web.assets_frontend">-->
+<!--   	 	<xpath expr="." position="inside">-->
+<!--   	 		<link  href="/backend_frontend_font/static/src/css/font_frontend.css" rel="stylesheet"/>-->
+<!--   	 	</xpath>-->
+<!--    </template>-->
+
+
+    </data>
+</odoo>

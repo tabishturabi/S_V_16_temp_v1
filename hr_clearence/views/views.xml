@@ -1,0 +1,166 @@
+<odoo>
+    <data>
+
+        <!-- Custody Request form view -->
+        <record id="hr_clearance_form_view" model="ir.ui.view">
+            <field name="name">hr.clearance.form.view</field>
+            <field name="model">hr.clearance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="submit_check" invisible="1"/>
+                        <button name="submit" string="Submit" class="oe_highlight" attrs="{'invisible':[('submit_check','!=',False)]}" type="object" states="draft"/>
+
+                        <button name="branch_supervisor_approve" string="Approve" class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','branch_supervisor')]}" groups="bsg_hr.group_branch_supervisor"/>
+                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" context="{'btn_clicked':'refused'}" type="action" attrs="{'invisible':[('state','!=','branch_supervisor')]}" groups="bsg_hr.group_branch_supervisor"/>
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" attrs="{'invisible':[('state','!=','department_manager')]}" groups="bsg_hr.group_department_manager"/>-->
+
+                        <button name="direct_manager_approve" string="Approve" class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','direct_manager')]}" groups="bsg_hr.group_department_manager"/>
+                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" context="{'btn_clicked':'refused'}" type="action" attrs="{'invisible':[('state','!=','direct_manager')]}" groups="bsg_hr.group_department_manager"/>
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" attrs="{'invisible':[('state','!=','department_manager')]}" groups="bsg_hr.group_department_manager"/>-->
+
+<!--                        <field name="manager_login_check" invisible="1"></field>-->
+<!--                        <button name="dept_manager_approve" string="Approve" class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','department_manager')]}" groups="bsg_hr.group_department_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" context="{'btn_clicked':'refused'}" type="action" attrs="{'invisible':[('state','!=','department_manager')]}" groups="bsg_hr.group_department_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" attrs="{'invisible':[('state','!=','department_manager')]}" groups="bsg_hr.group_department_manager"/>-->
+
+<!--                        <button name="tech_aupport_approve" string="Approve" groups="bsg_fleet_operations.group_driver_assign,bsg_fleet_operations.group_driver_unassign" class="oe_highlight" type="object" attrs="{'invisible':[('state','!=','technical_support')]}"/>-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" groups="bsg_fleet_operations.group_driver_assign,bsg_fleet_operations.group_driver_unassign" class="oe_highlight" context="{'btn_clicked':'refused'}" type="action" attrs="{'invisible':[('state','!=','technical_support')]}"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" groups="bsg_fleet_operations.group_driver_assign,bsg_fleet_operations.group_driver_unassign" class="oe_highlight" type="action" attrs="{'invisible':[('state','!=','technical_support')]}"/>-->
+
+
+<!--                        <button name="replacement_approve" string="Approve" class="oe_highlight" type="object" states="replacement_approval" />-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" context="{'btn_clicked':'refused'}" type="action" states="replacement_approval" />-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" states="replacement_approval" />-->
+
+
+
+<!--                        <button name="internal_audit_approve" string="Approve" class="oe_highlight" type="object" states="internal_auditor" groups="bsg_hr.group_internal_audit_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" type="action" states="internal_auditor" groups="bsg_hr.group_internal_audit_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" states="internal_auditor" groups="bsg_hr.group_internal_audit_manager"/>-->
+
+
+
+<!--                        <button name="finance_manager" string="Approve" class="oe_highlight" type="object" states="finance_manager" groups="bsg_hr.group_finance_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="finance_manager" type="action" states="finance_manager" groups="bsg_hr.group_finance_manager"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="finance_manager" type="action" states="finance_manager" groups="bsg_hr.group_finance_manager"/>-->
+
+
+
+<!--                        <button name="hr_salary_accountant" string="Approve" class="oe_highlight" type="object" states="hr_salary_accountant" groups="effective_date_notes.effective_reporting_hr_salary_group"/>-->
+<!--                        <button name="%(hr_clearence.clearance_refusal_reason_action)d" string="Refuse" class="oe_highlight" type="action" states="hr_salary_accountant" groups="effective_date_notes.effective_reporting_hr_salary_group"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" states="hr_salary_accountant" groups="effective_date_notes.effective_reporting_hr_salary_group"/>-->
+
+
+
+<!--                        <button name="draft" string="RE-Draft" class="oe_highlight" type="object" states="cancel" groups="hr.group_hr_manager" confirm="Are you sure to Rest To Draft This Record?"/>-->
+<!--                        <button name="%(hr_clearence.clearance_cancel_reason_action)d" string="Cancel" class="oe_highlight" type="action" states="done"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box">
+                            <button name="action_get_custody" class="oe_stat_button" icon="fa-desktop" type="object" attrs="{'invisible': [('custody_count', '=', 0)]}">
+                            <field name="custody_count" widget="statinfo" string="Custodies"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="from_hr_department" groups="hr.groups_hr_manager,bsg_hr.group_department_manager" string="Another Employee" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="employee_id" groups="hr.groups_hr_manager,bsg_hr.group_department_manager"  string="Employee Name" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':['|',('state','!=','draft'),('from_hr_department','!=',True)],'required':[('from_hr_department','=',True)]}"/>
+                                <field name="date" string="Date Request" required="1"/>
+                                <field name="date_deliver_work" string="Delivering Work Date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group name="employee_info">
+                                <field name="department_id" options="{'no_create': True, 'no_open': True}" string="Department" readonly="1"/>
+                                <field name="job_id" options="{'no_create': True, 'no_open': True}" string="Job Title" readonly="1"/>
+                               <field name="clearance_type" string="Clearance Type" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="decision_number" attrs="{'invisible':[('clearance_type','!=','transfer')]}" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="termination_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':[('clearance_type','!=','final')],'required':[('clearance_type','=','final')]}" domain="[('have_termination','=',False)]"/>
+
+                            </group>
+                             <group attrs="{'invisible':[('clearance_type','!=','vacation')]}">
+                                <field name="leave_request_id" options="{'no_create': True, 'no_open': True}" string="Leave Request" attrs="{'required':[('clearance_type','=','vacation')],'readonly':[('state','!=','draft')]}" groups="hr.groups_hr_manager,bsg_hr.group_department_manager" domain="[('employee_id','=',employee_id),('state','!=','draft'),('have_clearance','=',False)]"/>
+                                <field name="start_of_vacation" string="Start of Vacation" readonly="1"/>
+                                <field name="end_of_vacation" string="End of vacation" readonly="1"/>
+                             </group>
+                        </group>
+                        <group>
+                        </group>
+                        <group>
+                            <field name="work_delivered" string="Reason Of Clearance" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <group>
+                                <separator string="Approval Clearance Bank" attrs="{'invisible':[('clearance_type','!=','final')]}"/>
+                                <br/>
+                                <field name="bank_attachment_id" string="Bank Attach" widget="many2many_binary" class="oe_inline" attrs="{'readonly':[('state','not in',('draft','finance_manager'))],'required':[('clearance_type','=','final')],'invisible':[('clearance_type','!=','final')]}"/>
+                                <field name="bank_comments" string="Bank Reasons" attrs="{'readonly':[('state','not in',('draft','hr_salary_accountant'))],'required':[('clearance_type','=','final')],'invisible':[('clearance_type','!=','final')]}"/>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                        <!--Discuss widgets for history and communication -->
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Custody Request tree view -->
+        <record id="hr_clearance_tree_view" model="ir.ui.view">
+            <field name="name">hr.clearance.tree.view</field>
+            <field name="model">hr.clearance</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="state == 'refuse'" decoration-info="state == 'draft'" string="Employee Clearance">
+                    <field name="employee_id" string="Employee Name"/>
+                    <field name="department_id" string="Department"/>
+                    <field name="job_id" string="Job Title"/>
+                    <field name="clearance_type" string="Clearance Type" required="1"/>
+                    <field name="state" string="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Custody Request Action -->
+        <record id="hr_clearance_action" model="ir.actions.act_window">
+            <field name="name">Employee Clearance Form</field>
+            <field name="res_model">hr.clearance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="hr_my_clearance_action" model="ir.actions.act_window">
+            <field name="name">Employee Clearance Form</field>
+            <field name="res_model">hr.clearance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'create' : False}</field>
+        </record>
+
+        <!-- Custodies Main Menu -->
+<!--        <menuitem id="hr_clearance_main_menu"-->
+<!--                  name="HR Clearance"-->
+<!--                  sequence="7"-->
+<!--                  parent="bsg_hr.menu_hr_employees"-->
+<!--                  />-->
+        <menuitem id="employee_clearance_form_emp_service_menu"
+                  name="Employee Clearance Form"
+                  sequence="7"
+                  parent="employee_service.employee_service_main_menu"
+                  action="hr_my_clearance_action"
+                  />
+        <menuitem id="employee_clearance_form_menu"
+                  name="Employee Clearance Form"
+                  sequence="8"
+                  parent="bsg_hr.menu_hr_employees"
+                  action="hr_clearance_action"
+                  />
+
+
+    </data>
+</odoo>

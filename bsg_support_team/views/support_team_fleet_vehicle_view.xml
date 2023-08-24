@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+
+
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="view_support_team_fleet_vehicle_change_branch_form">
+        <field name="name">support_team_fleet_vehicle_change_branch.form</field>
+        <field name="model">support_team_fleet_vehicle_change_branch</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form delete="false" >
+                <header>
+                  <button name="cahnge_branch" string="Confirm" type="object" class="btn-primary" states="draft"/>
+                  <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>
+                    <group>
+                       <field name="current_branch_id" attrs="{'readonly': [('state', 'in', ['draft','confirmed'])]}"/>
+                       <field name="new_branch_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </group>                    
+                  </group>
+                </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+                </div>                
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_support_team_fleet_vehicle_change_branch_tree">
+        <field name="name">support_team_fleet_vehicle_change_branch.tree</field>
+        <field name="model">support_team_fleet_vehicle_change_branch</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+              <field name="current_branch_id"/>
+              <field name="new_branch_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_support_team_fleet_vehicle_change_branch">
+        <field name="name">Fleet Vehicle Change Branch</field>
+        <field name="res_model">support_team_fleet_vehicle_change_branch</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+   
+    <!-- <menuitem name="Support Team" 
+      id="root_menu_support_team"
+      web_icon="bsg_support_team,static/img/support.png"
+      groups="bsg_support_team.group_change_truck_current_branch"
+      sequence="1"
+      />
+   
+    <menuitem name="Fleet Vehicle Change Branch"
+              id="root_menu_support_team_fleet_vehicle_change_branch"
+              parent="root_menu_support_team"
+              action="action_support_team_fleet_vehicle_change_branch"
+              groups="bsg_support_team.group_fleet_vehicle_change_branch"
+              sequence="1"
+    /> -->
+  </data>
+</odoo>

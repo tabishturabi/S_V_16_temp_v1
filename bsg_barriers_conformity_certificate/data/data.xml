@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="0">
+        <record id="saso_settings_data" model="saso_settings">
+        </record>
+    </data>
+</odoo>

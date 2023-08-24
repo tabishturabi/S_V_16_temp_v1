@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record id="groups_items_gatepass" model="res.groups">
+              <field name="name">Items Gatepass Group</field>
+              <field name="comment">The user will have access to Items Gatepass menu.</field>
+<!--              <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>-->
+          </record>
+
+          <record id="groups_gatepass_op_manager" model="res.groups">
+              <field name="name">Gatepass OP Manager Group</field>
+              <field name="comment">The user will have access to op manager approval records.</field>
+<!--              <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>-->
+          </record>
+    </data>
+</odoo>

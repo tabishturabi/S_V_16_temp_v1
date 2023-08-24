@@ -1,0 +1,120 @@
+<odoo>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="hr_attendance_reports/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>
+                    <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> - <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="employee_permission_report">
+        <t t-call="web.html_container">
+            <t t-call="hr_attendance_reports.external_layout_standard">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div>
+                            <div class="oe_structure"/>
+                            <h1 align="left"> Shift Exception </h1>
+                            <div align="right">
+                                <h3> From   <span t-esc="dates[0]"/> To  <span t-esc="dates[1]"/></h3>
+                            </div>
+                            <div>
+                            </div>
+                            <table style="border:1px solid black;" class="table table-condensed" dir="rtl">
+                                <thead>
+                                    <tr width="100%">
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Employee ID</th>
+                                        <th width="20%" style="border:1px solid black;" class="text-center">Employee Name</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Type</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Duration</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Date</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">From</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">To</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Permission Period</th>
+                                        <th width="8%" style="border:1px solid black;" class="text-center">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <t t-foreach="permissions" t-as="permission_list">
+                                        <tr style="border:1px solid black;">
+                                            <td> <t t-esc="permission_list[0]"/> </td>
+                                        </tr>
+                                        <t t-set="duration_total" t-value="0" />
+                                        <t t-set="from_total" t-value="0" />
+                                        <t t-set="to_total" t-value="0" />
+
+                                        <t t-foreach="permission_list[1]" t-as="permission">
+                                            <tr width="100%">
+                                                <td width="10%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.employee_id.employee_code"/>
+                                                </td>
+                                                <td width="40%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.employee_id.name"/>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.permission_type_id.name"/>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <t t-if="permission.duration">
+                                                        <t t-set="duration_total" t-value="duration_total + permission.duration" />
+                                                        <span t-field="permission.duration"/>
+                                                    </t>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <t t-if="permission.request_date">
+                                                        <span t-field="permission.request_date"/>
+                                                    </t>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.hour_from"/>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.hour_to"/>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.permission_period"/>
+                                                </td>
+                                                <td width="8%" style="border:1px solid black;" class="text-center">
+                                                    <span t-field="permission.name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr style="border:1px solid black;">
+                                            <td style="border:1px solid black;"> <t t-esc="'Total'"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="' '"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="' '"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="duration_total"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="''"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="from_total"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="to_total"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="' '"/> </td>
+                                            <td style="border:1px solid black;"> <t t-esc="' '"/> </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="oe_structure"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

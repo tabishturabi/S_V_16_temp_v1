@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demurrage_charges_config_1" model="demurrage_charges_config">
+        <field name="starting_day_no">1</field>
+        <field name="ending_day_no">3</field>
+        <field name="chares">0</field>
+    </record>
+    <record id="demurrage_charges_config_2" model="demurrage_charges_config">
+        <field name="starting_day_no">3</field>
+        <field name="ending_day_no">15</field>
+        <field name="chares">15</field>
+    </record>
+    <record id="demurrage_charges_config_3" model="demurrage_charges_config">
+        <field name="starting_day_no">20</field>
+        <field name="ending_day_no">20</field>
+        <field name="chares">20</field>
+    </record>
+</odoo>

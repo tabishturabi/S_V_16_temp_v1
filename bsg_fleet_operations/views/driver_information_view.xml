@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- form view -->
+        <record model="ir.ui.view" id="view_driver_information_form">
+            <field name="name">driver.information.form</field>
+            <field name="model">driver.information</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Driver Information">
+                        <group>
+                            <group>
+                                <field name="employee_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="mobile"/>
+                                <field name="taq_number" force_save="1"/>
+                                <field name="card_no"/>
+                            </group>
+                            <group>
+                                <field name="trailer_id" force_save="1"/>
+                                <field name="card_expire_date" class="with_hijri"/>
+                                 <field name="left_days"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Tree view   -->
+        <record model="ir.ui.view" id="view_driver_information_tree">
+            <field name="name">driver.information.tree</field>
+            <field name="model">driver.information</field>
+            <field name="arch" type="xml">
+                <tree string="Driver Assignment">
+                    <field name="employee_id"/>
+                    <field name="mobile"/>
+                    <field name="taq_number"/>
+                    <field name="trailer_id"/>
+                    <field name="card_expire_date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Serach view  -->
+	    <record id="view_driver_information_search" model="ir.ui.view">
+	            <field name="name">driver.information.search</field>
+	            <field name="model">driver.information</field>
+	            <field name="arch" type="xml">
+	                <search string="Driver Information">
+	                    <field name="employee_id"/>
+	                    <field name="mobile"/>
+	                    <field name="taq_number"/>
+	                    <field name="trailer_id"/>
+	                    <field name="card_expire_date"/>
+	                </search>
+	            </field>
+	    </record>
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="bsg_driver_information_action">
+            <field name="name">Driver Information</field>
+            <field name="res_model">driver.information</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Driver Information" id="driver_info_menu"
+                  parent="bsg_fleet_operations.root_driver_master"
+                  sequence="3"
+                  action="bsg_driver_information_action"
+                  groups="bsg_fleet_operations.group_driver_assign,bsg_fleet_operations.group_driver_unassign"
+        />
+    </data>
+</odoo>

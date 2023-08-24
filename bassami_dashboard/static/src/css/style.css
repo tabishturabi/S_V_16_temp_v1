@@ -1,0 +1,229 @@
+.all_sections {
+	width: 100%;
+	background-image: url();
+    background-position: top center;
+    background-size: 100%;
+    background-repeat: repeat;
+}
+
+.section {
+	width: 1220px;
+	float: left;
+	margin: 10px 1%;
+	border: 1px solid #CCC;
+	position: relative;
+	background: #CCC;
+	height: 108px;
+}
+
+.o_stat_value {
+	font-size: 23px;
+}
+
+.section h1 {
+	border-bottom: 1px solid #EEE;
+	margin: 0px 0px 10px;
+	text-align: center;
+	padding: 10px 0px;
+	background: green;
+}
+.section button {
+	width: 100%;
+	margin: 0px;
+	border-radius: 0px;
+	font-weight: normal;
+	padding: 0px;
+	outline: none;
+	background: no-repeat;
+}
+
+/*.texture,
+.buttoned {
+	display: inline-block;
+	background: none !important;
+	margin: 0px;
+	font-size: 25px;
+    margin-right: 63px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.texture1,
+.buttoned {
+	display: inline-block;
+	background: none !important;
+	margin: 0px;
+	font-size: 25px;
+    margin-right: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.texture2,
+.buttoned {
+	display: inline-block;
+	background: none !important;
+	margin: 0px;
+	font-size: 25px;
+    margin-right: 18px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.texture3,
+.buttoned {
+	display: inline-block;
+	background: none !important;
+	margin: 0px;
+	font-size: 25px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.texture4{
+
+	margin-right: 95px;
+
+}
+
+.texture4,
+.buttoned {
+	display: inline-block;
+	background: none !important;
+	font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+.contains {
+	padding: 5px 0px 0px 10px;
+}
+
+
+.section h1 {
+	border-bottom: 1px solid #EEE;
+	margin: 0px 0px 10px;
+	text-align: center;
+	padding: 10px 0px;
+	background: green;
+}
+.section button {
+	width: 100%;
+	margin: 0px;
+	border-radius: 0px;
+	font-weight: normal;
+	padding: 0px;
+	outline: none;
+	background: no-repeat;
+}
+.clearfloat {
+	width: 1px;
+	height: 1px;
+	display: block;
+	clear: both;
+	float: none;
+}
+.totaler {
+	width: 100%;
+	height: 40px;
+	margin: 0px;
+}
+.o_stat_value {
+	font-size: 13px;
+}
+.green {
+	border: 1px solid black;
+}
+.green .contains,
+.green h1 {
+	color: black;
+}
+.green .totaler {
+	color: #FFF;
+	background: black;
+}
+.red {
+	border: 1px solid black;
+
+}
+.red .contains,
+.red h1 {
+	color: black;
+}
+.red .totaler {
+	color: #FFF;
+	background: black;
+}
+.yellow {
+	border: 1px solid black;
+
+}
+.yellow .o_stat_info,
+.yellow .texture,
+.yellow h1 {
+	color: black;
+}
+.yellow .o_stat_info,
+.yellow .texture1,
+.yellow h1 {
+	color: green;
+}
+.yellow .o_stat_info,
+.yellow .texture2,
+.yellow h1 {
+	color: green;
+}
+.yellow .o_stat_info,
+.yellow .texture3,
+.yellow h1 {
+	color: green;
+}
+.yellow .o_stat_info,
+.yellow .texture4,
+.yellow h1 {
+	color: green;
+}
+.yellow .totaler {
+	color: #FFF;
+	background: green;
+}
+.purple {
+	border: 1px solid green;
+
+}
+.purple .o_stat_info,
+.purple .texture,
+.purple h1 {
+	color: green;
+}
+.purple .o_stat_info,
+.purple .texture1,
+.purple h1 {
+	color: green;
+}
+.purple .o_stat_info,
+.purple .texture2,
+.purple h1 {
+	color: green;
+}
+.purple .o_stat_info,
+.purple .texture3,
+.purple h1 {
+	color: green;
+}
+.purple .o_stat_info,
+.purple .texture4,
+.purple h1 {
+	color: green;
+}
+.purple .totaler {
+	color: #FFF;
+	background: green;
+}*/
+
+
+
+/*.o_button_icon,
+.o_stat_text {
+	display: none;
+}*/

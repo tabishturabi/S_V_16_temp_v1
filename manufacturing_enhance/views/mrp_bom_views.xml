@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="bsg_mrp_bom_form_view" model="ir.ui.view">-->
+<!--            <field name="name">mrp.bom.form</field>-->
+<!--            <field name="model">bsg.mrp.bom</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Bill of Material">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="product_tmpl_id" context="{'default_type': 'product'}"/>-->
+<!--                            <field name="product_id" groups="product.group_product_variant"-->
+<!--                                   context="{'default_type': 'product'}"/>-->
+<!--                            <label for="product_qty" string="Quantity"/>-->
+<!--                            <div class="o_row">-->
+<!--                                <field name="product_qty"/>-->
+<!--                                <field name="product_uom_id" options="{'no_open':True,'no_create':True}"-->
+<!--                                       groups="uom.group_uom"/>-->
+<!--                            </div>-->
+<!--                            <field name="routing_id" groups="mrp.group_mrp_routings"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="code"/>-->
+<!--                            <field name="type" widget="radio"/>-->
+<!--                            <p colspan="2" class="oe_grey oe_edit_only" attrs="{'invisible': [('type','=','normal')]}">-->
+<!--                                <ul>-->
+<!--                                    <li>-->
+<!--                                        If the product is a finished product: When processing a sales-->
+<!--                                        order for this product, the delivery order will contain the raw-->
+<!--                                        materials, instead of the finished product.-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        If the product is a semi-finished product: When processing a-->
+<!--                                        manufacturing order that contains that product as component,-->
+<!--                                        the raw materials of that product will be added to the-->
+<!--                                        manufacturing order of the final product.-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </p>-->
+<!--                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>-->
+<!--                        </group>-->
+<!--                        <notebook>-->
+<!--                            <page string="Components">-->
+<!--                                <field name="bom_line_ids" widget="one2many_list">-->
+<!--                                    <tree string="Components" editable="bottom">-->
+<!--                                        <field name="sequence" widget="handle"/>-->
+<!--                                        <field name="product_id" context="{'default_type': 'product'}"/>-->
+<!--&lt;!&ndash;                                        <field name="has_attachments" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <button name="action_see_attachments" type="object" icon="fa-files-o"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                attrs="{'invisible': [('has_attachments', '=', True)]}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                aria-label="No attachment" title="No attachment"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <button name="action_see_attachments" type="object" icon="fa-file"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                attrs="{'invisible': [('has_attachments', '=', False)]}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                aria-label="Attachments" title="Attachments"/>&ndash;&gt;-->
+<!--                                        <field name="product_qty"/>-->
+<!--&lt;!&ndash;                                        <field name="parent_product_tmpl_id" invisible="1"/>&ndash;&gt;-->
+<!--                                        <field name="product_uom_id" options="{'no_open':True,'no_create':True}"-->
+<!--                                               groups="uom.group_uom"/>-->
+<!--&lt;!&ndash;                                        <field name="attribute_value_ids" widget="many2many_tags"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               options="{'no_create': True}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               attrs="{'column_invisible': [('parent.product_id', '!=', False)]}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               groups="product.group_product_variant"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="operation_id" groups="mrp.group_mrp_routings"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               domain="[('routing_id', '=', parent.routing_id)]"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               options="{'no_quick_create':True,'no_create_edit':True}"/>&ndash;&gt;-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                            <page string="Miscellaneous">-->
+<!--                                <group>-->
+<!--                                    <group>-->
+<!--                                        <field name="sequence"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--&lt;!&ndash;                                        <field name="ready_to_produce" string="Manufacturing Readiness"/>&ndash;&gt;-->
+<!--                                        <field name="picking_type_id" string="Operation"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+
+<!--                    </sheet>-->
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" colspan="4" widget="mail_thread" nolabel="1"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="bsg_mrp_bom_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">bsg.mrp.bom.tree</field>-->
+<!--            <field name="model">bsg.mrp.bom</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Bill of Materials" default_order="product_tmpl_id">-->
+<!--                    <field name="active" invisible="1"/>-->
+<!--                    <field name="sequence" invisible="1"/>-->
+<!--                    <field name="product_tmpl_id"/>-->
+<!--                    <field name="code"/>-->
+<!--                    <field name="product_id" groups="product.group_product_variant"/>-->
+<!--                    <field name="product_qty"/>-->
+<!--                    <field name="product_uom_id" groups="uom.group_uom"/>-->
+<!--                    <field name="routing_id" groups="mrp.group_mrp_routings"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="bsg_mrp_bom_form_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Bills of Materials</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">bsg.mrp.bom</field>-->
+<!--            <field name="domain">[]</field> &lt;!&ndash; force empty &ndash;&gt;-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create a bill of materials-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Bills of materials allow you to define the list of required raw-->
+<!--                    materials used to make a finished product; through a manufacturing-->
+<!--                    order or a pack of products.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <menuitem id="menu_mrp_bom_form_action"-->
+<!--                  action="bsg_mrp_bom_form_action"-->
+<!--                  parent="manufacturing_enhance.menu_bsg_mrp_root"-->
+<!--                  sequence="3"/>-->
+    </data>
+</odoo>

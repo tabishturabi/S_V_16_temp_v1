@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+    <!-- change state for so line -->
+    <record id="view_bsg_vehicle_cargo_sale_line_form_custom_support" model="ir.ui.view">
+          <field name="name">bsg_vehicle_cargo_sale_line.from</field>
+          <field name="model">bsg_vehicle_cargo_sale_line</field>
+          <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+          <field name="arch" type="xml">
+           <button name="print_delivery_report_done_sate" position="after">
+              <button style="color:green;" name="change_state" type="object" class="btn-primary" groups="bsg_support_team.group_cahnge_so_line_state"  confirm="Are you sure you to Change State..?" string="Change State"/>
+              <button style="color:green;" name="update_so_line_related_fields" type="object" class="btn-primary" groups="bsg_support_team.group_cahnge_so_line_state"  confirm="Are you sure you to Update Line..?" string="Update Line"/>
+            </button>
+            <field name="non_saudi_plate_no" position="replace">
+              <field name="is_support_team" />
+              <field name="non_saudi_plate_no" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </field>
+            <xpath expr="//field[@name='plate_no']" position="replace">
+                  <field name="plate_no"  class="o_address_zip" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='palte_second']" position="replace">
+                  <field name="palte_second" class="oe_inline" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='palte_third']" position="replace">
+                  <field name="palte_third" class="oe_inline" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='palte_one']" position="replace">
+              <field name="palte_one" class="oe_inline" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </xpath>
+            <field name="chassis_no" position="replace">
+              <field name="chassis_no" string="Chasis No" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}"/>
+            </field>
+            <field name="car_model" position="replace">
+               <field name="car_model"  string="Model" required="1" attrs="{'readonly': [('state', 'not in',['draft'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+            </field>
+            <field name="car_color" position="replace">
+              <field name="car_color" string="Color" attrs="{'readonly': [('is_support_team', '=', False),('state', 'not in',['draft','registered','confirm'])]}" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+            </field>
+          </field>
+    </record>
+  </data>
+</odoo>

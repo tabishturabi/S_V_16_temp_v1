@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+<!-- banks form view-->
+      <record model="ir.ui.view" id="view_banks_form">
+        <field name="name">hr.banks.form</field>
+        <field name="model">hr.banks</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Employee Banks" >
+                <sheet>
+                    <group>
+                    	<field name="bsg_employee_id"/>
+                        <field name="bsg_acc_number"/>
+                        <field name="bsg_swift_code_id"/>
+                        <field name="bsg_bank_name"/>
+                        <field name="bsg_title"/>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="activity_ids" widget="mail_activity"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_banks_tree">
+        <field name="name">hr.banks.tree</field>
+        <field name="model">hr.banks</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="bsg_employee_id"/>
+                <field name="bsg_acc_number"/>
+                <field name="bsg_swift_code_id"/>
+                <field name="bsg_bank_name"/>
+                <field name="bsg_title"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsg_emp_banks_action">
+        <field name="name">Employee Banks</field>
+        <field name="res_model">hr.banks</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Employee Banks"
+      id="hr_emp_banks_menu"
+      parent="bsg_hr.hr_iqama_menu"
+      action="bsg_emp_banks_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

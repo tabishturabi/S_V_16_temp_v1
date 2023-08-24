@@ -1,0 +1,82 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="monthly_variable_report_wizard_form">
+      <field name="name">monthly.variable.report.wizard.form</field>
+      <field name="model">monthly.variable.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+<!--                <field name="start_date_condition_by"/>-->
+              </group>
+              <group>
+                <field name="period_grouping_by" attrs="{'invisible':[('grouping_by','!=','by_payslip_periods')]}"/>
+              </group>
+            </group>
+             <group>
+              <group>
+                <field name="start_date_condition"   />
+                <field name="slip_start_date_condition"   />
+                <label string="Period" for="month" />
+                 <div>
+                   <field name="period_month" class="oe_inline"/>
+                   <field name="period_year" style="margin-left: 0px;" class="oe_inline" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                 </div>
+              </group>
+              <group>
+                <field name="date_from"  attrs="{'invisible':[('start_date_condition','!=','is_between')],'required':[('start_date_condition','=','is_between')]}" />
+                <field name="date_to"  attrs="{'invisible':[('start_date_condition','!=','is_between')],'required':[('start_date_condition','=','is_between')]}" />
+                <field name="start_date"  attrs="{'invisible':[('start_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('start_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+                <field name="slip_date_from"  attrs="{'invisible':[('slip_start_date_condition','!=','is_between')],'required':[('slip_start_date_condition','=','is_between')]}" />
+                <field name="slip_date_to"  attrs="{'invisible':[('slip_start_date_condition','!=','is_between')],'required':[('slip_start_date_condition','=','is_between')]}" />
+                <field name="slip_start_date"  attrs="{'invisible':[('slip_start_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('slip_start_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="payslip_batch_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="employee_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="branch_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}' />
+                <field name="country_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="salary_structure_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="from_payslip_ref"/>
+                <field name="rule_category_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+              </group>
+              <group>
+                <field name="department_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="job_position_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}' />
+<!--                <field name="employee_status"/>-->
+                <field name="employee_state_id"  options="{'no_create':True,'no_edit':True}"/>
+                <field name="salary_payment_method"></field>
+                <field name="company_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                <field name="to_payslip_ref"></field>
+                <field name="rule_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}' />
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="monthly_variable_report_action">
+      <field name="name">Payslip Monthly Variable Report</field>
+      <field name="res_model">monthly.variable.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="monthly_variable_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Payslip Monthly Variable Reports"
+             id="menu_payslip_monthly_variable_reports"
+             parent="bsg_hr_payroll.hr_payroll_reports_menu"
+             sequence="3"
+             groups="bsg_payslip_variable_report.groups_payslip_monthly_variable_reports"
+             action="monthly_variable_report_action"/>
+  </data>
+</odoo>

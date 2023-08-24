@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="purchase_req_report_pdf_id"
+            model="purchase.req.report.wizard"
+            string="Purchase Request Report"
+            report_type="qweb-html"
+            name="bsg_purchase_req_report.pr_report_pdf"
+            file="bsg_purchase_req_report.pr_report_pdf"/>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="bsg_purchase_req_report/static/src/img/logo.png" style="max-height: 145px;width:1200px"
+                         alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="docs.print_date" class="list-inline-item">Print Date:
+                        <span t-field="docs.print_date"/>
+                    </li>
+                    <li t-if="docs.env.user.id" class="list-inline-item">Print By:
+                        <span t-field="docs.env.user.name"/>
+                    </li>
+                </ul>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page:
+                    <span class="page"/>
+                    -
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="pr_report_pdf">
+        <t t-call="web.html_container">
+            <t t-call="bsg_purchase_req_report.external_layout_standard">
+                <div class="page">
+                    <style type="text/css">
+                        .clearfloat {
+                        clear: both;
+                        float: none;
+                        width: 100%;
+                        height: 1px;
+                        display: block;
+                        }
+                        .report-wrapper {
+                        width: 1000px;
+                        margin: 0px auto;
+                        }
+
+                        table {
+                        width: 100%;
+                        border-spacing: 0px;
+                        border: 2px solid #CCC;
+                        }
+
+                        table tr td, table tr th {
+                        text-align: center;
+                        padding: 1px 1px 1px 1px;
+                        font-size: 12px;
+                        border-right: 2px solid #CCC;
+                        border-bottom: 1px solid #eee;
+                        }
+
+                        table tr td:last-child,
+                        table tr th:last-child {
+                        border-right: none
+                        }
+
+
+                        table tr th {
+                        text-align: center;
+                        }
+                        .report-header {
+                        width: 100%;
+                        margin: 0px 0px -20px;
+                        text-align: left;
+                        }
+                        .report-header p {
+                        width: 50%;
+                        float: left;
+                        margin: 0px 0px 20px;
+                        }
+                        .report-header p .solid {
+                        font-weight: bold;
+                        }
+                        h2 {
+                        text-align: center;
+                        font-size: 35px;
+                        text-decoration: underline;
+                        }
+                        .tile {
+                        display: inline-block;
+                        width: 100px;
+                        text-align: center;
+                        background: #a64f8e;
+                        color: #fff;
+                        padding: 2px 5px;
+                        }
+
+                        .big {
+                        width: 100%;
+                        float : left;
+                        font-size: 12px;
+                        margin-bottom: 5px;
+                        }
+
+
+                        .box {
+                        width: 50%;
+                        border: 1px solid #000;
+                        float: left;
+                        margin-top: 15px;
+
+                        }
+
+                        .box1 {
+                        width: 50%;
+                        border: 1px solid #000;
+                        float: left;
+                        margin-top: 15px;
+
+                        }
+
+                        .supp {
+
+                        width: 100%;
+                        float: left;
+                        margin: 5px;
+                        }
+
+                        .solidsupp1 {
+                        width: 28%;
+                        float: left;
+                        font-weight: bold;
+                        }
+
+                        .liquidsupp {
+                        width: 40%;
+                        float: left;
+
+                        }
+
+                        .solidsupp2 {
+                        width: 28%;
+                        float: right;
+                        font-weight: bold;
+
+                        }
+
+                        .add {
+                        width: 100%;
+                        float: left;
+                        margin: 5px;
+                        }
+
+                        .solidadd1 {
+                        width: 28%;
+                        float: left;
+                        font-weight: bold;
+                        }
+
+                        .solidadd2 {
+                        width: 28%;
+                        float: right;
+                        font-weight: bold;
+                        }
+
+                        .liquidadd {
+                        width: 40%;
+                        float: left;
+
+                        }
+
+                        .tele {
+                        width: 100%;
+                        float: left;
+                        margin: 5px;
+                        }
+
+                        .solidtele1 {
+                        width: 28%;
+                        float: left;
+                        font-weight: bold;
+                        }
+
+                        .solidtele2 {
+                        width: 28%;
+                        float: right;
+                        font-weight: bold;
+                        }
+
+                        .liquidtele {
+                        width: 40%;
+                        float: left;
+
+                        }
+
+                        .ntn {
+                        width: 100%;
+                        float: left;
+                        margin: 5px;
+                        }
+
+                        .solidntn1 {
+                        width: 28%;
+                        float: left;
+                        font-weight: bold;
+                        }
+
+                        .solidntn2 {
+                        width: 28%;
+                        float: right;
+                        font-weight: bold;
+                        }
+
+                        .liquidntn {
+                        width: 40%;
+                        float: left;
+
+                        }
+
+                        .term {
+                        width: 100;
+                        float: left;
+                        margin-top: 30px;
+                        }
+
+                        .term .solid {
+                        width: 15%;
+                        float: left;
+                        font-weight: bold;
+                        }
+
+                        .term .liquid {
+                        width: 85%;
+                        float: left;
+                        }
+
+
+                        .header {
+                        display : none !importnat;
+                        }
+                        .footer {
+                        display : none !importnat;
+                        }
+
+                    </style>
+                    <table>
+                        <tr>
+                            <th colspan="5" style="background: #CCC;">
+                                <span style="text-align: center;font-size:25px">Purchase Request Report تقرير طلبات
+                                    الشراء
+                                </span>
+                            </th>
+                        </tr>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tr>
+                            <td>
+                                <strong>PR Filter By</strong>
+                            </td>
+                            <td>
+                                Tabish
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Company</strong>
+                            </td>
+                            <td>
+                                XYZ
+                            </td>
+                            <td>
+                                <strong>Start Date</strong>
+                            </td>
+                            <td>
+                                12345
+                            </td>
+                            <td>
+                                <strong>End Date</strong>
+                            </td>
+                            <td>
+                                3242352354234
+                            </td>
+                        </tr>
+                    </table>
+                    <t t-if="filter_by == 'group_by_product'">
+                        <table>
+                            <tr>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['product_id']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_returned']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+                    <t t-if="filter_by == 'group_by_category'">
+                        <table>
+                            <tr>
+                                <th>Product Category</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['product_categ']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_returned']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+
+                    <t t-if="filter_by in ('all','done_pr','open_pr')">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['pr_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['date_pr_line']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pc_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['product_id']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['department_display_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['branch_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['request_type']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['fleet_num']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_state']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+                    <t t-if="filter_by == 'pr_has_rfq_not_po'">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>PO Price</th>
+                                <th>Invoice Price</th>
+                                <th>Vendors</th>
+                                <th>ISS Qty</th>
+                                <th>Returned Qty</th>
+                                <th>Net Received Qty</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['pr_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['date_pr_line']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pc_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['product_id']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['department_display_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['branch_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['request_type']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['fleet_num']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_state']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_po_price']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_invoice_price']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+                    <t t-if="filter_by == 'pr_has_po'">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                        </table>
+
+                    </t>
+                    <t t-if="filter_by == 'pr_done_by_store_dept'">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['pr_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['date_pr_line']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pc_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['product_id']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['department_display_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['branch_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['request_type']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['fleet_num']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_state']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+                    <t t-if="filter_by == 'pr_not_received_by_store'">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                        </table>
+                        <t t-foreach="data_dict_list" t-as="data">
+                            <tr>
+                                <td>
+                                    <span t-esc="data['pr_name']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['date_pr_line']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['pr_line_name']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['pc_name']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['product_id']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['qty_net_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['department_display_name']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['branch_name']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['request_type']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['fleet_num']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data['pr_line_state']"></span>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td>
+                                <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty_po']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty_received']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                            </td>
+                            <td>
+                                <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                            </td>
+                        </tr>
+
+                    </t>
+                    <t t-if="filter_by == 'pr_has_iss'">
+                        <table>
+                            <tr>
+                                <th>PR #</th>
+                                <th>PR Date</th>
+                                <th>Description</th>
+                                <th>Product Category</th>
+                                <th>Requested Product</th>
+                                <th>Requested</th>
+                                <th>Rfq</th>
+                                <th>PO</th>
+                                <th>Received</th>
+                                <th>ISS</th>
+                                <th>Returned</th>
+                                <th>Net Received</th>
+                                <th>Department</th>
+                                <th>Branch</th>
+                                <th>Request Type</th>
+                                <th>Fleet/Trailer</th>
+                                <th>State</th>
+                            </tr>
+                            <t t-foreach="data_dict_list" t-as="data">
+                                <tr>
+                                    <td>
+                                        <span t-esc="data['pr_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['date_pr_line']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pc_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['product_id']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_rfq']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_po']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['iss_qty']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['qty_net_received']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['department_display_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['branch_name']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['request_type']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['fleet_num']"></span>
+                                    </td>
+                                    <td>
+                                        <span t-esc="data['pr_line_state']"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;font-size: 14px;"></span>TOTAL
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_rfq']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_po']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_received']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_iss_qty']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_returned']"></span>
+                                </td>
+                                <td>
+                                    <span t-esc="data_dict_totals['total_qty_net_received']"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

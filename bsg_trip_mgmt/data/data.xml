@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <data noupdate="1">
+<!--           Migration Note-->
+<!--            <record id="res_config_cash_rounding_data" model="res.config.cash.rounding">-->
+<!--                <field name="sequnce_id"></field>-->
+<!--            </record>-->
+        </data>      
+    </data>
+</odoo>

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="sim_card_receipt_form_view" model="ir.ui.view">
+            <field name="name">sim_card_receipt_form_view</field>
+            <field name="model">sim.card.receipt</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <widget name="attach_document" string="ATTACH DOCUMENT" action="" highlight="1"/>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="action_send_mail" string="Send Email" type="object"
+                                class="oe_highlight oe_structure" attrs="{'invisible':[('state','!=','done')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book" type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group style="color:#0e620a;">
+                            <group>
+                                <field name="mble_no" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="employee_id" force_save="1"/>
+                                <field name="manager_id" force_save="1"/>
+                                <field name="company_id" force_save="1"/>
+                                <field name="mble_state" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="pkg_id" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="delivery_seq_id" force_save="1"/>
+                                <field name="branch_id" force_save="1"/>
+                                <field name="department_id" force_save="1"/>
+                                <field name="job_id" force_save="1"/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <field name="employee_code" force_save="1"/>
+                                <field name="bsg_empiqama" force_save="1" attrs="{'invisible':[('bsg_national_id','!=',False)]}"/>
+                                <field name="bsg_national_id" force_save="1" attrs="{'invisible':[('bsg_empiqama','!=',False)]}"/>
+                                <field name="receipt_id" invisible="1"/>
+                                <field name="date1" invisible="1"/>
+                                <field name="sim_type" invisible="1"/>
+                                <field name="is_cost" invisible="1"/>
+                                <field name="transaction_type" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_receipt_tree_view" model="ir.ui.view">
+            <field name="name">sim_card_receipt_tree_view</field>
+            <field name="model">sim.card.receipt</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="mble_no"/>
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mble_state"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_receipt_tree_vieww1" model="ir.ui.view">
+            <field name="name">sim_card_receipt_tree_view</field>
+            <field name="model">sim.card.receipt</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree create="false" import="false">
+                    <field name="mble_no"/>
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mble_state"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_view_action" model="ir.actions.act_window">
+            <field name="name">Employee Manager To Approve</field>
+            <field name="res_model">sim.card.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','submitted'),('manager_id.user_id','=',uid)]</field>
+        </record>
+
+        <record id="sim_card_Administrator_manger_action" model="ir.actions.act_window">
+            <field name="name">Administrator Manager</field>
+            <field name="res_model">sim.card.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','submitted')]</field>
+        </record>
+
+
+        <record id="sim_card_financial_view_action" model="ir.actions.act_window">
+            <field name="name">Finance Manager To Approve </field>
+            <field name="res_model">sim.card.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','approve')]</field>
+        </record>
+
+        <record id="sim_card_receipt_view_action" model="ir.actions.act_window">
+            <field name="name">Sim Card Receipt</field>
+            <field name="res_model">sim.card.receipt</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sim_card_request_main_menu_card" name="SIM Card" parent="sim_card_request_menu_root" sequence="2"/>
+        <menuitem id="sim_card_request_main_menu_card1" name="SIM Card Reporting"
+                  parent="sim_card_request_main_menu_card" sequence="1"/>
+        <menuitem id="sim_card_request_main_menu_card12" name="Employee Manager"
+                  parent="sim_card_request_main_menu_card1" sequence="1"/>
+        <menuitem id="sim_card_request_main_menu_Administrator_manger" name="Administrator Manager"
+                  parent="sim_card_request_main_menu_card1" sequence="2"/>
+        <menuitem id="sim_card_request_main_menu_card_financial" name="Financial Management"
+                  parent="sim_card_request_main_menu_card1" sequence="3"/>
+        <menuitem id="sim_card_main_menu" name="To Approve" action="sim_card_view_action"
+                  parent="sim_card_request_main_menu_card12" groups="sim_card.sim_card_employee_manger_user"/>
+        <menuitem id="sim_card_main_Administrator_menu" name="To Approve" action="sim_card_Administrator_manger_action"
+                  parent="sim_card_request_main_menu_Administrator_manger" groups="sim_card.sim_card_Administrator_manger_user"/>
+        <menuitem id="sim_card_main_menu_financial" name="To Approve" action="sim_card_financial_view_action"
+                  parent="sim_card_request_main_menu_card_financial" groups="sim_card.sim_card_finance_manger_user"/>
+        <menuitem id="sim_card_main_menu_receipt" name="Sim Card Receipts" action="sim_card_receipt_view_action"
+                  parent="sim_card_request_main_menu_card" sequence="2" groups="sim_card.sim_card_receipt_user"/>
+
+    </data>
+</openerp>

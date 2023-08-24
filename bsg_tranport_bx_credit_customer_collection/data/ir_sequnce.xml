@@ -1,0 +1,11 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Sequence for BX credit collection -->
+    <record id="ir_sequence_bx_credit_customer_collection" model="ir.sequence">
+        <field name="name">BX Credit Customer Collection</field>
+        <field name="code">bx.credit.customer.collection</field>
+        <field name="prefix">BXCC-</field>
+        <field name="padding">4</field>
+    </record>
+  </data>
+</odoo>

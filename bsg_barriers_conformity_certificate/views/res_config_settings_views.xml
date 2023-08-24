@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="saso_settings_form">
+          <field name="name">saso.settings.form</field>
+          <field name="model">saso_settings</field>
+          <field name="arch" type="xml">
+              <form string="Settings" class="oe_form_configuration">
+                  <header>
+                      <button string="Save" type="object" name="execute_settings" class="oe_highlight" />
+                      <button string="Discard" type="object" name="cancel" special="cancel" />
+                  </header>
+                  <div class="o_setting_container">
+                      <div class="settings">
+                          <div class="app_settings_block" data-string="SASO" string="SASO" data-key="bsg_barriers_conformity_certificate">
+                              <div class="row mt16 o_settings_container">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <div class="content-group">
+                                            <div class="row">
+                                                <label string="Manufacturer" for="manufacturer" class="col-lg-4 o_bold_label"/>
+                                                <field name="manufacturer"></field>
+                                            </div>
+                                            <div class="row">
+                                                <label string="Manufacturer Code" for="manufacturer_code" class="col-lg-4 o_bold_label"/>
+                                                <field name="manufacturer_code"></field>
+                                            </div>
+                                            <div class="row">
+                                                <label string="Payment Journals" for="bcc_journal_ids" class="col-lg-4 o_bold_label"/>
+                                                <field name="bcc_journal_ids" widget="many2many_tags"></field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </field>
+      </record>
+      <record model="ir.actions.act_window" id="saso_settings_action">
+          <field name="name">Saso Configuration</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">saso_settings</field>
+          <field name="view_mode">form</field>
+          <field name="target">inline</field>
+      </record>
+    <menuitem id="menu_saso_general_settings"
+        name="SASO Configuration"
+        parent="bsg_master_config.root_configuration_menu"
+        sequence="6"
+        action="saso_settings_action"
+    />
+</odoo>

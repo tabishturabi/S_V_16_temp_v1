@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="ext_view_bsg_fleet_vehicle_odometer_form_inherit">
+            <field name="name">ext_view_bsg_fleet_vehicle_odometer_form_inherit</field>
+            <field name="model">fleet.vehicle.odometer</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vehicle_id']" position="after">
+                    <field name="fleet_bx_trip_id" attrs="{'invisible':[('fleet_trip_id','!=',False)]}"
+                           domain="[('state','in', ['fuel_voucher', 'receive_pod', 'done']),('transportation_vehicle','=', vehicle_id)]"/>
+                    <field name="fleet_trip_id" attrs="{'invisible':[('fleet_bx_trip_id','!=',False)]}"
+                           domain="[('vehicle_id','=', vehicle_id)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_bsg_fleet_bx_vehicle_odometer_tree_inherit">
+            <field name="name">view_bsg_fleet_vehicle_odometer_tree_inherit</field>
+            <field name="model">fleet.vehicle.odometer</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fleet_trip_id']" position="after">
+                    <field name="fleet_bx_trip_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="ext_view_bsg_fleet_vehicle_form_inherit">
+            <field name="name">ext_view_bsg_fleet_vehicle_form_inherit</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='trip_id']" position="after">
+                    <field name="fleet_bx_trip_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

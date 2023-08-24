@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+<!-- banks form view-->
+      <record model="ir.ui.view" id="hr_employee_religion_form">
+        <field name="name">hr.employee.religion.form</field>
+        <field name="model">hr.employee.religion</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Employee Religion" >
+                <sheet>
+                    <group>
+                        <field name="religion_name"/>
+                        <field name="sequence"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="hr_employee_religion_tree">
+        <field name="name">hr.employee.religion.tree</field>
+        <field name="model">hr.employee.religion</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="religion_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_employee_religion_action">
+        <field name="name">Employee Religion</field>
+        <field name="res_model">hr.employee.religion</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Employees Religion"
+      id="hr_employee_religion_menu"
+      parent="bsg_hr.hr_iqama_menu"
+      action="hr_employee_religion_action"
+      sequence="20"
+      />
+
+  </data>
+</odoo>

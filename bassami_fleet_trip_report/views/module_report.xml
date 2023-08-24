@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="fleet_trip_report">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style type="text/css">
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                            }
+                            .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                font-size: 13px;
+                            }
+
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                            }
+                            table tr td, table tr th {
+                                text-align: center;
+                                padding: 5px 0px 0px 5px;
+                                border-right: 2px solid #CCC;
+                                border-bottom: 1px solid #eee;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                border-right: none
+                            }
+                            table tr:last-child td {
+                                border-bottom: none
+                            }
+                            table tr th {
+                                text-align: center;
+                            }
+                            .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                            }
+                            .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                            }
+                            .report-header p .solid {
+                                font-weight: bold;
+                            }
+                            h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline; 
+                            }
+                            .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                            }
+
+                            .header {
+                                display : none !importnat;
+                            }
+                            .footer {
+                                display : none !importnat;
+                            }
+
+                            tr { 
+                                page-break-inside: avoid !important;
+                            }
+
+                            td { 
+                                page-break-inside: avoid !important;
+                            }
+
+                        </style>
+
+                        <div class="report-wrapper">
+                            
+                            <div class="report-header">
+
+                                <h3>
+
+                                    <img style="width:260px;background: rgba(0,0,0,0.1);float:right;margin-right:30px" src="/bassami_fleet_trip_report/static/src/img/rightHeader.png"/>
+
+                                    <img style="width:240px;background: rgba(0,0,0,0.1);float:left;margin-left:30px" src="/bassami_fleet_trip_report/static/src/img/logod.png"/>
+
+                                    
+                                </h3>
+
+                                <br></br>
+
+                                <h2>
+                                    <span class="solid" style="text-align:  center;font-size:30px" t-esc="head"></span>
+                                </h2>
+                                
+                            </div>
+
+                            <br class="clearfloat" />
+
+                            <div style="float:left; width: 40%;margin-bottom:10px;margin-top:15px">
+                                <table>
+                                    <tr style="width:100%">
+                                        <td style="width:50%">
+                                            <span>Print Date</span>
+                                        </td>
+                                        <td style="width:50%">
+                                            <span t-esc="print_date"></span>
+                                        </td>
+                                    </tr>
+                                    <tr style="width:100%">
+                                        <td style="width:50%">
+                                            <span>Print By</span>
+                                        </td>
+                                        <td style="width:50%">
+                                            <span t-esc="print_by"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="float:left; width: 100%;margin-bottom:10px;margin-top:15px">
+
+                                <table>
+
+                                    <tr bgcolor="#90EE90">
+                                        <th>اسم الموظف</th>
+                                        <th>الفرع الحالي</th>
+                                        <th>رقم جوال السائق</th>
+                                        <th>نوع الرحلة</th>
+                                        <th>مجموع السيارات</th>
+                                        <th>حالة الرحلة</th>
+                                        <th>اريخ اخر محطة وصول</th>
+                                        <th>تاريخ الوصول المتوقع</th>
+                                        <th>تاريخ بدء الجدولة</th>
+                                        <th>فرع الوصول</th>
+                                        <th>فرع الإنطلاق</th>
+                                        <th>حالة الشاحنة</th>
+                                        <th>نوع الشاحنة</th>
+                                        <th>إسم السائق</th>
+                                        <th>كود السائق</th>
+                                        <th>كـود الشاحــنة</th>
+                                        <th>رقم الرحلة</th>
+                                    </tr>
+                                    <t t-foreach="final_data" t-as="rec">
+
+                                        <tr style="page-break-inside">
+                                            <td>
+                                                <span t-esc="rec['trip_creator']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['current_branch']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['driver_mobile_phone']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['trip_type']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['total_cars']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['trip_state']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['end_time']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['act_end_time']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['start_time']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['end_point']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['start_point']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['vehicle_state']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['trailer_cat']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['driver_name']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['driver_code']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['sticker']"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['trip_name']"></span>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                </table>
+
+                            </div>
+
+                        </div><!--end of report wrapper-->
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

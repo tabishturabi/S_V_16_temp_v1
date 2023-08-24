@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="bx_productivity_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+                id="report_transport_management"
+                model="transport.management"
+                name="bx_productivity_reports.bx_productivity_pdf"
+                file="bx_productivity_reports.bx_productivity_pdf"
+                report_type="qweb-pdf"
+                string="Bx Productivity Reports"
+                paperformat="bx_productivity_template"
+                menu="False"/>
+
+
+        <record id="bx_productivity_report_wizard" model="ir.ui.view">
+            <field name="name">bx_productivity_reports_wizard</field>
+            <field name="model">bx.productivity.reports</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="report_mode"/>
+                            <field name="date_type"/>
+                            <field name="branch_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="fleet_type_transport" widget="many2many_tags" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="customer_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="truck_load"/>
+                        </group>
+
+                        <group name="group_right">
+                            <field name="period_group" attrs="{'invisible':[('report_mode','not in',['Bx Productivity Summary Loading Date Report','Bx Productivity Summary Arrival Date Report'])],'required':[('report_mode','in',['Bx Productivity Summary Loading Date Report','Bx Productivity Summary Arrival Date Report'])]}"/>
+                            <field name="date" attrs="{'invisible':[('others','!=', True)],'required':[('others','=', True)]}"/>
+
+                            <field name="form" attrs="{'invisible':[('is_between','!=', True)],'required':[('is_between','=', True)]}"/>
+                            <field name="to" attrs="{'invisible':[('is_between','!=', True)],'required':[('is_between','=', True)]}"/>
+                            <field name="branch_ids_to" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="users" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="state" widget="many2many_tags"/>
+                            <field name="employee_state"/>
+
+                        </group>
+
+                        <group name="group_left">
+                            <field name="is_between" invisible="1"/>
+                            <field name="others" invisible="1"/>
+                        </group>
+
+                        <!--<group name="group_right">-->
+                        <!--</group>-->
+
+                        <!--<group name="group_left">-->
+                        <!---->
+                        <!---->
+                        <!---->
+                        <!--</group>-->
+
+                        <!--<group name="group_right">-->
+                        <!--&lt;!&ndash;&ndash;&gt;-->
+                        <!--</group>-->
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print Xlsx" class="oe_highlight"/>
+                        <button name="generate_report" type="object" string="Print Pdf" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+        <record id="bx_productivity_report_action" model="ir.actions.act_window">
+            <field name="name">Bx productivity Report</field>
+            <field name="res_model">bx.productivity.reports</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="bx_productivity_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+        <menuitem id="bx_productivity_report_menu_item" name="Bx Productivity Report" action="bx_productivity_report_action"
+                  parent="bx_information_report.bx_info_report_main_menu_item"/>
+
+
+
+        <report
+                id="action_bx_productivity_reports"
+                string="Bx Productivity Report"
+                model="transport.management"
+                report_type="xlsx"
+                file="Bx Productivity Report"
+                name="bx_productivity_reports.bx_productivity_reports_xlsx"
+                menu="False"
+        />
+
+
+
+
+    </data>
+</openerp>

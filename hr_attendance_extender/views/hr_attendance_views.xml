@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <!--
+            hr attendants
+                                -->
+    <!-- attendance main module menu -->
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_manage_attendances">
+        <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance')])]"/>
+    </record>
+
+    <!-- attendance management no action menu -->
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_manage_attendances">
+        <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance')])]"/>
+    </record>
+
+    <!-- attendance action menu -->
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_view_attendances">
+        <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance')])]"/>
+    </record>
+
+       <!-- configuration menu -->
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_my_attendances">
+        <field name="name">Config / Log Attendance</field>
+        <field name="groups_id" eval="[(6,0,[ref('hr_attendance.group_hr_attendance_user')])]"/>
+        <field name="sequence">25</field>
+    </record>
+
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_kiosk_mode">
+        <field name="action" eval="False"/>
+    </record>
+
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_report">
+        <field name="action" eval="False"/>
+    </record>
+
+    <record model="ir.ui.menu" id="hr_attendance.menu_hr_attendance_settings">
+        <field name="action" eval="False"/>
+    </record>
+
+    <!-- hr attendants form -->
+    <record id="hr_attend_form" model="ir.ui.view">
+        <field name="name">inherit.attendance.form</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="before">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,complete,noted,confirm,validated"/>
+                    <button name="action_complete" states="draft" string="Complete" class="oe_highlight"
+                            type="object" icon="fa-check" groups="base.group_user"
+                            attrs="{'invisible': ['|', ('is_passed', '=', False), ('state', 'not in', ['draft'])]}"/>
+                    <button name="action_confirm" states="complete" string="Confirm" class="oe_highlight"
+                            type="object" groups="hr_attendance_extender.group_attendance_direct_manager"/>
+                    <button name="action_validate" states="confirm" string="Validate" class="oe_highlight"
+                            type="object" groups="hr_attendance.group_hr_attendance_user"/>
+                   <button name="action_reject" states="complete" string="Reject" class="oe_highlight"
+                            type="object" groups="hr_attendance_extender.group_attendance_direct_manager"/>
+                    <button name="action_reject" states="confirm" string="Reject" class="oe_highlight"
+                            type="object" groups="hr_attendance.group_hr_attendance_user"/>
+                    <button name="action_reset_draft" states="reject" string="Set to Draft" class="oe_highlight"
+                            type="object" groups="hr_attendance.group_hr_attendance_user"/>
+
+
+                </header>
+            </xpath>
+            <xpath expr="/form/sheet/group" position="before">
+                <div class="oe_button_box">
+                    <h2>
+                        <field name="state_attendance" nolabel="1" style="color:Black;" readonly="1"/>
+                    </h2>
+                </div>
+            </xpath>
+            <field name="check_in" position="replace">
+                <field name="check_in" attrs="{'readonly': [('state', 'not in', ['draft', 'submit'])]}"/>
+            </field>
+            <field name="check_out" position="replace">
+                 <field name="check_out" attrs="{'readonly': [('state', 'not in', ['draft', 'submit'])]}"/>
+            </field>
+            <field name ="employee_id" position="replace">
+                <field name="employee_id" widget="selection" readonly="1"/>
+            </field>
+            <field name="employee_id" position="before">
+                <field name="name" />
+            </field>
+<!--            <field name="employee_id" position="after">-->
+<!--                <field name="employee_code" />-->
+<!--            </field>-->
+            <xpath expr="/form/sheet/group[1]" position="after">
+                <group>
+                    <group>
+                        <label for="expected_check_in_min" string="Expected Check-In"/>
+                        <div>
+                            <field name="expected_check_in_min" readonly="1" class="oe_inline"/> -
+                            <field name="expected_check_in_max" readonly="1" class="oe_inline"/>
+                        </div>
+                    </group>
+                    <group>
+                        <label for="expected_check_in_min" string="Expected Check-Out"/>
+                        <div>
+                            <field name="expected_check_out_min" readonly="1" class="oe_inline"/> -
+                            <field name="expected_check_out_max" readonly="1" class="oe_inline"/>
+                        </div>
+                    </group>
+                </group>
+                <group>
+                    <field name="abs_reason" placeholder="Add a reason..." attrs="{'invisible': [('is_absent', '=', False)]}"/>
+                </group>
+                <notebook>
+                    <page name="hours" string ="Work Hours">
+                        <group>
+                            <field name="worked_hours" readonly="1"/>
+                            <field name="over_time" readonly="1"/>
+                            <field name="under_time" readonly="1"/>
+                            <field name="over_time_off" readonly="1"
+                                   attrs="{'invisible': [('is_off_duty_overtime', '=', False)]}"/>
+                        </group>
+                    </page>
+                    <page name="log" string="Log Details">
+                        <field name="log_ids" nolabel="0" string="Log Details" readonly="1">
+                            <tree editable="bottom" >
+<!--                                <field name="employee_code"/>-->
+                                <field name="employee_id"/>
+                                <field name="time"/>
+                                <field name="machine_id"/>
+                                <field name="time_zone"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="technical" string="Technical Information">
+                        <group>
+                            <group string="Flags">
+                                <!--<field name="state_attendance" readonly="1"/>-->
+                                <field name="is_complete" readonly="1"/>
+                                <field name="is_absent" readonly="1"/>
+                                <field name="is_passed" readonly="1"/>
+                                <field name="is_off_duty_overtime" readonly="1"/>
+                                <field name="is_manual_modify" readonly="1"/>
+
+                            </group>
+                            <group string="Sheet Info">
+                                <field name="append_in_sheet" readonly="1"/>
+                                <field name="sheet_id" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+
+            <xpath expr="/form/sheet" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- hr attendants tree-->
+    <record id="hr_attend_tree" model="ir.ui.view">
+        <field name="name">inherit.attendance.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="check_in" position="before">
+                <field name="expected_check_in"/>
+            </field>
+            <field name="check_out" position="after">
+                <field name="worked_hours"/>
+                <field name="over_time"/>
+                <field name="over_time_off" string="O.T Dutey Off"/>
+                <field name="under_time"/>
+                <field name="state_attendance"/>
+                <field name="state"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- hr attendants action -->
+    <record id="hr_attendance.hr_attendance_action" model="ir.actions.act_window">
+        <field name="context">{"search_default_employee":1, "search_default_groupby_name":1}</field>
+    </record>
+
+
+</odoo>

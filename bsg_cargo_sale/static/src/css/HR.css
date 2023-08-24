@@ -1,0 +1,17 @@
+@charset "utf-8";
+.hrGreen {
+    height: 5px;
+    background-color:#00b050;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.hrWhite {
+    height: 1px;
+    background-color:#fff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+

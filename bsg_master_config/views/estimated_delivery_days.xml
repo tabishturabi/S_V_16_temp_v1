@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+    <!-- form view -->
+    <record model="ir.ui.view" id="estimated_delivery_days_form">
+      <field name="name">estimated_delivery_days.form</field>
+      <field name="model">bsg.estimated.delivery.days</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet string="Estimated Delivery Day's">
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                </button>
+            </div>            
+            <div class="oe_title">
+              <h1>
+                  <field name="name" readonly="1" />
+              </h1>
+            </div>
+            <group name="top">
+              <group name="left">
+                <field name="loc_from_id" string="From"  domain="[('id','!=',loc_to_id)]" required="1"/>
+                <field name="shipemnt_type" string="Shipment Type" required="1"/>
+              </group>
+              <group name="right">
+                <field name="loc_to_id" string="To" domain="[('id','!=',loc_from_id)]" required="1"/>
+                <label for="est_no_delivery_days"  string="Est Time"/>
+                <div class="o_address_format" > 
+                  <field name="est_no_delivery_days"  class="o_address_zip" placeholder="Day"/>
+                  <field name="est_no_hours" widget='float_time' class="oe_inline" style="margin-left: 12px;" placeholder="Hours"/>
+                </div>
+                <label for="est_max_no_delivery_days"  string="Est Max Days"/>
+                <div class="o_address_format" >
+                  <field name="est_max_no_delivery_days"  class="o_address_zip" placeholder="Day"/>
+                  <field name="est_max_no_hours" widget='float_time' class="oe_inline" style="margin-left: 12px;" placeholder="Hours"/>
+                </div>
+              </group>                    
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>            
+        </form>
+      </field>
+    </record>
+    
+    <!-- Tree view   -->
+    <record model="ir.ui.view" id="estimated_delivery_days_tree">
+      <field name="name">estimated_delivery_days.tree</field>
+      <field name="model">bsg.estimated.delivery.days</field>
+      <field name="arch" type="xml">
+        <tree string="Estimated Delivery Day's">
+          <field name="name" />
+          <field name="loc_from_id" />
+          <field name="loc_to_id" />
+          <field name="est_no_delivery_days" />
+          <field name="est_max_no_delivery_days" />
+        </tree>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="estimated_delivery_days_action">
+      <field name="name">Estimated Delivery Day's</field>
+      <field name="res_model">bsg.estimated.delivery.days</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+  </data>
+</odoo>

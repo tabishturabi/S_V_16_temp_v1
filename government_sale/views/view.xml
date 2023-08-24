@@ -1,0 +1,609 @@
+<odoo>
+    <data>
+        <record id="government_sale_form_view" model="ir.ui.view">
+            <field name="name">government.sale.form.view</field>
+            <field name="model">transport.management</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Government Sale">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,issue_bill,vendor_trip,fuel_voucher,done,cancel"/>
+                        <button name="action_confirm" type="object" string="Confirm Order" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="action_issue_bill" type="object" string="Bill Issuance" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','confirm')]}"/>
+                        <button name="action_vendor_trip" type="object" string="Vendor Trip" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','issue_bill')]}"/>
+                        <button name="pay_trip_money" type="object" string="Pay Transport Trip" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','vendor_trip')]}"/>
+                        <button name="action_start_trip_gov" type="object" string="Start Trip" class="oe_highlight"
+                                attrs="{'invisible':['|',('is_started_trip','=',True),'&amp;',('state','!=','fuel_voucher'),('vehicle_type_domain_name','!=','Carrier')]}"/>
+                        <button name="action_arrival" type="object" string="Register Arrival" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','fuel_voucher')]}"/>
+                        <button name="action_done" type="object" string="Done" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','receive_pod')]}"/>
+                        <button name="action_draft" type="object" string="Set to Draft" class="oe_link"
+                                attrs="{'invisible': [('state', 'in',['draft','receive_pod','fuel_voucher','done','cancel'])]}"
+                                groups="government_sale.group_create_government_so,transport_management.group_transport_management"/>
+                        <button name="action_normal_cancel" type="object" string="Cancel" class="oe_link"
+                                attrs="{'invisible': [('state', 'in',['fuel_voucher','receive_pod','done','cancel'])]}"/>
+
+                        <button name="action_cancel" type="object" string="Cancel Vendor Bill" class="oe_link"
+                                attrs="{'invisible':['|',('state','not in',['fuel_voucher','cancel','receive_pod']),('is_created_return_bill', '=', True)]}"
+                                groups="transport_management.group_cancel_trasport_vendor_bill,government_sale.group_create_government_so"/>
+                        <button name="action_cancel" type="object" string="Cancel Vendor Bill" class="oe_link"
+                                attrs="{'invisible':['|',('is_created_return_invoice', '=', False),('is_created_return_bill', '=', True)]}"
+                                groups="transport_management.group_cancel_trasport_vendor_bill,government_sale.group_create_government_so"/>
+
+                        <button name="register_payment_for_return"
+                                groups="government_sale.group_create_government_so,transport_management.group_register_payment_vendor_bill,base.group_erp_manager"
+                                string="Register Payment For Retrun Bill" type="object" class="o_sale_confirm"
+                                attrs="{'invisible':['|',('is_return_validate','=',True),                       ('refund_invoice_count', '=', 0)]}"/>
+                        <button name="pay_trip_money_trans"
+                                groups="transport_management.group_pay_transport_money_trans"
+                                string="Pay Trip Money Diff." type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('state', 'in',['draft','confirm','issue_bill','vendor_trip','cancel']),('pull_from_other_bx','=',True)]}"/>
+                        <button name="compute_rc_fuel_trip_amt"
+                                groups="transport_management.group_compute_fuel_trip_amt" string="Re-Calc. Amt"
+                                type="object" class="oe_highlight"
+                                attrs="{'invisible':['|',('state','in',['draft','confirm','issue_bill','cancel']),('pull_from_other_bx','=',True)]}"/>
+                        <button name="register_payment_for_invoice"
+                                groups="government_sale.group_create_government_so,transport_management.group_register_payment_customer_invoice,base.group_erp_manager"
+                                string="Register Payment For Invoice" type="object" class="o_sale_confirm"
+                                attrs="{'invisible':[('invoice_status', '=', False)]}"/>
+
+                        <button name="cancel_tranport_invoice"
+                                groups="government_sale.group_create_government_so,transport_management.group_cancel_trasport_customer_invoice,base.group_erp_manager"
+                                string="Cancel Agreement" type="object" class="oe_link"
+                                attrs="{'invisible':['|','|',('invoice_id', '=', False),('state','in',['draft','confirm','issue_bill','vendor_trip','fuel_voucher','receive_pod','cancel']),('refund_customer_invoice_count', '=', 1)]}"/>
+
+                        <button name="register_payment_for_return_invoice"
+                                groups="government_sale.group_create_government_so,transport_management.group_cancel_trasport_customer_invoice,base.group_erp_manager"
+                                string="Register Payment For Retrun Invoice" type="object" class="o_sale_confirm"
+                                attrs="{'invisible':['|',('is_customer_return_validate','=',True),                       ('refund_customer_invoice_count', '=', 0)]}"/>
+
+                    </header>
+                    <sheet string="Government Sale">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_invoice" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('invoice_id', '=', False)]}">
+                                <span>Invoice</span>
+                            </button>
+                            <button name="action_view_payment" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o" attrs="{'invisible': [('paymen', '=', 0)]}">
+                                <field name="paymen" string="Fuel Vouchers" widget="statinfo"/>
+                            </button>
+                            <button name="action_view_refund_bill" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    groups="government_sale.group_create_government_so,transport_management.group_register_payment_vendor_bill,base.group_erp_manager"
+                                    attrs="{'invisible': [('refund_invoice_count', '=', 0)]}">
+                                <span>Refund Bill</span>
+                                <!--  <field name="refund_invoice_count" widget="statinfo" string="Refund Invoices"/> -->
+                            </button>
+                            <button name="action_view_refund_invoice" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    groups="government_sale.group_create_government_so,transport_management.group_register_payment_vendor_bill,base.group_erp_manager"
+                                    attrs="{'invisible': [('refund_customer_invoice_count', '=', 0)]}">
+                                <span>Refund Invoice</span>
+                                <!--  <field name="refund_invoice_count" widget="statinfo" string="Refund Invoices"/> -->
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="transportation_no" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="current_user_branch_id" invisible="1"/>
+                                <field name="distance_km" invisible="1"/>
+                                <field name="vehicle_type_domain_name" invisible="1"/>
+                                <field name="is_started_trip" invisible="1"/>
+                                <field name="is_government" invisible="1"/>
+                                <field name="is_created_return_bill" invisible="1"/>
+                                <field name="is_created_return_invoice" invisible="1"/>
+                                <field name="reversal_move_ids" invisible="1"/>
+                                <field name="invoice_id" invisible="1"/>
+                                <field name="invoice_status" invisible="1"/>
+                                <field name="refund_customer_invoice_ids" invisible="1"/>
+                                <field name="is_customer_return_validate" invisible="1"/>
+                                <field name="refund_customer_invoice_count" invisible="1"/>
+                                <field name="is_return_validate" invisible="1"/>
+                                <field name="refund_invoice_count" invisible="1"/>
+                                <!--                         <field name="cus1"/> -->
+                                <field name="partner_types" string="Partner Type" domain="[('is_government','=',1)]"
+                                       attrs="{'readonly':[('state','!=','draft')],'required':[('state','=','draft')]}"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="customer"
+                                       domain="[('parent_id','=',False),('customer_rank','>',0),('partner_types','=',partner_types)]"
+                                       options="{'limit': 10, 'no_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                       required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       context="{'default_is_company':False,'default_property_product_pricelist' : 1,'partner_type_val' : partner_types,'default_partner_types' : partner_types}"/>
+                                <!--                         <field name="customer" string="cus2" domain="[('parent_id','=',False),('customer','=',True)]"  -->
+                                <!--                              required="1"  -->
+                                <!--                             attrs="{'readonly': [('state', '!=', 'draft')], 'invisible':[('cus1','=',True)]}" /> -->
+                                <field name="customer_ref_gs"/>
+                                <!--                                <field name="clearance_mode" widget="radio" options="{'horizontal': true}"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <!--                                <field name="custom_import"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <!--                                <field name="custom_export"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <!--                                <field name="site_import"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"-->
+                                <!--                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>-->
+                                <!--                                <field name="site_export"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"-->
+                                <!--                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>-->
+                                <field name="agreement_type" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       required="1"/>
+                                <!--                                <field name="sale_status"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_open': True}"/>-->
+                                <!--                                <field name="vessel_name"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <!--                                <field name="demurrage_date"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <!--                                <field name="detention_date"-->
+                                <!--                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <field name="payment_method" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       required="1"
+                                       options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                <field name="request_type" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       required="1"/>
+                                <field name="form_transport"
+                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                       force_save="0"
+                                       attrs="{'readonly': [('state', '!=', 'draft')],                                    'required': [('state', '=', 'draft')]}"/>
+                                <field name="to_transport" domain="[('id','!=',form_transport)]"
+                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                       force_save="1"
+                                       attrs="{'readonly': [('state', '!=', 'draft')],                             'required': [('state', '=', 'draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="customer_contract"
+                                       options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                       domain="[('cont_customer','=',customer),('cont_end_date','&gt;=',order_date),('state','=','confirm')]"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+
+                                <field name="order_date" class="with_hijri"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <!--<field name="expiration_date" class="with_hijri" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <field name="payment_terms" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       options="{'no_open': True}"/>
+                                <field name="priority_type" readonly="1"/>
+                                <field name="tender_date" class="with_hijri"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="delivery_date" readonly="1"/>
+                                <field name="tender_number" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       required="1"/>
+                                <field name="delivery_way" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       required="1"/>
+                                <!--                                <field name="insurance_req" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+                                <field name="is_multiple" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       force_save="1"/>
+
+                            </group>
+                        </group>
+                        <notebook attrs="{'readonly': [('state', '=', 'done')]}">
+                            <page string="Line Items">
+                                <field name="transport_management_line" mode="tree" force_save="1"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       context="{'default_form':form_transport,'default_to':to_transport,'default_is_government':is_government,'default_is_multiple':is_multiple,'default_container_number':tender_number,'default_distance_km':distance_km,'default_agreement_type':agreement_type}">
+                                    <tree>
+                                        <field name="request_type" required="1"/>
+                                        <field name="product_id" required="1"
+                                               options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                        <field name="description" required="1"/>
+                                        <!--                                        <field name="weight"/>-->
+                                        <!--                                        <field name="length"/>-->
+                                        <!--                                        <field name="width"/>-->
+                                        <!--                                        <field name="height"/>-->
+                                        <!--                                        <field name="total_pieces"/>-->
+                                        <field name="form" readonly="1"
+                                               options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                        <field name="to"
+                                               options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                               force_save="1"/>
+                                        <field name="car_size_id"
+                                               options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                        <field name="fleet_type" invisible="1" domain="[('domain_name','=','Bx')]"
+                                               options="{'no_create_edit':True}"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="price" required="1"/>
+                                        <!--                                        <field name="seal_number"/>-->
+                                        <field name="container_number" string="Tender No" required="1" readonly="1"/>
+                                        <field name="tax_ids" widget="many2many_tags"
+                                               domain="[('type_tax_use', '=','sale' )]"/>
+                                        <field name="total_before_taxes" readonly="1"/>
+                                        <field name="tax_amount" readonly="1"/>
+                                        <field name="total_amount" readonly="1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="request_type" required="1" force_save="1"/>
+                                                <field name="product_id" required="1"
+                                                       domain="[('is_government', '=', True)]"
+                                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                            </group>
+                                            <group>
+                                                <field name="description" required="1"/>
+                                            </group>
+                                            <group>
+                                                <!--                                                <field name="weight"/>-->
+                                                <!--                                                <field name="width"/>-->
+                                                <!--                                                <field name="total_pieces"/>-->
+                                                <field name="is_overnight" force_save="1"/>
+                                                <field name="is_government" force_save="1" invisible="1"/>
+                                                <field name="form" readonly="1" force_save="1"
+                                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                                <field name="product_uom_qty"/>
+                                                <field name="agreement_type" readonly="1"/>
+
+                                                <!--                                                <field name="seal_number"/>-->
+                                                <field name="tax_ids" widget="many2many_tags" readonly="1"
+                                                       force_save="1" domain="[('type_tax_use', '=','sale' )]"/>
+
+                                            </group>
+                                            <group>
+                                                <!--                                                <field name="length"/>-->
+                                                <!--
+                                                                                       <field name="height"/>-->
+                                                <field name="is_multiple" force_save="1" invisible="1"/>
+
+                                                <field name="to" attrs="{'readonly': [('is_multiple', '=', False)]}"
+                                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                                       force_save="1"/>
+                                                <field name="car_size_id" domain="[('is_government', '=', True)]"
+                                                       options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+
+                                                <field name="fleet_type" invisible="1"
+                                                       domain="[('domain_name','=','Bx')]"
+                                                       options="{'no_create_edit':True}"/>
+                                                <field name="price" force_save="1" required="1"/>
+                                                <field name="container_number" string="Tender No" required="1" readonly="1"
+                                                       force_save="1"/>
+                                                <field name="tax_amount" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="total_before_taxes" force_save="1" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="total_amount" force_save="1" readonly="1"/>
+                                                <field name="distance_km" force_save="1" readonly="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="total_before_taxes"/>
+                                    <field name="tax_amount"/>
+                                    <field name="total_amount" class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </page>
+                            <page string="Shipper and Receiver">
+                                <group string="Shipper Details">
+                                    <group>
+                                        <field name="same_as_customer" string="Same As Customer"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="sender_name" required="1" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="customer_number" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <label for="street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="street" placeholder="Street..." class="o_address_street"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="city" placeholder="City" class="o_address_city"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="state_id" class="o_address_state" placeholder="State"
+                                                   options="{&quot;no_open&quot;: True}"
+                                                   context="{'country_id': country_id, 'zip': zip}"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="country_id" placeholder="Country" class="o_address_country"
+                                                   options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        </div>
+                                        <field name="sender_type" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="sender_nationality" required="1"
+                                               options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="company" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="mobile" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="phone" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="sender_id_type" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="sender_id_card_no"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="sender_visa_no" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                    </group>
+                                </group>
+
+                                <group string="Receiver Details">
+                                    <group>
+                                        <field name="same_as_sender" string="Same As Sender"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="receiver_name" required="1" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="rec_customer_number"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <label for="rec_street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="rec_street" placeholder="Street..." class="o_address_street"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="rec_street2" placeholder="Street 2..." class="o_address_street"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="rec_city" placeholder="City" class="o_address_city"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="rec_state_id" class="o_address_state" placeholder="State"
+                                                   options="{&quot;no_open&quot;: True}"
+                                                   context="{'country_id': country_id, 'zip': zip}"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="rec_zip" placeholder="ZIP" class="o_address_zip"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                            <field name="rec_country_id" placeholder="Country" class="o_address_country"
+                                                   options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                                   attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        </div>
+                                        <field name="receiver_type" required="1" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="receiver_nationality"
+                                               options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="rec_company" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="rec_mobile" required="1" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="rec_phone" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="receiver_id_type"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="receiver_id_card_no"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                        <field name="receiver_visa_no"
+                                               attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Transport Information"
+                                  attrs="{'invisible': [('state', 'in', ('draft','confirm'))]}">
+                                <group>
+                                    <group>
+                                        <field name="pull_from_other_bx"
+                                               attrs="{'readonly': [('state', 'in',('done','receive_pod'))]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="other_bx_id"
+                                               domain="[('state','in',['fuel_voucher','receive_pod','done']),('order_date','=',order_date),('form_transport','=',form_transport)]"
+                                               attrs="{'invisible': [('pull_from_other_bx', '!=',True)],'required':[('pull_from_other_bx','=',True)],'readonly': [('state', 'in',('done','receive_pod'))]}"
+                                               options="{'no_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    </group>
+                                    <field name="pull_reason_note"
+                                           attrs="{'invisible': [('pull_from_other_bx', '!=',True)],'required':[('pull_from_other_bx','=',True)],'readonly': [('state', 'in',('done','receive_pod'))]}"
+                                           placeholder="Note"/>
+                                </group>
+                                <group string="Main Information">
+                                    <group>
+                                        <field name="service_name"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="internal_number"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="supplier_name" options="{'no_open': True}" invisible="0"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="driver" readonly="1" options="{'no_open': True}" force_save="1"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="supplier_freight" invisible="1" required="0"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                    </group>
+                                </group>
+                                <group string="Transport Information">
+                                    <group>
+                                        <field name="fleet_type_transport" force_save="1" readonly="1"
+                                               options="{'no_open': True,'no_create_edit':True}"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="vehicle_type_domain_id" force_save="1"
+                                               options="{'no_open': True,'no_create_edit':True}"/>
+                                    </group>
+                                </group>
+                                <group string="Vehicle Trip">
+                                    <group>
+                                        <field name="route_id"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               options="{'no_open': True}" force_save="1"/>
+                                        <field name="transportation_vehicle"
+                                               domain="[('current_branch_id','=',current_user_branch_id),('state_id.in_service','=',True)]"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               options="{'no_open': True}" force_save="1"/>
+                                        <field name="transportation_driver" readonly="1" force_save="1"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)],'invisible': [('is_rented','=',True)]}"
+                                               options="{'no_open': True}"/>
+                                        <field name="transportation_driver_rented" readonly="1" force_save="1"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)],'invisible': [('is_rented','!=',True)]}"
+                                               options="{'no_open': True}"/>
+                                        <field name="driver_number" readonly="1" force_save="1"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="display_expense_mthod_id" force_save="1" readonly="1"
+                                               options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                                        <field name="truck_load" readonly="1" force_save="1"/>
+                                        <field name="display_expense_type" force_save="1" readonly="1"/>
+
+                                    </group>
+                                    <group>
+
+                                        <field name="extra_distance"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="trip_distance" readonly="1" force_save="1"/>
+                                        <field name="total_distance" readonly="1" force_save="1"/>
+                                        <field name="total_reward_amount" readonly="1" widget="integer" force_save="1"/>
+                                        <field name="total_fuel_amount" force_save="1" readonly="1" widget="integer"/>
+                                        <field name="reason"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="trailer_id" options="{'no_create': True, 'no_open': True}"/>
+                                    </group>
+                                </group>
+                                <group string="Sale and Transport Date(s)">
+                                    <group>
+                                        <field name="loading_date"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               force_save="1"/>
+                                        <field name="arrival_date"
+                                               attrs="{'readonly': ['|',('state', '!=', 'issue_bill'),('pull_from_other_bx','=',True)]}"
+                                               force_save="1"/>
+                                        <label for="arrival_time" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                        <div>
+                                            <field name="arrival_time" class="oe_inline" readonly="1" force_save="1"/>
+                                            hours
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="return_date" force_save="1"
+                                               attrs="{'readonly': ['|',('state', 'not in', ['issue_bill','receive_pod','done']),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="stuffing_date" force_save="1"
+                                               attrs="{'readonly': ['|',('state', 'not in', ['issue_bill','receive_pod','done']),('pull_from_other_bx','=',True)]}"/>
+                                        <field name="actual_arrival_date" force_save="1" readonly="1"/>
+                                        <field name="register_arrival_branch_id" options="{'no_create':True,'no_edit':True,'no_open':True}" force_save="1" readonly="1"/>
+                                    </group>
+                                </group>
+<!--                                <group string="Lead Days Information">-->
+<!--                                    <group>-->
+<!--                                        <field name="waybill_date" force_save="1"-->
+<!--                                               attrs="{'readonly': ['|',('state', 'not in', ['issue_bill','receive_pod','done']),('pull_from_other_bx','=',True)]}"/>-->
+<!--                                        <field name="pod_date" force_save="1"-->
+<!--                                               attrs="{'readonly': ['|',('state', 'not in', ['issue_bill','receive_pod','done']),('pull_from_other_bx','=',True)]}"/>-->
+<!--                                        <field name="lead_days" force_save="1"-->
+<!--                                               attrs="{'readonly': ['|',('state', 'not in', ['issue_bill','receive_pod','done']),('pull_from_other_bx','=',True)]}"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+                            </page>
+<!--                            <page string="Receive POD"-->
+<!--                                  attrs="{'invisible': [('state', 'in', ('draft','confirm','issue_bill','vendor_bill'))]}">-->
+<!--                                <group string="POD Attachment">-->
+<!--                                    <group>-->
+<!--                                        <field name="receive_pod" widget="many2many_binary"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+                            <page name="rented_vehicle" string="Rented Vehicle"
+                                  attrs="{'invisible':[('is_rented','!=',True)]}">
+                                <group>
+                                    <field name="is_rented" invisible="1"/>
+                                    <field name="rented_vehicle_vendor" force_save="1"
+                                           options="{&quot;no_open&quot;: True,&quot;no_create&quot;: True}"/>
+                                    <field name="trip_cost" force_save="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="government_sale_tree_view" model="ir.ui.view">
+            <field name="name">government.sale.tree.view</field>
+            <field name="model">transport.management</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Government Sale">
+                    <field name="transportation_no"/>
+                    <field name="order_date"/>
+                    <field name="customer"/>
+                    <!--                    <field name="clearance_mode"/>-->
+                    <field name="transportation_vehicle" string="Vehicle No."/>
+                    <field name="transportation_driver" string="Driver name"/>
+                    <field name="delivery_date"/>
+                    <!--                    <field name="expiration_date"/>-->
+                    <field name="priority_type"/>
+                    <!--                    <field name="sale_status"/>-->
+                    <field name="state"/>
+                    <field name="total_before_taxes" string="Tot Before Tax"/>
+                    <field name="tax_amount"/>
+                    <field name="total_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_government_sale" model="ir.ui.view">
+            <field name="name">Government Sale Search</field>
+            <field name="model">transport.management</field>
+            <field name="arch" type="xml">
+                <search string="Search Government Sale">
+                    <field name="transportation_no" string="Transport Management No."/>
+                    <field name="order_date"/>
+                    <field name="customer"/>
+                    <!--                    <field name="clearance_mode"/>-->
+                    <field name="transportation_vehicle" string="Vehicle No."/>
+                    <field name="transportation_driver" string="Driver name"/>
+                    <field name="delivery_date"/>
+                    <!--                    <field name="expiration_date"/>-->
+                    <field name="priority_type"/>
+                    <!--                    <field name="sale_status"/>-->
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_government_sale_filter" model="ir.ui.view">
+            <field name="name">view.government.sale.filter</field>
+            <field name="model">transport.management</field>
+            <field name="arch" type="xml">
+                <search string="Search Sale Government">
+                    <field name="transportation_no" string="Transportation"
+                           filter_domain="[('transportation_no','ilike',self)]"/>
+                    <field name="customer" string="Customer" filter_domain="[('customer','ilike',self)]"/>
+                    <field name="supplier_name" required="0" string="Transport Vendor" invisible="0"
+                           filter_domain="[('supplier_name','ilike',self)]"/>
+                    <!--                    <field name="clearance_mode" string="Clearance Mode"-->
+                    <!--                           filter_domain="[('clearance_mode','ilike',self)]"/>-->
+                    <!--                    <field name="sale_status" string="Sale Status" filter_domain="[('sale_status','ilike',self)]"/>-->
+                    <filter string="Vendor Trip" name="vendor_trip" domain="[('state','=','vendor_trip')]"/>
+                    <filter string="Done" name="done" domain="[('state','=','done')]" help="Done Slip"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Customer" name="customer" context="{'group_by':'customer'}"/>
+                        <!--                        <filter string="Clearance Mode" name="clearance_mode" context="{'group_by':'clearance_mode'}"/>-->
+                        <filter string="States" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="government_sale_action" model="ir.actions.act_window">
+            <field name="name">Government Sale</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transport.management</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('government_sale.government_sale_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('government_sale.government_sale_form_view')})]"/>
+            <field name="search_view_id" ref="government_sale.search_government_sale"/>
+            <field name="domain">[('is_government','=',1)]</field>
+            <field name="context">{'default_is_government': 1,'default_priority_type': 'high','default_delivery_way':
+                'dr2dr','default_request_type': 'car_cargo'}
+            </field>
+        </record>
+        <menuitem id="government_sale_view_root" name="Government Sale"
+                  groups="government_sale.group_create_government_so"
+                  parent="sale.sale_menu_root" sequence="1"/>
+        <menuitem id="government_sale_view_child1" name="Government Sale"
+                  groups="government_sale.group_create_government_so" action="government_sale_action"
+                  parent="government_sale.government_sale_view_root" sequence="1"/>
+
+
+        <record id="sale.sale_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('government_sale.group_create_government_so'))]"/>
+        </record>
+
+    </data>
+</odoo>

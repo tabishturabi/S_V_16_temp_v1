@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <record id="view_fleet_vehicle_trip_form_support_team" model="ir.ui.view">
+          <field name="name">fleet.vehicle.trip.from</field>
+          <field name="model">fleet.vehicle.trip</field>
+          <field name="inherit_id" ref="bsg_trip_mgmt.view_fleet_vehicle_trip_form"/>
+          <field name="arch" type="xml">
+            <field name="next_branch_id" position="replace">
+                <field name="next_branch_id" string="Next Destination" 
+                 groups="bsg_support_team.group_set_next_branch_for_trip" attrs="{'readonly':[('state','=','done')]}"/>
+            </field>
+
+            <button name="action_register_arrival" position="after">
+              <button style="color:green;" name="change_state" type="object" class="btn-primary" groups="bsg_support_team.group_trip_state"  confirm="Are you sure you to Change State..?" string="Change State"/>
+            </button>
+          </field>
+    </record>
+  </data>
+</odoo>

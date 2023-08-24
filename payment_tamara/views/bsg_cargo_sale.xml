@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_vehicle_cargo_pay_tamara_form" model="ir.ui.view">
+            <field name="name">view_vehicle_cargo_pay_tamara_form</field>
+            <field name="model">bsg_vehicle_cargo_sale</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_vehicle_cargo_sale_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <field name="is_paid_by_tamra" invisible="1"/>
+                    <button name="pay_via_tamara_wizard" groups="base.group_system,bsg_cargo_sale.group_register_payment_on_agreement" attrs="{'invisible':['|',('state','not in',['confirm','pod']),('is_paid_by_tamra','!=',False)]}" type="object" string="Pay Via Tamara"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

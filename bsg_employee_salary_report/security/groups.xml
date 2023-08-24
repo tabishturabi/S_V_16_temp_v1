@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+         <record id="groups_employee_salary_info_reports" model="res.groups">
+              <field name="name">Employees Salary Info Reports</field>
+              <field name="comment">The user will have access to Employees Salary Info report menu.</field>
+              <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+          </record>
+    </data>
+</odoo>

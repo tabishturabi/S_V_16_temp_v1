@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="bsg_warehouse_restrictions.SwitchUserWarehouse" owl="1">
+    <Dropdown class="'o_switch_company_menu d-none d-md-block'" position="'bottom-end'">
+        <t t-set-slot="toggler">
+            <i class="fa fa-building d-lg-none"/>
+<!--            <span class="oe_topbar_name d-none d-lg-block" t-esc="currentCompany.name"/>-->
+            <span class="oe_topbar_name d-none d-lg-block" t-esc="currentWarehouse"/>
+        </t>
+<!--        <t t-foreach="Object.values(companyService.availableCompanies).sort((c1, c2) => c1.sequence - c2.sequence)" t-as="company" t-key="company.id">-->
+        <t t-foreach="user_wh_ids" t-as="warehouse" t-key="warehouse.id">
+            <t t-call="bsg_warehouse_restrictions.SwitchWareHouseItem">
+                <t t-set="warehouse" t-value="warehouse" />
+                <t t-set="current_warehouse" t-value="currentWarehouse" />
+            </t>
+        </t>
+    </Dropdown>
+</t>
+
+
+<t t-name="bsg_warehouse_restrictions.SwitchWareHouseItem" owl="1">
+<!--    <span><t t-esc="branch.branch_ar_name" /></span><br />-->
+    <DropdownItem class="'p-0 bg-white'">
+        <t t-set="isCompanySelected" t-value="selectedWarehouses.includes(warehouse.id)"/>
+<!--        <t t-set="isCurrent" t-value="company.id === companyService.currentCompany.id"/>-->
+        <t t-set="isCurrent" t-value="warehouse.id === currentWarehouseId"/>
+        <div class="d-flex" data-menu="warehouse" t-att-data-company-id="warehouse.id">
+            <div
+                role="menuitemcheckbox"
+                t-att-aria-checked="isCurrent ? 'true' : 'false'"
+                t-att-aria-label="warehouse.name"
+                t-att-title="(isCurrent ? 'Hide ' : 'Show ') + warehouse.name + ' content.'"
+                tabindex="0"
+                class="border-end toggle_company"
+                t-attf-class="{{isCurrent ? 'border-primary' : ''}}"
+                t-on-click="() => this.toggleWarehouse(warehouse)">
+
+                <span class="btn btn-light border-0 p-2">
+                    <i class="fa fa-fw py-2" t-att-class="isCurrent ? 'fa-check-square text-primary' : 'fa-square-o'"/>
+                </span>
+            </div>
+
+            <div
+                role="button"
+                t-att-aria-pressed="isCurrent ? 'true' : 'false'"
+                t-att-aria-label="'Switch to ' + warehouse.name "
+                t-att-title="'Switch to ' + warehouse.name "
+                tabindex="0"
+                class="d-flex flex-grow-1 align-items-center py-0 log_into ps-2"
+                t-att-class="isCurrent ? 'alert-primary ms-1 me-2' : 'btn btn-light fw-normal border-0'"
+                t-on-click="() => this.logIntoWarehouse(warehouse)">
+                <span
+                    class='company_label pe-3'
+                    t-att-class="isCurrent ? 'text-900 fw-bold' : 'ms-1'">
+                    <t t-esc="warehouse.name"/>
+                    <br />
+                </span>
+            </div>
+        </div>
+    </DropdownItem>
+</t>
+</templates>
+
+<!--<?xml version="1.0" encoding="utf-8" ?>-->
+<!--<template>-->
+<!--	 <t t-name="SwitchUserWarehouse">-->
+<!--	    <li class="o_switch_company_menu">-->
+<!--	        <a role="button" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-expanded="false" href="#" aria-label="Dropdown menu" title="Dropdown menu">-->
+<!--	            <span t-attf-class="#{widget.isMobile ? 'fa fa-building-o' : 'oe_topbar_name'}"/>-->
+<!--	        </a>-->
+<!--	        <div class="dropdown-menu dropdown-menu-right" role="menu"/>-->
+<!--	    </li>-->
+<!--	</t>-->
+<!--</template>-->

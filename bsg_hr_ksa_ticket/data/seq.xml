@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+            <record model="ir.sequence" id="hr_ticket_seq">
+            <field name="name">HR Ticket Sequence</field>
+            <field name="code">hr.ticket.seq</field>
+            <field name="prefix">TIC/%(range_year)s/</field>
+            <field name="padding">4</field>
+    </record>
+    </data>
+</odoo>

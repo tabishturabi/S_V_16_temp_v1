@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="paperformat_packshipment_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="package_shipment_report_id" 
+            model="bsg_package_shipment"
+            name="package_shipment_report.package_shipment_temp_id"
+            file="package_shipment_report.package_shipment_temp_id"
+            report_type="qweb-html"
+            string="Package Shipment Report"
+            paperformat="paperformat_packshipment_template"/> 
+
+    </data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_master_configuration">
+            <field name="name">Master Configration Management</field>
+            <field name="description">Master Configration Management</field>
+            <field name="sequence">23</field>
+        </record>
+        <record model="res.groups" id="group_master_configuration">
+            <field name="name">Master Configration</field>
+            <field name="category_id" ref="module_master_configuration"/>
+        </record>
+        <record model="res.groups" id="group_waypoint_sale_master">
+            <field name="name">Sale Master</field>
+            <field name="category_id" ref="module_master_configuration"/>
+        </record>
+    </data>
+</odoo>

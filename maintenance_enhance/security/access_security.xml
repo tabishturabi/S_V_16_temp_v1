@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--       ###################### Work Order Groups ##################################-->
+        <record model="ir.module.category" id="module_maintenance_enhance_wo">
+            <field name="name">Entry Permission System</field>
+        </record>
+        <record id="group_wo_add_service_on_wo" model="res.groups">
+            <field name="name">Add service on WO</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+
+        <record id="group_wo_mm_approve" model="res.groups">
+            <field name="name">Work Order Manager Approval</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+            <field name="implied_ids" eval="[(4, ref('maintenance_enhance.group_wo_add_service_on_wo'))]"/>
+        </record>
+        <record id="group_wo_user_branch" model="res.groups">
+            <field name="name">Work Order User Branch</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_wo_em_approve" model="res.groups">
+            <field name="name">Work Order External Maintenance Approval</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_wo_create_pr" model="res.groups">
+            <field name="name">Work Order Create PR</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_wo_it_approve" model="res.groups">
+            <field name="name">Work Order Inspection Technician Approval</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_wo_cancelled" model="res.groups">
+            <field name="name">Work Order Cancellation</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_work_order_closed" model="res.groups">
+            <field name="name">Work Order Closed</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_work_order_reset" model="res.groups">
+            <field name="name">Work Order Reset To Draft</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+
+        <!--       ###################### Entry Permission Groups ##################################-->
+
+        <record id="group_ep_create" model="res.groups">
+            <field name="name">Entry Permission System Create</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_ep_read_write" model="res.groups">
+            <field name="name">Entry Permission System Read/Write</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_ep_confirm" model="res.groups">
+            <field name="name">Entry Permission Confirm</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_ep_cancel" model="res.groups">
+            <field name="name">Entry Permission Cancellation</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_ep_reset" model="res.groups">
+            <field name="name">Entry Permission Reset To Draft</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_dup_line_wo_lines" model="res.groups">
+            <field name="name">WO Lines Duplicate</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_re-open_wo_lines" model="res.groups">
+            <field name="name">WO lines re-open</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_closed_task_wo_lines" model="res.groups">
+            <field name="name">WO lines closed task</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_waiting_availability_wo_lines" model="res.groups">
+            <field name="name">WO lines waiting availability</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_start_task_wo_lines" model="res.groups">
+            <field name="name">WO lines start task</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+        <record id="group_confirm_wo" model="res.groups">
+            <field name="name">Confirm WO</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+
+
+        <record id="group_wo_maintenance_with_access_only_read" model="res.groups">
+            <field name="name">Maintenance with access only read</field>
+            <field name="category_id" ref="module_maintenance_enhance_wo"/>
+        </record>
+
+
+    </data>
+</odoo>

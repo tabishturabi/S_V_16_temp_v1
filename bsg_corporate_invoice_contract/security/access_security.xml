@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_collection_invoice_management">
+            <field name="name">Collection Invoice Management</field>
+            <field name="description">Collection Invoice Management Management</field>
+            <field name="sequence">22</field>
+        </record>
+       	<record model="res.groups" id="group_create_cc">
+            <field name="name">Create CC</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record>
+        <record model="res.groups" id="group_confirm_send_cc">
+            <field name="name">Confirm &amp; send CC</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record>
+        <record model="res.groups" id="group_cc_create_invoice">
+            <field name="name">Create Invoice</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record>
+        <record model="res.groups" id="group_cc_set_to_draft">
+            <field name="name">Set to Draft</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record>       
+        <record model="res.groups" id="group_cancel_cc">
+            <field name="name">Cancel CC</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record> 
+
+        <record model="res.groups" id="group_view_and_edit_credit_collection">
+            <field name="name">View And Edit Credit Collections</field>
+            <field name="category_id" ref="module_collection_invoice_management"/>
+        </record> 
+
+
+        <record model="ir.rule" id="account_payment_for_acc_view_all_rules">
+	        <field name="name">Credit Collections Account payment View rule</field>
+	        <field name="model_id" ref="account.model_account_payment"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('bsg_corporate_invoice_contract.group_view_and_edit_credit_collection'))]"/>
+	        <field name="perm_create" eval="0"/>
+	        <field name="perm_write" eval="0"/>
+	        <field name="perm_unlink" eval="0"/>
+	        <field name="perm_read" eval="1"/>
+    	</record>
+    </data>
+</odoo>

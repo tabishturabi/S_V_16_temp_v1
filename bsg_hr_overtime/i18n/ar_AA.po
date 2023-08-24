@@ -1,0 +1,1685 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* bsg_hr_overtime
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-15 12:24+0000\n"
+"PO-Revision-Date: 2020-06-15 12:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_move_post.py:23
+#, python-format
+msgid " You can only post move for overtimes in Financial Approved , Please Approve {}"
+msgstr "عفوا ، يجب التصديق المالي أولا قبل ترحيل القيود"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:90
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:218
+#, python-format
+msgid "%s does not has contract in running state"
+msgstr "ليس لديه عقد ساري"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime Accounting"
+msgstr "حسابات اﻷجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Per Hour"
+msgstr "بالساعة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "To"
+msgstr "إلى"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+msgid "Print date:"
+msgstr "تاريخ الطباعة:"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_register_payment.py:95
+#, python-format
+msgid "A payment of %s %s with the reference <a href='/mail/view?%s'>%s</a> related to your overtime %s has been made."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "ACCOUNT APPROVE"
+msgstr "إعتماد المحاسب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "ACCOUNT REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "APPROVE"
+msgstr "الموافقة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "AUDIT APPROVE"
+msgstr "إعتماد المراجع"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "AUDIT REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Account Approved"
+msgstr "تصديق المحاسب"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_accounting_approver
+msgid "Accounting Approver"
+msgstr "تصديق المحاسب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__move_id
+msgid "Accounting Entry"
+msgstr "القيد المحاسبي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Accounting Information"
+msgstr "معلومات محاسبية"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_needaction
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Post To Payslip"
+msgstr "إضافة للرواتب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Pull From Attendance"
+msgstr "توليـد من الحضور"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_admin
+msgid "Administrator"
+msgstr "المدير"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_all
+msgid "All"
+msgstr "الكل"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_all_approver
+msgid "All Approver"
+msgstr "كل الإعتمادات"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_all_overtime_request
+msgid "All Overtime Requests"
+msgstr "كل الطلبات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__amount
+msgid "Amount"
+msgstr "القيمة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__analytic_account
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_analytic_account_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_analytic_account_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Analytic Account"
+msgstr "الحساب التحليلي"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,state:0
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Approved"
+msgstr "مقبول"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__approved_hours
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__approved_hours
+msgid "Approved Hours"
+msgstr "الساعات المُعتمدة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Attach Document"
+msgstr "إرفاق مستند"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_attachment_count
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Audit Approved"
+msgstr "إعتماد المراجع"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_audit_approver
+msgid "Audit Approver"
+msgstr "إعتماد المراجع"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_audit_team
+msgid "Audit Team"
+msgstr "المراجعين"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__emp_overtime_batch
+msgid "Batch ID"
+msgstr "الدُفعة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__branch
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__branch_ids
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Branch"
+msgstr "الفرع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__branch_name
+msgid "Branch Name"
+msgstr "اسم الفرع"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,mode:0
+#: selection:overtime.detailed.report.wizard,group_by_mode:0
+#: selection:overtime.detailed.report.wizard,mode:0
+msgid "By Branch"
+msgstr "حسب الفرع"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,mode:0
+#: selection:overtime.detailed.report.wizard,mode:0
+msgid "By Company"
+msgstr "حسب المؤسسة"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,mode:0
+#: selection:overtime.detailed.report.wizard,group_by_mode:0
+#: selection:overtime.detailed.report.wizard,mode:0
+msgid "By Department"
+msgstr "حسب القسم"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,mode:0
+#: selection:overtime.detailed.report.wizard,mode:0
+msgid "By Employee Tag"
+msgstr "حسب وسم الموظف"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_move_post_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_refuse_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_register_payment_view_form
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_detailed_report_wizard_view_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+msgid "Canceld"
+msgstr "إلغاء"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Choose the default for overtime sallary rule"
+msgstr "إختار قاعدة رواتب الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__manager_comment
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__manager_comment
+msgid "Comment By Manager"
+msgstr "تعليق المدير"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "Comment by Manager"
+msgstr "تعليق المدير"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_res_company
+msgid "Companies"
+msgstr "المؤسسات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__company
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__company
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__company_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__company_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__company_ids
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Company"
+msgstr "المؤسسة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime_move_post_wizard__company_id
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__company_id
+msgid "Company related to this journal"
+msgstr "المؤسسة المرتبطة بدفتر اليومية هذا"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_res_config_settings
+msgid "Config Settings"
+msgstr "ضبط الإعدادات"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.menu_overtime_request_configuration
+msgid "Configuration"
+msgstr "الإعدادات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__create_by
+msgid "Create By"
+msgstr "أنشئ بواسطة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Create Overtime from incomming emails"
+msgstr "إنشاء الأجر الإضافي عبر إرسال إيميل"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Pull Overtime From Employee Attendance automatically"
+msgstr "تولـيد الأجر الإضافي من سجـل الحضور والإنصراف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__create_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__create_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__credit_account
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_credit_account_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_credit_account_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Credit Account"
+msgstr "الحساب الدائن"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__currency_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__date_condition
+msgid "Date Condition"
+msgstr "شرط التاريخ"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/multi_emps_overtime_request.py:120
+#: code:addons/bsg_hr_overtime/models/multi_emps_overtime_request.py:213
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:198
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:320
+#, python-format
+msgid "Date from can not be greater than date to"
+msgstr "تاريخ البداية يجب أن لايكون أكبرمن تاريخ النهاية"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__debit_account
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_debit_account_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_debit_account_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Debit Account"
+msgstr "الحساب المدين"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__department
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__emp_department
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__department_ids
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Department"
+msgstr "القسم"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:157
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:318
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:482
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Department of Human Ressources"
+msgstr "إدارة شئون الموظفين"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__description
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__description
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__description
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__description
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,report_type:0
+msgid "Detail Report"
+msgstr "تفصيلي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_report_bsg_hr_overtime_overtime_details_report_template__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Documents"
+msgstr "المستندات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__file_download
+msgid "Download overtime"
+msgstr "تحميل الملف"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,state:0
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:169
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:332
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__employee_name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__employee_ids
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__employee_id
+msgid "Employee Code"
+msgstr "الموظف"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+msgid "Employee ID"
+msgstr "رقم الموظف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__employee_name
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+msgid "Employee Name"
+msgstr "اسم الموظف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__employee_readonly
+msgid "Employee Readonly"
+msgstr "الموظف للقراءة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__employee_tag
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__employee_tag_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__employee_tag_ids
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Employee Tag"
+msgstr "وسم الموظف"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.multi_employee_overtime_act_action_window
+#: model:ir.ui.menu,name:bsg_hr_overtime.multi_emp_overtime_request
+#: model:res.groups,name:bsg_hr_overtime.group_emps_overtime_requests_batch
+msgid "Employees Overtime Requests Batch"
+msgstr "دفعة طلب عمل إضافي للموظفين"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "FIN APPROVE"
+msgstr "الإعتماد المالي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "FIN REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__name
+msgid "File Name"
+msgstr "اسم الملف"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Fin Approved"
+msgstr "الإعتماد المالي"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_financial_management
+msgid "Financial Management"
+msgstr "الإدارة المالية"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_financial_management_approver
+msgid "Financial Management Approver"
+msgstr "تصديق الإدارة المالية"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_follower_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_channel_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "المتابعون (القنوات)"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_partner_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__date_from
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__date_from
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__date_from
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "From"
+msgstr "مِن"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__from_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__from_date
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Generate"
+msgstr "إنشاء"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__generate_from_attendance
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__default_generate_from_attendance
+msgid "Pull Data From Attendance App"
+msgstr "توليـد من سجل الحضور"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "Generate Overtime"
+msgstr "توليد الأجر الإضتفي"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:229
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:394
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:559
+#, python-format
+msgid "Grand Total"
+msgstr "الإجمالي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+msgid "Group By..."
+msgstr "تجميع حسب.."
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__group_by_mode
+msgid "Grouping By"
+msgstr "تجميع حسب"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_accouting_team
+msgid "HR Accounting Team"
+msgstr "المحاسبين"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "HR MANAGER APPROVE"
+msgstr "إعتماد مدير الموارد البشرية"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "HR MANAGER REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_hr_manager
+msgid "HR Manager"
+msgstr "مدير الموارد البشرية"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "HR Manager Approved"
+msgstr "إعتماد مدير الموارد البشرية"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "HR SALLARY APPROVE"
+msgstr "إعتماد إدارة الرواتب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "HR SALLARY REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "HR Sallary Approved"
+msgstr "إعتماد إدارة الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_hr_sallary
+msgid "HR Sallary Team"
+msgstr "إدارة الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.module.category,description:bsg_hr_overtime.module_category_overtime_request
+msgid "Helps you access overtime request menue"
+msgstr "الوصول لقائمة الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__hide_payment_method
+msgid "Hide Payment Method"
+msgstr "إخفاء طريقة السداد"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,priority:0
+msgid "High Priority"
+msgstr "عالي"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:173
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:336
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:502
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__subtotal
+#, python-format
+msgid "Hours"
+msgstr "الساعات"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_hr_manager_approver
+msgid "Hr Manager Approver"
+msgstr "إعتماد المدير المالي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__hr_overtime_ids
+msgid "Hr Overtime"
+msgstr "الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_hr_sallary_team
+msgid "Hr Sallary Team"
+msgstr "إدارة الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_report_bsg_hr_overtime_overtime_details_report_template__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_unread
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_unread
+msgid "If checked new messages require your attention."
+msgstr "إذا حددته، سيتم إخطارك بالرسائل الجديدة."
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_needaction
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا حددته، سيتم إخطارك بالرسائل الجديدة."
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_has_error
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ في التسليم."
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+msgid "Payslip"
+msgstr "في الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__incomming_emails
+msgid "Incomming Emails"
+msgstr "إنشاء الأجر الإضافي عبر الإيميل"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__default_generate_from_attendance
+msgid "Pull Data From Attendance App"
+msgstr "تولـيد من نظام الحضور والإنصراف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_is_follower
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__job_position
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+msgid "Job Position"
+msgstr "المناصب الوظيفية"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_report_bsg_hr_overtime_overtime_details_report_template____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__write_uid
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detail_report_excel__write_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,priority:0
+msgid "Low Priority"
+msgstr "منخفض"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_main_attachment_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "المرفق الرئيسي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__manager
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__manager
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_manager
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Manager"
+msgstr "المدير"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_manager_approver
+msgid "Manager Approver"
+msgstr "إعتماد المدير"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,priority:0
+msgid "Medium Priority"
+msgstr "متوسط"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__communication
+msgid "Memo"
+msgstr "مذكرة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_has_error
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__mode
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__mode
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_search_view
+msgid "Mode"
+msgstr "الوضع"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:170
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:333
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:499
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Month"
+msgstr "الشهر"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_my_overtime_act_action_window_readonly
+#: model:res.groups,name:bsg_hr_overtime.group_my_overtime_request
+msgid "My Overtime Request"
+msgstr "طلباتي"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.menu_my_overtime_request_readonly
+msgid "My Overtime Requests"
+msgstr "طلباتي"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:175
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:338
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:504
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_needaction_counter
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__doc_count
+msgid "Number of documents attached"
+msgstr "عدد المستندات المرفقة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_has_error_counter
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_has_error_counter
+msgid "Number of error"
+msgstr "عدد الأخطاء"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_needaction_counter
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تتطلب اجراء"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_has_error_counter
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__message_unread_counter
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "Other Info"
+msgstr "معلومات أخرى"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_payslip__overtime_requests
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.payslip_config_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime"
+msgstr "ساعات الاضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__overtime_coefficient
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__overtime_coefficient
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__overtime_coefficient
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__overtime_coefficient
+msgid "Overtime Coefficient"
+msgstr "معامل الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_detailed_report_wizard_menu
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_detailed_report_wizard_view_form
+msgid "Overtime Details Report"
+msgstr "تقرير الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,state:0
+msgid "Overtime Generated"
+msgstr "تم التوليد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__overtime
+msgid "Overtime Hours"
+msgstr "الساعات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__journal_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__journal_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_journal_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_journal_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime Journal"
+msgstr "يومية الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__overtime_line
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__overtime_rel
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__overtime_line
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__overtime_rel
+msgid "Overtime Line"
+msgstr "بنود الاضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_overtime_move_post_wizard
+msgid "Overtime Move Post Wizard"
+msgstr "معالج ترحيل قيد الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_payroll_approve
+msgid "Overtime Payroll Approve"
+msgstr "تصديق الإضافة للرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_overtime_refuse_wizard
+msgid "Overtime Refuse Reason Wizard"
+msgstr "معالج سبب رفض الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_overtime_register_payment_wizard
+msgid "Overtime Register Payment Wizard"
+msgstr "معالج تسجيل سدسد الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_main_menu
+msgid "Overtime Reports"
+msgstr "موافقات الإضافيات"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_my_overtime_act_action_window_editable
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_account_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_all_approve_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_all_paid_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_all_posted_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_audit_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_fin_approve_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_fin_paid_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_fin_post_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_hr_manager_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_manager_act_action_window
+#: model:ir.actions.act_window,name:bsg_hr_overtime.employee_overtime_sallary_team_act_action_window
+#: model:ir.module.category,name:bsg_hr_overtime.module_category_overtime_request
+#: model:res.groups,name:bsg_hr_overtime.group_overtime_request_root
+msgid "Overtime Request"
+msgstr "طلب عمل إضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.menu_my_overtime_request_editable
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_request_menu
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_request_root
+msgid "Overtime Requests"
+msgstr "طلبات الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__state
+msgid "Overtime State"
+msgstr "الحالة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime can be post Journal Entries"
+msgstr "ترحيل قيود الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime can be reimbursed in payslips"
+msgstr "تسجيل الأجر الإضافي مع الراتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.overtime_detailed_report_wizard_action
+msgid "Overtime details Reports"
+msgstr "تقرير الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_refuse_wizard_view_form
+msgid "Overtime refuse reason"
+msgstr "سبب رفض الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Overtime sallary rule"
+msgstr "قاعدة رواتب الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:158
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:319
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:483
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Overtime statement"
+msgstr "بيـان الإضافات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_payslip_input__overtime_ids
+msgid "Overtimes"
+msgstr "الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.report,name:bsg_hr_overtime.overtime_details_action_report
+msgid "Overtimes Details Report"
+msgstr "تقرير الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "POST"
+msgstr "ترحيل"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_detailed_report_wizard_view_form
+msgid "PRINT EXCEL"
+msgstr "طباعة إكسل"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_detailed_report_wizard_view_form
+msgid "PRINT PDF"
+msgstr "طباعة PDF"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Paid"
+msgstr "مدفوع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__paid_date
+msgid "Paid Date"
+msgstr "تاريخ السداد"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Pay"
+msgstr "تسجيل السداد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_payslip
+msgid "Pay Slip"
+msgstr "إيصال المرتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__amount
+msgid "Payment Amount"
+msgstr "المبلغ المدفوع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__payment_date
+msgid "Payment Date"
+msgstr "تاريخ السداد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__payment_move_id
+msgid "Payment Entry"
+msgstr "رقم السداد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__journal_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_payment_method_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_payment_method_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Payment Journal"
+msgstr "دفتر يومية السداد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__payment_method_id
+msgid "Payment Type"
+msgstr "نوع السداد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__payslip_ids
+msgid "Payslip"
+msgstr "قسيمة المرتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_payslip_input
+msgid "Payslip Input"
+msgstr "مدخلات إيصال المرتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__per_hour
+msgid "Per Hour"
+msgstr "مبلغ الساعه"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "Period"
+msgstr "فترة"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:223
+#, python-format
+msgid "Please Add One Line at Least!!"
+msgstr "يجب إضافة تفاصيل الأجر الإضافي بالأسفل"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_move_post.py:25
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_register_payment.py:91
+#, python-format
+msgid "Please Set Partner For Employee {}"
+msgstr "الرجاء تحديد مستفيد للموظف"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_move_post_view_form
+msgid "Post"
+msgstr "ترحيل"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_move_post_wizard__post_date
+msgid "Post Date"
+msgstr "تاريخ الترحيل"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.hr_overtime_move_post_wizard_action
+#: model:ir.actions.act_window,name:bsg_hr_overtime.hr_overtime_move_post_wizard_action_multi
+msgid "Post Move"
+msgstr "ترحيل قيد اليومية"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_move_post_view_form
+msgid "Post Overtime"
+msgstr "ترحيل قيد الأجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Posted"
+msgstr "مُرحل"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__posted_date
+msgid "Posted Date"
+msgstr "تاريخ الترحيل"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:159
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:320
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:484
+#, python-format
+msgid "Printing Date"
+msgstr "تاريخ الطباعة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__priority
+msgid "Priority"
+msgstr "الأولوية"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "REJECT"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_refuse_wizard__reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__refusal_reason
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Reason To Refuse"
+msgstr "سبب الرفض"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_refuse_wizard_view_form
+msgid "Reason To Refuse Overtime"
+msgstr "سبب الرفض"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_refuse_wizard_view_form
+msgid "Refuse"
+msgstr "رفـض"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.hr_overtime_refuse_wizard_action
+msgid "Refuse Overtime"
+msgstr "رفض الإجر الإضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.hr_overtime_register_payment_wizard_action
+#: model:ir.actions.act_window,name:bsg_hr_overtime.hr_overtime_register_payment_wizard_action_multi
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_register_payment_view_form
+msgid "Register Payment"
+msgstr "تسجيل الدفعية"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__default_payslip_reimburse
+msgid "Reimburse in Payslip"
+msgstr "تسجيل مع الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__default_multi_payslip_reimburse
+msgid "Reimburse in Payslip For Multi Requests"
+msgstr "تسجيل مع الرواتب للطلبات المتعددة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__multi_payslip_reimburse
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__payslip_reimburse
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__payslip_reimburse
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__payslip_reimburse
+msgid "Reimburse in payslip"
+msgstr "تسجيل مع الرواتب"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Reject"
+msgstr "إرجاع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__report_type
+msgid "Report Type"
+msgstr "نوع التقرير"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__report_nextslip
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__report_nextslip
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__report_nextslip
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__report_nextslip
+msgid "Report in next payslip"
+msgstr "تسجيل مع الرواتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_report_wizard_main_menu
+msgid "Reports"
+msgstr "التقارير"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__sequence_number
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__sequence_number
+msgid "Request NO"
+msgstr "رقم الطلب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__name
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__name
+msgid "Request Name"
+msgstr "الإسم"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "SUBMIT TO MANAGER"
+msgstr "أرسل إلى المدير"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__per_hour_sallary
+msgid "Sallary Per Hour"
+msgstr "مرتب الساعة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_sallary_rule_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_sallary_rule_id
+msgid "Sallary Rule"
+msgstr "قاعدة الرواتب"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:168
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:331
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:497
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: bsg_hr_overtime
+#: model:ir.actions.act_window,name:bsg_hr_overtime.action_config_settings
+#: model:ir.ui.menu,name:bsg_hr_overtime.menu_overtime_general_settings
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,mode:0
+msgid "Specific Employee"
+msgstr "الموظف"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__state
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__state
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_search_view
+msgid "State"
+msgstr "الحالة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__subtotal
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "SubTotal"
+msgstr "الإجمالي"
+
+#. module: bsg_hr_overtime
+#: selection:hr.employee.overtime,state:0
+#: selection:hr.overtime,state:0
+#: selection:overtime.detailed.report.wizard,state:0
+msgid "Submitted"
+msgstr "ارسال للموافقة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_company__overtime_tax_id
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_res_config_settings__overtime_tax_id
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.res_config_settings_view_form
+msgid "Tax"
+msgstr "الضريبة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime_register_payment_wizard__hide_payment_method
+msgid "Technical field used to hide the payment method if the selected journal has only one available which is 'manual'"
+msgstr "حقل تقني يُستخدم لإخفاء طريقة السداد إن كان دفتر اليومية المُختار متاح به طريقة واحدة فقط وهي 'يدويًا'"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_move_post.py:45
+#, python-format
+msgid "The amount must be Strictly positive."
+msgstr "المبلغ يجب أن يكون موجب"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_register_payment.py:40
+#, python-format
+msgid "The payment amount must be Strictly positive."
+msgstr "المبلغ يجب أن يكون موجب"
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_all_overtime_request
+msgid "The user will have access to all overtime request menues."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_all_approver
+msgid "The user will have access to all records to be approved."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_admin
+msgid "The user will have access to menues as admin."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_my_overtime_request
+msgid "The user will have access to my overtime request menu."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_request_root
+msgid "The user will have access to overtime request main menu."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_hr_sallary_team
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_payroll_approve
+msgid "The user will have access to record for sallary team."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_accounting_approver
+msgid "The user will have access to record to be approved by accounting."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_audit_approver
+msgid "The user will have access to record to be approved by audit."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_financial_management_approver
+msgid "The user will have access to record to be approved by financial management."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_hr_manager_approver
+msgid "The user will have access to record to be approved by hr manager."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_overtime_manager_approver
+msgid "The user will have access to record to be approved by manager."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:res.groups,comment:bsg_hr_overtime.group_emps_overtime_requests_batch
+msgid "The user will have access to the employees overtime request menu."
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/report/hr_overtime_details_report.py:60
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:87
+#, python-format
+msgid "There Is No Match Overtime Data"
+msgstr "عفـوا!! لا توجد سجلات أجر إضافي مطابقة"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/hr_overtime_move_post.py:21
+#, python-format
+msgid "This Record Is Already Posted {}"
+msgstr "يوجد سجل تم ترحيله مسبقا"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__date_to
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__date_to
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_overtime_detailed_report_wizard__date_to
+msgid "To"
+msgstr "إلى"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_accounting_team_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_all_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_audit_team_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_financial_management_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_hr_manager_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_hr_sallary_to_approve
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_manager_to_approve
+msgid "To Approve"
+msgstr "مطلوب الموافقة عليه"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__to_date
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__to_date
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_all_to_paid
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_financial_management_to_paid
+msgid "To Paid"
+msgstr "للدفع"
+
+#. module: bsg_hr_overtime
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_all_to_post
+#: model:ir.ui.menu,name:bsg_hr_overtime.overtime_reports_financial_management_to_post
+msgid "To post"
+msgstr "للترحيل"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#: selection:overtime.detailed.report.wizard,report_type:0
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+msgid "Total Amount"
+msgstr "إجمالي المبلغ"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+msgid "Total Hours"
+msgstr "عدد الساعات"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__total_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime_line__total_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__total_overtime
+msgid "Total Overtime"
+msgstr "إجمالي ساعات الاضافي"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:174
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:337
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:503
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__total_overtime_amount
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__total_overtime_amount
+#, python-format
+msgid "Total Overtime Amount"
+msgstr "إجمالي قيمة الاضافي"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime_line__total_overtime
+msgid "Total Overtime Hours"
+msgstr "إجمالي الساعات"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:172
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:335
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:501
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Total Salary"
+msgstr "إجمالي الراتب"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:171
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:334
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:500
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.overtime_details_report_template
+#, python-format
+msgid "Type"
+msgstr "النوع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_unread
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_unread
+msgid "Unread Messages"
+msgstr "الرسائل الجديدة"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__message_unread_counter
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.hr_overtime_register_payment_view_form
+msgid "Validate"
+msgstr "اعتماد"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__wage_sallary
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "Wage Sallary"
+msgstr "إجمالي الراتب"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_employee_overtime__website_message_ids
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_employee_overtime__website_message_ids
+#: model:ir.model.fields,help:bsg_hr_overtime.field_hr_overtime__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:332
+#, python-format
+msgid "You can not have 2 overtimes that overlaps on the same periods."
+msgstr "لا يمكن أن يكون لديك طلبين في نفس الفترة"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/multi_emps_overtime_request.py:129
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:207
+#, python-format
+msgid "You can not have 2 requests that overlaps on the same day."
+msgstr "لا يمكن أن يكون لديك طلبين في نفس الفترة"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/multi_emps_overtime_request.py:215
+#: code:addons/bsg_hr_overtime/models/my_overtime_request.py:322
+#, python-format
+msgid "You can not have dates out of the range of dates above."
+msgstr "التاريخ يجب أن يكون ضمن التاريخ المحدد"
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/models/multi_emps_overtime_request.py:84
+#, python-format
+msgid "You can not have period which overlap on previous one"
+msgstr "لا يمكن أن يكون لديك طلبين في نفس الفترة"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,group_by_mode:0
+msgid "by Employee"
+msgstr "الموظف"
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.emp_overtime_request_form_view
+msgid "e.g. Overtime of Employee"
+msgstr "مثلا إضافي الموظف ...."
+
+#. module: bsg_hr_overtime
+#: model_terms:ir.ui.view,arch_db:bsg_hr_overtime.multi_emp_overtime_request_form_view
+msgid "e.g. Overtime of Employees"
+msgstr "مثلا إضافي الموظف ...."
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_employee_overtime
+msgid "hr.employee.overtime"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_employee_overtime_line
+msgid "hr.employee.overtime.line"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_overtime
+msgid "hr.overtime"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_hr_overtime_line
+msgid "hr.overtime.line"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model.fields,field_description:bsg_hr_overtime.field_hr_overtime__payslip_input_ids
+msgid "input"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is after"
+msgstr "بعد"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is after or equal to"
+msgstr "بعد أو يساوي"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is before"
+msgstr "قبل"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is between"
+msgstr "هو بين"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is equal to"
+msgstr "يساوي"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is not equal"
+msgstr "لا يساوي"
+
+#. module: bsg_hr_overtime
+#: selection:overtime.detailed.report.wizard,date_condition:0
+msgid "is set"
+msgstr "مضبوط"
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_overtime_detail_report_excel
+msgid "overtime.detail.report.excel"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_overtime_detailed_report_wizard
+msgid "overtime.detailed.report.wizard"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:107
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:268
+#: code:addons/bsg_hr_overtime/wizard/overtime_detailed_report_wizard.py:432
+#, python-format
+msgid "overtime_report.xlsx"
+msgstr ""
+
+#. module: bsg_hr_overtime
+#: model:ir.model,name:bsg_hr_overtime.model_report_bsg_hr_overtime_overtime_details_report_template
+msgid "report.bsg_hr_overtime.overtime_details_report_template"
+msgstr ""
+

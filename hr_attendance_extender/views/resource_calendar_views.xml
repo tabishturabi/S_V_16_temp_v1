@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- resource calendar form -->
+    <record id="config_calender" model="ir.ui.view">
+        <field name="name">inherit.resource.calender</field>
+        <field name="model">resource.calendar</field>
+        <field name="inherit_id" ref="resource.resource_calendar_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="sms_time_delay"/> (M)
+            </field>
+            <field name="attendance_ids" position="before">
+                <group>
+                    <label for="early_checked_in" string="Early-Late/Chek In"/>
+                    <div>
+                        <field name="early_checked_in"  class="oe_inline"/> (M) -
+                        <field name="late_checked_in"  class="oe_inline"/> (M)
+                    </div>
+                </group>
+                <group>
+                    <label for="early_checked_out" string="Early-Late/Check Out"/>
+                    <div>
+                        <field name="early_checked_out"  class="oe_inline"/> (M) -
+                        <field name="late_checked_out"   class="oe_inline"/> (M)
+                    </div>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <!-- resource calendar attendance tree -->
+    <record id="resource_calender" model="ir.ui.view">
+        <field name="name">inherit.resorse.calender.attendance.tree</field>
+        <field name="model">resource.calendar.attendance</field>
+        <field name="inherit_id" ref="resource.view_resource_calendar_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="date_from" position="replace"/>
+            <field name="date_to" position="replace"/>
+            <field name="hour_to" position="after">
+                <field name="is_work"/>
+                <field name="worked_hours"/>
+                <field name="span_days" />
+            </field>
+        </field>
+    </record>
+
+    <!-- resource calendar attendance form -->
+    <record id="resource_calender_form" model="ir.ui.view">
+        <field name="name">inherit.resource.calender.attendance.form</field>
+        <field name="model">resource.calendar.attendance</field>
+        <field name="inherit_id" ref="resource.view_resource_calendar_attendance_form"/>
+        <field name="arch" type="xml">
+            <field name="dayofweek" position="after">
+                <field name="is_work"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

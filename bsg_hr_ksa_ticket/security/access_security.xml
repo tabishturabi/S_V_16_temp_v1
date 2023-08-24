@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="module_hr_ticketing">
+            <field name="name">HR Ticketing</field>
+            <field name="description">HR Ticketing</field>
+            <field name="sequence">24</field>
+        </record>
+        <record model="res.groups" id="group_ticket_request">
+            <field name="name">Tickets Request</field>
+            <field name="category_id" ref="module_hr_ticketing"/>
+        </record>
+
+
+    </data>
+</odoo>

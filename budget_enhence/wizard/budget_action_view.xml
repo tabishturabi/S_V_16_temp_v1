@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	    <record model="ir.ui.view" id="view_internal_number_from">
+	            <field name="name">BudgetReconciliationInternalTransfer</field>
+	            <field name="model">budget_reconciliation_internal_transfer</field>
+	            <field name="type">form</field>
+	            <field name="arch" type="xml">
+	                <form string="Create Budget Reconciliation">
+	                <div class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('payment_journal_id','!=',False)]}">
+	                <bold>We Are not Match Data</bold>
+	                </div>
+	                    <group>
+	                        <group>
+	                            <field name="payment_amount"/>
+	                            <field name="payment_journal_id" required="1"/>
+	                            <field name="destination_journal_id" required="1" options="{'no_quick_create': True, 'no_create_edit' : True ,'no_open':True}"/>
+	                        </group>
+	                        <group>
+	                            <field name="payment_date" required="1"/>
+	                            <field name="tax_amount"/>
+	                            <field name="bank_charges"/>
+	                            <field name="tamara_charges"/>
+	                        </group>
+	                    </group>
+	                    
+	                    <footer>
+	                        <button name="action_add_budget_reconciliation" string="Confirm" type="object"  class="btn-primary" attrs="{'invisible': ['|', ('payment_journal_id', '=', False),('payment_amount', '=', False)]}" />
+	                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+	                    </footer>
+	                </form>
+	            </field>
+	    </record>
+
+
+		 <record id="action_budget_reconciliation" model="ir.actions.act_window">
+          <field name="name">Create Budget Reconciliation</field>
+          <field name="res_model">budget_reconciliation_internal_transfer</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="budget_enhence.view_internal_number_from"/>
+          <field name="target">new</field>
+          <field name="context">{}</field>
+          <field name="binding_model_id" ref="account.model_account_payment"/>
+<!--          <field name="groups_id" eval="[(4, ref('bsg_trip_mgmt.group_add_to_trip'))]"/>-->
+          <field name="binding_view_types">form,list</field>
+      </record>
+        
+<!--	    <act_window-->
+<!--	            id="action_add_internal_transfer"-->
+<!--	            name="Create Budget Reconciliation"-->
+<!--	            res_model="budget_reconciliation_internal_transfer"-->
+<!--	            src_model="account.payment"-->
+<!--	            view_mode="form"-->
+<!--	            multi="True"-->
+<!--	            target="new"-->
+<!--	            key2="client_action_multi"-->
+<!--	        />-->
+    </data>
+</odoo>

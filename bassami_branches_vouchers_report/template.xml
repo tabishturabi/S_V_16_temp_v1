@@ -1,0 +1,83 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_voucher_template_branches" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_branches_voucher_records" 
+            model="account.payment"
+            name="bassami_branches_vouchers_report.branchesvoucher_report"
+            file="bassami_branches_vouchers_report.branchesvoucher_report"
+            report_type="qweb-html"
+            string="Branches Voucher Report"
+            paperformat="paperformat_voucher_template_branches"
+            menu="False"/>
+
+        <record id="branchesvoucher_records_wizard" model="ir.ui.view">
+            <field name="name">branchesvoucher_records_wizard</field>
+            <field name="model">branchesvouchers.report.bassami</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="form"/>
+                            <field name="branch_ids"  widget="many2many_tags" options="{'no_create':True,'no_edit':True}"/>
+
+                        </group>
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="report_type"/>
+                            
+                        </group>
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print Pdf" class = "oe_highlight" />
+                        <button name="print_report_xlsx" type="object" string="Print Xlsx" class = "oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="branchesvoucher_records_menu_action" model="ir.actions.act_window">
+            <field name="name">Branches Voucher Report</field>
+            <field name="res_model">branchesvouchers.report.bassami</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="branchesvoucher_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="bassamibranches_voucher_menu_item" name="Branches Voucher Report" action="branchesvoucher_records_menu_action" parent="account.menu_finance_reports"/>
+
+        <report
+            id="action_branches_voucher_report"
+            string="Branches Voucher Report"
+            model="account.payment"
+            report_type="xlsx"
+            file="Branches Voucher Report"
+            name="bassami_branches_vouchers_report.voucher_report_xlsx"
+            menu="False"
+        />
+
+
+    
+        
+    </data>
+</odoo>

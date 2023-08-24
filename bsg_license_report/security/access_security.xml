@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="res.groups" id="group_view_bsg_branch_license_report">
+            <field name="name">Branch License Reports</field>
+        </record>
+        <record model="res.groups" id="group_view_bsg_branch_report">
+            <field name="name">Main Branch License Reports</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_pr_mrp" model="res.groups">
+            <field name="name">P.R For Manufacture</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+        <record id="bsg_mrp_production_comp_rule" model="ir.rule">
+            <field name="name">Bsg Mrp Production</field>
+            <field name="model_id" ref="manufacturing_enhance.model_bsg_mrp_production"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="bsg_quality_check_comp_rule" model="ir.rule">
+            <field name="name">Bsg Quality Check</field>
+            <field name="model_id" ref="manufacturing_enhance.model_bsg_quality_check"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="bsg_mrp_project_comp_rule" model="ir.rule">
+            <field name="name">Bsg Mrp Project</field>
+            <field name="model_id" ref="manufacturing_enhance.model_bsg_mrp_project"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="bsg_mrp_project_type_comp_rule" model="ir.rule">
+            <field name="name">Bsg Mrp Project Type</field>
+            <field name="model_id" ref="manufacturing_enhance.model_bsg_mrp_project_type"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+    </data>
+</odoo>

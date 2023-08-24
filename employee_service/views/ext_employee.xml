@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="form_inherit_view_view_employee_service_formform1" model="ir.ui.view">
+            <field name="name">hr.employee.form.service.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="before">-->
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="employee_service" type="object" class="oe_stat_button">
+                        <field name="service_count" widget="statinfo" string="Employee service"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="employee_passport_report_xlsx_id"
+                model="employee.passport.report.wizard"
+                string="Employee Passport Report"
+                report_type="xlsx"
+                name="bsg_documents_expire_reports.passport_report_xlsx"
+                file="employee_passport_report"/>
+</odoo>

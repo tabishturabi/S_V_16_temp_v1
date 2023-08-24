@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="bsg_cargo_sale_inherit_view_sale_config_settings" model="ir.ui.view">-->
+<!--        <field name="name">bsg_cargo_sale_inherit_view_sale_config_settings</field>-->
+<!--        <field name="model">res.config.settings</field>-->
+<!--        <field name="type">form</field>-->
+<!--        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[hasclass('app_settings_block')]" position="inside">-->
+<!--                <h2>Satah Service</h2>-->
+<!--                <div class="row mt16 o_settings_container">-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box">-->
+<!--                        <div class="o_setting_left_pane"/>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <span class="o_form_label">Satah Service</span>-->
+<!--                            <div class="text-muted">-->
+<!--                                Account used for satah service-->
+<!--                            </div>-->
+<!--                            <div class="text-muted">-->
+<!--                                <field name="satah_account_id"/>-->
+<!--                            </div>-->
+<!--                            <span class="o_form_label">Default Invoice Line Account</span>-->
+<!--                            <div class="text-muted">-->
+<!--                                Default Invoice Line Account-->
+<!--                            </div>-->
+<!--                            <div class="text-muted">-->
+<!--                                <field name="inv_line_account_id"/>-->
+<!--                            </div>-->
+<!--                            <span class="o_form_label">Default Cargo Service</span>-->
+<!--                            <div class="text-muted">-->
+<!--                                Default Cargo Service-->
+<!--                            </div>-->
+<!--                            <div class="text-muted">-->
+<!--                                <field name="cargo_service_id"/>-->
+<!--                            </div>-->
+<!--                            <span class="o_form_label">Default Taxes</span>-->
+<!--                            <div class="text-muted">-->
+<!--                                Default tax-->
+<!--                            </div>-->
+<!--                            <div class="text-muted">-->
+<!--                                <field name="tax_ids" widget="many2many_tags" nolabel="1"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

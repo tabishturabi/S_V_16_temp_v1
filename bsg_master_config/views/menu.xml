@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Configuration"
+              id="root_configuration_menu"
+              web_icon="bsg_master_config,static/description/icon.png"
+              groups="bsg_master_config.group_master_configuration"
+              sequence="1"/>
+
+    <menuitem name="Car Management"
+              id="root_car_master"
+              parent="root_configuration_menu"
+              sequence="1"/>
+
+    <menuitem name="Car Size"
+              id="menu_car_size"
+              parent="root_car_master"
+              action="bsg_car_size_action"
+              sequence="1"
+    />
+
+    <menuitem name="Car Maker"
+              id="menu_car_make"
+              parent="root_car_master"
+              action="bsg_car_make_action"
+              sequence="2"
+    />
+
+    <menuitem name="Car Model"
+              id="menu_car_config"
+              parent="root_car_master"
+              action="bsg_car_config_action"
+              sequence="3"
+    />
+
+    <menuitem name="Model Details"
+              id="menu_car_model"
+              parent="root_car_master"
+              action="bsg_car_model_action"
+              sequence="4"
+    />
+
+    <menuitem name="Plate Config"
+              id="menu_plate_config"
+              parent="root_car_master"
+              action="bsg_plate_config_action"
+              sequence="5"
+              groups="base.group_erp_manager"
+    />
+
+    <menuitem name="Vehicle Color"
+              id="menu_vehicle_color_"
+              parent="root_car_master"
+              action="bsg_vehicle_color_action"
+              sequence="6"
+              groups="base.group_erp_manager"
+    />
+
+    <menuitem name="Car Year"
+              id="menu_car_year"
+              parent="root_car_master"
+              action="bsg_car_year_action"
+              sequence="7"
+              groups="base.group_erp_manager"
+    />
+
+    <menuitem name="Car Classfication"
+              id="menu_car_classfication"
+              parent="root_car_master"
+              action="bsg_car_classfication_action"
+              sequence="8"
+              groups="base.group_erp_manager"
+    />
+
+    <menuitem name="Shipment Config"
+              id="menu_shipment_config"
+              parent="root_car_master"
+              action="action_bsg_car_shipment_type"
+              sequence="9"
+              groups="base.group_erp_manager"
+    />
+
+    <menuitem name="Route Management"
+              id="root_route_master"
+              parent="root_configuration_menu"
+              sequence="2"
+    />
+
+    <menuitem name="Route"
+              id="menu_route"
+              parent="root_route_master"
+              action="bsg_bsg_route_action"
+              sequence="1"
+    />
+
+    <menuitem name="Locations"
+              id="menu_route_waypoint"
+              parent="root_route_master"
+              action="bsg_route_waypoints_action"
+              sequence="2"
+    />
+        <menuitem name="Trucks Dedicating Area"
+              id="menu_trucks_dedicating_area"
+              parent="root_route_master"
+              action="trucks_dedicating_area_action"
+              sequence="3"
+    />
+
+    <menuitem name="Estimated Delivery Day's"
+              id="menu_route_estimated_delivery"
+              parent="root_route_master"
+              action="estimated_delivery_days_action"
+              sequence="4"
+    />
+
+    <menuitem name="MAX Daily SO per Branch's"
+              id="menu_max_daily_so_per_branch"
+              parent="root_route_master"
+              action="max_daily_so_per_branch_action"
+              sequence="5"
+    />
+    <!--	<menuitem name="Locations"
+            id="menu_locations"
+            parent="root_customer_locations_master"
+            action="action_window_customer_location"
+            sequence="1"
+            /> -->
+
+
+    <menuitem name="Price Management"
+              id="root_price_master"
+              parent="root_configuration_menu"
+              sequence="3"
+    />
+
+    <menuitem name="Price Config"
+              id="menu_price_config"
+              parent="root_price_master"
+              action="bsg_price_config_action"
+              sequence="1"
+    />
+
+    <menuitem name="Price Config Line"
+              id="menu_price_config_line"
+              parent="root_price_master"
+              action="bsg_price_line_action"
+              sequence="2"
+    />
+    <menuitem name="Discount on Cargo"
+              id="menu_discount_on_cargo"
+              parent="root_price_master"
+              action="discount_on_cargo_config_action"
+              groups="base.group_erp_manager"
+              sequence="8"
+    />
+
+
+    <menuitem
+            id="menu_demurrage_charges_config"
+            parent="root_price_master"
+            action="demurrage_charges_config_action"
+            sequence="3"
+    />
+
+    <menuitem name="Cancellation Configuration"
+              id="root_bsg_cancel_config"
+              parent="root_configuration_menu"
+              sequence="4"
+    />
+
+    <menuitem name="Single Trip"
+              id="menu_bsg_single_trip"
+              parent="root_bsg_cancel_config"
+              action="single_trip_cancel_action"
+              sequence="5"
+    />
+
+    <menuitem name="Round Trip"
+              id="menu_bsg_round_trip"
+              parent="root_bsg_cancel_config"
+              action="round_trip_cancel_action"
+              sequence="5"
+    />
+
+
+    <menuitem name="Configuration"
+              id="root_bsg_config_settings"
+              parent="root_configuration_menu"
+              sequence="4"
+    />
+    <menuitem name="Settings"
+              id="menu_bsg_config_settings"
+              parent="root_bsg_config_settings"
+              action="bsg_master_config_settings_action"
+              sequence="5"
+    />
+
+    <menuitem name="Service Product"
+              id="menu_service_products"
+              parent="root_configuration_menu"
+              sequence="7"/>
+
+
+    <record model="ir.ui.menu" id="bsg_master_config.root_car_master">
+        <field name="name">Car Management</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                            ref('bsg_master_config.group_waypoint_sale_master')
+                                            ])]"/>
+    </record>
+
+
+    <record model="ir.ui.menu" id="bsg_master_config.menu_route_waypoint">
+        <field name="name">Locations</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),ref('bsg_master_config.group_waypoint_sale_master')
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.root_price_master">
+        <field name="name">Price Management</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.root_bsg_cancel_config">
+        <field name="name">Cancellation Configuration</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.menu_service_products">
+        <field name="name">Service Product</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                            ])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="bsg_master_config.root_bsg_config_settings">
+        <field name="name">Configuration</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_master_config.group_master_configuration'),
+                                            ref('base.group_erp_manager'),
+                                            ])]"/>
+    </record>
+
+</odoo>

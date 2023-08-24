@@ -1,0 +1,51 @@
+<?xml version="1.0"?> 
+<odoo> 
+    <data>
+        <record model="ir.module.category" id="module_access_transporter"> 
+            <field name="name">Transportation Access</field> 
+            <field name="sequence">7</field> 
+        </record> 
+        <record id="group_transport_manager" model="res.groups"> 
+            <field name="name">Transportation Manager</field> 
+            <field name="category_id" ref="module_access_transporter"/> 
+            <field name="users" eval="[(4, ref('base.user_root'))]"/> 
+        </record>
+        <record id="group_transport_management" model="res.groups"> 
+            <field name="name">Transportation Button</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/> 
+        </record>
+        <record id="group_cancel_trasport_vendor_bill" model="res.groups"> 
+            <field name="name">Cancel Vendor Bill</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+        </record>
+        <record id="group_register_payment_vendor_bill" model="res.groups"> 
+            <field name="name">Register Payment for Return Vendor Bill</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+        </record>
+
+        <record id="group_register_payment_customer_invoice" model="res.groups"> 
+            <field name="name">Register Payment for Invoice</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+        </record>
+
+        <record id="group_cancel_trasport_customer_invoice" model="res.groups"> 
+            <field name="name">Cancel Customer Invoice</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+        </record>
+        <record id="group_pay_transport_money_trans" model="res.groups">
+            <field name="name">Pay Transport Money Difference</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/> 
+        </record>
+        <record id="group_compute_fuel_trip_amt" model="res.groups"> 
+            <field name="name">Re-Calculate Amount</field> 
+            <field name="category_id" ref="module_access_transporter"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/> 
+        </record>
+        <record id="group_get_driver_back" model="res.groups">
+            <field name="name">Retrieve Drivers</field>
+            <field name="category_id" ref="module_access_transporter"/>
+        </record>
+    </data>
+</odoo>

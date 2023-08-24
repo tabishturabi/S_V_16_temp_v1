@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="vehicle_document_report_xlsx_id"
+                model="vehicle.documents.report.wizard"
+                string="Vehicle Documents Report"
+                report_type="xlsx"
+                name="bsg_vehicle_documents_reports.vehicle_doc_report_xlsx"
+                file="Vehicle Documents Reports"/>
+</odoo>

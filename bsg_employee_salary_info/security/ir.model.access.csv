@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_salary_info_line,access_salary_info_line,model_salary_info_line,,1,1,1,1
+
+

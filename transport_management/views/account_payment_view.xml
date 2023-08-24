@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_payment_form_extendes" model="ir.ui.view">
+			<field name="name">Account Payment</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account.view_account_payment_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='journal_id']" position="before">
+                   <field name="transport" invisible="1"/>
+                   <field name="bx_transport_id" readonly="1" attrs="{'invisible': [('transport', '=',False)]}"/>
+                </xpath>
+		 	</field>
+         </record>
+</odoo>

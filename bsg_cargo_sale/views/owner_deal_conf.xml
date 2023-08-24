@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+
+        <!-- Form View  -->
+        <record model="ir.ui.view" id="view_owner_deal_conf_form">
+            <field name="name">owner_deal_conf.form</field>
+            <field name="model">owner_deal_conf</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="owner_deal_name" placeholder="Owner Deal Name"/>
+                        <field name="commercial_number" placeholder="Commercial Number"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record model="ir.ui.view" id="view_owner_deal_conf_tree">
+            <field name="name">owner_deal_conf.tree</field>
+            <field name="model">owner_deal_conf</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree duplicate="false">
+                    <field name="owner_deal_name"/>
+                    <field name="commercial_number"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action  -->
+        <record model="ir.actions.act_window" id="action_owner_deal_conf">
+            <field name="name">Owner Deal Conf</field>
+            <field name="res_model">owner_deal_conf</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Owner Deal Config"
+                  id="cargo_payment_method_menu"
+                  parent="sale.sale_menu_root"
+                  action="action_owner_deal_conf"
+                  sequence="101"
+                  groups="bsg_cargo_sale.group_shipment_price_list"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <report
+            id="fleet_status_report_xlsx_id"
+            string="Fleet Status Report Excel"
+            model="fleet.status.model"
+            report_type="xlsx"
+            file="Fleet Status Report Excel"
+            name="fleet_status_report.fleetstatus_report_xlsx"
+        />
+
+      
+    </data>
+</openerp>

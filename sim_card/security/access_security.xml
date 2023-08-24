@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_sim_card">
+            <field name="name">SIM Configuration</field>
+            <field name="description">User access level for this module</field>
+            <field name="sequence">8</field>
+        </record>
+
+        <record id="service_provider_user" model="res.groups">
+            <field name="name">Service provider</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="package_type_user" model="res.groups">
+            <field name="name">Package Type</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_status_user" model="res.groups">
+            <field name="name">SIM Card Status</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_user" model="res.groups">
+            <field name="name">SIM Card Define</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_delivery_user" model="res.groups">
+            <field name="name">SIM Card Delivery</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_receipt_user" model="res.groups">
+            <field name="name">SIM Card Receipt</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_employee_manger_user" model="res.groups">
+            <field name="name">Employee Manager To Approve</field>
+            <field name="category_id" ref="module_sim_card"/>
+
+        </record>
+
+        <record id="sim_card_finance_manger_user" model="res.groups">
+            <field name="name">Finance Manager To Approve</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_Administrator_manger_user" model="res.groups">
+            <field name="name">Administrator Manager To Approve</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_upgrade_package_user" model="res.groups">
+            <field name="name">Sim Card Upgrade Package</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+
+         <record id="sim_card_lost_package_user" model="res.groups">
+            <field name="name">Replacement for Lost  SIM Request</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_request_user" model="res.groups">
+            <field name="name">Sim Card Request</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+        <record id="sim_card_movement_report" model="res.groups">
+            <field name="name">SIM Card Movement Report</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+
+        <record id="sim_card_request_active" model="res.groups">
+            <field name="name">Sim Card Active</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+         <record id="service_sim_card_owner" model="res.groups">
+            <field name="name">Sim Card Owner</field>
+            <field name="category_id" ref="module_sim_card"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="wizard_get_image_wizard" model="ir.ui.view">
+		<field name="name">Get Image</field>
+		<field name="model">get.image</field>
+		<field name="arch" type="xml">
+			<form string="Get Images">
+				<style>
+					.o_field_image{
+						width: 100%;
+					}
+					.modal-header{
+						display: none !important;
+					}
+					.o_form_view.o_form_nosheet{
+						padding-top: 0px !important;
+						padding-right: 0px !important;
+						padding-bottom: 0px !important;
+						padding-left: 0px !important;
+					}
+					.codup_gmap {
+						margin-top: 0px !important;
+					}
+					.o_form_view .o_field_widget {
+						margin-bottom: 0px !important;
+					}
+				</style>
+				<field name="is_other" invisible="1"/>
+				<group col="4" colspan="4" attrs="{'invisible': [('is_other', '=', True)]}">
+					<field name="images_top" widget="image"/>
+					<field name="images_right" widget="image"/>
+					<separator/>
+					<separator/>
+					<field name="images_left" widget="image"/>
+					<field name="images_bottom" widget="image"/>
+				
+				</group>
+				<field name="images_other" widget="image" attrs="{'invisible': [('is_other', '!=', True)]}"/>
+				<footer>
+					<button name="action_confirm" type="object" string="Confirm" class="btn btn-primary"/>
+					<button name="cancel" string="Cancel" special="cancel" class="btn btn-primary pull-right"/>
+				</footer>
+				</form>
+		</field>
+	</record>
+
+	<record id="action_get_image_wizard" model="ir.actions.act_window">
+		<field name="name">Get Images</field>
+		<field name="res_model">get.image</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="search_view_id" ref="wizard_get_image_wizard"/>
+	</record>
+	
+</odoo>

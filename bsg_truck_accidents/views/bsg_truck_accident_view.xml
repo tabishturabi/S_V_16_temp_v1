@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="bsg_truck_accidents"
+                  name="Truck Accidents"
+                  web_icon="bsg_truck_accidents,static/description/insuranceClaim_Icon.png"
+                  groups="bsg_truck_accidents.group_truck_accident,bsg_truck_accidents.group_truck_company_claims,bsg_truck_accidents.group_individual_claims,bsg_truck_accidents.group_state_accident_state_7,bsg_truck_accidents.group_shaamil_claims"
+        />
+        <menuitem id="menu_truck_accident"
+                  name="Register Truck Accidents"
+                  parent="bsg_truck_accidents"
+                  sequence="1"
+                  groups="bsg_truck_accidents.group_truck_accident,bsg_truck_accidents.group_shaamil_claims_state_1,bsg_truck_accidents.group_shaamil_claims,bsg_truck_accidents.group_state_accident_state_7"
+        />
+    </data>
+</odoo>

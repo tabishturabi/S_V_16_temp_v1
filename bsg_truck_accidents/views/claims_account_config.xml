@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="form_claims_account_config_view" model="ir.ui.view">
+            <field name="name">claims.account.config.form</field>
+            <field name="model">claims_account_config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Claims Account Config">
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="claim_product_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="cars_account_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="claim_account_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="analytic_account_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="journal_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="driver_mistake_account_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="vendor_tax_id" options="{'no_create':True,'no_edit':True}"/>
+                                <field name="customer_tax_id" options="{'no_create':True,'no_edit':True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_claims_account_config" model="ir.ui.view">
+            <field name="name">claims.account.config.tree</field>
+            <field name="model">claims_account_config</field>
+            <field name="arch" type="xml">
+                <tree string="Claims Account Config">
+                    <field name="name"/>
+                    <field name="claim_account_id"/>
+                    <field name="analytic_account_id"/>
+                    <field name="journal_id"/>
+                    <field name="driver_mistake_account_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_claims_account_config" model="ir.actions.act_window">
+            <field name="name">Claims Account Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">claims_account_config</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('tree_claims_account_config')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('form_claims_account_config_view')})]"/>
+        </record>
+        <menuitem action="action_claims_account_config" id="menu_claims_account_config"
+                  parent="bsg_truck_accidents.menu_truck_accident_config" name="Accounting Configuration" sequence="2"/>
+    </data>
+</odoo>

@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+
+    <!-- Form View Of Fine For Late Arrival -->
+    <record model="ir.ui.view" id="view_fine_for_late_arrivalform">
+        <field name="name">fine_for_late_arrival.form</field>
+        <field name="model">fine_for_late_arrival</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form>
+            <sheet>
+              <group>
+                <group>
+                  <field name="from_km" string="From(Hours)"/>
+                  <field name="deduction_from_reqard"/>
+                </group>
+                <group>
+                  <field name="to_km" string="To(Hours)"/>
+                </group>
+              </group>
+            </sheet>
+            <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+    <!-- Tree View Of Fine For Late Arrival  -->
+    <record model="ir.ui.view" id="view_fine_for_late_arrival_tree">
+        <field name="name">fine_for_late_arrival.tree</field>
+        <field name="model">fine_for_late_arrival</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree editable="bottom">
+          <field name="from_km" string="From(Hours)"/>
+          <field name="to_km" string="To(Hours)"/>
+          <field name="deduction_from_reqard"/>
+        </tree>
+        </field>
+    </record>
+
+    <!-- Action View of Fine For Late Arrival -->
+    <record model="ir.actions.act_window" id="action_fine_for_late_arrival">
+        <field name="name">Fine For Late Arrival</field>
+        <field name="res_model">fine_for_late_arrival</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+    </record>
+    
+</data>
+</odoo>

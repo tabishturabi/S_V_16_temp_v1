@@ -1,0 +1,145 @@
+<odoo>
+  
+  <record model="ir.ui.view" id="arriving_confrim_wiz_form">
+        <field name="name">arriving.confrim.Wiz.form</field>
+        <field name="model">arriving.confrim.wiz</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+              <group>
+              <field name="arriving_lines"  widget="html" readonly="1" nolable="1"/>
+              </group>
+            </form>
+            <footer>
+                <button string='Confirm' name="register_arrival" type="object" class="btn-primary"/>
+                <button string="Cancel" name="action_cancel" class="btn-secondary" type="object"/>
+            </footer>
+
+        </field>
+  </record>    
+   <!-- Form View Of Survey Question -->
+    <record model="ir.ui.view" id="fleet_trip_arrival_form">
+        <field name="name">fleet.trip.arrival.form</field>
+        <field name="model">fleet.trip.arrival</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                 <group>
+                    <group>
+                      <field name="is_required" invisible="1"/>
+                      <field name="waypoint_from" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                      <field name="est_trip_time" invisible="1"/>
+                      <field name="actual_start_time" attrs="{'readonly': [('is_required', '=',True)]}"/>
+                      <!-- <label for="parking_no"/>
+                      <div class="o_row">
+                          <field name="parking_no"/>
+                          <button string="⇒ Update" type="object" name="action_update_parking" class="oe_link" />
+                      </div> -->
+<!--                      <field name="odoometer" attrs="{'required': [('is_required', '=',True)]}"/>-->
+                        <field name="odoometer" invisible="1"/>
+                        <field name="register_done" invisible="1"/>
+                      <separator/>
+                      <separator/>
+                      <!-- <field name="finish_trip"/> -->
+                      <field name="is_driver_reward_given"/>
+                    </group>
+                    <group>
+                        <field name="waypoint_to" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="actual_end_time" attrs="{'readonly': [('is_required', '=',True)]}"/>
+                        <!-- <label for="drawer_no"  />
+
+                        <div class="o_row">
+                            <field name="drawer_no" />
+                            <button string="⇒ Update" type="object" name="action_update_drawer" class="oe_link" />
+                        </div>                                 -->
+                        <field name="is_survey_done" invisible="1"/>
+                        <field name="actual_time_duration" readonly="1"/>
+                        <separator/>
+                        <separator/>
+                        <field name="survey_ids" widget="many2many_tags" attrs="{'required': [('is_no_violation', '!=', True)]}"/>
+                          <field name="is_no_violation"/>
+                        <button name="action_create_survey" type="object" string="Start Survey" class="oe_highlight" invisible="1"/>
+                    </group>
+
+                </group>
+            <notebook>
+                <page string="Info" name="info">
+                  <field name="arrival_line_ids" domain="[('state','=', 'shipped')]">
+                      <tree string="Trip Arrival" nolabel="1" delete="false" create="false" editable="bottom">
+                          <field name="delivery_id" readonly="1" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                          <field name="state" invisible="1"/>
+                          <field name="pickup_loc" options="{'no_create': True,'no_create_edit': True, 'no_open': True}" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                          <field name="route_waypoint_ids" invisible="1"/>
+                          <field name="drop_loc" domain="[('id', 'in', route_waypoint_ids)]" options="{'no_create': True,'no_create_edit': True, 'no_open': True}" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                          <field name="loc_to" attrs="{'invisible':[('state','!=', 'shipped')]}" options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/>
+                          <field name="car_maker_id" attrs="{'invisible':[('state','!=', 'shipped')]}" options="{'no_create': True, 'no_open': True}"/>
+                          <field name="car_model_id" attrs="{'invisible':[('state','!=', 'shipped')]}" options="{'no_create': True, 'no_open': True}"/>
+                          <field name="chassis_no" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                          <field name="plate_no" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                        <field name="parking_no" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+<!--                          <field name="parking_no" invisible="1"/>-->
+                          <field name="drawer_no" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+<!--                          <field name="drawer_no" invisible="1"/>-->
+                          <field name="arrived" string="Is Arrived?" attrs="{'invisible':[('state','!=', 'shipped')]}"/>
+                      </tree>
+                      <form>
+                        <group>
+                          <group>
+                            <field name="delivery_id" readonly="1"/>
+                            <field name="parking_no"/>
+                            <field name="car_maker_id"/>
+                            <field name="car_model_id"/>
+                          </group>
+                          <group>
+                            <field name="chassis_no"/>
+                            <field name="plate_no"/>                                        
+                            <field name="drawer_no"/>
+                            <field name="parking_check"/>
+                            <field name="arrived" string="Is Arrived?"/>
+                          </group>
+                        </group>                            
+                      </form>
+                    </field>
+                </page>
+                 <page string="Survey" name="survey" invisible="1">
+                  <field name="arrival_survey_ids">
+                      <tree create="false" editable="bottom">
+                        <field name="name" readonly="1"/>
+                        <field name="category_id" invisible="1"/>
+                        <field name="dedcution_way" invisible="1"/>
+                        <field name="deducation_amount" invisible="1"/>
+                        <field name="deserving" invisible="1"/>
+                        <field name="feedback"/>
+                      </tree>
+                      <form>
+                        <group>
+                          <group>
+                            <field name="name" readonly="1"/>
+                          </group>
+                          <group>
+                            <field name="feedback"/>
+                          </group>
+                        </group>                            
+                      </form>
+                  </field>
+                  <button name="no_violation" string="No violation" type="object" class="oe_highlight" style="align:center;margin-top:30px;"/>
+                  <br/>
+                  <button name="confirm_survey" string="Confirm Survey" type="object" class="oe_highlight" style="align:center;margin-top:30px;margin-right:50px;"/>
+                </page>
+                <page string="Reward" name="reward" invisible="1">
+                  <group>
+                    <group>
+                      <field name="reward_calculation"/>
+                    </group>
+                  </group>
+                </page>
+            </notebook>
+            <footer>
+                <button string='Confirm' name="confirm_arriving_lines" type="object" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+
+        </field>
+    </record>
+</odoo>

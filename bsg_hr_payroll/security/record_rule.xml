@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record model="ir.rule" id="hr_payroll_branch_accountant">
+            <field name="name">HR payroll Branch Accountant</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="domain_force">[('pay_by_branch_id', '=', user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_hr_payroll.group_payslip_branch_accountant'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+
+    </data>
+</odoo>

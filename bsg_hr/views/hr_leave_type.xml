@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="hr_leave_type_form_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.type.form.inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <group>
+                        <field name="advance_request_years" />
+                        <field name="working_days" />
+                        <field name="official_holidays" />
+                    </group>
+                    <group>
+                        <field name="include_weekend" />
+                        <field name="exit_return_permission" />
+                        <field name="exit_return_permission_duration" />
+                    </group>
+                    <group>
+                        <field name="issuing_ticket" />
+                        <field name="period_ticket" />
+                        <field name="mission_chick" />
+                        <field name="attach_chick" />
+                    </group>
+                    <group>
+                        <field name="alternative_chick" />
+                        <field name="used_once" />
+                        <field name="issuing_clearance_form" />
+                        <field name="issuing_deliver_custody" />
+                        <field name="minimum_duration" />
+                        <field name="leave_type" />
+                    </group>
+                </xpath>
+<!--                <xpath expr="//field[@name='double_validation']" position="after">-->
+<!--                    <field name="leave_type" required="1" />-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,341 @@
+<odoo>
+  <data>
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_unplanned">
+        <field name="name">Cargo Sale</field>
+        <field name="res_model">bsg_vehicle_cargo_sale</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','unplanned')]</field>
+    </record>
+    <!-- For Draft Unplanned SO LINE -->
+     <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_line_unplanned">
+        <field name="name">Unplanned SO Line</field>
+        <field name="res_model">bsg_vehicle_cargo_sale_line</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            ('sale_order_state','in',['done','pod']),
+            ('state','in',['draft','on_transit','confirm']),
+            ('added_to_trip','=',False),
+            ('fleet_trip_id','=',False),
+            ]</field>
+        <field name="context">{'group_pick_up':True,'group_drop_up':True}</field>
+        
+    </record>
+
+
+    <!-- For Local Services SO LINE -->
+     <record model="ir.actions.act_window" id="action_cargo_sale_line_local_services">
+        <field name="name">Local Services SO Line</field>
+        <field name="res_model">bsg_vehicle_cargo_sale_line</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            ('state','in',['draft','confirm','Delivered']),
+            ('bsg_cargo_sale_id.partner_types.is_credit_customer','=',True),
+            ]</field>
+        <field name="context">{'so_type':'local_services'}</field>
+
+    </record>
+
+
+    <!-- For Delivered SO LINE -->
+     <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_line_delivered">
+        <field name="name">Delivered SO Line</field>
+        <field name="res_model">bsg_vehicle_cargo_sale_line</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','Delivered')]</field>
+    </record>
+
+    <!-- For Linked SO LINE -->
+     <record model="ir.actions.act_window" id="action_bsg_vehicle_cargo_sale_line_linked">
+        <field name="name">Linked SO Line</field>
+        <field name="res_model">bsg_vehicle_cargo_sale_line</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('added_to_trip','=',True),('fleet_trip_id','!=',False)]</field>
+    </record>
+
+
+    <!--International Add To Trip Form -->
+    <record model="ir.ui.view" id="view_add_a_trip_from">
+            <field name="name">cargo_sale_line_add_trip</field>
+            <field name="model">cargo_sale_line_add_trip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Add to Trip">
+                    <group>
+                        <group>
+                            <field name="fleet_trip_id" options="{'no_create': True, 'no_open': True}" />
+                            <field name="route_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="vehicle_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="driver_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="fleet_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="is_cargo_sale_line" invisible="1"/>
+                        </group>
+
+                    </group>
+                    <field name="cargo_sale_line_data_trip_ids" attrs="{'invisible': [('is_cargo_sale_line', '!=', True)]}">
+                        <tree editable="bottom" create="0">
+                            <field name="cargo_sale_line_id" invisible="1"/>
+                            <field name="cs_line_id" />
+                            <field name="loc_from" readonly="1"/>
+                            <field name="pickup_loc" domain="[('id','in', bsg_route_waypoints_line_ids)]" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="loc_to" readonly="1"/>
+                            <field name="drop_loc" domain="[('id','in', basg_route_waypoint_city_ids)]" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="bsg_route_waypoints_line_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="basg_route_waypoint_city_ids" widget="many2many_tags" invisible="1"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="cargo_sale_line_id" invisible="1"/>
+                                    <field name="cs_line_id" />
+                                    <field name="loc_from" readonly="1" />
+                                    <field name="pickup_loc" options="{'no_create': True, 'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <field name="loc_to" readonly="1"/>
+                                    <field name="drop_loc" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('pickup_loc', '=', False)]}"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+
+                    <footer>
+                        <button name="add_trip" string="Add Trip" type="object"  class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+<!--      Migration Note-->
+    <!-- Add To Trip Action  -->
+<!--    <act_window-->
+<!--            id="action_add_a_trip"-->
+<!--            name="Add to Trip"-->
+<!--            res_model="cargo_sale_line_add_trip"-->
+<!--            src_model="bsg_vehicle_cargo_sale_line"-->
+<!--            view_mode="form"-->
+<!--            multi="True"-->
+<!--            target="new"-->
+<!--            key2="client_action_multi"-->
+<!--            groups="bsg_trip_mgmt.group_add_to_trip"-->
+
+<!--        />-->
+<!--      <act_window-->
+<!--            id="action_add_a_trip"-->
+<!--            name="Add to Trip"-->
+<!--            res_model="cargo_sale_line_add_trip"-->
+<!--            view_mode="form"-->
+<!--            target="new"-->
+<!--            groups="bsg_trip_mgmt.group_add_to_trip"-->
+
+<!--        />-->
+      <record id="action_cargo_sale_line_add_trip" model="ir.actions.act_window">
+          <field name="name">Add to Trip</field>
+          <field name="res_model">cargo_sale_line_add_trip</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="bsg_trip_mgmt.view_add_a_trip_from"/>
+          <field name="target">new</field>
+          <field name="context">{}</field>
+          <field name="binding_model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+<!--          <field name="groups_id" eval="[(4, ref('bsg_trip_mgmt.group_add_to_trip'))]"/>-->
+          <field name="binding_view_types">list</field>
+      </record>
+
+    <!--add trip filed -->
+    <record id="view_bsg_vehicle_cargo_sale_line_search_custom_filter" model="ir.ui.view">
+            <field name="name">bsg_vehicle_cargo_sale_line.filter</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_search"/>
+            <field name="arch" type="xml">
+              <xpath expr="//search" position="inside">
+                    <field name="fleet_trip_id" />
+              </xpath>
+            </field>
+    </record>
+
+    <!-- Local Service Add to Trip Action  -->
+    <record model="ir.ui.view" id="view_add_to_local_service_trip_from">
+            <field name="name">cargo_sale_line_add_trip</field>
+            <field name="model">cargo_sale_line_add_trip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Add to Trip">
+                    <group>
+                        <group>
+                            <field name="fleet_trip_id" required="1" options="{'no_create': True, 'no_open': True}" domain="[('trip_type','=','local')]"/>
+                            <field name="route_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="vehicle_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="driver_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="fleet_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="is_cargo_sale_line" invisible="1"/>
+                        </group>
+
+                    </group>
+                    <group name="update_locations" string="Location Update">
+                        <group name="left">
+                            <field name="pickup_loc" required="1" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group name="left">
+                            <field name="drop_loc" required="1" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <field name="cargo_sale_line_data_trip_ids" attrs="{'invisible': [('is_cargo_sale_line', '!=', True)]}">
+                        <tree editable="bottom" create="0">
+                            <field name="pickup_readonly" invisible="1"/>
+                            <field name="drop_readonly" invisible="1"/>
+                            <field name="cargo_sale_line_id" invisible="1"/>
+                            <field name="cs_line_id" />
+                            <field name="loc_from" readonly="1"/>
+                            <field name="pickup_loc" readonly="1"
+                                   domain="[('id','in', bsg_route_waypoints_line_ids)]" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="loc_to" readonly="1"/>
+                            <field name="drop_loc" readonly="1"
+                                   domain="[('id','in', basg_route_waypoint_city_ids)]" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="bsg_route_waypoints_line_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="basg_route_waypoint_city_ids" widget="many2many_tags" invisible="1"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="cargo_sale_line_id" invisible="1"/>
+                                    <field name="cs_line_id" />
+                                    <field name="loc_from" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="pickup_loc" options="{'no_create': True, 'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <field name="loc_to" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="drop_loc" options="{'no_create': True, 'no_open': True}" />
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+
+                    <footer>
+                        <button name="add_to_local_trip" string="Add Trip" type="object"  class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+<!--      Migration Note-->
+    <!-- Local Service Add to Trip Action  -->
+<!--       <act_window-->
+<!--            name="Local Service Trip"-->
+<!--            id="action_add_local_service_trip"-->
+<!--            multi="True"-->
+<!--            key2="client_action_multi"-->
+<!--            res_model="cargo_sale_line_add_trip"-->
+<!--            src_model="bsg_vehicle_cargo_sale_line"-->
+<!--            view_mode="form"-->
+<!--            target="new"-->
+<!--            context="{'so_type':'local_services_so'}"-->
+<!--            view_type="form"-->
+<!--            view_id="bsg_trip_mgmt.view_add_to_local_service_trip_from"-->
+<!--            groups="bsg_trip_mgmt.group_add_to_trip"/>-->
+
+
+<!--       <act_window-->
+<!--            name="Local Service Trip"-->
+<!--            id="action_add_local_service_trip"-->
+<!--            res_model="cargo_sale_line_add_trip"-->
+<!--            binding_model_id="bsg_vehicle_cargo_sale_line"-->
+<!--            view_mode="form"-->
+<!--            target="new"-->
+<!--            context="{'so_type':'local_services_so'}"-->
+<!--            view_id="bsg_trip_mgmt.view_add_to_local_service_trip_from"-->
+<!--       />-->
+
+      <record id="action_cargo_sale_line_local_service_trip" model="ir.actions.act_window">
+           <field name="name">Local Service Trip</field>
+           <field name="res_model">cargo_sale_line_add_trip</field>
+           <field name="view_mode">form</field>
+           <field name="view_id" ref="bsg_trip_mgmt.view_add_to_local_service_trip_from"/>
+           <field name="target">new</field>
+           <field name="context">{'so_type':'local_services_so'}</field>
+           <field name="binding_model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+           <field name="groups_id" eval="[(4, ref('bsg_trip_mgmt.group_add_to_trip'))]"/>
+           <field name="binding_view_types">list</field>
+       </record>
+
+
+
+    <!-- Inherit and override view  -->
+
+    <record model="ir.ui.view" id="view_bsg_inherit_cargo_sale_line_view_form">
+        <field name="name">view_bsg_inherit_cargo_sale_line_view_form</field>
+        <field name="model">bsg_vehicle_cargo_sale_line</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form" />
+        <field name="arch" type="xml">
+          <header position="inside">
+            <button
+                name="action_reset_line"
+                string="Reset Line"
+                type="object"
+                groups="base.group_erp_manager,bsg_support_team.group_cahnge_so_line_state"
+                />
+            <button
+                name="link_trip_to_sale_line"
+                string="Trip History All"
+                type="object"
+                groups="base.group_erp_manager"
+                />
+            <button
+                name="calculate_earned_revenue"
+                string="Calculate Earned Revenue"
+                type="object"
+                groups="base.group_erp_manager"
+                />
+
+          </header>
+          <xpath expr="//form[1]/sheet[1]/notebook/page[@name='shipment_history']" position="after">
+            <page name="trip_history" string="Trip History">
+              <group>
+                <field name="trip_history_ids" nolabel="1" >
+                    <tree string="Trip History" create="false" delete="false" edit="false">
+                        <field name="fleet_trip_id" string="Previous Trip" readonly="1"/>
+                        <field name="expected_start_date"  />
+                        <field name="trip_type"  />
+                        <field name="delivery_date"  />
+                        <field name="expected_end_date"  />
+                        <field name="trip_distance" string="Distance" readonly="1"/>
+                        <field name="earned_revenue"  readonly="1"/>
+                    </tree>
+                    <form>
+                        <header>
+                        </header>
+                        <sheet>
+                            <group name="top">
+                                <group name="left">
+                                    <field name="fleet_trip_id" string="Previous Trip" readonly="1"/>
+                                    <field name="expected_start_date"  />
+                                    <field name="trip_distance" string="Distance"  readonly="1"/>
+                                    <field name="delivery_date"  />
+                                </group>
+                                <group name="right">
+                                    <field name="trip_type"  />
+                                    <field name="expected_end_date"  />
+                                    <field name="earned_revenue"  readonly="1"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+              </group>
+            </page>
+          </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

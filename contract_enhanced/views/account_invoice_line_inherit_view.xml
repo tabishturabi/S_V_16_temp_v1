@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--inherit supplier form -->
+<!--    <record id="invoice_supplier_form_contract_custom_inherit" model="ir.ui.view">-->
+<!--        <field name="name">account.move.form</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--&lt;!&ndash;        Migration Note&ndash;&gt;-->
+<!--&lt;!&ndash;        <field name="inherit_id" ref="account.view_move_form"/>&ndash;&gt;-->
+<!--        <field name="inherit_id" ref="account.view_move_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='analytic_distribution']" position="after">-->
+<!--                <field name="branch_id" options="{'no_create': True}"/>-->
+<!--                <field name="department_id" options="{'no_create': True}"/>-->
+<!--                <field name="fleet_id" options="{'no_create': True}" attrs="{'invisible':[('trailer_id','=',True)]}"/>-->
+<!--                <field name="trailer_id" options="{'no_create': True}" attrs="{'invisible':[('trailer_id','=',False)]}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!--inherit customer form -->
+    <record id="invoice_form_custom_inherit" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+<!--        Migration Note-->
+        <field name="inherit_id" ref="account.view_move_form"/>
+<!--        <field name="inherit_id" ref="account.invoice_form"/>-->
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='analytic_distribution']" position="after">
+                <field name="branch_id" options="{'no_create': True}"/>
+                <field name="department_id" options="{'no_create': True}"/>
+                <field name="fleet_id" options="{'no_create': True}" attrs="{'invisible':[('trailer_id','=',True)]}"/>
+                <field name="trailer_id" options="{'no_create': True}" attrs="{'invisible':[('trailer_id','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

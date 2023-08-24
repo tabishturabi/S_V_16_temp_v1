@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Trailer Management Menus -->
+	 <menuitem name="Documents Expire Reports"
+             id="menu_documents_expire_reports"
+             parent="employee_info_report.employee_info_report_main_menu_item"
+             sequence="3"
+             />
+</odoo>

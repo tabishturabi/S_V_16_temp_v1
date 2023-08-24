@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="overtime_details_report_template">
+        <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <p><t t-esc="user.company_id.name" /></p>
+                       <center>
+                            <h5>Department of Human Ressources</h5>
+                            <h5>Overtime statement</h5>
+                       </center>
+                       <p><strong>Print date</strong> : <t t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"/></p>
+                    <t t-foreach="employee_data" t-as="group_data">
+                        <t t-set="total_salary" t-value="0" />
+                        <t t-set="total_hours" t-value="0" />
+                        <t t-set="total_amount" t-value="0" />
+                        <table class="table table-bordered">
+                                <thead >
+                                    <tr>
+                                        <t t-if="data['form']['group_by_mode'] != 'by_employee'">
+                                            <th colspan="8" style="text-align:center;background-color: #F1F1F1;color: #454748;font-size:20px;">
+                                                <t t-esc="group_data"/>
+                                            </th>
+                                        </t>
+                                        <t t-if="data['form']['group_by_mode'] == 'by_employee'">
+                                            <th colspan="7" style="text-align:center;background-color: #F1F1F1;color: #454748;font-size:20px;">
+                                                <t t-esc="group_data"/>
+                                            </th>
+                                        </t>
+                                    </tr>  
+                                    <tr style="background-color: gray;color: white;">
+                                        <th>Sequence</th>
+                                        <t t-if="data['form']['group_by_mode'] != 'by_employee'">
+                                            <th>Employee</th>
+                                        </t>    
+                                        <th>Month</th>
+                                        <th>Type</th>
+                                        <th>Total Salary</th>
+                                        <th>Total Hours</th>
+                                        <th>Total Amount</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       <t t-foreach="employee_data[group_data]" t-as="overtime_data">
+                                           <t t-if="data['form']['report_type'] == 'detail'"> 
+                                                    <t t-set="total_salary" t-value="total_salary+overtime_data.wage_sallary" />
+                                                    <t t-foreach="overtime_data.get_line_by_data_range(overtime_data,date_condition,date_from,date_to)" t-as="overtime_line">
+                                                        <t t-set="total_hours" t-value="total_hours+overtime_line.total_overtime" />
+                                                        <t t-set="total_amount" t-value="total_amount+round(overtime_line.total_overtime_amount,2)" />
+                                                        <tr>
+                                                            <td><span t-esc="overtime_data.sequence_number"/></td>
+                                                            <t t-if="data['form']['group_by_mode'] != 'by_employee'">
+                                                                <td><span t-esc="overtime_data.employee_name.name"/></td>
+                                                            </t>
+                                                            <td><span t-esc="overtime_data.get_month(overtime_data.date_from)"/></td>
+                                                            <td><span t-esc="overtime_data.name"/></td>
+                                                            <td><span t-esc="overtime_data.wage_sallary"/></td>
+                                                            <td><span t-esc="round(overtime_line.total_overtime,2)"/></td>
+                                                            <td><span t-esc="round(overtime_line.total_overtime_amount,2)"/></td>
+                                                            <td><span t-esc="overtime_line.description"/></td>
+                                                        </tr>    
+                                                    </t>  
+                                            </t>
+
+                                            <t t-if="data['form']['report_type'] == 'total'"> 
+                                                       <t t-set="total_salary" t-value="total_salary+overtime_data.wage_sallary" />
+                                                        <t t-set="total_hours" t-value="total_hours+sum(overtime_data.overtime_line.mapped('total_overtime'))" />
+                                                        <t t-set="total_amount" t-value="total_amount+round(sum(overtime_data.overtime_line.mapped('total_overtime_amount')),2)" />
+                                                        <tr>
+                                                            <td><span t-esc="overtime_data.sequence_number"/></td>
+                                                            <t t-if="data['form']['group_by_mode'] != 'by_employee'">
+                                                               <td><span t-esc="overtime_data.employee_name.name"/></td>
+                                                            </t>   
+                                                            <td><span t-esc="overtime_data.get_month(overtime_data.date_from)"/></td>
+                                                            <td><span t-esc="overtime_data.name"/></td>
+                                                            <td><span t-esc="overtime_data.wage_sallary"/></td>
+                                                            <td><span t-esc="round(sum(overtime_data.overtime_line.mapped('total_overtime'),2))"/></td>
+                                                            <td><span t-esc="round(sum(overtime_data.overtime_line.mapped('total_overtime_amount')),2)"/></td>
+                                                            <td><span t-esc="overtime_data.description"/></td>
+                                                        </tr>      
+                                            </t>
+
+                                       </t>
+                                       
+
+                                       <tr style="text-align:center;background-color: #F1F1F1;color: #454748;font-size:20px;">
+                                           <t t-if="data['form']['group_by_mode'] != 'by_employee'">
+                                                <td colspan="4">Total</td>
+                                           </t>
+                                           <t t-if="data['form']['group_by_mode'] == 'by_employee'">
+                                              <td colspan="3">Total</td>
+                                           </t>
+                                           <td><span t-esc="total_salary"/></td>
+                                           <td><span t-esc="total_hours"/></td>
+                                           <td><span t-esc="total_amount"/></td>
+                                           <td>-</td>
+                                       </tr>
+                                
+                                </tbody>
+                        </table>
+                        <p style="page-break-after:always"></p>
+                    </t>
+                    </div>
+                    </t>
+            
+        </t>
+    </template>
+
+</odoo>

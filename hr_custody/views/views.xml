@@ -1,0 +1,247 @@
+<odoo>
+    <data>
+
+        <!-- Custody Request form view -->
+        <record id="custody_request_form_view" model="ir.ui.view">
+            <field name="name">custody.request.form.view</field>
+            <field name="model">custody.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="submit_check" invisible="1" />
+                        <field name="approve_check" invisible="1" />
+                        <field name="return_check" invisible="1" />
+                        <button name="action_submit" string="Submit" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('submit_check','=',False),('state', '!=', 'draft')]}"/>
+                        <button name="action_approve" string="Approve" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('approve_check','=',False),('state', '!=', 'submit')]}"/>
+                        <button name="action_assign" string="Assign" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('submit_check','=',False),('state', '!=', 'approve')]}"/>
+                        <button name="action_return" string="Return" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('return_check','=',False),('state', '!=', 'assign')]}"/>
+                        <button name="action_draft" string="Set To New" type="object" class="oe_highlight"
+                                attrs="{'invisible': ['|',('submit_check','=',False),('state', 'not in', ['submit', 'approve', 'cancel'])]}"
+                                />
+                        <button name="action_refuse" string="Refuse" type="object" class="btn-danger"
+                                attrs="{'invisible': ['|',('submit_check','=',False),('state', 'not in', ['submit', 'approve'])]}"
+                        />
+                        <button name="action_cancel" string="Cancel" type="object" class="btn-danger" icon="fa-close"
+                                attrs="{'invisible': ['|',('submit_check','=',False),('state', 'not in', ['submit', 'approve'])]}"
+                        />
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft, submit, approve, assign, return, refuse, canceled"/>
+                    </header>
+                    <sheet>
+                        <separator string="General Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="employee_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="is_intangible"/>
+                                <field name="manager_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="employee_no"/>
+                                <field name="asset_id" attrs="{'readonly': [('state', '!=', 'approve')],
+                                                                            'required': [('state', '=', 'approve'),('is_intangible', '=',False)],
+                                                                            'invisible': ['|',('state', 'in', ['draft','submit']),('is_intangible', '=',True)]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="asset_name" attrs="{'required': [('is_intangible', '=',True)],'invisible': [('is_intangible', '=',False)]}"/>
+                                <field name="custody_asset_id" invisible="1"/>
+                                <field name="return_date" readonly="1" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="department_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="employee_job" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="request_date" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="assign_date" readonly="1"/>
+                                <field name="clearance_in_leave"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="desc" placeholder="Description..." required="1"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <separator string="Approval Information" style="color:#0e620a;" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="delivered_by"/>
+                                <field name="delivered_by_dept_id"/>
+                                <field name="returned_by" attrs="{'invisible': [('state', '!=', 'return')]}"/>
+                                <field name="returned_by_dept_id" attrs="{'invisible': [('state', '!=', 'return')]}"/>
+                            </group>
+                            <group>
+                                <field name="approved_by"/>
+                                <field name="approved_by_dept_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Custody Request tree view -->
+        <record id="custody_request_tree_view" model="ir.ui.view">
+            <field name="name">custody.request.tree.view</field>
+            <field name="model">custody.request</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Custody Request">
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="employee_no"/>
+                    <field name="department_id"/>
+                    <field name="employee_job"/>
+                    <field name="custody_asset_id"/>
+                    <field name="request_date"/>
+                    <field name="assign_date"/>
+                    <field name="return_date"/>
+<!--                    <field name="state" decoration-success="state == 'assign'"-->
+<!--                           decoration-info="state == 'approve' or state == 'submit'"-->
+<!--                           decoration-danger="state == 'return' or state == 'refuse' or state == 'cancel'" widget="badge"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_custody_request_view" model="ir.ui.view">
+            <field name="name">search_custody_request_view</field>
+            <field name="model">custody.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="employee_id"/>
+                    <field name="employee_no"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Custody asset form view -->
+        <record id="custody_asset_form_view" model="ir.ui.view">
+            <field name="name">custody.asset.form.view</field>
+            <field name="model">custody.asset</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="asset_id" string="Asset Name" options="{'no_create_edit': True, 'no_open': True}"/>
+                            <h1>
+                                <div class="d-flex">
+                                    <field class="o_text_overflow" name="asset_id"/>
+                                </div>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="asset_model_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        </group>
+                        <notebook>
+                            <page string="Custody History">
+                                <field name="custody_request_ids" nolabel="1">
+                                    <tree create="0" edit="0" delete="0">
+                                        <field name="employee_no"/>
+                                        <field name="employee_id" string="Employee Name"/>
+                                        <field name="request_date"/>
+                                        <field name="assign_date"/>
+                                        <field name="return_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Custody asset tree view -->
+        <record id="custody_asset_tree_view" model="ir.ui.view">
+            <field name="name">custody.asset.tree.view</field>
+            <field name="model">custody.asset</field>
+            <field name="arch" type="xml">
+                <tree string="Custody Asset">
+                    <field name="asset_id"/>
+                    <field name="asset_model_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Inherited hr.employee form view -->
+        <record id="inherit_view_employee_form" model="ir.ui.view">
+            <field name="name">inherit.view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_custody"
+                            class="oe_stat_button"
+                            icon="fa-desktop"
+                            type="object"
+                            groups="hr.group_hr_user"
+                            attrs="{'invisible': [('custody_count', '=', 0)]}">
+                        <field name="custody_count" widget="statinfo" string="Custodies"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherited hr.employee form view -->
+        <record id="inherit_view_account_asset_form" model="ir.ui.view">
+            <field name="name">inherit.account.asset</field>
+            <field name="model">account.asset</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]" position="before">
+                    <group>
+                        <field name="custody" attrs="{'readonly': [('employee_id', '!=', False)],
+                                                      'invisible': ['|',('asset_type', '!=', 'purchase'),('state', '=', 'model')]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//group/group[1]" position="inside">
+                    <field name="employee_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Custody Request Action -->
+        <record id="custody_request_action" model="ir.actions.act_window">
+            <field name="name">Custody Request</field>
+            <field name="res_model">custody.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Custody Asset Action -->
+        <record id="custody_asset_action" model="ir.actions.act_window">
+            <field name="name">Custody Asset</field>
+            <field name="res_model">custody.asset</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'create': False, 'delete': False,'edit': False}</field>
+        </record>
+
+        <!-- Custodies Main Menu -->
+        <menuitem id="hr_custody_main_menu"
+                  web_icon="hr_custody,static/description/custody_icon.png"
+                  name="Custody"
+                  sequence="20"
+                  groups="hr_custody.group_custody_request"/>
+
+        <!-- Custody Request Menu -->
+        <menuitem
+                id="custody_request_menu"
+                name="Custody Request"
+                parent="hr_custody_main_menu"
+                action="custody_request_action"
+                groups="hr_custody.group_custody_request"
+                sequence="1"
+        />
+
+        <!-- Custody Asset Menu -->
+        <menuitem
+                id="violation_type_menu"
+                name="Custody Assets History"
+                parent="hr_custody_main_menu"
+                action="custody_asset_action"
+                groups="hr_custody.group_custody_request"
+                sequence="2"
+        />
+
+    </data>
+</odoo>

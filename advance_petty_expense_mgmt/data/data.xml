@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data noupdate="1">
+        <record id="res_petty_cash_config_data" model="res_petty_cash_config">
+            <field name="product_ids" eval="False"></field>
+            <field name="account_ids" eval="False"></field>
+            <field name="analytic_account_ids" eval="False"></field>
+<!--            Migration Note-->
+<!--            <field name="analytic_tag_ids" eval="False"></field>-->
+            <field name="department_ids" eval="False"></field>
+            <field name="branch_ids" eval="False"></field>
+        </record>
+    </data>
+</odoo>

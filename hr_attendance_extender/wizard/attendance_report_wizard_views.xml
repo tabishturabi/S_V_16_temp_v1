@@ -1,0 +1,80 @@
+<odoo>
+
+
+    <!-- main reports menu -->
+    <menuitem
+            id="attendance_report_wizard_menu"
+            name="Reports"
+            parent="hr_attendance.menu_hr_attendance_root"
+            sequence="100"
+    />
+
+
+    <!-- attendance report wizard form -->
+    <record id="attendance_report_wizard_form" model="ir.ui.view">
+        <field name="name">attendance.report.wizard.form</field>
+        <field name="model">attendance.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Report">
+                <group>
+                    <group>
+                        <field name="mode" />
+                    </group>
+                    <group>
+                        <field name="attendance_type"/>
+                        <field name="missing_type"
+                               attrs="{
+                                 'invisible': [('attendance_type', 'not in', ['missing'])],
+                                 'required': [('attendance_type', 'in', ['missing'])]
+                                 }"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags"
+                               attrs="{'invisible': [('mode', '!=', 'employee')]}"/>
+                        <field name="department_ids" widget="many2many_tags"
+                               attrs="{'invisible': [('mode', '!=', 'department')]}"/>
+                    </group>
+                    <group>
+                    </group>
+
+                </group>
+                <group name="Dates">
+                    <group>
+                        <field name="date_from" />
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Print" name="print_report" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- attendance report wizard action -->
+    <record id="attendance_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Attendance Report</field>
+        <field name="res_model">attendance.report.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="attendance_report_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="attendance_report_wizard_action_menu"
+            action="attendance_report_wizard_action"
+            name="Attendance Report"
+            parent="attendance_report_wizard_menu"
+            sequence="100"
+            groups="hr_attendance.group_hr_attendance_user"
+    />
+
+
+</odoo>

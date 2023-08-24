@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <odoo>
+            <record model="ir.ui.view" id="hr_exit_account_form">
+                <field name="name">bayan.config.settings.form</field>
+                <field name="model">bayan.config.settings</field>
+                <field name="arch" type="xml">
+                    <form string="Settings" class="oe_form_configuration">
+                        <header>
+                            <button string="Save" type="object" name="execute_settings" class="oe_highlight"/>
+                            <button string="Discard" type="object" name="cancel" special="cancel"/>
+                        </header>
+                        <div class="app_settings_block" data-string="Bayan Settings" string="Bayan Settings"
+                             data-key="bayan_api">
+                            <div style="background-color:#e9ecef;">
+                                <h2>Bayan Settings</h2>
+                            </div>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <div class="content-group">
+                                            <div class="row mt16">
+                                                <label for="bayan_app_id" class="col-lg-3 o_light_label"
+                                                       string="Bayan App ID"/>
+                                                <field name="bayan_app_id" string="Bayan App ID" force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="bayan_app_key" class="col-lg-3 o_light_label"
+                                                       string="Bayan App Key"/>
+                                                <field name="bayan_app_key" string="Bayan App Key" force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="bayan_client_id" class="col-lg-3 o_light_label"
+                                                       string="Bayan Client ID"/>
+                                                <field name="bayan_client_id" string="Bayan Client ID" force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="bayan_staging_url" class="col-lg-3 o_light_label"
+                                                       string="Bayan Staging Url"/>
+                                                <field name="bayan_staging_url" string="Bayan Staging Url"
+                                                       force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="bayan_live_url" class="col-lg-3 o_light_label"
+                                                       string="Bayan Live Url"/>
+                                                <field name="bayan_live_url" string="Bayan Live Url" force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="is_active" class="col-lg-3 o_light_label"
+                                                       string="Is Active"/>
+                                                <field name="is_active" string="Is Active" force_save="1"/>
+                                            </div>
+                                            <div class="row mt16">
+                                                <label for="is_transport" class="col-lg-3 o_light_label"
+                                                       string="Is Transport Active"/>
+                                                <field name="is_transport" string="Is Transport Active" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </field>
+            </record>
+            <record model="ir.actions.act_window" id="bayan_config_settings_action">
+                <field name="name">Bayan Settings</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">bayan.config.settings</field>
+                <field name="view_mode">form</field>
+                <field name="target">inline</field>
+            </record>
+            <menuitem id="menu_bayan_config_settings"
+                      name="Bayan Settings"
+                      groups="base.group_system"
+                      parent="bsg_trip_mgmt.root_fleet_operations"
+                      action="bayan_config_settings_action"/>
+        </odoo>
+
+    </data>
+</odoo>

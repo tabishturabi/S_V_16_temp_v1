@@ -1,0 +1,84 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_drivers_reward_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_drivers_reward_id" 
+            model="fleet.vehicle.trip"
+            name="bsg_drivers_reward_report.drivers_reward_id"
+            file="bsg_drivers_reward_report.drivers_reward_id"
+            report_type="qweb-html"
+            string="Drivers Reward Report"
+            paperformat="paperformat_drivers_reward_template"
+            menu="False"/>
+        <report id="driver_reward_report_xlsx"
+                model="fleet.vehicle.trip"
+                string="Drivers Reward Report"
+                report_type="xlsx"
+                name="bsg_drivers_reward_report.reward_report_xlsx"
+                file="bsg_drivers_reward_report.reward_report_xlsx"
+         />
+
+        <record id="drivers_reward_records_wizard" model="ir.ui.view">
+            <field name="name">drivers_reward_records_wizard</field>
+            <field name="model">drivers.reward.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="form"/>
+                            <field name="to"/>
+                            <field name="trip_type" />
+                        </group>
+
+                        <group name="group_right">
+                            <field name="report_type"/>
+                            <field name="filters"/>
+                            <field name="driver_id" options="{'no_create':True,'no_edit':True,'no_open':True}" widget="many2many_tags" attrs="{'invisible':[('filters','!=','specific')],'required':[('filters','=','specific')]}" domain="[('driver_rewards','=','by_revenue')]"/>
+                            <field name="fuel_expense_method_ids" widget="many2many_tags" />
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                        <button name="generate_xlsx_report" type="object" string="Print Xlsx" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="drivers_reward_menu_action" model="ir.actions.act_window">
+            <field name="name">Drivers Reward Report</field>
+            <field name="res_model">drivers.reward.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="drivers_reward_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+    
+
+        <menuitem id="drivers_reward_menu_item" name="Drivers Reward Report" action="drivers_reward_menu_action" parent="bsg_trip_mgmt.root_trip_reports" groups="bsg_trip_mgmt.group_driver_reward_report"/>
+        
+    </data>
+</odoo>

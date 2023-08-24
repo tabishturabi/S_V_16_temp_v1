@@ -1,0 +1,82 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_branches_ledger_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+                id="report_for_branches_ledger"
+                model="account.journal"
+                name="bassami_branches_legder.branches_basami_report"
+                file="bassami_branches_legder.branches_basami_report"
+                report_type="qweb-html"
+                string="Branches General Ledger Report"
+                paperformat="paperformat_branches_ledger_template"
+                menu="False"/>
+
+        <record id="branches_ledger_records_wizard" model="ir.ui.view">
+            <field name="name">branches_ledger_records_wizard</field>
+            <field name="model">branches.ledger.bassami</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group>
+                        <field name="print_by"/>
+                    </group>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="date_form" attrs="{'invisible':[('print_by','!=',True)],'required':[('print_by','=',True)]}"/>
+                            <field name="form" attrs="{'invisible':[('print_by','!=',False)],'required':[('print_by','=',False)]}"/>
+                            <field name="journal_id" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="user_type"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="date_to" attrs="{'invisible':[('print_by','!=',True)],'required':[('print_by','=',True)]}"/>
+                            <field name="to" attrs="{'invisible':[('print_by','!=',False)],'required':[('print_by','=',False)]}"/>
+                            <field name="state"/>
+                            <field name="user_id" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('user_type','!=','specific')],'required':[('user_type','=','specific')]}" widget="many2many_tags"/>
+                            <field name="with_fc" groups="payments_enhanced.group_allowed_pay_with_fc"/>
+                            <field name="currency_id" options="{'no_create':True,'no_edit':True,'no_open':True}" groups="payments_enhanced.group_allowed_pay_with_fc" attrs="{'invisible':[('with_fc','=',False)],'required':[('with_fc','=',True)]}"/>
+                        </group>
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="branches_ledger_menu_action" model="ir.actions.act_window">
+            <field name="name">Branches General Ledger</field>
+            <field name="res_model">branches.ledger.bassami</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="branches_ledger_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+<!--        Migration Note removing groups-->
+<!--        <menuitem id="branches_reporting_menu_item" name="Branch Reporting" parent="account_accountant.menu_accounting" groups="bassami_branches_legder.group_report_branches_gen_ledger" sequence="21"/>-->
+        <menuitem id="branches_reporting_menu_item" name="Branch Reporting" parent="account_accountant.menu_accounting"  sequence="21"/>
+
+        <!-- account.menu_finance -->
+        <!-- account_accountant.menu_accounting -->
+
+        <menuitem id="branches_ledger_menu_item" name="Branches General Ledger" action="branches_ledger_menu_action" parent="branches_reporting_menu_item" sequence="1"/>
+
+    </data>
+</odoo>

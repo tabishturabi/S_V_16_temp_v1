@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="workshop_name_form_view" model="ir.ui.view">
+            <field name="name">workshop_name_form_view</field>
+            <field name="model">workshop.name</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Workshop Name">
+
+                    <sheet>
+                        <group name="group_top">
+                            <field name="name"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="workshop_name_tree_view" model="ir.ui.view">
+            <field name="name">workshop_name_tree_view</field>
+            <field name="model">workshop.name</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="workshop_name_view_search" model="ir.ui.view">
+            <field name="name">workshop.name.view.search</field>
+            <field name="model">workshop.name</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="workshop_name_action" model="ir.actions.act_window">
+            <field name="name">Workshops Name</field>
+            <field name="res_model">workshop.name</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="workshop_name_main_menu" name="Workshops Name" action="workshop_name_action"
+                  parent="maintenance_enhance.menu_fleet_maintenance_child2"/>
+
+    </data>
+</odoo>

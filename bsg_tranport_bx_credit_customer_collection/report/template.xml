@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="paperformat_bx_credit_customer_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">8</field>
+            <field name="margin_left">8</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="bx_bassami_credit_collection_report_id" 
+            model="bx.credit.customer.collection"
+            name="bsg_tranport_bx_credit_customer_collection.b_coll"
+            file="bsg_tranport_bx_credit_customer_collection.b_coll"
+            report_type="qweb-html"
+            string="Bx Collection Invoice Report"
+            paperformat="paperformat_bx_credit_customer_template"/>
+         <report
+            id="bx_bassami_certificate_of_achievement_report_id"
+            model="bx.credit.customer.collection"
+            name="bsg_tranport_bx_credit_customer_collection.bx_coa_pdf"
+            file="bsg_tranport_bx_credit_customer_collection.bx_coa_pdf"
+            report_type="qweb-pdf"
+            string="Bx Certificate Of Achievement Report Pdf"
+            />
+         <report
+            id="bx_claim_report_id"
+            model="bx.credit.customer.collection"
+            name="bsg_tranport_bx_credit_customer_collection.bx_claim_pdf"
+            file="bsg_tranport_bx_credit_customer_collection.bx_claim_pdf"
+            report_type="qweb-pdf"
+            string="Bx Claim Report Pdf"
+            />
+         <report
+            id="bx_summary_collection_invoice_report_id"
+            model="bx.credit.customer.collection"
+            name="bsg_tranport_bx_credit_customer_collection.bx_sci_pdf"
+            file="bsg_tranport_bx_credit_customer_collection.bx_sci_pdf"
+            report_type="qweb-pdf"
+            string="Bx Summary Collection Invoice Report Pdf"
+            />
+    </data>
+</odoo>

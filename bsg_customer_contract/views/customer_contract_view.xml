@@ -1,0 +1,156 @@
+<odoo>
+    <data>
+
+        <!-- Form View  -->
+        <record model="ir.ui.view" id="view_bsg_customer_contract_form">
+            <field name="name">bsg_customer_contract.form</field>
+            <field name="model">bsg_customer_contract</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="open_attach_wizard" type="object" string="ATTACH DOCUMENT" highlight="1"/>
+                        <button name="confirm_btn" states="draft" string="Confirm" type="object" class="o_sale_confirm"
+                                groups="bsg_customer_contract.group_confirm_contract"/>
+
+                        <button name="set_draft_btn" states="cancel" string="Set to Draft" type="object"
+                                groups="bsg_customer_contract.group_cancel_and_set_to_draft" class="o_sale_confirm"/>
+                        <button name="import_contract_lines" groups="bsg_customer_contract.group_upload_contract"
+                                states="draft" string="Upload" type="object" class="o_sale_confirm"/>
+
+                        <button name="decline" groups="bsg_customer_contract.group_cancel_and_set_to_draft"
+                                states="draft,confirm" string="Decline" type="object" class="o_sale_confirm"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                            <button name="action_sale_view" type="object" class="oe_stat_button" icon="fa-file-text">
+                                <field string="Sales" name="no_of_sales" widget="statinfo"/>
+                            </button>
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="contract_name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="top">
+                            <group name="left">
+                                <field name="cont_customer" attrs="{'readonly': [('state','=','confirm')]}"
+                                       required="1"/>
+                                <field name="cont_start_date" attrs="{'readonly': [('state','=','confirm')]}"
+                                       required="1"/>
+                                <field name="cont_end_date" attrs="{'readonly': [('state','=','confirm')]}"
+                                       required="1"/>
+                                <field name="cont_invoice_to" domain="[('loc_customer_ids','=',cont_customer)]"
+                                       invisible="1"/>
+                                <field name="is_invoice_create"/>
+                                <field name="collection_created_by" widget="many2many_tags"></field>
+                                <field name="sales_teams_ids" widget="many2many_tags"></field>
+                                <field name="contract_no"></field>
+                                <field name="contract_date" class="with_hijri"></field>
+
+                            </group>
+                            <group name="right">
+                                <field name="max_sales_limit" attrs="{'readonly': [('state','=','confirm')]}"
+                                       required="1"/>
+                                <field name="total_sales" readonly="1"/>
+                                <field name="draft_so_amt" readonly="1"/>
+                                <field name="remainder_amt" readonly="1"/>
+                                <field name="free_satha_service" attrs="{'readonly': [('state','=','confirm')]}"/>
+                                <field name="internal_shipment_pirce" attrs="{'readonly': [('state','=','confirm')]}"/>
+                                <field name="shipment_type" attrs="{'readonly': [('state','=','confirm')]}"/>
+                                <field name="check_decline_access" attrs="{'readonly': [('state','=','draft')]}"/>
+                                <field name="remark"/>
+                                <field name="mail_sended" invisible="1"/>
+                                <field name="reg_expiry_check" invisible="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <field name="contract_line_ids" nolabel="1" context="{'default_partner_id':cont_customer}"
+                               attrs="{'readonly': [('state','=','confirm')]}">
+                            <tree editable="bottom">
+                                <field name="loc_from" attrs="{'readonly': [('check_sale','=',True)]}"
+                                       context="{'loc_from_id': loc_from}" string="From" required="1"/>
+                                <field name="loc_to" attrs="{'readonly': [('check_sale','=',True)]}"
+                                       context="{'loc_to_id': loc_to}" string="To" required="1"/>
+                                <field name="car_size" attrs="{'readonly': [('check_sale','=',True)]}" required="1"/>
+                                <field name="service_type" attrs="{'readonly': [('check_sale','=',True)]}"
+                                       required="1"/>
+                                <field name="price" string="Price"/>
+                                <field name="cust_contract_id" invisible="1"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="check_sale" invisible="1"/>
+                                <button name="action_duplicate_record" type="object" string="Duplicate"
+                                        class="oe_highlight"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="total_amount"/>
+                            </div>
+                            <field name="total_amount" nolabel="1" class="oe_subtotal_footer_separator"
+                                   widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record model="ir.ui.view" id="view_bsg_customer_contract_tree">
+            <field name="name">bsg_customer_contract.tree</field>
+            <field name="model">bsg_customer_contract</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="contract_name"/>
+                    <field name="cont_customer"/>
+                    <field name="cont_start_date"/>
+                    <field name="cont_end_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Serach view  -->
+        <record id="view_bsg_customer_contract_search" model="ir.ui.view">
+            <field name="name">bsg_customer_contract.search</field>
+            <field name="model">bsg_customer_contract</field>
+            <field name="arch" type="xml">
+                <search string="Customer Contract">
+                    <field name="contract_name"/>
+                    <field name="cont_customer" string="Customer"/>
+                    <field name="cont_start_date"/>
+                    <field name="cont_end_date"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="action_bsg_customer_contract">
+            <field name="name">Customer Contract</field>
+            <field name="res_model">bsg_customer_contract</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Contract"
+                  id="menu_customer_contract"
+                  parent="root_customer_contract_menu"
+                  action="action_bsg_customer_contract"
+                  sequence="2"
+        />
+
+    </data>
+</odoo>

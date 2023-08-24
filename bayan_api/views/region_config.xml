@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+<!--         <record model="ir.ui.view" id="region_config_bayan_form">-->
+<!--        <field name="name">region.config.bayan.form</field>-->
+<!--        <field name="model">region.config</field>-->
+<!--        <field name="inherit_id" ref="bsg_branch_config.ioud_region_config_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//group[@name='right']" position="inside">-->
+<!--                <field name="bayan_region_id"></field>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--         </record>-->
+<!--         <record model="ir.ui.view" id="region_config_line_bayan_form">-->
+<!--        <field name="name">region.config.line.bayan.form</field>-->
+<!--        <field name="model">region.config</field>-->
+<!--        <field name="inherit_id" ref="bsg_branches_zone_and region_and_branch_config.region_config_inherit_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='region_line']/tree" position="inside">-->
+<!--                <field name="bayan_city_id"></field>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--         </record>-->
+    </data>
+</odoo>

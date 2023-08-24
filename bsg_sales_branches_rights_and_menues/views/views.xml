@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record id="bsg_branch_config.bsg_branches_menu_2" model="ir.ui.menu">
+        <field name="name">Branches</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_branches_configuration')])]"/>
+    </record>
+      <record id="bsg_branch_config.menu_branch_classification" model="ir.ui.menu">
+        <field name="name">Branch Classification</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_branches_configuration')])]"/>
+    </record>
+      <record id="bsg_branch_config.menu_region_config" model="ir.ui.menu">
+        <field name="name">Region Configuration</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_branches_configuration')])]"/>
+        <field name="sequence">6</field>
+        <field name="parent_id" ref="bsg_branch_config.bsg_branches_menu_1"></field>
+      </record>
+     <record id="bsg_branch_config.menu_bsg_license" model="ir.ui.menu">
+        <field name="name">Branch License</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_branches_licences')])]"/>
+      </record>
+     <record id="bsg_branch_config.menu_branch_doc_type_config" model="ir.ui.menu">
+        <field name="name">Branch Document Type</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_branches_licences')]),(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_branches_configuration')])]"/>
+      </record>
+      <record id="bsg_branch_config.bsg_sales_target_menu" model="ir.ui.menu">
+        <field name="name">Branch Sales Target</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_targets')])]"/>
+      </record>
+      <record id="bsg_cargo_sale.cargo_payment_method_meunu" model="ir.ui.menu">
+        <field name="name">Cargo Payment Method</field>
+        <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_configuration')])]"/>
+        <field name="sequence">4</field>
+        <field name="parent_id" ref="sale.menu_sale_config"></field>
+      </record>
+      <record id="bsg_cargo_sale.cargo_sale_order_config_menu" model="ir.ui.menu">
+          <field name="name">Cargo Sale Order Config</field>
+          <field name="groups_id" eval="[(6,0,[ref('bsg_sales_branches_rights_and_menues.group_sales_configuration')])]"/>
+          <field name="sequence">6</field>
+          <field name="parent_id" ref="sale.menu_sale_config"></field>
+      </record>
+  </data>
+</odoo>

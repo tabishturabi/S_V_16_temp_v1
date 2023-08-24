@@ -1,0 +1,90 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="vehicle_prod_report_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- <report
+
+            id="vehicle_prod_report" 
+            model="fleet.vehicle.trip"
+            name="bsg_vehicle_prod_report.vehicle_prod_report"
+            file="bsg_vehicle_prod_report.vehicle_prod_report"
+            report_type="qweb-html"
+            string="Vehicle Productivity Report"
+            paperformat="vehicle_prod_report_template"
+            menu="False"/> -->
+
+        <report
+            id="vehicle_prod_report"
+            string="Vehicle Productivity Report"
+            model="fleet.vehicle.trip"
+            report_type="xlsx"
+            file="Vehicle Productivity Report"
+            name="bsg_vehicle_prod_report.vehicle_prod_reports_temp"
+        />
+        <record id="vehicle_prod_report_wizard" model="ir.ui.view">
+            <field name="name">vehicle.prod.report.form</field>
+            <field name="model">vehicle.prod.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="report_mode"/>
+                            <field name="date_condition"/>
+                            <field name="from_location_ids" widget="many2many_tags"/>
+                            <field name="vehicle_ids" widget="many2many_tags"/>
+                            <field name="driver_ids" widget="many2many_tags"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="period_grouby"/>
+                            <field name="form"/>
+                            <field name="to"/>
+                            <field name="to_location_ids" widget="many2many_tags"/>
+
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="vehicle_prod_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Vehicale Prodcutivity Reports</field>
+            <field name="res_model">vehicle.prod.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vehicle_prod_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+    
+
+        <menuitem id="vehicle_prod_report_wizard_menu_item" name="Vehicale Prodcutivity Reports" action="vehicle_prod_report_wizard_action" parent="bsg_trip_mgmt.root_trip_reports" />
+        
+    </data>
+</odoo>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="vouchers_history_temp_id">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style type="text/css">
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                            }
+                            .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                font-size: 13px;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                            }
+                            table tr td, table tr th {
+                                text-align: center;
+                                padding: 5px 0px 0px 5px;
+                                border-right: 2px solid #CCC;
+                                border-bottom: 1px solid #eee;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                border-right: none
+                            }
+                            table tr:last-child td {
+                                border-bottom: none
+                            }
+                            table tr th {
+                                text-align: center;
+                            }
+                            .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                            }
+                            .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                            }
+                            .report-header p .solid {
+                                font-weight: bold;
+                            }
+                            h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline; 
+                            }
+                            .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                            }
+
+                            .header {
+                                display : none !importnat;
+                            }
+                            .footer {
+                                display : none !importnat;
+                            }
+
+                            tr { 
+                                page-break-inside: avoid !important;
+                            }
+
+                            td { 
+                                page-break-inside: avoid !important;
+                            }
+
+                        </style>
+
+                        <div class="report-wrapper">
+                            
+                            <div class="report-header">
+
+                                <h3>
+                                    <img src="/budget_reconciliation_report/static/src/img/logod.png" width="134" style="margin-left: 25px;" alt=""/>
+
+                                    <span class="solid" style="text-align:  center; margin-left: 120px;margin-right: 120px;" t-esc="head"></span>
+
+                                    <img style="width:200px;background: rgba(0,0,0,0.1);" src="/budget_reconciliation_report/static/src/img/rightHeader.png"/>
+                                </h3>
+
+                                <h5>
+                                    <span t-esc="types"></span>
+                                </h5>
+                                
+                            </div>
+
+                            <br class="clearfloat" />
+
+                            <div style="float:left; width: 60%;text-align: right;margin-bottom:10px;background-color : #D3D3D3;">
+
+                                <table>
+                                    
+
+                                    <tr>
+                                        <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                        <td style="text-align:left">
+                                           <span>From : </span>
+                                           <span t-esc="form"></span>
+                                           <span>To : </span> 
+                                           <span t-esc="to"></span>
+                                        </td>
+                                        <td style="font-weight:bold;text-align:left">‫التاريخ‬</td>
+                                        
+                                    </tr>
+
+                                    <t t-if="branch_ids">
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Branches</td>
+                                            <td style="text-align:left">
+                                                <t t-foreach="branch_ids" t-as="d">
+                                                    <span t-esc="d.branch_ar_name"></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                    
+                                </table>
+                            </div>
+                                
+                            <br class="clearfloat" />
+
+                            <div style="float:left; width: 100%;">
+
+                                <table width="100%">
+                                    <tr>
+                                        <th style="width:90;min-width:90px;max-width:90px">Date</th>
+                                        <th style="width:110;min-width:110px;max-width:110px">Voucher #</th>
+                                        <th style="width:130;min-width:130px;max-width:130px">Partner</th>
+                                        <th style="width:80;min-width:80px;max-width:80px">Amount</th>
+                                        <th>History</th>
+                                        
+                                    </tr>
+
+                                    <!-- <tr>
+                                        <th>التاريخ</th>
+                                        <th>رقم السند</th>
+                                        <th>الموافقة</th>
+                                        <th>اسم الفرع</th>
+                                        <th>الموازنه</th>
+                                        <th>المدين</th>
+                                        <th>الدائن</th>
+                                        <th>الرصيد</th>
+                                        
+                                    </tr> -->
+                                    
+
+                                    <t t-foreach="all_data" t-as="rec">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="rec['date']"></span>
+
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec['name']"></span>
+                                            </td>
+                
+                                            <td>
+                                                <span t-esc="rec['partner']"></span>
+                                                <span></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="'{0:,.2f}'.format(float(rec['amount']))"></span>
+                                            </td>
+
+                                            <td style="text-align:left">
+                                                <span t-esc="rec['history']"></span>
+                                            </td>
+
+
+                                        </tr>
+
+                                    </t>
+
+
+                                </table>
+
+                            </div>
+
+                        </div><!--end of report wrapper-->
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

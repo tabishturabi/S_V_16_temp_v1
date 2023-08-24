@@ -1,0 +1,78 @@
+<odoo>
+<template id="portal_custom_clearance" name="MOI Inquiries">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Shipment Orders</t>
+        </t>
+        <t t-if="not sale_line_ids">
+            <p>There are currently no shipments orders.</p>
+        </t>
+        <t t-if="sale_line_ids" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Number #</th>
+                    <th>Order Date</th>
+                    <th class='d-none d-md-table-cell'>Sender Name</th>
+                    <th class='d-none d-md-table-cell'>Sender ID</th>
+                    <th class='d-none d-md-table-cell'>Reciever Name</th>
+                    <th class='d-none d-md-table-cell'>Reciever ID</th>
+                    <th class='d-none d-md-table-cell'>From</th>
+                    <th class='d-none d-md-table-cell'>To</th>
+                    <th class='d-none d-md-table-cell'>Plate</th>
+                    <th class='d-none d-md-table-cell'>Chasis No</th>
+                    <th class='d-none d-md-table-cell'>Make</th>
+                    <th class='d-none d-md-table-cell'>model</th>
+                    <th class='d-none d-md-table-cell'>Color</th>
+                    <th class='d-none d-md-table-cell'>Year</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="sale_line_ids" t-as="order_line">
+                    <tr>
+                        <td>
+                            <a t-att-href="order_line.bsg_cargo_sale_id.get_portal_url()" t-att-title="order_line.sale_line_rec_name">
+                                <t t-esc="order_line.sale_line_rec_name" />
+                            </a>
+                        </td>
+                        <td><span t-field="order_line.order_date"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.bsg_cargo_sale_id.sender_name"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.bsg_cargo_sale_id.sender_id_card_no"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.bsg_cargo_sale_id.receiver_name"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.bsg_cargo_sale_id.receiver_id_card_no"/></td>
+                        <!--td class='d-none d-md-table-cell'><span t-field="shipment.shipment_type"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="shipment.payment_method.payment_method_name"/></td-->
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.loc_from.route_waypoint_name"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.loc_to.route_waypoint_name"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.general_plate_no"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.chassis_no"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.car_make"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.car_model"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.car_color"/></td>
+                        <td class='d-none d-md-table-cell'><span t-field="order_line.year"/></td>
+                        <td class="tx_status">
+                            <t t-if="order_line.state not in ['done','cancel','cancel_request']">
+                                <span class="badge badge-pill badge-info"><i class="fa fa-fw fa-clock-o" aria-label="Opened" title="Opened" role="img"></i><span class="d-none d-md-inline"> <span t-field="order_line.state"/></span></span>
+                            </t>
+                            <t t-if="order_line.state == 'done'">
+                                <span class="badge badge-pill badge-success"><i class="fa fa-fw fa-check" aria-label="Done" title="Done" role="img"></i><span class="d-none d-md-inline"> Done</span></span>
+                            </t>
+                            <t t-if="order_line.state == 'cancel'">
+                                <span class="badge badge-pill badge-warning"><i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i><span class="d-none d-md-inline"> Cancelled</span></span>
+                            </t>
+                            <t t-if="order_line.state == 'cancel_request'">
+                                <span class="badge badge-pill badge-warning"><i class="fa fa-fw fa-clock-o" aria-label="Cancel Requested" title="Cancel Requested" role="img"></i><span class="d-none d-md-inline">Cancel Request</span></span>
+                            </t>
+
+                            
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+    
+    </odoo>

@@ -1,0 +1,99 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_general_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_general_ledger" 
+            model="account.account"
+            name="bassami_general_legder.general_basami_report"
+            file="bassami_general_legder.general_basami_report"
+            report_type="qweb-html"
+            string="General Ledger Report"
+            paperformat="paperformat_general_template"
+            menu="False"/>
+
+        <record id="general_ledger_records_wizard" model="ir.ui.view">
+            <field name="name">general_ledger_records_wizard</field>
+            <field name="model">general.ledger.bassami</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="account_id" options="{'no_create':True,'no_edit':True}"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="to"/>
+                            <field name="state"/>
+                            <field name="with_fc" groups="payments_enhanced.group_allowed_pay_with_fc"/>
+                            <field name="currency_id" options="{'no_create':True,'no_edit':True,'no_open':True}" attrs="{'invisible':[('with_fc','=',False)],'required':[('with_fc','=',True)]}" groups="payments_enhanced.group_allowed_pay_with_fc"/>
+                           <!--  <field name="branch_type" attrs="{'invisible':[('report_type','=','trans')],'required':[('report_type','!=','trans')]}"/>
+
+                            <field name="branch_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('branch_type','!=','specific')],'required':[('branch_type','=','specific')]}"/> -->
+                        </group>
+
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- <record id="genral_ledger_action" model="ir.actions.act_window">
+            <field name="name">Genral Ledger</field>
+            <field name="res_model">general.ledger.bassami</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="general_ledger_records_wizard"/>
+            <field name="target">new</field>
+            <field name="context">{'default_account_id': active_id}</field> 
+        </record>
+
+        <record model="ir.values" id="genral_wise_filter">
+            <field name="model_id" ref="" />
+            <field name="name">Print From Wizard</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval ="'ir.actions.act_window,'+str(ref('genral_ledger_action'))"/>
+            <field name="key">action</field>
+            <field name="model">account.account</field>
+        </record> -->
+
+        <record id="general_ledger_menu_action" model="ir.actions.act_window">
+            <field name="name">General Ledger</field>
+            <field name="res_model">general.ledger.bassami</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="general_ledger_records_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="general_ledger_menu_item" name="Bassami General Ledger" action="general_ledger_menu_action" parent="account_reports.account_reports_audit_reports_menu" />
+        
+    </data>
+</odoo>

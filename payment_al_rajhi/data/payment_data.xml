@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="payment_acquirer_payfort" model="payment.acquirer">
+            <field name="name">Al Rajhi Bank</field>
+            <field name="image" type="base64" file="payment_al_rajhi/static/src/img/icon.png"/>
+            <field name="provider">alrajhi</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="alrajhi_acquirer_button"/>
+            <field name="environment">test</field>
+            <field name="pre_msg"><![CDATA[
+              <p>You will be redirected to the Al Rajhi website after clicking on the payment button.</p>]]></field>
+              <field name="alrajhi_access_code">dummy</field>
+              <field name="alrajhi_merchant_identifier">dummy</field>
+              <field name="alrajhi_request_phrase">dummy</field>
+              <field name="alrajhi_response_phrase">dummy</field>
+              <field name="alrajhi_sha_type">sha_256</field>
+              
+        </record>
+
+    </data>
+</odoo>

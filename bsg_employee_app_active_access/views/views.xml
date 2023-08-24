@@ -1,0 +1,274 @@
+<odoo>
+  <data>
+<!--       <record id="view_employee_form_all_access" model="ir.ui.view">-->
+<!--          <field name="name">hr.employee.form.archive.page.attrs</field>-->
+<!--          <field name="model">hr.employee</field>-->
+<!--          <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--          <field name="arch" type="xml">-->
+<!--              <xpath expr="//button[@name='toggle_active']" position="attributes">-->
+<!--                  <attribute name="groups">bsg_employee_app_active_access.groups_employee_app_active_access</attribute>-->
+<!--              </xpath>-->
+<!--          </field>-->
+<!--      </record>-->
+<!--      <record id="view_employee_form_active_button" model="ir.ui.view">-->
+<!--        <field name="name">hr.contract.form.active.add.attrs</field>-->
+<!--        <field name="model">hr.contract</field>-->
+<!--        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='toggle_active']" position="attributes">-->
+<!--                <attribute name="groups">bsg_employee_app_active_access.groups_employee_app_active_access</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--      </record>-->
+<!--      <record id="view_department_form_active_elements_access" model="ir.ui.view">-->
+<!--        <field name="name">hr.department.form.active.add.attrs</field>-->
+<!--         <field name="model">hr.department</field>-->
+<!--        <field name="inherit_id" ref="hr.view_department_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='toggle_active']" position="attributes">-->
+<!--                <attribute name="groups">bsg_employee_app_active_access.groups_employee_app_active_access</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--      </record>-->
+     <record id="view_employee_category_form_add_active" model="ir.ui.view">
+        <field name="name">hr.employee.category.form.active</field>
+        <field name="model">hr.employee.category</field>
+        <field name="inherit_id" ref="hr.view_employee_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+     <record id="hr_contract_type_view_form_active" model="ir.ui.view">
+        <field name="name">hr.contract.type.form.active</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr.hr_contract_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="bsg_hr_guarantor_view_form_active" model="ir.ui.view">
+        <field name="name">bsg.hr.guarantor.form.active</field>
+        <field name="model">bsg.hr.guarantor</field>
+        <field name="inherit_id" ref="bsg_hr.bsg_hr_guarantor_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+       <record id="view_doc_type_form_active" model="ir.ui.view">
+        <field name="name">hr.emp.doc.type.form.active</field>
+        <field name="model">hr.emp.doc.type</field>
+        <field name="inherit_id" ref="bsg_hr.view_doc_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="view_asset_type_form_active" model="ir.ui.view">
+        <field name="name">hr.asset.type.active</field>
+        <field name="model">hr.asset.type</field>
+        <field name="inherit_id" ref="bsg_hr.view_asset_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_assetmgt_type_form_active" model="ir.ui.view">
+        <field name="name">hr.emp.access.mgt.form.active</field>
+        <field name="model">hr.emp.access.mgt</field>
+        <field name="inherit_id" ref="bsg_hr.view_assetmgt_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_education_type_form_active" model="ir.ui.view">
+        <field name="name">hr.education.type.form.active</field>
+        <field name="model">hr.education.type</field>
+        <field name="inherit_id" ref="bsg_hr.view_education_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_access_type_form_active" model="ir.ui.view">
+        <field name="name">hr.access.type.form.active</field>
+        <field name="model">hr.access.type</field>
+        <field name="inherit_id" ref="bsg_hr.view_access_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_id_type_form_active" model="ir.ui.view">
+        <field name="name">hr.id.type.form.active</field>
+        <field name="model">hr.id.type</field>
+        <field name="inherit_id" ref="bsg_hr.view_id_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_banks_details_form_active" model="ir.ui.view">
+        <field name="name">hr.banks.details.form.active</field>
+        <field name="model">hr.banks.details</field>
+        <field name="inherit_id" ref="bsg_hr.view_banks_details_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_hr_state_form_active" model="ir.ui.view">
+        <field name="name">bsg.hr.state.form.active</field>
+        <field name="model">bsg.hr.state</field>
+        <field name="inherit_id" ref="bsg_hr.view_hr_state_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_hr_iqama_form_active" model="ir.ui.view">
+        <field name="name">hr.iqama.form.remove.active</field>
+        <field name="model">hr.iqama</field>
+        <field name="inherit_id" ref="bsg_hr.view_hr_iqama_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" groups="bsg_employee_app_active_access.groups_employee_app_active_access" type="object" class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="view_banks_form_active" model="ir.ui.view">
+        <field name="name">hr.banks.form.active</field>
+        <field name="model">hr.banks</field>
+        <field name="inherit_id" ref="bsg_hr.view_banks_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="view_hr_natioinality_form_active" model="ir.ui.view">
+        <field name="name">hr.nationality.form.active</field>
+        <field name="model">hr.nationality</field>
+        <field name="inherit_id" ref="bsg_hr.view_hr_natioinality_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="view_hr_passport_form_active" model="ir.ui.view">
+        <field name="name">hr.passport.form.active</field>
+        <field name="model">hr.passport</field>
+        <field name="inherit_id" ref="bsg_hr.view_hr_passport_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="view_hr_insurance_form_active" model="ir.ui.view">
+        <field name="name">hr.insurance.form.active</field>
+        <field name="model">hr.insurance</field>
+        <field name="inherit_id" ref="bsg_hr.view_hr_insurance_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+      </record>
+      <record id="hr_employee_religion_form_active" model="ir.ui.view">
+        <field name="name">hr.employee.religion.form.active</field>
+        <field name="model">hr.employee.religion</field>
+        <field name="inherit_id" ref="bsg_hr.hr_employee_religion_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="bsg_employee_app_active_access.groups_employee_app_active_access">
+                        <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

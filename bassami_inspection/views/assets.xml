@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	
+<!--	<template id="assets_backend_inherit" inherit_id="web.assets_backend">-->
+<!--		<xpath expr=".">-->
+			<!-- <script type="text/javascript" src="/bassami_inspection/static/src/js/webcam.min.js"/>
+			<script type="text/javascript" src="/bassami_inspection/static/src/js/web_came_screen.js"/>-->
+<!--			<script type="text/javascript" src="/bassami_inspection/static/src/js/add_image.js"/> -->
+<!--			<link rel="stylesheet" href="/bassami_inspection/static/src/scss/style.scss"/>-->
+<!--			<link rel="stylesheet" type="text/less" href="/bassami_inspection/static/src/less/my_dev.less"/>-->
+<!--		</xpath>-->
+<!--	</template>-->
+<!--	-->
+</odoo>

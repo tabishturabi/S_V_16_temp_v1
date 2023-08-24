@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="employee_service_form_view" model="ir.ui.view">
+            <field name="name">employee_service_form_view</field>
+            <field name="model">employee.service</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Employee Service">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                        <widget name="attach_document" string="ATTACH DOCUMENT" action="" highlight="1"/>
+                        <field name="user_create_check" invisible="1" />
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                attrs="{'invisible':['|',('state','!=','draft'),('user_create_check','!=',True)]}"
+                                groups="bsg_hr.group_department_manager"
+                        />
+
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                states="direct_manager"
+                                groups="bsg_hr.group_department_manager"
+                        />
+                        <button string="Refuse" name="%(employee_service.empservice_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="direct_manager"
+                                groups="bsg_hr.group_department_manager"
+                        />
+                        <button string="Cancel" name="%(employee_service.empservice_cancel_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="direct_manager"
+                                groups="bsg_hr.group_department_manager"
+                        />
+
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                states="hr_specialist"
+                                groups="bsg_hr.group_hr_specialist"
+                        />
+                        <button string="Refuse" name="%(employee_service.empservice_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="hr_specialist"
+                                groups="bsg_hr.group_hr_specialist"
+                        />
+                        <button string="Cancel" name="%(employee_service.empservice_cancel_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="hr_specialist"
+                                groups="bsg_hr.group_hr_specialist"
+                        />
+
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                states="hr_supervisor"
+                                groups="bsg_hr.group_department_supervisor"
+                        />
+                        <button string="Refuse" name="%(employee_service.empservice_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="hr_supervisor"
+                                groups="bsg_hr.group_department_supervisor"
+                        />
+                        <button string="Cancel" name="%(employee_service.empservice_cancel_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="hr_supervisor"
+                                groups="bsg_hr.group_department_supervisor"
+                        />
+
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                states="top_management_secretary"
+                                groups="bsg_hr.group_top_management_secretary"
+                        />
+                        <button string="Refuse" name="%(employee_service.empservice_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="top_management_secretary"
+                                groups="bsg_hr.group_top_management_secretary"
+                        />
+                        <button string="Cancel" name="%(employee_service.empservice_cancel_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="top_management_secretary"
+                                groups="bsg_hr.group_top_management_secretary"
+
+                        />
+
+                        <button name="action_validate" type="object" string="Submit" class="oe_highlight"
+                                icon="fa-check-circle"
+                                states="waiting_finance"
+                                groups="account.group_account_user"
+                        />
+                        <button string="Refuse" name="%(employee_service.empservice_refuse_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="waiting_finance"
+                                groups="account.group_account_user"
+                        />
+                        <button string="Cancel" name="%(employee_service.empservice_cancel_wizard_action)d" class="oe_highlight"
+                                type="action"
+                                states="waiting_finance"
+                                groups="account.group_account_user"
+                        />
+
+                       <button string="Print Report" name="%(employee_service.employee_service_report)d" class="oe_highlight"
+                                type="action"
+                                states="done"
+                        />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check"
+                                    groups="employee_service.employee_active_service_group">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="employee_readonly" invisible="1"/>
+                                <field name="other_employee" groups="hr.groups_hr_manager,bsg_hr.group_department_manager,bsg_hr.group_hr_specialist,bsg_hr.group_branch_supervisor,bsg_hr.group_hr_manager"/>
+                                <field name="employee_id" force_save="1" options="{'no_create': True, 'no_open': True}" groups="hr.groups_hr_manager,bsg_hr.group_department_manager,bsg_hr.group_hr_specialist,bsg_hr.group_branch_supervisor,bsg_hr.group_hr_manager"
+                                       attrs="{'readonly':['|',('other_employee', '=', False),('state','not in','draft')],'required':[('other_employee', '=', True)]}" />
+                                <field name="manager_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="company_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="mobile_phone" force_save="1"/>
+                                <field name="bsg_empiqama" force_save="1"
+                                       attrs="{'invisible':[('bsg_national_id','!=',False)]}"
+                                       options="{'no_open': True}"/>
+                                <field name="bsg_national_id" force_save="1"
+                                       attrs="{'invisible':[('bsg_empiqama','!=',False)]}" options="{'no_open': True}"/>
+                                <field name="nationality_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="service_type" attrs="{'readonly':[('state', '=', 'done')]}" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="service_name" invisible="1" />
+                                <field name="service_to" attrs="{'invisible':[('service_name', 'not in', ['salary_transfer_letter','salary_intro_letter', 'letter_of_authority'])],'required':[('service_name', 'in', ['salary_transfer_letter','salary_intro_letter', 'letter_of_authority'])],'readonly':[('state', '=', 'done')]}"/>
+<!--                                <field name="account_no" attrs="{'invisible':[('service_name', 'not in', ['salary_transfer_letter'])],'required':[('service_name', 'in', ['salary_transfer_letter'])],'readonly':[('state', '=', 'done')]}"/>-->
+                                <field name="admin_group" invisible="1"/>
+
+                            </group>
+                            <group name="group_right">
+                                <field name="date"/>
+                                <field name="employee_code" force_save="1" options="{'no_open': True}"/>
+                                <field name="branch_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="department_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="job_id" force_save="1" options="{'no_open': True}"/>
+                                <field name="bsg_job_pos" force_save="1" options="{'no_open': True}"/>
+                                <field name="bsgjoining_date" force_save="1" options="{'no_open': True}"/>
+                                <field name="days_count"/>
+                                <field name="is_ceo" force_save="1" invisible="1"/>
+                                <field name="is_deputy" force_save="1" invisible="1"/>
+                                <field name="service_count" force_save="1" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="reason" attrs="{'readonly':[('state', '=', 'done')]}"/>
+                        </group>
+                        <group>
+                            <field name="certification" attrs="{'readonly':[('state', '=', 'done')]}"/>
+                            <field name="cost" attrs="{'invisible':['|',('certification', '=', False),('state', 'not in', ['top_management_secretary','waiting_finance','done'])],'required':[('certification', '=', True),('state', 'in', ['top_management_secretary','waiting_finance','done'])],'readonly':[('state', 'not in', ['top_management_secretary'])]}"/>
+                            <field name="account_debit_id" attrs="{'invisible':['|',('certification', '=', False),('state', 'not in', ['top_management_secretary','waiting_finance','done'])]}" options="{'no_open': True}"/>
+                            <field name="account_journal_id" attrs="{'invisible':['|',('certification', '=', False),('state', 'not in', ['top_management_secretary','waiting_finance','done'])]}" options="{'no_open': True}"/>
+                            <field name="account_move_id" attrs="{'invisible':['|',('certification', '=', False),('state', 'not in', ['top_management_secretary','waiting_finance','done'])]}" options="{'no_open': True}"/>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1" attrs="{'readonly':[('state', '=', 'done')]}"/>
+                        </group>
+<!--                        <notebook>-->
+<!--                            <page string="EMP Manager" groups="employee_service.employee_manager_service_group,employee_service.employee_hr_manager_service_group,-->
+<!--                            employee_service.employee_hr_deputy_ceo_approve_group,-->
+<!--                                  employee_service.employee_hr_ceo_approve_group,employee_service.employee_hr_supervisor_service_group">-->
+<!--                                <group>-->
+<!--                                    <group name="group_left">-->
+<!--                                        <field name="performance"-->
+<!--                                               attrs="{'required':[('state','=','submitted')],'readonly':[('state','!=','submitted')]}"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="emp_description" placeholder="This note is for employee purpose"-->
+<!--                                           attrs="{'readonly':[('state', '=', 'done')]}"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <group>-->
+<!--                                        <field name="approve_debt_date"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="emp_manager"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            <page string="Salary Information" name="hr_salary"-->
+<!--                                  groups="employee_service.employee_hr_supervisor_service_group,-->
+<!--                                  employee_service.employee_hr_manager_service_group,employee_service.employee_hr_deputy_ceo_approve_group,-->
+<!--                                  employee_service.employee_hr_ceo_approve_group">-->
+<!--                                <group>-->
+<!--                                    <group>-->
+<!--                                        <field name="salary_structure" force_save="1"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="analytic_account" force_save="1"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                                <field name="line_ids">-->
+<!--                                    <tree editable="bottom" create="false">-->
+<!--                                        <field name="name" force_save="1"/>-->
+<!--                                        <field name="total" force_save="1"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                                <group>-->
+<!--                                    <field name="hr_description" placeholder="This note is for employee purpose "-->
+<!--                                           attrs="{'readonly':[('state', '=', 'done')]}"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <group>-->
+<!--                                        <field name="hr_approve_date"/>-->
+<!--                                    </group>-->
+<!--                                    <group>-->
+<!--                                        <field name="hr_supervisor"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            <page string="HR Manager" name="hr_manager"-->
+<!--                                  groups="employee_service.employee_hr_manager_service_group">-->
+<!--                                <group>-->
+<!--                                    <field name="manager_description" placeholder="This note is for HR manager "-->
+<!--                                           attrs="{'readonly':[('state', '=', 'done')]}"/>-->
+<!--                                </group>-->
+
+<!--                                <group name="group_top">-->
+<!--                                    <group name="group_left">-->
+<!--                                        <field name="hr_manager_approve_date"/>-->
+<!--                                        <field name="hr_manager"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            <page string="Deputy CEO" groups="employee_service.employee_hr_deputy_ceo_approve_group"-->
+<!--                                  attrs="{'invisible':['|',('is_deputy','!=',True)]}">-->
+<!--                                <group>-->
+<!--                                    <field name="deputy_description" placeholder="This note is for Deputy CEO "/>-->
+<!--                                </group>-->
+
+<!--                                <group name="group_top">-->
+<!--                                    <group name="group_left">-->
+<!--                                        <field name="deputy_approve_date"/>-->
+<!--                                        <field name="deputy"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                            <page string="CEO" groups="employee_service.employee_hr_ceo_approve_group"-->
+<!--                                  attrs="{'invisible':['|',('is_ceo','!=',True)]}">-->
+<!--                                <group>-->
+<!--                                    <field name="ceo_description" placeholder="This note is for CEO "-->
+<!--                                           attrs="{'readonly':[('state', '=', 'done')]}"/>-->
+<!--                                </group>-->
+
+<!--                                <group name="group_top">-->
+<!--                                    <group name="group_left">-->
+<!--                                        <field name="ceo_approve_date"/>-->
+<!--                                        <field name="ceo"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_service_entry_tree_view" model="ir.ui.view">
+            <field name="name">employee_service_entry_tree_view</field>
+            <field name="model">employee.service</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree default_order="date desc">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="mobile_phone"/>
+                    <field name="branch_id"/>
+                    <field name="job_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_service_view_search" model="ir.ui.view">
+            <field name="name">employee_service.search</field>
+            <field name="model">employee.service</field>
+            <field name="arch" type="xml">
+                <search string="Employee Service">
+                    <field name="employee_id"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="mobile_phone"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="employee_code"/>
+                    <field name="bsg_empiqama"/>
+                    <field name="bsg_national_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="my_employee_service_action" model="ir.actions.act_window">
+            <field name="name">My Service Request</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True'}</field>
+            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid)]</field>
+        </record>
+
+        <record id="employee_service_action" model="ir.actions.act_window">
+            <field name="name">Employee Service Request</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="employee_service_reporting_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','submitted'),('manager_id.user_id','=',uid)]</field>
+        </record>
+
+        <record id="employee_admin_service_reporting_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','submitted')]</field>
+        </record>
+
+        <record id="employee_supervisor_reporting_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','approve')]</field>
+
+        </record>
+
+        <record id="employee_hr_reporting_action" model="ir.actions.act_window">
+            <field name="name">To Approve</field>
+            <field name="res_model">employee.service</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True, 'create' : False}</field>
+            <field name="domain">[('state','=','fin_approve')]</field>
+
+        </record>
+
+        <record id="employee_service_type_action" model="ir.actions.act_window">
+            <field name="name">Service Type</field>
+            <field name="res_model">service.type</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+<!--        <record id="my_sim_requestt_action1" model="ir.actions.act_window">-->
+<!--            <field name="name">My Sim Card Request</field>-->
+<!--            <field name="res_model">sim.card.request</field>-->
+<!--            &lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="context">{'default_employee_readonly':True'}</field>-->
+<!--            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid )]</field>-->
+<!--        </record>-->
+
+<!--        <record id="my_effect_request_action_my1" model="ir.actions.act_window">-->
+<!--            <field name="name">My Effective Date Request</field>-->
+<!--            <field name="res_model">effect.request</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="context">{'default_employee_readonly':True'}</field>-->
+<!--            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid )]</field>-->
+<!--        </record>-->
+
+        <record id="sim_card_my_lost_action1" model="ir.actions.act_window">
+            <field name="name">My Replacement for Lost SIM Request</field>
+            <field name="res_model">lost.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_employee_readonly':True'}</field>
+            <field name="domain">[('create_uid', '=',uid ),('employee_id.user_id', '=',uid )]</field>
+        </record>
+
+
+        <menuitem id="employee_service_menu_root"
+                  name="Employee Service"
+                  web_icon="employee_service,static/service.png"/>
+        <menuitem id="employee_service_main_menu" name="Request" parent="employee_service_menu_root" sequence="1"/>
+        <menuitem id="menu_es_employee_termination" parent="employee_service_menu_root" name="Termination" sequence="1"/>
+        <menuitem id="my_employee_leave_menu" name="MY Leave Request" action="hr_holidays.hr_leave_action_my"
+                  parent="employee_service_main_menu" sequence="1"/>
+        <menuitem id="my_employee_service_menu" name="MY Service Request" action="my_employee_service_action"
+                  parent="employee_service_main_menu" sequence="1" groups="base.group_user"/>
+        <menuitem id="employee_service_menu" name="Employee Service Request"
+                  action="employee_service_action"
+                  parent="employee_service_main_menu"
+                  sequence="5"
+                  groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager,bsg_hr.group_internal_audit_manager,account.group_account_user,bsg_hr.group_department_manager"
+        />
+        <menuitem id="employee_reporting_main_menu" name="Reporting" parent="employee_service_menu_root" sequence="3"/>
+        <menuitem id="employee_service_reporting_main_menu" name="Service Reporting"
+                  parent="employee_reporting_main_menu"/>
+        <menuitem id="employee_reporting_employee_manager_menu" name="Employee Manager"
+                  parent="employee_service_reporting_main_menu"/>
+        <menuitem id="employee_service_reporting_to_approve_main_menu" name="To Approve"
+                  parent="employee_reporting_employee_manager_menu"
+                  action="employee_service_reporting_action" groups="employee_service.employee_manager_service_group"/>
+        <menuitem id="employee_admin_reporting_employee_manager_menu" name="Employee Administrator"
+                  parent="employee_service_reporting_main_menu"/>
+        <menuitem id="employee_admin_reporting_to_approve_main_menu" name="To Approve"
+                  parent="employee_admin_reporting_employee_manager_menu"
+                  action="employee_admin_service_reporting_action"
+                  groups="employee_service.employee_admin_service_group"/>
+        <menuitem id="employee_reporting_employee_supervisor_menu" name="HR Supervisor Approve"
+                  parent="employee_service_reporting_main_menu"/>
+        <menuitem id="employee_service_supervisor_to_approve_main_menu" name="To Approve"
+                  parent="employee_reporting_employee_supervisor_menu"
+                  action="employee_supervisor_reporting_action"
+                  groups="employee_service.employee_hr_supervisor_service_group"/>
+        <menuitem id="employee_reporting_hr_manager_menu" name="HR Manager"
+                  parent="employee_service_reporting_main_menu"/>
+        <menuitem id="employee_service_hr_to_approve_main_menu" name="To Approve"
+                  parent="employee_reporting_hr_manager_menu"
+                  action="employee_hr_reporting_action" groups="employee_service.employee_hr_manager_service_group"/>
+        <menuitem id="employee_config_main_menu" name="Configuration" parent="employee_service_menu_root" sequence="4"/>
+        <menuitem id="employee_service_type_main_menu" name="Service Type" parent="employee_config_main_menu"
+                  action="employee_service_type_action" groups="employee_service.employee_service_type_group"/>
+        <menuitem id="my_sim_card_request_service_menu" name="My Sim Card Request" action="sim_card.my_sim_requestt_action"
+                  parent="employee_service.employee_service_main_menu" sequence="2"/>
+<!--        <menuitem id="my_effect_request_main_menu" name="My Effective Date Request"-->
+<!--                  action="my_effect_request_action_my1"-->
+<!--                  parent="employee_service.employee_service_main_menu" sequence="4"/>-->
+        <menuitem id="sim_card_my_lost_main_menu111" name="My Replacement for Lost  SIM Request"
+                  action="sim_card_my_lost_action1"
+                  parent="employee_service.employee_service_main_menu" sequence="3"/>
+
+
+         <record id="hr_leave_request_action_all" model="ir.actions.act_window">
+            <field name="name">Leaves Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,kanban,form,calendar,activity</field>
+            <field name="context">{'default_leave_req_action':True}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new leave request
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="leave_request_service_menue"
+                  name="Leave Request"
+                  action="hr_leave_request_action_all"
+                  parent="employee_service.employee_service_main_menu"
+                  sequence="8"
+                  groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager,bsg_hr.group_internal_audit_manager,account.group_account_user,bsg_hr.group_department_manager,bsg_hr.group_branch_supervisor"
+        />
+
+
+        <menuitem id="my_leave_request_service_menue"
+                  name="My Leave Request"
+                  action="hr_holidays.hr_leave_action_my"
+                  parent="employee_service.employee_service_main_menu"
+                  sequence="9"
+                  groups="base.group_user"
+        />
+
+         <record model="ir.ui.view" id="service_company_form_inherit">
+             <field name="name">service_company_form_inherit</field>
+             <field name="model">res.company</field>
+             <field name="inherit_id" ref="base.view_company_form"/>
+             <field name="arch" type="xml">
+                  <xpath expr="//field[@name='partner_id']" position="after">
+                      <field name="chairman_id" />
+                  </xpath>
+             </field>
+        </record>
+
+    </data>
+</openerp>

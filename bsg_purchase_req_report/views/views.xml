@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="purchase_req_report_wizard_form">
+      <field name="name">purchase.req.report.wizard.form</field>
+      <field name="model">purchase.req.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+              <group>
+                  <group>
+                      <field name="state_filter"></field>
+                      <field name="has_rfq"/>
+                      <field name="has_po"/>
+                      <field name="has_iss"/>
+                      <field name="has_recieved"/>
+                  </group>
+                  <group>
+                    <field name="pr_groub_by"></field>
+                    <field name="has_no_rfq"/>
+                    <field name="has_no_po"/>
+                    <field name="has_no_iss"/>
+                    <field name="has_no_recieved"/>
+                  </group>
+              </group>
+             <group>
+              <group>
+                  <field name="start_date"></field>
+                  <field name="product_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'></field>
+                  <field name="category_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'></field>
+                  <field name="branch_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'></field>
+                  <field name="is_with_details" />
+              </group>
+              <group>
+                  <field name="end_date"></field>
+                  <field name="department_ids" widget="many2many_tags" options='{"no_create": True,"no_edit": True,"no_open": True}'></field>
+                  <field name="request_type" options='{"no_create": True,"no_edit": True,"no_open": True}'></field>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="purchase_req_report_action">
+      <field name="name">Purchase Request Report</field>
+      <field name="res_model">purchase.req.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="purchase_req_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+      <menuitem name="Purchase Analysis"
+             id="menu_purchase_analysis"
+             parent="purchase.purchase_report"
+             sequence="1"
+             action="purchase.action_purchase_order_report_all"/>
+   <menuitem name="Purchase Request Report"
+             id="menu_purchase_req_report"
+             parent="purchase.purchase_report"
+             sequence="2"
+             groups="bsg_purchase_req_report.groups_purchase_req_reports"
+             action="purchase_req_report_action"/>
+  </data>
+</odoo>

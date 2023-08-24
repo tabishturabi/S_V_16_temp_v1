@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_payslip_form_aces" model="ir.ui.view">
+            <field name="name">hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/group" position="after">
+                    <separator string="Loan EMI"/>
+                    <field name="loan_paymet_ids">
+                        <tree string="Loan Payment" editable="bottom" create="0" limit="10">
+                            <field name="due_date" readonly="1"/>
+                            <field name="principal" readonly="1"/>
+                            <field name="interest" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                        </tree>
+                    </field>
+                </xpath>
+                <xpath expr="//button[@name='refund_sheet']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('state','!=','done')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

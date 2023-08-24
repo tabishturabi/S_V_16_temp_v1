@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+        <record model="res.groups" id="group_register_payment_for_so">
+            <field name="name">Register Payment For SO</field>
+            <field name="category_id" ref="bsg_cargo_sale.module_nagliyat_sales_maangement"/>
+        </record>               
+    </data>
+</odoo>

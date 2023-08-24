@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record id="groups_branches_zones" model="res.groups">
+              <field name="name">Branches Zones</field>
+              <field name="comment">The user will have access to Branches Zones menu.</field>
+<!--              <field name="category_id" ref="bsg_trip_mgmt.module_category_fleet_management"/>-->
+          </record>
+
+    </data>
+</odoo>

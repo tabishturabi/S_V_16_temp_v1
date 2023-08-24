@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="groups_organizational_chart" model="res.groups">
+            <field name="name">Employee Organizational Chart</field>
+            <field name="comment">The user will have access to organizational chart menu.</field>
+            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>
+        </record>
+
+        <record model="res.users" id="base.user_admin">
+            <field eval="[(4,ref('groups_organizational_chart'))]" name="groups_id"/>
+        </record>
+
+    </data>
+</odoo>

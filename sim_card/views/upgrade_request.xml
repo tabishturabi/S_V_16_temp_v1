@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="sim_card_upgrade_form_view" model="ir.ui.view">
+            <field name="name">sim_card_upgrade_form_view</field>
+            <field name="model">upgrade.request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sim Card Upgrade">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <widget name="attach_document" string="ATTACH DOCUMENT" action="" highlight="1"/>
+                        <button name="action_submit" type="object" string="SUBMIT TO MANAGER" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="approve_mng" type="object" string="APPROVE MANAGER" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','submitted')]}"/>
+                        <button name="reject_mng" type="object" string="REJECT MANAGER" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','submitted')]}"/>
+                        <button name="finance_approve" type="object" string="FINANCE APPROVE" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','approve')]}"/>
+                        <button name="finance_reject" type="object" string="FINANCE REJECT" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','approve')]}"/>
+                        <button name="action_done" type="object" string="Done" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','fin_approve')]}"/>
+                        <button name="action_send_mail" string="Send Email" type="object"
+                                class="oe_highlight oe_structure" attrs="{'invisible':[('state','!=','done')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-book" type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="sim_card.sim_card_request_active">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group style="color:#0e620a;">
+                            <group>
+                                <field name="employee_id" force_save="1" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="manager_id" force_save="1"/>
+                                <field name="company_id" force_save="1"/>
+                                <field name="mble_no" attrs="{'readonly':[('state','not in','draft')]}"/>
+                                <field name="pkg_id" force_save="1"/>
+                                <field name="new_pkg_id" force_save="1" attrs="{'readonly':[('state','in',['fin_approve','done'])]}"/>
+                                <field name="service_id" force_save="1" invisible="1"/>
+                                <field name="sim_type"/>
+                                <field name="is_cost" widget='radio'/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1"/>
+                                <field name="branch_id" force_save="1"/>
+                                <field name="department_id" force_save="1"/>
+                                <field name="job_id" force_save="1"/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <field name="employee_code" force_save="1"/>
+                                <field name="bsg_empiqama" force_save="1" attrs="{'invisible':[('bsg_national_id','!=',False)]}"/>
+                                <field name="bsg_national_id" force_save="1" attrs="{'invisible':[('bsg_empiqama','!=',False)]}"/>
+                                <field name="date1" invisible="1"/>
+                                <field name="transaction_type" invisible="1"/>
+
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sim_card_upgrade_tree_vieww" model="ir.ui.view">
+            <field name="name">sim_card_upgrade_tree_view</field>
+            <field name="model">upgrade.request</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="mble_no"/>
+                    <field name="manager_id"/>
+                    <field name="company_id"/>
+                    <field name="sim_type"/>
+                    <field name="is_cost"/>
+                    <field name="date"/>
+                    <field name="branch_id"/>
+                    <field name="department_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sim_card_upgrade_action" model="ir.actions.act_window">
+            <field name="name">Sim Card Upgrade</field>
+            <field name="res_model">upgrade.request</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sim_card_upgrade_main_menu1" name="Upgrade Sim Card Package Request" action="sim_card_upgrade_action"
+                  parent="sim_card_request_main_menu_request" groups="sim_card.sim_card_upgrade_package_user"/>
+    </data>
+</openerp>

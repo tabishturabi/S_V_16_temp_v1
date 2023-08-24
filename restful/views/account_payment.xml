@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>  
+    <record id="view_account_payment_form_api_inherit" model="ir.ui.view">
+            <field name="name">account.api.form</field>
+            <field name="model">account.payment</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_reference"/>
+                    <field name="app_fortid"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="bsg_license_report_wizard" model="ir.ui.view">
+            <field name="name">bsg_license_report_wizard</field>
+            <field name="model">bsg.license.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="report_mode"/>
+                            <field name="filter_type"/>
+                            <field name="date_type" attrs="{'required':[('filter_type','!=', False)]}"/>
+                            <field name="is_between" invisible="1"/>
+                            <field name="others" invisible="1"/>
+                            
+                            
+                        </group>
+
+                        <group name="group_right">
+                            <field name="branch_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="doc_type" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="form" attrs="{'invisible':[('is_between','!=', True)],'required':[('is_between','=', True)]}"/>
+                            <field name="to" attrs="{'invisible':[('is_between','!=', True)],'required':[('is_between','=', True)]}"/>
+                            <field name="date" attrs="{'invisible':[('others','!=', True)],'required':[('others','=', True)]}"/>
+                            
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="bsg_license_report_action" model="ir.actions.act_window">
+            <field name="name">Branch License Report</field>
+            <field name="res_model">bsg.license.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="bsg_license_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="bsg_license_report_main_menu_item" name="Reports" parent="bsg_branch_config.bsg_branches_menu_1" sequence="5" groups="bsg_license_report.group_view_bsg_branch_report"/>
+        <!-- sequence="3" groups="bx_information_report.group_view_bx_reports"/> -->
+
+        <!-- groups="bx_information_report.group_view_employee_reports" sequence="95" -->
+
+        <menuitem id="bsg_license_report_main_menu" name="Reports" parent="bsg_branch_config.menu_bsg_license_main" sequence="2"/>
+        <menuitem id="bsg_license_report_action_menu_item" name="Branches License Reports" action="bsg_license_report_action" groups="bsg_license_report.group_view_bsg_branch_license_report" parent="bsg_license_report_main_menu" sequence="1"/>
+
+        <report
+            id="action_bsg_license_report"
+            string="Branch License Report"
+            model="bsg.license.info"
+            report_type="xlsx"
+            file="Branch License Report"
+            name="bsg_license_report.bsg_license_report_xlsx"
+            menu="False"
+        />
+
+        
+    </data>
+</openerp>

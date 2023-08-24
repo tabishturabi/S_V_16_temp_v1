@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_sale_dashboard" model="ir.actions.client">
+            <field name="name">Sales Dashboard</field>
+            <field name="tag">sales_dashboard.sales_dashboard</field>
+        </record>
+        <record id="action_map_operation" model="ir.actions.client">
+            <field name="name">Operation Map</field>
+            <field name="tag">map_operation.map_operation</field>
+        </record>
+
+        <menuitem
+            id="menu_project_dashboard"
+            name="Sales Dashboard"
+            action="action_map_operation"
+            web_icon="sales_dashboard,static/src/icon.png"
+            sequence="0"/>
+    </data>
+</odoo>

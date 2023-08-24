@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="approvals_config_list">
+      <field name="name">approvals.config.tree</field>
+      <field name="model">approvals.config</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name = "code"></field>
+          </tree>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="approvals_config_form">
+          <field name="name">approvals.config.form</field>
+          <field name="model">approvals.config</field>
+          <field name="arch" type="xml">
+              <form>
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name = "code"></field>
+                              <field name = "position_ids" widget="many2many_tags"></field>
+                          </group>
+                          <group>
+                          </group>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+      <record model="ir.actions.act_window" id="approvals_config_action">
+          <field name="name">Approvals Configuration</field>
+          <field name="res_model">approvals.config</field>
+          <field name="view_mode">tree,form,kanban</field>
+      </record>
+      <menuitem name="Approvals Configuration"
+                id="approvals_config_menu"
+                sequence="7"
+                action="approvals_config_action"
+      />
+  </data>
+</odoo>

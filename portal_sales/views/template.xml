@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_show_vechial_sale" inherit_id="portal.frontend_layout" name="Show Vechial Sale">
+        <!--        <xpath expr="//ul[@id='top_menu']" position="inside">-->
+        <xpath expr="//t[@t-call='portal.user_dropdown']" position="after">
+            <t t-if="request.env.user">
+                <li class="nav-item divider"/>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                        <b>
+                            <span>Sale Orders</span>
+                        </b>
+                    </a>
+                    <!--a t-attf-href="/vechicle_shipment_sale/" class="nav-link">
+                        <b>Add Sale Order</b>
+                    </a-->
+
+                    <div t-attf-class="dropdown-menu js_usermenu #{_dropdown_menu_class}" role="menu">
+                        <t><a class="dropdown-item" role="menuitem" t-attf-href="/shipments/get_price_form">explore Explore The </a></t>
+                        <t><a class="dropdown-item" role="menuitem" t-attf-href="/shipments/get_so_line_form">Cargo So Line Specific </a></t>
+                        <t t-if="request.website.company_id.portal_create_individual_order"><a class="dropdown-item" role="menuitem" t-attf-href="/sale_individual_order/">Create Individual Order</a></t>
+                        <t t-if="request.website.company_id.portal_create_cooreperate_orders"><a class="dropdown-item" role="menuitem" t-attf-href="/sale_coorperate_order/">Create Cooreperate Orders</a></t>
+                        <t t-if="request.website.company_id.portal_create_individual_order"><a class="dropdown-item" role="menuitem" t-attf-href="/my/shipments">My Orders</a></t>
+                        <t t-if="request.website.company_id.portal_create_individual_order"><a class="dropdown-item" role="menuitem" t-attf-href="/my/shipmentlines">Cargo Sale Order Lines</a></t>
+                    </div>
+                </li>
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_portal_ssearchbar_extend_cargo" inherit_id="portal.portal_searchbar">
+        <xpath expr="//nav/div[@id='o_portal_navbar_content']/div" position="inside">
+            <!-- t-if="tickets" -->
+            <div class="form-inline" t-if="is_cargo">
+                <button class="btn btn-sm btn-secondary" style="margin-left: 5px !important;">
+                    <a class="leave-common" href="/sale_individual_order">Create Shipment Order</a>
+                </button>
+            </div>
+        </xpath>
+    </template>
+    <template id="vechicle_shipment_sale">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Sale Order</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-if="request_type == 'coorperate' and not contract_ids">
+                        <center>
+                            <h3><p>Sorry You Have No Contract,Please Contact Us To Make Contract</p></h3>
+                        </center>
+                    </t>
+                    <t t-else="">
+                        <form action="/sale_coorperate_order_create/" class="s_website_form js_attributes_custom" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="default_payment_method_id" t-att-value="default_payment_method_id" />
+                            <input type="hidden" name="default_country" t-att-value="default_country" />
+                            <div class="row o_portal_cargo_sale_order_details">
+                                <div class="col-lg-12">
+                                    <div class="row" style="    margin-left: auto;
+                                                margin-right: auto;">
+                                        <div class="col-xl-12" style="margin-top: 5px;">
+                                            <div class="row"
+                                                 style="background-color: #FFFFFF;
+                                                        background-clip: border-box;
+                                                        border: 1px solid rgba(0, 0, 0, 0.125);
+                                                        border-radius: 0.375rem;">
+                                                <div t-attf-class="form-group col-xl-12"
+                                                     style="padding: 0.75rem 1.25rem;text-align: center;
+                                                            margin-bottom: 0;
+                                                            background-color: rgba(0, 0, 0, 0.03);
+                                                            border-bottom: 1px solid rgba(0, 0, 0, 0.125);color: green !important;">
+                                                    <label class="col-form-label">Shipment Information</label>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                                        <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                                                    </div>
+                                                </div>
+
+                                                <div t-attf-class="form-group col-xl-6">
+                                                    <p><label class="col-form-label">Customer : </label> <t t-esc="customer.name" /></p>
+                                                    <input type="hidden" name="customer" t-att-value="customer.id" />
+                                                    <input type="hidden" name="customer_price_list" t-att-value="customer.property_product_pricelist.id" />
+                                                </div>
+                                                <div t-attf-class="form-group col-xl-6">
+                                                    <p><label class="col-form-label">Customer Type : </label> <t t-esc="partner_type.name" /></p>
+                                                    <input type="hidden" name="partner_types" t-att-value="partner_type.id"  />
+                                                </div>
+
+                                                <!--div t-attf-class="form-group col-xl-6">
+                                                    <p><label class="col-form-label">Payment Method : </label> <t t-esc="payment_method_id.payment_method_name" /></p>
+                                                </div-->
+
+                                                <t t-if="request_type == 'coorperate'">
+                                                    <div t-attf-class="form-group #{error.get('contract') and 'o_has_error' or ''} col-xl-12">
+                                                        <label class="col-form-label" for="contract">Contract</label>
+                                                        <select name="customer_contract" t-attf-class="form-control #{error.get('contract') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">...Contract...</option>
+                                                            <t t-foreach="contract_ids" t-as="contract">
+                                                                <option t-att-value="'%s' % (contract.id)" t-esc="contract.contract_name" t-att-selected="contract_set == str(contract.id)"/>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </t>
+
+                                                <!--div t-attf-class="form-group #{error.get('cargo_sale_type') and 'o_has_error' or ''} col-xl-12">
+                                                        <label class="col-form-label" for="cargo_sale_type">Order Type</label>
+                                                        <select name="cargo_sale_type" t-attf-class="form-control #{error.get('cargo_sale_type') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">...Type...</option>
+                                                            <t t-foreach="cargo_sale_types" t-as="order_type">
+                                                                <option t-att-value="'%s' % (order_type[0])" t-esc="order_type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div-->
+
+                                                <div style="display:none;" t-attf-class="form-group #{error.get('payment_method') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-form-label" for="payment_method">Payment Method</label>
+                                                    <select name="payment_method" t-attf-class="form-control #{error.get('payment_method') and 'is-invalid' or ''}" required="required" >
+                                                        <t t-foreach="payment_method_id" t-as="method_id">
+                                                            <option t-att-value="'%s' % (method_id.id)" t-esc="method_id.payment_method_name" t-att-selected="str(method_id.id) == str(default_payment_method_id)"/>
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+
+                                                <div t-attf-class="form-group col-xl-6 form-field o_website_form_custom">
+                                                    <label class="col-form-label">Shipment Date</label>
+                                                    <div class="o_website_form_datetime input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                        <input type="text" id="shipment_date" class="form-control datetimepicker-input o_website_form_input" data-target="#datetimepicker4" name="shipment_date" required="required"/>
+                                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                            <div class="input-group-text">
+                                                                <i class="fa fa-calendar"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    <div><font style="color:#eb4623; font-size: 14px;">You Must Deliver Car in this date or before it</font></div>
+                                                    <input type="hidden" name="user_timezone" />
+                                                </div>
+
+
+                                                <div t-attf-class="form-group #{error.get('agreement_type') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-form-label" for="agreement_type">Agreement Type</label>
+                                                    <select name="agreement_type" t-attf-class="form-control #{error.get('agreement_type') and 'is-invalid' or ''}" required="required">
+                                                        <option value="oneway">Oneway</option>
+                                                        <option value="return">Round Trip</option>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+                                                <!--    #########################First##################     -->
+                                                <div t-attf-class="form-group col-xl-12" id="return_details1" style="display:none;">
+                                                    <label class="col-form-label">First Leg</label>
+                                                </div>
+                                                <div t-attf-class="form-group #{error.get('loc_from') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-form-label" for="from">From</label>
+                                                    <select  name="loc_from" t-attf-class="form-control #{error.get('loc_from') and 'is-invalid' or ''}" required="required">
+                                                        <option value="">..From..</option>
+                                                        <t t-foreach="loc_from_ids" t-as="loc_from">
+                                                            <option t-att-value="'%s' % (loc_from.id)" t-esc="loc_from.route_waypoint_name" t-att-return_branch_type="loc_from.branch_type"
+                                                                    t-att-allowed_return_waypoint_ids="loc_from.allowed_return_waypoint_ids.ids" t-att-selected="loc_from_set == str(loc_from.id)" />
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+
+                                                <div t-attf-class="form-group #{error.get('loc_to') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-form-label" for="loc_to">To</label>
+                                                    <select name="loc_to" t-attf-class="form-control #{error.get('loc_to') and 'is-invalid' or ''}" required="required">
+                                                        <option value="">..To..</option>
+                                                        <t t-foreach="loc_to_ids" t-as="loc_to">
+                                                            <option t-att-value="'%s' % (loc_to.id)" style="display:none;" t-esc="loc_to.route_waypoint_name" t-att-selected="loc_to_set == str(loc_to.id)"/>
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+                                                <!-- #####################Second######################-->
+
+                                                <div t-attf-class="form-group col-xl-12" id="return_details2" style="display:none;">
+                                                    <label class="col-form-label">Second Leg</label>
+                                                </div>
+
+                                                <div t-attf-class="form-group #{error.get('return_loc_from') and 'o_has_error' or ''} col-xl-6" id="return_details3" style="display:none;">
+                                                    <label class="col-form-label" for="return_loc_from"> Return From</label>
+                                                    <select  name="return_loc_from" t-attf-class="form-control #{error.get('return_loc_from') and 'is-invalid' or ''}" disabled="disabled">
+                                                        <option value="">..Return From..</option>
+                                                        <t t-foreach="return_loc_ids" t-as="loc_from">
+                                                            <option t-att-value="'%s' % (loc_from.id)" style="display:none;" t-esc="loc_from.route_waypoint_name"/>
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+
+                                                <div t-attf-class="form-group #{error.get('return_loc_to') and 'o_has_error' or ''} col-xl-6" id="return_details4" style="display:none;">
+                                                    <label class="col-form-label" for="return_loc_to"> Return To </label>
+                                                    <select name="return_loc_to" t-attf-class="form-control #{error.get('return_loc_to') and 'is-invalid' or ''}" disabled="disabled">
+                                                        <option value="">..Return To..</option>
+                                                        <t t-foreach="return_loc_ids" t-as="loc_to">
+                                                            <option t-att-value="'%s' % (loc_to.id)" style="display:none;" t-esc="loc_to.route_waypoint_name" t-att-selected="loc_to_set == str(loc_to.id)"/>
+                                                        </t>
+                                                    </select>
+                                                    <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                </div>
+
+
+                                                <div t-attf-class="form-group row #{error.get('est_no_delivery_days') and 'o_has_error' or ''} col-xl-6">
+                                                    <label class="col-xl-4 col-form-label" for="est_no_delivery_days" style="padding: 0.75rem 1.0rem;text-align: center;">Expected Delivery :</label>
+                                                    <div id="deliver_ex_detail" class="col-xl-8 form-inline">
+
+                                                        <span style="padding:5px;">From</span>
+                                                        <span id="est_no_delivery_days" style="background-color: rgba(0, 0, 0, 0.03);color: green !important;padding: 0.75rem 1.25rem;text-align: center;">0</span>
+                                                        <span style="padding:5px;">TO</span>
+
+                                                        <span id="est_max_no_delivery_days" style="background-color: rgba(0, 0, 0, 0.03);color: green !important;padding: 0.75rem 1.25rem;text-align: center;">0</span>
+                                                        <span style="padding:5px;">Days</span>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                    <div><font style="color:#eb4623; font-size: 14px;">The actual arrival times will be applied while the vehicle is delivered to the branch</font></div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xl-12" style="margin-top: 5px;">
+                                            <div class="row"
+                                                 style="background-color: #FFFFFF;
+                                                    background-clip: border-box;
+                                                    border: 1px solid rgba(0, 0, 0, 0.125);
+                                                    border-radius: 0.375rem">
+                                                <div t-attf-class="form-group col-xl-12"
+                                                     style="padding: 0.75rem 1.25rem;text-align: center;
+                                                        margin-bottom: 0;
+                                                        background-color: rgba(0, 0, 0, 0.03);
+                                                        border-bottom: 1px solid rgba(0, 0, 0, 0.125);color: green !important;">
+                                                    <label class="col-form-label">Shipper And Receiver Details</label>
+                                                </div>
+                                                <div id="default_customer_details" style="display:none;">
+                                                    <input type="text" name="defualt_sender_name" t-att-value="defualt_sender_name"/>
+                                                    <input type="text" name="default_sender_type" t-att-value="default_sender_type"/>
+                                                    <input type="text" name="default_sender_nationality" t-att-value="default_sender_nationality"/>
+                                                    <input type="text" name="default_sender_id_type" t-att-value="default_sender_id_type"/>
+                                                    <input type="text" name="default_sender_id_card_no" t-att-value="default_sender_id_card_no"/>
+                                                    <input type="text" name="defualt_sender_visa_no" t-att-value="default_sender_visa_no"/>
+                                                </div>
+                                                <div class="row"
+                                                     style="border: 1px solid rgba(0,0,0,.125);
+                                                        border-radius: .25rem;margin-left: auto;
+                                                        margin-right: auto;">
+                                                    <div t-attf-class="form-group col-xl-12"
+                                                         style="background-color: #f7f7f7;text-align: center !important;">
+                                                        <label class="col-form-label">Sender</label>
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-2">
+                                                        <input type="checkbox"  name="sender_default" />
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-10">
+                                                        <label class="col-form-label"  for="sender_default">Same as Customer ?</label>
+                                                    </div>
+
+
+
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="sender_name">Sender Name</label>
+                                                        <input type="text" t-attf-class="form-control" name="sender_name" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('sender_id_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="sender_id_type">Sender ID Type</label>
+                                                        <select name="sender_id_type" t-attf-class="form-control #{error.get('sender_id_type') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Sender ID Type..</option>
+                                                            <t t-foreach="sender_id_type" t-as="id_type">
+                                                                <option t-att-value="'%s' % (id_type[0])" t-esc="id_type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('sender_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="sender_type">Sender Type</label>
+                                                        <select name="sender_type" t-attf-class="form-control #{error.get('sender_type') and 'is-invalid' or ''}" required="required" >
+                                                            <option value="">..Sender Type..</option>
+                                                            <t t-foreach="sender_type" t-as="type">
+                                                                <option t-att-value="'%s' % (type[0])" t-esc="type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="sender_id_card_no">Sender ID Card Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="sender_id_card_no" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('sender_nationality') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="sender_nationality">Sender Nationality</label>
+                                                        <select name="sender_nationality" t-attf-class="form-control #{error.get('sender_nationality') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">..Sender Nationality..</option>
+                                                            <t t-foreach="nationality_ids" t-as="nation_id">
+                                                                <option t-att-value="'%s' % (nation_id.id)" t-esc="nation_id.name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="sender_visa_no">Sender Visa Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="sender_visa_no"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row" style="border: 1px solid rgba(0,0,0,.125);
+                                                        border-radius: .25rem;margin-left: auto;
+                                                        margin-right: auto;">
+                                                    <div t-attf-class="form-group col-xl-12"
+                                                         style="background-color: #f7f7f7;
+                                                            text-align: center !important;">
+                                                        <label class="col-form-label">Owner</label>
+                                                    </div>
+
+
+                                                    <div t-attf-class="form-group col-xl-2">
+                                                        <input type="checkbox" name="owner_default"/>
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-10">
+                                                        <label class="col-form-label"  for="owner_default">Same as Sender ?</label>
+                                                    </div>
+
+
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="owner_name">Owner Name</label>
+                                                        <input type="text" t-attf-class="form-control" name="owner_name" />
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('owner_id_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="owner_id_type">Owner ID Type</label>
+                                                        <select name="owner_id_type" t-attf-class="form-control #{error.get('owner_id_type') and 'is-invalid' or ''}">
+                                                            <option value="">..Owner ID Type..</option>
+                                                            <t t-foreach="sender_id_type" t-as="id_type">
+                                                                <option t-att-value="'%s' % (id_type[0])" t-esc="id_type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('owner_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="owner_type">Owner Type</label>
+                                                        <select name="owner_type" t-attf-class="form-control #{error.get('owner_type') and 'is-invalid' or ''}">
+                                                            <option value="">..Owner Type..</option>
+                                                            <t t-foreach="sender_type" t-as="type">
+                                                                <option t-att-value="'%s' % (type[0])" t-esc="type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="owner_id_card_no">Owner ID Card Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="owner_id_card_no"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('owner_nationality') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="owner_nationality">Owner Nationality</label>
+                                                        <select name="owner_nationality" t-attf-class="form-control #{error.get('owner_nationality') and 'is-invalid' or ''}">
+                                                            <option value="">..Owner Nationality..</option>
+                                                            <t t-foreach="nationality_ids" t-as="nation_id">
+                                                                <option t-att-value="'%s' % (nation_id.id)" t-esc="nation_id.name" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="owner_visa_no">Owner Visa Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="owner_visa_no"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row" style="border: 1px solid rgba(0,0,0,.125);
+                                                        border-radius: .25rem;margin-left: auto;
+                                                        margin-right: auto;">
+                                                    <div t-attf-class="form-group col-xl-12"
+                                                         style="background-color: #f7f7f7 !important;
+                                                                text-align: center !important;">
+                                                        <label class="col-form-label">Receiver</label>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group col-xl-2">
+                                                        <input type="checkbox" name="receiver_default" />
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-10">
+                                                        <label class="col-form-label"  for="receiver_default">Same as Owner ?</label>
+                                                    </div>
+
+
+
+
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="receiver_name">Receiver Name</label>
+                                                        <input type="text" t-attf-class="form-control" name="receiver_name" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('receiver_id_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="receiver_id_type">Receiver ID Type</label>
+                                                        <select name="receiver_id_type" t-attf-class="form-control #{error.get('receiver_id_type') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">..Receiver ID Type..</option>
+                                                            <t t-foreach="sender_id_type" t-as="id_type">
+                                                                <option t-att-value="'%s' % (id_type[0])" t-esc="id_type[1]" required="required"/>
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('receiver_type') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="receiver_type">Receiver Type</label>
+                                                        <select name="receiver_type" t-attf-class="form-control #{error.get('receiver_type') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">..Receiver Type..</option>
+                                                            <t t-foreach="sender_type" t-as="type">
+                                                                <option t-att-value="'%s' % (type[0])" t-esc="type[1]" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="receiver_id_card_no">Receiver ID Card Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="receiver_id_card_no" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+
+                                                    </div>
+
+                                                    <div t-attf-class="form-group #{error.get('receiver_nationality') and 'o_has_error' or ''} col-xl-6">
+                                                        <label class="col-form-label" for="receiver_nationality">Receiver Nationality</label>
+                                                        <select name="receiver_nationality" t-attf-class="form-control #{error.get('receiver_nationality') and 'is-invalid' or ''}" required="required">
+                                                            <option value="">..Receiver Nationality..</option>
+                                                            <t t-foreach="nationality_ids" t-as="nation_id">
+                                                                <option t-att-value="'%s' % (nation_id.id)" t-esc="nation_id.name" required="required" />
+                                                            </t>
+                                                        </select>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="receiver_visa_no">Receiver Visa Number</label>
+                                                        <input type="text" t-attf-class="form-control" name="receiver_visa_no"  />
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="receiver_mob_no">Receiver Mobile Number</label>
+                                                        <input type="number" t-attf-class="form-control" name="receiver_mob_no" required="required"/>
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                    <div t-attf-class="form-group col-xl-6">
+                                                        <label class="col-form-label"  for="no_of_copy">No of Copy</label>
+                                                        <input type="number" t-attf-class="form-control" name="no_of_copy" />
+                                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+                                    <div t-attf-class="form-group col-xl-12">
+                                        <input type="text" t-attf-class="form-control" name="note" placeholder="Note....."/>
+                                        <div class="alert alert-danger" role="alert" style="display:none;"></div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <button type="submit"  id="property_submit_form" class="btn btn-primary float-right mb32">
+                                            Confirm
+                                            <span class="fa fa-long-arrow-right" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </t>
+                </div>
+
+            </div>
+        </t>
+    </template>
+    <template id="vechicle_shipment_sale_order_status">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Sale Order</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-if='order'>
+                        <span id="o_website_form_result" class="text-success ml8">
+                            <i class="fa fa-check mr4" role="img" aria-label="Success" title="Success"/>The Order Is Successfully Created , Order Number : <b><t t-esc="order.name" /></b>
+                        </span>
+                    </t>
+                    <t t-else=''>
+                        <span id="o_website_form_result" class="text-danger ml8">
+                            <i class="fa fa-close mr4" role="img" aria-label="Error" title="Error"/>An error has occured, the form has not been sent.
+                        </span>
+                    </t>
+
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+
+    <!--templates xml:space="preserve">
+
+         Success status
+        <t t-name="website_form.status_success">
+            <span id="o_website_form_result" class="text-success ml8">
+                <i class="fa fa-check mr4" role="img" aria-label="Success" title="Success"/>The form has been sent successfully.
+            </span>
+        </t>
+
+         Missing field status
+        <t t-name="website_form.status_invalid">
+            <span id="o_website_form_result" class="text-danger ml8">
+                <i class="fa fa-close mr4" role="img" aria-label="Error" title="Error"/>Please fill in the form correctly.
+            </span>
+        </t>
+
+         Error status
+        <t t-name="website_form.status_error">
+            <span id="o_website_form_result" class="text-danger ml8">
+                <i class="fa fa-close mr4" role="img" aria-label="Error" title="Error"/>An error has occured, the form has not been sent.
+            </span>
+        </t>
+
+    </templates-->
+
+
+</odoo>

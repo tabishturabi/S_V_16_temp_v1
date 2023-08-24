@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="trips_reports_xlsx_id"
+                model="trips.report.wizard"
+                string="Trips Reports"
+                report_type="xlsx"
+                name="bsg_trips_reports.trips_report_xlsx"
+                file="bsg_trips_reports.trips_report_xlsx"/>
+</odoo>

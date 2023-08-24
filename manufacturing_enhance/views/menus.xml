@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <menuitem id="menu_bsg_mrp_root"
+                  name="Manufacturing"
+                  icon="fa-wrench"
+                  web_icon="manufacturing_enhance,static/description/icon.png"
+                  sequence="35"/>
+        <menuitem id="menu_bsg_mrp_orders_menu"
+                  name="Manufacturing"
+                  sequence="3"
+                  parent="manufacturing_enhance.menu_bsg_mrp_root"/>
+        <menuitem id="menu_bsg_mrp_config"
+                  name="Configuration"
+                  parent="manufacturing_enhance.menu_bsg_mrp_root"
+                  sequence="5"/>
+
+
+        <menuitem id="menu_bsg_quality_root"
+                  name="Quality"
+                  icon="fa-wrench"
+                  web_icon="manufacturing_enhance,static/description/q_icon.png"
+                  sequence="35"/>
+        <menuitem id="menu_bsg_quality_control_menu"
+                  name="Quality Control"
+                  sequence="3"
+                  parent="manufacturing_enhance.menu_bsg_quality_root"/>
+        <menuitem id="menu_bsg_qc_config"
+                  name="Configuration"
+                  parent="manufacturing_enhance.menu_bsg_quality_root"
+                  sequence="5"/>
+
+
+    </data>
+</odoo>

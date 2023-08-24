@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_fleet_vehicle_trip_form_inherit">
+            <field name="name">view.fleet.vehicle.trip.form.inherit</field>
+            <field name="model">fleet.vehicle.trip</field>
+            <field name="inherit_id" ref="bsg_trip_mgmt.view_fleet_vehicle_trip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_get_bayan_pdf"
+                            attrs="{'invisible':[('bayan_status','!=','success')]}"
+                            string="Get Bayan Trip PDF" type="object" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//group[2]/separator" position="before">
+                    <field name="bayan_trip_id" force_save="1" readonly="1"/>
+                    <field name="bayan_status" force_save="1" readonly="1"/>
+                    <field name="bayan_config_active" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//page[@name='stock_picking_ids']/field[@name='stock_picking_id']/tree" position="inside">
+                    <field name="way_bill_line_state" invisible="1"/>
+                    <field name="bayan_way_bill_line_id" invisible="1"/>
+
+                    <button name="btn_cancel_waybill"
+                            attrs="{'invisible':['|',('way_bill_line_state','=','cancelled'),('bayan_way_bill_line_id','=',False)]}"
+                            string="Cancel Waybill" type="object" class="oe_highlight"/>
+                </xpath>
+                <!--                <xpath expr="//page[@name='stock_picking_ids']/field[@name='stock_picking_id']/form/group[1]"-->
+                <!--                       position="after">-->
+                <!--                    <group string="Bayan Reason">-->
+                <!--                        <group>-->
+                <!--                            <field name="bayan_reason_id" string="Bayan Reason" required="1" force_save="1"/>-->
+                <!--                        </group>-->
+                <!--                    </group>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+
+    </data>
+</odoo>

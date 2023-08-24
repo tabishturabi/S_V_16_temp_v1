@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       	<record model="res.groups" id="group_view_bx_reports">
+            <field name="name">Bx Reports</field>
+            <field name="category_id" ref="bsg_tranport_bx_credit_customer_collection.module_bx_credit_customer_collection"/>
+        </record>
+    </data>
+</odoo>

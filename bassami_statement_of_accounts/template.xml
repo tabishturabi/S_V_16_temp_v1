@@ -1,0 +1,107 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+        <record id="paperformat_soa_template" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_partner_ledger" 
+            model="res.partner"
+            name="bassami_statement_of_accounts.partner_ledger_report"
+            file="bassami_statement_of_accounts.partner_ledger_report"
+            report_type="qweb-html"
+            string="Statement of Accounts"
+            paperformat="paperformat_soa_template"
+            menu="False"/>
+
+        <record id="partner_ledger_wizard" model="ir.ui.view">
+            <field name="name">partner_ledger_wizard</field>
+            <field name="model">partner.ledger.bassami</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="customer_type" required="1"/>
+                            <field name="partner_ids" domain="[('partner_types','=',partner_types)]" widget="many2many_tags" attrs="{'invisible':[('customer_type','=','all')],'required':[('customer_type','!=','all')]}" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="entry_type" />
+                      
+                        </group>
+
+                        <group name="group_right">
+                            <field name="allowed_to_change" invisible="1"/>
+                            <field name="with_soa_vendor" invisible="1"/>
+                            <field name="to"/>
+                            <field name="account_type"  attrs="{'readonly':['|',('with_soa_vendor','!=',True),('allowed_to_change','!=',True)]}"/>
+                            <field name="account_ids" widget="many2many_tags" attrs="{'invisible':[('account_type','!=','others')]}" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="partner_types" options="{'no_create':True,'no_edit':True,'no_open':True}" attrs="{'required':['|',('with_soa_vendor','!=',True),('allowed_to_change','!=',True)]}"/>
+                            <field name="with_details" />
+                            <field name="for_emp" />
+                            <field name="one_page" attrs="{'invisible':[('with_details','=',False)]}" />
+                            <field name="sort_details" />
+                            <field name="branch_ids" widget="many2many_tags" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="with_inactive_partner"></field>
+
+                        </group>
+
+                      
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                        <button name="print_report_xlsx" type="object" string="Print EXCEL" class = "oe_highlight" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+      
+
+        <record id="partner_ledger_menu_action" model="ir.actions.act_window">
+            <field name="name">Statement of account</field>
+            <field name="res_model">partner.ledger.bassami</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="partner_ledger_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem
+            id="account_other_report_menu"
+            name="Account Report"
+            sequence="12"
+            parent="hr_payroll.menu_hr_payroll_root"/>
+            
+        <menuitem id="partner_ledger_menu_item" name="Statement of Account" action="partner_ledger_menu_action" parent="account_reports.account_reports_partners_reports_menu" groups="group_soa_report"/>
+        <menuitem id="partner_payroll_ledger_menu_item" name="Statement of Account" action="partner_ledger_menu_action" parent="account_other_report_menu" groups="group_soa_report"/>
+        <menuitem id="partner_purchase_ledger_menu_item" name="Statement of Account" action="partner_ledger_menu_action" parent="purchase.purchase_report" groups="bassami_statement_of_accounts.statement_of_account_vendor_SOA"/>
+        <report
+            id="action_report_for_soa_xlsx"
+            string="Statement Of  Account  Report"
+            model="res.partner"
+            report_type="xlsx"
+            file="Statement Of  Account  Report"
+            name="bassami_statement_of_accounts.stat_of_accounts_xlsx"
+            menu="False"
+        />
+        
+    </data>
+</odoo>

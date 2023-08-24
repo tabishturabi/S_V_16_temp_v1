@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_cargo_sale_line_bayan_data">
+            <field name="name">view.cargo.sale.line.bayan.data</field>
+            <field name="model">bsg_vehicle_cargo_sale_line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_cargo_sale.view_bsg_vehicle_cargo_sale_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_shipment_type']" position="after">
+                    <field name="waybill_id" readonly="1" force_save="1"/>
+                    <field name="way_bill_line_state" force_save="1"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+
+                    <button name="action_close_waybill"  string="Close WayBill"
+                            type="object" class="btn-primary"/>
+                    <button name="action_update_waybill"  string="Update WayBill"
+                            type="object" class="btn-primary"/>
+
+                </xpath>
+            </field>
+
+        </record>
+    </data>
+</odoo>

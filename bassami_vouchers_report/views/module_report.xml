@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="voucher_basami_report">
+
+            <t t-call="web.html_container">
+
+                <t t-call="web.internal_layout">
+                
+                    <div class="page">
+
+                        <style type="text/css">
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                            }
+                            .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                font-size: 13px;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                            }
+                            table tr td, table tr th {
+                                text-align: center;
+                                padding: 5px 0px 0px 5px;
+                                min-width: 130px;
+                                border-right: 2px solid #CCC;
+                                border-bottom: 1px solid #eee;
+                            }
+                            table tr td:last-child, 
+                            table tr th:last-child {
+                                border-right: none
+                            }
+                            table tr:last-child td {
+                                border-bottom: none
+                            }
+                            table tr th {
+                                text-align: center;
+                            }
+                            .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                            }
+                            .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                            }
+                            .report-header p .solid {
+                                font-weight: bold;
+                            }
+                            h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline; 
+                            }
+                            .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                            }
+
+                            .header {
+                                display : none !importnat;
+                            }
+                            .footer {
+                                display : none !importnat;
+                            }
+                        </style>
+
+                        <div class="report-wrapper">
+                            
+                            <div class="report-header">
+
+                                <h3>
+                                    <img t-if="company_id.logo" t-att-src="image_data_uri(company_id.logo)" width="134" style="margin-left: 45px;" alt=""/>
+
+                                    <span class="solid" style="text-align:  center; margin-left: 200px;margin-right: 200px;" t-esc="head"></span>
+
+                                    <img style="width:200px;background: rgba(0,0,0,0.1);" t-if="company_id.custom_right_header" t-att-src="image_data_uri(company_id.custom_right_header)"/>
+                                </h3>
+                                
+                            </div>
+
+                            <br class="clearfloat" />
+
+                            <t t-foreach="main_data" t-as="o">
+                                <div style="float:right; width: 60%;text-align: right;margin-bottom:10px;background-color : #D3D3D3;">
+
+                                    <table>
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Branch</td>
+                                            <td style="text-align:left">
+                                                <span t-esc="o['branch']"></span>
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left">‫الفرع‬</td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                            <td style="text-align:left">
+                                               <span>From : </span>
+                                               <span t-esc="form"></span>
+                                               <span>To : </span> 
+                                               <span t-esc="to"></span>
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left">‫التاريخ‬</td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Fiscal Year</td>
+                                            <td style="text-align:left">
+                                                <span t-esc="year"></span>
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left">‫ ‫السنة‬ المالية‬</td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Target Moves</td>
+
+                                            <td style="text-align:left">
+                                                <span t-esc="state"></span>
+                                            </td>
+                                            
+                                            <td style="font-weight:bold;text-align:left">‫ ‫الحركات‬ المستهدفة‬</td>
+        
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                    
+                                <br class="clearfloat" />
+
+                                <table>
+                                    <tr>
+                                        <th>Amount</th>
+                                        <th>Label</th>
+                                        <th>Reference</th>
+                                        <th>Partner</th>
+                                        <th>User</th>
+                                        <th>Voucher No.</th>
+                                        <th>Date</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>‫المبلغ‬</th>
+                                        <th>‫البيان‬</th>
+                                        <th>‫المرجع‬</th>
+                                        <th>‫المستفيد‬</th>
+                                        <th>‫المستخدم‬</th>
+                                        <th>‫رقم‬ السند‬</th>
+                                        <th>‫التاريخ‬</th>
+                                    </tr>
+
+                                    <t t-set="num" t-value="0" />
+                                    <t t-set="tot" t-value="0" />
+                                    <t t-foreach="o['in_data']" t-as="rec">
+                                        
+                                        <t t-if="o['branch'] == rec['branch_name']">
+                                        <t t-set="num" t-value="num+1" />
+                                        <tr>
+                                            <td>
+                                                <span t-esc="rec['amount']"></span>
+                                                <t t-set="tot" t-value="tot+rec['amount']" />
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['label']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['ref']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['partner']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['user']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['voucher']"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="rec['date']"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    </t>
+
+                                        <tr>
+                                            <th>
+                                                <span t-esc="tot"></span>
+                                            </th>
+                                            <th colspan="6">Total</th>
+                                        </tr>
+
+                                </table>
+
+                                <div style="float:right; width: 40%;text-align: right;margin-top:10px;margin-bottom:10px;background-color:#D3D3D3;">
+                                    <table>
+                                        <tr>
+                                            <th colspan="2">‫عدد‬ ‫سندات‬ ‫القبض‬</th>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <th>
+                                                <span t-esc="num"></span>
+                                            </th>
+                                            <th>Number Of <span t-esc="head"></span></th>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                                <table style="border:hidden">
+                                    <tr style="border:hidden">
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        
+                                    </tr>
+                                    <tr style="border:hidden">
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        
+                                    </tr>
+
+                                </table>
+
+                            </t>
+
+<!-- 
+                            <t t-if="check == 2">
+
+                                <div style="float:right; width: 60%;text-align: right;margin-bottom:10px;background-color : #D3D3D3;">
+
+                                    <table>
+                                        
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Date Filter</td>
+                                            <td style="text-align:left">
+                                               <span>From : </span>
+                                               <span t-esc="form"></span>
+                                               <span>To : </span> 
+                                               <span t-esc="to"></span>
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left">‫التاريخ‬</td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Fiscal Year</td>
+                                            <td style="text-align:left">
+                                                <span t-esc="year"></span>
+                                            </td>
+                                            <td style="font-weight:bold;text-align:left">‫ ‫السنة‬ المالية‬</td>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold;text-align:left">Target Moves</td>
+                                            <td style="text-align:left">
+                                                <span t-esc="state"></span>
+                                            </td>
+                                            
+                                            <td style="font-weight:bold;text-align:left">‫ ‫الحركات‬ المستهدفة‬</td>
+        
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                    
+                                <br class="clearfloat" />
+
+                                <table style="background-color : #D3D3D3;">
+                                    <tr>
+                                        <th>Amount</th>
+                                        <th>Label</th>
+                                        <th>Transfer To</th>
+                                        <th>User</th>
+                                        <th>Voucher No.</th>
+                                        <th>Date</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>‫المبلغ‬</th>
+                                        <th>‫البيان‬</th>
+                                        <th>حول إلى</th>
+                                        <th>‫المستخدم‬</th>
+                                        <th>‫رقم‬ السند‬</th>
+                                        <th>‫التاريخ‬</th>
+                                    </tr>
+
+                                    <t t-set="num" t-value="0" />
+                                    <t t-set="tot" t-value="0" />
+                                    <t t-foreach="trans" t-as="rec">
+                                        <t t-set="num" t-value="num+1" />
+                                        <tr>
+                                            <td>
+                                                <span t-esc="rec.amount"></span>
+                                                <t t-set="tot" t-value="tot+rec.amount" />
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.journal_id.name"></span>
+                                            </td>
+                
+                                            <td>
+                                                <span t-esc="rec.destination_journal_id.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.create_uid.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span t-esc="rec.payment_date"></span>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                        <tr>
+                                            <th>
+                                                <span t-esc="tot"></span>
+                                            </th>
+                                            <th colspan="5">Total</th>
+                                        </tr>
+
+                                </table>
+
+                                <div style="float:right; width: 40%;text-align: right;margin-top:10px;margin-bottom:10px;background-color : #D3D3D3;">
+                                    <table>
+                                        <tr>
+                                            <th colspan="2">‫عدد‬ ‫سندات‬ ‫القبض‬</th>
+                                            
+                                        </tr>
+
+                                        <tr>
+                                            <th>
+                                                <span t-esc="num"></span>
+                                            </th>
+                                            <th>Number Of <span t-esc="head"></span></th>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                                <table style="border:hidden">
+                                    <tr style="border:hidden">
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Name</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        
+                                    </tr>
+                                    <tr style="border:hidden">
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        <th style="border:hidden;text-align:right">Siganture</th>
+                                        <th style="border:hidden;text-align:right"></th>
+                                        
+                                    </tr>
+
+                                </table>
+
+                            </t> -->
+
+                        </div><!--end of report wrapper-->
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

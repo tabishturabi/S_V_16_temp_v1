@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="fleet_vehicle_state_maintenance_view_tree" model="ir.ui.view">
+            <field name="name">fleet.vehicle.state.tree.maintenance</field>
+            <field name="model">fleet.vehicle.state</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_state_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="in_service" position="after">
+                    <field name="code"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

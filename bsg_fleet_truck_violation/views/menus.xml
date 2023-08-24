@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <menuitem id="violation_config_parent" name="Violation Config"
+                  parent="bsg_trip_mgmt.root_fleet_operations"
+                  groups="bsg_fleet_truck_violation.group_truck_violation"/>
+        <menuitem id="violation_config_child1" name="Violation Type"
+                  parent="bsg_fleet_truck_violation.violation_config_parent"
+                  action="bsg_fleet_truck_violation.config_violation_type"
+                  groups="bsg_fleet_truck_violation.group_truck_violation"/>
+        <menuitem id="violation_config_child2" name="Violation Action"
+                  parent="bsg_fleet_truck_violation.violation_config_parent"
+                  action="bsg_fleet_truck_violation.config_violation_action"
+                  groups="bsg_fleet_truck_violation.group_truck_violation"/>
+    </data>
+</odoo>

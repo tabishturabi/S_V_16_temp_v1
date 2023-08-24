@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       	<record model="res.groups" id="group_view_bsg_branches_opt_report">
+            <field name="name">Branch Operation Reports</field>
+        </record>
+    </data>
+</odoo>

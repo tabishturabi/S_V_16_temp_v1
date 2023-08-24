@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+
+    <record id="fleet_vehicle_inherit_assignation_log_view_list" model="ir.ui.view"> 
+      <field name="name">fleet_vehicle_inherit_assignation_log_view_list</field> 
+      <field name="model">fleet.vehicle.assignation.log</field> 
+      <field name="inherit_id" ref="fleet.fleet_vehicle_assignation_log_view_list" /> 
+      <field name="arch" type="xml"> 
+        <field name="driver_id" position="replace">
+          <field name="bsg_driver_id"/>
+        </field>
+      </field> 
+    </record>
+
+  </data>
+  
+</odoo>

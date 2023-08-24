@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+		<t t-name="DialogForWebCam">
+			<div class="container mt16">
+				<div class="col-md-12">
+					<button class="btn btn-primary back-to-record pull-left" t-att-id="widget.data.id">Back</button>
+					<h5 class="text-center" style="font-size: 24px;"><span t-esc="widget.data.name"/> | #No. - <span t-esc="widget.data.plate_no"/><span t-esc="widget.data.palte_one"/>
+					<span t-esc="widget.data.palte_second"/><span t-esc="widget.data.palte_third"/></h5>
+				</div>
+				<div class="col-md-12 text-center mt8" style="padding: 0px;">
+					<div class="form-group text-center">
+						<div class="web_cam"/>
+					</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<button class="btn btn-primary confirm" >Confirm</button>
+					<button class="btn btn-primary cancel">Cancel</button>
+				</div>
+				
+			</div>
+		</t>
+		 <t t-name="sign_page">
+        <div class="o_my_dev_main_menu_container o_app_switcher_background">
+            <div class="o_my_dev_main_menu2">
+                <div class="model_div">
+                   
+                    <hr/>
+                    <div class='form-group options row col-md-12'>
+
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label class="pull-left label" for="comment">Comments :</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label class="pull-left label" for="signature1"> Mark Car </label>
+                        <div id="signature1">
+                        </div>
+                    </div>
+                    <hr/>
+
+					<div class="form-group">
+                        <label class="pull-left label" for="client_signature"> Client's Signature </label>
+                        <div id="client_signature">
+                        </div>
+                    </div>
+					<hr/>
+                    <div class="row col-sm-12 col-xs-12 bottom">
+                        <div class="col-sm-6 col-xs-12">
+                            <button class="center button_back btn btn-primary">BACK</button>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <button class="center button_submit btn btn-primary">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+		<script>
+		
+				$(document).ready(function(){ 
+					$("#signature1").jSignature({
+					'decor-color': '#FF0000',
+					'color': '#FF0000',
+					'background-color': '#fff',
+					'width':'100%',
+					'height': '450px',
+				});
+				var image  = document.getElementsByClassName('car_image')[0];
+				var canvas = document.getElementsByClassName('jSignature')[0];	
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+				$("#client_signature").jSignature({
+					'decor-color': '#FF0000',
+					'color': '#000',
+					'background-color': '#fff',
+					'width':'100%',
+					'height': '450px',
+				});
+				 }) 
+		
+		</script>
+    </t>
+</templates>

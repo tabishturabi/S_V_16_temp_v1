@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="helpdesk_root_cause_list">
+      <field name="name">root.causes.tree</field>
+      <field name="model">root.causes</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name = "name"></field>
+          </tree>
+      </field>
+    </record>
+      <record model="ir.ui.view" id="helpdesk_root_causes_form">
+          <field name="name">root.causes.form</field>
+          <field name="model">root.causes</field>
+          <field name="arch" type="xml">
+              <form>
+                  <sheet>
+                      <group>
+                          <group>
+                              <field name="name"></field>
+                          </group>
+                          <group>
+                          </group>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+      <record model="ir.actions.act_window" id="helpdesk_root_causes_action">
+          <field name="name">Root Causes</field>
+          <field name="res_model">root.causes</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+   <menuitem name="Root Causes"
+             id="root_causes_menu"
+             sequence="2"
+             parent="helpdesk.helpdesk_menu_config"
+             action="helpdesk_root_causes_action"
+   />
+<!--      <record model="ir.ui.view" id="vehicle_type_table_inherit_form">-->
+<!--        <field name="name">bsg.vehicle.type.table.inherit.form</field>-->
+<!--        <field name="model">bsg.vehicle.type.table</field>-->
+<!--        <field name="inherit_id" ref="bsg_fleet_operations.bsg_vehicle_type_table_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='domain_id']" position="replace">-->
+<!--                <field name="domain_name" widget="selection"></field>-->
+<!--            </xpath>-->
+<!--      </field>-->
+<!--    </record>-->
+<!--      <record model="ir.ui.view" id="vehicle_type_table_inherit_tree">-->
+<!--        <field name="name">bsg.vehicle.type.table.inherit.tree</field>-->
+<!--        <field name="model">bsg.vehicle.type.table</field>-->
+<!--        <field name="inherit_id" ref="bsg_fleet_operations.bsg_vehicle_type_table_view_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='domain_id']" position="replace">-->
+<!--                <field name="domain_name"></field>-->
+<!--            </xpath>-->
+<!--      </field>-->
+<!--    </record>-->
+  </data>
+</odoo>

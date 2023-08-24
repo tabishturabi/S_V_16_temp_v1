@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="truck_accidents_claim_report_form">
+            <field name="name">truck.accidents.claim.report.wizard.form</field>
+            <field name="model">claims.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+<!--                                <field name="driver_id"/>-->
+<!--                                <field name="customer_id"/>-->
+                                <field name="accident_agreement_type"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+                        <!--                        <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="truck_accidents_claim_report_action">
+            <field name="name">Claim Report</field>
+            <field name="res_model">claims.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="truck_accidents_claim_report_form"></field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Claims Report"
+                  id="menu_truck_accidents_claims_report"
+                  parent="bsg_truck_accidents.menu_truck_accidents_reports_main"
+                  sequence="5"
+                  action="truck_accidents_claim_report_action"/>
+        <report id="truck_accidents_claims_report_xlsx_id"
+                model="claims.report"
+                string="Claims Report"
+                report_type="xlsx"
+                name="bsg_truck_accidents.truck_accidents_claims_report_xlsx"
+                file="bsg_truck_accidents.truck_accidents_claims_report_xlsx"/>
+    </data>
+</odoo>

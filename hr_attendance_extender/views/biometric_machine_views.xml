@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- biometric machine form view -->
+    <record id="view_biometric_machine_form" model="ir.ui.view">
+        <field name="name">biometric.machine.form</field>
+        <field name="model">biometric.machine</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Biometric Machine" version="7.0">
+                <sheet>
+                    <!-- all contact with the machines should be through the cron functions -->
+                    <!--<div class="oe_right oe_button_box">-->
+                        <!--<button name="clear_attendance" string="Clear Data" class="oe_stat_button" icon="fa-remove " confirm="Please be carfull Are you sure you want to Clear Attendance?" type="object"/>-->
+                        <!--<button name="download_attendance"  string="Download Data" class="oe_stat_button" icon="fa-download " type="object" confirm="Are you sure you want to do this?" />-->
+                        <!--<button name="create_attendance"  string="Create Attendance" class="oe_stat_button" icon="fa-file" type="object" confirm="Are you sure you want to do this?" />-->
+                    <!--</div>-->
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <br/><br/><br/>
+                    <group>
+                        <group>
+                            <field name="make" required="1"/>
+                            <field name="ip_address" required="1"/>
+                            <field name="port" required="1"/>
+                            <field name="auth_type" />
+                        </group>
+                        <group>
+                            <field name="location" required="1"/>
+                            <field name="time_zone"/>
+                            <field name="last_download_date" readonly="1"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                     <group string="Database Connection" name="database_info" attrs="{'invisible': [('make', '!=', 'suprema')]}" >
+                        <group>
+                            <field name="database_ip" attrs="{'required': [('make', '=', 'suprema')]}" />
+                            <field name="database_port" />
+                            <field name="database_name" attrs="{'required': [('make', '=', 'suprema')]}" />
+                        </group>
+                        <group>
+                            <field name="database_username" attrs="{'required': [('make', '=', 'suprema')]}" />
+                            <field name="database_password" attrs="{'required': [('make', '=', 'suprema')]}" password="True"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- biometric machine tree view -->
+    <record id="view_biometric_machine_tree" model="ir.ui.view">
+        <field name="name">biometric.machine.tree</field>
+        <field name="model">biometric.machine</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Biometric Machine" version="7.0">
+                <field name="name"/>
+                <field name="location"/>
+                <field name="time_zone"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- biometric machine action -->
+    <record id="open_view_attendance_machine" model="ir.actions.act_window">
+        <field name="name">Attendances Configration</field>
+        <field name="res_model">biometric.machine</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- biometric machine menu -->
+    <menuitem id="id_add_bio_machine_new"
+              sequence="1"
+              parent="hr_attendance.menu_hr_attendance_my_attendances"
+              name="Attendance Machine" action="open_view_attendance_machine" />
+
+</odoo>

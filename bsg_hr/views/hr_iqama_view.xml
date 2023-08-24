@@ -1,0 +1,141 @@
+<odoo>
+  <data>
+<!-- iqama form view-->
+      <record model="ir.ui.view" id="view_hr_iqama_form">
+        <field name="name">hr.iqama.form</field>
+        <field name="model">hr.iqama</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Iqama" >
+                <sheet>
+                     <group>
+                        <group>
+                            <field name="bsg_iqama_name"/>
+                            <field name="bayan_issue_number"/>
+                            <field name="bsg_employee"/>
+                            <field name="bsg_department"/>
+                            <field name="guarantor_id" />
+                            <field name="bsg_issuedate" class="with_hijri"/>
+                            <field name="bsg_expirydate" class="with_hijri"/>
+                        </group>
+                        <group>
+                            <field name="bsg_dateofbirth" class="with_hijri"/>
+                            <field name="bsg_job_pos"/>
+                            <field name="bsg_arrivaldate" class="with_hijri"/>
+                            <field name="bsg_placeofissue"/>
+                            <field name="bsg_bloodgroup"/>
+                            <field name="bsg_dependent" invisible="1"/>
+                            <field name="yearly_iqama_cost"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="bsg_family" attrs="{'invisible': [('bsg_dependent' ,'=', False)]}">
+                            <form>
+                                <group>
+                                    <field name="bsg_name"/>
+                                    <field name="bsg_iqamanumber"/>
+                                    <field name="bsg_relation"/>
+                                    <field name="bsg_iqamaexpiry" class="with_hijri"/>
+                                    <field name="bsg_iqamaissueplace"/>
+                                </group>
+                            </form>
+                            <tree>
+                                <field name="bsg_name"/>
+                                <field name="bsg_iqamanumber"/>
+                                <field name="bsg_iqamanumber"/>
+                                <field name="bsg_relation"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_hr_iqama_tree">
+        <field name="name">hr.iqama.tree</field>
+        <field name="model">hr.iqama</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsg_iqama_name"/>
+                <field name="bsg_employee"/>
+                <field name="bsg_department"/>
+                <field name="bsg_issuedate"/>
+                <field name="bsg_expirydate"/>
+                <field name="bsg_job_pos"/>
+            </tree>
+        </field>
+    </record>
+    
+
+
+    <record model="ir.actions.act_window" id="bsg_hr_iqama_action">
+        <field name="name">Employee Iqama</field>
+        <field name="res_model">hr.iqama</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_hr_iqama_tree"/>
+    </record>
+
+    <record id="bsg_hr_guarantor_view_form" model="ir.ui.view">
+        <field name="name">bsg.hr.guarantor.view.form</field>
+        <field name="model">bsg.hr.guarantor</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="no" />
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="bsg_hr_guarantor_view_tree" model="ir.ui.view">
+        <field name="name">bsg.hr.guarantor.view.tree</field>
+        <field name="model">bsg.hr.guarantor</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                    <field name="no" />
+                    <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsg_emp_guarantor_definition_action">
+        <field name="name">Guarantor Definition</field>
+        <field name="res_model">bsg.hr.guarantor</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Human Resource"
+              id="hr_iqama_menu"
+              parent="hr.menu_hr_root"
+              sequence="11"
+              groups="bsg_hr.group_hr_specialist,bsg_hr.group_hr_manager,bsg_hr.group_government_relation"
+      />
+
+      <menuitem name="Employee Iqama"
+      id="hr_emp_iqama_menu"
+      parent="hr_iqama_menu"
+      action="bsg_hr_iqama_action"
+      sequence="11"
+      />
+
+      <menuitem name="Guarantor Definition"
+      id="hr_emp_guarantor_definition_menu"
+      parent="hr.menu_human_resources_configuration"
+      action="bsg_emp_guarantor_definition_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

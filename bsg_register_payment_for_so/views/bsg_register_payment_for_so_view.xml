@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="bsg_register_payment_for_so_form_view">
+        <field name="name">bsg_register_payment_for_so_form</field>
+        <field name="model">bsg_register_payment_for_so</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+              <sheet>
+                <group name="top" >
+                  <group name="left" >
+                        <field name="cargo_sale_id" options="{'no_create': True, 'no_open': True}"/>
+                  </group>
+                </group>
+              </sheet>
+              <footer>
+                <button string="Close" class="btn-secondary" special="cancel"/>
+                <button name="grant_user_access" type="object" string="Grant Access" class="btn btn-primary"/>
+              </footer>              
+            </form>
+        </field>
+    </record>
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="bsg_register_payment_for_so_act">
+        <field name="name">Register Payment For SO</field>
+        <field name="res_model">bsg_register_payment_for_so</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="bsg_register_payment_for_so_form_view"/>
+        <field name="target">new</field>
+    </record>
+    <!-- Menu Item  -->
+    <menuitem name="Register Payment For SO" 
+      id="bsg_register_payment_for_so_meun" 
+      parent="bsg_cargo_sale.cargo_sale_root_meun"
+      action="bsg_register_payment_for_so_act"
+      sequence="4"
+      groups="group_register_payment_for_so"
+      />
+  </data>
+</odoo>

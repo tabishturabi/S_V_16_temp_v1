@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="trucks_dedicating_area_form">
+            <field name="name">trucks.dedicating.area.form</field>
+            <field name="model">trucks.dedicating.area</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Trucks Dedicating Area">
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View  -->
+        <record id="trucks_dedicating_area_search" model="ir.ui.view">
+            <field name="name">trucks.dedicating.area.search</field>
+            <field name="model">trucks.dedicating.area</field>
+            <field name="arch" type="xml">
+                <search string="Trucks Dedicating Area">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="trucks_dedicating_area_tree">
+            <field name="name">trucks.dedicating.area.tree</field>
+            <field name="model">trucks.dedicating.area</field>
+            <field name="arch" type="xml">
+                <tree string="Trucks Dedicating Area">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="trucks_dedicating_area_action">
+            <field name="name">Trucks Dedicating Area</field>
+            <field name="res_model">trucks.dedicating.area</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+    </data>
+</odoo>

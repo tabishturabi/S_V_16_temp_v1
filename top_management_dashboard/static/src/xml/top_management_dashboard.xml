@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="TopManagementDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+                <div class="timeline_selection">
+                    <div class="row main-section pt-3">
+                        <div class="col-md-2 col-sm-2 mb-4 "></div>
+                        <div class="col-md-2 col-sm-2 mb-4"></div>
+                        <div class="col-md-2 col-sm-2 mb-4">
+<!--                            <label for="filters">Choose a Timeline:</label>-->
+                            <select name="filters" id="filters" style="padding: 10px; background-color:paleturquoise; border:none;">>
+                                <option value="month">This Month</option>
+                                <option value="year">This Year</option>
+                                <option value="week">This Week</option>
+                                <option value="today">Today</option>
+                                <option value="default">All</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-2 mb-4">
+<!--                            <select name="checks" id="checks" style="padding: 10px; background-color:paleturquoise; border:none;">>-->
+<!--                                <option value="">State</option>-->
+<!--                                <option value="trips">Trips</option>-->
+<!--                                <option value="Vehicles">Vehicles</option>-->
+<!--                                <option value="Purchases">Purchase Requests</option>-->
+<!--                            </select>-->
+                        </div>
+                        <div class="col-md-2 col-sm-2 mb-4"></div>
+                        <div class="col-md-2 col-sm-2 mb-4"></div>
+                    </div>
+                </div>
+                <div class="payments_dashboard">
+
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="AccountPaymentDetails">
+        <div class="row main-section pt-3">
+            <div class="col-md-3 col-sm-2">
+<!--                <div class="stat-icon"><i class="fa fa-money"/></div>-->
+                <div class="receipt-vouchers">
+                    <div class="amount-text">
+                        <span>SAR</span>
+                        <t t-esc="widget.payment_voucher['receipt_vouchers_amount']"/>
+                    </div>
+                    <div class="label_text">TOTAL RECEIPT VOUCHERS</div>
+                    <div class="more_info border-b1 get_receipt_vouchers">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+<!--                <div class="stat-icon"><i class="fa fa-clock-o"/></div>-->
+                <div class="portal_receipt-vouchers">
+                    <div class="amount-text">
+                        <span>SAR</span>
+                        <t t-esc="widget.payment_voucher['portal_receipt_vouchers_amount']"/>
+                    </div>
+                    <div class="label_text">RECEIPT VOUCHERS FROM PORTAL</div>
+                    <div class="more_info border-b2 get_portal_receipt_vouchers">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+<!--                <div class="stat-icon"><i class="fa fa-fw fa-book"/></div>-->
+                <div class="app_receipt-vouchers">
+                    <div class="amount-text">
+                        <span>SAR</span>
+                        <t t-esc="widget.payment_voucher['app_receipt_vouchers_amount']"/>
+                    </div>
+                    <div class="label_text">RECEIPT VOUCHERS FROM APP</div>
+                    <div class="more_info border-b3 get_app_receipt_vouchers">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="payment-vouchers">
+                    <div class="amount-text">
+                        <span>SAR</span>
+                        <t t-esc="widget.payment_voucher['payment_vouchers_amount']"/>
+                    </div>
+                   <div class="label_text">PAYMENT VOUCHERS</div>
+                   <div class="more_info border-b4 get_payment_vouchers">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="fuel-vouchers">
+                    <div class="amount-text">
+                        <span>SAR</span>
+                        <t t-esc="widget.payment_voucher['fuel_vouchers_amount']"/>
+                    </div>
+                   <div class="label_text">FUEL VOUCHERS</div>
+                   <div class="more_info border-b5 get_fuel_vouchers">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+<!--            <div class="col-md-3 col-sm-6 mt-4">-->
+<!--&lt;!&ndash;                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>&ndash;&gt;-->
+<!--               <div class="fuel-vouchers">-->
+<!--                    <div class="amount-text">-->
+<!--                        <span>SAR</span>-->
+<!--                        <t t-esc="widget.agreements['agreements_delivered_amount']"/>-->
+<!--                    </div>-->
+<!--                   <div class="label_text">Delivered Agreements</div>-->
+<!--                   <div class="more_info border-b5 get_fuel_vouchers">-->
+<!--                        <span>More Info</span>-->
+<!--                        <i class='fa fa-arrow-circle-right' />-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3 col-sm-6 mt-4">-->
+<!--&lt;!&ndash;                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>&ndash;&gt;-->
+<!--               <div class="fuel-vouchers">-->
+<!--                    <div class="amount-text">-->
+<!--                        <span>SAR</span>-->
+<!--                        <t t-esc="widget.agreements['agreements_draft_amount']"/>-->
+<!--                    </div>-->
+<!--                   <div class="label_text">Draft Agreements</div>-->
+<!--                   <div class="more_info border-b5 get_fuel_vouchers">-->
+<!--                        <span>More Info</span>-->
+<!--                        <i class='fa fa-arrow-circle-right' />-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="transit_trips">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.trips['transit_trips_amount']"/>
+                    </div>
+                   <div class="label_text">Transit Trips</div>
+                   <div class="more_info border-b6 get_transit_trips">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="confirmed_trips">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.trips['confirmed_trips_amount']"/>
+                    </div>
+                   <div class="label_text">Confirmed Trips</div>
+                   <div class="more_info border-b7 get_confirmed_trips">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="operations_trips">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.trips['operations_trips_amount']"/>
+                    </div>
+                   <div class="label_text">Trips In Operation</div>
+                   <div class="more_info border-b8 get_operations_trips">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="finished_trips">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.trips['finished_trips_amount']"/>
+                    </div>
+                   <div class="label_text">Finished Trips</div>
+                   <div class="more_info border-b9 get_finished_trips">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="linked_vehicles">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.vehicles['vehicles_in_service_amount']"/>
+                    </div>
+                   <div class="label_text">Vehicles In Service</div>
+                   <div class="more_info border-b10 get_linked_vehicles">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="vehicles_in_maintenance">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.vehicles['vehicles_in_maintenance_amount']"/>
+                    </div>
+                   <div class="label_text">Vehicles In Maintenance</div>
+                   <div class="more_info border-b11 get_vehicles_in_maintenance">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="unlinked_vehicles">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.vehicles['vehicles_unlinked_amount']"/>
+                    </div>
+                   <div class="label_text">Vehicles Unlinked</div>
+                   <div class="more_info border-b12 get_unlinked_vehicles">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="purchase_requests">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.purchases['purchase_requests_amount']"/>
+                    </div>
+                   <div class="label_text">Purchase Reqests</div>
+                   <div class="more_info border-b13 get_purchase_requests">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="on_job_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['on_job_employees_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Job</div>
+                   <div class="more_info border-b14 get_on_job_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="on_leave_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['on_leave_employees_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Leave</div>
+                   <div class="more_info border-b15 get_on_leave_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="on_trial_employees">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.employees['employees_on_trial_amount']"/>
+                    </div>
+                   <div class="label_text">Employees On Trial</div>
+                   <div class="more_info border-b21 get_on_trial_employees">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="approved_decisions">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.decisions['confirmed_decisions_amount']"/>
+                    </div>
+                   <div class="label_text">Decisions Confirmed</div>
+                   <div class="more_info border-b16 get_confirmed_decisions">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="saudization_percentage">
+                    <div class="amount-text">
+                        <span>Saudization Percentage</span>
+<!--                        <t t-esc="widget.decisions['confirmed_decisions_amount']"/>-->
+                    </div>
+                   <div class="label_text">
+                       <t t-esc="widget.employees['saudization_percentage']"/>
+                       <span>%</span>
+                   </div>
+                   <div class="more_info border-b17">
+<!--                        <span>More Info</span>-->
+<!--                        <i class='fa fa-arrow-circle-right' />-->
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="leave_requests">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.leaves['all_leaves_amount']"/>
+                    </div>
+                   <div class="label_text">Leave Requests</div>
+                   <div class="more_info border-b18 get_leaves_request">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="effective_requests">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.eff_requests['all_eff_requests_amount']"/>
+                    </div>
+                   <div class="label_text">Effective Requests</div>
+                   <div class="more_info border-b19 get_effective_request">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-4">
+<!--                <div class="stat-icon"><i class="fa fa-bar-chart"/></div>-->
+               <div class="employee_clearance">
+                    <div class="amount-text">
+                        <span>TOTAL</span>
+                        <t t-esc="widget.clearances['all_clearances_amount']"/>
+                    </div>
+                   <div class="label_text">Clearances</div>
+                   <div class="more_info border-b20 get_clearances">
+                        <span>More Info</span>
+                        <i class='fa fa-arrow-circle-right' />
+                    </div>
+               </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="PaymentWarning">
+        <div>
+            <p>Error : Could not find any receipt or payment</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+</templates>

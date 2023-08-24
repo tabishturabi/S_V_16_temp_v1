@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inherits_view_employee_form" model="ir.ui.view">
+            <field name="name">inheits.view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//header" position="inside">
+                        <button name="emp_complete_data" type="object" string="Complete Data" attrs="{'invisible':[('state','=','complete_data')]}" class="oe_stat_button" />
+                        <button name="last_state" type="object" string="Last State" class="oe_stat_button" attrs="{'invisible':[('state','!=','complete_data')]}" />
+                        <button name="change_to_on_job" type="object" string="Change To On Job" class="oe_stat_button" attrs="{'invisible':[('state','not in',['on_leave','service_expired'])]}" groups="bsg_hr.group_change_emp_state" />
+                        <button name="generate_employee_seq" type="object" groups="hr.group_hr_user"
+                                class="oe_stat_button" invisible="1"/>
+                        <field name="state" widget="statusbar"/>
+
+                    </xpath>
+                    <xpath expr="//div[@class='oe_title']" position="before">
+                        <div>
+                            <label for="employee_code" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employee_code"/>
+                            </h1>
+                        </div>
+                    </xpath>
+<!--                    <button name="toggle_active" position="before">-->
+<!--                        &lt;!&ndash; FOR TECHNICAL USE &ndash;&gt;-->
+<!--                        <button name="generate_employee_seq" type="object" groups="hr.group_hr_user"-->
+<!--                                class="oe_stat_button" invisible="1"/>-->
+<!--                    </button>-->
+                    <field name="country_id" position="before">
+                        <field name="has_done_payslip" invisible="1"/>
+                    </field>
+                    <field name="country_id" position="attributes">
+                        <attribute name="required">True</attribute>
+                        <attribute name="attrs">{'readonly':[('has_done_payslip','=',True)]}</attribute>
+                        <attribute name="domain">[('code','!=',False)]</attribute>
+                    </field>
+                    <field name="parent_id" position="after">
+<!--                        <field name="last_return_date"/>-->
+                        <field name="check_suspend_salary" invisible="1"/>
+                        <!--                        <field name="state_id" options="{'no_open': True}" attrs="{'readonly':[('check_suspend_salary','=',False)]}"/>-->
+<!--                        <field name="employee_state" attrs="{'readonly':[('check_suspend_salary','=',False)]}"/>-->
+<!--                        <field name="suspend_salary" force_save="1"-->
+<!--                               attrs="{'readonly':[('check_suspend_salary','=',False)]}"/>-->
+                         <field name="branch_id" options="{'no_open':True}"/>
+<!--                        <field name="is_inspection_employee"/>-->
+<!--                        <field name="social_security_no"/>-->
+
+<!--                        <field name="salary_payment_method"/>-->
+                    </field>
+<!--                    <field name="work_location" position="after">-->
+<!--                        <field name="branch_id" options="{'no_open':True}"/>-->
+<!--                        <field name="is_inspection_employee"/>-->
+<!--                    </field>-->
+<!--                    <field name="mobile_private" position="after">-->
+<!--                    </field>-->
+                    <page name="hr_settings" position="inside">
+                        <group name="suspended_case" string="Case info"
+                               attrs="{'invisible': [('employee_state', '!=', 'suspended_case')]}">
+                            <field name="employee_state" invisible="1"/>
+                            <field name="judicial_character"
+                                   attrs="{'invisible': [('employee_state', '!=', 'suspended_case')]}"/>
+                            <field name="judicial_body"
+                                   attrs="{'invisible': [('employee_state', '!=', 'suspended_case')]}"/>
+                        </group>
+                    </page>
+                    <page name="personal_information" position="inside">
+                        <group name="loan" string="Loan Info">
+                            <field name="has_loan"/>
+                            <field name="loan_from"/>
+                        </group>
+                    </page>
+                </data>
+            </field>
+        </record>
+
+        <record id="inherits_hr_view_employee_tree" model="ir.ui.view">
+            <field name="name">inherits.hr.employee.view.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="after">
+                        <field name="employee_code"/>
+                    </field>
+                </data>
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_employee_kanban_inherit">
+            <field name="name">hr.employee.list.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="type">kanban</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <xpath expr="//ul" position="replace">
+                    <ul>
+                        <li id="last_login"/>
+                        <li>
+                            <field name="employee_state"/>
+                        </li>
+                        <li t-if="record.work_location.raw_value">
+                            <field name="work_location"/>
+                        </li>
+                    </ul>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherits_hr_view_employee_filter" model="ir.ui.view">
+            <field name="name">inherits.hr.employee.view.search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="before">
+                        <field name="employee_code"/>
+                    </field>
+                </data>
+
+            </field>
+        </record>
+    </data>
+</odoo>

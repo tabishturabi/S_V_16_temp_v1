@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_entry_housing,access_entry_housing,model_entry_housing,base.group_user,1,1,1,1
+access_exit_housing,access_exit_housing,model_exit_housing,base.group_user,1,1,1,1
+access_reason_entry,access_reason_entry,model_reason_entry,base.group_user,1,1,1,1
+access_permission_settings,access_permission_settings,model_permission_settings,base.group_user,1,1,1,1
+
+
+
+
+
+
+
+
+
+
+
+

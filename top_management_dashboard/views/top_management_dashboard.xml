@@ -1,0 +1,40 @@
+<odoo>
+<!--    <template id="assets_backend" name="Top Management Dashboard assets" inherit_id="web.assets_backend">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/top_management_dashboard/static/src/js/top_management_dashboard.js"/>-->
+<!--            <link rel="stylesheet" href="/top_management_dashboard/static/src/css/top_management_dashboard.css"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <data>
+        <record id="top_management_action_dashboard" model="ir.actions.client">
+            <field name="name">Top Management Dashboard</field>
+<!--            <field name="tag">top_management_dashboard.top_management_dashboard</field>-->
+            <field name="tag">top_management_dashboard</field>
+        </record>
+        <menuitem id="menu_top_management_dashboard"
+                  name="Top Management Dashboard"
+                  action="top_management_action_dashboard"
+                  web_icon="top_management_dashboard,static/description/dashboard_icon.png"
+                  sequence="-101" groups="top_management_dashboard.group_top_management_dashboard"/>
+
+        <record id="hr_management_action_dashboard" model="ir.actions.client">
+            <field name="name">HR Management Dashboard</field>
+            <field name="tag">top_management_dashboard.hr_management_dashboard</field>
+        </record>
+        <menuitem id="menu_hr_management_dashboard"
+                  name="HR Management Dashboard"
+                  action="hr_management_action_dashboard"
+                  web_icon="top_management_dashboard,static/description/dashboard_icon.png"
+                  sequence="-101" groups="top_management_dashboard.group_hr_management_dashboard"/>
+
+        <record id="operations_action_dashboard" model="ir.actions.client">
+            <field name="name">Operations Dashboard</field>
+            <field name="tag">top_management_dashboard.operations_dashboard</field>
+        </record>
+        <menuitem id="menu_operations_dashboard"
+                  name="Operations Dashboard"
+                  action="operations_action_dashboard"
+                  web_icon="top_management_dashboard,static/description/dashboard_icon.png"
+                  sequence="-101" groups="top_management_dashboard.group_operations_dashboard"/>
+    </data>
+</odoo>

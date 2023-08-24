@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cargo_sale_tamara_wiz_success" model="ir.ui.view">
+        <field name="name">cargo.sale.tamara.wiz.success</field>
+        <field name="model">cargo.sale.tamara.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Cargo Sale Tamara">
+                <sheet>
+                    <div class="oe_title text-center">
+                        <h1>Purchase Successfully Completed</h1>
+                    </div>
+                </sheet>
+                <footer>
+                    <button string="Close" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="cargo_sale_tamara_wiz_form" model="ir.ui.view">
+        <field name="name">cargo.sale.tamara.wiz.form</field>
+        <field name="model">cargo.sale.tamara.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Cargo Sale Tamara">
+                <sheet>
+                    <field name="id" invisible="1"/>
+                    <div class="oe_title text-center">
+                        <h1>Send Payment request via SMS</h1>
+                        <p>Ask the customer for their phone number 966xxxxxxxxx (example 966555123456)</p>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="mobile"/>
+                            <div class="o_address_format" style="direction: ltr;">
+                                <field name="sender_mob_country_code" readonly="1"/>
+                                <field name="mobile" class="oe_inline" attrs="{'required' : ['|',('is_tamara_call_second','=',False),('is_tamara_checkout','=',False)]}"/>
+                            </div>
+                        </group>
+
+                    </group>
+                    <group>
+                        <field name="card_details" readonly="1" groups="base.group_no_one"/>
+                        <field name="is_paid_by_tamra" invisible="1"/>
+                        <field name="is_tamara_checkout" invisible="1"/>
+                        <field name="is_tamara_call_second" invisible="1"/>
+
+                    </group>
+                    <group string="Response">
+
+                        <field name="result" readonly="1"/>
+                        <field name="url" groups="base.group_no_one" readonly="1"/>
+
+                    </group>
+
+                </sheet>
+                <footer>
+                    <button string="Call Tamara Instore" attrs="{'invisible' : ['|',('is_paid_by_tamra','!=',False),('is_tamara_checkout','!=',False)]}" name="pay_via_tamara" type="object" class="btn-primary"/>
+                    <button string="Check Status" name="check_status" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="cargo_sale_tamara_wiz_action" model="ir.actions.act_window">
+        <field name="name">Cargo Sale Tamara</field>
+        <field name="res_model">cargo.sale.tamara.wiz</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="cargo_sale_tamara_wiz_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

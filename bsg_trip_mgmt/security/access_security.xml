@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record model="ir.module.category" id="module_category_add_to_trip">
+            <field name="name">Trip Management</field>
+            <field name="description">Trip Management Access</field>
+            <field name="sequence">22</field>
+        </record> -->
+
+        <record model="ir.module.category" id="module_category_fleet_management">
+            <field name="name">Fleet Management</field>
+            <field name="description">Fleet Management</field>
+            <field name="sequence">20</field>
+        </record>
+        <record model="res.groups" id="group_create_trips">
+            <field name="name">Create Trips</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_update_trip_info">
+            <field name="name">Update Trip Info</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_view_all_trips">
+            <field name="name">View All Trips</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_confirm_trips">
+            <field name="name">Confirm Trips</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_register_arrival">
+            <field name="name">Register Arrival</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_release_car">
+            <field name="name">Release Car</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_linked_so_line">
+            <field name="name">Linked SO Line</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_dispatch_report">
+            <field name="name">Print Dispatch Report</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_show_my_branch_unlanned_so">
+            <field name="name">Show My Branch Unpland SO</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_delivery_report">
+            <field name="name">Print Delevery Report</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_pay_money_trips">
+            <field name="name">Pay Trip Money</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_pay_money_trips_diff">
+            <field name="name">Pay Trip Money difference</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_view_my_trips">
+            <field name="name">View My Trips</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+            <field name="implied_ids" eval="[(4, ref('group_create_trips'))]"/>
+        </record>
+        <record model="res.groups" id="group_trips_master">
+            <field name="name">Trips Master</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_fleet_all">
+            <field name="name">Fleet ALL</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_fleet_menu_access_only">
+            <field name="name">Fleet Menu Access</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_add_to_trip">
+            <field name="name">Add Unpland SO To Trip</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_fleet_configuration">
+            <field name="name">Fleet Configration</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+            <field name="implied_ids" eval="[(4, ref('group_create_trips'))]"/>
+        </record>
+        <record model="res.groups" id="group_cancel_trip">
+            <field name="name">Cancel Trip</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_trip_statement">
+            <field name="name">Trip statement</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_pay_driver_reward">
+            <field name="name">Pay Driver Reward</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_fuel_amt_recal">
+            <field name="name">Fuel Amt Recal</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_route_and_estimate_delivery_day">
+            <field name="name">Route &amp; Estimated Delivery Day's Mgt</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_create_trip_with_all_route_view">
+            <field name="name">Create Trip With All Route View</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_plan_trip_automatic">
+            <field name="name">Plan Service Group</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <!-- mr khaleed need rename old name is Plan trip Automatic -->
+        <record model="res.groups" id="group_plan_trip_manual">
+            <field name="name">Plan trip Manual</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_plan_trip_fleet_report">
+            <field name="name">Trip Report</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_show_my_branch_comming_trip">
+            <field name="name">Show my branch Coming trip</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_trailer_managment">
+            <field name="name">Trailer Manamgment Menu</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_link_driver">
+            <field name="name">Link Driver</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_release_trailer">
+            <field name="name">Release Trailer</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_price_config">
+            <field name="name">Price Config</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_driver_reward_report">
+            <field name="name">Drivers Reward Report</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_trip_archiving">
+            <field name="name">Archiving</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+        <record model="res.groups" id="group_trip_rented_vehicle_tab">
+            <field name="name">Rented Vehicle Tab</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="res.groups" id="group_trip_vehicle_show_trip_money">
+            <field name="name">Pay Trip Money From Any Branch</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+         <record model="res.groups" id="group_show_trip_revenue">
+            <field name="name">Show Trip Revenue</field>
+            <field name="category_id" ref="module_category_fleet_management"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_show_my_branch_so_rules">
+            <field name="name">Fleet Show my brnach SO</field>
+            <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">[('loc_from.loc_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_show_my_branch_unlanned_so'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_show_drop_loc_so_rules">
+            <field name="name">Fleet Show Drop Location Cargo Sale</field>
+            <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[('order_line_ids.drop_loc.loc_branch_id', '=', user.user_branch_id.id)]</field>
+            <field name="groups"
+                   eval="[(4, ref('bsg_trip_mgmt.group_register_arrival')), (4, ref('bsg_trip_mgmt.group_release_car'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_show_drop_loc_so_line_rules">
+            <field name="name">Fleet Show Drop Location Cargo Line</field>
+            <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">[('drop_loc.loc_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups"
+                   eval="[(4, ref('bsg_trip_mgmt.group_register_arrival')), (4, ref('bsg_trip_mgmt.group_release_car'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_show_pickup_loc_so_rules">
+            <field name="name">Fleet Show Pickup Location Cargo Sale</field>
+            <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale"/>
+            <field name="domain_force">[('order_line_ids.pickup_loc.loc_branch_id', '=',
+                user.user_branch_id.id),('order_line_ids.state', '=','on_transit')]
+            </field>
+            <field name="groups"
+                   eval="[(4, ref('bsg_trip_mgmt.group_register_arrival')), (4, ref('bsg_trip_mgmt.group_release_car'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_show_pickup_loc_so_line_rules">
+            <field name="name">Fleet Show Pickup Location Cargo Line</field>
+            <field name="model_id" ref="bsg_cargo_sale.model_bsg_vehicle_cargo_sale_line"/>
+            <field name="domain_force">
+                [('pickup_loc.loc_branch_id','=',user.user_branch_id.id),('state','=','on_transit')]
+            </field>
+            <field name="groups"
+                   eval="[(4, ref('bsg_trip_mgmt.group_register_arrival')), (4, ref('bsg_trip_mgmt.group_release_car'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_vehicle_trip_view_my_rules">
+            <field name="name">Fleet Vehicle Trip rule For my trip Group</field>
+            <field name="model_id" ref="model_fleet_vehicle_trip"/>
+            <field name="domain_force">[('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_view_my_trips'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_vehicle_route_from_branch">
+            <field name="name">Route Rules from branch</field>
+            <field name="model_id" ref="bsg_master_config.model_bsg_route"/>
+            <field name="domain_force">[('waypoint_from.loc_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_create_trips'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_vehicle_route_for_o2m_Field_branch">
+            <field name="name">Route Rules from branch</field>
+            <field name="model_id" ref="bsg_master_config.model_bsg_route"/>
+            <field name="domain_force">[('waypoint_to_ids.waypoint.loc_branch_id', '=', user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_show_my_branch_comming_trip'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_group_create_trip_with_all_route_view">
+            <field name="name">Route Rules from All branch</field>
+            <field name="model_id" ref="bsg_master_config.model_bsg_route"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_create_trip_with_all_route_view'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <!--         <record model="ir.rule" id="fleet_vehicle_route_other_branch_user">
+                    <field name="name">Route Rules from other branch user</field>
+                    <field name="model_id" ref="bsg_master_config.model_bsg_route"/>
+                    <field name="domain_force">[('branch_ids','in',user.user_branch_id.id)]</field>
+                    <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_create_trips'))]"/>
+                    <field name="perm_create" eval="1"/>
+                    <field name="perm_write" eval="1"/>
+                    <field name="perm_unlink" eval="0"/>
+                    <field name="perm_read" eval="1"/>
+                </record> -->
+
+        <record model="ir.rule" id="fleet_vehicle_route_from_branch_admin">
+            <field name="name">Route Rules from branch Admin</field>
+            <field name="model_id" ref="bsg_master_config.model_bsg_route"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_erp_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+
+        <record model="ir.rule" id="fleet_vehicle_trip_view_all_rules">
+            <field name="name">Fleet Vehicle Trip rule</field>
+            <field name="model_id" ref="model_fleet_vehicle_trip"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups"
+                   eval="[(4, ref('bsg_trip_mgmt.group_view_all_trips')),(4, ref('base.group_erp_manager'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="fleet_vehicle_for_next_user_branch_id">
+            <field name="name">Fleet Vehicle For next User</field>
+            <field name="model_id" ref="model_fleet_vehicle_trip"/>
+            <field name="domain_force">[('next_branch_id','=',user.user_branch_id.id)]</field>
+            <field name="groups" eval="[(4, ref('bsg_trip_mgmt.group_show_my_branch_comming_trip'))]"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_read" eval="1"/>
+        </record>
+
+        <!--  <record id="fleet_rule_for_user_see_draft_linked" model="ir.rule">
+             <field name="name">User can only see his/her contracts</field>
+             <field name="model_id" ref="fleet.model_fleet_vehicle"/>
+             <field name="groups" eval="[(4, ref('fleet.fleet_group_user'))]"/>
+             <field name="perm_read" eval="True"/>
+             <field name="perm_write" eval="False"/>
+             <field name="perm_create" eval="False"/>
+             <field name="perm_unlink" eval="False"/>
+             <field name="domain_force">[('state_id','in',[1,2])]</field>
+         </record> -->
+
+    </data>
+</odoo>

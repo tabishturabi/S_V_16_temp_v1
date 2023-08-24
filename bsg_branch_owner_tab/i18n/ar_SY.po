@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* bsg_branch_owner_tab
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e-20190502\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-27 05:53+0000\n"
+"PO-Revision-Date: 2020-07-27 05:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__attachment_ids
+msgid "Attachment"
+msgstr "المرفق"
+
+#. module: bsg_branch_owner_tab
+#: model_terms:ir.ui.view,arch_db:bsg_branch_owner_tab.branch_owner_tab
+msgid "Branch Owner"
+msgstr "مالك الفرع"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model,name:bsg_branch_owner_tab.model_bsg_branches_bsg_branches
+msgid "BsgBranches"
+msgstr ""
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__contract_amount
+msgid "Contract Amount"
+msgstr "قيمة العقد"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__contract_no
+msgid "Contract Number"
+msgstr "رقم التعاقد"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__contract_type
+msgid "Contract Type"
+msgstr "نوع العقد"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__description
+msgid "Description"
+msgstr "وصف"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__electricity_meter_number
+msgid "Electricity Meter Number"
+msgstr "رقم عداد الكهرباء"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__lessor_name
+msgid "Lessor Name"
+msgstr "اسم المؤجر"
+
+#. module: bsg_branch_owner_tab
+#: selection:bsg_branches.bsg_branches,contract_type:0
+msgid "Owned"
+msgstr "مملوكة"
+
+#. module: bsg_branch_owner_tab
+#: selection:bsg_branches.bsg_branches,contract_type:0
+msgid "Rent"
+msgstr "تأجير"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__tenancy_end_date
+msgid "Tenancy End Date"
+msgstr "تاريخ انتهاء الإيجار"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__tenancy_start_date
+msgid "Tenancy Start Date"
+msgstr "تاريخ بدء الإيجار"
+
+#. module: bsg_branch_owner_tab
+#: model:ir.model.fields,field_description:bsg_branch_owner_tab.field_bsg_branches_bsg_branches__water_meter_number
+msgid "Water Meter Number"
+msgstr "رقم عداد المياه"
+

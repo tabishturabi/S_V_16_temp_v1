@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+
+        <record id="employee_annual_report" model="ir.ui.view">
+            <field name="name">employee annual report</field>
+            <field name="model">employee.annual.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_right">
+
+                        <field name="form"/>
+                        <field name="to"/>
+                        <field name="employee_ids" options="{'no_create':True,'no_edit':True}"/>
+
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+        <record id="window_action_employee_annual_report" model="ir.actions.act_window">
+            <field name="name">Employee Annual Report</field>
+            <field name="res_model">employee.annual.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="employee_annual_report"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="employee_annual_report_menu_item" name="Employee Annual Report"
+                  action="window_action_employee_annual_report" parent="hr_holidays.menu_hr_holidays_report"/>
+
+        <report
+                id="action_employee_annual_report"
+                string="Employee Annual Report"
+                model="hr.leave"
+                report_type="xlsx"
+                file="Employee Annual Report"
+                name="employee_leaves_report.employee_leaves_report_xlsx"
+                menu="False"/>
+    </data>
+</openerp>

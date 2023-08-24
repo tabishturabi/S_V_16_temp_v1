@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- attendance direct manager group -->
+        <record forcecreate="True" id="group_attendance_direct_manager" model="res.groups">
+            <field name="name">Attendance / Direct Manager</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_hr_attendance"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <!-- give base user manual attendance group -->
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('hr_attendance.group_hr_attendance'))]"/>
+        </record>
+    </data>
+
+
+    <data noupdate="1">
+        <!-- attendance model-->
+        <!-- only see your own attendance -->
+        <record id="hr_attendance.hr_attendance_rule_attendance_employee" model="ir.rule">
+            <field name="name">user: modify own attendance only</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        <record  id="manager_own_department_attendance_rule" model="ir.rule">
+            <field name="name">Direct Manager Sees Own department attendance </field>
+            <field ref="model_hr_attendance" name="model_id"/>
+            <field name="domain_force">['|',('employee_id.parent_id.user_id','=',user.id),('employee_id.parent_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_attendance_direct_manager'))]"/>
+        </record>
+
+         <!-- sheet model-->
+        <!-- sheet record rules for employee -->
+        <record id="employee_own_attendance_sheet_rule" model="ir.rule">
+            <field name="name">Employee Sees Own attendance sheet</field>
+            <field ref="model_hr_attendance_sheet" name="model_id"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record  id="manager_own_department_attendance_sheet_rule" model="ir.rule">
+            <field name="name">Direct Manager Sees Own department attendance sheet</field>
+            <field ref="model_hr_attendance_sheet" name="model_id"/>
+            <field name="domain_force">['|',('employee_id.parent_id.user_id','=',user.id),('employee_id.parent_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_attendance_direct_manager'))]"/>
+        </record>
+        <record id="hr_attendance_rule_attendance_sheet_officer" model="ir.rule">
+            <field name="name">Attendance Officer: full access sheet</field>
+            <field name="model_id" ref="model_hr_attendance_sheet"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_user'))]"/>
+        </record>
+    </data>
+
+</odoo>

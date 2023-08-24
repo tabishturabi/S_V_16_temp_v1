@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="bx_info_report_wizard" model="ir.ui.view">
+            <field name="name">bx_info_report_wizard</field>
+            <field name="model">bx.info.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="grouping_by"/>
+                        </group>
+
+                        <group name="group_right">
+                            <field name="period_grouping_by" attrs="{'invisible':[('grouping_by','!=','by_period')]}"/>
+                        </group>
+                    </group>
+                    <group name="group_bottom">
+                        <group name="group_left">
+                            <field name="form"/>
+                            <field name="branch_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="from_bx" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="vehicle_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="payment_method_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="users" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="vehicle_type_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="include_cancel" attrs="{'invisible':[('state','!=',False)]}"/>
+                        </group>
+
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="branch_ids_to" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="customer_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="to_bx" options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                            <field name="driver_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="vehicle_type_domain_ids" options="{'no_create':True,'no_edit':True}" widget="many2many_tags"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="bx_info_report_action" model="ir.actions.act_window">
+            <field name="name">Bx Information Report</field>
+            <field name="res_model">bx.info.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="bx_info_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="bx_info_report_main_menu_item" name="Bx Reporting" parent="sale.sale_menu_root" sequence="3" groups="bx_information_report.group_view_bx_reports"/>
+
+        <!-- groups="bx_information_report.group_view_employee_reports" sequence="95" -->
+
+        <menuitem id="bx_info_report_action_menu_item" name="Bx Information Report" action="bx_info_report_action" parent="bx_information_report.bx_info_report_main_menu_item" groups="bx_information_report.group_view_bx_reports"/>
+
+        <report
+            id="action_bx_info_report"
+            string="Bx Information Report"
+            model="bx.info.report"
+            report_type="xlsx"
+            file="Bx Information Report"
+            name="bx_information_report.bx_info_report_xlsx"
+            menu="False"
+        />
+
+        
+    </data>
+</openerp>

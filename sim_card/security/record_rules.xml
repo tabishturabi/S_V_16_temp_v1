@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+<!--        <record model="ir.rule" id="sim_card_Administrator_manger_user_id">-->
+<!--            <field name="name">Administrator Manager To Approve</field>-->
+<!--            <field name="model_id" ref="sim_card.model_sim_card_request"/>-->
+<!--            <field name="groups" eval="[(4,ref('sim_card_employee_manger_user'))]"/>-->
+<!--            <field name="domain_force">-->
+<!--                []-->
+<!--            </field>-->
+<!--            <field eval="1" name="perm_write"/>-->
+<!--            <field eval="0" name="perm_read"/>-->
+<!--            <field eval="0" name="perm_unlink"/>-->
+<!--            <field eval="0" name="perm_create"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.rule" id="sim_card_user_Administrator_manger_user_id">-->
+<!--            <field name="name">Administrator userr To Approve</field>-->
+<!--            <field name="model_id" ref="sim_card.model_sim_card_request"/>-->
+<!--            <field name="groups" eval="[(4,ref('sim_card_request_user'))]"/>-->
+<!--            <field name="domain_force">-->
+<!--                []-->
+<!--            </field>-->
+<!--            <field eval="1" name="perm_write"/>-->
+<!--            <field eval="1" name="perm_read"/>-->
+<!--            <field eval="1" name="perm_unlink"/>-->
+<!--            <field eval="1" name="perm_create"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.rule" id="sim_card_Administrator_manger_user_iddddd">-->
+<!--            <field name="name">Administrator Manager To Approve</field>-->
+<!--            <field name="model_id" ref="sim_card.model_sim_card_request"/>-->
+<!--            <field name="groups" eval="[(4,ref('sim_card_employee_manger_user'))]"/>-->
+<!--            <field name="domain_force">[('state','=','submitted'),('manager_id.user_id','=',user.id)]</field>-->
+<!--            <field eval="1" name="perm_write"/>-->
+<!--            <field eval="1" name="perm_read"/>-->
+<!--            <field eval="1" name="perm_unlink"/>-->
+<!--            <field eval="1" name="perm_create"/>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

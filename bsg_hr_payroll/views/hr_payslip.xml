@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_attachment_payslip_batch_form" model="ir.ui.view">
+            <field name="model">ir.attachment</field>
+            <field name="arch" type="xml">
+                <form string="Attachments">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="bsg_type"/>
+                                <field name="type"/>
+                                <field name="datas" filename="store_fname" attrs="{'invisible':[('type','=','url')]}"/>
+                                <field name="url" widget="url" attrs="{'invisible':[('type','=','binary')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_attachment_payslip_batch_tree" model="ir.ui.view">
+            <field name="model">ir.attachment</field>
+            <field name="arch" type="xml">
+                <tree string="Attachments">
+                    <field name="name"/>
+                    <field name="store_fname"/>
+                    <field name="res_model"/>
+                    <field name="res_field"/>
+                    <field name="res_id"/>
+<!--                    <field name="type"/>-->
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="inherits_view_hr_payslip_run_form" model="ir.ui.view">
+            <field name="name">inheits.view.hr.payslip.run</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//sheet/label" position="before">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object"
+                                    groups="bsg_hr_payroll.group_payslip_batch_view">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                        </div>
+                    </xpath>
+                    <xpath expr="/form/header" position="inside">
+                        <button name="open_attach_wizard" type="object" string="ATTACH DOCUMENT" highlight="1"
+                                groups="bsg_hr_payroll.group_payslip_batch_delete,bsg_hr_payroll.group_payslip_batch_add"/>
+                    </xpath>
+                    <button name="action_validate" position="after">
+                        <button name="confirm_payslip_run"
+                                type="object" string="Confirm" states="draft" class="oe_highlight"
+                                confirm="This action will generate accounting enteries,  please make sure you computed and reviewed all slips in this batch!"
+                                groups="hr_payroll.group_hr_payroll_user,hr_payroll.group_hr_payroll_manager"/>
+                    </button>
+                    <button name="action_validate" position="after">
+                        <button name="compute_payslip_run" type="object" string="Compute Payslips" states="draft"
+                                class="oe_highlight"
+                                groups="hr_payroll.group_hr_payroll_user,hr_payroll.group_hr_payroll_manager"/>
+                    </button>
+<!--                    <xpath expr="/form/header/button[@name='close_payslip_run']" position="replace">-->
+<!--                        <button name="close_payslip_run" type="object" string="Close" states="paid" class="oe_highlight"-->
+<!--                                groups="hr_payroll.group_hr_payroll_user,hr_payroll.group_hr_payroll_manager"/>-->
+<!--                    </xpath>-->
+
+                    <field name="company_id" position="after">
+                        <field name="batch_net_total"/>
+                        <field name="description"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="inherits_view_hr_payslip_by_employees" model="ir.ui.view">
+            <field name="name">inheits.view.hr.paysil.by.employees</field>
+            <field name="model">hr.payslip.employees</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- <field name="employee_ids" position="attributes">
+                        <attribute name="domain">[('suspend_salary','!=',True),('has_open_contract','=', True)]</attribute>
+                    </field> -->
+                    <field name="employee_ids" position="before">
+                        <field name="payslip_run_id" invisible="1"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="inherits_view_hr_payslip_tree" model="ir.ui.view">
+            <field name="name">inheits.hr.payslip.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="employee_id" position="after">
+                        <field name="department_id" readonly="1"/>
+                        <field name="category_ids" widget="many2many_tags"/>
+                        <field name="branch_id"/>
+                    </field>
+                    <field name="company_id" position="after">
+                        <field name="job_id"/>
+                        <field name="total_net"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="inherits_view_hr_payslip_filter" model="ir.ui.view">
+            <field name="name">inheits.hr.payslip.select</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+            <field name="arch" type="xml">
+                <data>
+                    <filter name="group_by_state" position="after">
+                        <filter string="Job Position" name="state" context="{'group_by':'job_id'}"/>
+                    </filter>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_hr_payslip_form_inherit_bsg_payroll" model="ir.ui.view">
+            <field name="name">hr.payslip.form.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done,paid"/>
+                </field>
+                 <xpath expr="//button[@name='compute_sheet']" position="replace">
+                     <button string="Compute Sheet" name="compute_sheet" type="object"  class="oe_highlight" groups="hr_payroll.group_hr_payroll_manager,hr_payroll.group_hr_payroll_user"/>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="after">
+                    <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="e.g. Part Time" groups="hr.group_hr_user"/>
+                    <field name="branch_id" options="{'color_field': 'color', 'no_create_edit': True}" readonly="1"/>
+                </xpath>
+                <field name="company_id" position="after">
+                    <field name="total_net"/>
+                    <field name="description"/>
+                </field>
+                <field name="move_id" position="after">
+                    <field name="payment_move_id"/>
+                </field>
+                 <field name="number" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                     <attribute name="force_save">1</attribute>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="force_save">1</attribute>
+                </field>
+                <field name="employee_id" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                </field>
+                <field name="branch_id" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                    <attribute name="readonly">1</attribute>                </field>
+                <field name="contract_id" position="attributes">
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                    <attribute name="readonly">1</attribute>
+
+                </field>
+                <field name="struct_id" position="attributes">
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="options">{'no_create':True,'no_edit':True, 'no_open': True}</attribute>
+                    <attribute name="readonly">1</attribute>
+
+                </field>
+                <field name="contract_id" position="before">
+                    <field name="department_id" readonly="1" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+                    <field name="job_id" readonly="1" options="{'no_create':True,'no_edit':True, 'no_open': True}"/>
+<!--                    <field name="type" readonly="1"/>-->
+                    <field name="employee_state" force_save="1"  readonly="1"/>
+                    <field name="salary_payment_method" readonly="1" force_save="1" />
+                    <field name="pay_by_branch_check" invisible="1"/>
+                    <field name="pay_by_branch" attrs="{'invisible':[('pay_by_branch_check','=',True)]}"/>
+                    <field name="pay_by_branch_id" attrs="{'invisible':[('pay_by_branch','=',False)],'required':[('pay_by_branch','=',True)]}"/>
+                </field>
+                <xpath expr="//field[@name='input_line_ids']/form//field[@name='contract_id']" position="replace">
+                    <field name="description" readonly="1"/>
+                    <field name="contract_id" invisible="True"/>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree//field[@name='contract_id']" position="replace">
+                    <field name="description"/>
+                    <field name="contract_id" invisible="True"/>
+                </xpath>
+                <xpath expr="//field[@name='worked_days_line_ids']" position="attributes">
+                     <attribute name="readonly">1</attribute>
+                      <attribute name="force_save">1</attribute>
+
+
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record model="ir.ui.menu" id="hr_payroll.menu_hr_payroll_employee_payslips">-->
+<!--            <field name="name">Employee Payslips</field>-->
+<!--            <field name="groups_id" eval="[(6,0,[ref('hr_payroll.group_hr_payroll_user'),ref('bsg_hr.group_view_all_payroll'),ref('bsg_hr_payroll.group_payslip_branch_accountant'),-->
+<!--                                                ])]"/>-->
+<!--        </record>-->
+
+        <record model="ir.ui.menu" id="hr_payroll.menu_hr_payroll_root">
+            <field name="groups_id" eval="[(4,ref('bsg_hr_payroll.group_payslip_branch_accountant'))]"/>
+        </record>
+    </data>
+</odoo>

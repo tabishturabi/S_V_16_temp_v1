@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="seq_hr_expense_invoice" model="ir.sequence">
+            <field name="name">Truck Accident Sequence</field>
+            <field name="code">bsg.truck.accident.seq</field>
+            <!--            <field name="prefix">%(y)s</field>-->
+            <field name="padding">4</field>
+        </record>
+        <record id="seq_third_party_claims" model="ir.sequence">
+            <field name="name">Third Party Sequence</field>
+            <field name="code">seq.third.party.claims</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_clear_cars_claims" model="ir.sequence">
+            <field name="name">Clear Cars Claims</field>
+            <field name="code">seq.clear.cars.claims</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_shaamil_claims" model="ir.sequence">
+            <field name="name">Shaamil Claims</field>
+            <field name="code">seq.shaamil.claims</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

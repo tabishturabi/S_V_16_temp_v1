@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="ir_cron_customer_contract_notification_action" model="ir.cron">
+		<field name="name">Customer Contract Notification</field>
+		<field name="user_id" ref="base.user_root" />
+		<field name="model_id" ref="bsg_master_config.model_customer_contract_notification" />
+		<field name="interval_number">1</field>
+		<field name="interval_type">weeks</field>
+		<field name="numbercall">-1</field>
+		<field eval="False" name="doall" />
+		<field name="state">code</field>
+		<field name="code">model._send_mail_to_customer()</field>
+	</record>
+	
+	<record id="email_template_customer_contract_not" model="mail.template">
+		<field name="name">Customer Contract: Send by email</field>
+		<field name="model_id" ref="bsg_master_config.model_customer_contract_notification" />
+		<field name="partner_to"></field>
+		<field name="body_html" type="html">
+			<div style="margin: 0px; padding: 0px;">Customer Contract: Send by email</div>
+		</field>
+	</record>
+</odoo>

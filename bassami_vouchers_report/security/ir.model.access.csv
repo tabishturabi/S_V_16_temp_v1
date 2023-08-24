@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vouchers_report_bassami,access_vouchers_report_bassami,model_vouchers_report_bassami,,1,1,1,1

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="added_id_field_project_task_form" model="ir.ui.view">
+            <field name="name">added.id.field.project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group[1]" position="before">
+                    <h2>ID :  <field name="id"/></h2>
+                </xpath>
+            </field>
+        </record>
+
+                <record id="added_id_field_project_task_search" model="ir.ui.view">
+            <field name="name">added.id.field.project.task.search</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

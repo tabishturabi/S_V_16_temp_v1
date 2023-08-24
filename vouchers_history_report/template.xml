@@ -1,0 +1,73 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<odoo>
+    <data>
+
+        <record id="paperformat_vouchers_history" model="report.paperformat">
+            <field name="name">European A4 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+
+            id="report_for_vouchers_history"
+            model="account.payment"
+            name="vouchers_history_report.vouchers_history_temp_id"
+            file="vouchers_history_report.vouchers_history_temp_id"
+            report_type="qweb-html"
+            string="Voucher History Report"
+            paperformat="paperformat_vouchers_history"
+            menu="False"/>
+
+        <record id="vouchers_history_report_wizard" model="ir.ui.view">
+            <field name="name">vouchers_history_report_wizard</field>
+            <field name="model">voucher.history.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+                            <field name="form"/>
+                            <field name="report_type"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="to"/>
+                            <field name="branch_filter"/>
+                            <field name="branch_ids"  widget="many2many_tags" options="{'no_create':True,'no_edit':True}" attrs="{'invisible':[('branch_filter','!=','specific')],'required':[('branch_filter','=','specific')]}"/>
+                        </group>
+
+                    </group>
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="generate_report" type="object" string="Print" class = "oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="vouchers_history_report_menu_action" model="ir.actions.act_window">
+            <field name="name">Voucher History Report</field>
+            <field name="res_model">voucher.history.report</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vouchers_history_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="vouchers_history_report_menu_item" name="Voucher History Report" action="vouchers_history_report_menu_action" parent="account.menu_finance_reports"/>
+
+        
+
+    
+        
+    </data>
+</odoo>

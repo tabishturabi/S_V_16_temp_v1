@@ -1,0 +1,52 @@
+<odoo>
+  <data>
+<!-- employee access mgmt form view-->
+      <record model="ir.ui.view" id="view_assetmgt_type_form">
+        <field name="name">hr.emp.access.mgt.form</field>
+        <field name="model">hr.emp.access.mgt</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Document Type" >
+                <sheet>
+                    <group>
+                        <field name="bsg_accesstype"/>
+                        <field name="bsg_appro"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+      </record>
+
+      <!-- Tree View -->
+    <record model="ir.ui.view" id="view_assetmgt_type_tree">
+        <field name="name">hr.emp.access.mgt</field>
+        <field name="model">hr.emp.access.mgt</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsg_accesstype"/>
+                <field name="bsg_appro"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsg_emp_assemgt_type_action">
+        <field name="name">Employees Access Management</field>
+        <field name="res_model">hr.emp.access.mgt</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Employees Access Management"
+      id="hr_emp_assetaccessemp_menu"
+      parent="hr.menu_human_resources_configuration"
+      action="bsg_emp_assemgt_type_action"
+      sequence="11"
+      />
+
+  </data>
+</odoo>

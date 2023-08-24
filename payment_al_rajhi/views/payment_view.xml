@@ -1,0 +1,21 @@
+<odoo>
+    <record id="acquirer_form_alrajhi" model="ir.ui.view">
+        <field name="name">acquirer.form.alrajhi</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='after'>
+                <group attrs="{'invisible': [('provider', '!=', 'alrajhi')]}">
+                    <field name="alrajhi_access_code"/>
+                    <field name="alrajhi_merchant_identifier"/>
+                    <field name="alrajhi_sha_type"/>
+                    <field name="alrajhi_request_phrase"/>
+                    <field name="alrajhi_response_phrase"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    
+
+
+</odoo>

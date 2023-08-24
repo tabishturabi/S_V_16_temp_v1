@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_bsg_branches_view_form_form_coalevel" model="ir.ui.view">
+        <field name="name">bsg_branches.bsg_branches.formcc1</field>
+        <field name="model">bsg_branches.bsg_branches</field>
+        <field name="inherit_id" ref="bsg_branch_config.bsg_branches_view_form"/>
+        <field name="arch" type="xml">
+            <field name="branch_operation" position="after">
+                <field name="account"  />
+            </field>
+        </field>
+    </record>
+</data>
+</odoo>

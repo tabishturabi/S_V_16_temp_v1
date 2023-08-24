@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="discount_on_cargo_config_form">
+            <field name="name">discount_on_cargo_form</field>
+            <field name="model">discount.cargo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Discount">
+                        <group name="top">
+                            <group name="left">
+                                <field name="name"/>
+                                <field name="discount"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="discount_on_cargo_config_view_tree">
+            <field name="name">discount_on_cargo_tree</field>
+            <field name="model">discount.cargo</field>
+            <field name="arch" type="xml">
+                <tree string="Discount">
+                    <field name="name"/>
+                    <field name="discount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="discount_on_cargo_config_action">
+            <field name="name">Discount On Cargo Config</field>
+            <field name="res_model">discount.cargo</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

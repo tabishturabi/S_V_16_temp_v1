@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Manufacturing Order -->
+        <record id="bsg_mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.production.tree</field>
+            <field name="model">bsg.mrp.production</field>
+            <field name="arch" type="xml">
+                <tree string="Manufacturing Orders">
+                    <field name="name"/>
+                    <field name="date_planned_start"/>
+                    <field name="product_id"/>
+                    <field name="origin"/>
+                    <field name="product_qty" sum="Total Qty" string="Quantity"/>
+                    <field name="product_uom_id" string="Unit of Measure" options="{'no_open':True,'no_create':True}"/>
+                    <field name="routing_id"/>
+                    <field name="state"/>
+                    <field name="is_check_create_pr"/>
+                    <field name="is_send_to_qc"/>
+                </tree>
+            </field>
+        </record>
+        <record id="bsg_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">bsg.mrp.production.form</field>
+            <field name="model">bsg.mrp.production</field>
+            <field name="arch" type="xml">
+                <form string="Manufacturing Orders">
+                    <header>
+                        <button name="btn_confirm" type="object"
+                                attrs="{'invisible':[('state','in',['7'])]}"
+                                string="Confirm" class="oe_highlight"/>
+                        <button name="btn_material_takeoff" type="object"
+                                attrs="{'invisible':[('is_check_create_pr','=',False),('state','in',['7'])]}"
+                                string="Material Takeoff" class="oe_highlight"/>
+                        <button name="btn_reject" type="object"
+                                attrs="{'invisible':[('state','in',['7'])]}"
+                                string="Reject" class="oe_highlight"/>
+                        <button name="btn_send_to_qc" type="object"
+                                attrs="{'invisible':['|',('is_send_to_qc','!=',False),('state','in',['1','7'])]}"
+                                string="Send To QC" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="action_get_pr_view" class="oe_stat_button" icon="fa-book" type="object"
+                                    attrs="{'invisible':[('pr_count','=',0)]}">
+                                <field name="pr_count" widget="statinfo" string="PR"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                            <button name="action_get_qc_view" class="oe_stat_button" icon="fa-book" type="object"
+                                    attrs="{'invisible':[('qc_count','=',0)]}">
+                                <field name="qc_count" widget="statinfo" string="QC"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+
+
+                        </div>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Manufacturing Reference" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_check_create_pr" invisible="1"/>
+                                <field name="quality_control_id" invisible="1"/>
+                                <field name="name"/>
+                                <field name="date_planned_start"/>
+                                <!--                                <field name="product_id"/>-->
+                                <field name="origin"/>
+                                <field name="project_id"/>
+
+                            </group>
+                            <group>
+                                <!--                                <field name="product_uom_id"/>-->
+                                <field name="product_id"/>
+                                <field name="product_qty" sum="Total Qty" string="Quantity"/>
+                                <field name="analytic_account_id" required="1"/>
+                                <field name="project_type" required="1" options="{'no_open':True,'no_create':True}"/>
+                                <field name="is_send_to_qc" readonly="1"/>
+                                <!--                                <field name="product_uom_id" string="Unit of Measure"-->
+                                <!--                                       options="{'no_open':True,'no_create':True}"/>-->
+                                <!--                                <field name="routing_id"/>-->
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Components Materials">
+                                <field name="production_line_ids" widget="one2many_list"
+                                       attrs="{'readonly':[('state','in',['1','7'])]}">
+                                    <tree string="Components" editable="bottom">
+                                        <field name="product_id" context="{'default_type': 'product'}"/>
+                                        <field name="requested_from"/>
+                                        <field name="qty_to_consume"/>
+                                        <field name="product_uom_id"/>
+                                        <field name="note"/>
+                                        <field name="is_pr_create" readonly="1"/>
+                                        <!--                                        <field name="qty_reserved"/>-->
+                                        <!--                                        <field name="qty_done"/>-->
+                                    </tree>
+                                </field>
+
+
+                            </page>
+                            <page name="technicians" string="Technicians">
+                                <field name="technician_line_ids" widget="one2many_list"
+                                       attrs="{'readonly':[('state','in',['1','7'])]}">
+                                    <tree string="Technicians" editable="bottom">
+                                        <field name="employee_id" force_save="1" domain="[('is_technician','=',True)]"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="driver_code" force_save="1"
+                                               options="{'no_create':True,'no_edit':True,'no_open':True}"/>
+                                        <field name="state" readonly="1"/>
+                                    </tree>
+                                </field>
+                                <group>
+
+                                </group>
+                            </page>
+                            <page name="other_info" string="Other Info">
+                                <group>
+                                    <field name="manager_ids" widget="many2many_tags"
+                                           options="{&quot;no_open&quot;: True,&quot;no_create&quot;: 1, &quot;no_create_edit&quot;: 1}"/>
+                                    <field name="picking_type_id" domain="[('code', '=', 'mrp_operation')]"/>
+                                    <field name="location_src_id"/>
+                                    <field name="location_dest_id"/>   
+                                    <field name="final_picking" readonly="1"/>    
+
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="bsg_mrp_production_order_view_search" model="ir.ui.view">
+            <field name="name">bsg_mrp_production_order_view_search</field>
+            <field name="model">bsg.mrp.production</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="is_check_create_pr" invisible="1"/>
+                    <filter string="PR not created" name="pr_not_created" domain="[('is_check_create_pr','=',True)]"
+                            help="WO with no PR created"/>
+
+                </search>
+            </field>
+        </record>
+        <record id="bsg_mrp_production_action" model="ir.actions.act_window">
+            <field name="name">Manufacturing Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bsg.mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new manufacturing order
+                </p>
+            </field>
+        </record>
+        <menuitem action="bsg_mrp_production_action"
+                  name="Manufacturing Orders"
+                  id="bsg_menu_mrp_production_action"
+                  parent="manufacturing_enhance.menu_bsg_mrp_orders_menu"
+                  sequence="4"/>
+    </data>
+</odoo>

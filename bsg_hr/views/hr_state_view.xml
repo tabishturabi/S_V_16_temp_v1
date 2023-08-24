@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- hr state form view-->
+        <record model="ir.ui.view" id="view_hr_state_form">
+            <field name="name">bsg.hr.state.form</field>
+            <field name="model">bsg.hr.state</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Employee State">
+                    <sheet>
+                        <group>
+                            <field name="employee_state" />
+                            <field name="suspend_salary" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="view_hr_state_tree">
+            <field name="name">bsg.hr.state.tree</field>
+            <field name="model">bsg.hr.state</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_state" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="bsg_hr_state_action">
+            <field name="name">Employee State</field>
+            <field name="res_model">bsg.hr.state</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Employee State" id="hr_hr_state_submenu" parent="hr.menu_human_resources_configuration" action="bsg_hr_state_action" sequence="17" />
+    </data>
+</odoo>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="external_layout_standard">
+      <div class="header">
+          <div class="row">
+              <div class="col-3 mb4">
+                      <img src="bsg_tranport_bx_credit_customer_collection/static/src/img/logo.png" width="1200px" height="220px" alt="Logo"/>
+              </div>
+          </div>
+      </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+<!--        <div class="footer o_standard_footer">-->
+<!--              <div class="text-center" style="border-top: 1px solid black;">-->
+<!--                  <ul class="list-inline mb4">-->
+<!--                      <li t-if="docs.print_date" class="list-inline-item">Print Date: <span t-field="docs.print_date"/></li>-->
+<!--                      <li t-if="docs.env.user.id" class="list-inline-item">Print By: <span t-field="docs.env.user.name"/></li>-->
+<!--                  </ul>-->
+<!--                  <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                      Page: <span class="page"/> - <span class="topage"/>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+      </template>
+      <template id="bx_sci_pdf">
+        <t t-call="web.html_container">
+             <t t-call="bsg_tranport_bx_credit_customer_collection.external_layout_standard">
+                 <div class="page">
+                     <style type="text/css">
+                            <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/bsg_tranport_bx_credit_customer_collection//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             div {
+                                font-family: 'Arial';
+                                    }
+                             table {
+                                border-collapse: collapse;
+                                    }
+
+					            ]]>
+                        </style>
+                     <t t-set="contract_id" t-value="docs.get_contract(docs)" />
+                     <div width="100%" style="margin-top:5px;direction: rtl;font-size:30px;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "docs.doc_reference_no">
+                                 <span><t t-esc="docs.doc_reference_no" /> </span>
+                             </t>
+                          </div >
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                              <span> الرقم  :</span>
+                          </div>
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <t t-if = "docs.date">
+                                     <span><t t-esc="docs.date" /> </span>
+                                 </t>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span>التاريخ :</span>
+                         </div>
+                          <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <span><t t-esc="contract_id.contract_no" /> </span>
+                                 <span>هـ</span>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span>رقم العقد:</span>
+                         </div>
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "contract_id">
+                                 <t t-set="contract_date" t-value="docs.get_contract_date(contract_id)" />
+                                 <t t-if="contract_date">
+                                     <span><t t-esc="contract_date" /> </span>
+                                     <span>هـ</span>
+                                 </t>
+                             </t>
+                         </div >
+                         <div style="direction: rtl;padding-top:2px;padding-bottom:2px;width:15%;border:0px solid black;float:left;text-align:right;">
+                             <span> تاريخ العقد:</span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:45px;padding-top:20px;padding-bottom:20px;direction: rtl;width:100%;border:0px solid black;text-align:center;">
+                             <span>فاتورة على الحساب</span>
+                         </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;font-size:30px;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                          <div style="direction: rtl;padding-top:10px;padding-bottom:10px;width:85%;border:0px solid black;float:left;text-align:right;" >
+                             <t t-if = "docs.invoice_to.name">
+                                 <span><t t-esc="docs.invoice_to.name" /> </span>
+                             </t>
+                          </div >
+                          <div style="direction: rtl;padding-top:10px;padding-bottom:10px;width:15%;border:0px solid black;float:left;text-align:right;">
+                              <span> السادة /</span>
+                          </div>
+                     </div>
+                     <div width="100%" style="direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="font-size:30px;padding-top:10px;padding-bottom:10px;direction: rtl;width:100%;border:0px solid black;text-align:right;">
+                             <span>المحترمين</span>
+                         </div>
+                     </div>
+                     <table BORDERCOLOR="#{'#00000'}" border="0" cellpadding="0" cellspacing="0" width="1200px" dir="rtl">
+                         <tbody>
+                             <tr t-attf-style="background-color: grey;page-break-inside: avoid !important;border:1px solid black; font-weight:bold;color:black;};">
+                                 <td align="center" width="10%"   t-attf-style="padding:15px;font-size:38px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         م
+                                     </span>
+                                 </td>
+                                  <td align="center" width="30%"  t-attf-style="padding:15px;font-size:38px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         الوصف
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:38px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         المبلغ
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:38px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         الضريبة 15%
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:38px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         السعر الإجمالي
+                                     </span>
+                                 </td>
+                             </tr>
+                             <tr t-attf-style="page-break-inside: avoid !important;border:1px solid black; font-weight:bold;background-color:white;color:black;};">
+                                 <td align="center" width="10%"   t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         1
+                                     </span>
+                                 </td>
+                                  <td align="center" width="30%"  t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         <t t-esc="docs.internal_note" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         <t t-set="price" t-value="docs.get_price(docs)" />
+                                         <t t-esc="price" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         <t t-set="tax_amount" t-value="docs.get_tax_amount(docs)" />
+                                         <t t-esc="tax_amount" />
+                                     </span>
+                                 </td>
+                                 <td align="center" width="20%"  t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         <t t-esc="docs.amount_total" />
+                                     </span>
+                                 </td>
+                             </tr>
+                              <tr t-attf-style="page-break-inside: avoid !important;border:1px solid black; font-weight:bold;background-color:white;color:black;};">
+                                 <td align="center" colspan="3"   t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                          <t t-set="arabic_amount_total" t-value="docs.get_arabic_total_word(docs.amount_total)" />
+                                         <t t-esc="arabic_amount_total"></t>
+                                     </span>
+                                 </td>
+                                  <td align="center" colspan="2"  t-attf-style="padding:15px;font-size:30px;font-weight:bold;color:black;border:1px solid black;">
+                                     <span>
+                                         <t t-esc="docs.amount_total" />
+                                     </span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     <div width="100%" style="margin-top:80px;direction: rtl;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                         <div style="padding-top:20px;padding-bottom:20px;font-size:30px;direction: rtl;width:50%;border:0px solid black;float:left;text-align:left;">
+                            <span> الختم</span>
+                         </div>
+                         <div style="padding-top:20px;padding-bottom:20px;font-size:30px;direction: rtl;width:50%;border:0px solid black;text-align:right;">
+                             <span> التوقيع</span>
+                         </div>
+                     </div>
+                 </div>
+             </t>
+        </t>
+    </template>
+</odoo>

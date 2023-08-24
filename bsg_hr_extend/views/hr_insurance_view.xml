@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_insurance_form_extendes" model="ir.ui.view">
+            <field name="name">Hr Insurance</field>
+            <field name="model">hr.insurance</field>
+            <field name="inherit_id" ref="bsg_hr.view_hr_insurance_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bsg_gender']" position="after">
+                    <field name="bsg_emp_code" invisible="1" />
+                    <field name="bsg_emp_id" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+        <!--     Search View -->
+        <record id="view_hr_insurance_serach" model="ir.ui.view">
+            <field name="name">hr.insurance.search</field>
+            <field name="model">hr.insurance</field>
+            <field name="arch" type="xml">
+                <search string="Search HR Insurance">
+                    <field name="is_employee" />
+                    <field name="employee_insurance" />
+                    <field name="bsg_emp_code" />
+                    <field name="bsg_emp_id" />
+                    <field name="bsg_insurance_company" />
+                    <field name="bsg_insurance_member1" />
+                    <field name="bsg_startdate" />
+                    <field name="bsg_enddate" />
+                    <field name="bsg_premium" />
+                    <field name="bsg_insurancerelation" />
+                    <field name="bsg_class" />
+                    <field name="bsg_cardcode" />
+                    <field name="bsg_gender" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

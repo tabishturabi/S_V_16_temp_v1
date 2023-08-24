@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="sales_revenue_report_xlsx_id"
+             model="sales.revenue.report.wizard"
+             string="Sales Revenue Summary Report"
+             report_type="xlsx"
+             name="bsg_sales_revenue_sumary_report.sales_report_xlsx"
+             file="bsg_sales_revenue_sumary_report.sales_report_xlsx"
+     />
+</odoo>

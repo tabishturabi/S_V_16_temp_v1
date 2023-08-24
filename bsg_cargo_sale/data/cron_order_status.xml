@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_cargo_order_status" model="ir.cron">
+        <field name="name">Update Cargo Sale Status</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+        <field name="code">model.update_order_status()</field>
+        <field name="state">code</field>
+    </record>
+
+
+        <record id="cc_create_delivery_history" model="ir.cron">
+        <field name="name">CC Create Delivery History</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+        <field name="code">model.update_cc_create_delivery_history()</field>
+        <field name="state">code</field>
+    </record>
+
+
+
+    <!-- cron to send sms -->
+
+    <record id="ir_cron_send_sms" model="ir.cron">
+        <field name="name">Send SMS</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+        <field name="code">model.cron_send_sms()</field>
+        <field name="state">code</field>
+    </record>
+
+        <!-- cron to Update OLD record delivery_note_no -->
+
+    <record id="ir_cron_update_delivery_note_no" model="ir.cron">
+        <field name="name">Update Unupdated Delivert note no</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">0</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+        <field name="code">model._cron_update_delivery_note_no()</field>
+        <field name="state">code</field>
+    </record> 
+
+    <!-- cron to Update Unused so to cancel -->
+
+    <record id="ir_cron_update_so_price_to_cancel" model="ir.cron">
+        <field name="name">Update Unused So</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">0</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+        <field name="code">model._cron_update_so_cancel()</field>
+        <field name="state">code</field>
+    </record>
+
+    <!-- cron to Update SO PRICING -->
+
+    <record id="ir_cron_update_so_pricing" model="ir.cron">
+        <field name="name">Update SO Pricing</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">0</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+        <field name="code">model._cron_update_so_price()</field>
+        <field name="state">code</field>
+    </record>
+
+
+    <!-- cron to Update Unused so to cancel -->
+
+    <record id="ir_cron_update_so_price_to_cancel" model="ir.cron">
+        <field name="name">Update Unused So</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">0</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+        <field name="code">model._cron_update_so_cancel()</field>
+        <field name="state">code</field>
+    </record>
+
+
+
+    <!-- cron to Update OLD record delivery_note_no -->
+
+    <record id="ir_cron_update_delivery_note_no" model="ir.cron">
+        <field name="name">Update Unused So</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">0</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+        <field name="code">model._cron_update_delivery_note_no()</field>
+        <field name="state">code</field>
+    </record>    
+    <!-- Temp cron to Update fields [charges_stored, final_price_stored, invoice_state_stored] -->
+    <record id="ir_cron_update_stored_fields" model="ir.cron">
+            <field name="name">Update stored fields</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+            <field name="code">model.action_update_stored_fields()</field>
+            <field name="state">code</field>
+        </record>
+
+</odoo>

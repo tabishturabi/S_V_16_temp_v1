@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record model="ir.module.category" id="module_category_iqama_renewal">
+            <field name="name">Employees Iqama Renewel</field>
+            <field name="description">Helps you access iqama renewel menue</field>
+            <field name="sequence">115</field>
+        </record>
+          <record id="group_iqama_access" model="res.groups">
+              <field name="name">Employees Iqama Renewel</field>
+              <field name="comment">The user will have access to the iqama renewel menue.</field>
+              <field name="category_id" ref="bsg_iqama_renewels.module_category_iqama_renewal"/>
+          </record>
+          <record id="group_iqama_department_manager" model="res.groups">
+              <field name="name">Manager Approver</field>
+              <field name="comment">The user will have access to the human resources configuration as well as statistic reports.</field>
+              <field name="category_id" ref="bsg_iqama_renewels.module_category_iqama_renewal"/>
+              <field name="implied_ids" eval="[(4, ref('bsg_iqama_renewels.group_iqama_access'))]"/>
+          </record>
+          <record id="group_iqama_hr_manager" model="res.groups">
+              <field name="name">HR Manager Approver</field>
+              <field name="comment">The user will have access to the human resources configuration as well as statistic reports.</field>
+              <field name="category_id" ref="bsg_iqama_renewels.module_category_iqama_renewal"/>
+              <field name="implied_ids" eval="[(4, ref('bsg_iqama_renewels.group_iqama_access'))]"/>
+          </record>
+           <record id="group_create_petty_cash" model="res.groups">
+              <field name="name">Create Petty Cash</field>
+              <field name="comment">The user will have access to to create petty cash.</field>
+              <field name="category_id" ref="bsg_iqama_renewels.module_category_iqama_renewal"/>
+          </record>
+    </data>
+</odoo>

@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="expense_accounting_petty_view_search" model="ir.ui.view">
+    <field name="name">expense.accounting.petty.view.search</field>
+    <field name="model">expense.accounting.petty</field>
+    <field name="arch" type="xml">
+        <search string="Petty">
+            <field name="name" />
+            <field name="user_id" string="Requester"/>
+            <field name="journal_id" />
+            <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+            <filter string="Auditing" name="auditing" domain="[('state','=','auditing')]"/>
+            <filter string="Open" name="open" domain="[('state','=','open')]"/>
+            <filter string="Done" name="done" domain="[('state','=','done')]"/>
+            <separator/>
+            <filter string="Today" name="current_day" domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d')), ('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d'))]"/>
+            <filter string="This Week" name="current_week" domain="[('date', '&gt;=', ((context_today()+ relativedelta(weeks=-1, days=1, weekday=0)).strftime('%Y-%m-%d'))),('date', '&lt;=', ((context_today()+ relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d')))]"/>
+            <filter string="This Month" name="current_month" domain="[('date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+            <filter string="This Year" name="current_year" domain="[('date','&lt;=',(context_today()+relativedelta(day=31,month=12)).strftime('%Y-%m-%d')),('date','&gt;=',(context_today()-relativedelta(day=1,month=1)).strftime('%Y-%m-%d'))]"/>                    
+        </search>
+    </field>
+</record>
+    <!-- Expense Module -->
+
+    <record id="expense_account_tree_view" model="ir.ui.view">
+        <field name="name">expense_account_tree_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree delete="false">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="journal_id"/>
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="expenses_bcube_form_view" model="ir.ui.view">
+        <field name="name">expenses_bcube_form_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header> 
+                    <button name="action_send" type="object"  states='draft'
+                            string="Send" groups="advance_petty_expense_mgmt.petty_cash_user" class = "oe_highlight"/>
+                    <button name="action_user_resend" type="object" groups="advance_petty_expense_mgmt.petty_cash_user"
+                            string="Resend" attrs="{'invisible':['|',('state','in',('draft','done')),('in_auditor','=',True)]}" class = "oe_highlight"/>                
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auditing,open,done"/>
+                </header>
+                <sheet>
+                    
+                    <div class="oe_button_box" name="button_box">
+                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                                  <field string="Documents" name="doc_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" name="button_journal_entries"
+                                string="Journal Items" type="object"
+                                 icon="fa-bars" groups="advance_petty_expense_mgmt.petty_cash_manager" attrs="{'invisible':[('len_move_id','=',0),('state','!=','done')]}"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="EXP/" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="top">
+                        <group name="left">
+                            <field name="requested_partner_id"  invisible="1"/>
+                            <field name="user_id" string="Requester" options="{&quot;no_open&quot;: True}" readonly="1"/>
+                            <field name="petty_cash_user_rule_id" options="{&quot;no_open&quot;: True}" domain="[('user_id','=',user_id)]"  required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="petty_cash_journal_id" invisible="1"/>
+                            <field name="journal_id" options="{'no_create': True, 'no_open': True}" force_save="1" domain="[('id','=',petty_cash_journal_id)]" readonly="1" />
+                            <field name="account_id" options="{&quot;no_open&quot;: True}" readonly="1" force_save="1" />
+                            <field name="template_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        </group>
+                        <group name="right">
+                            <field name="date" readonly="1"/>
+                           <!--  <field name="department_id" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                            <field name="opening_balacne" force_save="1" readonly="1"/>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="in_auditor" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="len_move_id" invisible="1"/>
+                    <notebook>
+                    <page string="Petty Cash Lines">     
+                        <field name="expense_treeview" string="Petty Cash Lines" context="{'petty_cash_user_rule_id' : petty_cash_user_rule_id, 'default_is_with_product' : is_with_product,'default_is_without_product' : is_without_product}"  nolabel='1' attrs="{'readonly':['|',('state','=','done'),('in_auditor','=',True)]}">
+                        <!-- attrs="{'readonly':[('done','=',True)]}" -->
+                        <tree decoration-info="parent.state == 'draft'" decoration-danger="parent.state != 'draft' and done == False and review != False">
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="name" readonly="1" widget="handle"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_with_product','=',True )]}"   domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="department_id" invisible="1" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+<!--                            Migration Note-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':[('done','=', True)]}"/>-->
+                            <field name="invoice_ref_no" invisible="1" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" attrs="{'readonly':[('done','=', True)],'required':[('tax_ids','!=', False)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier_rank' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}"/>
+                            <field name="vat_no" invisible="1" readonly="1" attrs="{'required':[('tax_ids','=', True)]}"/>
+                            
+                            <field name="line_tax_amount" invisible="1"/>
+                            <field name="date" invisible="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            <field name="review" invisible="1" attrs="{'readonly':[('is_allow_to_change_review','=', True)]}" />
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" invisible="1"  />
+                            <field name="is_new_order" invisible="1"/>
+                        </tree>
+                        <form>
+                          <group>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="allow_to_change" invisible="1"/>
+                            <field name="name" readonly="1"/>
+                            <group>
+                            <field name="invoice_ref_no" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_with_product','=',True )]}"  
+                             domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_len" invisible="1"/>
+
+                            <field name="line_tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_exclude_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" invisible="1"/>
+                            </group>
+                            <group>
+                            <field name="date" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}" options="{'no_create_edit': True, 'no_open': True}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+<!--                                MIgration NOte-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>-->
+                                
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="department_id" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            
+                            
+                            
+                            <field name="vat_no" readonly="1" force_save="1" attrs="{'required':[('tax_len','&gt;',0)],'invisible':[('tax_len','&lt;=', 0)]}"/>
+                            
+                            <field name="attachment_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" widget="many2many_binary"/>
+                            <field name="is_attach_added" required="True" readonly="True" invisible="True" force_save="True"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            
+                            <field name="currency_id" invisible="1"/>
+                            <field name="is_new_order" invisible="1"/>
+                            </group>
+                            <field name="review" placeholder="Review" readonly="1" />
+                          </group>
+                        </form>
+                    </field>
+                    </page>
+                    </notebook>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="total_without_vat" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="balnce_of_requester" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="expenses_bcube_view_kanban" model="ir.ui.view">
+        <field name="name">expense.accounting.petty.view.kanban</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="arch" type="xml">
+            <kanban disable_drag_drop_record='true'>
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                            <div>
+                            <a name="petty_cash_get_form_view" type="object">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </a>
+                            </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+
+    <record id="expense_account_form_view_action" model="ir.actions.act_window">
+        <field name="name">Expenses</field>
+        <field name="res_model">expense.accounting.petty</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="context"></field>
+    </record>
+
+
+
+    <record id="expense_account_tree1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="expense_account_tree_view"/>
+            <field name="act_window_id" ref="expense_account_form_view_action"/>
+    </record>
+
+    <record id="expense_account_form2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="expenses_bcube_form_view"/>
+            <field name="act_window_id" ref="expense_account_form_view_action"/>
+    </record>
+
+    <record id="expense_account_kanban2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="expenses_bcube_view_kanban"/>
+            <field name="act_window_id" ref="expense_account_form_view_action"/>
+    </record>
+
+
+
+
+
+
+
+
+
+
+    <record id="expenses_all_bcube_form_view" model="ir.ui.view">
+        <field name="name">expenses_all_bcube_form_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+                <header>                
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auditing,open,done"/>
+                </header>
+                <sheet>
+                    
+                    <div class="oe_button_box" name="button_box">
+                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                                  <field string="Documents" name="doc_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" name="button_journal_entries"
+                                string="Journal Items" type="object"
+                                 icon="fa-bars" groups="advance_petty_expense_mgmt.petty_cash_manager" attrs="{'invisible':[('len_move_id','=',0),('state','!=','done')]}"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="EXP/" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="top">
+                        <group name="left">
+                            <field name="requested_partner_id"  invisible="1"/>
+                            <field name="user_id" string="Requester" options="{&quot;no_open&quot;: True}" readonly="1"/>
+                            <field name="petty_cash_user_rule_id" options="{&quot;no_open&quot;: True}" domain="[('user_id','=',user_id)]"  required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="petty_cash_journal_id" invisible="1"/>
+                            <field name="journal_id" options="{'no_create': True, 'no_open': True}" force_save="1" domain="[('id','=',petty_cash_journal_id)]" readonly="1" />
+                            <field name="account_id" options="{&quot;no_open&quot;: True}" readonly="1" force_save="1" />
+                            <field name="template_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        </group>
+                        <group name="right">
+                            <field name="date" readonly="1"/>
+                           <!--  <field name="department_id" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                            <field name="opening_balacne" force_save="1" readonly="1"/>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="in_auditor" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="len_move_id" invisible="1"/>
+                    <notebook>
+                    <page string="Petty Cash Lines">     
+                        <field name="expense_treeview" string="Petty Cash Lines" context="{'petty_cash_user_rule_id' : petty_cash_user_rule_id, 'default_is_with_product' : is_with_product,'default_is_without_product' : is_without_product}"  nolabel='1' attrs="{'readonly':[('state','=','done')]}">
+                        <!-- attrs="{'readonly':[('done','=',True)]}" -->
+                        <tree decoration-info="parent.state == 'draft'" decoration-danger="parent.state != 'draft' and done == False and review != False" create="false" edit="false" delete="false">
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="name" readonly="1" widget="handle"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_with_product','=',True )]}"   domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="department_id" invisible="1" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+<!--                            Migration Note-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':[('done','=', True)]}"/>-->
+                            <field name="invoice_ref_no" invisible="1" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" attrs="{'readonly':[('done','=', True)],'required':[('tax_ids','!=', False)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}"/>
+                            <field name="vat_no" invisible="1" readonly="1" attrs="{'required':[('tax_ids','!=', False)]}"/>
+                            <field name="line_tax_amount" invisible="1"/>
+                            <field name="date" invisible="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            <field name="review" invisible="1" attrs="{'readonly':[('is_allow_to_change_review','=', True)]}" />
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" invisible="1" attrs="{'readonly':[('done','=', True)]}" />
+                            <field name="is_new_order" invisible="1"/>
+                        </tree>
+                        <form create="false" edit="false" delete="false">
+                          <group>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="allow_to_change" invisible="1"/>
+                            <field name="name" readonly="1"/>
+                            <group>
+                            <field name="invoice_ref_no" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_with_product','=',True )]}"  
+                             domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_len" invisible="1"/>
+
+                            <field name="line_tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_exclude_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" attrs="{'readonly':['|',('done','=', True),('parent.in_auditor','!=',True)]}" groups="advance_petty_expense_mgmt.petty_cash_internal_editor"/>
+                            </group>
+                            <group>
+                            <field name="date" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+<!--                                Migration Note-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>-->
+                                
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="department_id" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            
+                            
+                            
+                            <field name="vat_no" readonly="1" attrs="{'required':[('tax_len','&gt;',0)],'invisible':[('tax_len','&lt;=',0)]}"/>
+                            
+                            <field name="attachment_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" widget="many2many_binary"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            
+                            <field name="currency_id" invisible="1"/>
+                            <field name="is_new_order" invisible="1"/>
+                            </group>
+                            <field name="review" placeholder="Review" attrs="{'readonly':['|',('done','=', True),'|',('is_allow_to_change_review','!=',True),('parent.in_auditor','!=',True)]}" />
+                          </group>
+                        </form>
+                    </field>
+                    </page>
+                    </notebook>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="total_without_vat" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="balnce_of_requester" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="expense_account_all_tree_view" model="ir.ui.view">
+        <field name="name">expense_account_all_tree_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree delete="false" create="false" edit="false">
+                <field name="name"/>
+                <field name="user_id" string="Requester"/>
+                <field name="date"/>
+                <field name="journal_id"/>
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="expenses_bcube_all_view_kanban" model="ir.ui.view">
+        <field name="name">expense.accounting.petty.all.view.kanban</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="arch" type="xml">
+            <kanban disable_drag_drop_record='true'>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                        <a name="petty_cash_get_form_view" type="object">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    <field name="user_id" string="Requester"/>
+                                </strong>
+                            </div>
+                        </a>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="expense_account_all_form_view_action" model="ir.actions.act_window">
+        <field name="name">Expenses</field>
+        <field name="res_model">expense.accounting.petty</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain"></field>
+        <field name="context"></field>
+    </record>
+
+
+
+
+
+    <record id="expense_account_tree3" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="expense_account_all_tree_view"/>
+            <field name="act_window_id" ref="expense_account_all_form_view_action"/>
+    </record>
+
+    <record id="expense_account_form3" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="expenses_all_bcube_form_view"/>
+            <field name="act_window_id" ref="expense_account_all_form_view_action"/>
+    </record>
+
+    <record id="expense_account_kanban3" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="expenses_bcube_all_view_kanban"/>
+            <field name="act_window_id" ref="expense_account_all_form_view_action"/>
+    </record>
+
+
+
+
+
+    <record id="expenses_bcube_form_auditing_view" model="ir.ui.view">
+        <field name="name">expenses_bcube_form_auditing_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <header> 
+                    <button name="action_audit_resend" type="object" 
+                            string="Resend" groups="advance_petty_expense_mgmt.petty_cash_internal_editor" attrs="{'invisible':['|',('state','in',('draft','done')),('in_auditor','!=',True)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auditing,open,done"/>
+                </header>
+                <sheet>
+                    
+                    <div class="oe_button_box" name="button_box">
+                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                                  <field string="Documents" name="doc_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" name="button_journal_entries"
+                                string="Journal Items" type="object"
+                                 icon="fa-bars" groups="advance_petty_expense_mgmt.petty_cash_manager" attrs="{'invisible':[('len_move_id','=',0),('state','!=','done')]}"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="EXP/" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="top">
+                        <group name="left">
+                            <field name="requested_partner_id"  invisible="1"/>
+                            <field name="user_id" string="Requester" options="{&quot;no_open&quot;: True}" readonly="1"/>
+                            <field name="petty_cash_user_rule_id" options="{&quot;no_open&quot;: True}" domain="[('user_id','=',user_id)]"  required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="petty_cash_journal_id" invisible="1"/>
+                            <field name="journal_id" options="{'no_create': True, 'no_open': True}" force_save="1" domain="[('id','=',petty_cash_journal_id)]" readonly="1" />
+                            <field name="account_id" options="{&quot;no_open&quot;: True}" readonly="1" force_save="1" />
+                            <field name="template_id" options="{'no_create_edit': True, 'no_open': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group name="right">
+                            <field name="date" readonly="1"/>
+                           <!--  <field name="department_id" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                            <field name="opening_balacne" force_save="1" readonly="1"/>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="in_auditor" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                        </group>
+                    </group>
+                    <field name="len_move_id" invisible="1"/>
+                    <notebook>
+                    <page string="Petty Cash Lines">     
+                        <field name="expense_treeview" string="Petty Cash Lines" context="{'petty_cash_user_rule_id' : petty_cash_user_rule_id, 'default_is_with_product' : is_with_product,'default_is_without_product' : is_without_product}"  nolabel='1' attrs="{'readonly':[('state','=','done')]}">
+                        <!-- attrs="{'readonly':[('done','=',True)]}" -->
+                        <tree decoration-info="parent.state == 'draft'" decoration-danger="parent.state != 'draft' and done == False and review != False" create="false" delete="false">
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="is_post" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="name" readonly="1" widget="handle"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_with_product','=',True )]}"   domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('done','=', True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="department_id" invisible="1" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':[('done','=', True)]}"/>
+<!--                            Migration Note-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':[('done','=', True)]}"/>-->
+                            <field name="invoice_ref_no" invisible="1" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':[('done','=', True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" attrs="{'readonly':[('done','=', True)],'required':[('tax_ids','!=', False)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}"/>
+                            <field name="vat_no" invisible="1" readonly="1" attrs="{'required':[('tax_ids','!=', False)]}"/>
+                            
+                            <field name="line_tax_amount" invisible="1"/>
+                            <field name="date" invisible="1" attrs="{'readonly':[('done','=', True)]}"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            <field name="review" invisible="1" attrs="{'readonly':[('is_allow_to_change_review','=', True)]}" />
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" invisible="1" attrs="{'readonly':[('done','=', True)]}" />
+                            <field name="is_new_order" invisible="1"/>
+                        </tree>
+                        <form create="false" delete="false">
+                          <group>
+                            <field name="is_with_product" invisible="1"/>
+                            <field name="is_without_product" invisible="1"/>
+                            <field name="petty_cash_user_rules_id" invisible="1"/>
+                            <field name="user_product_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="partner_type_ids" invisible="1"/>
+                            <field name="user_analytic_account_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_analytic_tag_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_department_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="user_branch_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="cash_vendor_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="done" invisible="1"/>
+                            <field name="allow_to_change" invisible="1"/>
+                            <field name="name" readonly="1"/>
+                            <group>
+                            <field name="invoice_ref_no" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_with_product','=',True )]}"  
+                             domain="[('id','in',user_product_ids)]" />
+                            <!-- 'column_invisible': [('parent.is_without_product','=',True)] -->
+                            <field name="account_id" domain="[('id','in',user_account_ids)]" options="{'no_create': True, 'no_open': True}" 
+                            attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'required':[('parent.is_without_product','=', True)]}" required="1"/>
+                            <!-- ,'column_invisible': [('parent.is_with_product','=',True) ]-->
+                            <field name="description" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="amount" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="tax_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_ids" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)],'invisible':[('is_new_order','!=', True)]}" options="{'no_create': True, 'no_open': True}" 
+                            domain="[('type_tax_use','=','purchase')]"/>
+                            <field name="tax_len" invisible="1"/>
+                            <field name="line_tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_exclude_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_post" attrs="{'readonly':['|',('done','=', True),('parent.in_auditor','!=',True)]}" groups="advance_petty_expense_mgmt.petty_cash_internal_editor"/>
+                            </group>
+                            <group>
+                            <field name="date" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"/>
+                            <field name="is_petty_vendor_id" domain="[('id','in',cash_vendor_ids)]" required="1" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}"  context="{'default_partner_types': partner_type_ids[0],
+                                'default_customer_rank' : False,'default_supplier' : True, 'default_is_petty_vendor' : True,'passing_partner_type_ids' : partner_type_ids}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="analytical_id" required="1" domain="[('id','in',user_analytic_account_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+<!--                                Migration Note-->
+<!--                            <field name="analytic_tag_ids"  domain="[('id','in',user_analytic_tag_ids)]" widget="many2many_tags" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>-->
+                                
+                            <field name="branches_id" required="1" domain="[('id','in',user_branch_ids)]" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="department_id" domain="[('id','in',user_department_ids)]"  attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="fleet_vehicle_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" options="{'no_create': True, 'no_open': True}"/>
+                            
+                            
+                            
+                            <field name="vat_no" readonly="1" attrs="{'required':[('tax_len','&gt;',0)],'invisible':[('tax_len','&lt;=',0)]}"/>
+                            
+                            <field name="attachment_id" attrs="{'readonly':['|',('done','=', True),'|',('parent.in_auditor','=',True),('allow_to_change','!=',True)]}" widget="many2many_binary"/>
+                            <field name="is_allow_to_change_review" invisible="1"/>
+                            
+                            <field name="currency_id" invisible="1"/>
+                            <field name="is_new_order" invisible="1"/>
+                            </group>
+                            <field name="review" placeholder="Review" attrs="{'readonly':['|',('done','=', True),'|',('is_allow_to_change_review','!=',True),'|',('parent.in_auditor','!=',True),('is_post','=',True)]}" groups="advance_petty_expense_mgmt.petty_cash_internal_editor" />
+                          </group>
+                        </form>
+                    </field>
+                    </page>
+                    </notebook>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="total_without_vat" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="balnce_of_requester" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="activity_ids" widget="mail_activity"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="expense_account_auditing_tree_view" model="ir.ui.view">
+        <field name="name">expense_account_auditing_tree_view</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree delete="false" create="false">
+                <field name="name"/>
+                <field name="user_id" string="Requester"/>
+                <field name="date"/>
+                <field name="journal_id"/>
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="expenses_auditing_view_kanban" model="ir.ui.view">
+        <field name="name">expense.accounting.petty.auditing.view.kanban</field>
+        <field name="model">expense.accounting.petty</field>
+        <field name="arch" type="xml">
+            <kanban disable_drag_drop_record='true'>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                        <a name="petty_cash_get_form_view" type="object">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    <field name="user_id" string="Requester"/>
+                                </strong>
+                            </div>
+                        </a>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="expense_auditing_account_form_view_action" model="ir.actions.act_window">
+        <field name="name">Expenses Auditing</field>
+        <field name="res_model">expense.accounting.petty</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="domain">[('state', 'in', ('auditing','open')),('user_id', '!=', uid)]</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context"></field>
+    </record>
+
+    <record id="expense_auditing_account_tree2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="expense_account_auditing_tree_view"/>
+            <field name="act_window_id" ref="expense_auditing_account_form_view_action"/>
+    </record>
+
+    <record id="expense_auditing_account_form2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="expenses_bcube_form_auditing_view"/>
+            <field name="act_window_id" ref="expense_auditing_account_form_view_action"/>
+    </record>
+    <record id="expense_auditing_account_kanban2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="expenses_auditing_view_kanban"/>
+            <field name="act_window_id" ref="expense_auditing_account_form_view_action"/>
+    </record>
+
+
+
+    <!-- Action post_payment for multi -->
+    <record id="action_expense_accounting_petty_validate_postlines" model="ir.actions.server">
+        <field name="name">Validate Posted Line</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="model_expense_accounting_petty"/>
+        <field name="binding_model_id" ref="model_expense_accounting_petty"/>
+        <field name="code">records.action_validate_post_lines()</field>
+    </record>
+
+
+        <!-- Action post_payment for multi -->
+    <record id="action_expense_accounting_petty_validate_alllines" model="ir.actions.server">
+        <field name="name">Validate All Line</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="model_expense_accounting_petty"/>
+        <field name="binding_model_id" ref="model_expense_accounting_petty"/>
+        <field name="code">records.action_validate_all_lines()</field>
+    </record>
+
+    <record id="view_move_form_csutom_inherit" model="ir.ui.view">
+        <field name="name">expense_bcube_journal_entry_linkage</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[2]" position="inside">
+                <group>
+                    <field name="expense_id" attrs="{'invisible':[('expense_id','=',False)]}"/>
+                    <field name="payment_id" attrs="{'invisible':[('payment_id','=',False)]}"/>
+                    <field name="invoice_id" attrs="{'invisible':[('invoice_id','=',False)]}"/>
+                    <field name="pety_cash_id" attrs="{'invisible':[('pety_cash_id','=',False)]}"/>
+                    <field name="picking_id" attrs="{'invisible':[('picking_id','=',False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+<!--   <record id="view_account_payment_form_custom_inherit" model="ir.ui.view">-->
+<!--        <field name="name">account.paymentcus.form</field>-->
+<!--        <field name="model">account.payment.register</field>-->
+<!--        <field name="priority">16</field>-->
+<!--        <field name="inherit_id" ref="account_accountant.view_account_payment_form_inherit_account_accountant"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--&lt;!&ndash;            Migration NOTE&ndash;&gt;-->
+<!--&lt;!&ndash;            <button name="open_payment_matching_screen" position="replace">&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="petty_cash_id" invisible="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="oe_stat_button"&ndash;&gt;-->
+<!--&lt;!&ndash;                name="open_payment_matching_screen"&ndash;&gt;-->
+<!--&lt;!&ndash;                string="Payment Matching" type="object"&ndash;&gt;-->
+<!--&lt;!&ndash;                attrs="{'invisible':['|',('petty_cash_id','!=',False),('move_reconciled','=',True)]}" icon="fa-university"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </button>&ndash;&gt;-->
+<!--            <button name="action_open_manual_reconciliation_widget" position="replace">-->
+<!--                <field name="petty_cash_id" invisible="1"/>-->
+<!--                <field name="is_reconciled" invisible="1"/>-->
+<!--                <button class="oe_stat_button"-->
+<!--                name="action_open_manual_reconciliation_widget"-->
+<!--                string="Payment Matching" type="object" -->
+<!--                attrs="{'invisible':['|',('petty_cash_id','!=',False),('is_reconciled','=',True)]}" icon="fa-university"/>-->
+<!--            </button>-->
+<!--           <field name="payment_type" position="replace">-->
+<!--                <field name="payment_type" widget="radio" readonly="1"/>-->
+<!--            </field>-->
+<!--            <field name="partner_type" position="attributes">-->
+<!--            	<attribute name="readonly">1</attribute>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="eos_refuse_form" model="ir.ui.view">
+        <field name="name">eos_refuse_form</field>
+        <field name="model">hr.eos.refuse</field>
+        <field name="arch" type="xml">
+            <form string="EOS Refuse Reason">
+                <separator string="EOS Refuse Reason"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="eos_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+
+    <record id="eos_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">EOS Reason</field>
+        <field name="res_model">hr.eos.refuse</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="eos_refuse_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

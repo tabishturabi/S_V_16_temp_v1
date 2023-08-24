@@ -1,0 +1,82 @@
+<odoo>
+  <data>
+
+
+    <!-- Form View  -->
+    <record model="ir.ui.view" id="bsg_shipment_price_form">
+        <field name="name">bsg_shipment_price_form</field>
+        <field name="model">bsg_shipment_price</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+              <sheet>
+                <group name="top" >
+
+                  <group name="left" >
+		    <field name="order_date" readonly="1"/>
+                    <field name="customer_type" />
+                    <field name="shipment_type"  />
+                    <field name="ship_type"  options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                    
+                    <field name="loc_from"  options='{"no_create": True,"no_edit": True,"no_open": True}' domain="[('id','!=',loc_to),('branch_type','in',['shipping','both']),('is_close_location','!=',True),('location_type','=','albassami_loc')]"/>
+                    <field name="loc_to" options='{"no_create": True,"no_edit": True,"no_open": True}' domain="[('id','!=',loc_from),('is_close_location','!=',True),('branch_type','in',['pickup','both'])]"/>
+		    <field name="customer_price_list"  options='{"no_create": True,"no_edit": True,"no_open": True}'
+                    domain="['|',('location_domain','!=',True),'|',('loc_from_ids','=',False),('loc_from_ids','in',loc_from),'|',('loc_to_ids','=',False)
+                                    ,('loc_to_ids','in',loc_to),'|',('shipment_type','=',False),('shipment_type','in',ship_type),
+                                    '|',('date_from','=',False),('date_from','&lt;=',order_date),'|',('date_to','=',False),('date_to','&gt;=',order_date)]"/>
+                    
+                  </group>
+
+                  <group name="right">
+                    <field name="car_make"  options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                    <field name="car_model"  options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                    <field name="car_size"  options='{"no_create": True,"no_edit": True,"no_open": True}'/>
+                    <field name="amount"  />
+                    <field name="discount"  />
+                      <label for="est_no_delivery_days" string="Est Days From"/>
+                        <div class="o_address_format">
+                            <field name="est_no_delivery_days" force_save="1" readonly="1" class="oe_inline"/>
+                            <span style="margin-right: 12px;">  الي </span>
+                            <field name="est_max_no_delivery_days" force_save="1" readonly="1" class="oe_inline" style="margin-right: 12px;"/>
+                            <span style="margin-right: 12px;">أيام</span>
+                        </div>
+                    <field name="tax_id" options='{"no_create": True,"no_edit": True,"no_open": True}' domain="[('amount', '=',  15), ('type_tax_use', '=', 'sale')]"/>
+                    <field name="total_amount"  />
+                  </group> 
+
+                </group>
+              </sheet>
+              <footer>
+                <button name="close_wizard" type="object" string="Close" class="btn btn-primary"/>
+                <button name="new_wizard" type="object" string="Create New" class="btn btn-primary"/>
+            
+              </footer>              
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    
+    <!-- Action  -->
+    <record model="ir.actions.act_window" id="action_bsg_shipment_price">
+        <field name="name">Shipment Price</field>
+        <field name="res_model">bsg_shipment_price</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="bsg_shipment_price_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem name="Shipment Price" 
+      id="bsg_shipment_price_meun" 
+      parent="cargo_sale_root_meun"
+      action="action_bsg_shipment_price"
+      sequence="4"
+      groups="bsg_cargo_sale.group_shipment_price"
+      />
+
+     
+
+  </data>
+</odoo>

@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <!-- form view -->
+
+        <record model="ir.ui.view" id="bsg_vehicle_document_licence_form_view">
+            <field name="name">Vehicles Documents License_view_form</field>
+            <field name="model">document.info.fleet</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="open_attach_wizard" type="object" string="ATTACH DOCUMENT" highlight="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="is_created" invisible="1"/>
+                            <group string="Vehicles Documents License" colspan="4" col="4">
+                                <field name="document_id" required="1" force_save="1"
+                                       attrs="{'readonly': [('is_created', '=', True)]}"/>
+                                <field name="vehicle_name" readonly="1" force_save="1"/>
+                                <field name="document_type_id" string="Doc Type" required="1" force_save="1"
+                                       attrs="{'readonly': [('is_created', '=', True)]}"/>
+                                <field name="chassis_no" readonly="1" force_save="1"/>
+                                <field name="document_no" force_save="1"/>
+                                <field name="licence_plate" readonly="1" force_save="1"/>
+                                <field name="issue_date" required="1" class="with_hijri" force_save="1"/>
+                                <field name="expiry_date" class="with_hijri" force_save="1"/>
+                                <field name="attachment_ids" widget="many2many_binary" force_save="1" invisible="1"/>
+                                <field name="renewel_license_date" class="with_hijri" />
+
+
+                            </group>
+                            <group>
+                                <field name="descripiton" force_save="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"></field>
+                        <field name="message_ids" widget="mail_thread"></field>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view  -->
+        <record model="ir.ui.view" id="bsg_vehicle_document_licence_tree_view">
+            <field name="name">Vehicles Documents License_tree</field>
+            <field name="model">document.info.fleet</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicles Documents License">
+                    <field name="document_id"/>
+                    <field name="document_type_id"/>
+                    <field name="document_no"/>
+                    <field name="vehicle_name"/>
+                    <field name="licence_plate"/>
+                    <field name="chassis_no"/>
+                    <field name="issue_date"/>
+                    <field name="hijri_issue_date" force_save="1"/>
+                    <field name="expiry_date"/>
+                    <field name="hijri_date" string="Hijri Expire Date"/>
+                    <field name="renewel_license_date" />
+                </tree>
+            </field>
+        </record>
+        <record id="bsg_vehicle_document_licence_view_search" model="ir.ui.view">
+            <field name="name">Vehicles Documents License Search View</field>
+            <field name="model">document.info.fleet</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="document_id"/>
+                    <field name="vehicle_name"/>
+                    <field name="licence_plate"/>
+                    <field name="chassis_no"/>
+                    <field name="document_no"/>
+                    <field name="document_type_id"/>
+                    <field name="issue_date"/>
+                    <field name="expiry_date"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="vehicle_document_action_licence">
+            <field name="name">Vehicles Documents License</field>
+            <field name="res_model">document.info.fleet</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="bsg_fleet_operations.bsg_renewal_vehicle_document" name="Vehicles Documents License"
+                  parent="fleet.fleet_vehicles" action="vehicle_document_action_licence"
+                  sequence="105"/>
+
+         <record id="fleet_doc_emp_payslip_del_attach_id" model="ir.actions.server">
+            <field name="name">Delete Attachment</field>
+            <field name="model_id" ref="model_ir_attachment"/>
+            <field name="binding_model_id" ref="model_ir_attachment"/>
+            <field name="binding_view_types">tree,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.delete_attachement()</field>
+        </record>
+    </data>
+</odoo>

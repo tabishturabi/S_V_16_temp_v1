@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_bsg_fleet_vehicle_form_ext">
+            <field name="name">view_bsg_fleet_vehicle_form_ext</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="open_attach_wizard" type="object" string="ATTACH DOCUMENT" highlight="1" groups="bsg_vehicle_enhancement.group_fleet_attachment_add"/>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
+                    <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object"
+                            groups="bsg_vehicle_enhancement.group_fleet_attachment_view"
+                            >
+                        <field name="attachment_number" widget="statinfo" string="Documents"
+                               options="{'reload_on_button': true}"/>
+                    </button>
+
+                    <button name="action_get_trips_view"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object">
+                        <field name="trips_number" widget="statinfo" string="Vehicle Trips"/>
+                    </button>
+
+                    <button name="action_get_bx_trip"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object"
+                            groups="transport_management.group_transport_management">
+                        <field name="bx_trip_count" widget="statinfo" string="Bx Trips"/>
+                    </button>
+
+                    <button name="action_get_assigned_view"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object"
+                            groups="bsg_fleet_operations.group_driver_assign">
+                        <field name="driver_assign_count" widget="statinfo" string="Driver Assigned"/>
+                    </button>
+
+                    <button name="action_get_unassigned_view"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            type="object"
+                            groups="bsg_fleet_operations.group_driver_unassign">
+                        <field name="driver_unassigned_count" widget="statinfo" string="Driver Unassigned"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

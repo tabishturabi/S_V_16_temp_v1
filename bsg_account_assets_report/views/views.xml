@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="account_asset_report_wizard_form">
+      <field name="name">account.asset.report.wizard.form</field>
+      <field name="model">account.asset.report</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="date_from"/>
+                <field name="with_details" />
+              </group>
+              <group>
+                <field name="date_to"/>
+                <field name="assets_type" required="1"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="account_asset_report_action">
+      <field name="name">Assets Report</field>
+      <field name="res_model">account.asset.report</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="account_asset_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Assets Report"
+             id="menu_account_asset_report"
+             parent="account_reports.account_reports_partners_reports_menu"
+             sequence="11"
+             action="account_asset_report_action"/>
+  </data>
+</odoo>

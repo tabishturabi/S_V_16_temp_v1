@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <report id="sim_card_receipt_report"
+            model="sim.card.receipt"
+            string="sim card receipt report"
+            report_type="qweb-pdf"
+            name="sim_card.sim_card_receipt_pdf"
+            file="sim_card.sim_card_receipt_report_pdf"/>
+    <template id="external_layout_standard">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="sim_card/static/src/img/logo.png" style="max-height: 145px;width:1200px" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+    </template>
+    <template id="sim_card_receipt_pdf">
+        <t t-call="web.html_container">
+            <t t-call="sim_card.external_layout_standard">
+                <div class="page">
+                    <style type="text/css">
+                        <![CDATA[
+                            @font-face {
+                                font-family: 'Arial';
+                                font-weight: bold;
+                                font-style: bold;
+                                src: url('/sim_card//static/src/fonts/arial.ttf')
+                                format('truetype');
+                                    }
+                             tr,td {
+                                font-family: 'Arial';
+                                    }
+
+					            ]]>
+                    </style>
+                    <br />
+                    <table BORDERCOLOR="#{'#00000'}" border="0" t-attf-style="border-collapse:collapse;border-spacing:10px;" width="1200px">
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr style="padding:50px;">
+
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>:التاريخ</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.date"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;" width="20%">
+                                        <span>Delivery Date</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>رقم الطلب   :</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Receipt Seq No.</span>
+                                    </td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table BORDERCOLOR="#{'#00000'}" border="0" t-attf-style="border-collapse:collapse;border-spacing:10px;" width="1200px">
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr style="text-align:center;font-weight:bold;font-size:40px;text-decoration-line: underline;">
+                                    <td colspan="4" width="100%">
+                                        <span>نموذج إستلام شريحه</span>
+                                    </td>
+                                </tr>
+
+                                <br/>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>اسم الموظف</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.employee_id.name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Employee Name</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الرقم الوظيفي</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.employee_id.employee_code"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Employee Id</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الشركة</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.company_id.name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>company_id</span>
+                                    </td>
+
+                                </tr>
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الادارة</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.department_id.name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Department</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الفرع</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.branch_id.branch_ar_name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Branch</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الوظيفة</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.job_id.name"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Job Position</span>
+                                    </td>
+
+                                </tr>
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>رقم الشريحة</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.mble_no.mble_no"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Mobile Number</span>
+                                    </td>
+
+                                </tr>
+                                <tr t-attf-style="page-break-inside: avoid !important;border:0px solid black; font-weight:bold;background-color:white; color:black;};">
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>الوصف</span>
+                                    </td>
+                                    <td align="center" colspan="2" t-attf-style="font-weight:bold;font-size:26px;color:black;border:1px solid grey;"
+                                        width="20%">
+                                        <span t-esc="doc.description"></span>
+                                    </td>
+                                    <td align="center" t-attf-style="font-weight:bold;font-size:26px;color:black;background-color:#eff6ef;border:1px solid grey;"
+                                        width="20%">
+                                        <span>Description</span>
+                                    </td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div style="text-align:right;margin-top:30px;font-family:Calibri;font-size:40px;font-weight:bold;">تم اخلاء عدة الموظف اعلاءه من الشريحة المذكورة انفا.</div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

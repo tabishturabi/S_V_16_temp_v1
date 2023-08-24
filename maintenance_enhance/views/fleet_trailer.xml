@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_trailer_maintenance_work_order_count_config">
+            <field name="name">view.work.order.count.trailer</field>
+            <field name="model">bsg_fleet_trailer_config</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="bsg_fleet_operations.view_bsg_fleet_trailer_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_get_work_order_count"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object">
+                        <field name="work_order_count" widget="statinfo" string="Work Order"
+                               options="{'reload_on_button': true}"/>
+                    </button>
+
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+		<record id="view_other_charges_form" model="ir.ui.view">
+            <field name="name">Other Charges</field>
+            <field name="model">charges.des</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Other Charges">
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                            
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tree_other_charges" model="ir.ui.view">
+            <field name="name">Other Charges</field>
+            <field name="type">tree</field>
+            <field name="model">charges.des</field>
+            <field name="arch" type="xml">
+                <tree string="Other Charges">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_other_charges" model="ir.actions.act_window">
+            <field name="name">Other Charges</field>
+            <field name="res_model">charges.des</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_other_charges" />
+        </record>
+        <menuitem action="action_other_charges" id="custom_clearance_submenu_other_charges" name="Other Charges" parent="custom_clearance.custom_clearance_submenu" sequence="1" />
+	
+	</data>
+</odoo>

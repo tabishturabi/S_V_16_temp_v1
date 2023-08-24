@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="trips_report_wizard_form">
+      <field name="name">trips.report.wizard.form</field>
+      <field name="model">trips.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="form"/>
+                <field name="vehicle_type" widget="many2many_tags" />
+                <field name="branch_from" domain="[('id','not in',branch_to)]" widget="many2many_tags" />
+                <field name="trip_status" />
+                <field name="truck_load"/>
+                <field name="user_id"/>
+              </group>
+              <group>
+                <field name="to"/>
+                <field name="trip_type"/>
+                <field name="branch_to" domain="[('id','not in',branch_from)]" widget="many2many_tags"/>
+                <field name="vehicle_group_id"/>
+                <field name="user_register_arrival"/>
+                <field name="car_load"/>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="trips_report_action">
+      <field name="name">Trips Report</field>
+      <field name="res_model">trips.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="trips_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Trips Reports"
+             id="menu_trips_reports"
+             parent="bsg_trip_mgmt.root_trip_reports"
+             sequence="11"
+             action="trips_report_action"/>
+  </data>
+</odoo>

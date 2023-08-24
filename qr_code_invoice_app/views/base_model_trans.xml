@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="view_res_partner_form_inherit_partner_autocomplete_qr" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.partner.autocomplete.qr</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_autocomplete.view_res_partner_form_inherit_partner_autocomplete"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]/h1/field[@name='name']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+        </field>
+    </record>
+<!--    Migration Note-->
+
+<!--    <record id="view_res_partner_short_form_inherit_partner_autocomplete_qr" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.short.form.inherit.partner.autocomplete.qr</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="partner_autocomplete.view_res_partner_short_form_inherit_partner_autocomplete"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[hasclass('oe_title')]/h1/field[@name='name']" position="attributes">-->
+<!--                <attribute name="widget"></attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='vat']" position="attributes">-->
+<!--                <attribute name="widget"></attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_partner_simple_form_inherit_partner_autocomplete_qr" model="ir.ui.view">
+        <field name="name">res.partner.simplified.form.inherit.partner.autocomplete.qr</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_autocomplete.view_partner_simple_form_inherit_partner_autocomplete"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]/h1/field[@name='name']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>    

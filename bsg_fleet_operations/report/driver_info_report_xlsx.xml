@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_driver_info_id"
+                string="Driver Info Report"
+                model="driver.info.report.wizard"
+                report_type="xlsx"
+                file="bsg_fleet_operations.driver_info_xlsx"
+                name="bsg_fleet_operations.driver_info_xlsx"
+        />
+    </data>
+</odoo>

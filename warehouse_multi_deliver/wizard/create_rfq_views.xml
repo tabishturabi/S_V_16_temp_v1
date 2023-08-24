@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="create_rfq_wizard_form" model="ir.ui.view">
+            <field name="name">crate.rfq.wizard.form</field>
+            <field name="model">create.rfq.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group class="oe_title">
+                        <field name="purchase_request_id" required="1" invisible="1"/>
+                        <field name="purchase_request_ids" invisible="1"/>
+                        <field name="is_multiple_vendor"  groups="purchase_enhanced.purchase_vendor_specify"/>
+                        <field name="vendor_ids" attrs="{'invisible': [('is_multiple_vendor', '=', False)],'required':[('is_multiple_vendor', '=', True)]}" context="{'default_customer': False,'default_supplier_rank' : 0,'company_type' : True}" domain="[('supplier_rank','>',0)]" widget="many2many_tags" groups="purchase_enhanced.purchase_vendor_specify"/>
+                        <field name="vendor_id"  widget="res_partner_many2one"  domain="[('supplier_rank','>',0)]" attrs="{'invisible': [('is_multiple_vendor', '=', True)],'required':[('is_multiple_vendor', '=', False)]}" context="{'default_customer': False,'default_supplier_rank' : 0,'company_type' : True}" groups="purchase_enhanced.purchase_vendor_specify"/>
+                    </group>
+<!--                    <group colspan="4" >-->
+                        <separator string="Lines"/>
+<!--                        <newline/>-->
+                        <field name="purchase_request_line_ids" context="{'tree_view_ref': 'purchase_enhanced.view_purchase_req_rec_tree_line','form_view_ref': 'purchase_enhanced.view_purchase_req_rec_form_line'}" nolabel="1" domain="[('preq_rec','=',purchase_request_id),('added_to_rfq','=',False),('state','!=','cancel')]">
+                                <tree string="Purchase Transfer" editable="bottom">
+                                    <field name="purchase_req_id" readonly="1" string="P.R" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="product_id" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="analytic_account_id" readonly="1" force_save="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="deliver_to" readonly="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="qty" readonly="1"/>
+                                    <field name="onhand" readonly="1"/>
+                                    <field name="qty_po" />
+                                    <field name="qty_rfq" readonly="1"/>
+                                    <field name="qtmr"  />
+                                </tree>    
+                        </field>
+<!--                    </group>-->
+                    <footer>
+                        <button name="purchase_order" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_rfq_wizard_action" model="ir.actions.act_window">
+            <field name="name">Create Rfq</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.rfq.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_rfq_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

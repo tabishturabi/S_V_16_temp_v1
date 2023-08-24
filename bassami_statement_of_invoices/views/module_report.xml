@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>   
+
+        <template id="partner_ledger_report">
+
+            <t t-call="web.html_container">
+
+
+                <t t-foreach="main_data" t-as="rec">
+                    <t t-call="web.internal_layout">
+            
+                        <div class="page">
+
+                            <style>
+                                .head {
+                                    text-align: center;
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    }
+                                
+
+                                table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid;
+                                }
+                                table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 5px 0px 0px 5px;
+                                    border-right: 2px solid;
+                                    border-bottom: 1px solid;
+                                }
+                                table tr td:last-child, 
+                                table tr th:last-child {
+                                    border-right: none
+                                }
+                                table tr:last-child td {
+                                    border-bottom: none
+                                }
+                                table tr th {
+                                    text-align: center;
+                                }
+
+                                .report-header {
+                                    width: 100%;
+                                    margin: 0px 0px -20px;
+                                    text-align: center;
+                                }
+                                .report-header p {
+                                    width: 50%;
+                                    float: left;
+                                    margin: 0px 0px 20px;
+                                }
+                                .report-header p .solid {
+                                    font-weight: bold;
+                                }
+
+                                .stat {
+                                    text-align: right;
+                                    margin-bottom: 40px;
+                                    margin-top: -70px;
+                                }
+
+                                .main-table {
+                                    width: 100%;
+                                    float : left;
+                                }
+
+                                .big {
+                                    width: 100%;
+                                    float : left;
+                                    font-size: 12px;
+                                    margin-bottom: 5px;
+                                }
+
+
+                                .box {
+                                    width: 50%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+                                    
+                                }
+
+                                .box1 {
+                                    width: 50%;
+                                    border: 1px solid #000;
+                                    float: left;
+                                    margin-top: 15px;
+
+                                }
+
+                                .supp {
+
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidsupp1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .liquidsupp {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .solidsupp2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                
+                                }
+
+                                .add {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidadd1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidadd2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidadd {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .tele {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidtele1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidtele2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidtele {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .ntn {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 5px;
+                                }
+
+                                .solidntn1 {
+                                    width: 28%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .solidntn2 {
+                                    width: 28%;
+                                    float: right;
+                                    font-weight: bold;
+                                }
+
+                                .liquidntn {
+                                    width: 40%;
+                                    float: left;
+                                
+                                }
+
+                                .term {
+                                    width: 100;
+                                    float: left;
+                                    margin-top: 30px;
+                                }
+
+                                .term .solid {
+                                    width: 15%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .term .liquid {
+                                    width: 85%;
+                                    float: left;
+                                }
+
+
+                                .header {
+                                    display : none !importnat;
+                                }
+                                .footer {
+                                    display : none !importnat;
+                                }
+
+
+                            </style>
+
+                            <div class="report-header">
+
+                                <h3>
+                                   
+                                    <img src="/bassami_statement_of_invoices/static/src/img/collection.png" width="1000px" style="margin-top: 5px"/>
+
+                                </h3>
+
+                                <br class="clearfloat" />
+
+                            </div>
+
+
+                            <div class="big">
+                                
+                                <table style="width:100%">
+
+                                <tr>
+                                    <th colspan="2" style="background: #CCC;">
+                                        <span style="text-align: center;font-size:25px">Statement of Invoices  بيان الفواتير </span>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th style="background: #CCC;">Date From</th>
+                                    <th style="background: #CCC;">Date To</th>
+                                </tr>
+                                                        
+                                <tr>
+                                 
+                                    <td><b>
+                                        <span t-esc="date_from" t-options="{'widget': 'date'}"></span>
+                                    </b></td>
+                                    
+                                    <td><b>
+                                        <span t-esc="date_to" t-options="{'widget': 'date'}"></span>
+                                    </b></td>
+                                        
+                                </tr>
+
+                                </table>
+
+                                <div class="box" style="height: 190px;padding:8px;">
+
+                                    <div class="supp">
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪Customer Information</div>
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫بيانات‬ العميل‬</div>
+                                    </div>
+
+                                    <div class="supp">
+                                        <div class="solidsupp1">Customer Name</div>
+                                        <div class="liquidsupp">
+                                            <span t-esc="rec['parent_id']"></span>
+                                            <span>,</span>
+                                            <span t-esc="rec['name']"></span>
+                                        </div>
+                                        <div class="solidsupp2">‫‪اسم‬ العميل‬</div>
+                                    </div>
+
+                                    <div class="ntn">
+                                        <div class="solidntn1">Tax Account No</div>
+                                        <div class="liquidntn">
+                                            <span t-esc="rec['vat']"></span>
+                                        </div>
+                                        <div class="solidntn2">‫‪الرقم‬ الضريبي‬</div>
+                                    </div>
+
+                                    <div class="add">
+                                        <div class="solidadd1">Address</div>
+                                        <div class="liquidadd">
+                                            <span t-esc="rec['street']"></span>
+                                        </div>
+                                        <div class="solidadd2">‫‪العنوان‬</div>
+                                    </div>
+
+                                    <div class="tele">
+                                        <div class="solidtele1">Telephone No</div>
+                                        <div class="liquidtele">
+                                            <span t-esc="rec['phone']"></span>
+                                        </div>
+                                        <div class="solidtele2">‫‪رقم‬ الھاتف‬</div>
+                                    </div>                                       
+
+                                </div>
+
+                                <div class="box1" style="height: 190px;padding:8px;">
+                                    <div class="supp">
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">Company Information</div>
+                                        <div style="width: 49%;float: left;font-weight: bold;text-align: center;">‫‪بيانات‬ الشركه‬</div>
+                                    </div>
+
+
+                                    <div class="supp">
+                                        <div class="solidsupp1">Company Name</div>
+                                        <div class="liquidsupp">
+                                            <span>
+                                                ‫مجموعة أعمال البسامي الدولية
+                                            </span>
+                                        </div>
+                                        <div class="solidsupp2">‫‪اسم‬ الشركه‬</div>
+                                    </div>
+
+                                    <div class="ntn">
+                                        <div class="solidntn1">Tax Account No</div>
+                                        <div class="liquidntn">
+                                            <span>‫‪300043273800003‬‬</span>
+                                        </div>
+                                        <div class="solidntn2">‫‪الرقم‬ الضريبي‬</div>
+                                    </div>
+
+                                    <div class="add">
+                                        <div class="solidadd1">Address</div>
+                                        <div class="liquidntn">
+                                            <span>‫Between Exit 10 and Exit 11, Al Bassami Building,Al Quds,Riyadh</span>
+                                        </div>
+                                        <div class="solidadd2">‫‪العنوان‬</div>
+                                    </div>
+
+                                    <div class="tele">
+                                        <div class="solidtele1">Telephone No</div>
+                                        <div class="liquidtele">
+                                            <span>‫‪920005353‬‬</span>
+                                        </div>
+                                        <div class="solidtele2">‫‪رقم‬ الھاتف‬</div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+
+                            <br class="clearfloat" />
+
+                            <div class="main-table">
+
+
+                                <table style="width:100%">
+
+                                    <tr>
+                                        <th>Invoice no.</th>
+                                        <th>Invoice Date</th>
+                                        <th>Reference</th>
+                                        <th>Total Amount</th>
+                                        <th>VAT 5% Amount</th>
+                                        <th>Amount with VAT</th>
+                                        <th>Due amount</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Opening Balance: </span><span class="liquid" t-esc="'{:0,}'.format(float(rec['real_open_bal']))"></span></b></td>
+                                    </tr>
+                                    <t t-set = "qty" t-value = "0" />
+                                    <t t-set = "price_unit" t-value = "0" />
+                                    <t t-set = "total_amount" t-value = "0" />
+                                    <t t-set = "discount" t-value = "0" />
+                                    <t t-set = "amount_with_vat" t-value = "0" />
+                                    <t t-set = "amount_vat" t-value = "0" />
+                                    <t t-set="total_overdue" t-value="0"/>
+                                    <t t-foreach="rec['enteries']" t-as="o">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="o.number"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.invoice_date"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.origin"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,.2f}'.format(float(o.amount_untaxed))"/>
+                                                <t t-set="total_amount" t-value = "total_amount + o.amount_untaxed" />
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.amount_tax"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,.2f}'.format(float(o.amount_total))"/>
+                                                <t t-set = "amount_with_vat" t-value = "amount_with_vat + o.amount_total" />
+                                                <t t-set = "amount_vat" t-value = "amount_vat + o.amount_tax" />
+
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,.2f}'.format(o.residual)"/>
+                                                <t t-set="total_overdue" t-value="total_overdue + o.residual"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr style="font-weight:bold;height:30px">
+                                        <td colspan="3">Total</td>
+                                        <td>
+                                            <span t-esc="'{:0,.2f}'.format(float(total_amount))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,.2f}'.format(float(amount_vat))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,.2f}'.format(float(amount_with_vat))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,.2f}'.format(float(total_overdue))"/>
+                                        </td>
+                                        
+                                    </tr>
+
+                                    <tr style="font-weight:bold;height:30px">
+                                        <td colspan="7">
+                                            <span class="solid">Payments made during this period: </span>
+                                            <span class="solid" t-esc="'{:0,.2f}'.format(amount_with_vat - total_overdue)"/>
+                                        </td>
+                                    </tr>                                
+                                    <tr style="font-weight:bold;height:30px">
+                                        <td colspan="7">
+                                            <span class="solid" t-esc="number_to_spell(rec['closing_bal'])"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Outstanding Balance : </span><span class="liquid" t-esc="'{:0,.2f}'.format(float(rec['closing_bal']))"></span></b>
+                                    </td>
+                                    </tr>
+                                    <tr style="font-weight:bold;height:100px">
+
+                                        <td colspan="2">Prepared By: </td>
+                                        <td colspan="1">
+                                            <span class="solid" t-esc="getname()" />
+                                        </td>
+                                        <td colspan="1">
+                                            <span/>
+                                        </td>
+                                        <td colspan="2">Approved By: </td>
+                                        <td colspan="1"></td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+                    </t>
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+     <record id="inherits_hr_leave_allocation_view_form" model="ir.ui.view">
+            <field name="name">inheits.hr.leave.allocation.form</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form_manager"/>
+            <field name="arch" type="xml">
+                <data>
+<!--                     <xpath expr="//field[@name='accrual']" position="replace">-->
+<!--                        <field name="accrual" invisible="1"/>-->
+<!--                        <label for="date_to" string="" invisible="1"/>-->
+<!--                        <div invisible="1">-->
+<!--                            <div class="o_row">-->
+<!--                                Run until <field name="date_to" string="Run Until" help="If no value set, runs indefinitely"/>-->
+<!--                            </div>-->
+<!--                            <div class="o_row">-->
+<!--                                <span>Add</span>-->
+<!--                                <field name="number_per_interval" class="ml8" required="0"/>-->
+<!--                                <field name="unit_per_interval" required="0"/>-->
+<!--                                <span class="ml8">of leaves every</span>-->
+<!--                                <field name="interval_number" class="ml8" required="0"/>-->
+<!--                                <field name="interval_unit" required="0"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </xpath>-->
+                    <xpath expr="//field[@name='employee_id']" position="after">
+                        <field name="is_annual_allocation" groups="base.group_system" force_save="1"/>
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="0">
+        <record model="res.groups" id="group_moi_user">
+            <field name="name">Is MOI user</field>
+            <field name="category_id" ref="bsg_cargo_sale.module_nagliyat_sales_maangement"/>
+        </record>
+        <record model="res.groups" id="group_custom_clearance_user">
+            <field name="name">Is Custom Clearance User</field>
+            <field name="category_id" ref="bsg_cargo_sale.module_nagliyat_sales_maangement"/>
+        </record>
+    </data>    
+</odoo>

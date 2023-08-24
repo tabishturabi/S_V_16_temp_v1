@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="paperformat_emp_attendance" model="report.paperformat">
+        <field name="name">Employee Attendance Reports</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">60</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">60</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="attendance_daily_report_id"
+            model="attendance.report.wizard"
+            string="Attendance Daily Report"
+            report_type="qweb-pdf"
+            name="hr_attendance_reports.attendance_daily_report"
+            file="hr_attendance_reports.attendance_daily_report"/>
+
+    <report id="attendance_summary_report_id"
+            model="attendance.report.wizard"
+            string="Attendance Summary Report"
+            report_type="qweb-pdf"
+            name="hr_attendance_reports.attendance_summary_report"
+            file="hr_attendance_reports.attendance_summary_report"/>
+
+    <report id="attendance_summary_excel_report_id"
+            model="attendance.report.wizard"
+            string="Attendance Summary Report"
+            report_type="xlsx"
+            name="hr_attendance_reports.attendance_summary_excel_report"
+            file="hr_attendance_reports.attendance_summary_excel_report"/>
+
+
+    <record id="attendance_daily_report_id" model="ir.actions.report">
+        <field name="paperformat_id" ref="paperformat_emp_attendance"/>
+    </record>
+    <record id="attendance_summary_report_id" model="ir.actions.report">
+        <field name="paperformat_id" ref="paperformat_emp_attendance"/>
+    </record>
+
+    <!-- permission reports -->
+    <record id="paperformat_emp_permission" model="report.paperformat">
+        <field name="name">Employee Attendance Permission Reports</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">60</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">60</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="attendance_permission_report_id"
+            model="attendance.report.wizard"
+            string="Employee Permission"
+            report_type="qweb-pdf"
+            name="hr_attendance_reports.employee_permission_report"
+            file="hr_attendance_reports.employee_permission_report"/>
+
+
+    <record id="attendance_permission_report_id" model="ir.actions.report">
+        <field name="paperformat_id" ref="paperformat_emp_permission"/>
+    </record>
+
+</odoo>

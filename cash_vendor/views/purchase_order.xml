@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <data>
+        <record id="view_purchase_order_formform" model="ir.ui.view">
+            <field name="name">purchase.order.form.form1</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="partner_idid" invisible="1"/>
+                    <field name="vendor_type" invisible="1"/>
+                    <field name="emp" string="Purchase Representative" 
+                    attrs="{'invisible': [('vendor_type', '!=','char')]}" options="{'no_create': True}" domain="[('pur_rep', '=', True)]" />
+                    <field name="emp" attrs="{'invisible': [('partner_id', '!=',partner_idid.emp)]}"/>
+                </xpath>
+            
+            </field>
+        </record>
+    </data> -->
+</odoo>

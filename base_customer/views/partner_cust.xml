@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_view_partner_base_formform" model="ir.ui.view">
+            <field name="name">res.partner.form1.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="attributes">
+                    <attribute name="groups">base.group_erp_manager,base_customer.group_create_client</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group[1]" position="before">
+                    <group>
+                    </group>
+                    <group>
+                        <group invisible="1">
+                            <field name="is_parents" />
+                            <field name="is_dealer"/>
+                            <field name="has_parents" />
+                            <field name="partner_parent" attrs="{'invisible': [('has_parents', '=', False)]}" domain="[('is_parents', '=', True)]"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="partner_types" required="1" options="{'no_create': True, 'no_open': True}" />
+
+                </xpath>
+            </field>
+        </record>
+<!--        <record id="view_partner_archive_base_form" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.archive.form</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//button[@name='toggle_active']" position="attributes">-->
+<!--                    <attribute name="groups">base.group_erp_manager,base_customer.group_partner_archive</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

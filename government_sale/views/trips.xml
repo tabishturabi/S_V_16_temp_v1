@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+            <record id="view_fleet_vehicle_trip_gov" model="ir.ui.view">
+          <field name="name">view.fleet.vehicle.trip.gov</field>
+          <field name="model">fleet.vehicle.trip</field>
+          <field name="inherit_id" ref="bsg_trip_mgmt.view_fleet_vehicle_trip_form"/>
+          <field name="arch" type="xml">
+            <field name="trailer_id" position="after">
+                <field name="sale_gov_id" readonly="1"/>
+            </field>
+          </field>
+    </record>
+
+    </data>
+</odoo>

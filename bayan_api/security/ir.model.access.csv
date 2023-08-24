@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bayan_data,access_bayan_data,model_bayan_data,,1,1,1,1
+access_bayan_data_line,access_bayan_data_line,model_bayan_data_line,,1,1,1,1
+access_way_bill_line,access_way_bill_line,model_way_bill_line,,1,1,1,1
+access_bayan_plate_type_config,access_bayan_plate_type_config,model_bayan_plate_type_config,,1,1,1,1
+access_bayan_config_settings,bayan_config_settings,model_bayan_config_settings,,1,1,1,1
+access_cancel_status_reasons,access_cancel_status_reasons,model_cancel_status_reasons,,1,1,1,1
+access_good_type_config_user,access_bayan_good_type_config,model_bayan_good_type_config,,1,1,1,0
+access_bayan_calculate_value_wizard,access_calculate_value_wizard,model_calculate_value_wizard,,1,1,1,0

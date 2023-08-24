@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+	<t t-extend="ListView.buttons">
+	 	<t t-jquery=".o_list_buttons" t-operation="append">
+	 		 <span class="btn btn-danger o_sale_warnning_message" style="margin-left:10px;font-size:15px;font-weight: bold;background-color:red;cursor: default;">All Records In Draft State Will Be Canceld In 24 Hours</span>
+		</t>
+	</t>
+</templates>

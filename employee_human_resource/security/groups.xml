@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+<!--        <record model="res.groups" id="group_government_relation">-->
+<!--            <field name="name">Government Relation</field>-->
+<!--            <field name="category_id" ref="bsg_hr.module_hr_custom_management"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

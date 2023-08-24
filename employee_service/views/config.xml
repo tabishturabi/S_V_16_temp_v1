@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="employee_service_type_form_view" model="ir.ui.view">
+            <field name="name">employee_service_type_form_view</field>
+            <field name="model">service.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="employee service">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" groups="employee_service.employee_active_service_group">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <group string="Employee Service Type">
+                            <group>
+                                <field name="service_name"/>
+                                <field name="is_ceo"/>
+                                <field name="is_deputy"/>
+                            </group>
+                            <group>
+                                <field name="mail_template"/>
+<!--                                <field name="template_id"/>-->
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_service_tree_view" model="ir.ui.view">
+            <field name="name">employee_service_tree_view</field>
+            <field name="model">service.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="service_name"/>
+                    <field name="is_ceo"/>
+                    <field name="is_deputy"/>
+                    <field name="mail_template"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

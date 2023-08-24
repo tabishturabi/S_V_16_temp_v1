@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="effective_refuse_wizard_view_form" model="ir.ui.view">
+        <field name="name">eff_refuse_wizard_view_form</field>
+        <field name="model">effdate.refuse.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Effective refuse reason">
+                <separator string="Reason To Refuse"/>
+                <field name="effective_ids" invisible="1"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Refuse' name="effective_refuse_reason" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="effective_refuse_wizard_action" model="ir.actions.act_window">
+        <field name="name">Refuse Reason</field>
+        <field name="res_model">effdate.refuse.wizard</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="effective_refuse_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="effective_cancel_wizard_view_form" model="ir.ui.view">
+        <field name="name">effective.cancel.wizard.view.form</field>
+        <field name="model">effdate.cancel.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Effective Cancel Reason">
+                <separator string="Reason To Cancel"/>
+                <field name="effective_ids" invisible="1"/>
+                <field name="reason"/>
+                <footer>
+                    <button string='Cancel' name="effective_cancel_reason" type="object" class="oe_highlight"/>
+                    <button string="Discard" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="effective_cancel_wizard_action" model="ir.actions.act_window">
+        <field name="name">Cancel Reason</field>
+        <field name="res_model">effdate.cancel.wizard</field>
+        <!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="effective_cancel_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+
+</odoo>

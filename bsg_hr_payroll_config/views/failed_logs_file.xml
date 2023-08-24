@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="failed_logs_xlsx_id"
+                model="import.inputs"
+                string="Failed Logs"
+                report_type="xlsx"
+                name="bsg_hr_payroll_config.failed_logs_xlsx"
+                file="bsg_hr_payroll_config.failed_logs_xlsx"/>
+</odoo>

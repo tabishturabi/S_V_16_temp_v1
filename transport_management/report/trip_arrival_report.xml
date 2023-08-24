@@ -1,0 +1,564 @@
+<odoo>
+  <data>
+    <!-- Action Trip Arrival Report -->
+      <record id="paperformat_transport_management_template" model="report.paperformat">
+          <field name="name">European A4 low margin</field>
+          <field name="default" eval="True" />
+          <field name="format">A4</field>
+          <field name="orientation">Portrait</field>
+          <field name="margin_top">0</field>
+          <field name="margin_bottom">0</field>
+          <field name="margin_left">5</field>
+          <field name="margin_right">5</field>
+          <field name="header_line" eval="False" />
+          <field name="header_spacing">10</field>
+          <field name="dpi">90</field>
+      </record>
+
+      <report 
+          id="report_arrival_template_report"
+          string="Trip Arrival Report"
+          model="transport.management" 
+          report_type="qweb-html"
+          file="transport_management.report_transport_template_call" 
+          name="transport_management.report_transport_template_call"
+          paperformat="paperformat_transport_management_template"/>
+<!--           groups="transport_management.group_trip_statement" -->
+
+      <!-- Main template -->
+      <!-- <template id="report_arrival_template">
+            <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                <t t-call="transport_management.report_arrival_template_call" t-lang="lang"/>
+                </t>
+              </t>
+            </template> -->
+
+      <!-- Translatable template  and internal layout-->
+
+      <!-- <template id="report_arrival_template_call">
+              <t t-call="web.internal_layout">
+                <t t-set="o" t-value="o.with_context({'lang': lang})"/> -->
+
+      <template id="report_transport_template_call">
+        <t t-call="web.html_container">
+          <t t-call="web.internal_layout">
+            <t t-foreach="docs" t-as="o">
+              <div class="page">
+                <style>
+
+                    .header {
+                        display: none;
+                    }
+                     body {
+                      display: block;
+                      font-size: 14px;
+                      margin: 0 auto;
+                      margin-bottom: 0.5cm;
+                    }
+                    .footer {
+                        display: none !important;
+                    }
+
+                    .header {
+                        display: none !important;
+                    }
+
+                    table {
+                        border: 1px solid #000;
+                        margin: 10px 0px 0px;
+                        width: 100%;
+                        float: left;
+                        border-spacing: 0px;
+                        bgcolor="#90EE90";
+                    }
+
+                    table tr th,
+                    table tr td {
+                        border-right: 1px solid #000;
+                        text-align: center;
+                    }
+
+                    table tr th {
+                        padding: 10px 0px;
+                        background: #ccc;
+                                                        
+                    }
+
+                    table tr td {
+                        border-top: 1px solid #000;
+                        padding: 5px 0px;
+                    }
+
+                    .centered {
+                        width: 1000px;
+                        margin: auto;
+                    }
+                    page[size="A4"] {
+                      width: 19cm;
+                      height: 27.7cm;
+                      text-align: center;
+                    }
+                    .address {
+                        width: 45%;
+                        float: right;
+                        margin: 15px 0px 15px 0px;
+                    }
+                    .address p {
+                        text-align: right;
+                    }
+                    .span_left {
+                        float: left;
+                        font-weight:bold;
+                    }
+                    .span_right {
+                      float: right;
+                      font-weight:bold;
+                    }
+                    span_center {
+                      align: center;
+                      font-size:medium;
+                      
+                    }
+                    .p_text_bold {
+                      font-weight:bold;
+                    }
+                </style> 
+
+
+                <page size="A4">
+                  <div style="align-content: center">
+                    <table  align="center" width="80%" height="100" style="border:hidden;margin-bottom:30px">
+                      <tr style="border:hidden">
+
+                        <td width="25%" style="border:hidden"><img src="/transport_management/static/img/albassami_transport_logoWP.png" width="134" height="50" style="margin-left: 56px"/></td>
+
+                        <td width="30%" style="border:hidden"> <h1 style="margin-top: 40px;margin-left: 100px;border:hidden"><font color="green"> بيان رحلة </font></h1> </td>
+
+                      <td width="25%" style="border:hidden"><img src="/transport_management/static/img/rightHeader.png" width="190" height="90" style="margin-left: 72px;"/></td>
+
+                      </tr>
+                    </table>
+
+
+                  </div>
+
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+
+                  <hr class="width100%Solid" />
+                  <!-- <hr></hr> -->
+
+                  <div class="main-data">
+                    <div class="centered">
+                      <div>
+
+                        <table class="table-1" width="100%" style="border:hidden">
+
+                          <tr style="border:hidden">
+
+                              <td style="border:hidden">
+                                  <span class="span_left"> Driver Name :</span>
+                              </td>
+
+                              <td style="border:hidden">
+                                <span t-esc="o.driver.name" />
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left"> : اسم السائق  </span>
+                              </td>
+                              
+                              <td style="border:hidden">
+                                  <span class="span_right"> Trip No : </span>
+                              </td>
+
+                              <td style="border:hidden">
+                                <span t-esc="o.transportation_no" />
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left"> : رقم الرحلة </span>
+                              </td>
+        
+                              <td style="border:hidden">
+                                  <span class="span_right"> Truck No : </span>
+                              </td>
+
+                              <td style="border:hidden">
+                                <span t-esc="o.transportation_vehicle.name" />
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_right"> : رقم الشاحنة </span>
+                              </td>
+                          </tr>
+
+                          <tr>
+                            <td style="border:hidden"> <span class="span_left"> Trip Itinerary :</span></td>
+                            <td colspan="7" style="border:hidden">
+                              <span t-esc="o.route_id.route_name" />
+                            </td>
+                            <td style="border:hidden"> <span class="span_right"> : خط السير </span></td>
+
+                          </tr>
+
+                        <table width="100%" style="margin-top: 15px;border:hidden">
+                          
+                          <tr style="border:hidden">
+
+                              <td style="border:hidden">
+                                  <span class="span_left"> Odometer : </span>
+                              </td>
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="o.vehicle_id.odometer+o.trip_distance" /> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left"> : عداد الوصول </span>
+                              </td>
+                              
+                              <td style="border:hidden">
+                                  <span class="span_left"> Arrival Time : </span>
+                              </td>
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="o.expected_end_date" /> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left"> : موعد الوصول </span>
+                              </td>
+
+                              <td style="border:hidden">
+                                  <span class="span_left"> Odometer : </span>
+                              </td>
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="o.vehicle_id.odometer" /> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_right"> : عداد الانطلاق </span>
+                              </td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden" colspan="2">
+                              <span class="span_left"> Reading Approach : </span>
+                            </td>
+
+                            <td style="border:hidden"></td>
+
+                            <td style="border:hidden">
+                                  <span class="span_left"> Start Date : </span>
+                              </td>
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="o.expected_start_date" /> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left"> : تاريخ الانطلاق </span>
+                              </td>
+
+                            <td style="border:hidden">
+                              <span class="span_left"> Reading</span>
+                            </td>
+
+                            <td style="border:hidden"></td>
+                            <td style="border:hidden"></td>
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden">
+                              <span class="span_left"> Total Distance :</span>
+                            </td>
+
+                            <td style="border:hidden">
+<!--                               <span t-esc="o.trip_distance+o.extra_distance" /> -->
+                            </td>
+
+                            <td style="border:hidden" class="span_right">: إجمالي المسافة</td>
+
+                            <td style="border:hidden">
+                                  <span class="span_left">Extra Distance :</span>
+                              </td>
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="o.extra_distance" /> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span class="span_left">: المسافة الإضافية</span>
+                              </td>
+
+                            <td style="border:hidden">
+                              <span class="span_left">Trip Distance :</span>
+                            </td>
+
+                            <td style="border:hidden">
+<!--                               <span t-esc="o.trip_distance" /> -->
+                            </td>
+                            <td style="border:hidden" class="span_right">: مسافة الرحلة</td>
+
+                          </tr>
+
+                          <tr style="border:hidden">
+                            <td style="border:hidden">
+                              <span class="span_left">Reason :</span>
+                            </td>
+
+                            <td style="border:hidden" colspan="7">
+                              <span t-esc="o.reason" />
+                            </td>
+
+                            <td style="border:hidden" class="span_right">: السبب</td>
+                            
+                          </tr>
+
+                        </table>
+                        <table>
+                              <tr>
+                                <p align="right"><b> Departure Details : بيانات الترحيل </b></p>
+                              </tr>
+                            </table>
+                          <table class="table-2" width="100%" border="1" bgcolor="#90EE90">
+
+                            <tr>
+                              <td align="center"> <p><b>المسافة/قيمة الاتفاقية</b> <br><b>Distance/So Line Amount</b></br></p></td>
+
+                              <td align="center"> <p><b>رقم الاتفاقية</b> <br><b>So No.</b></br></p></td>
+
+                              <td align="center"> <p><b>رقم اللوحة</b> <br><b>Plate No.</b></br></p></td>
+
+                              <td align="center" > <p><b>موعد الوصول المتوقع</b> <br><b> Approach Arr.Time</b></br></p></td>
+
+                              <td align="center"> <p><b>عدد السيارات</b> <br><b> No. Of Cars</b></br></p></td>
+
+                              <td align="center"> <p><b>رقم بيان الترحيل</b> <br><b>Dispatching No</b></br></p></td>
+
+                              <td align="center"> <p><b>الي الموقع</b> <br><b> To Branch</b></br></p></td>
+
+                              <td align="center"> <p><b>من الموقع</b> <br><b> From Branch</b></br></p></td>
+
+                              <td align="center"> <p><b>مسلسل</b> <br><b> S. No.</b></br></p></td>
+                            </tr>
+
+                            <t t-set="sr_no" t-value="0" />
+<!--                             <t t-foreach="o.stock_picking_id" t-as="line"> -->
+
+<!--                               <tr> -->
+<!--                                 <td> -->
+<!--                                   <t t-if="o.driver.driver_rewards == 'by_revenue'"> -->
+<!--                                     <span t-esc=""></span> -->
+<!--                                     <span t-esc="'{0:,.2f}'.format(float(line.picking_name.sudo().bsg_cargo_sale_id.total_amount-line.picking_name.sudo().bsg_cargo_sale_id.tax_amount_total))"></span> -->
+<!--                                   </t> -->
+<!--                                   <t t-else=""> -->
+<!--                                     <span></span> -->
+<!--                                   </t> -->
+<!--                                 </td> -->
+
+<!--                                 <td> -->
+<!--                                   <span t-esc="line.sudo().picking_name.sale_line_rec_name"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td> -->
+<!--                                   <span t-esc="line.plate_no"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <span t-esc="line.picking_name.sudo().bsg_cargo_sale_id.deliver_date"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <span t-esc="get_cars(line.group_name)"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <span t-esc="line.group_name"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <span t-esc="line.loc_to.loc_branch_id.branch_ar_name"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <span t-esc="line.loc_from.loc_branch_id.branch_ar_name"></span> -->
+<!--                                 </td> -->
+
+<!--                                 <td align="center"> -->
+<!--                                   <t t-set="sr_no" t-value="sr_no + 1" /> -->
+<!--                                   <span t-esc="sr_no"></span> -->
+<!--                                 </td> -->
+
+<!--                               </tr> -->
+<!--                             </t> -->
+
+                            
+
+                          </table>
+
+
+                           <table style="border:hidden">
+
+                            <tr style="border:hidden">
+                              <td style="border:hidden;text-align:left;font-weight:bold">Enclusers :</td>
+                              <td style="border:hidden"></td>
+                              <td style="border:hidden;text-align:right;font-weight:bold">: المرفقات </td>
+                            </tr>
+                            <!-- <tr style="border:hidden">
+                              <td style="border:hidden"> <span class="span_right"> Enclusers : </span></td>
+                              <td style="border:hidden" colspan="7" ></td>
+                              <td style="border:hidden"> <span class="span_right"> : المرفقات </span></td>
+                            </tr> -->
+                            <tr style="border:hidden">
+                              <td style="border:hidden" > <span class="span_right"></span></td>
+
+                              <td style="border:hidden" colspan="7" >  _____________________________________________________________________________________________________________ </td>
+
+                              <td style="border:hidden" width="10%"> <span class="span_right"></span></td>
+                            </tr>
+                            <tr style="border:hidden">
+                              <td style="border:hidden" width="10%"> <span class="span_right"></span></td>
+                              <td style="border:hidden" width="60%" colspan="7" >  ______________________________________________________________________________________________________________</td>
+                              <td style="border:hidden" width="10%"> <span class="span_right"></span></td>
+                            </tr>
+
+                          </table>
+
+                          <table width="100%" align="center" style="margin-top: 15px;border:hidden;margin-bottom:15px">
+
+                            <tr style="border:hidden">
+
+                              <td style="border:hidden" align="center"> <p><b> قيمة مصروف الطريق </b> <br><b> Expense Road</b></br></p></td>
+
+
+                              <td style="border:hidden" align="center"> <p><b> الضريبة المضافة </b> <br><b> VAT <t t-esc="tax_amount"/>% </b></br></p></td>
+
+                             <!--  <td style="border:hidden" align="center"> <p><b> إجمالي قيمة السند </b> <br><b> Total Voucher Amt.</b></br></p></td>
+ -->
+                              <td style="border:hidden" align="center"> <p><b> سند صرف رقم </b> <br><b> Payment Voucher</b></br></p></td>
+
+                              <td style="border:hidden" align="center"> <p><b> قسيمة مردود طريق </b> <br><b> Lost Load Cars</b></br></p></td>
+
+                            </tr>
+
+                            <tr style="border:hidden">
+
+                              <td style="border:hidden" align="center">
+                                <!-- <span t-esc="o.fuel_trip_amt" /> -->
+                                <span t-esc="'{0:,.2f}'.format(float(o.total_fuel_amount))"></span>
+                              </td>
+
+                              <td style="border:hidden" align="center"> 
+                                <!-- <span t-esc="o.fuel_trip_amt*0.05" /> -->
+                                <span t-esc="'{0:,.2f}'.format(float(o.total_fuel_amount*(tax_amount/100)))"></span>
+
+                              </td>
+
+                             <!--  <td style="border:hidden" align="center"> 
+                                <span t-esc="'{0:,.2f}'.format(round(
+                                  float((o.fuel_trip_amt/1.05)+((o.fuel_trip_amt/1.05)
+                                  *0.05))))"></span>
+
+                              </td> -->
+
+                              <td style="border:hidden">
+<!--                                 <span t-esc="search_ids.name"> -->
+                                  
+<!--                                 </span> -->
+                              </td>
+
+                              <td style="border:hidden">
+                                <span></span>
+                              </td>
+
+
+                            </tr>                          
+                          </table>
+
+                          <table width="100%" align="center" style="border:hidden">
+                            <tr>
+                              <td style="border:hidden" width="15%"> <span class="span_right"> <p> Supervisor </p> </span></td>
+                              <td></td>
+                              <td style="border:hidden" width="15%"> <span class="span_right"> <p> مسئول الحركة </p> </span> </td>
+                              <td style="border:hidden" width="40%"></td>
+                              <td style="border:hidden" width="15%"> <span class="span_left"> <p> Driver </p> </span> </td>
+                              <td style="border:hidden"></td>
+
+                              <td style="border:hidden" width="15%"> <span class="span_left"> <p> السائق </p></span> </td>
+                            </tr>
+
+                            <table width="100%" align="center" style="border:hidden">
+                              <tr>
+                                <td style="border:hidden"> 
+                                  <span class="span_left">Name :</span>
+                                </td>
+
+                                <td>
+                                  <span style="margin-left: 70px;margin-right: 46px;" t-esc="o.create_uid.name" />
+                                </td>
+
+                                <td style="font-weight:bold;border:hidden">
+                                  : الإسم
+                                </td>
+
+                                <td style="border:hidden" colspan="5" ></td>
+
+                                <td style="border:hidden"> 
+                                  <span class="span_left">Name :</span>
+                                </td>
+
+                                <td>
+                                  <span style="margin-left: 70px;margin-right: 46px;" t-esc="o.driver.name" />
+                                </td>
+
+                                <td style="font-weight:bold;border:hidden">
+                                  : الإسم
+                                </td>
+
+                                <!-- <td style="border:hidden"> <span class="span_right">  Name : 
+                                  <span style="margin-left: 70px;margin-right: 46px;" t-esc="o.driver_id.name" /> : الإسم </span> 
+                                </td> -->
+                              </tr>
+
+                              <tr style="margin-top:8px">
+                                <td style="border:hidden" colspan="3"> <span class="span_left"> Signature: ........................................ :التوقيع </span> </td>
+                                 <td style="border:hidden;min-width:200px;max-width:200px;width:200px" colspan="5"></td>
+
+                                <td style="border:hidden" colspan="3"> <span class="span_right"> Signature: ........................................ :التوقيع </span> </td>
+                              </tr>
+
+                              <tr style="margin-top:8px">
+                                <td style="border:hidden"> <span class="span_left"> Print Date : </span> </td>
+                                <td style="border:hidden"  colspan="2"> 
+                                  <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/> 
+                                </td>
+                                 <td style="border:hidden;min-width:200px;max-width:200px;width:200px" colspan="5"></td>
+
+                                <td style="border:hidden"> <span class="span_right">Print By : </span> </td>
+                                <td style="border:hidden"  colspan="2"> 
+                                  <span t-esc="current_user" />
+                                </td>
+                              </tr>
+
+                          </table>
+                          </table>
+                        </table>
+                      </div>       
+                    </div>
+                  </div>
+                </page>
+              </div>
+            </t>
+          </t>
+        </t>
+      </template>
+  </data>
+</odoo>

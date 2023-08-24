@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <data noupdate="0">
+          <record model="ir.module.category" id="module_saso">
+            <field name="name">SASO</field>
+            <field name="description">SASO</field>
+        </record>
+          <record id="groups_saso_users" model="res.groups">
+              <field name="name">SASO Users</field>
+              <field name="category_id" ref="module_saso"/>
+          </record>
+          <record id="groups_print_saso_cert" model="res.groups">
+              <field name="name">Print SASO Cert</field>
+              <field name="category_id" ref="module_saso"/>
+          </record>
+    </data>
+</odoo>

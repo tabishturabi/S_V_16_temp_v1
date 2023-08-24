@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+       <record model="ir.ui.view" id="wizard_leave_reject_form">
+       <field name="name">wizard.leave.reject.form</field>
+       <field name="model">wizard.leave.reject</field>
+       <field name="arch" type="xml">
+          <form>
+              <field name="leave_id" invisible="1"></field>
+              <label for="reject_reason" string="Reason To Refuse Employee Mandate Request"></label>
+              <field name="reject_reason"></field>
+               <footer>
+                   <button name="click_reject" string="Reject" type="object"
+                                confirm="Are You sure you want to reject?" class="btn-primary"/>
+                   <button string="Cancel" special="cancel" class="btn-seconday"/>
+               </footer>
+          </form>
+      </field>
+       </record>
+        <record id="leave_rejection_reason_wizard" model="ir.actions.act_window">
+            <field name="name">Reason To Reject</field>
+            <field name="type">ir.actions.act_window</field>
+<!--            <field name="src_model">employee.mandate.request</field>-->
+            <field name="res_model">wizard.leave.reject</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_leave_reject_form"></field>
+            <field name="context">{'default_leave_id':active_id}</field>
+            <field name="target">new</field>
+        </record>
+  </data>
+</odoo>

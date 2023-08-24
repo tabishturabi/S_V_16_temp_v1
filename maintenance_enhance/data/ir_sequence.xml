@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="maintenance_enhance_seq" model="ir.sequence">
+            <field name="name">maintenance_enhance_work_order</field>
+            <field name="code">maintenance.enhance.work.order</field>
+<!--            <field name="prefix">%(y)s%(month)s</field>-->
+            <field name="padding">3</field>
+        </record>
+                <record id="entry_permission_seq" model="ir.sequence">
+            <field name="name">maintenance_enhance_entry_permission_seq</field>
+            <field name="code">maintenance.enhance.entry.permission.seq</field>
+            <!--            <field name="prefix">%(y)s%(month)s</field>-->
+            <field name="padding">3</field>
+        </record>
+    </data>
+</odoo>

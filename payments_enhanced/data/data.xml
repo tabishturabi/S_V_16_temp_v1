@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <data noupdate="1">
+            <record id="res_config_sequnce_data" model="res.config.sequnce">
+                <field name="sequnce_id"></field>
+            </record>
+           <!--Precisions-->
+            <record forcecreate="True" id="decimal_voucher" model="decimal.precision">
+                <field name="name">Vouchers</field>
+                <field name="digits">2</field>
+            </record>
+        </data>      
+    </data>
+</odoo>

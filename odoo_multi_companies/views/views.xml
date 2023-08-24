@@ -1,0 +1,403 @@
+<odoo>
+    <data>
+        <record id="cargo_sale_comp_rule" model="ir.rule">
+            <field name="name">Local Cargo Sale multi-company</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="cargo_sale_line_comp_rule" model="ir.rule">
+            <field name="name">Local Cargo Sale Line multi-company</field>
+            <field name="model_id" ref="model_bsg_vehicle_cargo_sale_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bassami_inspection_comp_rule" model="ir.rule">
+            <field name="name">Bassami Inspection multi-company</field>
+            <field name="model_id" ref="model_bassami_inspection"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="bsg_price_line_comp_rule" model="ir.rule">
+            <field name="name">Price Lines multi-company</field>
+            <field name="model_id" ref="model_bsg_price_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_fleet_trailer_config_rule" model="ir.rule">
+            <field name="name">Trialer multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_bsg_fleet_trailer_config"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_price_config_comp_rule" model="ir.rule">
+            <field name="name">Price Configuratioin multi-company</field>
+            <field name="model_id" ref="model_bsg_price_config"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="partner_type_comp_rule" model="ir.rule">
+            <field name="name">Partner Type multi-company</field>
+            <field name="model_id" ref="model_partner_type"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_route_comp_rule" model="ir.rule">
+            <field name="name">Bsg Route multi-company</field>
+            <field name="model_id" ref="model_bsg_route"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="bsg_route_waypoints_comp_rule" model="ir.rule">
+            <field name="name">Bsg Route Waypoints multi-company</field>
+            <field name="model_id" ref="model_bsg_route_waypoints"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="bsg_branches_comp_rule" model="ir.rule">
+            <field name="name">Bsg Branches multi-company</field>
+            <field name="model_id" ref="model_bsg_branches_bsg_branches"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="demurrage_charges_config_comp_rule" model="ir.rule">
+            <field name="name">Demurrage Charges Config multi-company</field>
+            <field name="model_id" ref="model_demurrage_charges_config"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_customer_contract_comp_rule" model="ir.rule">
+            <field name="name">Customer Contract multi-company</field>
+            <field name="model_id" ref="model_bsg_customer_contract"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_customer_contract_line_comp_rule" model="ir.rule">
+            <field name="name">Customer Contract Line multi-company</field>
+            <field name="model_id" ref="model_bsg_customer_contract_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_car_shipment_type_comp_rule" model="ir.rule">
+            <field name="name">Bsg Car Shipment Type multi-company</field>
+            <field name="model_id" ref="model_bsg_car_shipment_type"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_trip_comp_rule" model="ir.rule">
+            <field name="name">Fleet Vehicle Trip multi-company</field>
+            <field name="model_id" ref="model_fleet_vehicle_trip"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_comp_rule" model="ir.rule">
+            <field name="name">Fleet Vehicle multi-company</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_state_comp_rule" model="ir.rule">
+            <field name="name">Fleet Vehicle State multi-company</field>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_state"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_vehicle_type_table_comp_rule" model="ir.rule">
+            <field name="name">Bsg Vehicle Type Table multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_bsg_vehicle_type_table"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_fuel_expense_method_comp_rule" model="ir.rule">
+            <field name="name">Bsg Fuel Expense Method multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_bsg_fuel_expense_method"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="bsg_trailer_categories_comp_rule" model="ir.rule">
+            <field name="name">Bsg Trailer Type multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_bsg_trailer_categories"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="driver_unassign_comp_rule" model="ir.rule">
+            <field name="name">Driver Unassign multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_driver_unassign"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="renewal_vehicle_document_comp_rule" model="ir.rule">
+            <field name="name">Renewal Vehicle Document multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_renewal_vehicle_document"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="fleet_truck_violation_comp_rule" model="ir.rule">
+            <field name="name">Fleet Truck Violation multi-company</field>
+            <field name="model_id" ref="bsg_fleet_truck_violation.model_fleet_truck_violation"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="account_cash_rounding_comp_rule" model="ir.rule">
+            <field name="name">Account Cash Rounding multi-company</field>
+            <field name="model_id" ref="account.model_account_cash_rounding"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="fleet_status_model_comp_rule" model="ir.rule">
+            <field name="name">Fleet Status Model multi-company</field>
+            <field name="model_id" ref="fleet_status_report.model_fleet_status_model"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_estimated_delivery_days_comp_rule" model="ir.rule">
+            <field name="name">Bsg Estimated Delivery Days multi-company</field>
+            <field name="model_id" ref="bsg_master_config.model_bsg_estimated_delivery_days"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="bsg_vehicle_group_rule" model="ir.rule">
+            <field name="name">Bsg vehicle group multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_bsg_vehicle_group"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="driver_assign_comp_rule" model="ir.rule">
+            <field name="name">Driver assign multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_driver_assign"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="vehicles_documents_license_comp_rule" model="ir.rule">
+            <field name="name">Vehicles Documents License multi-company</field>
+            <field name="model_id" ref="bsg_fleet_operations.model_document_info_fleet"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_iqama_comp_rule" model="ir.rule">
+            <field name="name">Hr Iqama multi-company</field>
+            <field name="model_id" ref="bsg_hr.model_hr_iqama"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_banks_comp_rule" model="ir.rule">
+            <field name="name">Hr Banks multi-company</field>
+            <field name="model_id" ref="bsg_hr.model_hr_banks"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_passport_comp_rule" model="ir.rule">
+            <field name="name">Hr Passport multi-company</field>
+            <field name="model_id" ref="bsg_hr.model_hr_passport"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_insurance_comp_rule" model="ir.rule">
+            <field name="name">Hr Insurance multi-company</field>
+            <field name="model_id" ref="bsg_hr.model_hr_insurance"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_payslip_comp_rule" model="ir.rule">
+            <field name="name">Hr Payslip multi-company</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_payslip_run_comp_rule" model="ir.rule">
+            <field name="name">Hr Payslip Run multi-company</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_run"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="hr_contract_run_comp_rule" model="ir.rule">
+            <field name="name">Hr Contract Run multi-company</field>
+            <field name="model_id" ref="hr_contract.model_hr_contract"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="hr_payroll_structure_comp_rule" model="ir.rule">
+            <field name="name">Hr Payroll Structure multi-company</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payroll_structure"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_contribution_register_comp_rule" model="ir.rule">
+            <field name="name">Contribution Register multi-company</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_salary_rule_register_comp_rule" model="ir.rule">
+            <field name="name">Hr Salary Rule multi-company</field>
+            <field name="model_id" ref="hr_payroll.model_hr_salary_rule"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="petty_cash_expense_accounting_comp_rule" model="ir.rule">
+            <field name="name">Petty Cash Expenses Accounting multi-company</field>
+            <field name="model_id" ref="advance_petty_expense_mgmt.model_petty_cash_expense_accounting"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="expense_accounting_petty_comp_rule" model="ir.rule">
+            <field name="name">Expense Accounting Petty multi-company</field>
+            <field name="model_id" ref="advance_petty_expense_mgmt.model_expense_accounting_petty"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+
+        <record id="expense_accounting_template_comp_rule" model="ir.rule">
+            <field name="name">Expense Accounting Template multi-company</field>
+            <field name="model_id" ref="advance_petty_expense_mgmt.model_expense_accounting_template"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="res_petty_cash_config_comp_rule" model="ir.rule">
+            <field name="name">Res Petty Cash Config multi-company</field>
+            <field name="model_id" ref="advance_petty_expense_mgmt.model_res_petty_cash_config"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="hr_nationality_comp_rule" model="ir.rule">
+            <field name="name">Hr Nationality multi-company</field>
+            <field name="model_id" ref="bsg_hr.model_hr_nationality"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="account_group_comp_rule" model="ir.rule">
+            <field name="name">Account Group multi-company</field>
+            <field name="model_id" ref="account.model_account_group"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+
+        <record id="account_fuel_trip_configuration_comp_rule" model="ir.rule">
+            <field name="name">Account Fuel Trip Configuration multi-company</field>
+            <field name="model_id" ref="account_generic_enhanced.model_account_fuel_trip_configuration"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+        <record id="product_category_comp_rule" model="ir.rule">
+            <field name="name">Product Category multi-company</field>
+            <field name="model_id" ref="product.model_product_category"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
+        </record>
+<!--Stopping for Migration Testing-->
+<!--        <record id="credit_customer_collection_comp_rule" model="ir.rule">-->
+<!--            <field name="name">Credit Customer Collection multi-company</field>-->
+<!--            <field name="model_id" ref="bsg_corporate_invoice_contract.model_credit_customer_collection"/>-->
+<!--            <field name="global" eval="True"/>-->
+<!--            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="bx_credit_customer_collection_comp_rule" model="ir.rule">-->
+<!--            <field name="name">Credit Customer Collection multi-company</field>-->
+<!--            <field name="model_id"  ref="bsg_tranport_bx_credit_customer_collection.model_bx_credit_customer_collection"/>-->
+<!--            <field name="global" eval="True"/>-->
+<!--            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

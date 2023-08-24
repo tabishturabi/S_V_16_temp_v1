@@ -1,0 +1,384 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_bsg_fleet_vehicle_form_inherit">
+            <field name="name">view_bsg_fleet_vehicle_form_inherit</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="reset_daily_trip_count" type="object" string="Reset Daily Trip Count"
+                            class="oe_highlight"/>
+                </header>
+                <label for="tag_ids" position="before">
+                    <label for="taq_number" class="oe_edit_only" string="Sticker No"/>
+                    <h2>
+                        <field name="taq_number" class="oe_inline"/>
+                    </h2>
+                </label>
+
+                <xpath expr="//group[1]/group[2]/label[@for='odometer']" position="before">
+                    <label for="plate_no"/>
+                    <div class="o_address_format">
+                        <label for="leftLetter" string="L"/>
+                        <field name="leftLetter" class="oe_inline" force_save="1"/>
+                        <label for="middleLetter" string="M"/>
+                        <field name="middleLetter" class="oe_inline" force_save="1"/>
+                        <label for="rightLetter" string="R"/>
+                        <field name="rightLetter" class="oe_inline" force_save="1"/>
+                        <field name="plate_no" style="margin-left: 12px;" class="o_address_zip"
+                               force_save="1"/>
+                    </div>
+                                        <field name="bayan_plate_type_id" force_save="1"/>
+                                        <field name="fleet_dedicated_area_ids" widget="many2many_tags" force_save="1"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='driver_id']" position="replace">
+                    <field name="is_driver_linked" invisible="1"/>
+                    <label for="bsg_driver"/>
+                    <div class="o_row">
+                        <field name="bsg_driver" readonly="1" domain="[('is_driver','=',True)]"
+                               attrs="{'readonly':[('is_driver_linked','=',True)]}"/>
+                        <button string="⇒ Link Driver" type="object" name="link_driver"
+                                attrs="{'invisible':[('is_driver_linked','=',True)]}"/>
+                        <!--                     <button string="⇒ Unlink Driver" type="object" name="unlink_driver" attrs="{'invisible':[('is_driver_linked','=',False)]}"/> -->
+                    </div>
+                    <field name="driver_code" readonly="1"/>
+                    <field name="mobile_phone" attrs="{'readonly':[('bsg_driver','=',False)]}"/>
+                    <field name="daily_trip_count" readonly="1" force_save="1"/>
+                    <field name="trip_count_last_rest" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='model_year']" position="after">
+                    <field name="estmaira_serial_no"/>
+                    <field name="location_id"/>
+                    <field name="bsg_route"/>
+                    <field name="current_branch_id"/>
+                    <field name="current_loc_id"/>
+                    <field name="rented_vehicle"/>
+                </xpath>
+
+                <xpath expr="//form/sheet/group[last()]" position="after">
+                    <!--<xpath expr="//group[3]" -->
+                    <group>
+                        <group string="Other Info">
+                            <label for="trailer_id"/>
+                            <div class="o_row">
+                                <field name="trailer_id" options="{'no_create': True}"
+                                       domain="[('state','=','unlinked')]"
+                                       attrs="{'readonly':[('trailer_added','=',True)]}"/>
+                                <button string="⇒ Add Trailer" type="object" name="create_associated_trailer"
+                                        attrs="{'invisible':[('trailer_added','=',True)]}"/>
+                            </div>
+                            <field name="safety_certificate_received" widget="radio" options="{'horizontal':true}"/>
+                            <field name="safety_certificate_received_reason" attrs="{'required':[('safety_certificate_received','=','no')],'invisible':[('safety_certificate_received','!=','no')]}"/>
+                            <field name="trailer_added" invisible="1"/>
+                            <field name="assert_status"/>
+                            <field name="last_association"/>
+                            <field name="last_association_name"/>
+                            <field name="region_id"/>
+                            <field name="vehicle_group"/>
+                            <field name="vehicle_group_name"/>
+                        </group>
+                        <group string="Truck Info">
+                            <field name="vehicle_ar_name"/>
+                            <field name="vehicle_en_name"/>
+                            <field name="veh_regis_type"/>
+                            <field name="vendor_name"/>
+                            <field name="driver_code"/>
+                            <field name="mobile_phone"/>
+                            <field name="vehicle_status"/>
+                            <field name="vehicle_type"/>
+                            <field name="region_restrict"/>
+                            <field name="insurance_company_name"/>
+                            <field name="trip_id"/>
+                            <field name="route_id"/>
+                            <field name="expected_end_date"/>
+                            <field name="no_of_cars"/>
+                            <field name="time_diff"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="trailer_associated" string="Trailer Associated">
+                            <field name="trailer_ids" nolabel="1" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="fleet_id" invisible="1"/>
+                                    <field name="trailer_name"/>
+                                    <field name="effective_date"/>
+                                    <field name="expiration_date"/>
+                                    <field name="comments"/>
+                                    <field name="safety_certificate_delivered" widget="radio" options="{'horizontal':true}" />
+                                    <field name="safety_certificate_delivered_reason" attrs="{'required':[('safety_certificate_delivered','=','no')],'invisible':[('safety_certificate_delivered','!=','no')]}"/>
+                                    <button name="release_trailer" string="Release Trailer" type="object"
+                                            confirm="Are you sure you want to release?"
+                                            attrs="{'invisible':[('expiration_date','!=',False)]}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="document_info" string="Document Info">
+                            <field name="document_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="document_type_id"/>
+                                    <field name="document_name"/>
+                                    <field name="issue_date"/>
+                                    <field name="document_no"/>
+                                    <field name="expiry_date"/>
+                                    <field name="hijri_date"/>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="tires_history" string="Tires History">
+                            <field name="tires_history_id" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="tires_serial_no"/>
+                                    <field name="work_job_no"/>
+                                    <field name="work_job_date"/>
+                                </tree>
+                            </field>
+                        </page>
+
+
+                        <page name="battery_history" string="Battery History">
+                            <field name="battery_history_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="bateery_serial_no"/>
+                                    <field name="battery_expiration_date"/>
+                                    <field name="work_job_no"/>
+                                    <field name="work_job_date"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page name="comment" string="Comments">
+                            <group>
+                                <group>
+                                    <field name="comment_date"/>
+                                    <field name="short_comment_des"/>
+                                </group>
+
+                                <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                    <field name="comments"/>
+                                </group>
+
+                            </group>
+                        </page>
+
+                        <page name="custody" string="Driver Custody">
+                            <!--                     	<group> -->
+                            <!--                     		<group> -->
+                            <!--                     			<field name="driver_assign_id" options="{'no_create': True,'no_open':True}" groups="bsg_fleet_operations.driver_assign_id"/> -->
+                            <!--                     		</group> -->
+                            <!--                         	<group> -->
+                            <!--                         		<field name="driver_unassign_id" options="{'no_create': True,'no_open':True}" groups="bsg_fleet_operations.driver_unassign_id"/> -->
+                            <!--                         	</group> -->
+                            <!--                     	</group> -->
+
+                            <group>
+                                <group>
+                                    <field name="kilometrage" string="Odometer value" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="fuel_qty" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+
+                            <group string="Vehicles Documents">
+                                <group>
+                                    <field name="truck_license" readonly="1" force_save="1"/>
+                                    <field name="insurance_card" readonly="1" force_save="1"/>
+                                    <field name="weight_card" readonly="1" force_save="1"/>
+                                    <field name="truck_inspection_card" readonly="1" force_save="1"/>
+                                    <field name="driver_receipt_original_istimara"/>
+                                </group>
+                                <group>
+                                    <field name="oil_card" readonly="1" force_save="1"/>
+                                    <field name="truck_head" readonly="1" force_save="1"/>
+                                    <field name="trailer_tire" readonly="1" force_save="1"/>
+                                    <field name="plate" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+
+                            <group string="Spare Tires">
+                                <group>
+                                    <field name="spare_tire_truck" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="spare_tire_trailer" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+
+                            <group string="Vehicles Tools">
+                                <group>
+                                    <field name="jack" readonly="1" force_save="1"/>
+                                    <field name="fire_extinguisher" readonly="1" force_save="1"/>
+                                    <field name="triangel" readonly="1" force_save="1"/>
+                                    <field name="tire_wrench_tractor" readonly="1" force_save="1"/>
+                                    <field name="tire_wrench_trailer" readonly="1" force_save="1"/>
+                                    <field name="tire_unfix_lieber" readonly="1" force_save="1"/>
+                                    <field name="hands_lifted_trailer" readonly="1" force_save="1"/>
+                                    <field name="lift_tool_truck_head" readonly="1" force_save="1"/>
+                                    <field name="unfix_tool_spare_tire" readonly="1" force_save="1"/>
+                                    <field name="fixing_tools" readonly="1" force_save="1"/>
+                                    <field name="belt" readonly="1" force_save="1"/>
+                                    <field name="lock" readonly="1" force_save="1"/>
+                                    <field name="chain" readonly="1" force_save="1"/>
+                                    <field name="pliers" readonly="1" force_save="1"/>
+                                    <field name="spanner_musharshar" readonly="1" force_save="1"/>
+                                    <field name="spanner_baladi" readonly="1" force_save="1"/>
+                                    <field name="battery" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="ladders" readonly="1" force_save="1"/>
+                                    <field name="air_condition" readonly="1" force_save="1"/>
+                                    <field name="cabin_cleaner" readonly="1" force_save="1"/>
+                                    <field name="recoder" readonly="1" force_save="1"/>
+                                    <field name="cooler" readonly="1" force_save="1"/>
+                                    <field name="cover_battery" readonly="1" force_save="1"/>
+                                    <field name="cover_of_diesel_tank" readonly="1" force_save="1"/>
+                                    <field name="emergency_rotaing_light" readonly="1" force_save="1"/>
+                                    <field name="curtains" readonly="1" force_save="1"/>
+                                    <field name="bed" readonly="1" force_save="1"/>
+                                    <field name="trailer_plate" readonly="1" force_save="1"/>
+                                    <field name="cover" readonly="1" force_save="1"/>
+                                    <field name="air_pipe" readonly="1" force_save="1"/>
+                                    <field name="spanner" readonly="1" force_save="1"/>
+                                    <field name="screw_drivers" readonly="1" force_save="1"/>
+                                    <field name="sixfold_key" readonly="1" force_save="1"/>
+                                    <field name="hammer" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="other_tools" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="driver_comment" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+
+                            <group string="Body &amp; content of external Vehicles">
+                                <group name="left">
+                                    <field name="front_glass" readonly="1" force_save="1"/>
+                                    <field name="side_glass" readonly="1" force_save="1"/>
+                                    <field name="lights" readonly="1" force_save="1"/>
+                                    <field name="front_light" readonly="1" force_save="1"/>
+                                    <field name="back_light" readonly="1" force_save="1"/>
+                                    <field name="side_flashing_tractor" readonly="1" force_save="1"/>
+                                    <field name="side_flashing_trailer" readonly="1" force_save="1"/>
+                                    <field name="shocks_scratches" readonly="1" force_save="1"/>
+                                    <field name="big_side_mirror" readonly="1" force_save="1"/>
+                                    <field name="small_side_mirror" readonly="1" force_save="1"/>
+                                </group>
+                                <group name="right">
+                                </group>
+                            </group>
+
+                            <group>
+                                <field name="comment" readonly="1" force_save="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="fleet_vehicle_kanban_inherit" model="ir.ui.view">
+            <field name="name">Fleet Vehicle Kanban modification</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//t[@t-name='kanban-box']//field[@name='tag_ids']"
+                       position="after">
+                    <field name="taq_number"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--  <record id="fleet_vehicle_tree_list_inherit" model="ir.ui.view">
+           <field name="name">Fleet Vehicle Tree modification</field>
+           <field name="model">fleet.vehicle</field>
+           <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree" />
+           <field name="arch" type="xml">
+             <xpath expr="//field[@name='driver_id']" position="replace">
+                 <field name="vehicle_type"  string="Truck Type"/>
+                 <field name="bsg_driver"  string="Driver Name"/>
+                 <field name="driver_num"  />
+             </xpath>
+
+             <xpath expr="//field[@name='license_plate']" position="attributes">
+                 <attribute name="string">Truck Number</attribute>
+             </xpath>
+
+             <xpath expr="//field[@name='model_id']" position="attributes">
+                 <attribute name="string">Truck Name</attribute>
+             </xpath>
+
+             <xpath expr="//field[@name='license_plate']" position="after">
+                 <field name="taq_number" string="Truck Sticker No"/>
+             </xpath>
+
+           </field>
+         </record> -->
+
+        <record model="ir.ui.view" id="fleet_vehicle_tree_list_inherit_truck_coming">
+            <field name="name">fleet_vehicle_tree_list_inherit_truck_coming</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="false" create="false">
+
+                    <field name="license_plate" string="Truck Number"/>
+                    <field name="model_id" string="Truck Name"/>
+                    <field name="taq_number" string="Truck Sticker No"/>
+                    <field name="vehicle_type" string="Truck Type"/>
+                    <field name="bsg_driver" string="Driver Name"/>
+                    <field name="mobile_phone" string="Driver Phone"/>
+                    <field name="trip_id"/>
+                    <field name="no_of_cars"/>
+                    <field name="expected_end_date"/>
+                    <field name="time_diff"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fleet_vehicle_tree_list_inherit_truck_in">
+            <field name="name">fleet_vehicle_tree_list_inherit_truck_in</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="false" create="false">
+
+                    <field name="license_plate" string="Truck Number"/>
+                    <field name="model_id" string="Truck Name"/>
+                    <field name="taq_number" string="Truck Sticker No"/>
+                    <field name="vehicle_type" string="Truck Type"/>
+                    <field name="bsg_driver" string="Driver Name"/>
+                    <field name="mobile_phone" string="Driver Phone"/>
+                    <field name="trip_id" string='Last Trip Id'/>
+                    <field name="no_of_cars"/>
+                    <field name="expected_end_date" string='Last Arrival Date And Time'/>
+                    <field name="time_diff" string="Number of Hours Since Last Stop"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="fleet.fleet_vehicle_action" model="ir.actions.act_window">
+            <field name="view_mode">tree,form,kanban,activity</field>
+        </record>
+
+
+    </data>
+
+</odoo>

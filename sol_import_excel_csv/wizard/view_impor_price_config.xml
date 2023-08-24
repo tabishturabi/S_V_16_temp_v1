@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record id="wizard_import_price_config" model="ir.ui.view">
+			<field name="name">wizard.import.price>config</field>
+			<field name="model">import.price.config</field>
+			<field name="arch" type="xml">
+				<form string="Import Price Configuration" >
+					<group>
+                    <field name="import_option" widget="radio" />
+                </group>
+              
+                <group>
+                    <field name="File_slect" filename="name"/>
+                </group>	
+					<footer>
+	
+						<button string="Import" name="imoport_file"
+							type="object" class="oe_highlight" />
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="sol_act_import_price_config" model="ir.actions.act_window">
+			<field name="name">Import Price Configuration</field>
+			<field name="res_model">import.price.config</field>
+<!--			<field name="view_type">form</field>-->
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_import_price_config" />
+			<field name="target">new</field>
+		</record>
+
+		<menuitem
+    		id="menu_import_price_config"
+    		action="sol_act_import_price_config"
+    		name="Import Price Configuration"
+    		parent="bsg_master_config.root_price_master"
+    		sequence="5"/>
+
+	</data>
+</odoo>

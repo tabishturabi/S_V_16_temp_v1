@@ -1,0 +1,832 @@
+<odoo>
+    <data>
+        <template id="bx_productivity_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+
+                    <style>
+                        .clearfloat {
+                        clear: both;
+                        float: none;
+                        width: 100%;
+                        height: 1px;
+                        display: block;
+                        }
+                        .report-wrapper {
+                        width: 1000px;
+                        margin: 0px auto;
+                        font-size: 13px;
+                        }
+                        table {
+                        width: 100%;
+                        border-spacing: 0px;
+                        border: 2px solid #CCC;
+                        }
+                        table tr td, table tr th {
+                        text-align: center;
+                        padding: 5px 0px 0px 5px;
+                        border-right: 2px solid #CCC;
+                        border-bottom: 1px solid #eee;
+                        }
+                        table tr td:last-child,
+                        table tr th:last-child {
+                        border-right: none
+                        }
+                        table tr:last-child td {
+                        border-bottom: none
+                        }
+                        table tr th {
+                        text-align: center;
+                        }
+                        .report-header {
+                        width: 100%;
+                        margin: 0px 0px 10px;
+                        text-align: left;
+                        }
+                        .report-header p {
+                        width: 50%;
+                        float: left;
+                        margin: 0px 0px 20px;
+                        }
+                        .report-header p .solid {
+                        font-weight: bold;
+                        }
+                        h2 {
+                        text-align: center;
+                        font-size: 35px;
+                        text-decoration: underline;
+                        }
+                        .tile {
+                        display: inline-block;
+                        width: 100px;
+                        text-align: center;
+                        background: #a64f8e;
+                        color: #fff;
+                        padding: 2px 5px;
+                        }
+
+                        .header {
+                        display : none !importnat;
+                        }
+                        .footer {
+                        display : none !importnat;
+                        }
+
+                        tr {
+                        page-break-inside: avoid !important;
+                        }
+
+                        td {
+                        page-break-inside: avoid !important;
+                        }
+
+                    </style>
+
+                    <div class="page">
+
+                        <t t-if="report_type_num == 6">
+
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx Vehicle productivity Summery Report</h2>
+                                    <h2 style="margin-top:50px">تقرير تفصيلي انتاجيه شاحنات نقل البضائع</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+
+                                <tr bgcolor="#90EE90">
+                                    <th>استيكر الشاحنة</th>
+                                    <th>نوع الشاحنة</th>
+                                    <th>حالة الشاحنة</th>
+                                    <th>كود السائق</th>
+                                    <th>اسم السائق</th>
+                                    <th>عدد اتفاقيات</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>المسافة المقطوعة</th>
+                                    <th>المسافة الإضافية</th>
+                                    <th>اجمالي المسافة</th>
+<!--                                    <th>قيمة ديزل المسافة الإضافية</th>-->
+                                    <th>قيمة الديزل</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Vehicle Sticker</th>
+                                    <th>Vehicle Type Name</th>
+                                    <th>Vehicle States</th>
+                                    <th>Employee ID</th>
+                                    <th>Driver Name</th>
+                                    <th>No. Bx Agreement</th>
+                                    <th>Tot Invoice Amt Before Tax</th>
+                                    <th>Trip Distance</th>
+                                    <th>Extra Distance</th>
+                                    <th>Total Distance</th>
+<!--                                    <th>Extra Distance Amt</th>-->
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount</th>
+                                    <th>Total Fuel Amt</th>
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['taq_number']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_type_name']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_status_name']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['driver_code']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['bsg_driver']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['transportation_no']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_before_taxes']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['trip_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['extra_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_fuel_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_reward_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_amount']))"></span>
+                                        </td>
+
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="5" style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_bx))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_bxx))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tripp_distance))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(extr_distance))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(totl_distance))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_fuel_amount))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_reward_amount))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_amount))"></span>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+                        </t>
+
+
+                        <t t-if="report_type_num == 1">
+
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx Vehicle productivity Detail Report</h2>
+                                    <h2 style="margin-top:50px">تقرير تفصيلي لإنتاجية شاحنات نقل البضائع</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+
+                                <tr bgcolor="#90EE90">
+                                    <th>استيكر الشاحنة</th>
+                                    <th>نوع الشاحنة</th>
+                                    <th>قحالة الشاحنة</th>
+                                    <th>كود السائق</th>
+                                    <th>اسم السائق</th>
+                                    <th>عدد اتفاقيات</th>
+                                    <th>اسم خط السير</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>اجمالي المسافة</th>
+                                    <th>قيمة الديزل</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Vehicle Sticker</th>
+                                    <th>Vehicle Type Name</th>
+                                    <th>Vehicle States</th>
+                                    <th>Employee ID</th>
+                                    <th>Driver Name</th>
+                                    <th>No. Bx Agreement</th>
+                                    <th>Route Name</th>
+                                    <th>Tot Invoice Amt Before Tax</th>
+                                    <th>Total Distance</th>
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount Backend</th>
+                                    <th>Total Amt</th>
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['taq_number']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_type_name']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_status_name']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['driver_code']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['bsg_driver']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['transportation_no']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['route_id']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_before_taxes']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_fuel_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_reward_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_amount']))"></span>
+                                        </td>
+
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="6" style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_before_taxes))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_distance))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_fuel_amount))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_reward_amount))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(total_amount))"></span>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+                        </t>
+
+                        <t t-if="report_type_num == 2">
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx Vehicle Type productivity Report</h2>
+                                    <h2 style="margin-top:50px">تقرير ملخص انتاجيه أنواع شاحنات نقل البضائع</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+                                <tr bgcolor="#90EE90">
+                                    <th>نوع الشاحنة</th>
+                                    <th>رقم الرحلة</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>المسافة المقطوعة</th>
+                                    <th>المسافة الإضافية</th>
+                                    <th>اجمالي المسافة</th>
+                                    <th>قيمة ديزل المسافة الإضافية</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Vehicle Type Name</th>
+                                    <th>Bx Agreement</th>
+                                    <th>Tot Invoice Amount Before Tax</th>
+                                    <th>Trip Distance</th>
+                                    <th>Extra Distance</th>
+                                    <th>Total Distance</th>
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount Backend</th>
+                                    <th>Total Amt</th>
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_type']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_type_name']"/>
+                                        </td>
+
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['vehicle_status_name']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['driver_number']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['bsg_driver']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['transportation_no']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_before_taxes']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_fuel_amount']))"></span>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="1" style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_bx))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_invc_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_trip))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_extra))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tott_distance))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_fuel_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_rewrd_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_amt))"></span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                        </t>
+
+                        <t t-if="report_type_num == 3">
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx Driver Summary Report</h2>
+                                    <h2 style="margin-top:50px">تقرير اجمالي إيرادات نقل البضاع بحسب المستخدم</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+                                <tr bgcolor="#90EE90">
+                                    <th>كود السائق</th>
+                                    <th>اسم السائق</th>
+                                    <th>تاريخ التعيين</th>
+                                    <th>حالة السائق</th>
+                                    <th>استيكر الشاحنة</th>
+                                    <th>نوع الشاحنة</th>
+                                    <th>حالة الشاحنة</th>
+                                    <th>عدد اتفاقيات</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>المسافة المقطوعة</th>
+                                    <th>المسافة الإضافية</th>
+                                    <th>اجمالي المسافة</th>
+                                    <th>قيمة الديزل</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Driver Name</th>
+                                    <th>Date of Join</th>
+                                    <th>Employee State</th>
+                                    <th>Vehicle Sticker</th>
+                                    <th>Vehicle Type Name</th>
+                                    <th>Vehicle States</th>
+                                    <th>No. Bx Agreement</th>
+                                    <th>Tot Invoice Amt Before Tax</th>
+                                    <th>Trip Distance</th>
+                                    <th>Extra Distance</th>
+                                    <th>Total Distance</th>
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount Backend</th>
+                                    <th>Total Amt</th>
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['driver_code']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['bsg_driver']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['bsgjoining_date']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['employee_state']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['taq_number']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_type_name']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['vehicle_status_name']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['all_numz']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['all_amt']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['distance_trip']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['ex_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_fuel_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_reward_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_amount']))"></span>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="7" style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_pos_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_pos_num))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_unpos_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_unpos_num))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_dis_num))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_fuel_num))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_rwrd_num))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_all_num))"></span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                        </t>
+
+                        <t t-if="report_type_num == 4">
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx User Summary Report</h2>
+                                    <h2 style="margin-top:50px">تقرير اجمالي إيرادات نقل البضاع بحسب العميل</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+                                <tr bgcolor="#90EE90">
+                                    <th>ركود المستخدم</th>
+                                    <th>اسم المستخدم</th>
+                                    <th>تاريخ التعيين</th>
+                                    <th>حالة المستخدم</th>
+                                    <th>اسم الفرع الحالي</th>
+                                    <th>عدد اتفاقيات</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>المسافة المقطوعة</th>
+                                    <th>المسافة الإضافية</th>
+                                    <th>اجمالي المسافة</th>
+                                    <th>قيمة الديزل</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>User Name</th>
+                                    <th>Date of Join</th>
+                                    <th>Employee State</th>
+                                    <th>Current Branch</th>
+                                    <th>No. Bx Agreement</th>
+                                    <th>Tot Invoice Amt Before Tax</th>
+                                    <th>Trip Distance</th>
+                                    <th>Extra Distance</th>
+                                    <th>Total Distance</th>
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount Backend</th>
+                                    <th>Total Amt</th>
+
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['driver_code']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['create_uid']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['bsgjoining_date']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['employee_state']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['branch_ar_name']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['counter']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_before_taxes']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['trip_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['extra_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_fuel_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_reward_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['total_amount']))"></span>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td colspan="5" style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_bx))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_trip))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_extra))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_tot))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_fuel))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_rwrd))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_count_amt))"></span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                        </t>
+
+                        <t t-if="report_type_num == 5">
+                            <div class="report_head">
+                                <div style="width:30%;float:left">
+                                    <img src="/bassami_cargo_shipment_report/static/img/albassami_transport_logoWP.png"
+                                         width="200" height="100" style="margin-left: 25px;float:left"/>
+                                </div>
+
+                                <div style="width:38%;float:left">
+                                    <h2 style="margin-top:50px">Bx Productivity Summary Loading Date Report</h2>
+                                    <h2 style="margin-top:50px">تقرير اجمالي إيرادات نقل البضاع بحسب اليوم</h2>
+                                </div>
+                            </div>
+
+                            <table width="100%">
+                                <tr bgcolor="#90EE90">
+                                    <th>التاريخ</th>
+                                    <th>رقم الرحلة</th>
+                                    <th>قيمه اتفاقيات</th>
+                                    <th>المسافة المقطوعة</th>
+                                    <th>المسافة الإضافية</th>
+                                    <th>اجمالي المسافة</th>
+                                    <th>قيمة الديزل</th>
+                                    <th>قيمة مكافأة الحمولة</th>
+                                    <th>اجمالي مصروف الطريق</th>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Bx Agreement</th>
+                                    <th>Tot Invoice Amount Before Tax</th>
+                                    <th>Trip Distance</th>
+                                    <th>Extra Distance</th>
+                                    <th>Total Distance</th>
+                                    <th>Total Fuel Expense</th>
+                                    <th>Total Reward amount Backend</th>
+                                    <th>Total Amt</th>
+                                </tr>
+
+                                <t t-foreach="main_data" t-as="main">
+
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <span t-esc="main['date']"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['posted_numz']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['all_amt']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_trip']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_extra']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_distance']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_fuel_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_reward_amount']))"></span>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="'{0:,.2f}'.format(float(main['tot_amount']))"></span>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                                <tr>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span>Grand Total</span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_bx))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_invc_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_trip_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_extra_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_distance_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_fuel_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_rewrd_amt))"></span>
+                                    </td>
+                                    <td style="text-align: left;font-weight:bold">
+                                        <span t-esc="'{0:,.2f}'.format(float(tot_amt))"></span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+
+                        </t>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

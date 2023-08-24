@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="frontend_layout_custom" name="Main Frontend Layout">
+		<t t-call="web.layout">
+			<t t-set="head_website">
+				<t t-call-assets="web.assets_common" t-js="false"/>
+				<t t-call-assets="web.assets_frontend" t-js="false"/>
+				<t t-call-assets="web.assets_common" t-css="false"/>
+				<t t-call-assets="web.assets_frontend" t-css="false"/>
+			</t>
+			<t t-set="head" t-value="head_website + (head or '')"/>
+		
+			<t t-set="direction" t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
+			<div id="wrapwrap" class="portal_web web-login">
+				<main>
+					<t t-raw="0"/>
+				</main>
+			</div>
+		</t>
+	</template>
+	
+	
+	<template id="branchs_layout" name="Main Frontend Layout">
+		<t t-call="bassami_web_login.frontend_layout_custom">
+			<style>
+				.web-login{
+				}
+				#login{
+					background-image: url("/bassami_web_login/static/src/img/background.png");
+					background-size: cover;
+				}
+				#login .container #login-row #login-column #login-box {
+					margin-bottom: 95px;
+ 					margin-top: 95px;
+					max-width: 600px;
+					border: 1px solid #1d2127;
+					border-radius: 4px;
+					background: #ebebeb;
+					background-size: cover;
+					box-shadow: 10px 10px 5px #aaaaaa;
+				}
+				#login .container #login-row #login-column #login-box #login-form {
+					padding: 35px;
+				}
+				#login .container #login-row #login-column #login-box #login-form #register-link {
+					margin-top: -85px;
+				}
+			</style>
+			<div class="header-w3l row text-center">
+				<a href="/" class="navbar-brand logo col-md-12" style="margin-top: 35px;">
+					<span t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+				</a>
+			</div>
+			
+			<div id="login" class="mt96">
+			    <div class="container">
+			        <div id="login-row" class="row justify-content-center align-items-center">
+			            <div id="login-column" class="col-md-6">
+			                <div id="login-box" class="col-md-12">
+			                    <form id="login-form" class="form text-center" action="/my-web-my-barnchs" method="post">
+			                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+			                        <h3 class="text-center text-info" 
+			                        	style="font-size: 20px;color: #1d2127!important;text-transform: uppercase;font-weight: bold;">Our Branches</h3>
+			                        <div class="form-group">
+			                            <select class="form-control" id="sel1" name="branch_id" required="required">
+											<option value=""> --- Select --- </option>
+											<t t-foreach="user_id.user_branch_ids" t-as="branch">
+												<option t-att-value="branch.id"><t t-esc="branch.branch_ar_name"/></option>
+											</t>
+									  </select>
+			                        </div>
+			                        <button class="btn btn-primary" type="submit" style="box-shadow: 1px 5px 5px #aaa;">Submit</button>
+			                    </form>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</t>
+	</template>
+
+</odoo>

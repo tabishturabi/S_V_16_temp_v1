@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_bsg_fleet_vehicle_document_info">
+            <field name="name">view_bsg_fleet_vehicle_document_info</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='document_info']/field/tree" position="replace">
+                    <tree editable="bottom">
+                        <field name="document_type_id"/>
+                        <field name="document_name"/>
+                        <field name="document_no"/>
+                        <field name="issue_date"/>
+                        <field name="hijri_issue_date" placeholder="1441-12-27"/>
+                        <field name="expiry_date"/>
+                        <field name="hijri_date" placeholder="1441-12-27" string="Hijri Expire Date"/>
+                        <button name="action_get_attachment_view"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    type="object">
+                                <field name="attachment_number" widget="statinfo" string="Documents"
+                                       options="{'reload_on_button': true}"/>
+                            </button>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

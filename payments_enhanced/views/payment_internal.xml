@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_finance_entries_accounting_payments" name="Payment Internal Transfer" parent="account.menu_finance_entries"/>
+        <menuitem action="account.action_account_payments_transfer" 
+        id="menu_action_account_payments_transfer" parent="menu_finance_entries_accounting_payments" sequence="20"/>
+        
+        <!-- <menuitem action="account.action_account_payments_transfer" 
+        id="menu_action_account_payments_transfer" parent="account.menu_finance_payables" sequence="20"/> -->
+
+    </data>
+</odoo>

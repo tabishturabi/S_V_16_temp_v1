@@ -1,0 +1,8 @@
+<odoo>
+	<record id="ir_bassami_inspection" model="ir.sequence">
+		<field name="name">bassami.inspection</field>
+		<field name="code">bassami.inspection</field>
+		<field name="prefix">INS/%(y)s%(month)s</field>
+		<field name="padding">5</field>
+	</record>
+</odoo>

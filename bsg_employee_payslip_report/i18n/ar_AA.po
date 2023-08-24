@@ -1,0 +1,296 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bsg_employee_payslip_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-09 00:47+0000\n"
+"PO-Revision-Date: 2021-08-09 03:01+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: ar\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_wizard
+msgid "<span class=\"oe_inline\">To</span>"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_pdf
+msgid "<span style=\"font-size: 14px; font-weight: bold;\">Branch</span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\">الفرع</span>"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_pdf
+msgid "<span style=\"font-size: 14px; font-weight: bold;\">Department</span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\">القسم</span>"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_pdf
+msgid "<span style=\"font-size: 14px; font-weight: bold;\">Job Description</span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\">الوظيفة</span>"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_pdf
+msgid "<span style=\"font-size: 14px; font-weight: bold;\">Month</span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\">الشهر</span>"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_pdf
+msgid "<span style=\"font-size: 14px; font-weight: bold;\">Total</span>"
+msgstr "<span style=\"font-size: 14px; font-weight: bold;\">الاجمالي</span>"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "April"
+msgstr "ابريل"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "August"
+msgstr "اغسطس"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Country"
+msgstr "الجنسية"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "December"
+msgstr "ديسمبر"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__display_name
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_pdf__display_name
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_xlsx__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Employee ID"
+msgstr "كود الموظف"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__employee_id
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Employee Name"
+msgstr "اسم الموظف"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.actions.report,name:bsg_employee_payslip_report.employee_payslip_report_pdf_id
+#: model:ir.actions.report,name:bsg_employee_payslip_report.employee_payslip_report_xlsx_id
+msgid "Employee Payslip Report"
+msgstr "تقرير مرتبات موظف"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.actions.act_window,name:bsg_employee_payslip_report.employee_payslip_report_act_action_window
+msgid "Employee Payslip Report Wizard"
+msgstr "تقرير مرتبات موظف"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.ui.menu,name:bsg_employee_payslip_report.menu_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Employee Payslips Report"
+msgstr "تقرير مرتبات موظف"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__end_month
+msgid "End Month"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__end_year
+msgid "End Year"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "February"
+msgstr "فبراير"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_wizard
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "From"
+msgstr "مِن"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__from_date
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__from_month
+msgid "From Month"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__from_year
+msgid "From Year"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__id
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_pdf__id
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_xlsx__id
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "ID"
+msgstr "رقم الهوية"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "January"
+msgstr "يناير"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Joining Date"
+msgstr "تاريخ التعيين"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "July"
+msgstr "يوليو"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "June"
+msgstr "يونيو"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard____last_update
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_pdf____last_update
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_report_bsg_employee_payslip_report_employee_payslip_report_xlsx____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Logo"
+msgstr "الشعار"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "March"
+msgstr "مارس"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "May"
+msgstr "مايو"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "November"
+msgstr "نوفمبر"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "October"
+msgstr "اكتوبر"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Page: <span class=\"page\"/> - <span class=\"topage\"/>"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Print By:"
+msgstr "الطباعة بواسطة:"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "Print Date:"
+msgstr "الطباعة في:"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_wizard
+msgid "Print Excel"
+msgstr "طباعة اكسل"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.employee_payslip_report_wizard
+msgid "Print PDF"
+msgstr "طباعة PDF"
+
+#. module: bsg_employee_payslip_report
+#: selection:employee.payslip.report.wizard,end_month:0
+#: selection:employee.payslip.report.wizard,from_month:0
+msgid "September"
+msgstr "سبتمبر"
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "To"
+msgstr "إلى"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__to_date
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model.fields,field_description:bsg_employee_payslip_report.field_employee_payslip_report_wizard__print_date
+msgid "Today Date"
+msgstr "تاريخ اليوم"
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model,name:bsg_employee_payslip_report.model_employee_payslip_report_wizard
+msgid "employee.payslip.report.wizard"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model,name:bsg_employee_payslip_report.model_report_bsg_employee_payslip_report_employee_payslip_report_pdf
+msgid "report.bsg_employee_payslip_report.employee_payslip_report_pdf"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model:ir.model,name:bsg_employee_payslip_report.model_report_bsg_employee_payslip_report_employee_payslip_report_xlsx
+msgid "report.bsg_employee_payslip_report.employee_payslip_report_xlsx"
+msgstr ""
+
+#. module: bsg_employee_payslip_report
+#: model_terms:ir.ui.view,arch_db:bsg_employee_payslip_report.external_layout_standard
+msgid "كشف رواتب موظف"
+msgstr ""

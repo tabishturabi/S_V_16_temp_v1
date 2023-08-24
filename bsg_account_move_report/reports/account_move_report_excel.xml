@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <report id="account_move_report_xlsx_id"
+             model="account.move.report.wizard"
+             string="Account Move Report"
+             report_type="xlsx"
+             name="bsg_account_move_report.am_report_xlsx"
+             file="bsg_account_move_report.am_report_xlsx"
+     />
+</odoo>

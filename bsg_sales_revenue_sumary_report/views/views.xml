@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="sales_revenue_report_wizard_form">
+      <field name="name">sales.revenue.report.wizard.form</field>
+      <field name="model">sales.revenue.report.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="grouping_by" />
+                <field name="order_date_condition" />
+              </group>
+              <group>
+                <field name="period_grouping_by" attrs="{'invisible':[('grouping_by','!=','by_order_date')]}"/>
+                <field name="date_from"  attrs="{'invisible':[('order_date_condition','!=','is_between')],'required':[('order_date_condition','=','is_between')]}" />
+                <field name="date_to"  attrs="{'invisible':[('order_date_condition','!=','is_between')],'required':[('order_date_condition','=','is_between')]}" />
+                <field name="order_date"  attrs="{'invisible':[('order_date_condition','in',['all','is_set','is_not_set','is_between'])],'required':[('order_date_condition','not in',['all','is_set','is_not_set','is_between'])]}" />
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="region_ids" widget="many2many_tags"/>
+                <field name="from_branch_ids" widget="many2many_tags" />
+                <field name="branch_cls_ids" widget="many2many_tags"/>
+                <field name="partner_type_ids" widget="many2many_tags"/>
+                <field name="create_user_ids" widget="many2many_tags"/>
+                <field name="sale_type"/>
+                <field name="car_size_ids" widget="many2many_tags"/>
+                <field name="car_maker_ids" widget="many2many_tags"/>
+                <field name="manufacture_year_ids" widget="many2many_tags"/>
+                <field name="pricelist_ids" widget="many2many_tags"/>
+              </group>
+              <group>
+                <field name="to_branch_ids" widget="many2many_tags"/>
+                <field name="company_ids" widget="many2many_tags" />
+                <field name="shipment_type_ids" widget="many2many_tags" />
+                 <field name="payment_method_ids" widget="many2many_tags" />
+                <field name="agreement_type"/>
+                <field name="include_salath"></field>
+                <field name="shipment_status"></field>
+              </group>
+            </group>
+          </sheet>
+          <footer>
+            <button name="click_print_excel" string="Print Excel" type="object" class="btn-primary"/>
+<!--            <button name="click_print_pdf" string="Print PDF" type="object" class="btn-primary"/>-->
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="sales_revenue_summary_report_action">
+      <field name="name">Sales Revenue Summary Reports</field>
+      <field name="res_model">sales.revenue.report.wizard</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="sales_revenue_report_wizard_form"></field>
+      <field name="target">new</field>
+    </record>
+   <menuitem name="Sales Revenue Summary Reports"
+             id="menu_sales_revenue_summary_reports"
+             parent="bsg_cargo_sale.cargo_sale_root_meun"
+             sequence="11"
+             groups="bsg_sales_revenue_sumary_report.groups_sales_revenue_summary_reports"
+             action="sales_revenue_summary_report_action"/>
+  </data>
+</odoo>
